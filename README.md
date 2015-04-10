@@ -39,7 +39,6 @@ Note that oXygen will require you to restart the editor after installing the add
 1. Extract the folder in the ZIP archive to the oXygen `frameworks` directory.
  - On Windows, this is `C:\Program Files\Oxygen XML Editor 16\frameworks`, or something similar.
  - If you don't have permission to copy the folder to the `frameworks` directory, then you can use an alternative location as described below.
- - You don't need to remove the `-master` from the folder name, since oXygen doesn't display the folder name.
 1. Restart oXygen.
 
 ### Installing a ZIP archive to an alternative frameworks location
