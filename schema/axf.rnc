@@ -1,0 +1,114 @@
+# Copyright 2015 Antenna House, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+default namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
+namespace fo = "http://www.w3.org/1999/XSL/Format"
+
+include "axf-inherited.rnc" {
+#
+# Overrides to patterns in 'fo-inherited.rnc' (and patterns in
+# modules that it includes).
+#
+
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#fo.change-bar-begin
+fo_change-bar-begin.model =
+    ( fo_float? )
+
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info
+fo_root.model =
+    ( (axf_document-info*,
+       fo_layout-master-set,
+       axf_document-info*,
+       fo_declarations?,
+       axf_document-info*,
+       fo_bookmark-tree?,
+       axf_document-info*,
+       (fo_page-sequence|fo_page-sequence-wrapper)+) )
+
+# AH Formatter allows fo:region-* in any order.
+fo_simple-page-master.model =
+    ( (fo_region-body+ &
+       fo_region-before? &
+       fo_region-after? &
+       fo_region-start? &
+       fo_region-end?) )
+
+# AH Formatter allows fo:block-container to omit block FOs.
+fo_block-container.model =
+    fo_marker*,
+    ( ( (block.fo.list)* & (neutral.fo.list)* ) & (point.fo.list)* )
+
+# AH Formatter allows fo:inline-container to omit block FOs.
+fo_inline-container.model =
+    fo_marker*,
+    ( ( (block.fo.list)* & (neutral.fo.list)* ) & (point.fo.list)* )
+
+# AH Formatter allows fo:table-cell omit block FOs.
+fo_table-cell.model =
+    fo_marker*,
+    ( ( (block.fo.list)* & (neutral.fo.list)* ) & (point.fo.list)* )
+
+#
+# End of overrides to patterns in 'fo-inherited.rnc'.
+#
+}
+
+#
+# Antenna House extension elements
+#
+
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info
+axf_document-info =
+  element axf:document-info {
+    attribute name { ('document-title' | 'subject' | 'author' | 'author-title' |
+                       'description-writer' | 'keywords' | 'copyright-status' |
+		       'copyright-notice' | 'copyright-info-url' | 'xmp' | 'pagemode' |
+		       'pagelayout' | 'hidetoolbar' | 'hidemenubar' | 'hidewindowui' |
+		       'fitwindow' | 'centerwindow' | 'displaydoctitle' | 'openaction' )},
+    attribute value { text },
+    empty
+}
+
+#
+# Antenna House extensions to patterns in included modules.
+#
+
+#
+# Extensions to FO models and attlists
+#
+
+
+fo_block.attlist &=
+    width
+
+fo_basic-link.attlist &=
+    axf_action-type
+
+#
+# Extensions to property groups
+#
+common-border-padding-and-background-properties &=
+    axf_border-radius,
+    axf_border-top-right-radius
+
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type
+axf_action-type =
+    ## Specifies the action of external link or form action. In CSS, form actions are invalid. 
+    attribute axf:action-type { 'gotor' | 'launch' | 'uri' | 'reset' | 'submit' | 'auto' }?
+
+axf_border-radius =
+    attribute axf:border-radius { text }?
+axf_border-top-right-radius =
+    attribute axf:border-top-right-radius { text }?
+

@@ -1,0 +1,90 @@
+Expression	   ::=  Expr EOF
+Expr		   ::=  AdditiveExpr
+AdditiveExpr	   ::=  MultiplicativeExpr ( ( '+' | '-' ) MultiplicativeExpr )*
+MultiplicativeExpr ::=  UnaryExpr ( ( '*' | 'div' | 'mod' ) UnaryExpr )*
+UnaryExpr	   ::=  PrimaryExpr
+		        | '-' UnaryExpr
+PrimaryExpr	   ::=  '(' Expr ')'
+			| Numeric
+			| Literal
+			| Color
+			| EnumerationToken
+			| FunctionCall
+FunctionCall	   ::=  FunctionName '(' ( Expr ( ',' Expr)*)? ')'
+Numeric	   ::=   	AbsoluteNumeric
+			| RelativeNumeric
+AbsoluteNumeric	   ::=  AbsoluteLength
+AbsoluteLength	   ::=  Number AbsoluteUnitName?
+AbsoluteUnitName   ::=  ('cm' | 'mm' | 'in' | 'pt' | 'pc' | 'px'
+			| 'ex' | 'jpt' | 'q' | 'dpi' | 'dd' | 'cc'
+			| 'rem' | 'ch' | 'wch' | 'lh' | 'rlh' | 'vw'
+			| 'vh' | 'vmin' | 'vmax' | 'pvw' | 'pvh'
+			| 'pvmin' | 'pvmax' | 'gr')
+RelativeNumeric	   ::=  Percent
+			| RelativeLength
+Percent	   ::=   	Number '%'
+RelativeLength ::= Number RelativeUnitName
+RelativeUnitName	   ::=   	'em'
+Color	   ::=   	'#' ('CMYK' | 'Grayscale' | 'Registration' | 'Separation' | AlphaOrDigits)
+FunctionName	   ::=  NCName
+EnumerationToken	   ::=   	NCName
+
+WhiteSpace
+         ::= ( S^WS)*
+          /* ws: definition */
+
+<?TOKENS?>
+
+EOF      ::= $
+Number
+         ::= ( '.' Digits | Digits ( '.' [0-9]* )? )
+          /* ws: explicit */
+Digits   ::= [0-9]+
+S        ::= ( #x0020 | #x0009 | #x000D | #x000A )+
+Literal	   ::=   	'"' [^"]* '"'
+			| "'" [^']* "'"
+          /* ws: explicit */
+AlphaOrDigits	   ::=   	[a-fA-F0-9]+
+
+NameStartChar
+         ::= ':'
+           | [A-Z]
+           | '_'
+           | [a-z]
+           | [#x00C0-#x00D6]
+           | [#x00D8-#x00F6]
+           | [#x00F8-#x02FF]
+           | [#x0370-#x037D]
+           | [#x037F-#x1FFF]
+           | [#x200C-#x200D]
+           | [#x2070-#x218F]
+           | [#x2C00-#x2FEF]
+           | [#x3001-#xD7FF]
+           | [#xF900-#xFDCF]
+           | [#xFDF0-#xFFFD]
+           | [#x10000-#xEFFFF]
+NameChar ::= NameStartChar
+           | '-'
+           | '.'
+           | [0-9]
+           | #x00B7
+           | [#x0300-#x036F]
+           | [#x203F-#x2040]
+Name     ::= NameStartChar NameChar*
+NCName   ::= Name - ( Char* ':' Char* )
+Char     ::= #x0009
+           | #x000A
+           | #x000D
+           | [#x0020-#xD7FF]
+           | [#xE000-#xFFFD]
+           | [#x10000-#x10FFFF]
+NonNCNameChar
+         ::= $
+           | ':'
+           | Char - NameChar
+DelimitingChar
+         ::= NonNCNameChar
+           | '-'
+           | '.'
+DelimitingChar
+          \\ Number

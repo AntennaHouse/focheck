@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="focheck" basedir="." default="build">
+<description>Make a facility for checking FO documents that include
+Antenna House extensions.</description>
+<!--
+     Copyright 2015 Antenna House, Inc.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<dirname property="system.basedir" file="${ant.file.focheck}"/>
+
+<pathconvert property="system.basedir.converted" dirsep="/">
+  <path location="${system.basedir}" />
+  <!-- Ant under cygwin uses a lowercase drive letter, which some Java
+       programs don't recognise as a drive letter, so translate. -->
+  <map from="c:" to="/C:"/>
+  <map from="d:" to="/D:"/>
+  <map from="e:" to="/E:"/>
+</pathconvert>
+
+<pathconvert property="basedir.converted" dirsep="/">
+  <path location="${basedir}" />
+  <!-- Ant under cygwin uses a lowercase drive letter, which some Java
+       programs don't recognise as a drive letter, so translate. -->
+  <map from="c:" to="/C:"/>
+  <map from="d:" to="/D:"/>
+  <map from="e:" to="/E:"/>
+</pathconvert>
+
+<!-- Local file of properties determining or describing local
+     configuration. -->
+<property name="build.local.properties"
+	  location="${basedir.converted}/build.local.properties"/>
+<property file="${build.local.properties}"/>
+
+<!-- XML file of properties determining or describing local
+     configuration. -->
+<property name="build.properties.xml"
+	  location="${basedir.converted}/properties.xml"/>
+<property file="${build.properties.xml}"/>
+
+<!-- File of properties determining or describing local
+     configuration. -->
+<property name="build.properties"
+	  location="${basedir.converted}/build.properties"/>
+<property file="${build.properties}"/>
+
+<!-- Input and output file properties. -->
+
+<property name="etc.dir" value="${basedir.converted}/etc" />
+<property name="schema.dir" value="${basedir.converted}/schema" />
+<property name="schematron.dir" value="${basedir.converted}/schematron" />
+<property name="xsl.dir" value="${basedir.converted}/xsl" />
+<property name="schema.basename" value="axf" />
+<!-- XSLT stylesheet for dumping Schematron for checking property values. -->
+<property name="property-schematron-dump.xsl"
+	  value="axf-property-schematron-override.xsl" />
+<!-- Schematron file used by 'stf'. -->
+<property name="schematron" value="file://${schematron.dir}/axf.sch" />
+<!-- Location of Calabash jar. -->
+<property name="calabash.jar"
+	  value="${basedir.converted}/lib/calabash-1.0.25-96/calabash.jar"/>
+<!-- Location of XML catalog resolver library. -->
+<property name="resolver.jar"
+	  value="${basedir.converted}/lib/resolver.jar"/>
+<property name="tests.dir"
+	  value="${basedir.converted}/test/stf"/>
+
+<property name="stf.dir" location="${basedir.converted}/stf" />
+<import file="${stf.dir}/build.xml" optional="true" />
+
+<!-- Housekeeping properties -->
+
+<!-- Whether to force processing to run. -->
+<property name="force" value="no" />
+
+<tstamp>
+  <format property="timestamp" pattern="yyyy-MM-dd"/>
+</tstamp>
+
+<!-- saxon.jar location depends on if run from oXygen or on OS. -->
+<condition property="saxon.jar" value="${ant.home}/../../lib/saxon9ee.jar">
+  <contains string="${ant.home}" substring="oxygen" casesensitive="false" />
+</condition>
+<condition property="saxon.jar" value="${saxon.jar.windows}">
+  <os family="windows" />
+</condition>
+<condition property="saxon.jar" value="${saxon.jar.mac}">
+  <os family="mac" />
+</condition>
+<property name="saxon.jar" value="${saxon.jar.unix}" />
+
+<!-- trang.jar location depends on if run from oXygen or on OS. -->
+<condition property="trang.jar" value="${ant.home}/../../lib/trang.jar">
+  <contains string="${ant.home}" substring="oxygen" casesensitive="false" />
+</condition>
+<condition property="trang.jar" value="${trang.jar.windows}">
+  <os family="windows" />
+</condition>
+<condition property="trang.jar" value="${trang.jar.mac}">
+  <os family="mac" />
+</condition>
+<property name="trang.jar" value="${trang.jar.unix}" />
+
+<!-- Targets -->
+
+<target name="rncdump">
+  <dependset>
+    <srcfilelist dir="${xsl.dir}" files="common.xsl" />
+    <targetfileset dir="${schema.dir}" includes="fo.rnc"/>
+  </dependset> 
+  <xslt in="${etc.dir}/xslspec.xml"
+        out="${schema.dir}/fo.rnc"
+        style="${xsl.dir}/rncdump.xsl"
+        classpath="${saxon.jar}"
+	force="${force}">
+    <factory name="net.sf.saxon.TransformerFactoryImpl">
+      <attribute
+          name="http://saxon.sf.net/feature/allow-external-functions" 
+          value="true"/>
+      <attribute
+          name="http://saxon.sf.net/feature/validation" 
+          value="false"/>
+    </factory>
+    <param name="debug" expression="${debug}" if="debug" />
+    <param name="timestamp" expression="${timestamp}" if="timestamp" />
+    <param name="version" expression="${version}" />
+  </xslt>
+</target>
+
+<target name="rncinherited">
+  <dependset>
+    <srcfilelist dir="${xsl.dir}" files="common.xsl" />
+    <targetfileset dir="${schema.dir}" includes="fo-inherited.rnc"/>
+  </dependset> 
+  <xslt in="${etc.dir}/xslspec.xml"
+        out="${schema.dir}/fo-inherited.rnc"
+        style="${xsl.dir}/rncinherited.xsl"
+        classpath="${saxon.jar}"
+	force="${force}">
+    <factory name="net.sf.saxon.TransformerFactoryImpl">
+      <attribute
+          name="http://saxon.sf.net/feature/allow-external-functions" 
+          value="true"/>
+      <attribute
+          name="http://saxon.sf.net/feature/validation" 
+          value="false"/>
+    </factory>
+    <param name="debug" expression="${debug}" if="debug" />
+    <param name="timestamp" expression="${timestamp}" if="timestamp" />
+    <param name="version" expression="${version}" />
+  </xslt>
+</target>
+
+<target name="axf-inherited">
+  <dependset>
+    <srcfilelist dir="${xsl.dir}" files="common.xsl" />
+    <targetfileset dir="${schema.dir}" includes="axf-inherited.rnc"/>
+  </dependset> 
+  <xslt in="${etc.dir}/xslspec.xml"
+        out="${schema.dir}/axf-inherited.rnc"
+        style="${xsl.dir}/axf-inherited.xsl"
+        classpath="${saxon.jar}"
+	force="${force}">
+    <factory name="net.sf.saxon.TransformerFactoryImpl">
+      <attribute
+          name="http://saxon.sf.net/feature/allow-external-functions" 
+          value="true"/>
+      <attribute
+          name="http://saxon.sf.net/feature/validation" 
+          value="false"/>
+    </factory>
+    <param name="debug" expression="${debug}" if="debug" />
+    <param name="timestamp" expression="${timestamp}" if="timestamp" />
+    <param name="version" expression="${version}" />
+  </xslt>
+</target>
+
+<target name="-rng.uptodate">
+  <uptodate property="rng.uptodate">
+    <srcfiles dir= "${schema.dir}" includes="*.rnc"/>
+    <mapper type="glob" from="*.rnc" to="*.rng"/>
+  </uptodate>
+</target>
+
+<target name="rng" depends="rncdump, rncinherited, axf-inherited, -rng.uptodate"
+	unless="rng.uptodate">
+  <fail message="Could not locate 'trang.jar'.">
+    <condition>
+      <not>
+	<available file="${trang.jar}" />
+      </not>
+    </condition>
+  </fail>
+  <java jar="${trang.jar}" fork="true">
+    <arg value="${schema.dir}/${schema.basename}.rnc" />
+    <arg value="${schema.dir}/${schema.basename}.rng" />
+  </java>
+</target>
+
+<target name="fo-property.sch">
+  <dependset>
+    <srcfilelist dir="${xsl.dir}" files="common.xsl, property-schematron-dump.xsl" />
+    <targetfileset dir="${schematron.dir}" includes="fo-property.sch"/>
+  </dependset> 
+  <xslt in="${etc.dir}/xslspec.xml"
+        out="${schematron.dir}/fo-property.sch"
+        style="${xsl.dir}/${property-schematron-dump.xsl}"
+        classpath="${saxon.jar}"
+	force="${force}">
+    <factory name="net.sf.saxon.TransformerFactoryImpl">
+      <attribute
+          name="http://saxon.sf.net/feature/allow-external-functions" 
+          value="true"/>
+      <attribute
+          name="http://saxon.sf.net/feature/validation" 
+          value="false"/>
+    </factory>
+    <param name="debug" expression="${debug}" if="debug" />
+    <param name="timestamp" expression="${timestamp}" if="timestamp" />
+    <param name="version" expression="${version}" />
+  </xslt>
+</target>
+
+<target name="build"
+	depends="rng, fo-property.sch"
+	description="Build the generated files." />
+
+<target name="clean"
+	description="Remove the generated files.">
+  <delete>
+    <fileset dir="${schema.dir}" includes="*.rng, fo.rnc" />
+    <fileset dir="${schematron.dir}" includes="fo-property.sch" />
+  </delete>
+</target>
+
+<!-- Testing targets -->
+
+<target name="run.rex"
+	description="Run REx expression parser.  Specify expression as $${input}.">
+  <fail unless="input">Specify the expression to be parsed as $${input}.  On the command line, use '-Dinput=your-expression'.</fail>
+  <java jar="${saxon.jar}" fork="true">
+    <arg value="-xsl:${xsl.dir}/expression2.xslt" />
+    <arg value="-it:main" />
+    <arg value="input={${input}}" />
+  </java>
+</target>
+
+<target name="run.parser"
+	description="Run expression parser.  Specify expression as $${input}.">
+  <fail unless="input">Specify the expression to be parsed as $${input}.  On the command line, use '-Dinput=your-expression'.</fail>
+  <java jar="${saxon.jar}" fork="true">
+    <arg value="-xsl:${xsl.dir}/parser-runner.xsl" />
+    <arg value="-it:{http://www.antennahouse.com/names/XSLT/Functions/Document}parser-runner" />
+    <arg value="input=${input}" />
+  </java>
+</target>
+
+<target name="test.schematron"
+	description="Run Schematron on the test files.">
+  <test.schematron basedir="${basedir.converted}" />
+</target>
+
+<target name="run.schematron">
+  <schematron basedir="${basedir.converted}/test/stf" />
+</target>
+
+
+<!-- Release targets. -->
+
+<target name="add-on.xml"
+	description="Update the version information in 'add-on.xml'.">
+  <replaceregexp file="${basedir.converted}/add-on.xml">
+    <regexp pattern="&lt;xt:version>[^&lt;]+&lt;/xt:version>" />
+    <substitution expression="&lt;xt:version>${version}&lt;/xt:version>"/>
+  </replaceregexp>
+  <replaceregexp file="${basedir.converted}/add-on.xml">
+    <regexp pattern='releases/download/[^"]+' />
+    <substitution expression="releases/download/v${version}/focheck-${version}.zip"/>
+  </replaceregexp>
+</target>
+
+<target name="framework.zip" depends="build"
+	description="Make a Zip archive of just the oXygen framework.">
+  <mkdir dir="${system.basedir.converted}/releases" />
+  <zip destfile="${system.basedir.converted}/releases/${ant.project.name}-${version}.zip"
+       basedir="${system.basedir.converted}"
+       excludes="**"
+       update="true">
+    <zipfileset dir="."
+		includes="README.md, LICENSE.md, *.framework"
+		prefix="${ant.project.name}" />
+    <!--<zipfileset dir="css" includes="*.css" prefix="${ant.project.name}/css" />-->
+    <zipfileset dir="schema" includes="*.rng, catalog.xml"
+		prefix="${ant.project.name}/schema" />
+    <zipfileset dir="schematron" includes="*.sch"
+		prefix="${ant.project.name}/schematron" />
+    <zipfileset dir="template" includes="*.xml, *.fo"
+		prefix="${ant.project.name}/template" />
+    <zipfileset dir="xsl" includes="parser-runner.xsl, expression2.xslt"
+		prefix="${ant.project.name}/xsl" />
+  </zip>
+</target>
+
+
+<!-- Utility targets. -->
+
+<target name="echoproperties">
+  <echoproperties />
+</target>
+
+</project>

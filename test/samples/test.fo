@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"
+    xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" color="#abc">
+    <axf:document-info name="author-title" value="hi there!"/>
+    <axf:document-info name="xmp" value="blah" />
+    <fo:layout-master-set>
+        <fo:simple-page-master master-name="a">
+            <fo:region-body column-count="-1"/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence master-reference="a">
+        <fo:flow flow-name="xsl-region-body"><fo:change-bar-begin><fo:float><fo:block>a</fo:block></fo:float></fo:change-bar-begin>
+            <fo:block font-size="#aabbcc"></fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

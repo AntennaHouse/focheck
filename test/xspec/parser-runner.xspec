@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document" stylesheet="../../xsl/parser-runner.xsl">
+
+    <x:scenario label="Color">
+        <x:call function="ahf:parser-runner"/>
+        <x:scenario label="#aabbcc">
+            <x:call>
+                <x:param name="input" select="'#aabbcc'" as="xs:string" />
+            </x:call>
+            <x:expect label="is a color">
+                <Color value="aabbcc" />
+            </x:expect>
+        </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="EnumerationToken">
+        <x:call function="ahf:parser-runner"/>
+        <x:scenario label="token">
+            <x:call>
+                <x:param name="input" select="'token'" as="xs:string" />
+            </x:call>
+            <x:expect label="is an EnumerationToken">
+                <EnumerationToken token="token" />
+            </x:expect>
+        </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="Number">
+        <x:call function="ahf:parser-runner"/>
+        <x:scenario label="1">
+            <x:call>
+                <x:param name="input" select="'1'" as="xs:string" />
+            </x:call>
+            <x:expect label="is a number">
+                <Number value="1" is-positive="yes" is-zero="no" />
+            </x:expect>
+        </x:scenario>
+        <x:scenario label="0">
+            <x:call>
+                <x:param name="input" select="'0'" as="xs:string" />
+            </x:call>
+            <x:expect label="is a number">
+                <Number value="0" is-positive="yes" is-zero="yes" />
+            </x:expect>
+        </x:scenario>
+        <x:scenario label="-1">
+            <x:call>
+                <x:param name="input" select="'-1'" as="xs:string" />
+            </x:call>
+            <x:expect label="is a number">
+                <Number value="-1" is-positive="no" is-zero="no" />
+            </x:expect>
+        </x:scenario>
+        <x:scenario label="1.1">
+            <x:call>
+                <x:param name="input" select="'1.1'" as="xs:string" />
+            </x:call>
+            <x:expect label="is a number">
+                <Number value="1.1" is-positive="yes" is-zero="no" />
+            </x:expect>
+        </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="Length">
+        <x:call function="ahf:parser-runner"/>
+        <x:scenario label="1 pt">
+            <x:call>
+                <x:param name="input" select="'1 pt'" as="xs:string" />
+            </x:call>
+            <x:expect label="is a Length">
+                <Length value="1" unit="pt" is-positive="yes" is-zero="no" />
+            </x:expect>
+        </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="Percent">
+        <x:call function="ahf:parser-runner"/>
+        <x:scenario label="1%">
+            <x:call>
+                <x:param name="input" select="'1%'" as="xs:string" />
+            </x:call>
+            <x:expect label="is a percent">
+                <Percent value="1" is-positive="yes" is-zero="no" />
+            </x:expect>
+        </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="MultiplicativeExpr">
+        <x:call function="ahf:parser-runner"/>
+        <x:scenario label="1em * 1.3 * (1 - 1)">
+            <x:call>
+                <x:param name="input" select="'1em * 1.3 * (1 - 1)'" as="xs:string"/>
+            </x:call>
+            <x:expect label="is a Length">
+                <Length value="0" is-positive="yes" is-zero="yes"/>
+            </x:expect>
+        </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="AdditiveExpr">
+        <x:call function="ahf:parser-runner"/>
+        <x:scenario label="1 + 1">
+            <x:call>
+                <x:param name="input" select="'1+1'" as="xs:string"/>
+            </x:call>
+            <x:expect label="is a number">
+                <Number value="2" is-positive="yes" is-zero="no"/>
+            </x:expect>
+        </x:scenario>
+        <x:scenario label="1 - 1">
+            <x:call>
+                <x:param name="input" select="'1 - 1'" as="xs:string"/>
+            </x:call>
+            <x:expect label="is a number">
+                <Number value="0" is-positive="yes" is-zero="yes"/>
+            </x:expect>
+        </x:scenario>
+        <x:scenario label="1-1">
+            <x:call>
+                <x:param name="input" select="'1-1'" as="xs:string"/>
+            </x:call>
+            <x:expect label="is a number">
+                <Number value="0" is-positive="yes" is-zero="yes"/>
+            </x:expect>
+        </x:scenario>
+        <x:scenario label="-1 - -2">
+            <x:call>
+                <x:param name="input" select="'-1 - -2'" as="xs:string"/>
+            </x:call>
+            <x:expect label="is a number">
+                <Number value="1" is-positive="yes" is-zero="no"/>
+            </x:expect>
+        </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="Functions">
+        <x:call function="ahf:parser-runner"/>
+        <x:scenario label="floor(1)">
+            <x:call>
+                <x:param name="input" select="'floor(1)'" as="xs:string"/>
+            </x:call>
+            <x:expect label="is a number">
+                <Number/>
+            </x:expect>
+        </x:scenario>
+    </x:scenario>
+
+    <x:scenario label="Errors">
+        <x:call function="ahf:parser-runner"/>
+        <x:scenario label="MultipicativeExpr">
+            <x:scenario label="1 / 1">
+                <x:call>
+                    <x:param name="input" select="'1z'" as="xs:string"/>
+                </x:call>
+                <x:expect label="is an error because '/' is not an operator.">
+                    <ERROR>...</ERROR>
+                </x:expect>
+            </x:scenario>
+        </x:scenario>
+        <x:scenario label="AbsoluteLength">
+            <x:scenario label="1z">
+                <x:call>
+                    <x:param name="input" select="'1z'" as="xs:string"/>
+                </x:call>
+                <x:expect label="'iz' an error">
+                    <ERROR>...</ERROR>
+                </x:expect>
+            </x:scenario>
+        </x:scenario>
+        <x:scenario label="z()">
+            <x:call>
+                <x:param name="input" select="'z()'" as="xs:string"/>
+            </x:call>
+            <x:expect label="'z()' an error">
+                <ERROR>...</ERROR>
+            </x:expect>
+        </x:scenario>
+    </x:scenario>
+</x:description>
