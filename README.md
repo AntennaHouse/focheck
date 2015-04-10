@@ -19,9 +19,19 @@ Pull requests and new issues are welcome.
 
 ## Installing
 
-* If you just want to use **focheck** with oXygen, then you can simply download and install a static copy of this repository.
+* If you just want to use **focheck** with oXygen, then you can either:
+ * Install **focheck** as an add-on oXygen framework.
+ * Download and install a static copy of the oXygen framework.
 * If you want to easily keep up-to-date with changes, then you can clone this repository and 'pull' the latest version whenever you want.
 * If you want to hack on **focheck** or submit pull requests, then you can fork this repository and clone that onto your local machine.
+
+### Installing as add-on oXygen framework
+
+Follow the instructions in the oXygen manual at http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.html
+
+The **focheck** update site URL is https://github.com/AntennaHouse/focheck/raw/master/add-on.xml
+
+Note that oXygen will require you to restart the editor after installing the add-on framework.
 
 ### Installing a ZIP archive to oXygen `frameworks` directory
 
