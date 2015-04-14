@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2015 Antenna House, Inc.
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<grammar ns="http://www.antennahouse.com/names/XSL/Extensions" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="axf-inherited.rng">
+    <!--
+      
+      Overrides to patterns in 'fo-inherited.rnc' (and patterns in
+      modules that it includes).
+      
+    -->
+    <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#fo.change-bar-begin -->
+    <define name="fo_change-bar-begin.model">
+      <optional>
+        <ref name="fo_float"/>
+      </optional>
+    </define>
+    <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info -->
+    <define name="fo_root.model">
+      <zeroOrMore>
+        <ref name="axf_document-info"/>
+      </zeroOrMore>
+      <ref name="fo_layout-master-set"/>
+      <zeroOrMore>
+        <ref name="axf_document-info"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="fo_declarations"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="axf_document-info"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="fo_bookmark-tree"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="axf_document-info"/>
+      </zeroOrMore>
+      <oneOrMore>
+        <choice>
+          <ref name="fo_page-sequence"/>
+          <ref name="fo_page-sequence-wrapper"/>
+        </choice>
+      </oneOrMore>
+    </define>
+    <!-- AH Formatter allows fo:region-* in any order. -->
+    <define name="fo_simple-page-master.model">
+      <interleave>
+        <oneOrMore>
+          <ref name="fo_region-body"/>
+        </oneOrMore>
+        <optional>
+          <ref name="fo_region-before"/>
+        </optional>
+        <optional>
+          <ref name="fo_region-after"/>
+        </optional>
+        <optional>
+          <ref name="fo_region-start"/>
+        </optional>
+        <optional>
+          <ref name="fo_region-end"/>
+        </optional>
+      </interleave>
+    </define>
+    <!-- AH Formatter allows empty fo:static-content. -->
+    <define name="fo_static-content.model">
+      <interleave>
+        <interleave>
+          <zeroOrMore>
+            <ref name="block.fo.list"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="neutral.fo.list"/>
+          </zeroOrMore>
+        </interleave>
+        <zeroOrMore>
+          <ref name="point.fo.list"/>
+        </zeroOrMore>
+      </interleave>
+    </define>
+    <!-- AH Formatter allows fo:block-container to omit block FOs. -->
+    <define name="fo_block-container.model">
+      <zeroOrMore>
+        <ref name="fo_marker"/>
+      </zeroOrMore>
+      <interleave>
+        <interleave>
+          <zeroOrMore>
+            <ref name="block.fo.list"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="neutral.fo.list"/>
+          </zeroOrMore>
+        </interleave>
+        <zeroOrMore>
+          <ref name="point.fo.list"/>
+        </zeroOrMore>
+      </interleave>
+    </define>
+    <!-- AH Formatter allows fo:inline-container to omit block FOs. -->
+    <define name="fo_inline-container.model">
+      <zeroOrMore>
+        <ref name="fo_marker"/>
+      </zeroOrMore>
+      <interleave>
+        <interleave>
+          <zeroOrMore>
+            <ref name="block.fo.list"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="neutral.fo.list"/>
+          </zeroOrMore>
+        </interleave>
+        <zeroOrMore>
+          <ref name="point.fo.list"/>
+        </zeroOrMore>
+      </interleave>
+    </define>
+    <!-- AH Formatter allows fo:table-cell omit block FOs. -->
+    <define name="fo_table-cell.model">
+      <zeroOrMore>
+        <ref name="fo_marker"/>
+      </zeroOrMore>
+      <interleave>
+        <interleave>
+          <zeroOrMore>
+            <ref name="block.fo.list"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="neutral.fo.list"/>
+          </zeroOrMore>
+        </interleave>
+        <zeroOrMore>
+          <ref name="point.fo.list"/>
+        </zeroOrMore>
+      </interleave>
+    </define>
+    <!--
+      
+      End of overrides to patterns in 'fo-inherited.rnc'.
+      
+    -->
+  </include>
+  <!--
+    
+    Antenna House extension elements
+    
+  -->
+  <!--
+    <axf:document-info/>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info
+  -->
+  <define name="axf_document-info">
+    <element name="axf:document-info">
+      <a:documentation>Document information such as an author and title that can be embedded in the PDF</a:documentation>
+      <attribute name="name">
+        <a:documentation>Name of the document information</a:documentation>
+        <choice>
+          <value>document-title</value>
+          <value>subject</value>
+          <value>author</value>
+          <value>author-title</value>
+          <value>description-writer</value>
+          <value>keywords</value>
+          <value>copyright-status</value>
+          <value>copyright-notice</value>
+          <value>copyright-info-url</value>
+          <value>xmp</value>
+          <value>pagemode</value>
+          <value>pagelayout</value>
+          <value>hidetoolbar</value>
+          <value>hidemenubar</value>
+          <value>hidewindowui</value>
+          <value>fitwindow</value>
+          <value>centerwindow</value>
+          <value>displaydoctitle</value>
+          <value>openaction</value>
+        </choice>
+      </attribute>
+      <attribute name="value">
+        <a:documentation>Value of the document information.  Some information has constraints on the allowed values.</a:documentation>
+      </attribute>
+      <empty/>
+    </element>
+  </define>
+  <!--
+    
+    Antenna House extensions to patterns in included modules.
+    
+  -->
+  <!--
+    
+    Extensions to FO models
+    
+  -->
+  <!--
+    
+    Extensions to FO attlists
+    
+  -->
+  <define name="fo_simple-page-master.attlist" combine="interleave">
+    <ref name="axf_bleed"/>
+    <ref name="axf_bleed-top"/>
+    <ref name="axf_bleed-bottom"/>
+    <ref name="axf_bleed-left"/>
+    <ref name="axf_bleed-right"/>
+    <ref name="axf_crop-area-visibility"/>
+    <ref name="axf_crop-offset"/>
+    <ref name="axf_crop-offset-top"/>
+    <ref name="axf_crop-offset-bottom"/>
+    <ref name="axf_crop-offset-left"/>
+    <ref name="axf_crop-offset-right"/>
+    <ref name="axf_printer-marks"/>
+    <ref name="axf_printer-marks-line-color"/>
+    <ref name="axf_printer-marks-line-length"/>
+    <ref name="axf_printer-marks-line-width"/>
+    <ref name="axf_printer-marks-spine-width"/>
+    <ref name="axf_printer-marks-zero-margin"/>
+  </define>
+  <define name="fo_basic-link.attlist" combine="interleave">
+    <ref name="axf_action-type"/>
+    <ref name="text-decoration"/>
+  </define>
+  <define name="fo_block.attlist" combine="interleave">
+    <ref name="axf_destination-type"/>
+    <ref name="width"/>
+  </define>
+  <define name="fo_block-container.attlist" combine="interleave">
+    <ref name="axf_destination-type"/>
+  </define>
+  <!--
+    
+    Extensions to property groups
+    
+  -->
+  <define name="common-border-padding-and-background-properties" combine="interleave">
+    <ref name="axf_border-radius"/>
+    <ref name="axf_border-top-left-radius"/>
+    <ref name="axf_border-top-right-radius"/>
+    <ref name="axf_border-bottom-left-radius"/>
+    <ref name="axf_border-bottom-right-radius"/>
+  </define>
+  <!--
+    
+    Antenna House extension properties
+    
+  -->
+  <!--
+    @axf:action-type
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type
+  -->
+  <define name="axf_action-type">
+    <optional>
+      <attribute name="axf:action-type">
+        <a:documentation>Specifies the action of external link or form action</a:documentation>
+        <choice>
+          <value>gotor</value>
+          <value>launch</value>
+          <value>uri</value>
+          <value>reset</value>
+          <value>submit</value>
+          <value>auto</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:border-radius
+    @axf:border-top-left-radius
+    @axf:border-top-right-radius
+    @axf:border-bottom-left-radius
+    @axf:border-bottom-right-radius
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.border-radius
+  -->
+  <define name="axf_border-radius">
+    <optional>
+      <attribute name="axf:border-radius">
+        <a:documentation>Radii of the rounded corners: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_border-top-left-radius">
+    <optional>
+      <attribute name="axf:border-top-left-radius">
+        <a:documentation>Radii of the top-left corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_border-top-right-radius">
+    <optional>
+      <attribute name="axf:border-top-right-radius">
+        <a:documentation>Radii of the top-right corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_border-bottom-left-radius">
+    <optional>
+      <attribute name="axf:border-bottom-left-radius">
+        <a:documentation>Radii of the bottom-left corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_border-bottom-right-radius">
+    <optional>
+      <attribute name="axf:border-bottom-right-radius">
+        <a:documentation>Radii of the bottom-right corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:bleed
+    @axf:bleed-top
+    @axf:bleed-bottom
+    @axf:bleed-left
+    @axf:bleed-right
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.bleed
+  -->
+  <define name="axf_bleed">
+    <optional>
+      <attribute name="axf:bleed">
+        <a:documentation>Wdth of the bleed region: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_bleed-top">
+    <optional>
+      <attribute name="axf:bleed-top">
+        <a:documentation>Wdth of the top bleed region: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_bleed-bottom">
+    <optional>
+      <attribute name="axf:bleed-bottom">
+        <a:documentation>Wdth of the bottom bleed region: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_bleed-left">
+    <optional>
+      <attribute name="axf:bleed-left">
+        <a:documentation>Wdth of the left bleed region: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_bleed-right">
+    <optional>
+      <attribute name="axf:bleed-right">
+        <a:documentation>Wdth of the right bleed region: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:crop-area-visibility
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.crop-area-visibility
+  -->
+  <define name="axf_crop-area-visibility">
+    <optional>
+      <attribute name="axf:crop-area-visibility">
+        <a:documentation>Whether to display the area beyond the finished page size</a:documentation>
+        <choice>
+          <value>hidden</value>
+          <value>visible</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:crop-offset
+    @axf:crop-offset-top
+    @axf:crop-offset-bottom
+    @axf:crop-offset-left
+    @axf:crop-offset-right
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.crop-offset
+  -->
+  <define name="axf_crop-offset">
+    <optional>
+      <attribute name="axf:crop-offset">
+        <a:documentation>Distance from the physical edges to the trim size of the output medium: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_crop-offset-top">
+    <optional>
+      <attribute name="axf:crop-offset-top">
+        <a:documentation>Distance from the physical top edge to the trim size of the output medium: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_crop-offset-bottom">
+    <optional>
+      <attribute name="axf:crop-offset-bottom">
+        <a:documentation>Distance from the physical bottom edge to the trim size of the output medium: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_crop-offset-left">
+    <optional>
+      <attribute name="axf:crop-offset-left">
+        <a:documentation>Distance from the physical left edge to the trim size of the output medium: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_crop-offset-right">
+    <optional>
+      <attribute name="axf:crop-offset-right">
+        <a:documentation>Distance from the physical right edge to the trim size of the output medium: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:destination-type
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.destination-type
+  -->
+  <define name="axf_destination-type">
+    <optional>
+      <attribute name="axf:destination-type">
+        <a:documentation>The way a link opens in a link destination</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:printer-marks
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks
+  -->
+  <define name="axf_printer-marks">
+    <optional>
+      <attribute name="axf:printer-marks">
+        <a:documentation>Printing marks, such as a crop mark</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:printer-marks-line-color
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-color
+  -->
+  <define name="axf_printer-marks-line-color">
+    <optional>
+      <attribute name="axf:printer-marks-line-color">
+        <a:documentation>Line color of printer marks: &lt;line&gt; | auto</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:printer-marks-line-length
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-length
+  -->
+  <define name="axf_printer-marks-line-length">
+    <optional>
+      <attribute name="axf:printer-marks-line-length">
+        <a:documentation>Line length of printer marks: &lt;length&gt; | auto</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:printer-marks-line-width
+    Line width of printer marks: <length> | auto
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-width
+  -->
+  <define name="axf_printer-marks-line-width">
+    <optional>
+      <attribute name="axf:printer-marks-line-width">
+        <a:documentation/>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:printer-marks-zero-margin
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-zero-margin
+  -->
+  <define name="axf_printer-marks-zero-margin">
+    <optional>
+      <attribute name="axf:printer-marks-zero-margin">
+        <a:documentation>Margin between the page and the printer marks when bleed is 0: &lt;length&gt; | auto</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:printer-marks-spine-width
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-spine-width
+  -->
+  <define name="axf_printer-marks-spine-width">
+    <optional>
+      <attribute name="axf:printer-marks-spine-width">
+        <a:documentation>Spine width of the facing page: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+</grammar>

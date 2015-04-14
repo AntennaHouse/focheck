@@ -17,7 +17,7 @@
 								<Integer>4</Integer>
 							</field>
 							<field name="uri">
-								<String>${framework}/schema/axf.rng</String>
+								<String>${framework}/schema/rng/axf.rng</String>
 							</field>
 						</docTypeSchema>
 					</field>
@@ -294,7 +294,7 @@
 														<Integer>4</Integer>
 													</field>
 													<field name="uri">
-														<String>${framework}/schema/axf.rng</String>
+														<String>${framework}/schema/rng/axf.rng</String>
 													</field>
 												</validationUnitSchema>
 											</field>

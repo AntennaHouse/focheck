@@ -190,15 +190,9 @@ Antenna House extensions.</description>
   </xslt>
 </target>
 
-<target name="-rng.uptodate">
-  <uptodate property="rng.uptodate">
-    <srcfiles dir= "${schema.dir}" includes="*.rnc"/>
-    <mapper type="glob" from="*.rnc" to="*.rng"/>
-  </uptodate>
-</target>
+<target name="rnc" depends="rncdump, rncinherited, axf-inherited" />
 
-<target name="rng" depends="rncdump, rncinherited, axf-inherited, -rng.uptodate"
-	unless="rng.uptodate">
+<target name="trang">
   <fail message="Could not locate 'trang.jar'.">
     <condition>
       <not>
@@ -206,9 +200,35 @@ Antenna House extensions.</description>
       </not>
     </condition>
   </fail>
+</target>
+
+<target name="-rng.uptodate">
+  <uptodate property="rng.uptodate">
+    <srcfiles dir= "${schema.dir}" includes="*.rnc"/>
+    <mapper type="glob" from="*.rnc" to="rng/*.rng"/>
+  </uptodate>
+</target>
+
+<target name="rng" depends="trang, rnc, -rng.uptodate"
+	unless="rng.uptodate">
   <java jar="${trang.jar}" fork="true">
     <arg value="${schema.dir}/${schema.basename}.rnc" />
-    <arg value="${schema.dir}/${schema.basename}.rng" />
+    <arg value="${schema.dir}/rng/${schema.basename}.rng" />
+  </java>
+</target>
+
+<target name="-xsd.uptodate">
+  <uptodate property="rng.uptodate">
+    <srcfiles dir= "${schema.dir}" includes="*.rnc"/>
+    <mapper type="glob" from="*.rnc" to="xsd/*.xsd"/>
+  </uptodate>
+</target>
+
+<target name="xsd" depends="trang, rnc, -xsd.uptodate"
+	unless="xsd.uptodate">
+  <java jar="${trang.jar}" fork="true">
+    <arg value="${schema.dir}/${schema.basename}.rnc" />
+    <arg value="${schema.dir}/xsd/${schema.basename}.xsd" />
   </java>
 </target>
 
@@ -305,8 +325,8 @@ Antenna House extensions.</description>
 		includes="README.md, LICENSE.md, *.framework"
 		prefix="${ant.project.name}" />
     <!--<zipfileset dir="css" includes="*.css" prefix="${ant.project.name}/css" />-->
-    <zipfileset dir="schema" includes="*.rng, catalog.xml"
-		prefix="${ant.project.name}/schema" />
+    <zipfileset dir="schema/rng" includes="*.rng"
+		prefix="${ant.project.name}/schema/rng" />
     <zipfileset dir="schematron" includes="*.sch"
 		prefix="${ant.project.name}/schematron" />
     <zipfileset dir="template" includes="*.xml, *.fo"

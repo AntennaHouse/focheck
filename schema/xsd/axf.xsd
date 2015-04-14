@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2015 Antenna House, Inc.
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.antennahouse.com/names/XSL/Extensions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions">
+  <xs:include schemaLocation="axf-inherited.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/XSL/Format" schemaLocation="fo.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  <!--
+    
+    Overrides to patterns in 'fo-inherited.rnc' (and patterns in
+    modules that it includes).
+    
+  -->
+  <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#fo.change-bar-begin -->
+  <xs:complexType name="fo_change-bar-begin.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="fo:float"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info -->
+  <xs:complexType name="fo_root.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="axf:document-info"/>
+      <xs:element ref="fo:layout-master-set"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="axf:document-info"/>
+      <xs:element minOccurs="0" ref="fo:declarations"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="axf:document-info"/>
+      <xs:element minOccurs="0" ref="fo:bookmark-tree"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="axf:document-info"/>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="fo:page-sequence"/>
+        <xs:element ref="fo:page-sequence-wrapper"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- AH Formatter allows fo:region-* in any order. -->
+  <xs:complexType name="fo_simple-page-master.model">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="fo:region-body"/>
+      <xs:element ref="fo:region-before"/>
+      <xs:element ref="fo:region-after"/>
+      <xs:element ref="fo:region-start"/>
+      <xs:element ref="fo:region-end"/>
+    </xs:choice>
+  </xs:complexType>
+  <!-- AH Formatter allows fo:block-container to omit block FOs. -->
+  <xs:complexType name="fo_block-container.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:choice>
+          <xs:element ref="fo:block.fo.list"/>
+          <xs:element ref="fo:neutral.fo.list"/>
+        </xs:choice>
+        <xs:element ref="fo:point.fo.list"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- AH Formatter allows fo:inline-container to omit block FOs. -->
+  <xs:complexType name="fo_inline-container.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:choice>
+          <xs:element ref="fo:block.fo.list"/>
+          <xs:element ref="fo:neutral.fo.list"/>
+        </xs:choice>
+        <xs:element ref="fo:point.fo.list"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- AH Formatter allows fo:table-cell omit block FOs. -->
+  <xs:complexType name="fo_table-cell.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:choice>
+          <xs:element ref="fo:block.fo.list"/>
+          <xs:element ref="fo:neutral.fo.list"/>
+        </xs:choice>
+        <xs:element ref="fo:point.fo.list"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!--
+    
+    End of overrides to patterns in 'fo-inherited.rnc'.
+    
+  -->
+  <!--
+    
+    Antenna House extension elements
+    
+  -->
+  <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info -->
+  <xs:element name="document-info">
+    <xs:complexType>
+      <xs:attribute name="name" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="document-title"/>
+            <xs:enumeration value="subject"/>
+            <xs:enumeration value="author"/>
+            <xs:enumeration value="author-title"/>
+            <xs:enumeration value="description-writer"/>
+            <xs:enumeration value="keywords"/>
+            <xs:enumeration value="copyright-status"/>
+            <xs:enumeration value="copyright-notice"/>
+            <xs:enumeration value="copyright-info-url"/>
+            <xs:enumeration value="xmp"/>
+            <xs:enumeration value="pagemode"/>
+            <xs:enumeration value="pagelayout"/>
+            <xs:enumeration value="hidetoolbar"/>
+            <xs:enumeration value="hidemenubar"/>
+            <xs:enumeration value="hidewindowui"/>
+            <xs:enumeration value="fitwindow"/>
+            <xs:enumeration value="centerwindow"/>
+            <xs:enumeration value="displaydoctitle"/>
+            <xs:enumeration value="openaction"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="value" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    
+    Antenna House extensions to patterns in included modules.
+    
+  -->
+  <!--
+    
+    Extensions to FO models and attlists
+    
+  -->
+  <!--
+    
+    Extensions to property groups
+    
+  -->
+  <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type -->
+  <xs:attributeGroup name="axf_action-type">
+    <xs:attribute name="action-type" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Specifies the action of external link or form action. In CSS, form actions are invalid. </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="gotor"/>
+          <xs:enumeration value="launch"/>
+          <xs:enumeration value="uri"/>
+          <xs:enumeration value="reset"/>
+          <xs:enumeration value="submit"/>
+          <xs:enumeration value="auto"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_border-radius">
+    <xs:attribute name="border-radius" form="qualified"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_border-top-right-radius">
+    <xs:attribute name="border-top-right-radius" form="qualified"/>
+  </xs:attributeGroup>
+</xs:schema>
