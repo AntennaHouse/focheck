@@ -257,13 +257,13 @@ Antenna House extensions.</description>
 </target>
 
 <target name="build"
-	depends="rng, fo-property.sch"
+	depends="rng, xsd, fo-property.sch"
 	description="Build the generated files." />
 
 <target name="clean"
 	description="Remove the generated files.">
   <delete>
-    <fileset dir="${schema.dir}" includes="*.rng, fo.rnc" />
+    <fileset dir="${schema.dir}" includes="fo.rnc" />
     <fileset dir="${schematron.dir}" includes="fo-property.sch" />
   </delete>
 </target>
