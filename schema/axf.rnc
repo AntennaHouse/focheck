@@ -58,9 +58,21 @@ fo_inline-container.model =
     fo_marker*,
     ( ( (block.fo.list)* & (neutral.fo.list)* ) & (point.fo.list)* )
 
-# AH Formatter allows fo:table-cell omit block FOs.
+# AH Formatter allows empty fo:list-item.
+fo_list-item.model =
+    fo_marker*,
+    ( (fo_list-item-label,fo_list-item-body)? & (point.fo.list)* )
+
+# AH Formatter allows fo:list-item-label omit block FOs.
+fo_list-item-label.model =
+    fo_marker*,
+    ( ( (block.fo.list)* & (neutral.fo.list)* ) & (point.fo.list)* )
+
+# AH Formatter allows fo:table-cell to omit block FOs.
+# axf:table-cell-repeated-marker used when cell repeats.
 fo_table-cell.model =
     fo_marker*,
+    axf_table-cell-repeated-marker?,
     ( ( (block.fo.list)* & (neutral.fo.list)* ) & (point.fo.list)* )
 
 #
@@ -88,6 +100,32 @@ axf_document-info =
     empty
 }
 
+# <axf:footnote-number/>
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-number
+axf_footnote-number =
+  ## Generates a footnote number
+  element axf:footnote-number {
+    id,
+    empty
+}
+
+# <axf:footnote-number-citation/>
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-number-citation
+axf_footnote-number-citation =
+  ## Cites a footnote number
+  element axf:footnote-number-citation {
+    attribute ref-id { text },
+    empty
+}
+
+# <axf:table-cell-repeated-marker>
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.table-cell-repeated-marker
+axf_table-cell-repeated-marker =
+  ## Contents used when axf:repeat-cell-content-at-break="true"
+  element axf:table-cell-repeated-marker {
+    (text|inline.fo.list|block.fo.list)*
+  }
+
 #
 # Antenna House extensions to patterns in included modules.
 #
@@ -96,7 +134,9 @@ axf_document-info =
 # Extensions to FO models
 #
 
-
+inline.fo.list |=
+    axf_footnote-number |
+    axf_footnote-number-citation
 
 #
 # Extensions to FO attlists
@@ -127,10 +167,23 @@ fo_basic-link.attlist &=
 
 fo_block.attlist &=
     axf_destination-type,
+    height,
+    text-decoration,
     width
 
 fo_block-container.attlist &=
+    axf_column-count,
+    axf_column-gap,
     axf_destination-type
+
+fo_footnote.attlist &=
+    space-before
+
+fo_table-cell.attlist &=
+    axf_repeat-cell-content-at-break
+
+fo_table-column.attlist &=
+    id
 
 #
 # Extensions to property groups
@@ -200,6 +253,20 @@ axf_bleed-left =
 axf_bleed-right =
     ## Wdth of the right bleed region: <length>
     attribute axf:bleed-right { text }?
+
+# @axf:column-count
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.column-count
+axf_column-count =
+    ## The number of columns: <number>
+    attribute axf:column-count { text }?
+
+# @axf:column-gap
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.column-gap
+axf_column-gap =
+    ## The gap between columns: <length> | <percentage>
+    attribute axf:column-gap { text }?
 
 # @axf:crop-area-visibility
 #
@@ -279,3 +346,10 @@ axf_printer-marks-zero-margin =
 axf_printer-marks-spine-width =
     ## Spine width of the facing page: <length>
     attribute axf:printer-marks-spine-width { text }?
+
+# @axf:repeat-cell-content-at-break
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.repeat-cell-content-at-break
+axf_repeat-cell-content-at-break =
+    ## Whether to copy the contents of a cell when a cell breaks
+    attribute axf:repeat-cell-content-at-break { 'true' | 'false' }?
