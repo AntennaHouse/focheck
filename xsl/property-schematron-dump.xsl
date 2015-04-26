@@ -111,11 +111,13 @@
 external-destination
 font-family
 format
+id
 index-key
 internal-destination
 ref-id
 ref-index-key
 reference-orientation
+role
 src
 text-align
 </xsl:variable>
