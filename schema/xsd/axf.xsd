@@ -56,6 +56,16 @@
       <xs:element ref="fo:region-end"/>
     </xs:choice>
   </xs:complexType>
+  <!-- AH Formatter allows empty fo:static-content. -->
+  <xs:complexType name="fo_static-content.model">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:choice>
+        <xs:element ref="fo:block.fo.list"/>
+        <xs:element ref="fo:neutral.fo.list"/>
+      </xs:choice>
+      <xs:element ref="fo:point.fo.list"/>
+    </xs:choice>
+  </xs:complexType>
   <!-- AH Formatter allows fo:block-container to omit block FOs. -->
   <xs:complexType name="fo_block-container.model">
     <xs:sequence>
@@ -82,10 +92,40 @@
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
-  <!-- AH Formatter allows fo:table-cell omit block FOs. -->
+  <!-- AH Formatter allows empty fo:list-item. -->
+  <xs:complexType name="fo_list-item.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:choice>
+          <xs:element ref="fo:list-item-label"/>
+          <xs:element ref="fo:list-item-body"/>
+        </xs:choice>
+        <xs:element ref="fo:point.fo.list"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- AH Formatter allows fo:list-item-label omit block FOs. -->
+  <xs:complexType name="fo_list-item-label.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:choice>
+          <xs:element ref="fo:block.fo.list"/>
+          <xs:element ref="fo:neutral.fo.list"/>
+        </xs:choice>
+        <xs:element ref="fo:point.fo.list"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!--
+    AH Formatter allows fo:table-cell to omit block FOs.
+    axf:table-cell-repeated-marker used when cell repeats.
+  -->
   <xs:complexType name="fo_table-cell.model">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
+      <xs:element minOccurs="0" ref="axf:table-cell-repeated-marker"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:choice>
           <xs:element ref="fo:block.fo.list"/>
@@ -105,10 +145,19 @@
     Antenna House extension elements
     
   -->
-  <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info -->
+  <!--
+    <axf:document-info/>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info
+  -->
   <xs:element name="document-info">
+    <xs:annotation>
+      <xs:documentation>Document information such as an author and title that can be embedded in the PDF</xs:documentation>
+    </xs:annotation>
     <xs:complexType>
       <xs:attribute name="name" use="required">
+        <xs:annotation>
+          <xs:documentation>Name of the document information</xs:documentation>
+        </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:token">
             <xs:enumeration value="document-title"/>
@@ -133,7 +182,50 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="value" use="required"/>
+      <xs:attribute name="value" use="required">
+        <xs:annotation>
+          <xs:documentation>Value of the document information.  Some information has constraints on the allowed values.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    <axf:footnote-number/>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-number
+  -->
+  <xs:element name="footnote-number" substitutionGroup="fo:inline.fo.list">
+    <xs:annotation>
+      <xs:documentation>Generates a footnote number</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="fo:id"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    <axf:footnote-number-citation/>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-number-citation
+  -->
+  <xs:element name="footnote-number-citation" substitutionGroup="fo:inline.fo.list">
+    <xs:annotation>
+      <xs:documentation>Cites a footnote number</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="ref-id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    <axf:table-cell-repeated-marker>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.table-cell-repeated-marker
+  -->
+  <xs:element name="table-cell-repeated-marker">
+    <xs:annotation>
+      <xs:documentation>Contents used when axf:repeat-cell-content-at-break="true"</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="fo:inline.fo.list"/>
+        <xs:element ref="fo:block.fo.list"/>
+      </xs:choice>
     </xs:complexType>
   </xs:element>
   <!--
@@ -143,7 +235,12 @@
   -->
   <!--
     
-    Extensions to FO models and attlists
+    Extensions to FO models
+    
+  -->
+  <!--
+    
+    Extensions to FO attlists
     
   -->
   <!--
@@ -151,11 +248,20 @@
     Extensions to property groups
     
   -->
-  <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type -->
+  <!--
+    
+    Antenna House extension properties
+    
+  -->
+  <!--
+    @axf:action-type
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type
+  -->
   <xs:attributeGroup name="axf_action-type">
     <xs:attribute name="action-type" form="qualified">
       <xs:annotation>
-        <xs:documentation>Specifies the action of external link or form action. In CSS, form actions are invalid. </xs:documentation>
+        <xs:documentation>Specifies the action of external link or form action</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -169,10 +275,280 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
+  <!--
+    @axf:border-radius
+    @axf:border-top-left-radius
+    @axf:border-top-right-radius
+    @axf:border-bottom-left-radius
+    @axf:border-bottom-right-radius
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.border-radius
+  -->
   <xs:attributeGroup name="axf_border-radius">
-    <xs:attribute name="border-radius" form="qualified"/>
+    <xs:attribute name="border-radius" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Radii of the rounded corners: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_border-top-left-radius">
+    <xs:attribute name="border-top-left-radius" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Radii of the top-left corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:attributeGroup>
   <xs:attributeGroup name="axf_border-top-right-radius">
-    <xs:attribute name="border-top-right-radius" form="qualified"/>
+    <xs:attribute name="border-top-right-radius" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Radii of the top-right corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_border-bottom-left-radius">
+    <xs:attribute name="border-bottom-left-radius" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Radii of the bottom-left corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_border-bottom-right-radius">
+    <xs:attribute name="border-bottom-right-radius" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Radii of the bottom-right corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:bleed
+    @axf:bleed-top
+    @axf:bleed-bottom
+    @axf:bleed-left
+    @axf:bleed-right
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.bleed
+  -->
+  <xs:attributeGroup name="axf_bleed">
+    <xs:attribute name="bleed" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Wdth of the bleed region: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_bleed-top">
+    <xs:attribute name="bleed-top" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Wdth of the top bleed region: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_bleed-bottom">
+    <xs:attribute name="bleed-bottom" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Wdth of the bottom bleed region: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_bleed-left">
+    <xs:attribute name="bleed-left" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Wdth of the left bleed region: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_bleed-right">
+    <xs:attribute name="bleed-right" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Wdth of the right bleed region: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:column-count
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.column-count
+  -->
+  <xs:attributeGroup name="axf_column-count">
+    <xs:attribute name="column-count" form="qualified">
+      <xs:annotation>
+        <xs:documentation>The number of columns: &lt;number&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:column-gap
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.column-gap
+  -->
+  <xs:attributeGroup name="axf_column-gap">
+    <xs:attribute name="column-gap" form="qualified">
+      <xs:annotation>
+        <xs:documentation>The gap between columns: &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:crop-area-visibility
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.crop-area-visibility
+  -->
+  <xs:attributeGroup name="axf_crop-area-visibility">
+    <xs:attribute name="crop-area-visibility" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Whether to display the area beyond the finished page size</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="hidden"/>
+          <xs:enumeration value="visible"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:crop-offset
+    @axf:crop-offset-top
+    @axf:crop-offset-bottom
+    @axf:crop-offset-left
+    @axf:crop-offset-right
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.crop-offset
+  -->
+  <xs:attributeGroup name="axf_crop-offset">
+    <xs:attribute name="crop-offset" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Distance from the physical edges to the trim size of the output medium: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_crop-offset-top">
+    <xs:attribute name="crop-offset-top" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Distance from the physical top edge to the trim size of the output medium: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_crop-offset-bottom">
+    <xs:attribute name="crop-offset-bottom" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Distance from the physical bottom edge to the trim size of the output medium: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_crop-offset-left">
+    <xs:attribute name="crop-offset-left" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Distance from the physical left edge to the trim size of the output medium: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_crop-offset-right">
+    <xs:attribute name="crop-offset-right" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Distance from the physical right edge to the trim size of the output medium: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:destination-type
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.destination-type
+  -->
+  <xs:attributeGroup name="axf_destination-type">
+    <xs:attribute name="destination-type" form="qualified">
+      <xs:annotation>
+        <xs:documentation>The way a link opens in a link destination</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks
+  -->
+  <xs:attributeGroup name="axf_printer-marks">
+    <xs:attribute name="printer-marks" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Printing marks, such as a crop mark</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks-line-color
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-color
+  -->
+  <xs:attributeGroup name="axf_printer-marks-line-color">
+    <xs:attribute name="printer-marks-line-color" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Line color of printer marks: &lt;line&gt; | auto</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks-line-length
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-length
+  -->
+  <xs:attributeGroup name="axf_printer-marks-line-length">
+    <xs:attribute name="printer-marks-line-length" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Line length of printer marks: &lt;length&gt; | auto</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks-line-width
+    Line width of printer marks: <length> | auto
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-width
+  -->
+  <xs:attributeGroup name="axf_printer-marks-line-width">
+    <xs:attribute name="printer-marks-line-width" form="qualified">
+      <xs:annotation>
+        <xs:documentation/>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks-zero-margin
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-zero-margin
+  -->
+  <xs:attributeGroup name="axf_printer-marks-zero-margin">
+    <xs:attribute name="printer-marks-zero-margin" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Margin between the page and the printer marks when bleed is 0: &lt;length&gt; | auto</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks-spine-width
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-spine-width
+  -->
+  <xs:attributeGroup name="axf_printer-marks-spine-width">
+    <xs:attribute name="printer-marks-spine-width" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Spine width of the facing page: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:repeat-cell-content-at-break
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.repeat-cell-content-at-break
+  -->
+  <xs:attributeGroup name="axf_repeat-cell-content-at-break">
+    <xs:attribute name="repeat-cell-content-at-break" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Whether to copy the contents of a cell when a cell breaks</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:attributeGroup>
 </xs:schema>
