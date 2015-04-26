@@ -13,7 +13,7 @@ to XSL-FO datatypes.
 
 ## Disclaimer
 
-`focheck` is a work in progress.  It does not (yet) handle every XSL-FO property or every requirement in the XSL-FO spec, nor does it evaluate either functions or relative lengths.
+**focheck** is a work in progress.  It does not (yet) handle every XSL-FO property or every requirement in the XSL-FO spec, nor does it evaluate either functions or relative lengths.
 
 Pull requests and new issues are welcome.
 
@@ -84,7 +84,7 @@ You can use the Relax NG schema in the `schema` folder and the Schematron files 
 
 ### Standalone
 
-1. If the properties in `build.properties` are not correct for your system, then copy `build.properties` to `build.local.properties` in the same directory.
+1. If the properties in `build.properties` are not correct for your system, then copy `build.properties` to `build.local.properties` in the same directory and set the correct values there.
  - You can delete or comment out any properties in `build.local.properties` that you don't need to change.
 1. Run Ant.
 
