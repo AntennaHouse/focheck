@@ -218,7 +218,7 @@ Antenna House extensions.</description>
 </target>
 
 <target name="-xsd.uptodate">
-  <uptodate property="rng.uptodate">
+  <uptodate property="xsd.uptodate">
     <srcfiles dir= "${schema.dir}" includes="*.rnc"/>
     <mapper type="glob" from="*.rnc" to="xsd/*.xsd"/>
   </uptodate>
