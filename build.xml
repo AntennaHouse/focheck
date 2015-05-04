@@ -302,7 +302,14 @@ Antenna House extensions.</description>
 
 <!-- Release targets. -->
 
-<target name="add-on.xml"
+<target name="add-on.xml.uptodate">
+  <uptodate property="add-on.xml.uptodate"
+	    srcfile="${basedir.converted}/build.properties"
+	    targetfile="${basedir.converted}/add-on.xml" />
+</target>
+
+<target name="add-on.xml" depends="add-on.xml.uptodate"
+	unless="add-on.xml.uptodate"
 	description="Update the version information in 'add-on.xml'.">
   <replaceregexp file="${basedir.converted}/add-on.xml">
     <regexp pattern="&lt;xt:version>[^&lt;]+&lt;/xt:version>" />
