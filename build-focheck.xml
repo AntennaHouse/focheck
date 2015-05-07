@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="focheck-run" basedir="." default="build">
+<description>Build file for running the 'focheck' facility for
+checking FO documents that include Antenna House
+extensions.</description>
+<!--
+     Copyright 2015 Antenna House, Inc.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<dirname property="focheck.basedir" file="${ant.file.focheck}"/>
+
+<pathconvert property="focheck.basedir.converted" dirsep="/">
+  <path location="${focheck.basedir}" />
+  <!-- Ant under cygwin uses a lowercase drive letter, which some Java
+       programs don't recognise as a drive letter, so translate. -->
+  <map from="c:" to="/C:"/>
+  <map from="d:" to="/D:"/>
+  <map from="e:" to="/E:"/>
+</pathconvert>
+
+<pathconvert property="basedir.converted" dirsep="/">
+  <path location="${basedir}" />
+  <!-- Ant under cygwin uses a lowercase drive letter, which some Java
+       programs don't recognise as a drive letter, so translate. -->
+  <map from="c:" to="/C:"/>
+  <map from="d:" to="/D:"/>
+  <map from="e:" to="/E:"/>
+</pathconvert>
+
+<!-- Local file of properties determining or describing local
+     configuration. -->
+<property name="build.local.properties"
+	  location="${basedir.converted}/build.local.properties"/>
+<property file="${build.local.properties}"/>
+
+<!-- XML file of properties determining or describing local
+     configuration. -->
+<property name="build.properties.xml"
+	  location="${fochek.basedir.converted}/properties.xml"/>
+<property file="${build.properties.xml}"/>
+
+<!-- File of properties determining or describing local
+     configuration. -->
+<property name="build.properties"
+	  location="${focheck.basedir.converted}/build.properties"/>
+<property file="${build.properties}"/>
+
+<!-- Input and output file properties. -->
+
+<!-- Where to find auxiliary files such as the EBNF. -->
+<property name="etc.dir" value="${focheck.basedir.converted}/etc" />
+<!-- Where to find schema files. -->
+<property name="schema.dir" value="${focheck.basedir.converted}/schema" />
+<!-- Where to find Schematron files. -->
+<property name="schematron.dir" value="${focheck.basedir.converted}/schematron" />
+<!-- Where to find XSLT files. -->
+<property name="xsl.dir" value="${focheck.basedir.converted}/xsl" />
+<!-- Basename of main (outermost) schema file. -->
+<property name="schema.basename" value="axf" />
+<!-- Main Schematron file. -->
+<property name="schematron" value="${schematron.dir}/axf.sch" />
+<!-- Where to find built files such as compiled Schematron. -->
+<property name="build.dir" value="${focheck.basedir.converted}/build" />
+
+<!-- Housekeeping properties -->
+
+<!-- Whether to force processing to run. -->
+<property name="force" value="no" />
+
+<!-- Whether to delete temporary files on exit. -->
+<property name="deleteonexit" value="false" />
+
+<!-- saxon.jar location depends on if run from oXygen or on OS. -->
+<condition property="saxon.jar" value="${ant.home}/../../lib/saxon9ee.jar">
+  <contains string="${ant.home}" substring="oxygen" casesensitive="false" />
+</condition>
+<condition property="saxon.jar" value="${saxon.jar.windows}">
+  <os family="windows" />
+</condition>
+<condition property="saxon.jar" value="${saxon.jar.mac}">
+  <os family="mac" />
+</condition>
+<property name="saxon.jar" value="${saxon.jar.unix}" />
+
+<!-- jing.jar location depends on if run from oXygen or on OS. -->
+<condition property="jing.jar" value="${ant.home}/../../lib/jing.jar">
+  <contains string="${ant.home}" substring="oxygen" casesensitive="false" />
+</condition>
+<condition property="jing.jar" value="${jing.jar.windows}">
+  <os family="windows" />
+</condition>
+<condition property="jing.jar" value="${jing.jar.mac}">
+  <os family="mac" />
+</condition>
+<property name="jing.jar" value="${jing.jar.unix}" />
+
+<taskdef name="jing"
+	 classname="com.thaiopensource.relaxng.util.JingTask"
+	 classpath="${jing.jar}" />
+
+<!-- Targets -->
+
+<!-- Validation targets -->
+
+<target name="single.basename">
+  <fail unless="single"
+        message="'single' property must be set to filename of single XML file to process." />
+  <!-- Basename of single file to process. -->
+  <basename property="single.basename" file="${single}" suffix=".xml" />
+</target>
+
+<target name="validate.single" depends="single.basename">
+  <jing rngfile="${schema.dir}/rng/${schema.basename}.rng"
+	file="${single}" />
+  <schematron>
+    <fileset file="${single}"/>
+  </schematron>
+</target>
+
+<macrodef name="schematron"
+	  description="Runs Schematron using Saxon">
+  <attribute name="schematron"
+	     default="${schematron}"
+	     description="Schematron file to use." />
+  <attribute name="basedir"
+	     default="${basedir.converted}"
+	     description="Base directory from which to run Schematron." />
+  <attribute name="saxon.jar"
+	     default="${saxon.jar}"
+	     description="Location of Saxon jar." />
+  <element name="files"
+	   implicit="true"
+	   description="Fileset or similar on which to run Schematron." />
+  <sequential>
+    <echo message="Running '@{schematron}' Schematron.  SVRL in 'out'."/>
+    <local name="filenames" />
+    <mkdir dir="${basedir.converted}/out"/>
+
+    <mappedresources id="filenames">
+      <files />
+      <flattenmapper />
+      </mappedresources>
+
+    <echo message="Validate" />
+    <!-- validate -->
+    <xslt destdir="${basedir.converted}/out"
+	  style="${build.dir}/schematron.xsl"
+	  useimplicitfileset="false"
+	  classpath="@{saxon.jar}">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+	<attribute
+	    name="http://saxon.sf.net/feature/allow-external-functions"
+	    value="true"/>
+	<attribute
+	    name="http://saxon.sf.net/feature/linenumbering"
+	    value="true"/>
+      </factory>
+      <files />
+      <flattenmapper />
+    </xslt>
+
+    <local name="ignore-me" />
+    <local name="ignore-me.basename" />
+    <tempfile property="ignore-me"
+	      prefix="ignore-me"
+	      destdir="${basedir.converted}"
+	      deleteonexit="true"/>
+    <basename property="ignore-me.basename" file="${ignore-me}" />
+    <!-- check -->
+    <xslt basedir="${basedir.converted}/out"
+	  destdir="${basedir.converted}"
+	  useimplicitfileset="false"
+	  style="${build.dir}/check-schematron.xsl"
+	  classpath="${saxon.jar}"
+	  force="true">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+	<attribute
+	    name="http://saxon.sf.net/feature/validation-warnings"
+	    value="false"/>
+	<attribute
+	    name="http://saxon.sf.net/feature/linenumbering"
+	    value="true"/>
+      </factory>
+      <resources refid="filenames" />
+      <mergemapper to="${ignore-me.basename}" />
+    </xslt>
+  </sequential>
+</macrodef>
+
+<target name="schematron.single" depends="single.basename">
+  <schematron>
+    <fileset file="${single}"/>
+  </schematron>
+</target>
+
+<target name="schematron.dir">
+  <schematron>
+    <fileset dir="${dir}" includes="*.fo" />
+  </schematron>
+</target>
+
+
+<!-- Utility targets. -->
+
+<target name="echoproperties">
+  <echoproperties />
+</target>
+
+</project>
