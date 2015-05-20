@@ -285,7 +285,7 @@
 
    <!--PATTERN fo-property-->
    <xsl:include xmlns="http://purl.oclc.org/dsdl/schematron"
-                href="file:/C:/projects/oxygen/focheck/xsl/parser-runner.xsl"/>
+                href="file:/E:/Projects/oxygen/focheck/xsl/parser-runner.xsl"/>
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@absolute-position" priority="1212" mode="M1">

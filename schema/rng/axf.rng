@@ -724,7 +724,7 @@
   <define name="axf_printer-marks-line-width">
     <optional>
       <attribute name="axf:printer-marks-line-width">
-        <a:documentation/>
+        <a:documentation>Line width of printer marks</a:documentation>
       </attribute>
     </optional>
   </define>

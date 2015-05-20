@@ -17,7 +17,7 @@
 
 </pattern>
     <pattern xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" id="fo-property">
-   <xsl:include href="file:/C:/projects/oxygen/focheck/xsl/parser-runner.xsl"/>
+   <xsl:include href="file:/E:/Projects/oxygen/focheck/xsl/parser-runner.xsl"/>
 
    
    

@@ -620,7 +620,7 @@
   <xs:attributeGroup name="axf_printer-marks-line-width">
     <xs:attribute name="printer-marks-line-width" form="qualified">
       <xs:annotation>
-        <xs:documentation/>
+        <xs:documentation>Line width of printer marks</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
