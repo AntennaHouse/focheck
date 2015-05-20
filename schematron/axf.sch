@@ -19,6 +19,7 @@
     <include href="fo-property.sch" />
     <ns uri="http://www.w3.org/1999/XSL/Format" prefix="fo" />
     <ns uri="http://www.antennahouse.com/names/XSLT/Functions/Document" prefix="ahf" />
+    <ns uri="http://www.antennahouse.com/names/XSL/Extensions" prefix="axf" />
     
     <phase id="fo">
         <active pattern="fo-fo" /></phase>
@@ -27,8 +28,27 @@
     </phase>
     <pattern id="axf">
         <p>http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info</p>
-        <rule context="ahf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1" role="axf-1">
-            <assert test="empty(../ahf:document-info[@name eq 'xmp'])" role="axf-2">"<value-of select="@name"/>" axf:document-info cannot be used when "xmp" axf:document-info is present.</assert>
+        <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1" role="axf-1">
+            <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">"<value-of select="@name"/>" axf:document-info cannot be used when "xmp" axf:document-info is present.</assert>
         </rule>
+
+	<!-- axf:outline-color -->
+	<!-- <color> -->
+	<!-- Inherited: false -->
+	<rule context="fo:*/@axf:outline-color">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'ERROR', 'Object')">'axf:outline-color' should be Color or a color name.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: 'axf:outline-color="<value-of select="."/>"'</report>
+	</rule>
+
+	<!-- axf:outline-level -->
+	<!-- <number> -->
+	<!-- Inherited: false -->
+	<rule context="fo:*/@axf:outline-level">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Number', 'ERROR', 'Object')">'axf:outline-level should be Number.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: 'outline-level="<value-of select="."/>"'</report>
+	</rule>
+
     </pattern>
 </schema>
