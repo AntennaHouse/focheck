@@ -401,7 +401,7 @@ axf_printer-marks-line-length =
 # Line width of printer marks: <length> | auto
 # http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-width
 axf_printer-marks-line-width =
-    ## 
+    ## Line width of printer marks
     attribute axf:printer-marks-line-width { text }?
 
 # @axf:printer-marks-zero-margin
