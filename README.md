@@ -68,9 +68,13 @@ If you don't have permission to modify the oXygen installation – for example, 
 
 When you open an XSL-FO document – where the document element is `root` in the XSL-FO namespace – oXygen will automatically validate the document against both the Relax NG schema and the Schematron grammar.
 
+### Ant
+
+Use the `build-focheck.xml` Ant build file and the `validate.single` target to validate a file using both Relax NG and Schematron.  Alternatively, use the `schematron.single` or `schematron.dir` target to run Schematron on one or multiple files.
+
 ### Standalone
 
-You can use the Relax NG schema in the `schema` folder and the Schematron files in the `schematron` folder outside of oXygen.  However:
+You can use the Relax NG schema in the `schema` folder and the Schematron files in the `schematron` folder outside of oXygen and Ant.  However:
 
 - The Relax NG works with Jing and with Emacs `nxml-mode` but not with `xmllint`.
 - The Schematron requires an XSLT 2.0 binding and a Schematron implementation that will both match on attributes as contexts as well as import and use external XSLT 2.0 stylesheets.
