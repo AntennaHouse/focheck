@@ -169,15 +169,26 @@ fo_block.attlist &=
     axf_destination-type,
     height,
     text-decoration,
-    width
+    width,
+    axf.block.attlist
 
 fo_block-container.attlist &=
     axf_column-count,
     axf_column-gap,
-    axf_destination-type
+    axf_destination-type,
+    axf.block.attlist
 
 fo_footnote.attlist &=
     space-before
+
+fo_list-block.attlist &=
+    axf.block.attlist
+
+fo_table.attlist &=
+    axf.block.attlist
+
+fo_table-and-caption.attlist &=
+    axf.block.attlist
 
 fo_table-cell.attlist &=
     axf_repeat-cell-content-at-break
@@ -200,6 +211,17 @@ common-border-padding-and-background-properties &=
 #
 # Antenna House extension properties
 #
+
+# List of extension properties common to all block-level formatting
+# objects
+axf.block.attlist =
+    axf_outline-expand,
+    axf_outline-group,
+    axf_outline-level,
+    axf_outline-title,
+    axf_outline-color,
+    axf_outline-font-style,
+    axf_outline-font-weight
 
 # @axf:action-type
 #
@@ -304,6 +326,55 @@ axf_crop-offset-right =
 axf_destination-type =
     ## The way a link opens in a link destination
     attribute axf:destination-type { text }?
+
+# @axf:outline-expand
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-expand
+axf_outline-expand =
+    ## Whether to display the lower hierarchy of bookmark items or not
+    attribute axf:outline-expand { 'true' | 'false' }?
+
+# @axf:outline-group
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-group
+axf_outline-group =
+    ## Name of the output group: <string>
+    attribute axf:outline-group { text }?
+
+# @axf:outline-level
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-level
+axf_outline-level =
+    ## The hierarchy level of bookmark items: <number>
+    attribute axf:outline-level { text }?
+
+# @axf:outline-title
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-title
+axf_outline-title =
+    ## String which appears as a title of bookmark: <string>
+    attribute axf:outline-title { text }?
+
+# @axf:outline-color
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-color
+axf_outline-color =
+    ## Color which appears as a title of bookmark
+    attribute axf:outline-color { text }?
+
+# @axf:outline-font-style
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf_outline-font-style
+axf_outline-font-style =
+    ## Font style which appears as a title of bookmark
+    attribute axf:outline-font-style { 'normal' | 'italic' }?
+
+# @axf:outline-font-weight
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf:outline-font-weight
+axf_outline-font-weight =
+    ## Font weight which appears as a title of bookmark
+    attribute axf:outline-font-weight { 'normal' | 'bold' }?
 
 # @axf:printer-marks
 #
