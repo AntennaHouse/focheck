@@ -117,3 +117,119 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+----
+
+# focheck – oXygen又は standaloneでXSL-FO と　アンテナハウスの拡張を検証する。
+
+**focheck** はoXygen XMLエデイター内　　XSL-FOの詳細な検証のための oXygen フレームワークで Relax NG 又はSchematron 文法が包まれています。
+もちろん、一緒に又は別々に、oXygenの以外で**focheck** のRelax NG とのSchematron を使用することができます。
+
+Relax NG は、構造的な検証を処理し、SchematronのはRelax NGでは表現できない追加の制約を処理します。
+Schematron のはRExパーサージエネレーターとXSL-FOとデータタイプにパースツリーを低減するためのXSLTライブラリーによって生成されたXSLTのあるパーサーを使用して、プロパティ値の式を説明します。
+
+## 免責条項
+
+**focheck** は進行中の作業です。 それは　「まだ」全てのXSL-FO プロパティ又はXSL-FO仕様の全ての資格を処理しません。また、機能や相対的な長さのいずれかを評価しません。
+
+Pullリクエスト又は新しい問題はどうぞ。
+
+
+## インストールする
+
+* **focheck**を oXygenだけと使用する場合は、いずれ次のようになる:
+ * 追加oXygenフレームワークとして **focheck**をインストールします。
+ * ダウンロードして、oXygen フレームワークの静体的なコピーをインストールします。
+* 簡単に変更で最新のをついて行きたい場合は、このリポジトリをクローンして、いつでも好きな時に最新バージョンを「pull」することができます。
+* **focheck** をハックやpullリクエストを提出する場合は、このリポジトリをフォークして、ローカルマシンにそれをクローンすることができます。
+
+
+### 追加 oXygenフレームワークとしてインストールする。
+
+http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.htmlでoXygenのマニュアルの命令に従います。
+
+**focheck** 最新サイトのURLは https://github.com/AntennaHouse/focheck/raw/master/add-on.xmlです。
+
+oXygen は追加フレームワークをインストールした後、エデイターを再起動する必要があり、注意してください。
+
+
+### oXygen 「フレームワークス」　デイレクトリのZIPアーカイブをインストールする。
+
+1. 'Releases' ページにある最新リリースから ZIPアーカイブ　をダウンロードする。
+1. oXygen `frameworks`デイレクトリにZIP アーカイブにあるフルダーを摘出します。
+ - ウインドウズでは、これは `C:\Program Files\Oxygen XML Editor 16\frameworks`, 又は同類のものです。
+ - `frameworks`デイレクトリにフォルダをコピーする権限がない場合は、以下に説明するように、別の場所を使用することができます。
+1. oXygen再起動します。。
+
+
+### 別のフレームワークの場所にZIP アーカイブをインストールする。
+
+例えば、oXygenは `C:\Program Files\`でウインドウズにインストールされている場合は、oXygenのインストールを変更する権限を持っていない、あなたは管理者もではない場合は、別のフレームワークの場所を使用することができるようにoXygen を設定することができます。
+
+1. ファイルをダウンロードするには、このプロジェクトの代表ページに"Download ZIP"をクリックします。
+1. 新しいフォルダを生成することができるフォルダに ZIP アーカイブ内のフォルダを摘出します。
+1.　oXygen の環境では、別のフレームワークの場所として**focheck**フォルダに*含む* フォルダを追加します。
+ - http://oxygenxml.com/doc/ug-editor/index.html#topics/framework-location.htmlを確認してください。
+1. oXygenを再起動します。
+
+### リポジトリクローンをインストールする。
+
+1. oXygen　「フレームワークス」　デイレクトリ又は別のデイレクトリのいずれにリポジトリをクローンします。
+ - **focheck** はサブモジュールとして**[stf](https://github.com/MenteaXML/stf)** を合併しています。  また、 **stf**を確認するには、２つの方法があります:
+   - **focheck**を確認するとき、 `git clone`　に　`--recursive`を渡します。
+   - 既に **focheck**　を確認した場合、次のを実行できる。
+     `git submodule init`
+     `git submodule update`
+2. 必要だと、別のフレームワークスの場所として**focheck**　フォルダを*含む* フォルダを追加します。
+3.　oXygenを再起動します。
+
+## **focheck**　を使用する。
+
+### oXygen XML エデイター
+
+文書要素はXSL-FO の名前空間で　`root` である　XSL-FO文書を開くと、oXygenは自動的にRelax NGスキーマとSchematronの文法両方に対して文書を検証します。
+
+### Standalone
+
+`schema`フォルダ内の Relax NG のスキーマを使用することができるし、 Schematronのファイルは  oXygenの外にある `schematron` フォルダを使用します。  と言えば:
+
+- `xmllint`　ではなく、Relax NG は Jing と Emacs `nxml-mode`に対応します。
+- Schematronのは XSLT 2.0 結合とSchematronの実行が必要です。　それらは、両方のコンテクスト　として属性に合わせて、外部のXSLT 2.0 スタイルシートを読み込みんで使用することもできます。
+
+### oXygen XML　エデイター
+
+1. oXygen　で `build.xml` を開きます。
+2. デフォルトの "ANT" 変換のシナリオを実行する。
+
+### Standalone
+
+1. `build.properties` プロパティーは使用するシステムの正確ではない場合は、同じデイレクトリで`build.properties`を`build.local.properties`に コピーします。
+ -  `build.local.properties`にあるいずれのプロパティーは変更する必要はない場合、削除するか、コメントアウトもできます。
+1. Antを実行します。
+
+## その他の Ant ターゲット
+
+
+### `run.parser`
+
+`${input}`で　パーサーを実行する。
+
+### `framework.zip`
+
+ちょうどoXygen フレームワークのZip　アーカイブを生成します。
+
+## ライセンス
+
+Copyright 2015 Antenna House, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
