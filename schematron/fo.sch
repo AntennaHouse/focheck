@@ -18,17 +18,28 @@
 	 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	 xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document"
 	 id="fo-fo">
-  <!--<xsl:include href="parser-runner.xsl" />-->
-  <!--<rule context="fo:retrieve-table-marker">
+
+  <rule context="fo:retrieve-table-marker">
     <assert test="exists(ancestor::fo:table-header) or
                   exists(ancestor::fo:table-footer) or
                   (exists(parent::fo:table) and empty(preceding-sibling::fo:table-body) and empty(following-sibling::fo:table-column))">An fo:retrieve-table-marker is only permitted as the descendant of an fo:table-header or fo:table-footer or as a child of fo:table in a position where fo:table-header or fo:table-footer is permitted.</assert>
-  </rule>-->
-  <rule context="fo:*/@column-count" role="column-count">
+  </rule>
+
+  <rule context="fo:*/@column-count | fo:*/@number-columns-spanned">
     <let name="expression" value="ahf:parser-runner(.)"/>
     <report test="local-name($expression) = 'Number' and
                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or
                    $expression/@is-zero = 'yes' or
-                   exists($expression/@value) and not($expression/@value castable as xs:integer))" role="column-count">Warning: @column-count should be a positive integer.  The FO formatter will round a non-positive or non-integer value to the nearest integer value greater than or equal to 1.</report>
+                   exists($expression/@value) and not($expression/@value castable as xs:integer))" role="column-count">Warning: @<value-of select="local-name()" /> should be a positive integer.  The FO formatter will round a non-positive or non-integer value to the nearest integer value greater than or equal to 1.</report>
   </rule>
+
+  <rule context="fo:*/@column-width">
+    <let name="number-columns-spanned"
+	 value="ahf:parser-runner(../@number-columns-spanned)"/>
+    <report test="exists(../@number-columns-spanned) and
+		  local-name($number-columns-spanned) = 'Number' and
+                  (exists($number-columns-spanned/@value) and
+		   number($number-columns-spanned/@value) >= 1.5)" role="column-width">Warning: @<value-of select="local-name()" /> is ignored with @number-columns-spanned is present and has a value greater than 1.</report>
+  </rule>
+
 </pattern>
