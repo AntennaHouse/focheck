@@ -8,6 +8,7 @@
                 xmlns:xhtml="http://www.w3.org/1999/xhtml"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document"
+                xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions"
                 version="2.0"><!--Implementers: please note that overriding process-prolog or process-root is 
     the preferred method for meta-stylesheets to use where possible. -->
    <xsl:param name="archiveDirParameter"/>
@@ -193,6 +194,7 @@
          <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/1999/XSL/Format" prefix="fo"/>
          <svrl:ns-prefix-in-attribute-values uri="http://www.antennahouse.com/names/XSLT/Functions/Document"
                                              prefix="ahf"/>
+         <svrl:ns-prefix-in-attribute-values uri="http://www.antennahouse.com/names/XSL/Extensions" prefix="axf"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -202,7 +204,7 @@
             <svrl:text>http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info</svrl:text>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M6"/>
+         <xsl:apply-templates select="/" mode="M7"/>
       </svrl:schematron-output>
    </xsl:template>
 
@@ -213,10 +215,32 @@
 
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-count" priority="1000" mode="M0">
+   <xsl:template match="fo:retrieve-table-marker" priority="1002" mode="M0">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@column-count"
-                       role="column-count"/>
+                       context="fo:retrieve-table-marker"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="exists(ancestor::fo:table-header) or                   exists(ancestor::fo:table-footer) or                   (exists(parent::fo:table) and empty(preceding-sibling::fo:table-body) and empty(following-sibling::fo:table-column))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists(ancestor::fo:table-header) or exists(ancestor::fo:table-footer) or (exists(parent::fo:table) and empty(preceding-sibling::fo:table-body) and empty(following-sibling::fo:table-column))">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>An fo:retrieve-table-marker is only permitted as the descendant of an fo:table-header or fo:table-footer or as a child of fo:table in a position where fo:table-header or fo:table-footer is permitted.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="@*|*" mode="M0"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@column-count | fo:*/@number-columns-spanned"
+                 priority="1001"
+                 mode="M0">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@column-count | fo:*/@number-columns-spanned"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--REPORT column-count-->
@@ -227,7 +251,30 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>Warning: @column-count should be a positive integer.  The FO formatter will round a non-positive or non-integer value to the nearest integer value greater than or equal to 1.</svrl:text>
+            <svrl:text>Warning: @<xsl:text/>
+               <xsl:value-of select="local-name()"/>
+               <xsl:text/> should be a positive integer.  The FO formatter will round a non-positive or non-integer value to the nearest integer value greater than or equal to 1.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@column-width" priority="1000" mode="M0">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-width"/>
+      <xsl:variable name="number-columns-spanned"
+                    select="ahf:parser-runner(../@number-columns-spanned)"/>
+
+		    <!--REPORT column-width-->
+      <xsl:if test="exists(../@number-columns-spanned) and     local-name($number-columns-spanned) = 'Number' and                   (exists($number-columns-spanned/@value) and      number($number-columns-spanned/@value) &gt;= 1.5)">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="exists(../@number-columns-spanned) and local-name($number-columns-spanned) = 'Number' and (exists($number-columns-spanned/@value) and number($number-columns-spanned/@value) &gt;= 1.5)">
+            <xsl:attribute name="role">column-width</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>Warning: @<xsl:text/>
+               <xsl:value-of select="local-name()"/>
+               <xsl:text/> is ignored with @number-columns-spanned is present and has a value greater than 1.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -237,8 +284,7 @@
    </xsl:template>
 
    <!--PATTERN fo-property-->
-   <xsl:include xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions"
-                xmlns="http://purl.oclc.org/dsdl/schematron"
+   <xsl:include xmlns="http://purl.oclc.org/dsdl/schematron"
                 href="file:/C:/projects/oxygen/focheck/xsl/parser-runner.xsl"/>
 
 	  <!--RULE -->
@@ -10527,20 +10573,20 @@
 
 
 	  <!--RULE axf-1-->
-   <xsl:template match="ahf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
-                 priority="1000"
-                 mode="M6">
+   <xsl:template match="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
+                 priority="1002"
+                 mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="ahf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
+                       context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
                        id="axf-1"
                        role="axf-1"/>
 
 		    <!--ASSERT axf-2-->
       <xsl:choose>
-         <xsl:when test="empty(../ahf:document-info[@name eq 'xmp'])"/>
+         <xsl:when test="empty(../axf:document-info[@name eq 'xmp'])"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="empty(../ahf:document-info[@name eq 'xmp'])">
+                                test="empty(../axf:document-info[@name eq 'xmp'])">
                <xsl:attribute name="role">axf-2</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -10551,10 +10597,86 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="@*|*" mode="M6"/>
+      <xsl:apply-templates select="@*|*" mode="M7"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M6"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M6">
-      <xsl:apply-templates select="@*|*" mode="M6"/>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:outline-color" priority="1001" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:outline-color"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'ERROR', 'Object')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('Color', 'EnumerationToken', 'ERROR', 'Object')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>'axf:outline-color' should be Color or a color name.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>Syntax error: 'axf:outline-color="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"'</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:outline-level" priority="1000" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:outline-level"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('Number', 'ERROR', 'Object')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('Number', 'ERROR', 'Object')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>'axf:outline-level should be Number.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>Syntax error: 'outline-level="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"'</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M7"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M7">
+      <xsl:apply-templates select="@*|*" mode="M7"/>
    </xsl:template>
 </xsl:stylesheet>

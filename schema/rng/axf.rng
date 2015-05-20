@@ -324,14 +324,25 @@
     <ref name="height"/>
     <ref name="text-decoration"/>
     <ref name="width"/>
+    <ref name="axf.block.attlist"/>
   </define>
   <define name="fo_block-container.attlist" combine="interleave">
     <ref name="axf_column-count"/>
     <ref name="axf_column-gap"/>
     <ref name="axf_destination-type"/>
+    <ref name="axf.block.attlist"/>
   </define>
   <define name="fo_footnote.attlist" combine="interleave">
     <ref name="space-before"/>
+  </define>
+  <define name="fo_list-block.attlist" combine="interleave">
+    <ref name="axf.block.attlist"/>
+  </define>
+  <define name="fo_table.attlist" combine="interleave">
+    <ref name="axf.block.attlist"/>
+  </define>
+  <define name="fo_table-and-caption.attlist" combine="interleave">
+    <ref name="axf.block.attlist"/>
   </define>
   <define name="fo_table-cell.attlist" combine="interleave">
     <ref name="axf_repeat-cell-content-at-break"/>
@@ -356,6 +367,19 @@
     Antenna House extension properties
     
   -->
+  <!--
+    List of extension properties common to all block-level formatting
+    objects
+  -->
+  <define name="axf.block.attlist">
+    <ref name="axf_outline-expand"/>
+    <ref name="axf_outline-group"/>
+    <ref name="axf_outline-level"/>
+    <ref name="axf_outline-title"/>
+    <ref name="axf_outline-color"/>
+    <ref name="axf_outline-font-style"/>
+    <ref name="axf_outline-font-weight"/>
+  </define>
   <!--
     @axf:action-type
     
@@ -557,6 +581,102 @@
     <optional>
       <attribute name="axf:destination-type">
         <a:documentation>The way a link opens in a link destination</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:outline-expand
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-expand
+  -->
+  <define name="axf_outline-expand">
+    <optional>
+      <attribute name="axf:outline-expand">
+        <a:documentation>Whether to display the lower hierarchy of bookmark items or not</a:documentation>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:outline-group
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-group
+  -->
+  <define name="axf_outline-group">
+    <optional>
+      <attribute name="axf:outline-group">
+        <a:documentation>Name of the output group: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:outline-level
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-level
+  -->
+  <define name="axf_outline-level">
+    <optional>
+      <attribute name="axf:outline-level">
+        <a:documentation>The hierarchy level of bookmark items: &lt;number&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:outline-title
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-title
+  -->
+  <define name="axf_outline-title">
+    <optional>
+      <attribute name="axf:outline-title">
+        <a:documentation>String which appears as a title of bookmark: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:outline-color
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-color
+  -->
+  <define name="axf_outline-color">
+    <optional>
+      <attribute name="axf:outline-color">
+        <a:documentation>Color which appears as a title of bookmark</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:outline-font-style
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf_outline-font-style
+  -->
+  <define name="axf_outline-font-style">
+    <optional>
+      <attribute name="axf:outline-font-style">
+        <a:documentation>Font style which appears as a title of bookmark</a:documentation>
+        <choice>
+          <value>normal</value>
+          <value>italic</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:outline-font-weight
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf:outline-font-weight
+  -->
+  <define name="axf_outline-font-weight">
+    <optional>
+      <attribute name="axf:outline-font-weight">
+        <a:documentation>Font weight which appears as a title of bookmark</a:documentation>
+        <choice>
+          <value>normal</value>
+          <value>bold</value>
+        </choice>
       </attribute>
     </optional>
   </define>

@@ -14,16 +14,21 @@
      limitations under the License.
 --><schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
     <?DSDL_INCLUDE_START fo.sch?><pattern xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document" id="fo-fo">
-  <!--<xsl:include href="parser-runner.xsl" />-->
-  <!--<rule context="fo:retrieve-table-marker">
-    <assert test="exists(ancestor::fo:table-header) or
-                  exists(ancestor::fo:table-footer) or
-                  (exists(parent::fo:table) and empty(preceding-sibling::fo:table-body) and empty(following-sibling::fo:table-column))">An fo:retrieve-table-marker is only permitted as the descendant of an fo:table-header or fo:table-footer or as a child of fo:table in a position where fo:table-header or fo:table-footer is permitted.</assert>
-  </rule>-->
-  <rule context="fo:*/@column-count" role="column-count">
-    <let name="expression" value="ahf:parser-runner(.)"/>
-    <report test="local-name($expression) = 'Number' and                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or                    $expression/@is-zero = 'yes' or                    exists($expression/@value) and not($expression/@value castable as xs:integer))" role="column-count">Warning: @column-count should be a positive integer.  The FO formatter will round a non-positive or non-integer value to the nearest integer value greater than or equal to 1.</report>
+
+  <rule context="fo:retrieve-table-marker">
+    <assert test="exists(ancestor::fo:table-header) or                   exists(ancestor::fo:table-footer) or                   (exists(parent::fo:table) and empty(preceding-sibling::fo:table-body) and empty(following-sibling::fo:table-column))">An fo:retrieve-table-marker is only permitted as the descendant of an fo:table-header or fo:table-footer or as a child of fo:table in a position where fo:table-header or fo:table-footer is permitted.</assert>
   </rule>
+
+  <rule context="fo:*/@column-count | fo:*/@number-columns-spanned">
+    <let name="expression" value="ahf:parser-runner(.)"/>
+    <report test="local-name($expression) = 'Number' and                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or                    $expression/@is-zero = 'yes' or                    exists($expression/@value) and not($expression/@value castable as xs:integer))" role="column-count">Warning: @<value-of select="local-name()"/> should be a positive integer.  The FO formatter will round a non-positive or non-integer value to the nearest integer value greater than or equal to 1.</report>
+  </rule>
+
+  <rule context="fo:*/@column-width">
+    <let name="number-columns-spanned" value="ahf:parser-runner(../@number-columns-spanned)"/>
+    <report test="exists(../@number-columns-spanned) and     local-name($number-columns-spanned) = 'Number' and                   (exists($number-columns-spanned/@value) and      number($number-columns-spanned/@value) &gt;= 1.5)" role="column-width">Warning: @<value-of select="local-name()"/> is ignored with @number-columns-spanned is present and has a value greater than 1.</report>
+  </rule>
+
 </pattern><?DSDL_INCLUDE_END fo.sch?>
     <?DSDL_INCLUDE_START fo-property.sch?><pattern xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" id="fo-property">
    <xsl:include href="file:/C:/projects/oxygen/focheck/xsl/parser-runner.xsl"/>
@@ -2334,6 +2339,7 @@
 </pattern><?DSDL_INCLUDE_END fo-property.sch?>
     <ns uri="http://www.w3.org/1999/XSL/Format" prefix="fo"/>
     <ns uri="http://www.antennahouse.com/names/XSLT/Functions/Document" prefix="ahf"/>
+    <ns uri="http://www.antennahouse.com/names/XSL/Extensions" prefix="axf"/>
     
     <phase id="fo">
         <active pattern="fo-fo"/></phase>
@@ -2342,8 +2348,27 @@
     </phase>
     <pattern id="axf">
         <p>http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info</p>
-        <rule context="ahf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1" role="axf-1">
-            <assert test="empty(../ahf:document-info[@name eq 'xmp'])" role="axf-2">"<value-of select="@name"/>" axf:document-info cannot be used when "xmp" axf:document-info is present.</assert>
+        <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1" role="axf-1">
+            <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">"<value-of select="@name"/>" axf:document-info cannot be used when "xmp" axf:document-info is present.</assert>
         </rule>
+
+	<!-- axf:outline-color -->
+	<!-- <color> -->
+	<!-- Inherited: false -->
+	<rule context="fo:*/@axf:outline-color">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'ERROR', 'Object')">'axf:outline-color' should be Color or a color name.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: 'axf:outline-color="<value-of select="."/>"'</report>
+	</rule>
+
+	<!-- axf:outline-level -->
+	<!-- <number> -->
+	<!-- Inherited: false -->
+	<rule context="fo:*/@axf:outline-level">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Number', 'ERROR', 'Object')">'axf:outline-level should be Number.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: 'outline-level="<value-of select="."/>"'</report>
+	</rule>
+
     </pattern>
 </schema>

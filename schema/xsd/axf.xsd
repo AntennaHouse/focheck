@@ -254,6 +254,19 @@
     
   -->
   <!--
+    List of extension properties common to all block-level formatting
+    objects
+  -->
+  <xs:attributeGroup name="axf.block.attlist">
+    <xs:attributeGroup ref="axf:axf_outline-expand"/>
+    <xs:attributeGroup ref="axf:axf_outline-group"/>
+    <xs:attributeGroup ref="axf:axf_outline-level"/>
+    <xs:attributeGroup ref="axf:axf_outline-title"/>
+    <xs:attributeGroup ref="axf:axf_outline-color"/>
+    <xs:attributeGroup ref="axf:axf_outline-font-style"/>
+    <xs:attributeGroup ref="axf:axf_outline-font-weight"/>
+  </xs:attributeGroup>
+  <!--
     @axf:action-type
     
     http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type
@@ -459,6 +472,108 @@
       <xs:annotation>
         <xs:documentation>The way a link opens in a link destination</xs:documentation>
       </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-expand
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-expand
+  -->
+  <xs:attributeGroup name="axf_outline-expand">
+    <xs:attribute name="outline-expand" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Whether to display the lower hierarchy of bookmark items or not</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-group
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-group
+  -->
+  <xs:attributeGroup name="axf_outline-group">
+    <xs:attribute name="outline-group" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Name of the output group: &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-level
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-level
+  -->
+  <xs:attributeGroup name="axf_outline-level">
+    <xs:attribute name="outline-level" form="qualified">
+      <xs:annotation>
+        <xs:documentation>The hierarchy level of bookmark items: &lt;number&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-title
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-title
+  -->
+  <xs:attributeGroup name="axf_outline-title">
+    <xs:attribute name="outline-title" form="qualified">
+      <xs:annotation>
+        <xs:documentation>String which appears as a title of bookmark: &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-color
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-color
+  -->
+  <xs:attributeGroup name="axf_outline-color">
+    <xs:attribute name="outline-color" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Color which appears as a title of bookmark</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-font-style
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf_outline-font-style
+  -->
+  <xs:attributeGroup name="axf_outline-font-style">
+    <xs:attribute name="outline-font-style" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Font style which appears as a title of bookmark</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="italic"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-font-weight
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf:outline-font-weight
+  -->
+  <xs:attributeGroup name="axf_outline-font-weight">
+    <xs:attribute name="outline-font-weight" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Font weight which appears as a title of bookmark</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="bold"/>
+        </xs:restriction>
+      </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
   <!--
