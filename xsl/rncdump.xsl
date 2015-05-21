@@ -115,6 +115,12 @@ region-name-specifier'"
               select="tokenize($no-point-fos, '\s+')"
               as="xs:string+" />
 
+<!-- Shorthand properties aren't listed in the definitions of the FOs
+     to which they apply, so they have to be added
+     programmatically. -->
+
+<!-- Shorthands (and a few non-shorthands) that apply to all FOs to
+     which a group of properties applies. -->
 <xsl:variable name="shorthands-for-property-group" as="element(item)+">
   <!-- 'absolute-position' and 'relative-position' apply to different
        sets of FOs, so okay to list shorthand twice:
@@ -134,17 +140,30 @@ border-width padding</item>
        http://www.w3.org/TR/xsl11/#d0e21775 -->
   <item group="common-margin-properties-inline">
 margin margin-top margin-bottom margin-left margin-right</item>
+  <!-- 'position' is a shorthand. 'top', 'right', 'bottom' and 'left'
+       are not shorthands, but their definitions as relative position
+       properties are just links to full definitions in
+       'common-absolute-position-properties'. -->
+  <item group="common-relative-position-properties">position top right bottom left</item>
 </xsl:variable>
 
+<!-- Shorthands (and a few non-shorthands) that apply to FOs to which
+     some other property always applies. -->
 <xsl:variable name="shorthands-for-property" as="element(item)+">
   <item property="alignment-baseline">vertical-align</item>
   <item property="break-after">page-break-after</item>
   <item property="break-before">page-break-before</item>
+  <!-- 'max-height', 'max-width', 'min-height', and 'min-width' aren't
+       listed in the shorthand section but they're also not listed for
+       the FOs to which they apply. -->
+  <item property="inline-progression-dimension">max-height max-width min-height min-width</item>
+
   <!-- Omit 'page-break-inside' since it is an inherited property. -->
   <!--<item property="keep-together">page-break-inside</item>-->
+
   <!-- Omit 'white-space' since it is an inherited property. -->
   <!--<item property="linefeed-treatment">white-space</item>-->
-  <item property="relative-position">position</item>
+
   <item property="page-height">size</item>
 </xsl:variable>
 
@@ -234,25 +253,45 @@ fo_</xsl:text>
     <xsl:text>&#10;fo_</xsl:text>
     <xsl:value-of select="$element" />
     <xsl:text>.model =&#10;</xsl:text>
-    <xsl:if test="some $p in p satisfies contains($p, 'zero or more fo:markers')">
+    <!-- fo:wrapper has the 'fo:markers' text in a <ulist>. -->
+    <xsl:if test="some $p in (p | ulist)
+                    satisfies contains(normalize-space($p), 'zero or more fo:markers')">
       <xsl:text>    fo_marker*,&#10;</xsl:text>
     </xsl:if>
-    <xsl:if test="some $p in p satisfies contains($p, 'optionally followed by an fo:initial-property-set')">
+    <xsl:if
+        test="some $p in p
+                satisfies contains($p, 'optionally followed by an fo:initial-property-set')">
       <xsl:text>    fo_initial-property-set?,&#10;</xsl:text>
     </xsl:if>
     <xsl:text>    ( </xsl:text>
     <xsl:variable name="model" as="xs:string+">
       <xsl:apply-templates select="p[. eq 'Contents:']" />
     </xsl:variable>
+    <!-- fo:wrapper may only contain what its parent may contain, so
+         there's three separate patterns for fo:wrapper and three
+         'neutral' FO lists that refer to them. -->
+    <xsl:variable name="model" as="xs:string+"
+        select="if (count($model) = 1 and $model eq 'text')
+                  then '( text | neutral.fo.list.inline )*'
+                else if ($model = 'inline.fo.list' and
+                         $model = 'block.fo.list')
+                  then insert-before($model,
+                                     index-of($model, 'block.fo.list') + 1,
+                                     ' | neutral.fo.list')
+                else if ($model = 'block.fo.list')
+                  then insert-before($model,
+                                     index-of($model, 'block.fo.list') + 1,
+                                     ' | neutral.fo.list.block')
+                else if ($model = 'inline.fo.list')
+                  then insert-before($model,
+                                     index-of($model, 'inline.fo.list') + 1,
+                                     ' | neutral.fo.list.inline')
+                else $model" />
     <xsl:variable name="model" as="xs:string+"
         select="if ($model = ('text', 'inline.fo.list'))
                   then ('( ', $model, ' &amp; (inline.out-of-line.fo.list)* )')
                 else $model" />
-    <xsl:value-of
-        select="if ($model = ('text', 'inline.fo.list', 'block.fo.list'))
-                  then ('( ', $model, ' &amp; (neutral.fo.list)* )')
-                else $model"
-        separator="" />
+    <xsl:value-of select="$model" separator="" />
     <xsl:if test="not($model = 'empty') and not($element = $no-point-fo-list)">
       <xsl:text> &amp; (point.fo.list)*</xsl:text>
     </xsl:if>
@@ -274,7 +313,8 @@ fo_</xsl:text>
       <xsl:for-each
           select="$properties,
                   for $property in $properties
-                    return $shorthands-for-property[@property = $property]">
+                    return tokenize($shorthands-for-property[@property = $property],
+                                    '\s+')">
         <xsl:sort />
         <xsl:text>    </xsl:text>
         <xsl:value-of select="." />
@@ -412,6 +452,37 @@ non-xsl =
   ( attribute * - ( local:* | axf:* | xml:* ) { text }*,
     element * - ( local:* | fo:* ) { attribute * { text }*, anything }* )
 
+# From http://www.w3.org/TR/xsl/#fo_wrapper:
+#
+#    An fo:wrapper is only permitted to have children that would be #
+#    permitted to be children of the parent of the fo:wrapper
+#
+fo_wrapper.block =
+## The fo:wrapper formatting object is used to specify inherited properties for a group of formatting objects.
+  element wrapper {
+    fo_wrapper.attlist,
+    fo_wrapper.model.block
+}
+
+fo_wrapper.model.block =
+    fo_marker*,
+    ( ( ( (text|block.fo.list)* | neutral.fo.list.block)* ) &amp; (point.fo.list)* )
+
+fo_wrapper.inline =
+## The fo:wrapper formatting object is used to specify inherited properties for a group of formatting objects.
+  element wrapper {
+    fo_wrapper.attlist,
+    fo_wrapper.model.inline
+}
+
+fo_wrapper.model.inline =
+    fo_marker*,
+    ( ( ( (text|inline.fo.list)* | neutral.fo.list.inline)* &amp; (inline.out-of-line.fo.list)* ) &amp; (point.fo.list)* )
+
+#
+# FO groups
+#
+
 block.fo.list =
       fo_block
       | fo_block-container
@@ -442,8 +513,28 @@ neutral.fo.list =
       | fo_index-range-end
       | fo_wrapper
       | fo_retrieve-marker
-      | fo_retrieve-table-marker
-      | fo_float
+      | fo_retrieve-table-marker # Rely on Schematron to indicate where invalid
+      | fo_float # Rely on Schematron to indicate where invalid
+
+neutral.fo.list.block =
+      fo_multi-switch
+      | fo_multi-properties
+      | fo_index-range-begin
+      | fo_index-range-end
+      | fo_wrapper.block
+      | fo_retrieve-marker
+      | fo_retrieve-table-marker # Rely on Schematron to indicate where invalid
+      | fo_float # Rely on Schematron to indicate where invalid
+
+neutral.fo.list.inline =
+      fo_multi-switch
+      | fo_multi-properties
+      | fo_index-range-begin
+      | fo_index-range-end
+      | fo_wrapper.inline
+      | fo_retrieve-marker
+      | fo_retrieve-table-marker # Rely on Schematron to indicate where invalid
+      | fo_float # Rely on Schematron to indicate where invalid
 
 inline.out-of-line.fo.list =
       fo_footnote
