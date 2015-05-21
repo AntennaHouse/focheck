@@ -106,7 +106,10 @@
 <xsl:variable name="property-value-overrides" as="element(item)*" />
 
 <!-- Properties for which no Schematron rule will be generated.
-     Mostly the properties that can have string values. -->
+     Mostly the properties that can have string values.
+
+     This property may be overridden in a stylesheet that imports this
+     stylesheet to produce a different set of skipped properties. -->
 <xsl:variable name="skipped-properties" as="xs:string">
 external-destination
 font-family
@@ -114,6 +117,7 @@ format
 id
 index-key
 internal-destination
+language
 ref-id
 ref-index-key
 reference-orientation
@@ -150,6 +154,9 @@ text-align
       <xsl:message> - <xsl:value-of select="."/></xsl:message>
     </xsl:for-each>
     <xsl:message></xsl:message>
+
+    <xsl:message>Skipped properties:</xsl:message>
+    <xsl:message select="$skipped-properties-list" />
   </xsl:if>
 
   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -191,13 +198,13 @@ text-align
       <xsl:text>&#10;   </xsl:text>
       <xsl:comment>
         <xsl:text> Inherited: </xsl:text>
-        <xsl:value-of select="ahf:is-inherited(.)" />
+        <xsl:value-of select="if (ahf:is-inherited(.)) then 'yes' else 'no'" />
         <xsl:text> </xsl:text>
       </xsl:comment>
       <xsl:text>&#10;   </xsl:text>
       <xsl:comment>
         <xsl:text> Shorthand: </xsl:text>
-        <xsl:value-of select="ahf:is-shorthand(.)" />
+        <xsl:value-of select="if (ahf:is-shorthand(.)) then 'yes' else 'no'" />
         <xsl:text> </xsl:text>
       </xsl:comment>
       <xsl:text>&#10;</xsl:text>
@@ -238,7 +245,18 @@ text-align
           <xsl:text>'</xsl:text>
           <xsl:value-of select="$property" />
           <xsl:text>' should be </xsl:text>
-          <xsl:value-of select="string-join($use-datatypes, ', ')" />
+          <xsl:for-each select="$use-datatypes">
+            <xsl:value-of select="if (position() > 1)
+                                    then (if (last() > 2)
+                                            then ','
+                                          else (),
+                                          if (position() = last())
+                                            then ' or '
+                                          else ' ')
+                                   else ()"
+                          separator="" />
+            <xsl:value-of select="." />
+          </xsl:for-each>
           <xsl:text>.  '</xsl:text>
           <value-of select="." />
           <xsl:text>' is a </xsl:text>
@@ -263,7 +281,9 @@ text-align
               test="{concat('$expression instance of element(EnumerationToken) and not($expression/@token = (''',
                             string-join($enum-tokens, ''', '''),
                             '''))')}">
-            <xsl:text>Enumeration token is: '</xsl:text>
+            <xsl:text>'</xsl:text>
+            <xsl:value-of select="$property" />
+            <xsl:text>' enumeration token is '</xsl:text>
             <value-of select="$expression/@token"/>
             <xsl:text>'.  Token should be </xsl:text>
             <xsl:for-each select="$enum-tokens">
