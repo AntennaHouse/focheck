@@ -322,6 +322,10 @@
   <define name="fo_block.attlist" combine="interleave">
     <ref name="axf_destination-type"/>
     <ref name="height"/>
+    <ref name="max-height"/>
+    <ref name="max-width"/>
+    <ref name="min-height"/>
+    <ref name="min-width"/>
     <ref name="text-decoration"/>
     <ref name="width"/>
     <ref name="axf.block.attlist"/>

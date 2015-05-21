@@ -61,7 +61,7 @@
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:choice>
         <xs:element ref="fo:block.fo.list"/>
-        <xs:element ref="fo:neutral.fo.list"/>
+        <xs:group ref="fo:neutral.fo.list"/>
       </xs:choice>
       <xs:element ref="fo:point.fo.list"/>
     </xs:choice>
@@ -73,7 +73,7 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:choice>
           <xs:element ref="fo:block.fo.list"/>
-          <xs:element ref="fo:neutral.fo.list"/>
+          <xs:group ref="fo:neutral.fo.list"/>
         </xs:choice>
         <xs:element ref="fo:point.fo.list"/>
       </xs:choice>
@@ -86,7 +86,7 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:choice>
           <xs:element ref="fo:block.fo.list"/>
-          <xs:element ref="fo:neutral.fo.list"/>
+          <xs:group ref="fo:neutral.fo.list"/>
         </xs:choice>
         <xs:element ref="fo:point.fo.list"/>
       </xs:choice>
@@ -112,7 +112,7 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:choice>
           <xs:element ref="fo:block.fo.list"/>
-          <xs:element ref="fo:neutral.fo.list"/>
+          <xs:group ref="fo:neutral.fo.list"/>
         </xs:choice>
         <xs:element ref="fo:point.fo.list"/>
       </xs:choice>
@@ -129,7 +129,7 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:choice>
           <xs:element ref="fo:block.fo.list"/>
-          <xs:element ref="fo:neutral.fo.list"/>
+          <xs:group ref="fo:neutral.fo.list"/>
         </xs:choice>
         <xs:element ref="fo:point.fo.list"/>
       </xs:choice>
