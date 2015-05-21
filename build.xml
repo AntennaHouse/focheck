@@ -340,28 +340,35 @@
 <!-- Release targets. -->
 
 <target name="add-on.xml.uptodate">
-  <uptodate property="add-on.xml.uptodate"
-	    srcfile="${basedir.converted}/build.properties"
-	    targetfile="${basedir.converted}/add-on.xml" />
+  <condition property="add-on.xml.uptodate">
+    <and>
+      <uptodate srcfile="${basedir.converted}/build.properties"
+		targetfile="${basedir.converted}/add-on.xml" />
+     <not>
+	<istrue value="${force}" />
+      </not>
+    </and>
+  </condition>
 </target>
 
 <target name="add-on.xml" depends="add-on.xml.uptodate"
 	unless="add-on.xml.uptodate"
 	description="Update the version information in 'add-on.xml'.">
-  <replaceregexp file="${basedir.converted}/add-on.xml">
+  <replaceregexp file="${focheck.basedir.converted}/add-on.xml">
     <regexp pattern="&lt;xt:version>[^&lt;]+&lt;/xt:version>" />
     <substitution expression="&lt;xt:version>${version}&lt;/xt:version>"/>
   </replaceregexp>
-  <replaceregexp file="${basedir.converted}/add-on.xml">
+  <replaceregexp file="${focheck.basedir.converted}/add-on.xml">
     <regexp pattern='releases/download/[^"]+' />
-    <substitution expression="releases/download/v${version}/focheck-${version}.zip"/>
+    <substitution
+	expression="releases/download/v${version}/${ant.project.name}-framework-${version}.zip"/>
   </replaceregexp>
 </target>
 
 <target name="framework.zip" depends="build"
 	description="Make a Zip archive of just the oXygen framework.">
   <mkdir dir="${focheck.basedir.converted}/releases" />
-  <zip destfile="${focheck.basedir.converted}/releases/${ant.project.name}-${version}.zip"
+  <zip destfile="${focheck.basedir.converted}/releases/${ant.project.name}-framework-${version}.zip"
        basedir="${focheck.basedir.converted}"
        excludes="**"
        update="true">
