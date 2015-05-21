@@ -19,6 +19,10 @@
 	 xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document"
 	 id="fo-fo">
 
+  <rule context="fo:float | fo:footnote">
+    <report test="(for $ancestor in ancestor::fo:* return local-name($ancestor)) = ('float', 'footnote')">An '<value-of select="local-name()" />' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
+  </rule>
+
   <rule context="fo:retrieve-table-marker">
     <assert test="exists(ancestor::fo:table-header) or
                   exists(ancestor::fo:table-footer) or
