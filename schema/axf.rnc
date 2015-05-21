@@ -168,6 +168,10 @@ fo_basic-link.attlist &=
 fo_block.attlist &=
     axf_destination-type,
     height,
+    max-height,
+    max-width,
+    min-height,
+    min-width,
     text-decoration,
     width,
     axf.block.attlist
