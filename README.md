@@ -1,4 +1,9 @@
-# focheck – Validate XSL-FO and Antenna House extensions in oXygen or standalone
+* [English](#en)
+* [日本語](#ja)
+
+----
+
+# <a name="en"></a>focheck – Validate XSL-FO and Antenna House extensions in oXygen or standalone
 
 **focheck** bundles a Relax NG schema and a Schematron grammar in an oXygen framework for detailed validation
 of XSL-FO within oXygen XML Editor.  You can, of course,
@@ -120,7 +125,7 @@ limitations under the License.
 
 ----
 
-# focheck – oXygen又は standaloneでXSL-FO と　アンテナハウスの拡張を検証する。
+# <a name="ja"></a>focheck – oXygen又は standaloneでXSL-FO と　アンテナハウスの拡張を検証する。
 
 **focheck** はoXygen XMLエデイター内　　XSL-FOの詳細な検証のための oXygen フレームワークで Relax NG 又はSchematron 文法が包まれています。
 もちろん、一緒に又は別々に、oXygenの以外で**focheck** のRelax NG とのSchematron を使用することができます。
