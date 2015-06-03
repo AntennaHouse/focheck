@@ -9,6 +9,8 @@
 of XSL-FO within oXygen XML Editor.  You can, of course,
 also use the **focheck** Relax NG and Schematron outside of oXygen, either together or separately.
 
+![](https://github.com/AntennaHouse/focheck/blob/master/etc/screenshot.png)
+
 The Relax NG handles structural validation and the
 Schematron handles the additional constraints that cannot be
 expressed in Relax NG.  The Schematron parses property value
@@ -129,6 +131,8 @@ limitations under the License.
 
 **focheck** はoXygen XMLエデイター内　　XSL-FOの詳細な検証のための oXygen フレームワークで Relax NG 又はSchematron 文法が包まれています。
 もちろん、一緒に又は別々に、oXygenの以外で**focheck** のRelax NG とのSchematron を使用することができます。
+
+![](https://github.com/AntennaHouse/focheck/blob/master/etc/screenshot-ja.png)
 
 Relax NG は、構造的な検証を処理し、SchematronのはRelax NGでは表現できない追加の制約を処理します。
 Schematron のはRExパーサージエネレーターとXSL-FOとデータタイプにパースツリーを低減するためのXSLTライブラリーによって生成されたXSLTのあるパーサーを使用して、プロパティ値の式を説明します。
