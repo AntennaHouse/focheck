@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"
-    xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" color="#abc">
-    <axf:document-info name="author-title" value="hi there!"/>
-    <axf:document-info name="xmp" value="blah" />
+    xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" color="#006D2C">
+    <axf:document-info name="author-title" value="Antenna House"/>
+    <axf:document-info name="xmp" value="URL of a XMP file" />
     <fo:layout-master-set>
         <fo:simple-page-master master-name="a">
-            <fo:region-body column-count="-1"/>
+            <fo:region-body column-count="-1"
+            margin="36pt"/>
         </fo:simple-page-master>
     </fo:layout-master-set>
     <fo:page-sequence master-reference="a">
-        <fo:flow flow-name="xsl-region-body"><fo:change-bar-begin><fo:float><fo:block>a</fo:block></fo:float></fo:change-bar-begin>
-            <fo:block font-size="#aabbcc"></fo:block>
+        <fo:flow flow-name="xsl-region-body">
+            <fo:change-bar-begin change-bar-offset="2em"><fo:float><fo:block><fo:external-graphic src="logo-antenna.svg" content-width="1em"/></fo:block></fo:float></fo:change-bar-begin>
+            <fo:block font-size="#aabbcc"><fo:inline font-weight="bold">focheck</fo:inline> validates XSL-FO that includes Antenna House extensions.</fo:block>
+            <fo:change-bar-end/>
         </fo:flow>
     </fo:page-sequence>
 </fo:root>
