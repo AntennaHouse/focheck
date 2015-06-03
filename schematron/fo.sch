@@ -34,7 +34,7 @@
     <report test="local-name($expression) = 'Number' and
                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or
                    $expression/@is-zero = 'yes' or
-                   exists($expression/@value) and not($expression/@value castable as xs:integer))" role="column-count">Warning: @<value-of select="local-name()" /> should be a positive integer.  The FO formatter will round a non-positive or non-integer value to the nearest integer value greater than or equal to 1.</report>
+                   exists($expression/@value) and not($expression/@value castable as xs:integer))" role="column-count">Warning: '<value-of select="local-name()" />' should be a positive integer.  The FO formatter will round a non-positive or non-integer value to the nearest integer value greater than or equal to 1.</report>
   </rule>
 
   <rule context="fo:*/@column-width">
