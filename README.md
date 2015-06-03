@@ -132,6 +132,8 @@ limitations under the License.
 **focheck**はoXygen XMLエデイター内でXSL-FOの詳細な検証を行うoXygenフレームワークのRelax NGとSchematronのファイルをバンドルしています。
 もちろん、oXygenとは独立して**focheck**のRelax NGとSchematronを使用することも可能です。
 
+![](etc/screenshot-ja.png)
+
 Relax NGは、構造的な検証を処理し、加えてSchematronのはRelax NGでは表現できない制約条件を処理します。
 SchematronはRExパーサージエネレーターで生成されたXSLTベースのパーサーと、XSL-FOのデータタイプのパースツリーを軽減するために作成されたXSLTライブラリーを使用してXSL-FOのプロパティ値の式をパースします。
 
