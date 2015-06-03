@@ -52,7 +52,7 @@ If you don't have permission to modify the oXygen installation – for example, 
 
 1. Click on the "Download ZIP" button on this project's main page to download the files.
 1. Extract the folder in the ZIP archive to a folder where you can create the new folder.
-1. In your oXygen preferences, add the folder *containing* the **focheck** folder as an alternative frameworks location.
+1. In your oXygen preferences, add the **focheck** folder as an alternative frameworks location.
  - See http://oxygenxml.com/doc/ug-editor/index.html#topics/framework-location.html
 1. Restart oXygen.
 
@@ -64,7 +64,7 @@ If you don't have permission to modify the oXygen installation – for example, 
    - If you've already checked out **focheck**, you can run
      `git submodule init`
      `git submodule update`
-2. If necessary, add the folder *containing* the **focheck** folder as an alternative frameworks location.
+2. If necessary, add the **focheck** folder as an alternative frameworks location.
 3. Restart oXygen.
 
 ## Using **focheck**
