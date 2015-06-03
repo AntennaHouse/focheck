@@ -6,7 +6,7 @@
 # <a name="en"></a>focheck – Validate XSL-FO and Antenna House extensions in oXygen or standalone
 
 **focheck** bundles a Relax NG schema and a Schematron grammar in an oXygen framework for detailed validation
-of XSL-FO within oXygen XML Editor.  You can, of course,
+of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XML Editor.  **focheck** also validates the extension FOs and properties that AH Formatter provides for improved formatted output.  You can, of course,
 also use the **focheck** Relax NG and Schematron outside of oXygen, either together or separately.
 
 ![](etc/screenshot.png)
