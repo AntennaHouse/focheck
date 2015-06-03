@@ -19,8 +19,24 @@
 	 xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document"
 	 id="fo-fo">
 
-  <rule context="fo:float | fo:footnote">
+  <rule context="fo:float">
+    <!-- http://www.w3.org/TR/xsl/#d0e6532 -->
+    <report test="exists(ancestor::fo:float) or exists(ancestor::fo:footnote)">An '<value-of select="local-name()" />' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
+  </rule>
+
+  <rule context="fo:footnote">
+    <!-- http://www.w3.org/TR/xsl/#d0e6532 -->
     <report test="(for $ancestor in ancestor::fo:* return local-name($ancestor)) = ('float', 'footnote')">An '<value-of select="local-name()" />' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
+    <!-- http://www.w3.org/TR/xsl/#fo_footnote -->
+    <!--
+    <assert
+	test="ancestor::fo:flow/@flow-name eq 'xsl-region-body' or
+	      (not(ancestor::fo:flow/@flow-name = ('xsl-region-after', 'xsl-region-before', 'xsl-region-end', 'xsl-region-start')) and
+	       ancestor::fo:flow/@flow-name eq /fo:root/fo:layout-master-set/fo:simple-page-master[@master-name eq current()/ancestor::fo:page-sequence/@master-reference]/fo:region-body/@region-name)">An 'fo:footnote' must be a descendant of a flow that is assigned to one or more region-body regions.</assert>
+    -->
+    <report test="exists(ancestor::fo:block-container[@absolute-position = ('absolute', 'fixed')])">An 'fo:footnote' is not permitted as a descendant of an 'fo:block-container' that generates an absolutely positioned area.</report>
+    <report test="exists(descendant::fo:block-container[@absolute-position = ('absolute', 'fixed')])">An 'fo:footnote' is not permitted to have as a descendant an 'fo:block-container' that generates an absolutely positioned area.</report>
+    <report test="exists(descendant::fo:*[local-name() = ('float', 'footnote', 'marker')])">An 'fo:footnote' is not permitted to have an 'fo:float', 'fo:footnote', or 'fo:marker' as a descendant.</report>
   </rule>
 
   <rule context="fo:retrieve-table-marker">
