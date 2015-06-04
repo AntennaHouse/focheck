@@ -129,15 +129,19 @@ limitations under the License.
 
 # <a name="ja"></a>focheck – oXygenまたはスタンドアロンでXSL-FOとアンテナハウスの拡張要素とプロパティを検証
 
-**focheck**はoXygen XMLエデイター内でXSL-FOの詳細な検証を行うoXygenフレームワークのRelax NGとSchematronのファイルをバンドルしています。
-もちろん、oXygenとは独立して**focheck**のRelax NGとSchematronを使用することも可能です。
+**focheck**はoXygenフレームワークのRelax NGとSchematronのファイルをバンドルし、oXygen XMLエデイター内でXSL-FOの詳細な検証を行うことができます。
+
+* XSL-FOは、XSL 1.1勧告に基づいたフォーマッティングオブジェクトとプロパティが対象となります。
+* 更にAH Formatterが組版機能の向上のために導入した拡張フォーマッティングオブジェクトとプロパティも検証の対象としています。
+ 
+もちろん、oXygenとは別個に**focheck**のRelax NGとSchematronを使用することも可能です。
 
 ![](etc/screenshot-ja.png)
 
 Relax NGは、構造的な検証を処理し、加えてSchematronのはRelax NGでは表現できない制約条件を処理します。
 SchematronはRExパーサージエネレーターで生成されたXSLTベースのパーサーと、XSL-FOのデータタイプのパースツリーを軽減するために作成されたXSLTライブラリーを使用してXSL-FOのプロパティ値の式をパースします。
 
-## 免責条項
+## 免責事項
 
 **focheck**の開発は進行中です。 まだ全てのXSL-FOプロパティ又はXSL-FO仕様の全ての必要条件を処理できていません。また、関数や相対的な長さを評価できていません。
 
@@ -149,15 +153,15 @@ Pullリクエストや問題がありましたらお知らせください。
 * **focheck**をoXygenと共に使用する場合は、次のいずれかを行ってください:
  * **focheck**をOxygenの追加のアドオンフレームワークとしてインストールします。
  * oXygenフレームワークをダウンロードしてコピーをインストールします。
-* 最新の変更を反映させたい場合は、このリポジトリをクローンして、いつでも好きな時に最新バージョンを「pull」することができます。
+* 最新の変更を反映させたい場合は、このリポジトリをクローンすれば、いつでも好きな時に最新バージョンを「pull」することができます。
 * **focheck**を書き換えたりpullリクエストを出したい場合は、このリポジトリをフォークして、あなたのローカルマシンにクローンすることができます。
 
 
 ### 追加 oXygenフレームワークとしてインストールする。
 
-http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.htmlのoXygenのマニュアルの記述に沿って行います。
+http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.html のoXygenのマニュアルの記述に沿って行います。
 
-**focheck**の最新サイトのURLは https://github.com/AntennaHouse/focheck/raw/master/add-on.xmlです。
+**focheck**の最新サイトのURLは https://github.com/AntennaHouse/focheck/raw/master/add-on.xml です。
 
 oXygen は追加フレームワークをインストールした後、エデイターを再起動する必要があります。注意してください。
 
@@ -177,7 +181,7 @@ oXygen は追加フレームワークをインストールした後、エデイ�
 
 1. このプロジェクトのメインページの"Download ZIP"をクリックしてダウンロードします。
 1. 新しいフォルダを生成することができるフォルダにZIPアーカイブ内のフォルダを解凍します。 
-1. oXygen の環境設定で、別のフレームワークの場所として**focheck**フォルダを追加します。
+1. oXygen の環境設定で、別のフレームワークの場所として解凍した**focheck**フォルダを追加します。
  - http://oxygenxml.com/doc/ug-editor/index.html#topics/framework-location.html を参照してください。
 1. oXygenを再起動します。
 
@@ -189,21 +193,26 @@ oXygen は追加フレームワークをインストールした後、エデイ�
    - 既に**focheck**をチェックアウトしていた場合、次を実行します。
      `git submodule init`
      `git submodule update`
-1. 必要ならば、別のフレームワークスの場所として**focheck**フォルダを追加します。 
+1. 必要ならば、別のフレームワークスの場所としてクローンした**focheck**フォルダを追加します。 
 1. oXygenを再起動します。
 
-## **focheck**　を使用する。
+## **focheck**を使用する。
 
-### oXygen XML エデイターでの使用
+### oXygen XMLエディターでの使用
 
 最上位要素がXSL-FOの名前空間で`root`であるXSL-FO文書を開くと、oXygenは自動的にRelax NGスキーマとSchematronの両方で文書を検証します。
+
+### Antでの使用
+
+Antのビルドファイルの`build-focheck.xml`とターゲットの`validate.single`を使用すれば、Relax NGとSchematronの両方で検証ができます。
+またターゲットの`schematron.single`もしくは`schematron.dir`を使用すれば、単独のファイルや複数ファイルを対象にSchematronを実行することができます。
 
 ### スタンドアロンでの使用
 
 Oxygenやantを使用せずに、`schema`フォルダ内のRelax NGのスキーマや`schematron`フォルダのファイルを使用することができます。 しかし:
 
 - Relax NGはJingとEmacs `nxml-mode`にで動作します。`xmllint` では動作しません。
-- Schematronは XSLT 2.0プロセッサがとSchematronのインプリメンテネーションが必要です。　それらは、コンテキストとして属性にマッチでき、外部のXSLT 2.0 スタイルシートをインポートできることができなければなりません。
+- Schematronは XSLT 2.0プロセッサとSchematronのインプリメンテーションが必要です。　それらは、コンテキストとして属性にマッチでき、外部のXSLT 2.0 スタイルシートをインポートできることができなければなりません。
 
 ## ビルド方法
 
