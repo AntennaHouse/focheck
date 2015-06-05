@@ -146,11 +146,13 @@
 <!-- GLOBAL VARIABLES                                              -->
 <!-- ============================================================= -->
 
-<xsl:variable name="all-properties"
-              select="/spec/back/div1[@id='property-index']/div2[@id = 'prtab1']
-                      /table/tbody/tr/td[1]/specref/@ref
-                      [not(ahf:is-aural(.)) and
-                      not(key('property-group-by-property', .)/head = 'Shorthand Properties')]"/>
+<xsl:variable
+    name="all-properties"
+    select="/spec/back/div1[@id='property-index']/div2[@id = 'prtab1']
+            /table/tbody/tr/td[1]/specref/@ref
+            [not(ahf:is-aural(.)) and
+             not(key('property-group-by-property', .)/head =
+                 'Shorthand Properties')]"/>
 
 <!-- Document node for the XSL spec.  Used to provide context for
      keys. -->
