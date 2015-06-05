@@ -14,6 +14,7 @@
 
 default namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
 namespace fo = "http://www.w3.org/1999/XSL/Format"
+namespace local = ""
 
 include "axf-inherited.rnc" {
 #
@@ -46,17 +47,17 @@ fo_simple-page-master.model =
 
 # AH Formatter allows empty fo:static-content.
 fo_static-content.model =
-    ( ( (block.fo.list)* & (neutral.fo.list)* ) & (point.fo.list)* )
+    ( ( (block.fo.list | neutral.fo.list)* ) & (point.fo.list)* )
 
 # AH Formatter allows fo:block-container to omit block FOs.
 fo_block-container.model =
     fo_marker*,
-    ( ( (block.fo.list)* & (neutral.fo.list)* ) & (point.fo.list)* )
+    ( ( (block.fo.list | neutral.fo.list)* ) & (point.fo.list)* )
 
 # AH Formatter allows fo:inline-container to omit block FOs.
 fo_inline-container.model =
     fo_marker*,
-    ( ( (block.fo.list)* & (neutral.fo.list)* ) & (point.fo.list)* )
+    ( ( (block.fo.list | neutral.fo.list)* ) & (point.fo.list)* )
 
 # AH Formatter allows empty fo:list-item.
 fo_list-item.model =
@@ -66,14 +67,20 @@ fo_list-item.model =
 # AH Formatter allows fo:list-item-label omit block FOs.
 fo_list-item-label.model =
     fo_marker*,
-    ( ( (block.fo.list)* & (neutral.fo.list)* ) & (point.fo.list)* )
+    ( ( (block.fo.list | neutral.fo.list)* ) & (point.fo.list)* )
 
 # AH Formatter allows fo:table-cell to omit block FOs.
 # axf:table-cell-repeated-marker used when cell repeats.
 fo_table-cell.model =
     fo_marker*,
     axf_table-cell-repeated-marker?,
-    ( ( (block.fo.list)* & (neutral.fo.list)* ) & (point.fo.list)* )
+    ( ( (block.fo.list | neutral.fo.list)* ) & (point.fo.list)* )
+
+# For fo:instream-foreign-object
+# Exclude axf:* elements and attributes from counting as 'non-xsl'.
+non-xsl =
+  ( attribute * - ( local:* | axf:* | xml:* ) { text }*,
+    element * - ( local:* | fo:* | axf:* ) { attribute * { text }*, anything }* )
 
 #
 # End of overrides to patterns in 'fo-inherited.rnc'.

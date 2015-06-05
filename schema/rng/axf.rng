@@ -79,14 +79,12 @@
     <!-- AH Formatter allows empty fo:static-content. -->
     <define name="fo_static-content.model">
       <interleave>
-        <interleave>
-          <zeroOrMore>
+        <zeroOrMore>
+          <choice>
             <ref name="block.fo.list"/>
-          </zeroOrMore>
-          <zeroOrMore>
             <ref name="neutral.fo.list"/>
-          </zeroOrMore>
-        </interleave>
+          </choice>
+        </zeroOrMore>
         <zeroOrMore>
           <ref name="point.fo.list"/>
         </zeroOrMore>
@@ -98,14 +96,12 @@
         <ref name="fo_marker"/>
       </zeroOrMore>
       <interleave>
-        <interleave>
-          <zeroOrMore>
+        <zeroOrMore>
+          <choice>
             <ref name="block.fo.list"/>
-          </zeroOrMore>
-          <zeroOrMore>
             <ref name="neutral.fo.list"/>
-          </zeroOrMore>
-        </interleave>
+          </choice>
+        </zeroOrMore>
         <zeroOrMore>
           <ref name="point.fo.list"/>
         </zeroOrMore>
@@ -117,14 +113,12 @@
         <ref name="fo_marker"/>
       </zeroOrMore>
       <interleave>
-        <interleave>
-          <zeroOrMore>
+        <zeroOrMore>
+          <choice>
             <ref name="block.fo.list"/>
-          </zeroOrMore>
-          <zeroOrMore>
             <ref name="neutral.fo.list"/>
-          </zeroOrMore>
-        </interleave>
+          </choice>
+        </zeroOrMore>
         <zeroOrMore>
           <ref name="point.fo.list"/>
         </zeroOrMore>
@@ -151,14 +145,12 @@
         <ref name="fo_marker"/>
       </zeroOrMore>
       <interleave>
-        <interleave>
-          <zeroOrMore>
+        <zeroOrMore>
+          <choice>
             <ref name="block.fo.list"/>
-          </zeroOrMore>
-          <zeroOrMore>
             <ref name="neutral.fo.list"/>
-          </zeroOrMore>
-        </interleave>
+          </choice>
+        </zeroOrMore>
         <zeroOrMore>
           <ref name="point.fo.list"/>
         </zeroOrMore>
@@ -176,18 +168,50 @@
         <ref name="axf_table-cell-repeated-marker"/>
       </optional>
       <interleave>
-        <interleave>
-          <zeroOrMore>
+        <zeroOrMore>
+          <choice>
             <ref name="block.fo.list"/>
-          </zeroOrMore>
-          <zeroOrMore>
             <ref name="neutral.fo.list"/>
-          </zeroOrMore>
-        </interleave>
+          </choice>
+        </zeroOrMore>
         <zeroOrMore>
           <ref name="point.fo.list"/>
         </zeroOrMore>
       </interleave>
+    </define>
+    <!--
+      For fo:instream-foreign-object
+      Exclude axf:* elements and attributes from counting as 'non-xsl'.
+    -->
+    <define name="non-xsl">
+      <zeroOrMore>
+        <attribute>
+          <anyName>
+            <except>
+              <nsName ns=""/>
+              <nsName/>
+              <nsName ns="http://www.w3.org/XML/1998/namespace"/>
+            </except>
+          </anyName>
+        </attribute>
+      </zeroOrMore>
+      <zeroOrMore>
+        <element>
+          <anyName>
+            <except>
+              <nsName ns=""/>
+              <nsName ns="http://www.w3.org/1999/XSL/Format"/>
+              <nsName/>
+            </except>
+          </anyName>
+          <zeroOrMore>
+            <attribute>
+              <anyName/>
+            </attribute>
+          </zeroOrMore>
+          <ref name="anything"/>
+        </element>
+      </zeroOrMore>
     </define>
     <!--
       

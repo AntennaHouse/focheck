@@ -136,6 +136,18 @@
     </xs:sequence>
   </xs:complexType>
   <!--
+    For fo:instream-foreign-object
+    Exclude axf:* elements and attributes from counting as 'non-xsl'.
+  -->
+  <xs:group name="non-xsl">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="non-xsl">
+    <xs:anyAttribute processContents="skip"/>
+  </xs:attributeGroup>
+  <!--
     
     End of overrides to patterns in 'fo-inherited.rnc'.
     

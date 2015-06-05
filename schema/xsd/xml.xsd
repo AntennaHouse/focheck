@@ -2,5 +2,9 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.w3.org/XML/1998/namespace" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions">
   <xs:import namespace="http://www.antennahouse.com/names/XSL/Extensions" schemaLocation="axf.xsd"/>
   <xs:import namespace="http://www.w3.org/1999/XSL/Format" schemaLocation="fo.xsd"/>
-  <xs:attribute name="lang"/>
+  <xs:attribute name="lang" type="xs:language">
+    <xs:annotation>
+      <xs:documentation>&lt;language-country&gt; | inherit</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
 </xs:schema>
