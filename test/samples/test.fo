@@ -11,9 +11,11 @@
     </fo:layout-master-set>
     <fo:page-sequence master-reference="a">
         <fo:flow flow-name="xsl-region-body">
-            <fo:change-bar-begin change-bar-offset="2em"><fo:float><fo:block><fo:external-graphic src="logo-antenna.svg" content-width="1em"/></fo:block></fo:float></fo:change-bar-begin>
+            <fo:change-bar-begin change-bar-offset="2em" change-bar-class="a">
+                <fo:float><fo:block><fo:external-graphic src="logo-antenna.svg" content-width="1em"/></fo:block></fo:float>
+            </fo:change-bar-begin>
             <fo:block font-size="#aabbcc"><fo:inline font-weight="bold">focheck</fo:inline> validates XSL-FO that includes Antenna House extensions.</fo:block>
-            <fo:change-bar-end/>
+            <fo:change-bar-end change-bar-class="a"/>
         </fo:flow>
     </fo:page-sequence>
 </fo:root>
