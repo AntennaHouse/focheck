@@ -384,6 +384,9 @@ fo_</xsl:text>
     <xsl:variable name="values"
                   select="normalize-space(../../following-sibling::td[1])"
                   as="xs:string" />
+    <xsl:variable name="required"
+                  select="contains(../../following-sibling::td[2], 'required')"
+                  as="xs:boolean" />
 
     <xsl:value-of select="." />
     <xsl:text> =
@@ -392,7 +395,19 @@ fo_</xsl:text>
     <xsl:text>
     attribute </xsl:text>
     <xsl:value-of select="$att-name" />
-    <xsl:text> { text }?</xsl:text>
+    <xsl:text> { </xsl:text>
+    <xsl:value-of
+        select="if ($values eq '&lt;name>')
+                  then 'xsd:NCName'
+                else if ($values eq '&lt;id>')
+                  then 'xsd:ID'
+                else if ($values eq '&lt;idref>')
+                  then 'xsd:IDREF'
+                else if ($att-name eq 'xml:lang')
+                  then 'xsd:language'
+                else 'text'" />
+    <xsl:text> }</xsl:text>
+    <xsl:value-of select="if ($required) then '' else '?'" />
     <xsl:if test="contains($values, '&lt;keep&gt;')">
       <xsl:text>,
     attribute </xsl:text>
@@ -446,10 +461,14 @@ fo_</xsl:text>
 #
 
 # For fo:instream-foreign-object
-anything = ( element * { attribute * { text }*, anything } | text )*
+anything =
+   ( element * {
+        attribute * - id { text }*,
+        anything } |
+     text )*
 
 non-xsl =
-  ( attribute * - ( local:* | axf:* | xml:* ) { text }*,
+  ( attribute * - ( local:* | xml:* ) { text }*,
     element * - ( local:* | fo:* ) { attribute * { text }*, anything }* )
 
 # From http://www.w3.org/TR/xsl/#fo_wrapper:
