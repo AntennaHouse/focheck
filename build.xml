@@ -89,7 +89,6 @@
           value="false"/>
     </factory>
     <param name="debug" expression="${debug}" if="debug" />
-    <param name="timestamp" expression="${timestamp}" if="timestamp" />
     <param name="version" expression="${version}" />
   </xslt>
 </target>
@@ -113,7 +112,6 @@
           value="false"/>
     </factory>
     <param name="debug" expression="${debug}" if="debug" />
-    <param name="timestamp" expression="${timestamp}" if="timestamp" />
     <param name="version" expression="${version}" />
   </xslt>
 </target>
@@ -137,7 +135,6 @@
           value="false"/>
     </factory>
     <param name="debug" expression="${debug}" if="debug" />
-    <param name="timestamp" expression="${timestamp}" if="timestamp" />
     <param name="version" expression="${version}" />
   </xslt>
 </target>
@@ -203,7 +200,6 @@
           value="false"/>
     </factory>
     <param name="debug" expression="${debug}" if="debug" />
-    <param name="timestamp" expression="${timestamp}" if="timestamp" />
     <param name="version" expression="${version}" />
   </xslt>
 </target>
