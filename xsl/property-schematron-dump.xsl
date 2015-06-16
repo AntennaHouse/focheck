@@ -208,6 +208,12 @@ text-align
         <xsl:text> </xsl:text>
       </xsl:comment>
       <xsl:text>&#10;</xsl:text>
+      <xsl:comment>
+        <xsl:text> http://www.w3.org/TR/xsl11/#</xsl:text>
+        <xsl:value-of select="$property" />
+        <xsl:text> </xsl:text>
+      </xsl:comment>
+      <xsl:text>&#10;   </xsl:text>
       <rule context="fo:*/@{$property}">
         <let name="expression" value="ahf:parser-runner(.)"/>
 
@@ -244,7 +250,9 @@ text-align
                                                            ''', ''')}')">
           <xsl:text>'</xsl:text>
           <xsl:value-of select="$property" />
-          <xsl:text>' should be </xsl:text>
+          <xsl:text>="</xsl:text>
+          <value-of select="." />
+          <xsl:text>"' should be </xsl:text>
           <xsl:for-each select="$use-datatypes">
             <xsl:value-of select="if (position() > 1)
                                     then (if (last() > 2)
@@ -283,7 +291,9 @@ text-align
                             '''))')}">
             <xsl:text>'</xsl:text>
             <xsl:value-of select="$property" />
-            <xsl:text>' enumeration token is '</xsl:text>
+            <xsl:text>="</xsl:text>
+            <value-of select="." />
+            <xsl:text>"' enumeration token is '</xsl:text>
             <value-of select="$expression/@token"/>
             <xsl:text>'.  Token should be </xsl:text>
             <xsl:for-each select="$enum-tokens">
