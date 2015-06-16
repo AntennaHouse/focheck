@@ -50,7 +50,7 @@
     <report test="local-name($expression) = 'Number' and
                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or
                    $expression/@is-zero = 'yes' or
-                   exists($expression/@value) and not($expression/@value castable as xs:integer))" role="column-count">Warning: '<value-of select="local-name()" />' should be a positive integer.  The FO formatter will round a non-positive or non-integer value to the nearest integer value greater than or equal to 1.</report>
+                   exists($expression/@value) and not($expression/@value castable as xs:integer))" id="column-count" role="Warning">'<value-of select="local-name()" />="<value-of select="."/>"' should be a positive integer.  A non-positive or non-integer value will be rounded to the nearest integer value greater than or equal to 1.</report>
   </rule>
 
   <rule context="fo:*/@column-width">
@@ -59,7 +59,19 @@
     <report test="exists(../@number-columns-spanned) and
 		  local-name($number-columns-spanned) = 'Number' and
                   (exists($number-columns-spanned/@value) and
-		   number($number-columns-spanned/@value) >= 1.5)" role="column-width">Warning: @<value-of select="local-name()" /> is ignored with @number-columns-spanned is present and has a value greater than 1.</report>
+		   number($number-columns-spanned/@value) >= 1.5)" id="column-width" role="Warning">'<value-of select="local-name()" />' is ignored with 'number-columns-spanned' is present and has a value greater than 1.</report>
+  </rule>
+
+  <rule context="fo:*/@language">
+    <let name="expression" value="ahf:parser-runner(.)"/>
+    <!-- What would be generated if we could... -->
+    <!-- http://www.w3.org/TR/xsl11/#language -->
+    <assert test="local-name($expression) = ('EnumerationToken', 'ERROR', 'Object')">'language="<value-of select="."/>"' should be an EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit') or string-length($expression/@token) = 2 or string-length($expression/@token) = 3)">'language="<value-of select="."/>"' should be a 3-letter code conforming to a ISO639-2 terminology or bibliographic code or a 2-letter code conforming to a ISO639 2-letter code or 'none' or 'inherit'.</report>
+    <report test="local-name($expression) = 'ERROR'">Syntax error: 'language="<value-of select="."/>"'</report>
+    <!-- http://www.w3.org/TR/xsl11/#d0e4626 -->
+    <report test="$expression instance of element(EnumerationToken) and string-length($expression/@token) = 2" id="language_2-letter" role="Warning">'language="<value-of select="." />"' uses a 2-letter code.  A 2-letter code in conformance with ISO639 will be converted to the corresponding 3-letter ISO639-2 terminology code.</report>
+    <report test="$expression instance of element(EnumerationToken) and $expression/@token = ('mul', 'none')" id="language_und" role="Warning">'language="<value-of select="." />"' will be converted to 'und'.</report>
   </rule>
 
 </pattern>
