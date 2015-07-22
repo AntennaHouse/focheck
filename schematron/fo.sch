@@ -19,6 +19,8 @@
 	 xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document"
 	 id="fo-fo">
 
+  <!-- FOs -->
+
   <rule context="fo:float">
     <!-- http://www.w3.org/TR/xsl/#d0e6532 -->
     <report test="exists(ancestor::fo:float) or exists(ancestor::fo:footnote)">An '<value-of select="local-name()" />' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
@@ -44,6 +46,14 @@
                   exists(ancestor::fo:table-footer) or
                   (exists(parent::fo:table) and empty(preceding-sibling::fo:table-body) and empty(following-sibling::fo:table-column))">An fo:retrieve-table-marker is only permitted as the descendant of an fo:table-header or fo:table-footer or as a child of fo:table in a position where fo:table-header or fo:table-footer is permitted.</assert>
   </rule>
+
+  <rule context="fo:root">
+    <!-- http://www.w3.org/TR/xsl/#fo_root -->
+    <assert id="fo_root-001"
+	    test="exists(descendant::fo:page-sequence)">There must be at least one fo:page-sequence descendant of fo:root.</assert>
+  </rule>
+
+  <!-- Properties -->
 
   <rule context="fo:*/@column-count | fo:*/@number-columns-spanned">
     <let name="expression" value="ahf:parser-runner(.)"/>
