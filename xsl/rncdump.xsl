@@ -471,6 +471,10 @@ non-xsl =
   ( attribute * - ( local:* | xml:* ) { text }*,
     element * - ( local:* | fo:* ) { attribute * { text }*, anything }* )
 
+# For fo:declarations
+non-xsl-element =
+  element * - ( local:* | fo:* ) { attribute * - id { text }*, anything }*
+
 # From http://www.w3.org/TR/xsl/#fo_wrapper:
 #
 #    An fo:wrapper is only permitted to have children that would be #
@@ -574,6 +578,17 @@ point.fo.list =
   <xsl:apply-templates />
 </xsl:template>
 
+<!-- FOs that allow elements in non-XSL namespace. -->
+
+<!-- fo:declarations -->
+<!-- http://www.w3.org/TR/xsl/#fo_declarations -->
+<xsl:template match="p[. eq 'Contents:'][../head eq 'fo:declarations']"
+              priority="5" as="xs:string">
+  <xsl:sequence select="'(fo_color-profile | non-xsl-element)*'" />
+</xsl:template>
+
+<!-- fo:instream-foreign-object -->
+<!-- http://www.w3.org/TR/xsl/#fo_instream-foreign-object -->
 <xsl:template match="p[. eq 'Contents:'][../head eq 'fo:instream-foreign-object']"
               priority="5" as="xs:string">
   <xsl:sequence select="'non-xsl'" />
