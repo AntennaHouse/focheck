@@ -29,7 +29,7 @@
     <pattern id="axf">
         <p>http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info</p>
         <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1" role="axf-1">
-            <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">"<value-of select="@name"/>" axf:document-info cannot be used when "xmp" axf:document-info is present.</assert>
+<assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">name="<value-of select="@name"/>" cannot be used when axf:document-info with name="xmp" is present.</assert>
         </rule>
 
 	<!-- axf:outline-color -->
