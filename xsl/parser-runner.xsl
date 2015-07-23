@@ -131,8 +131,15 @@
               xmlns:saxon="http://saxon.sf.net/" >
   <xsl:param name="input" as="xs:string" />
 
-  <xsl:sequence
-      select="ahf:parser-runner2($input, false())"/>
+  <xsl:choose>
+    <xsl:when test="$input eq ''">
+      <EMPTY />
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:sequence
+          select="ahf:parser-runner2($input, false())"/>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:function>
 
 <xsl:function name="ahf:parser-runner" as="element()+" >
