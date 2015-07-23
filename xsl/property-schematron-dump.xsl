@@ -166,18 +166,19 @@ text-align
     <not-yet-xsl:include href="{$xsl.dir}/parser-runner.xsl" />
     
     <xsl:for-each
-      select="$all-properties[not(. = $skipped-properties-list) and
-                              not(ahf:is-shorthand(.))]">
+      select="$all-properties">
       <xsl:sort/>
 
-      <!-- Some variables controlling the generated code come from the spec. -->
+      <!-- Some variables controlling the generated code come from the
+           spec. -->
 
       <!-- Property name as extracted from the XSL spec. -->
       <xsl:variable name="property" select="normalize-space(.)"/>
 
-      <xsl:variable name="values"
-                    select="($property-value-overrides[@property = $property],
-                             ahf:values($property))[1]"/>
+      <xsl:variable
+          name="values"
+          select="($property-value-overrides[@property = $property],
+                   ahf:values($property))[1]"/>
 
       <!-- Initial value of the property. -->
       <xsl:variable name="initial-value"
@@ -215,111 +216,115 @@ text-align
       </xsl:comment>
       <xsl:text>&#10;   </xsl:text>
       <rule context="fo:*/@{$property}">
-        <let name="expression" value="ahf:parser-runner(.)"/>
+        <xsl:choose>
+          <xsl:when test="$property = $skipped-properties-list or
+                          ahf:is-shorthand($property)">
+            <report test=". eq ''" role="Warning">
+              <xsl:value-of select="$property" />
+              <xsl:text>="" should be '</xsl:text>
+              <xsl:value-of select="ahf:values($property)" />
+              <xsl:text>'.</xsl:text>
+            </report>
+          </xsl:when>
+          <xsl:otherwise>
+            <let name="expression" value="ahf:parser-runner(.)"/>
 
-        <xsl:variable name="datatypes" as="xs:string+">
-          <xsl:call-template name="values-to-expression-types">
-            <xsl:with-param
-                name="values"
-                select="$values"/>
-            <xsl:with-param
-                name="property"
-                select="$property"/>
-            <xsl:with-param
-                name="seen-enum"
-                select="false()"/>
-          </xsl:call-template>
-        </xsl:variable>
+            <xsl:variable name="datatypes" as="xs:string+">
+              <xsl:call-template name="values-to-expression-types">
+                <xsl:with-param name="values" select="$values"/>
+                <xsl:with-param name="property" select="$property"/>
+                <xsl:with-param name="seen-enum" select="false()"/>
+              </xsl:call-template>
+            </xsl:variable>
 
-        <!-- Contortions because NCName being returned from REx parser
-             as EnumerationToken/NCName and because <color> is more
-             than just a literal color. -->
-        <xsl:variable
-            name="use-datatypes"
-            select="distinct-values(for $datatype in $datatypes
-                                      return if ($datatype = ('NCName'))
-                                               then 'EnumerationToken'
-                                             else if ($datatype = ('Color'))
-                                               then ('Color', 'EnumerationToken')
-                                             else $datatype)"
-            as="xs:string+" />
-        <assert
-            test="local-name($expression) = ('{string-join(($use-datatypes,
-                                                            'ERROR',
-                                                            'Object'),
-                                                           ''', ''')}')">
-          <xsl:text>'</xsl:text>
-          <xsl:value-of select="$property" />
-          <xsl:text>="</xsl:text>
-          <value-of select="." />
-          <xsl:text>"' should be </xsl:text>
-          <xsl:for-each select="$use-datatypes">
-            <xsl:value-of select="if (position() > 1)
-                                    then (if (last() > 2)
-                                            then ','
-                                          else (),
-                                          if (position() = last())
-                                            then ' or '
-                                          else ' ')
-                                   else ()"
-                          separator="" />
-            <xsl:value-of select="." />
-          </xsl:for-each>
-          <xsl:text>.  '</xsl:text>
-          <value-of select="." />
-          <xsl:text>' is a </xsl:text>
-          <value-of select="local-name($expression)" />
-          <xsl:text>.</xsl:text>
-        </assert>
+            <!-- Contortions because NCName being returned from REx
+                 parser as EnumerationToken/NCName and because <color>
+                 is more than just a literal color. -->
+            <xsl:variable
+                name="use-datatypes"
+                select="distinct-values(for $datatype in $datatypes
+                                          return if ($datatype = ('NCName'))
+                                                   then 'EnumerationToken'
+                                                 else if ($datatype = ('Color'))
+                                                   then ('Color', 'EnumerationToken')
+                                                 else $datatype)"
+                as="xs:string+" />
+            <assert
+                test="local-name($expression) = ('{string-join(($use-datatypes,
+                                                                'EMPTY',
+                                                                'ERROR',
+                                                                'Object'),
+                                                               ''', ''')}')">
+              <xsl:value-of select="$property" />
+              <xsl:text>="</xsl:text>
+              <value-of select="." />
+              <xsl:text>" should be </xsl:text>
+              <xsl:value-of
+                  select="ahf:allowed-datatypes-text($use-datatypes)" />
+              <xsl:text>.  '</xsl:text>
+              <value-of select="." />
+              <xsl:text>' is a </xsl:text>
+              <value-of select="local-name($expression)" />
+              <xsl:text>.</xsl:text>
+            </assert>
 
-        <xsl:variable name="enum-tokens" as="xs:string*">
-          <xsl:call-template name="values-to-enum-report">
-            <xsl:with-param
-                name="values"
-                select="normalize-space($values)"/>
-            <xsl:with-param
-                name="property"
-                select="$property"/>
-          </xsl:call-template>
-        </xsl:variable>
+            <xsl:variable name="enum-tokens" as="xs:string*">
+              <xsl:call-template name="values-to-enum-report">
+                <xsl:with-param
+                    name="values"
+                    select="normalize-space($values)"/>
+                <xsl:with-param
+                    name="property"
+                    select="$property"/>
+              </xsl:call-template>
+            </xsl:variable>
 
-        <xsl:if test="exists($enum-tokens) and
-                      not($datatypes = ('Color', 'NCName'))">
-          <report
-              test="{concat('$expression instance of element(EnumerationToken) and not($expression/@token = (''',
-                            string-join($enum-tokens, ''', '''),
-                            '''))')}">
-            <xsl:text>'</xsl:text>
-            <xsl:value-of select="$property" />
-            <xsl:text>="</xsl:text>
-            <value-of select="." />
-            <xsl:text>"' enumeration token is '</xsl:text>
-            <value-of select="$expression/@token"/>
-            <xsl:text>'.  Token should be </xsl:text>
-            <xsl:for-each select="$enum-tokens">
-              <xsl:value-of select="if (position() > 1)
-                                      then (if (last() > 2)
-                                              then ','
-                                            else (),
-                                            if (position() = last())
-                                              then ' or '
-                                            else ' ')
-                                     else ()"
-                            separator="" />
-              <xsl:text>'</xsl:text>
-              <xsl:value-of select="." />
-              <xsl:text>'</xsl:text>
-            </xsl:for-each>
-            <xsl:text>.</xsl:text>
-          </report>
-        </xsl:if>
-        <report test="local-name($expression) = 'ERROR'">
-          <xsl:text>Syntax error: '</xsl:text>
-          <xsl:value-of select="$property" />
-          <xsl:text>="</xsl:text>
-          <value-of select="." />
-          <xsl:text>"'</xsl:text>
-        </report>
+            <xsl:if test="exists($enum-tokens) and
+                          not($datatypes = ('Color', 'NCName'))">
+              <report
+                  test="{concat('$expression instance of element(EnumerationToken) and not($expression/@token = (''',
+                                string-join($enum-tokens, ''', '''),
+                                '''))')}">
+                <xsl:value-of select="$property" />
+                <xsl:text>="</xsl:text>
+                <value-of select="." />
+                <xsl:text>" enumeration token is '</xsl:text>
+                <value-of select="$expression/@token"/>
+                <xsl:text>'.  Token should be </xsl:text>
+                <xsl:for-each select="$enum-tokens">
+                  <xsl:value-of select="if (position() > 1)
+                                          then (if (last() > 2)
+                                                  then ','
+                                                else (),
+                                                if (position() = last())
+                                                  then ' or '
+                                                else ' ')
+                                         else ()"
+                                separator="" />
+                  <xsl:text>'</xsl:text>
+                  <xsl:value-of select="." />
+                  <xsl:text>'</xsl:text>
+                </xsl:for-each>
+                <xsl:text>.</xsl:text>
+              </report>
+            </xsl:if>
+            <report test="local-name($expression) = 'EMPTY'"
+                    role="Warning">
+              <xsl:value-of select="$property" />
+              <xsl:text>="" should be </xsl:text>
+              <xsl:value-of
+                  select="ahf:allowed-datatypes-text($use-datatypes)" />
+              <xsl:text>.</xsl:text>
+            </report>
+            <report test="local-name($expression) = 'ERROR'">
+              <xsl:text>Syntax error: </xsl:text>
+              <xsl:value-of select="$property" />
+              <xsl:text>="</xsl:text>
+              <value-of select="." />
+              <xsl:text>"</xsl:text>
+            </report>
+          </xsl:otherwise>
+        </xsl:choose>
       </rule>
     </xsl:for-each>
   </pattern>

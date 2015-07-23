@@ -272,4 +272,26 @@
                   $xslspec)/@id = 'common-aural-properties'" />
 </xsl:function>
 
+<!-- ahf:allowed-datatypes-text($datatypes as xs:string+) as xs:string -->
+<!-- Returns true() if $property is an aural property.  Returns
+     false() if not. -->
+<xsl:function name="ahf:allowed-datatypes-text" as="xs:string">
+  <xsl:param name="datatypes" as="xs:string+" />
+
+  <xsl:value-of separator="">
+    <xsl:for-each select="$datatypes">
+      <xsl:value-of select="if (position() > 1)
+                              then (if (last() > 2)
+                                      then ','
+                                    else (),
+                                    if (position() = last())
+                                      then ' or '
+                                   else ' ')
+                             else ()"
+                    separator="" />
+      <xsl:value-of select="." />
+    </xsl:for-each>
+  </xsl:value-of>
+</xsl:function>
+
 </xsl:stylesheet>
