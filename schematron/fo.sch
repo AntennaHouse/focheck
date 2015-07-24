@@ -41,7 +41,13 @@
     <report test="exists(descendant::fo:*[local-name() = ('float', 'footnote', 'marker')])">An 'fo:footnote' is not permitted to have an 'fo:float', 'fo:footnote', or 'fo:marker' as a descendant.</report>
   </rule>
 
+  <rule context="fo:retrieve-marker">
+    <!-- http://www.w3.org/TR/xsl/#fo_retrieve-marker -->
+    <assert test="exists(ancestor::fo:static-content)">An fo:retrieve-marker is only permitted as the descendant of an fo:static-content.</assert>
+  </rule>
+
   <rule context="fo:retrieve-table-marker">
+    <!-- http://www.w3.org/TR/xsl/#fo_retrieve-table-marker -->
     <assert test="exists(ancestor::fo:table-header) or
                   exists(ancestor::fo:table-footer) or
                   (exists(parent::fo:table) and empty(preceding-sibling::fo:table-body) and empty(following-sibling::fo:table-column))">An fo:retrieve-table-marker is only permitted as the descendant of an fo:table-header or fo:table-footer or as a child of fo:table in a position where fo:table-header or fo:table-footer is permitted.</assert>
