@@ -173,6 +173,7 @@
         <xs:simpleType>
           <xs:restriction base="xs:token">
             <xs:enumeration value="document-title"/>
+            <xs:enumeration value="title"/>
             <xs:enumeration value="subject"/>
             <xs:enumeration value="author"/>
             <xs:enumeration value="author-title"/>
@@ -279,6 +280,50 @@
     <xs:attributeGroup ref="axf:axf_outline-font-weight"/>
   </xs:attributeGroup>
   <!--
+    @axf:background-color
+    @axf:background-image
+    @axf:background-position-horizontal
+    @axf:background-position-vertical
+    @axf:background-repeat
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#IDAAOLV
+  -->
+  <xs:attributeGroup name="axf_background-color">
+    <xs:attribute name="background-color" form="qualified">
+      <xs:annotation>
+        <xs:documentation>&lt;color&gt; | transparent</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-image">
+    <xs:attribute name="background-image" form="qualified">
+      <xs:annotation>
+        <xs:documentation>&lt;uri-specification&gt; | none</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-position-horizontal">
+    <xs:attribute name="background-position-horizontal" form="qualified">
+      <xs:annotation>
+        <xs:documentation>&lt;percentage&gt; | &lt;length&gt; | left | center | right</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-position-vertical">
+    <xs:attribute name="background-position-vertical" form="qualified">
+      <xs:annotation>
+        <xs:documentation>&lt;percentage&gt; | &lt;length&gt; | top | center | bottom</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-repeat">
+    <xs:attribute name="background-repeat" form="qualified">
+      <xs:annotation>
+        <xs:documentation>repeat | repeat-x | repeat-y | no-repeat | paginate</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:action-type
     
     http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type
@@ -296,6 +341,49 @@
           <xs:enumeration value="reset"/>
           <xs:enumeration value="submit"/>
           <xs:enumeration value="auto"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:background-content-height
+    @axf:background-content-type
+    @axf:background-content-width
+    @axf:background-scaling
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.background-content
+  -->
+  <xs:attributeGroup name="axf_background-content-height">
+    <xs:attribute name="background-content-height" form="qualified">
+      <xs:annotation>
+        <xs:documentation>auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-content-type">
+    <xs:attribute name="background-content-type" form="qualified">
+      <xs:annotation>
+        <xs:documentation>&lt;string&gt; | auto</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-content-width">
+    <xs:attribute name="background-content-width" form="qualified">
+      <xs:annotation>
+        <xs:documentation>auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-scaling">
+    <xs:attribute name="background-scaling" form="qualified">
+      <xs:annotation>
+        <xs:documentation>uniform | non-uniform | inherit</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="uniform"/>
+          <xs:enumeration value="non-uniform"/>
+          <xs:enumeration value="inherit"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>

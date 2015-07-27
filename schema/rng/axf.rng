@@ -231,10 +231,15 @@
   <define name="axf_document-info">
     <element name="axf:document-info">
       <a:documentation>Document information such as an author and title that can be embedded in the PDF</a:documentation>
+      <!--
+        'name="title"' was used in V5.1 and still works but is
+        undocumented in V6.2.
+      -->
       <attribute name="name">
         <a:documentation>Name of the document information</a:documentation>
         <choice>
           <value>document-title</value>
+          <value>title</value>
           <value>subject</value>
           <value>author</value>
           <value>author-title</value>
@@ -320,7 +325,19 @@
     Extensions to FO attlists
     
   -->
+  <define name="fo_page-sequence.attlist" combine="interleave">
+    <ref name="axf_background-color"/>
+    <ref name="axf_background-image"/>
+    <ref name="axf_background-position-horizontal"/>
+    <ref name="axf_background-position-vertical"/>
+    <ref name="axf_background-repeat"/>
+  </define>
   <define name="fo_simple-page-master.attlist" combine="interleave">
+    <ref name="axf_background-color"/>
+    <ref name="axf_background-image"/>
+    <ref name="axf_background-position-horizontal"/>
+    <ref name="axf_background-position-vertical"/>
+    <ref name="axf_background-repeat"/>
     <ref name="axf_bleed"/>
     <ref name="axf_bleed-top"/>
     <ref name="axf_bleed-bottom"/>
@@ -384,6 +401,10 @@
     
   -->
   <define name="common-border-padding-and-background-properties" combine="interleave">
+    <ref name="axf_background-content-width"/>
+    <ref name="axf_background-content-height"/>
+    <ref name="axf_background-content-type"/>
+    <ref name="axf_background-scaling"/>
     <ref name="axf_border-radius"/>
     <ref name="axf_border-top-left-radius"/>
     <ref name="axf_border-top-right-radius"/>
@@ -409,6 +430,50 @@
     <ref name="axf_outline-font-weight"/>
   </define>
   <!--
+    @axf:background-color
+    @axf:background-image
+    @axf:background-position-horizontal
+    @axf:background-position-vertical
+    @axf:background-repeat
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#IDAAOLV
+  -->
+  <define name="axf_background-color">
+    <optional>
+      <attribute name="axf:background-color">
+        <a:documentation>&lt;color&gt; | transparent</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_background-image">
+    <optional>
+      <attribute name="axf:background-image">
+        <a:documentation>&lt;uri-specification&gt; | none</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_background-position-horizontal">
+    <optional>
+      <attribute name="axf:background-position-horizontal">
+        <a:documentation>&lt;percentage&gt; | &lt;length&gt; | left | center | right</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_background-position-vertical">
+    <optional>
+      <attribute name="axf:background-position-vertical">
+        <a:documentation>&lt;percentage&gt; | &lt;length&gt; | top | center | bottom</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_background-repeat">
+    <optional>
+      <attribute name="axf:background-repeat">
+        <a:documentation>repeat | repeat-x | repeat-y | no-repeat | paginate</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:action-type
     
     http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type
@@ -424,6 +489,47 @@
           <value>reset</value>
           <value>submit</value>
           <value>auto</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:background-content-height
+    @axf:background-content-type
+    @axf:background-content-width
+    @axf:background-scaling
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.background-content
+  -->
+  <define name="axf_background-content-height">
+    <optional>
+      <attribute name="axf:background-content-height">
+        <a:documentation>auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_background-content-type">
+    <optional>
+      <attribute name="axf:background-content-type">
+        <a:documentation>&lt;string&gt; | auto</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_background-content-width">
+    <optional>
+      <attribute name="axf:background-content-width">
+        <a:documentation>auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_background-scaling">
+    <optional>
+      <attribute name="axf:background-scaling">
+        <a:documentation>uniform | non-uniform | inherit</a:documentation>
+        <choice>
+          <value>uniform</value>
+          <value>non-uniform</value>
+          <value>inherit</value>
         </choice>
       </attribute>
     </optional>
