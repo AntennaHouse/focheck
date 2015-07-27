@@ -96,8 +96,10 @@ non-xsl =
 axf_document-info =
   ## Document information such as an author and title that can be embedded in the PDF
   element axf:document-info {
+    # 'name="title"' was used in V5.1 and still works but is
+    # undocumented in V6.2.
     ## Name of the document information
-    attribute name { ('document-title' | 'subject' | 'author' | 'author-title' |
+    attribute name { ('document-title' | 'title' | 'subject' | 'author' | 'author-title' |
                        'description-writer' | 'keywords' | 'copyright-status' |
 		       'copyright-notice' | 'copyright-info-url' | 'xmp' | 'pagemode' |
 		       'pagelayout' | 'hidetoolbar' | 'hidemenubar' | 'hidewindowui' |
@@ -149,7 +151,19 @@ inline.fo.list |=
 # Extensions to FO attlists
 #
 
+fo_page-sequence.attlist &=
+    axf_background-color,
+    axf_background-image,
+    axf_background-position-horizontal,
+    axf_background-position-vertical,
+    axf_background-repeat
+
 fo_simple-page-master.attlist &=
+    axf_background-color,
+    axf_background-image,
+    axf_background-position-horizontal,
+    axf_background-position-vertical,
+    axf_background-repeat,
     axf_bleed,
     axf_bleed-top,
     axf_bleed-bottom,
@@ -212,6 +226,10 @@ fo_table-column.attlist &=
 #
 
 common-border-padding-and-background-properties &=
+    axf_background-content-width,
+    axf_background-content-height,
+    axf_background-content-type,
+    axf_background-scaling,
     axf_border-radius,
     axf_border-top-left-radius,
     axf_border-top-right-radius,
@@ -234,12 +252,54 @@ axf.block.attlist =
     axf_outline-font-style,
     axf_outline-font-weight
 
+# @axf:background-color
+# @axf:background-image
+# @axf:background-position-horizontal
+# @axf:background-position-vertical
+# @axf:background-repeat
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#IDAAOLV
+axf_background-color =
+    ## <color> | transparent
+    attribute axf:background-color { text }?
+axf_background-image =
+    ## <uri-specification> | none
+    attribute axf:background-image { text }?
+axf_background-position-horizontal =
+    ## <percentage> | <length> | left | center | right
+    attribute axf:background-position-horizontal { text }?
+axf_background-position-vertical =
+    ## <percentage> | <length> | top | center | bottom
+    attribute axf:background-position-vertical { text }?
+axf_background-repeat =
+    ## repeat | repeat-x | repeat-y | no-repeat | paginate
+    attribute axf:background-repeat { text }?
+
 # @axf:action-type
 #
 # http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type
 axf_action-type =
     ## Specifies the action of external link or form action
     attribute axf:action-type { 'gotor' | 'launch' | 'uri' | 'reset' | 'submit' | 'auto' }?
+
+# @axf:background-content-height
+# @axf:background-content-type
+# @axf:background-content-width
+# @axf:background-scaling
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.background-content
+axf_background-content-height =
+    ## auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit
+    attribute axf:background-content-height { text }?
+axf_background-content-type =
+    ## <string> | auto
+    attribute axf:background-content-type { text }?
+axf_background-content-width =
+    ## auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit
+    attribute axf:background-content-width { text }?
+axf_background-scaling =
+    ## uniform | non-uniform | inherit
+    attribute axf:background-scaling { 'uniform' | 'non-uniform' | 'inherit' }?
 
 # @axf:border-radius
 # @axf:border-top-left-radius
