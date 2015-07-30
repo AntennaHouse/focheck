@@ -361,7 +361,7 @@
   </replaceregexp>
 </target>
 
-<target name="framework.zip" depends="build"
+<target name="framework.zip" depends="build, add-on.xml"
 	description="Make a Zip archive of just the oXygen framework.">
   <mkdir dir="${focheck.basedir.converted}/releases" />
   <zip destfile="${focheck.basedir.converted}/releases/${ant.project.name}-framework-${version}.zip"
