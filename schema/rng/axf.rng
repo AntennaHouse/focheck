@@ -379,6 +379,11 @@
   </define>
   <define name="fo_footnote.attlist" combine="interleave">
     <ref name="space-before"/>
+    <ref name="axf_footnote-align"/>
+    <ref name="axf_footnote-stacking"/>
+    <ref name="axf_footnote-position"/>
+    <ref name="axf_footnote-keep"/>
+    <ref name="axf_footnote-max-height"/>
   </define>
   <define name="fo_list-block.attlist" combine="interleave">
     <ref name="axf.block.attlist"/>
@@ -715,6 +720,91 @@
     <optional>
       <attribute name="axf:destination-type">
         <a:documentation>The way a link opens in a link destination</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:footnote-align
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-align
+  -->
+  <define name="axf_footnote-align">
+    <optional>
+      <attribute name="axf:footnote-align">
+        <a:documentation>Specifies the alignment of the footnotes.</a:documentation>
+        <choice>
+          <value>auto</value>
+          <value>before</value>
+          <value>after</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:footnote-stacking
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-stacking
+  -->
+  <define name="axf_footnote-stacking">
+    <optional>
+      <attribute name="axf:footnote-stacking">
+        <a:documentation>Method to layout the footnote.</a:documentation>
+        <choice>
+          <value>block</value>
+          <value>inline</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:footnote-position
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-position
+  -->
+  <define name="axf_footnote-position">
+    <optional>
+      <attribute name="axf:footnote-position">
+        <a:documentation>Location to layout the footnote.</a:documentation>
+        <choice>
+          <value>page</value>
+          <value>start</value>
+          <value>end</value>
+          <value>inside</value>
+          <value>outside</value>
+          <value>column</value>
+          <value>start-column</value>
+          <value>end-column</value>
+          <value>inside-column</value>
+          <value>outside-column</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:footnote-keep
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-keep
+  -->
+  <define name="axf_footnote-keep">
+    <optional>
+      <attribute name="axf:footnote-keep">
+        <a:documentation>Whether to arrange a footnote and an anchor in the same page</a:documentation>
+        <choice>
+          <value>auto</value>
+          <value>always</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:footnote-max-height
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-max-height
+  -->
+  <define name="axf_footnote-max-height">
+    <optional>
+      <attribute name="axf:footnote-max-height">
+        <a:documentation>Maximum height of footnote: auto | &lt;length&gt; | &lt;percentage&gt;</a:documentation>
       </attribute>
     </optional>
   </define>

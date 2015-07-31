@@ -575,6 +575,99 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:footnote-align
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-align
+  -->
+  <xs:attributeGroup name="axf_footnote-align">
+    <xs:attribute name="footnote-align" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Specifies the alignment of the footnotes.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="before"/>
+          <xs:enumeration value="after"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:footnote-stacking
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-stacking
+  -->
+  <xs:attributeGroup name="axf_footnote-stacking">
+    <xs:attribute name="footnote-stacking" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Method to layout the footnote.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="block"/>
+          <xs:enumeration value="inline"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:footnote-position
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-position
+  -->
+  <xs:attributeGroup name="axf_footnote-position">
+    <xs:attribute name="footnote-position" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Location to layout the footnote.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="start"/>
+          <xs:enumeration value="end"/>
+          <xs:enumeration value="inside"/>
+          <xs:enumeration value="outside"/>
+          <xs:enumeration value="column"/>
+          <xs:enumeration value="start-column"/>
+          <xs:enumeration value="end-column"/>
+          <xs:enumeration value="inside-column"/>
+          <xs:enumeration value="outside-column"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:footnote-keep
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-keep
+  -->
+  <xs:attributeGroup name="axf_footnote-keep">
+    <xs:attribute name="footnote-keep" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Whether to arrange a footnote and an anchor in the same page</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="always"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:footnote-max-height
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-max-height
+  -->
+  <xs:attributeGroup name="axf_footnote-max-height">
+    <xs:attribute name="footnote-max-height" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Maximum height of footnote: auto | &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:outline-expand
     
     http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-expand
