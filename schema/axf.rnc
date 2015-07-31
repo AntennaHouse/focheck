@@ -204,7 +204,12 @@ fo_block-container.attlist &=
     axf.block.attlist
 
 fo_footnote.attlist &=
-    space-before
+    space-before,
+    axf_footnote-align,
+    axf_footnote-stacking,
+    axf_footnote-position,
+    axf_footnote-keep,
+    axf_footnote-max-height
 
 fo_list-block.attlist &=
     axf.block.attlist
@@ -397,6 +402,41 @@ axf_crop-offset-right =
 axf_destination-type =
     ## The way a link opens in a link destination
     attribute axf:destination-type { text }?
+
+# @axf:footnote-align
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-align
+axf_footnote-align =
+    ## Specifies the alignment of the footnotes.
+    attribute axf:footnote-align { 'auto' | 'before' | 'after' }?
+
+# @axf:footnote-stacking
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-stacking
+axf_footnote-stacking =
+    ## Method to layout the footnote.
+    attribute axf:footnote-stacking { 'block' | 'inline' }?
+
+# @axf:footnote-position
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-position
+axf_footnote-position =
+    ## Location to layout the footnote.
+    attribute axf:footnote-position { 'page' | 'start' | 'end' | 'inside' | 'outside' | 'column' | 'start-column' | 'end-column' | 'inside-column' | 'outside-column' }?
+
+# @axf:footnote-keep
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-keep
+axf_footnote-keep =
+    ## Whether to arrange a footnote and an anchor in the same page
+    attribute axf:footnote-keep { 'auto' | 'always' }?
+
+# @axf:footnote-max-height
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-max-height
+axf_footnote-max-height =
+    ## Maximum height of footnote: auto | <length> | <percentage>
+    attribute axf:footnote-max-height { text }?
 
 # @axf:outline-expand
 #
