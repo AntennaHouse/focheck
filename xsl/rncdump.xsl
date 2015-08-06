@@ -378,15 +378,19 @@ fo_</xsl:text>
 
   <xsl:for-each select="$properties">
     <!-- 'xml.lang' -> 'xml:lang'. -->
-    <xsl:variable name="att-name"
-                  select="translate(., '.', ':')"
-                  as="xs:string" />
-    <xsl:variable name="values"
-                  select="normalize-space(../../following-sibling::td[1])"
-                  as="xs:string" />
-    <xsl:variable name="required"
-                  select="contains(../../following-sibling::td[2], 'required')"
-                  as="xs:boolean" />
+    <xsl:variable
+        name="att-name"
+        select="translate(., '.', ':')"
+        as="xs:string" />
+    <xsl:variable
+        name="values"
+        select="normalize-space(../../following-sibling::td[1])"
+        as="xs:string" />
+    <xsl:variable
+        name="required"
+        select="contains(../../following-sibling::td[2], 'required') or
+                contains(../../following-sibling::td[3], 'required')"
+        as="xs:boolean" />
 
     <xsl:value-of select="." />
     <xsl:text> =
