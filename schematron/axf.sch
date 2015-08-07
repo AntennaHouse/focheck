@@ -17,6 +17,9 @@
 <schema xmlns="http://purl.oclc.org/dsdl/schematron"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	queryBinding="xslt2">
+    <xsl:key name="flow-name"
+	     match="fo:flow | fo:static-content"
+	     use="@flow-name" />
     <xsl:key name="master-name"
 	     match="fo:simple-page-master | fo:page-sequence-master"
 	     use="@master-name" />

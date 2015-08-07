@@ -78,10 +78,31 @@
 		   number($number-columns-spanned/@value) >= 1.5)" id="column-width" role="Warning"><value-of select="local-name()" /> is ignored with 'number-columns-spanned' is present and has a value greater than 1.</report>
   </rule>
 
+  <rule context="fo:*/@flow-map-reference">
+    <!-- http://www.w3.org/TR/xsl11/#flow-map-reference -->
+    <report test="empty(/fo:root/fo:layout-master-set/fo:flow-map/@flow-map-name[. eq current()])">flow-map-reference="<value-of select="."/>" does not match any fo:flow-map name.</report>
+  </rule>
+
   <rule context="fo:*/@flow-name">
     <!-- http://www.w3.org/TR/xsl11/#flow-name -->
     <assert test="count(../../*/@flow-name[. eq current()]) = 1">flow-name="<value-of select="."/>" must be unique within its fo:page-sequence.</assert>
-    <report test="not(. = ('xsl-region-body', 'xsl-region-start', 'xsl-region-end', 'xsl-region-before', 'xsl-region-after')) and empty(key('region-name', .))" role="Warning">flow-name="<value-of select="."/>" does not match any named or default region name.</report>
+    <report
+	test="not(. = ('xsl-region-body',
+		       'xsl-region-start',
+		       'xsl-region-end',
+		       'xsl-region-before',
+		       'xsl-region-after')) and
+              empty(key('region-name', .)) and
+              empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])" role="Warning">flow-name="<value-of select="."/>" does not match any named or default region-name or a flow-name-reference.</report>
+  </rule>
+
+  <rule context="fo:*/@flow-name-reference">
+    <!-- http://www.w3.org/TR/xsl11/#flow-name-reference -->
+    <assert test="count(ancestor::fo:flow-map//fo:flow-name-specifier/@flow-name-reference[. eq current()]) = 1">flow-name-reference="<value-of select="., ancestor::fo-flow-map//fo:flow-name-specifier/@flow-name-reference[. eq current()]"/>" must be unique within its fo:flow-map.</assert>
+    <!-- http://www.w3.org/TR/xsl11/#fo_flow-source-list -->
+    <!-- These flows must be either all fo:flow formatting objects or
+         all fo:static-content formatting objects. -->
+    <assert test="count(distinct-values(for $fo in key('flow-name', .)[ancestor::fo:page-sequence/@flow-map-reference = current()/ancestor::fo:flow-map/@flow-map-name] return local-name($fo))) = 1" role="Warning">flow-name-reference="<value-of select="."/>" should only be used with all fo:flow or all fo:static-content.</assert>
   </rule>
 
   <rule context="fo:*/@language">
@@ -109,6 +130,11 @@
   <rule context="fo:*/@region-name">
     <!-- http://www.w3.org/TR/xsl11/#region-name -->
     <assert test="count(distinct-values(for $fo in key('region-name', .) return local-name($fo))) = 1" role="Warning">region-name="<value-of select="."/>" should only be used with regions of the same class.</assert>
+  </rule>
+
+  <rule context="fo:*/@region-name-reference">
+    <!-- http://www.w3.org/TR/xsl11/#region-name-reference -->
+    <assert test="count(ancestor::fo:flow-map//fo:region-name-specifier/@region-name-reference[. eq current()]) = 1">region-name-reference="<value-of select="."/>" must be unique within its fo:flow-map.</assert>
   </rule>
 
 </pattern>
