@@ -78,6 +78,12 @@
 		   number($number-columns-spanned/@value) >= 1.5)" id="column-width" role="Warning"><value-of select="local-name()" /> is ignored with 'number-columns-spanned' is present and has a value greater than 1.</report>
   </rule>
 
+  <rule context="fo:*/@flow-name">
+    <!-- http://www.w3.org/TR/xsl11/#flow-name -->
+    <assert test="count(../../*/@flow-name[. eq current()]) = 1">flow-name="<value-of select="."/>" must be unique within its fo:page-sequence.</assert>
+    <report test="not(. = ('xsl-region-body', 'xsl-region-start', 'xsl-region-end', 'xsl-region-before', 'xsl-region-after')) and empty(key('region-name', .))" role="Warning">flow-name="<value-of select="."/>" does not match any named or default region name.</report>
+  </rule>
+
   <rule context="fo:*/@language">
     <let name="expression" value="ahf:parser-runner(.)"/>
     <!-- What would be generated if we could... -->
@@ -88,6 +94,21 @@
     <!-- http://www.w3.org/TR/xsl11/#d0e4626 -->
     <report test="$expression instance of element(EnumerationToken) and string-length($expression/@token) = 2" id="language_2-letter" role="Warning">language="<value-of select="." />" uses a 2-letter code.  A 2-letter code in conformance with ISO639 will be converted to the corresponding 3-letter ISO639-2 terminology code.</report>
     <report test="$expression instance of element(EnumerationToken) and $expression/@token = ('mul', 'none')" id="language_und" role="Warning">language="<value-of select="." />" will be converted to 'und'.</report>
+  </rule>
+
+  <rule context="fo:*/@master-name">
+    <!-- http://www.w3.org/TR/xsl11/#master-name -->
+    <assert test="count(key('master-name', .)) = 1" role="Warning">master-name="<value-of select="."/>" should be unique.</assert>
+  </rule>
+
+  <rule context="fo:*/@master-reference">
+    <!-- http://www.w3.org/TR/xsl11/#master-reference -->
+    <assert test="exists(key('master-name', .))" role="Warning">master-reference="<value-of select="."/>" should refer to a master-name that exists within the document.</assert>
+  </rule>
+
+  <rule context="fo:*/@region-name">
+    <!-- http://www.w3.org/TR/xsl11/#region-name -->
+    <assert test="count(distinct-values(for $fo in key('region-name', .) return local-name($fo))) = 1" role="Warning">region-name="<value-of select="."/>" should only be used with regions of the same class.</assert>
   </rule>
 
 </pattern>
