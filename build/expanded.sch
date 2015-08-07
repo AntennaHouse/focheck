@@ -12,8 +12,12 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
---><schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
-    <?DSDL_INCLUDE_START fo.sch?><pattern xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document" id="fo-fo">
+--><schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
+    <xsl:key name="flow-name" match="fo:flow | fo:static-content" use="@flow-name"/>
+    <xsl:key name="master-name" match="fo:simple-page-master | fo:page-sequence-master" use="@master-name"/>
+    <xsl:key name="region-name" match="fo:region-before | fo:region-after |       fo:region-start | fo:region-end |       fo:region-body" use="@region-name"/>
+
+    <?DSDL_INCLUDE_START fo.sch?><pattern xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document" id="fo-fo">
 
   <!-- FOs -->
 
@@ -64,6 +68,26 @@
     <report test="exists(../@number-columns-spanned) and     local-name($number-columns-spanned) = 'Number' and                   (exists($number-columns-spanned/@value) and      number($number-columns-spanned/@value) &gt;= 1.5)" id="column-width" role="Warning"><value-of select="local-name()"/> is ignored with 'number-columns-spanned' is present and has a value greater than 1.</report>
   </rule>
 
+  <rule context="fo:*/@flow-map-reference">
+    <!-- http://www.w3.org/TR/xsl11/#flow-map-reference -->
+    <report test="empty(/fo:root/fo:layout-master-set/fo:flow-map/@flow-map-name[. eq current()])">flow-map-reference="<value-of select="."/>" does not match any fo:flow-map name.</report>
+  </rule>
+
+  <rule context="fo:*/@flow-name">
+    <!-- http://www.w3.org/TR/xsl11/#flow-name -->
+    <assert test="count(../../*/@flow-name[. eq current()]) = 1">flow-name="<value-of select="."/>" must be unique within its fo:page-sequence.</assert>
+    <report test="not(. = ('xsl-region-body',          'xsl-region-start',          'xsl-region-end',          'xsl-region-before',          'xsl-region-after')) and               empty(key('region-name', .)) and               empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])" role="Warning">flow-name="<value-of select="."/>" does not match any named or default region-name or a flow-name-reference.</report>
+  </rule>
+
+  <rule context="fo:*/@flow-name-reference">
+    <!-- http://www.w3.org/TR/xsl11/#flow-name-reference -->
+    <assert test="count(ancestor::fo:flow-map//fo:flow-name-specifier/@flow-name-reference[. eq current()]) = 1">flow-name-reference="<value-of select="., ancestor::fo-flow-map//fo:flow-name-specifier/@flow-name-reference[. eq current()]"/>" must be unique within its fo:flow-map.</assert>
+    <!-- http://www.w3.org/TR/xsl11/#fo_flow-source-list -->
+    <!-- These flows must be either all fo:flow formatting objects or
+         all fo:static-content formatting objects. -->
+    <assert test="count(distinct-values(for $fo in key('flow-name', .)[ancestor::fo:page-sequence/@flow-map-reference = current()/ancestor::fo:flow-map/@flow-map-name] return local-name($fo))) = 1" role="Warning">flow-name-reference="<value-of select="."/>" should only be used with all fo:flow or all fo:static-content.</assert>
+  </rule>
+
   <rule context="fo:*/@language">
     <let name="expression" value="ahf:parser-runner(.)"/>
     <!-- What would be generated if we could... -->
@@ -76,9 +100,29 @@
     <report test="$expression instance of element(EnumerationToken) and $expression/@token = ('mul', 'none')" id="language_und" role="Warning">language="<value-of select="."/>" will be converted to 'und'.</report>
   </rule>
 
+  <rule context="fo:*/@master-name">
+    <!-- http://www.w3.org/TR/xsl11/#master-name -->
+    <assert test="count(key('master-name', .)) = 1" role="Warning">master-name="<value-of select="."/>" should be unique.</assert>
+  </rule>
+
+  <rule context="fo:*/@master-reference">
+    <!-- http://www.w3.org/TR/xsl11/#master-reference -->
+    <assert test="exists(key('master-name', .))" role="Warning">master-reference="<value-of select="."/>" should refer to a master-name that exists within the document.</assert>
+  </rule>
+
+  <rule context="fo:*/@region-name">
+    <!-- http://www.w3.org/TR/xsl11/#region-name -->
+    <assert test="count(distinct-values(for $fo in key('region-name', .) return local-name($fo))) = 1" role="Warning">region-name="<value-of select="."/>" should only be used with regions of the same class.</assert>
+  </rule>
+
+  <rule context="fo:*/@region-name-reference">
+    <!-- http://www.w3.org/TR/xsl11/#region-name-reference -->
+    <assert test="count(ancestor::fo:flow-map//fo:region-name-specifier/@region-name-reference[. eq current()]) = 1">region-name-reference="<value-of select="."/>" must be unique within its fo:flow-map.</assert>
+  </rule>
+
 </pattern><?DSDL_INCLUDE_END fo.sch?>
-    <?DSDL_INCLUDE_START fo-property.sch?><pattern xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" id="fo-property">
-   <xsl:include href="file:/C:/projects/oxygen/focheck/xsl/parser-runner.xsl"/>
+    <?DSDL_INCLUDE_START fo-property.sch?><pattern xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" id="fo-property">
+   <xsl:include href="file:/E:/Projects/oxygen/focheck/xsl/parser-runner.xsl"/>
 
    <!-- absolute-position -->
    <!-- auto | absolute | fixed | inherit -->
