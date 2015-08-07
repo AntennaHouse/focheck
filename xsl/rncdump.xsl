@@ -389,7 +389,8 @@ fo_</xsl:text>
     <xsl:variable
         name="required"
         select="contains(../../following-sibling::td[2], 'required') or
-                contains(../../following-sibling::td[3], 'required')"
+                (not(. eq 'region-name') and
+                 contains(../../following-sibling::td[3], 'required'))"
         as="xs:boolean" />
 
     <xsl:value-of select="." />
