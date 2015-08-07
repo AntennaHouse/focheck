@@ -268,7 +268,7 @@
 									<String>@PDF</String>
 								</field>
 								<field name="fOProcessorName">
-									<String>Antenna House GUI</String>
+									<String>AH Formatter GUI</String>
 								</field>
 								<field name="headerURL">
 									<String></String>
@@ -292,7 +292,7 @@
 									<Boolean>true</Boolean>
 								</field>
 								<field name="openInBrowser">
-									<Boolean>true</Boolean>
+									<Boolean>false</Boolean>
 								</field>
 								<field name="outputFile">
 									<File>${cfd}/${cfn}.pdf</File>
