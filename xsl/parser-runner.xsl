@@ -101,10 +101,11 @@
   <function name="system-color" returns="Color" />
   <function name="system-font" returns="Object" />
 
-  <function name="linear-gradient" returns="Object" />
-  <function name="radial-gradient" returns="Object" />
-  <function name="repeating-linear-gradient" returns="Object" />
-  <function name="repeating-radial-gradient" returns="Object" />
+  <function name="linear-gradient" returns="Color" />
+  <function name="radial-gradient" returns="Color" />
+  <function name="repeating-linear-gradient" returns="Color" />
+  <function name="repeating-radial-gradient" returns="Color" />
+  <function name="rgba" returns="Color" />
 </xsl:variable>
 
 <!-- ============================================================= -->
