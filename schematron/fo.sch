@@ -127,6 +127,11 @@
     <assert test="exists(key('master-name', .))" role="Warning">master-reference="<value-of select="."/>" should refer to a master-name that exists within the document.</assert>
   </rule>
 
+  <rule context="fo:*/@overflow">
+    <!-- http://www.w3.org/TR/xsl11/#overflow -->
+    <report test=". eq 'repeat' and ../@absolute-position = ('absolute', 'fixed')" role="Warning">overflow="<value-of select="."/>" on an absolutely-positioned area will be treated as 'auto'.</report>
+  </rule>
+
   <rule context="fo:*/@region-name">
     <!-- http://www.w3.org/TR/xsl11/#region-name -->
     <assert test="count(distinct-values(for $fo in key('region-name', .) return local-name($fo))) = 1" role="Warning">region-name="<value-of select="."/>" should only be used with regions of the same class.</assert>
