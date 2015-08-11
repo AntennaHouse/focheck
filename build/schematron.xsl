@@ -223,7 +223,7 @@
 
 
 	  <!--RULE -->
-   <xsl:template match="fo:float" priority="1014" mode="M3">
+   <xsl:template match="fo:float" priority="1015" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:float"/>
 
 		    <!--REPORT -->
@@ -242,7 +242,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:footnote" priority="1013" mode="M3">
+   <xsl:template match="fo:footnote" priority="1014" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:footnote"/>
 
 		    <!--REPORT -->
@@ -294,7 +294,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:retrieve-marker" priority="1012" mode="M3">
+   <xsl:template match="fo:retrieve-marker" priority="1013" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:retrieve-marker"/>
 
 		    <!--ASSERT -->
@@ -314,7 +314,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:retrieve-table-marker" priority="1011" mode="M3">
+   <xsl:template match="fo:retrieve-table-marker" priority="1012" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:retrieve-table-marker"/>
 
@@ -335,7 +335,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:root" priority="1010" mode="M3">
+   <xsl:template match="fo:root" priority="1011" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:root"/>
 
 		    <!--ASSERT -->
@@ -357,7 +357,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@column-count | fo:*/@number-columns-spanned"
-                 priority="1009"
+                 priority="1010"
                  mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@column-count | fo:*/@number-columns-spanned"/>
@@ -383,7 +383,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-width" priority="1008" mode="M3">
+   <xsl:template match="fo:*/@column-width" priority="1009" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-width"/>
       <xsl:variable name="number-columns-spanned"
                     select="ahf:parser-runner(../@number-columns-spanned)"/>
@@ -406,7 +406,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-map-reference" priority="1007" mode="M3">
+   <xsl:template match="fo:*/@flow-map-reference" priority="1008" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@flow-map-reference"/>
 
@@ -425,7 +425,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name" priority="1006" mode="M3">
+   <xsl:template match="fo:*/@flow-name" priority="1007" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-name"/>
 
 		    <!--ASSERT -->
@@ -460,7 +460,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name-reference" priority="1005" mode="M3">
+   <xsl:template match="fo:*/@flow-name-reference" priority="1006" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@flow-name-reference"/>
 
@@ -499,7 +499,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@language" priority="1004" mode="M3">
+   <xsl:template match="fo:*/@language" priority="1005" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@language"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -581,7 +581,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-name" priority="1003" mode="M3">
+   <xsl:template match="fo:*/@master-name" priority="1004" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@master-name"/>
 
 		    <!--ASSERT Warning-->
@@ -603,7 +603,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-reference" priority="1002" mode="M3">
+   <xsl:template match="fo:*/@master-reference" priority="1003" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@master-reference"/>
 
@@ -623,6 +623,25 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@overflow" priority="1002" mode="M3">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@overflow"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test=". eq 'repeat' and ../@absolute-position = ('absolute', 'fixed')">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test=". eq 'repeat' and ../@absolute-position = ('absolute', 'fixed')">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>overflow="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" on an absolutely-positioned area will be treated as 'auto'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
    </xsl:template>
 
 	  <!--RULE -->
@@ -694,7 +713,7 @@
                </xsl:attribute>
                <svrl:text>absolute-position="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'absolute', 'fixed', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -726,7 +745,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>absolute-position="" should be EnumerationToken.</svrl:text>
+            <svrl:text>absolute-position="" should be 'auto', 'absolute', 'fixed', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -760,7 +779,7 @@
                </xsl:attribute>
                <svrl:text>active-state="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'link', 'visited', 'active', 'hover', or 'focus'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -792,7 +811,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>active-state="" should be EnumerationToken.</svrl:text>
+            <svrl:text>active-state="" should be 'link', 'visited', 'active', 'hover', or 'focus'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -827,7 +846,7 @@
                </xsl:attribute>
                <svrl:text>alignment-adjust="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Percent, or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'inherit', Percent, or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -859,7 +878,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>alignment-adjust="" should be EnumerationToken, Percent, or Length.</svrl:text>
+            <svrl:text>alignment-adjust="" should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'inherit', Percent, or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -894,7 +913,7 @@
                </xsl:attribute>
                <svrl:text>alignment-baseline="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -926,7 +945,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>alignment-baseline="" should be EnumerationToken.</svrl:text>
+            <svrl:text>alignment-baseline="" should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -961,7 +980,7 @@
                </xsl:attribute>
                <svrl:text>allowed-height-scale="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'any', 'inherit', or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -993,7 +1012,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>allowed-height-scale="" should be EnumerationToken or Percent.</svrl:text>
+            <svrl:text>allowed-height-scale="" should be 'any', 'inherit', or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1028,7 +1047,7 @@
                </xsl:attribute>
                <svrl:text>allowed-width-scale="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'any', 'inherit', or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1060,7 +1079,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>allowed-width-scale="" should be EnumerationToken or Percent.</svrl:text>
+            <svrl:text>allowed-width-scale="" should be 'any', 'inherit', or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1094,7 +1113,7 @@
                </xsl:attribute>
                <svrl:text>auto-restore="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1126,7 +1145,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>auto-restore="" should be EnumerationToken.</svrl:text>
+            <svrl:text>auto-restore="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1177,7 +1196,7 @@
                </xsl:attribute>
                <svrl:text>background-attachment="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'scroll', 'fixed', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1209,7 +1228,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>background-attachment="" should be EnumerationToken.</svrl:text>
+            <svrl:text>background-attachment="" should be 'scroll', 'fixed', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1244,7 +1263,7 @@
                </xsl:attribute>
                <svrl:text>background-color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1261,7 +1280,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>background-color="" should be Color or EnumerationToken.</svrl:text>
+            <svrl:text>background-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1296,7 +1315,7 @@
                </xsl:attribute>
                <svrl:text>background-image="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be URI or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be URI, 'none', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1328,7 +1347,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>background-image="" should be URI or EnumerationToken.</svrl:text>
+            <svrl:text>background-image="" should be URI, 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1382,7 +1401,7 @@
                </xsl:attribute>
                <svrl:text>background-position-horizontal="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Percent, Length, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Percent, Length, 'left', 'center', 'right', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1414,7 +1433,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>background-position-horizontal="" should be Percent, Length, or EnumerationToken.</svrl:text>
+            <svrl:text>background-position-horizontal="" should be Percent, Length, 'left', 'center', 'right', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1451,7 +1470,7 @@
                </xsl:attribute>
                <svrl:text>background-position-vertical="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Percent, Length, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Percent, Length, 'top', 'center', 'bottom', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1483,7 +1502,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>background-position-vertical="" should be Percent, Length, or EnumerationToken.</svrl:text>
+            <svrl:text>background-position-vertical="" should be Percent, Length, 'top', 'center', 'bottom', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1518,7 +1537,7 @@
                </xsl:attribute>
                <svrl:text>background-repeat="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1550,7 +1569,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>background-repeat="" should be EnumerationToken.</svrl:text>
+            <svrl:text>background-repeat="" should be 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1584,7 +1603,7 @@
                </xsl:attribute>
                <svrl:text>baseline-shift="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Percent, or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'baseline', 'sub', 'super', 'inherit', Percent, or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1616,7 +1635,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>baseline-shift="" should be EnumerationToken, Percent, or Length.</svrl:text>
+            <svrl:text>baseline-shift="" should be 'baseline', 'sub', 'super', 'inherit', Percent, or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1651,7 +1670,7 @@
                </xsl:attribute>
                <svrl:text>blank-or-not-blank="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'blank', 'not-blank', 'any', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1683,7 +1702,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>blank-or-not-blank="" should be EnumerationToken.</svrl:text>
+            <svrl:text>blank-or-not-blank="" should be 'blank', 'not-blank', 'any', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1718,7 +1737,7 @@
                </xsl:attribute>
                <svrl:text>block-progression-dimension="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1750,7 +1769,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>block-progression-dimension="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>block-progression-dimension="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1801,7 +1820,7 @@
                </xsl:attribute>
                <svrl:text>border-after-color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1818,7 +1837,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-after-color="" should be Color or EnumerationToken.</svrl:text>
+            <svrl:text>border-after-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1853,7 +1872,7 @@
                </xsl:attribute>
                <svrl:text>border-after-precedence="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:text/>" should be 'force', 'inherit', or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1885,7 +1904,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-after-precedence="" should be EnumerationToken or Number.</svrl:text>
+            <svrl:text>border-after-precedence="" should be 'force', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1920,7 +1939,7 @@
                </xsl:attribute>
                <svrl:text>border-after-style="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -1952,7 +1971,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-after-style="" should be EnumerationToken.</svrl:text>
+            <svrl:text>border-after-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1987,7 +2006,7 @@
                </xsl:attribute>
                <svrl:text>border-after-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2019,7 +2038,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-after-width="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>border-after-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2054,7 +2073,7 @@
                </xsl:attribute>
                <svrl:text>border-before-color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2071,7 +2090,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-before-color="" should be Color or EnumerationToken.</svrl:text>
+            <svrl:text>border-before-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2106,7 +2125,7 @@
                </xsl:attribute>
                <svrl:text>border-before-precedence="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:text/>" should be 'force', 'inherit', or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2138,7 +2157,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-before-precedence="" should be EnumerationToken or Number.</svrl:text>
+            <svrl:text>border-before-precedence="" should be 'force', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2173,7 +2192,7 @@
                </xsl:attribute>
                <svrl:text>border-before-style="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2205,7 +2224,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-before-style="" should be EnumerationToken.</svrl:text>
+            <svrl:text>border-before-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2240,7 +2259,7 @@
                </xsl:attribute>
                <svrl:text>border-before-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2272,7 +2291,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-before-width="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>border-before-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2323,7 +2342,7 @@
                </xsl:attribute>
                <svrl:text>border-bottom-color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2340,7 +2359,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-bottom-color="" should be Color or EnumerationToken.</svrl:text>
+            <svrl:text>border-bottom-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2375,7 +2394,7 @@
                </xsl:attribute>
                <svrl:text>border-bottom-style="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2407,7 +2426,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-bottom-style="" should be EnumerationToken.</svrl:text>
+            <svrl:text>border-bottom-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2442,7 +2461,7 @@
                </xsl:attribute>
                <svrl:text>border-bottom-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2474,7 +2493,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-bottom-width="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>border-bottom-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2508,7 +2527,7 @@
                </xsl:attribute>
                <svrl:text>border-collapse="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'collapse', 'collapse-with-precedence', 'separate', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2540,7 +2559,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-collapse="" should be EnumerationToken.</svrl:text>
+            <svrl:text>border-collapse="" should be 'collapse', 'collapse-with-precedence', 'separate', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2591,7 +2610,7 @@
                </xsl:attribute>
                <svrl:text>border-end-color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2608,7 +2627,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-end-color="" should be Color or EnumerationToken.</svrl:text>
+            <svrl:text>border-end-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2643,7 +2662,7 @@
                </xsl:attribute>
                <svrl:text>border-end-precedence="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:text/>" should be 'force', 'inherit', or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2675,7 +2694,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-end-precedence="" should be EnumerationToken or Number.</svrl:text>
+            <svrl:text>border-end-precedence="" should be 'force', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2710,7 +2729,7 @@
                </xsl:attribute>
                <svrl:text>border-end-style="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2742,7 +2761,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-end-style="" should be EnumerationToken.</svrl:text>
+            <svrl:text>border-end-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2777,7 +2796,7 @@
                </xsl:attribute>
                <svrl:text>border-end-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2809,7 +2828,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-end-width="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>border-end-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2860,7 +2879,7 @@
                </xsl:attribute>
                <svrl:text>border-left-color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2877,7 +2896,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-left-color="" should be Color or EnumerationToken.</svrl:text>
+            <svrl:text>border-left-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2912,7 +2931,7 @@
                </xsl:attribute>
                <svrl:text>border-left-style="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -2944,7 +2963,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-left-style="" should be EnumerationToken.</svrl:text>
+            <svrl:text>border-left-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2979,7 +2998,7 @@
                </xsl:attribute>
                <svrl:text>border-left-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3011,7 +3030,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-left-width="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>border-left-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3062,7 +3081,7 @@
                </xsl:attribute>
                <svrl:text>border-right-color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3079,7 +3098,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-right-color="" should be Color or EnumerationToken.</svrl:text>
+            <svrl:text>border-right-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3114,7 +3133,7 @@
                </xsl:attribute>
                <svrl:text>border-right-style="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3146,7 +3165,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-right-style="" should be EnumerationToken.</svrl:text>
+            <svrl:text>border-right-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3181,7 +3200,7 @@
                </xsl:attribute>
                <svrl:text>border-right-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3213,7 +3232,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-right-width="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>border-right-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3248,7 +3267,7 @@
                </xsl:attribute>
                <svrl:text>border-separation="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3280,7 +3299,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-separation="" should be Length or EnumerationToken.</svrl:text>
+            <svrl:text>border-separation="" should be Length or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3331,7 +3350,7 @@
                </xsl:attribute>
                <svrl:text>border-start-color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3348,7 +3367,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-start-color="" should be Color or EnumerationToken.</svrl:text>
+            <svrl:text>border-start-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3383,7 +3402,7 @@
                </xsl:attribute>
                <svrl:text>border-start-precedence="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:text/>" should be 'force', 'inherit', or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3415,7 +3434,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-start-precedence="" should be EnumerationToken or Number.</svrl:text>
+            <svrl:text>border-start-precedence="" should be 'force', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3450,7 +3469,7 @@
                </xsl:attribute>
                <svrl:text>border-start-style="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3482,7 +3501,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-start-style="" should be EnumerationToken.</svrl:text>
+            <svrl:text>border-start-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3517,7 +3536,7 @@
                </xsl:attribute>
                <svrl:text>border-start-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3549,7 +3568,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-start-width="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>border-start-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3616,7 +3635,7 @@
                </xsl:attribute>
                <svrl:text>border-top-color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3633,7 +3652,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-top-color="" should be Color or EnumerationToken.</svrl:text>
+            <svrl:text>border-top-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3668,7 +3687,7 @@
                </xsl:attribute>
                <svrl:text>border-top-style="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3700,7 +3719,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-top-style="" should be EnumerationToken.</svrl:text>
+            <svrl:text>border-top-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3735,7 +3754,7 @@
                </xsl:attribute>
                <svrl:text>border-top-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3767,7 +3786,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>border-top-width="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>border-top-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3817,7 +3836,7 @@
                </xsl:attribute>
                <svrl:text>bottom="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3849,7 +3868,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>bottom="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>bottom="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3883,7 +3902,7 @@
                </xsl:attribute>
                <svrl:text>break-after="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3915,7 +3934,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>break-after="" should be EnumerationToken.</svrl:text>
+            <svrl:text>break-after="" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3949,7 +3968,7 @@
                </xsl:attribute>
                <svrl:text>break-before="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -3981,7 +4000,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>break-before="" should be EnumerationToken.</svrl:text>
+            <svrl:text>break-before="" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4015,7 +4034,7 @@
                </xsl:attribute>
                <svrl:text>caption-side="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4047,7 +4066,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>caption-side="" should be EnumerationToken.</svrl:text>
+            <svrl:text>caption-side="" should be 'before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4236,7 +4255,7 @@
                </xsl:attribute>
                <svrl:text>change-bar-color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', or 'yellow'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4253,7 +4272,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>change-bar-color="" should be Color or EnumerationToken.</svrl:text>
+            <svrl:text>change-bar-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', or 'yellow'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4340,7 +4359,7 @@
                </xsl:attribute>
                <svrl:text>change-bar-placement="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'start', 'end', 'left', 'right', 'inside', 'outside', or 'alternate'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4372,7 +4391,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>change-bar-placement="" should be EnumerationToken.</svrl:text>
+            <svrl:text>change-bar-placement="" should be 'start', 'end', 'left', 'right', 'inside', 'outside', or 'alternate'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4407,7 +4426,7 @@
                </xsl:attribute>
                <svrl:text>change-bar-style="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', or 'outset'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4439,7 +4458,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>change-bar-style="" should be EnumerationToken.</svrl:text>
+            <svrl:text>change-bar-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', or 'outset'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4474,7 +4493,7 @@
                </xsl:attribute>
                <svrl:text>change-bar-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'thin', 'medium', 'thick', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4506,7 +4525,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>change-bar-width="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>change-bar-width="" should be 'thin', 'medium', 'thick', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4591,7 +4610,7 @@
                </xsl:attribute>
                <svrl:text>clear="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'start', 'end', 'left', 'right', 'inside', 'outside', 'both', 'none', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4623,7 +4642,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>clear="" should be EnumerationToken.</svrl:text>
+            <svrl:text>clear="" should be 'start', 'end', 'left', 'right', 'inside', 'outside', 'both', 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4657,7 +4676,7 @@
                </xsl:attribute>
                <svrl:text>clip="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Function or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Function, 'auto', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4689,7 +4708,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>clip="" should be Function or EnumerationToken.</svrl:text>
+            <svrl:text>clip="" should be Function, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4723,7 +4742,7 @@
                </xsl:attribute>
                <svrl:text>color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4740,7 +4759,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>color="" should be Color or EnumerationToken.</svrl:text>
+            <svrl:text>color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4775,7 +4794,7 @@
                </xsl:attribute>
                <svrl:text>color-profile-name="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4792,7 +4811,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>color-profile-name="" should be EnumerationToken.</svrl:text>
+            <svrl:text>color-profile-name="" should be 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4826,7 +4845,7 @@
                </xsl:attribute>
                <svrl:text>column-count="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Number or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Number or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4858,7 +4877,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>column-count="" should be Number or EnumerationToken.</svrl:text>
+            <svrl:text>column-count="" should be Number or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4892,7 +4911,7 @@
                </xsl:attribute>
                <svrl:text>column-gap="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4924,7 +4943,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>column-gap="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>column-gap="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5060,7 +5079,7 @@
                </xsl:attribute>
                <svrl:text>content-height="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5092,7 +5111,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>content-height="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>content-height="" should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5126,7 +5145,7 @@
                </xsl:attribute>
                <svrl:text>content-type="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Literal or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Literal or 'auto'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5158,7 +5177,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>content-type="" should be Literal or EnumerationToken.</svrl:text>
+            <svrl:text>content-type="" should be Literal or 'auto'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5192,7 +5211,7 @@
                </xsl:attribute>
                <svrl:text>content-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5224,7 +5243,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>content-width="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>content-width="" should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5258,7 +5277,7 @@
                </xsl:attribute>
                <svrl:text>country="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Literal.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'inherit', or Literal.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5290,7 +5309,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>country="" should be EnumerationToken or Literal.</svrl:text>
+            <svrl:text>country="" should be 'none', 'inherit', or Literal.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5394,7 +5413,7 @@
                </xsl:attribute>
                <svrl:text>direction="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'ltr', 'rtl', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5426,7 +5445,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>direction="" should be EnumerationToken.</svrl:text>
+            <svrl:text>direction="" should be 'ltr', 'rtl', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5460,7 +5479,7 @@
                </xsl:attribute>
                <svrl:text>display-align="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'before', 'center', 'after', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5492,7 +5511,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>display-align="" should be EnumerationToken.</svrl:text>
+            <svrl:text>display-align="" should be 'auto', 'before', 'center', 'after', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5527,7 +5546,7 @@
                </xsl:attribute>
                <svrl:text>dominant-baseline="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5559,7 +5578,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>dominant-baseline="" should be EnumerationToken.</svrl:text>
+            <svrl:text>dominant-baseline="" should be 'auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5593,7 +5612,7 @@
                </xsl:attribute>
                <svrl:text>empty-cells="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'show', 'hide', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5625,7 +5644,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>empty-cells="" should be EnumerationToken.</svrl:text>
+            <svrl:text>empty-cells="" should be 'show', 'hide', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5659,7 +5678,7 @@
                </xsl:attribute>
                <svrl:text>end-indent="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5691,7 +5710,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>end-indent="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>end-indent="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5725,7 +5744,7 @@
                </xsl:attribute>
                <svrl:text>ends-row="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5757,7 +5776,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>ends-row="" should be EnumerationToken.</svrl:text>
+            <svrl:text>ends-row="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5791,7 +5810,7 @@
                </xsl:attribute>
                <svrl:text>extent="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5823,7 +5842,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>extent="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>extent="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5874,7 +5893,7 @@
                </xsl:attribute>
                <svrl:text>float="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'before', 'start', 'end', 'left', 'right', 'inside', 'outside', 'none', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5906,7 +5925,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>float="" should be EnumerationToken.</svrl:text>
+            <svrl:text>float="" should be 'before', 'start', 'end', 'left', 'right', 'inside', 'outside', 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6179,7 +6198,7 @@
                </xsl:attribute>
                <svrl:text>font-selection-strategy="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'character-by-character', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6211,7 +6230,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>font-selection-strategy="" should be EnumerationToken.</svrl:text>
+            <svrl:text>font-selection-strategy="" should be 'auto', 'character-by-character', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6245,7 +6264,7 @@
                </xsl:attribute>
                <svrl:text>font-size="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6277,7 +6296,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>font-size="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>font-size="" should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6312,7 +6331,7 @@
                </xsl:attribute>
                <svrl:text>font-size-adjust="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Number or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Number, 'none', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6344,7 +6363,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>font-size-adjust="" should be Number or EnumerationToken.</svrl:text>
+            <svrl:text>font-size-adjust="" should be Number, 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6378,7 +6397,7 @@
                </xsl:attribute>
                <svrl:text>font-stretch="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6410,7 +6429,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>font-stretch="" should be EnumerationToken or Percent.</svrl:text>
+            <svrl:text>font-stretch="" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6444,7 +6463,7 @@
                </xsl:attribute>
                <svrl:text>font-style="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'normal', 'italic', 'oblique', 'backslant', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6476,7 +6495,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>font-style="" should be EnumerationToken.</svrl:text>
+            <svrl:text>font-style="" should be 'normal', 'italic', 'oblique', 'backslant', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6510,7 +6529,7 @@
                </xsl:attribute>
                <svrl:text>font-variant="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'normal', 'small-caps', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6542,7 +6561,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>font-variant="" should be EnumerationToken.</svrl:text>
+            <svrl:text>font-variant="" should be 'normal', 'small-caps', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6576,7 +6595,7 @@
                </xsl:attribute>
                <svrl:text>font-weight="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:text/>" should be 'normal', 'bold', 'bolder', 'lighter', 'inherit', or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6608,7 +6627,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>font-weight="" should be EnumerationToken or Number.</svrl:text>
+            <svrl:text>font-weight="" should be 'normal', 'bold', 'bolder', 'lighter', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6678,7 +6697,7 @@
                </xsl:attribute>
                <svrl:text>glyph-orientation-horizontal="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6710,7 +6729,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>glyph-orientation-horizontal="" should be EnumerationToken.</svrl:text>
+            <svrl:text>glyph-orientation-horizontal="" should be 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6745,7 +6764,7 @@
                </xsl:attribute>
                <svrl:text>glyph-orientation-vertical="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto' or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6777,7 +6796,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>glyph-orientation-vertical="" should be EnumerationToken.</svrl:text>
+            <svrl:text>glyph-orientation-vertical="" should be 'auto' or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6914,7 +6933,7 @@
                </xsl:attribute>
                <svrl:text>height="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6946,7 +6965,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>height="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>height="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6980,7 +6999,7 @@
                </xsl:attribute>
                <svrl:text>hyphenate="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'false', 'true', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7012,7 +7031,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>hyphenate="" should be EnumerationToken.</svrl:text>
+            <svrl:text>hyphenate="" should be 'false', 'true', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7047,7 +7066,7 @@
                </xsl:attribute>
                <svrl:text>hyphenation-character="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Literal or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Literal or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7079,7 +7098,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>hyphenation-character="" should be Literal or EnumerationToken.</svrl:text>
+            <svrl:text>hyphenation-character="" should be Literal or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7114,7 +7133,7 @@
                </xsl:attribute>
                <svrl:text>hyphenation-keep="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'column', 'page', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7146,7 +7165,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>hyphenation-keep="" should be EnumerationToken.</svrl:text>
+            <svrl:text>hyphenation-keep="" should be 'auto', 'column', 'page', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7181,7 +7200,7 @@
                </xsl:attribute>
                <svrl:text>hyphenation-ladder-count="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:text/>" should be 'no-limit', 'inherit', or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7213,7 +7232,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>hyphenation-ladder-count="" should be EnumerationToken or Number.</svrl:text>
+            <svrl:text>hyphenation-ladder-count="" should be 'no-limit', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7250,7 +7269,7 @@
                </xsl:attribute>
                <svrl:text>hyphenation-push-character-count="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Number or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Number or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7282,7 +7301,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>hyphenation-push-character-count="" should be Number or EnumerationToken.</svrl:text>
+            <svrl:text>hyphenation-push-character-count="" should be Number or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7319,7 +7338,7 @@
                </xsl:attribute>
                <svrl:text>hyphenation-remain-character-count="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Number or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Number or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7351,7 +7370,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>hyphenation-remain-character-count="" should be Number or EnumerationToken.</svrl:text>
+            <svrl:text>hyphenation-remain-character-count="" should be Number or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7469,7 +7488,7 @@
                </xsl:attribute>
                <svrl:text>indicate-destination="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7501,7 +7520,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>indicate-destination="" should be EnumerationToken.</svrl:text>
+            <svrl:text>indicate-destination="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7536,7 +7555,7 @@
                </xsl:attribute>
                <svrl:text>initial-page-number="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'auto-odd', 'auto-even', 'inherit', or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7568,7 +7587,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>initial-page-number="" should be EnumerationToken or Number.</svrl:text>
+            <svrl:text>initial-page-number="" should be 'auto', 'auto-odd', 'auto-even', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7605,7 +7624,7 @@
                </xsl:attribute>
                <svrl:text>inline-progression-dimension="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7637,7 +7656,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>inline-progression-dimension="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>inline-progression-dimension="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7689,7 +7708,7 @@
                </xsl:attribute>
                <svrl:text>intrinsic-scale-value="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Percent or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Percent or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7721,7 +7740,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>intrinsic-scale-value="" should be Percent or EnumerationToken.</svrl:text>
+            <svrl:text>intrinsic-scale-value="" should be Percent or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7756,7 +7775,7 @@
                </xsl:attribute>
                <svrl:text>intrusion-displace="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'none', 'line', 'indent', 'block', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7788,7 +7807,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>intrusion-displace="" should be EnumerationToken.</svrl:text>
+            <svrl:text>intrusion-displace="" should be 'auto', 'none', 'line', 'indent', 'block', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7822,7 +7841,7 @@
                </xsl:attribute>
                <svrl:text>keep-together="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'always', 'inherit', or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7854,7 +7873,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>keep-together="" should be EnumerationToken or Number.</svrl:text>
+            <svrl:text>keep-together="" should be 'auto', 'always', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7888,7 +7907,7 @@
                </xsl:attribute>
                <svrl:text>keep-with-next="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'always', 'inherit', or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7920,7 +7939,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>keep-with-next="" should be EnumerationToken or Number.</svrl:text>
+            <svrl:text>keep-with-next="" should be 'auto', 'always', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7955,7 +7974,7 @@
                </xsl:attribute>
                <svrl:text>keep-with-previous="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'always', 'inherit', or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7987,7 +8006,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>keep-with-previous="" should be EnumerationToken or Number.</svrl:text>
+            <svrl:text>keep-with-previous="" should be 'auto', 'always', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8038,7 +8057,7 @@
                </xsl:attribute>
                <svrl:text>last-line-end-indent="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8070,7 +8089,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>last-line-end-indent="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>last-line-end-indent="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8105,7 +8124,7 @@
                </xsl:attribute>
                <svrl:text>leader-alignment="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'reference-area', 'page', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8137,7 +8156,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>leader-alignment="" should be EnumerationToken.</svrl:text>
+            <svrl:text>leader-alignment="" should be 'none', 'reference-area', 'page', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8171,7 +8190,7 @@
                </xsl:attribute>
                <svrl:text>leader-length="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8203,7 +8222,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>leader-length="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>leader-length="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8237,7 +8256,7 @@
                </xsl:attribute>
                <svrl:text>leader-pattern="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'space', 'rule', 'dots', 'use-content', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8269,7 +8288,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>leader-pattern="" should be EnumerationToken.</svrl:text>
+            <svrl:text>leader-pattern="" should be 'space', 'rule', 'dots', 'use-content', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8304,7 +8323,7 @@
                </xsl:attribute>
                <svrl:text>leader-pattern-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'use-font-metrics', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8336,7 +8355,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>leader-pattern-width="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>leader-pattern-width="" should be 'use-font-metrics', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8370,7 +8389,7 @@
                </xsl:attribute>
                <svrl:text>left="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8402,7 +8421,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>left="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>left="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8436,7 +8455,7 @@
                </xsl:attribute>
                <svrl:text>letter-spacing="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'normal', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8468,7 +8487,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>letter-spacing="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>letter-spacing="" should be 'normal', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8502,7 +8521,7 @@
                </xsl:attribute>
                <svrl:text>letter-value="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'alphabetic', or 'traditional'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8534,7 +8553,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>letter-value="" should be EnumerationToken.</svrl:text>
+            <svrl:text>letter-value="" should be 'auto', 'alphabetic', or 'traditional'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8568,7 +8587,7 @@
                </xsl:attribute>
                <svrl:text>line-height="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, Number, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'normal', 'inherit', Length, Number, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8600,7 +8619,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>line-height="" should be EnumerationToken, Length, Number, or Percent.</svrl:text>
+            <svrl:text>line-height="" should be 'normal', 'inherit', Length, Number, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8637,7 +8656,7 @@
                </xsl:attribute>
                <svrl:text>line-height-shift-adjustment="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'consider-shifts', 'disregard-shifts', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8669,7 +8688,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>line-height-shift-adjustment="" should be EnumerationToken.</svrl:text>
+            <svrl:text>line-height-shift-adjustment="" should be 'consider-shifts', 'disregard-shifts', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8704,7 +8723,7 @@
                </xsl:attribute>
                <svrl:text>line-stacking-strategy="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'line-height', 'font-height', 'max-height', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8736,7 +8755,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>line-stacking-strategy="" should be EnumerationToken.</svrl:text>
+            <svrl:text>line-stacking-strategy="" should be 'line-height', 'font-height', 'max-height', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8771,7 +8790,7 @@
                </xsl:attribute>
                <svrl:text>linefeed-treatment="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8803,7 +8822,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>linefeed-treatment="" should be EnumerationToken.</svrl:text>
+            <svrl:text>linefeed-treatment="" should be 'ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8853,7 +8872,7 @@
                </xsl:attribute>
                <svrl:text>margin-bottom="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8885,7 +8904,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>margin-bottom="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>margin-bottom="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8919,7 +8938,7 @@
                </xsl:attribute>
                <svrl:text>margin-left="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8951,7 +8970,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>margin-left="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>margin-left="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8985,7 +9004,7 @@
                </xsl:attribute>
                <svrl:text>margin-right="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -9017,7 +9036,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>margin-right="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>margin-right="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9051,7 +9070,7 @@
                </xsl:attribute>
                <svrl:text>margin-top="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -9083,7 +9102,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>margin-top="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>margin-top="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9304,7 +9323,7 @@
                </xsl:attribute>
                <svrl:text>maximum-repeats="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Number or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Number, 'no-limit', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -9336,7 +9355,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>maximum-repeats="" should be Number or EnumerationToken.</svrl:text>
+            <svrl:text>maximum-repeats="" should be Number, 'no-limit', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9370,7 +9389,7 @@
                </xsl:attribute>
                <svrl:text>media-usage="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'paginate', 'bounded-in-one-dimension', or 'unbounded'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -9402,7 +9421,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>media-usage="" should be EnumerationToken.</svrl:text>
+            <svrl:text>media-usage="" should be 'auto', 'paginate', 'bounded-in-one-dimension', or 'unbounded'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9439,7 +9458,7 @@
                </xsl:attribute>
                <svrl:text>merge-pages-across-index-key-references="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'merge' or 'leave-separate'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -9471,7 +9490,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>merge-pages-across-index-key-references="" should be EnumerationToken.</svrl:text>
+            <svrl:text>merge-pages-across-index-key-references="" should be 'merge' or 'leave-separate'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9508,7 +9527,7 @@
                </xsl:attribute>
                <svrl:text>merge-ranges-across-index-key-references="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'merge' or 'leave-separate'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -9540,7 +9559,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>merge-ranges-across-index-key-references="" should be EnumerationToken.</svrl:text>
+            <svrl:text>merge-ranges-across-index-key-references="" should be 'merge' or 'leave-separate'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9577,7 +9596,7 @@
                </xsl:attribute>
                <svrl:text>merge-sequential-page-numbers="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'merge' or 'leave-separate'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -9609,7 +9628,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>merge-sequential-page-numbers="" should be EnumerationToken.</svrl:text>
+            <svrl:text>merge-sequential-page-numbers="" should be 'merge' or 'leave-separate'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9831,7 +9850,7 @@
                </xsl:attribute>
                <svrl:text>odd-or-even="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'odd', 'even', 'any', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -9863,7 +9882,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>odd-or-even="" should be EnumerationToken.</svrl:text>
+            <svrl:text>odd-or-even="" should be 'odd', 'even', 'any', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9897,7 +9916,7 @@
                </xsl:attribute>
                <svrl:text>orphans="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Number or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Number or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -9929,7 +9948,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>orphans="" should be Number or EnumerationToken.</svrl:text>
+            <svrl:text>orphans="" should be Number or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9963,7 +9982,7 @@
                </xsl:attribute>
                <svrl:text>overflow="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'visible', 'hidden', 'scroll', 'error-if-overflow', 'repeat', 'replace', 'condense', or 'auto'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -9995,7 +10014,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>overflow="" should be EnumerationToken.</svrl:text>
+            <svrl:text>overflow="" should be 'visible', 'hidden', 'scroll', 'error-if-overflow', 'repeat', 'replace', 'condense', or 'auto'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10045,7 +10064,7 @@
                </xsl:attribute>
                <svrl:text>padding-after="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10077,7 +10096,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>padding-after="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>padding-after="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10111,7 +10130,7 @@
                </xsl:attribute>
                <svrl:text>padding-before="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10143,7 +10162,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>padding-before="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>padding-before="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10177,7 +10196,7 @@
                </xsl:attribute>
                <svrl:text>padding-bottom="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10209,7 +10228,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>padding-bottom="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>padding-bottom="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10243,7 +10262,7 @@
                </xsl:attribute>
                <svrl:text>padding-end="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10275,7 +10294,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>padding-end="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>padding-end="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10309,7 +10328,7 @@
                </xsl:attribute>
                <svrl:text>padding-left="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10341,7 +10360,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>padding-left="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>padding-left="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10375,7 +10394,7 @@
                </xsl:attribute>
                <svrl:text>padding-right="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10407,7 +10426,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>padding-right="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>padding-right="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10441,7 +10460,7 @@
                </xsl:attribute>
                <svrl:text>padding-start="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10473,7 +10492,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>padding-start="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>padding-start="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10507,7 +10526,7 @@
                </xsl:attribute>
                <svrl:text>padding-top="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10539,7 +10558,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>padding-top="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>padding-top="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10625,7 +10644,7 @@
                </xsl:attribute>
                <svrl:text>page-citation-strategy="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'all', 'normal', 'non-blank', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10657,7 +10676,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>page-citation-strategy="" should be EnumerationToken.</svrl:text>
+            <svrl:text>page-citation-strategy="" should be 'all', 'normal', 'non-blank', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10691,7 +10710,7 @@
                </xsl:attribute>
                <svrl:text>page-height="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'indefinite', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10723,7 +10742,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>page-height="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>page-height="" should be 'auto', 'indefinite', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10758,7 +10777,7 @@
                </xsl:attribute>
                <svrl:text>page-number-treatment="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'link' or 'no-link'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10790,7 +10809,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>page-number-treatment="" should be EnumerationToken.</svrl:text>
+            <svrl:text>page-number-treatment="" should be 'link' or 'no-link'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10824,7 +10843,7 @@
                </xsl:attribute>
                <svrl:text>page-position="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'only', 'first', 'last', 'rest', 'any', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10856,7 +10875,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>page-position="" should be EnumerationToken.</svrl:text>
+            <svrl:text>page-position="" should be 'only', 'first', 'last', 'rest', 'any', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10890,7 +10909,7 @@
                </xsl:attribute>
                <svrl:text>page-width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'indefinite', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -10922,7 +10941,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>page-width="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>page-width="" should be 'auto', 'indefinite', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10988,7 +11007,7 @@
                </xsl:attribute>
                <svrl:text>precedence="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'true', 'false', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11020,7 +11039,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>precedence="" should be EnumerationToken.</svrl:text>
+            <svrl:text>precedence="" should be 'true', 'false', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11057,7 +11076,7 @@
                </xsl:attribute>
                <svrl:text>provisional-distance-between-starts="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11089,7 +11108,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>provisional-distance-between-starts="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>provisional-distance-between-starts="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11126,7 +11145,7 @@
                </xsl:attribute>
                <svrl:text>provisional-label-separation="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11158,7 +11177,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>provisional-label-separation="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>provisional-label-separation="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11241,7 +11260,7 @@
                </xsl:attribute>
                <svrl:text>region-name="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'xsl-region-body', 'xsl-region-start', 'xsl-region-end', 'xsl-region-before', or 'xsl-region-after'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11258,7 +11277,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>region-name="" should be EnumerationToken.</svrl:text>
+            <svrl:text>region-name="" should be 'xsl-region-body', 'xsl-region-start', 'xsl-region-end', 'xsl-region-before', or 'xsl-region-after'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11344,7 +11363,7 @@
                </xsl:attribute>
                <svrl:text>relative-align="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'before', 'baseline', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11376,7 +11395,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>relative-align="" should be EnumerationToken.</svrl:text>
+            <svrl:text>relative-align="" should be 'before', 'baseline', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11411,7 +11430,7 @@
                </xsl:attribute>
                <svrl:text>relative-position="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'static', 'relative', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11443,7 +11462,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>relative-position="" should be EnumerationToken.</svrl:text>
+            <svrl:text>relative-position="" should be 'static', 'relative', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11478,7 +11497,7 @@
                </xsl:attribute>
                <svrl:text>rendering-intent="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11510,7 +11529,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>rendering-intent="" should be EnumerationToken.</svrl:text>
+            <svrl:text>rendering-intent="" should be 'auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11545,7 +11564,7 @@
                </xsl:attribute>
                <svrl:text>retrieve-boundary="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'page', 'page-sequence', or 'document'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11577,7 +11596,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>retrieve-boundary="" should be EnumerationToken.</svrl:text>
+            <svrl:text>retrieve-boundary="" should be 'page', 'page-sequence', or 'document'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11614,7 +11633,7 @@
                </xsl:attribute>
                <svrl:text>retrieve-boundary-within-table="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'table', 'table-fragment', or 'page'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11646,7 +11665,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>retrieve-boundary-within-table="" should be EnumerationToken.</svrl:text>
+            <svrl:text>retrieve-boundary-within-table="" should be 'table', 'table-fragment', or 'page'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11733,7 +11752,7 @@
                </xsl:attribute>
                <svrl:text>retrieve-position="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', or 'last-ending-within-page'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11765,7 +11784,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>retrieve-position="" should be EnumerationToken.</svrl:text>
+            <svrl:text>retrieve-position="" should be 'first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', or 'last-ending-within-page'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11802,7 +11821,7 @@
                </xsl:attribute>
                <svrl:text>retrieve-position-within-table="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'first-starting', 'first-including-carryover', 'last-starting', or 'last-ending'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11834,7 +11853,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>retrieve-position-within-table="" should be EnumerationToken.</svrl:text>
+            <svrl:text>retrieve-position-within-table="" should be 'first-starting', 'first-including-carryover', 'last-starting', or 'last-ending'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11868,7 +11887,7 @@
                </xsl:attribute>
                <svrl:text>right="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11900,7 +11919,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>right="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>right="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11950,7 +11969,7 @@
                </xsl:attribute>
                <svrl:text>rule-style="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -11982,7 +12001,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>rule-style="" should be EnumerationToken.</svrl:text>
+            <svrl:text>rule-style="" should be 'none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12067,7 +12086,7 @@
                </xsl:attribute>
                <svrl:text>scale-option="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'width', 'height', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12099,7 +12118,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>scale-option="" should be EnumerationToken.</svrl:text>
+            <svrl:text>scale-option="" should be 'width', 'height', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12133,7 +12152,7 @@
                </xsl:attribute>
                <svrl:text>scaling="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'uniform', 'non-uniform', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12165,7 +12184,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>scaling="" should be EnumerationToken.</svrl:text>
+            <svrl:text>scaling="" should be 'uniform', 'non-uniform', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12199,7 +12218,7 @@
                </xsl:attribute>
                <svrl:text>scaling-method="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'integer-pixels', 'resample-any-method', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12231,7 +12250,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>scaling-method="" should be EnumerationToken.</svrl:text>
+            <svrl:text>scaling-method="" should be 'auto', 'integer-pixels', 'resample-any-method', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12265,7 +12284,7 @@
                </xsl:attribute>
                <svrl:text>score-spaces="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'true', 'false', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12297,7 +12316,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>score-spaces="" should be EnumerationToken.</svrl:text>
+            <svrl:text>score-spaces="" should be 'true', 'false', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12331,7 +12350,7 @@
                </xsl:attribute>
                <svrl:text>script="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Literal.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'auto', 'inherit', or Literal.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12363,7 +12382,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>script="" should be EnumerationToken or Literal.</svrl:text>
+            <svrl:text>script="" should be 'none', 'auto', 'inherit', or Literal.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12398,7 +12417,7 @@
                </xsl:attribute>
                <svrl:text>show-destination="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'replace' or 'new'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12430,7 +12449,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>show-destination="" should be EnumerationToken.</svrl:text>
+            <svrl:text>show-destination="" should be 'replace' or 'new'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12480,7 +12499,7 @@
                </xsl:attribute>
                <svrl:text>source-document="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be URI or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be URI, 'none', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12512,7 +12531,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>source-document="" should be URI or EnumerationToken.</svrl:text>
+            <svrl:text>source-document="" should be URI, 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12546,7 +12565,7 @@
                </xsl:attribute>
                <svrl:text>space-after="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12578,7 +12597,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>space-after="" should be Length or EnumerationToken.</svrl:text>
+            <svrl:text>space-after="" should be Length or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12612,7 +12631,7 @@
                </xsl:attribute>
                <svrl:text>space-before="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12644,7 +12663,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>space-before="" should be Length or EnumerationToken.</svrl:text>
+            <svrl:text>space-before="" should be Length or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12678,7 +12697,7 @@
                </xsl:attribute>
                <svrl:text>space-end="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12710,7 +12729,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>space-end="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>space-end="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12744,7 +12763,7 @@
                </xsl:attribute>
                <svrl:text>space-start="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12776,7 +12795,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>space-start="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>space-start="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12810,7 +12829,7 @@
                </xsl:attribute>
                <svrl:text>span="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'all', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12842,7 +12861,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>span="" should be EnumerationToken.</svrl:text>
+            <svrl:text>span="" should be 'none', 'all', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12892,7 +12911,7 @@
                </xsl:attribute>
                <svrl:text>start-indent="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12924,7 +12943,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>start-indent="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>start-indent="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12958,7 +12977,7 @@
                </xsl:attribute>
                <svrl:text>starting-state="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'show' or 'hide'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -12990,7 +13009,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>starting-state="" should be EnumerationToken.</svrl:text>
+            <svrl:text>starting-state="" should be 'show' or 'hide'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13024,7 +13043,7 @@
                </xsl:attribute>
                <svrl:text>starts-row="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13056,7 +13075,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>starts-row="" should be EnumerationToken.</svrl:text>
+            <svrl:text>starts-row="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13091,7 +13110,7 @@
                </xsl:attribute>
                <svrl:text>suppress-at-line-break="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'suppress', 'retain', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13123,7 +13142,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>suppress-at-line-break="" should be EnumerationToken.</svrl:text>
+            <svrl:text>suppress-at-line-break="" should be 'auto', 'suppress', 'retain', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13157,7 +13176,7 @@
                </xsl:attribute>
                <svrl:text>switch-to="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'xsl-preceding', 'xsl-following', or 'xsl-any'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13174,7 +13193,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>switch-to="" should be EnumerationToken.</svrl:text>
+            <svrl:text>switch-to="" should be 'xsl-preceding', 'xsl-following', or 'xsl-any'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13208,7 +13227,7 @@
                </xsl:attribute>
                <svrl:text>table-layout="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'fixed', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13240,7 +13259,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>table-layout="" should be EnumerationToken.</svrl:text>
+            <svrl:text>table-layout="" should be 'auto', 'fixed', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13275,7 +13294,7 @@
                </xsl:attribute>
                <svrl:text>table-omit-footer-at-break="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13307,7 +13326,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>table-omit-footer-at-break="" should be EnumerationToken.</svrl:text>
+            <svrl:text>table-omit-footer-at-break="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13342,7 +13361,7 @@
                </xsl:attribute>
                <svrl:text>table-omit-header-at-break="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13374,7 +13393,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>table-omit-header-at-break="" should be EnumerationToken.</svrl:text>
+            <svrl:text>table-omit-header-at-break="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13409,7 +13428,7 @@
                </xsl:attribute>
                <svrl:text>target-presentation-context="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or URI.  '<xsl:text/>
+                  <xsl:text/>" should be 'use-target-processing-context' or URI.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13441,7 +13460,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>target-presentation-context="" should be EnumerationToken or URI.</svrl:text>
+            <svrl:text>target-presentation-context="" should be 'use-target-processing-context' or URI.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13476,7 +13495,7 @@
                </xsl:attribute>
                <svrl:text>target-processing-context="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or URI.  '<xsl:text/>
+                  <xsl:text/>" should be 'document-root' or URI.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13508,7 +13527,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>target-processing-context="" should be EnumerationToken or URI.</svrl:text>
+            <svrl:text>target-processing-context="" should be 'document-root' or URI.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13543,7 +13562,7 @@
                </xsl:attribute>
                <svrl:text>target-stylesheet="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or URI.  '<xsl:text/>
+                  <xsl:text/>" should be 'use-normal-stylesheet' or URI.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13575,7 +13594,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>target-stylesheet="" should be EnumerationToken or URI.</svrl:text>
+            <svrl:text>target-stylesheet="" should be 'use-normal-stylesheet' or URI.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13625,7 +13644,7 @@
                </xsl:attribute>
                <svrl:text>text-align-last="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'relative', 'start', 'center', 'end', 'justify', 'inside', 'outside', 'left', 'right', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13657,7 +13676,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>text-align-last="" should be EnumerationToken.</svrl:text>
+            <svrl:text>text-align-last="" should be 'relative', 'start', 'center', 'end', 'justify', 'inside', 'outside', 'left', 'right', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13691,7 +13710,7 @@
                </xsl:attribute>
                <svrl:text>text-altitude="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'use-font-metrics', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13723,7 +13742,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>text-altitude="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>text-altitude="" should be 'use-font-metrics', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13757,7 +13776,7 @@
                </xsl:attribute>
                <svrl:text>text-decoration="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13789,7 +13808,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>text-decoration="" should be EnumerationToken.</svrl:text>
+            <svrl:text>text-decoration="" should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13823,7 +13842,7 @@
                </xsl:attribute>
                <svrl:text>text-depth="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
+                  <xsl:text/>" should be 'use-font-metrics', 'inherit', Length, or Percent.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13855,7 +13874,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>text-depth="" should be EnumerationToken, Length, or Percent.</svrl:text>
+            <svrl:text>text-depth="" should be 'use-font-metrics', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13889,7 +13908,7 @@
                </xsl:attribute>
                <svrl:text>text-indent="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13921,7 +13940,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>text-indent="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>text-indent="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13955,7 +13974,7 @@
                </xsl:attribute>
                <svrl:text>text-shadow="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken, Color, or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'inherit', Color, or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -13972,7 +13991,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>text-shadow="" should be EnumerationToken, Color, or Length.</svrl:text>
+            <svrl:text>text-shadow="" should be 'none', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'inherit', Color, or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14006,7 +14025,7 @@
                </xsl:attribute>
                <svrl:text>text-transform="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14038,7 +14057,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>text-transform="" should be EnumerationToken.</svrl:text>
+            <svrl:text>text-transform="" should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14072,7 +14091,7 @@
                </xsl:attribute>
                <svrl:text>top="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14104,7 +14123,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>top="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>top="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14139,7 +14158,7 @@
                </xsl:attribute>
                <svrl:text>treat-as-word-space="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'true', 'false', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14171,7 +14190,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>treat-as-word-space="" should be EnumerationToken.</svrl:text>
+            <svrl:text>treat-as-word-space="" should be 'auto', 'true', 'false', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14205,7 +14224,7 @@
                </xsl:attribute>
                <svrl:text>unicode-bidi="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'normal', 'embed', 'bidi-override', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14237,7 +14256,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>unicode-bidi="" should be EnumerationToken.</svrl:text>
+            <svrl:text>unicode-bidi="" should be 'normal', 'embed', 'bidi-override', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14287,7 +14306,7 @@
                </xsl:attribute>
                <svrl:text>visibility="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'visible', 'hidden', 'collapse', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14319,7 +14338,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>visibility="" should be EnumerationToken.</svrl:text>
+            <svrl:text>visibility="" should be 'visible', 'hidden', 'collapse', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14370,7 +14389,7 @@
                </xsl:attribute>
                <svrl:text>white-space-collapse="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'false', 'true', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14402,7 +14421,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>white-space-collapse="" should be EnumerationToken.</svrl:text>
+            <svrl:text>white-space-collapse="" should be 'false', 'true', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14437,7 +14456,7 @@
                </xsl:attribute>
                <svrl:text>white-space-treatment="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14469,7 +14488,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>white-space-treatment="" should be EnumerationToken.</svrl:text>
+            <svrl:text>white-space-treatment="" should be 'ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14503,7 +14522,7 @@
                </xsl:attribute>
                <svrl:text>widows="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Number or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Number or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14535,7 +14554,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>widows="" should be Number or EnumerationToken.</svrl:text>
+            <svrl:text>widows="" should be Number or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14569,7 +14588,7 @@
                </xsl:attribute>
                <svrl:text>width="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Length, Percent, or EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14601,7 +14620,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>width="" should be Length, Percent, or EnumerationToken.</svrl:text>
+            <svrl:text>width="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14635,7 +14654,7 @@
                </xsl:attribute>
                <svrl:text>word-spacing="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:text/>" should be 'normal', 'inherit', or Length.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14667,7 +14686,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>word-spacing="" should be EnumerationToken or Length.</svrl:text>
+            <svrl:text>word-spacing="" should be 'normal', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14701,7 +14720,7 @@
                </xsl:attribute>
                <svrl:text>wrap-option="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'no-wrap', 'wrap', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14733,7 +14752,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>wrap-option="" should be EnumerationToken.</svrl:text>
+            <svrl:text>wrap-option="" should be 'no-wrap', 'wrap', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14767,7 +14786,7 @@
                </xsl:attribute>
                <svrl:text>writing-mode="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
+                  <xsl:text/>" should be 'lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14799,7 +14818,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>writing-mode="" should be EnumerationToken.</svrl:text>
+            <svrl:text>writing-mode="" should be 'lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14849,7 +14868,7 @@
                </xsl:attribute>
                <svrl:text>z-index="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'inherit', or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -14881,7 +14900,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>z-index="" should be EnumerationToken or Number.</svrl:text>
+            <svrl:text>z-index="" should be 'auto', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
