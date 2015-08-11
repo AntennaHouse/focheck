@@ -204,5 +204,12 @@
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: scaling="<value-of select="."/>"</report>
 	</rule>
 
+	<!-- overflow -->
+	<!-- visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto -->
+	<!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.overflow -->
+	<rule context="fo:*/@overflow">
+	  <report test=". = ('replace', 'condense') and not(local-name(..) = ('block-container', 'inline-container'))">overflow="<value-of select="."/>" applies only on fo:block-container or fo:inline-container.</report>
+	</rule>
+
     </pattern>
 </schema>
