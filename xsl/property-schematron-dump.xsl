@@ -249,6 +249,19 @@ text-align
                                                    then ('Color', 'EnumerationToken')
                                                  else $datatype)"
                 as="xs:string+" />
+
+            <!-- Enumeration tokens, if any, allowed for property. -->
+            <xsl:variable name="enum-tokens" as="xs:string*">
+              <xsl:call-template name="values-to-enum-report">
+                <xsl:with-param
+                    name="values"
+                    select="normalize-space($values)"/>
+                <xsl:with-param
+                    name="property"
+                    select="$property"/>
+              </xsl:call-template>
+            </xsl:variable>
+
             <assert
                 test="local-name($expression) = ('{string-join(($use-datatypes,
                                                                 'EMPTY',
@@ -260,24 +273,14 @@ text-align
               <value-of select="." />
               <xsl:text>" should be </xsl:text>
               <xsl:value-of
-                  select="ahf:allowed-datatypes-text($use-datatypes)" />
+                  select="ahf:allowed-datatypes-text($use-datatypes,
+                                                     $enum-tokens)" />
               <xsl:text>.  '</xsl:text>
               <value-of select="." />
               <xsl:text>' is a </xsl:text>
               <value-of select="local-name($expression)" />
               <xsl:text>.</xsl:text>
             </assert>
-
-            <xsl:variable name="enum-tokens" as="xs:string*">
-              <xsl:call-template name="values-to-enum-report">
-                <xsl:with-param
-                    name="values"
-                    select="normalize-space($values)"/>
-                <xsl:with-param
-                    name="property"
-                    select="$property"/>
-              </xsl:call-template>
-            </xsl:variable>
 
             <xsl:if test="exists($enum-tokens) and
                           not($datatypes = ('Color', 'NCName'))">
@@ -313,7 +316,8 @@ text-align
               <xsl:value-of select="$property" />
               <xsl:text>="" should be </xsl:text>
               <xsl:value-of
-                  select="ahf:allowed-datatypes-text($use-datatypes)" />
+                  select="ahf:allowed-datatypes-text($use-datatypes,
+                                                     $enum-tokens)" />
               <xsl:text>.</xsl:text>
             </report>
             <report test="local-name($expression) = 'ERROR'">

@@ -277,9 +277,20 @@
      false() if not. -->
 <xsl:function name="ahf:allowed-datatypes-text" as="xs:string">
   <xsl:param name="datatypes" as="xs:string+" />
+  <xsl:param name="enum-tokens" as="xs:string*" />
+
+  <xsl:variable
+      name="use-datatypes"
+      select="for $datatype in $datatypes
+                return if ($datatype eq 'EnumerationToken' and
+                           exists($enum-tokens))
+                         then for $token in $enum-tokens
+                                return concat('''', $token, '''')
+                       else $datatype"
+      as="xs:string+" />
 
   <xsl:value-of separator="">
-    <xsl:for-each select="$datatypes">
+    <xsl:for-each select="$use-datatypes">
       <xsl:value-of select="if (position() > 1)
                               then (if (last() > 2)
                                       then ','
