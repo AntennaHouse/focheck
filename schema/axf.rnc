@@ -156,14 +156,23 @@ fo_page-sequence.attlist &=
     axf_background-image,
     axf_background-position-horizontal,
     axf_background-position-vertical,
-    axf_background-repeat
+    axf_background-repeat,
+    background-color,
+    background-image,
+    background-position-horizontal,
+    background-position-vertical,
+    background-repeat
 
 fo_simple-page-master.attlist &=
     axf_background-color,
+    axf_background-content-height,
+    axf_background-content-type,
+    axf_background-content-width,
     axf_background-image,
     axf_background-position-horizontal,
     axf_background-position-vertical,
     axf_background-repeat,
+    axf_background-scaling,
     axf_bleed,
     axf_bleed-top,
     axf_bleed-bottom,
@@ -180,7 +189,12 @@ fo_simple-page-master.attlist &=
     axf_printer-marks-line-length,
     axf_printer-marks-line-width,
     axf_printer-marks-spine-width,
-    axf_printer-marks-zero-margin
+    axf_printer-marks-zero-margin,
+    background-color,
+    background-image,
+    background-position-horizontal,
+    background-position-vertical,
+    background-repeat
 
 fo_basic-link.attlist &=
     axf_action-type,
