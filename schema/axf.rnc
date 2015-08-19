@@ -83,7 +83,7 @@ non-xsl =
     element * - ( local:* | fo:* | axf:* ) { attribute * { text }*, anything }* )
 
 #
-# End of overrides to patterns in 'fo-inherited.rnc'.
+# End of overrides to patterns in 'axf-inherited.rnc'.
 #
 }
 
