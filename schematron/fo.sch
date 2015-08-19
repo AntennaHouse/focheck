@@ -136,6 +136,11 @@
   <rule context="fo:*/@region-name">
     <!-- http://www.w3.org/TR/xsl11/#region-name -->
     <assert test="count(distinct-values(for $fo in key('region-name', .) return local-name($fo))) = 1" role="Warning">region-name="<value-of select="."/>" should only be used with regions of the same class.</assert>
+    <assert test="not(. eq 'xsl-region-body') or local-name(..) eq 'region-body'">region-name="<value-of select="."/>" should only be used with fo:region-body.</assert>
+    <assert test="not(. eq 'xsl-region-start') or local-name(..) eq 'region-start'">region-name="<value-of select="."/>" should only be used with fo:region-start.</assert>
+    <assert test="not(. eq 'xsl-region-end') or local-name(..) eq 'region-end'">region-name="<value-of select="."/>" should only be used with fo:region-end.</assert>
+    <assert test="not(. eq 'xsl-region-before') or local-name(..) eq 'region-before'">region-name="<value-of select="."/>" should only be used with fo:region-before.</assert>
+    <assert test="not(. eq 'xsl-region-after') or local-name(..) eq 'region-after'">region-name="<value-of select="."/>" should only be used with fo:region-after.</assert>
   </rule>
 
   <rule context="fo:*/@region-name-reference">
