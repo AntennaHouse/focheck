@@ -217,8 +217,9 @@ text-align
       <xsl:text>&#10;   </xsl:text>
       <rule context="fo:*/@{$property}">
         <xsl:choose>
-          <xsl:when test="$property = $skipped-properties-list or
-                          ahf:is-shorthand($property)">
+          <xsl:when test="($property = $skipped-properties-list or
+                           ahf:is-shorthand($property)) and
+                          not($initial-value eq 'empty string')">
             <report test=". eq ''" role="Warning">
               <xsl:value-of select="$property" />
               <xsl:text>="" should be '</xsl:text>
@@ -291,9 +292,7 @@ text-align
                 <xsl:value-of select="$property" />
                 <xsl:text>="</xsl:text>
                 <value-of select="." />
-                <xsl:text>" enumeration token is '</xsl:text>
-                <value-of select="$expression/@token"/>
-                <xsl:text>'.  Token should be </xsl:text>
+                <xsl:text>" token should be </xsl:text>
                 <xsl:for-each select="$enum-tokens">
                   <xsl:value-of select="if (position() > 1)
                                           then (if (last() > 2)
@@ -308,18 +307,22 @@ text-align
                   <xsl:value-of select="." />
                   <xsl:text>'</xsl:text>
                 </xsl:for-each>
+                <xsl:text>. Enumeration token is '</xsl:text>
+                <value-of select="$expression/@token"/>
+                <xsl:text>'.</xsl:text>
+              </report>
+            </xsl:if>
+            <xsl:if test="not($initial-value eq 'empty string')">
+              <report test="local-name($expression) = 'EMPTY'"
+                      role="Warning">
+                <xsl:value-of select="$property" />
+                <xsl:text>="" should be </xsl:text>
+                <xsl:value-of
+                    select="ahf:allowed-datatypes-text($use-datatypes,
+                                                       $enum-tokens)" />
                 <xsl:text>.</xsl:text>
               </report>
             </xsl:if>
-            <report test="local-name($expression) = 'EMPTY'"
-                    role="Warning">
-              <xsl:value-of select="$property" />
-              <xsl:text>="" should be </xsl:text>
-              <xsl:value-of
-                  select="ahf:allowed-datatypes-text($use-datatypes,
-                                                     $enum-tokens)" />
-              <xsl:text>.</xsl:text>
-            </report>
             <report test="local-name($expression) = 'ERROR'">
               <xsl:text>Syntax error: </xsl:text>
               <xsl:value-of select="$property" />
