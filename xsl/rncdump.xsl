@@ -406,7 +406,7 @@ fo_</xsl:text>
                   then 'xsd:NCName'
                 else if ($values eq '&lt;id>')
                   then 'xsd:ID'
-                else if ($values eq '&lt;idref>')
+                else if (contains($values, '&lt;idref>'))
                   then 'xsd:IDREF'
                 else if ($att-name eq 'xml:lang')
                   then 'xsd:language'
@@ -468,7 +468,7 @@ fo_</xsl:text>
 # For fo:instream-foreign-object
 anything =
    ( element * {
-        attribute * - id { text }*,
+        attribute * - (id | ref-id | internal-destination ) { text }*,
         anything } |
      text )*
 
@@ -482,7 +482,7 @@ non-xsl-element =
 
 # From http://www.w3.org/TR/xsl/#fo_wrapper:
 #
-#    An fo:wrapper is only permitted to have children that would be #
+#    An fo:wrapper is only permitted to have children that would be
 #    permitted to be children of the parent of the fo:wrapper
 #
 fo_wrapper.block =
