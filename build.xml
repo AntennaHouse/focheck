@@ -376,7 +376,7 @@
 		prefix="${ant.project.name}/schema/rng" />
     <zipfileset dir="schematron" includes="*.sch"
 		prefix="${ant.project.name}/schematron" />
-    <zipfileset dir="template" includes="*.xml, *.fo"
+    <zipfileset dir="template" includes="*.xml, *.fo, *.properties"
 		prefix="${ant.project.name}/template" />
     <zipfileset dir="xsl"
 		includes="parser-runner.xsl,
