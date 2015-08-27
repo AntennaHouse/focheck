@@ -170,7 +170,7 @@
 									<null/>
 								</field>
 								<field name="name">
-									<String>AH Formatter</String>
+									<String>Antenna House Formatter</String>
 								</field>
 								<field name="baseURL">
 									<String></String>
@@ -256,7 +256,7 @@
 									<null/>
 								</field>
 								<field name="name">
-									<String>AH Formatter GUI</String>
+									<String>Antenna House Formatter GUI</String>
 								</field>
 								<field name="baseURL">
 									<String></String>
@@ -450,7 +450,7 @@
 					</field>
 					<field name="defaultTransformationScenarios">
 						<list>
-							<String>AH Formatter</String>
+							<String>Antenna House Formatter</String>
 						</list>
 					</field>
 					<field name="extensionsBundleClassName">
