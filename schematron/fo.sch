@@ -21,6 +21,11 @@
 
   <!-- FOs -->
 
+  <rule context="fo:basic-link">
+    <!-- http://www.w3.org/TR/xsl/#fo_basic-link -->
+    <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning">An '<value-of select="local-name()" />' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</report>
+  </rule>
+
   <rule context="fo:float">
     <!-- http://www.w3.org/TR/xsl/#d0e6532 -->
     <report test="exists(ancestor::fo:float) or exists(ancestor::fo:footnote)">An '<value-of select="local-name()" />' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
@@ -91,9 +96,11 @@
 		       'xsl-region-start',
 		       'xsl-region-end',
 		       'xsl-region-before',
-		       'xsl-region-after')) and
+		       'xsl-region-after',
+		       'xsl-footnote-separator',
+		       'xsl-before-float-separator')) and
               empty(key('region-name', .)) and
-              empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])" role="Warning">flow-name="<value-of select="."/>" does not match any named or default region-name or a flow-name-reference.</report>
+              empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])" role="Warning">flow-name="<value-of select="."/>" does not match any named or reserved region-name or a flow-name-reference.</report>
   </rule>
 
   <rule context="fo:*/@flow-name-reference">
