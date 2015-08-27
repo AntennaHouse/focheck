@@ -223,6 +223,26 @@
 
 
 	  <!--RULE -->
+   <xsl:template match="fo:basic-link" priority="1016" mode="M3">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:basic-link"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="exists(@internal-destination) and exists(@external-destination)">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="exists(@internal-destination) and exists(@external-destination)">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>An '<xsl:text/>
+               <xsl:value-of select="local-name()"/>
+               <xsl:text/>' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+      <xsl:apply-templates select="@*|*" mode="M3"/>
+   </xsl:template>
+
+	  <!--RULE -->
    <xsl:template match="fo:float" priority="1015" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:float"/>
 
@@ -258,14 +278,15 @@
          </svrl:successful-report>
       </xsl:if>
 
-		    <!--REPORT -->
+		    <!--REPORT Warning-->
       <xsl:if test="exists(ancestor::fo:block-container[@absolute-position = ('absolute', 'fixed')])">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="exists(ancestor::fo:block-container[@absolute-position = ('absolute', 'fixed')])">
+            <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>An 'fo:footnote' is not permitted as a descendant of an 'fo:block-container' that generates an absolutely positioned area.</svrl:text>
+            <svrl:text>An 'fo:footnote' that is a descendant of an 'fo:block-container' that generates an absolutely positioned area will be placed as normal block-level areas.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -445,16 +466,16 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="not(. = ('xsl-region-body',          'xsl-region-start',          'xsl-region-end',          'xsl-region-before',          'xsl-region-after')) and               empty(key('region-name', .)) and               empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])">
+      <xsl:if test="not(. = ('xsl-region-body',          'xsl-region-start',          'xsl-region-end',          'xsl-region-before',          'xsl-region-after',          'xsl-footnote-separator',          'xsl-before-float-separator')) and               empty(key('region-name', .)) and               empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="not(. = ('xsl-region-body', 'xsl-region-start', 'xsl-region-end', 'xsl-region-before', 'xsl-region-after')) and empty(key('region-name', .)) and empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])">
+                                 test="not(. = ('xsl-region-body', 'xsl-region-start', 'xsl-region-end', 'xsl-region-before', 'xsl-region-after', 'xsl-footnote-separator', 'xsl-before-float-separator')) and empty(key('region-name', .)) and empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
             <svrl:text>flow-name="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" does not match any named or default region-name or a flow-name-reference.</svrl:text>
+               <xsl:text/>" does not match any named or reserved region-name or a flow-name-reference.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -623,6 +644,20 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="count(key('master-name', .)) &gt; 1">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="count(key('master-name', .)) &gt; 1">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>master-reference="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" refers to multiple master-name within the document.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
    </xsl:template>
 
 	  <!--RULE -->
@@ -661,6 +696,86 @@
                <svrl:text>region-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should only be used with regions of the same class.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="not(. eq 'xsl-region-body') or local-name(..) eq 'region-body'"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="not(. eq 'xsl-region-body') or local-name(..) eq 'region-body'">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>region-name="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should only be used with fo:region-body.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="not(. eq 'xsl-region-start') or local-name(..) eq 'region-start'"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="not(. eq 'xsl-region-start') or local-name(..) eq 'region-start'">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>region-name="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should only be used with fo:region-start.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="not(. eq 'xsl-region-end') or local-name(..) eq 'region-end'"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="not(. eq 'xsl-region-end') or local-name(..) eq 'region-end'">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>region-name="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should only be used with fo:region-end.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="not(. eq 'xsl-region-before') or local-name(..) eq 'region-before'"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="not(. eq 'xsl-region-before') or local-name(..) eq 'region-before'">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>region-name="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should only be used with fo:region-before.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="not(. eq 'xsl-region-after') or local-name(..) eq 'region-after'"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="not(. eq 'xsl-region-after') or local-name(..) eq 'region-after'">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>region-name="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should only be used with fo:region-after.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
@@ -731,9 +846,9 @@
             </xsl:attribute>
             <svrl:text>absolute-position="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'absolute', 'fixed', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'absolute', 'fixed', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -797,9 +912,9 @@
             </xsl:attribute>
             <svrl:text>active-state="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'link', 'visited', 'active', 'hover', or 'focus'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'link', 'visited', 'active', 'hover', or 'focus'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -837,10 +952,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Percent', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Percent', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Percent', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Percent', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -864,9 +979,9 @@
             </xsl:attribute>
             <svrl:text>alignment-adjust="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -931,9 +1046,9 @@
             </xsl:attribute>
             <svrl:text>alignment-baseline="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -998,9 +1113,9 @@
             </xsl:attribute>
             <svrl:text>allowed-height-scale="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'any' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'any' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1065,9 +1180,9 @@
             </xsl:attribute>
             <svrl:text>allowed-width-scale="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'any' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'any' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1131,9 +1246,9 @@
             </xsl:attribute>
             <svrl:text>auto-restore="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'true' or 'false'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1214,9 +1329,9 @@
             </xsl:attribute>
             <svrl:text>background-attachment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'scroll', 'fixed', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'scroll', 'fixed', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1333,9 +1448,9 @@
             </xsl:attribute>
             <svrl:text>background-image="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1392,10 +1507,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1419,9 +1534,9 @@
             </xsl:attribute>
             <svrl:text>background-position-horizontal="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'left', 'center', 'right', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'left', 'center', 'right', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1461,10 +1576,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1488,9 +1603,9 @@
             </xsl:attribute>
             <svrl:text>background-position-vertical="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'top', 'center', 'bottom', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'top', 'center', 'bottom', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1555,9 +1670,9 @@
             </xsl:attribute>
             <svrl:text>background-repeat="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1594,10 +1709,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Percent', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Percent', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Percent', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Percent', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1621,9 +1736,9 @@
             </xsl:attribute>
             <svrl:text>baseline-shift="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'baseline', 'sub', 'super', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'baseline', 'sub', 'super', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1688,9 +1803,9 @@
             </xsl:attribute>
             <svrl:text>blank-or-not-blank="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'blank', 'not-blank', 'any', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'blank', 'not-blank', 'any', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1728,10 +1843,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -1755,9 +1870,9 @@
             </xsl:attribute>
             <svrl:text>block-progression-dimension="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1890,9 +2005,9 @@
             </xsl:attribute>
             <svrl:text>border-after-precedence="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'force' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'force' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1957,9 +2072,9 @@
             </xsl:attribute>
             <svrl:text>border-after-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -1997,10 +2112,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -2024,9 +2139,9 @@
             </xsl:attribute>
             <svrl:text>border-after-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'thin', 'medium', 'thick', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2143,9 +2258,9 @@
             </xsl:attribute>
             <svrl:text>border-before-precedence="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'force' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'force' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2210,9 +2325,9 @@
             </xsl:attribute>
             <svrl:text>border-before-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2250,10 +2365,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -2277,9 +2392,9 @@
             </xsl:attribute>
             <svrl:text>border-before-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'thin', 'medium', 'thick', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2412,9 +2527,9 @@
             </xsl:attribute>
             <svrl:text>border-bottom-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2452,10 +2567,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -2479,9 +2594,9 @@
             </xsl:attribute>
             <svrl:text>border-bottom-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'thin', 'medium', 'thick', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2545,9 +2660,9 @@
             </xsl:attribute>
             <svrl:text>border-collapse="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'collapse', 'collapse-with-precedence', 'separate', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'collapse', 'collapse-with-precedence', 'separate', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2680,9 +2795,9 @@
             </xsl:attribute>
             <svrl:text>border-end-precedence="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'force' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'force' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2747,9 +2862,9 @@
             </xsl:attribute>
             <svrl:text>border-end-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2787,10 +2902,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -2814,9 +2929,9 @@
             </xsl:attribute>
             <svrl:text>border-end-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'thin', 'medium', 'thick', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2949,9 +3064,9 @@
             </xsl:attribute>
             <svrl:text>border-left-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -2989,10 +3104,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -3016,9 +3131,9 @@
             </xsl:attribute>
             <svrl:text>border-left-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'thin', 'medium', 'thick', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3151,9 +3266,9 @@
             </xsl:attribute>
             <svrl:text>border-right-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3191,10 +3306,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -3218,9 +3333,9 @@
             </xsl:attribute>
             <svrl:text>border-right-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'thin', 'medium', 'thick', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3258,10 +3373,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -3285,9 +3400,9 @@
             </xsl:attribute>
             <svrl:text>border-separation="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3420,9 +3535,9 @@
             </xsl:attribute>
             <svrl:text>border-start-precedence="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'force' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'force' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3487,9 +3602,9 @@
             </xsl:attribute>
             <svrl:text>border-start-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3527,10 +3642,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -3554,9 +3669,9 @@
             </xsl:attribute>
             <svrl:text>border-start-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'thin', 'medium', 'thick', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3705,9 +3820,9 @@
             </xsl:attribute>
             <svrl:text>border-top-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3745,10 +3860,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -3772,9 +3887,9 @@
             </xsl:attribute>
             <svrl:text>border-top-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'thin', 'medium', 'thick', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3827,10 +3942,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -3854,9 +3969,9 @@
             </xsl:attribute>
             <svrl:text>bottom="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3920,9 +4035,9 @@
             </xsl:attribute>
             <svrl:text>break-after="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -3986,9 +4101,9 @@
             </xsl:attribute>
             <svrl:text>break-before="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4052,9 +4167,9 @@
             </xsl:attribute>
             <svrl:text>caption-side="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4298,10 +4413,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -4377,9 +4492,9 @@
             </xsl:attribute>
             <svrl:text>change-bar-placement="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'start', 'end', 'left', 'right', 'inside', 'outside', or 'alternate'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'start', 'end', 'left', 'right', 'inside', 'outside', or 'alternate'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4444,9 +4559,9 @@
             </xsl:attribute>
             <svrl:text>change-bar-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', or 'outset'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', or 'outset'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4484,10 +4599,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -4511,9 +4626,9 @@
             </xsl:attribute>
             <svrl:text>change-bar-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'thin', 'medium', or 'thick'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'thin', 'medium', or 'thick'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4628,9 +4743,9 @@
             </xsl:attribute>
             <svrl:text>clear="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'start', 'end', 'left', 'right', 'inside', 'outside', 'both', 'none', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'start', 'end', 'left', 'right', 'inside', 'outside', 'both', 'none', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4694,9 +4809,9 @@
             </xsl:attribute>
             <svrl:text>clip="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4863,9 +4978,9 @@
             </xsl:attribute>
             <svrl:text>column-count="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4902,10 +5017,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -4929,9 +5044,9 @@
             </xsl:attribute>
             <svrl:text>column-gap="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5019,10 +5134,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -5070,10 +5185,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -5097,9 +5212,9 @@
             </xsl:attribute>
             <svrl:text>content-height="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5163,9 +5278,9 @@
             </xsl:attribute>
             <svrl:text>content-type="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5202,10 +5317,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -5229,9 +5344,9 @@
             </xsl:attribute>
             <svrl:text>content-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5295,9 +5410,9 @@
             </xsl:attribute>
             <svrl:text>country="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5353,10 +5468,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -5431,9 +5546,9 @@
             </xsl:attribute>
             <svrl:text>direction="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'ltr', 'rtl', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'ltr', 'rtl', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5497,9 +5612,9 @@
             </xsl:attribute>
             <svrl:text>display-align="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'before', 'center', 'after', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'before', 'center', 'after', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5564,9 +5679,9 @@
             </xsl:attribute>
             <svrl:text>dominant-baseline="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5630,9 +5745,9 @@
             </xsl:attribute>
             <svrl:text>empty-cells="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'show', 'hide', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'show', 'hide', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5669,10 +5784,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -5696,9 +5811,9 @@
             </xsl:attribute>
             <svrl:text>end-indent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5762,9 +5877,9 @@
             </xsl:attribute>
             <svrl:text>ends-row="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'true' or 'false'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5801,10 +5916,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -5828,9 +5943,9 @@
             </xsl:attribute>
             <svrl:text>extent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -5864,15 +5979,53 @@
    <xsl:template match="fo:*/@external-destination" priority="1162" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@external-destination"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
-		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
-            <xsl:attribute name="role">Warning</xsl:attribute>
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'URI', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('EnumerationToken', 'URI', 'EMPTY', 'ERROR', 'Object')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>external-destination="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be 'empty', 'string', or URI.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT -->
+      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('empty', 'string'))">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('empty', 'string'))">
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>external-destination="" should be 'empty string | &lt;uri-specification&gt;'.</svrl:text>
+            <svrl:text>external-destination="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" token should be 'empty' or 'string'. Enumeration token is '<xsl:text/>
+               <xsl:value-of select="$expression/@token"/>
+               <xsl:text/>'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>Syntax error: external-destination="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5911,9 +6064,9 @@
             </xsl:attribute>
             <svrl:text>float="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'before', 'start', 'end', 'left', 'right', 'inside', 'outside', 'none', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'before', 'start', 'end', 'left', 'right', 'inside', 'outside', 'none', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6216,9 +6369,9 @@
             </xsl:attribute>
             <svrl:text>font-selection-strategy="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'character-by-character', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'character-by-character', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6255,10 +6408,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -6282,9 +6435,9 @@
             </xsl:attribute>
             <svrl:text>font-size="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6349,9 +6502,9 @@
             </xsl:attribute>
             <svrl:text>font-size-adjust="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6415,9 +6568,9 @@
             </xsl:attribute>
             <svrl:text>font-stretch="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6481,9 +6634,9 @@
             </xsl:attribute>
             <svrl:text>font-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'normal', 'italic', 'oblique', 'backslant', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'normal', 'italic', 'oblique', 'backslant', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6547,9 +6700,9 @@
             </xsl:attribute>
             <svrl:text>font-variant="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'normal', 'small-caps', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'normal', 'small-caps', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6613,9 +6766,9 @@
             </xsl:attribute>
             <svrl:text>font-weight="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'normal', 'bold', 'bolder', 'lighter', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'normal', 'bold', 'bolder', 'lighter', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6715,9 +6868,9 @@
             </xsl:attribute>
             <svrl:text>glyph-orientation-horizontal="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6782,9 +6935,9 @@
             </xsl:attribute>
             <svrl:text>glyph-orientation-vertical="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6924,10 +7077,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -6951,9 +7104,9 @@
             </xsl:attribute>
             <svrl:text>height="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7017,9 +7170,9 @@
             </xsl:attribute>
             <svrl:text>hyphenate="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'false', 'true', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'false', 'true', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7084,9 +7237,9 @@
             </xsl:attribute>
             <svrl:text>hyphenation-character="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7151,9 +7304,9 @@
             </xsl:attribute>
             <svrl:text>hyphenation-keep="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'column', 'page', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'column', 'page', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7218,9 +7371,9 @@
             </xsl:attribute>
             <svrl:text>hyphenation-ladder-count="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'no-limit' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'no-limit' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7287,9 +7440,9 @@
             </xsl:attribute>
             <svrl:text>hyphenation-push-character-count="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7356,9 +7509,9 @@
             </xsl:attribute>
             <svrl:text>hyphenation-remain-character-count="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7429,18 +7582,6 @@
          </xsl:otherwise>
       </xsl:choose>
 
-		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'EMPTY'">
-            <xsl:attribute name="role">Warning</xsl:attribute>
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>index-class="" should be Literal.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
 		    <!--REPORT -->
       <xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7506,9 +7647,9 @@
             </xsl:attribute>
             <svrl:text>indicate-destination="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'true' or 'false'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7573,9 +7714,9 @@
             </xsl:attribute>
             <svrl:text>initial-page-number="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'auto-odd', 'auto-even', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'auto-odd', 'auto-even', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7615,10 +7756,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -7642,9 +7783,9 @@
             </xsl:attribute>
             <svrl:text>inline-progression-dimension="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7678,15 +7819,53 @@
    <xsl:template match="fo:*/@internal-destination" priority="1128" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@internal-destination"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
-		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
-            <xsl:attribute name="role">Warning</xsl:attribute>
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>internal-destination="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be 'empty' or 'string'.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT -->
+      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('empty', 'string'))">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('empty', 'string'))">
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>internal-destination="" should be 'empty string | &lt;idref&gt;'.</svrl:text>
+            <svrl:text>internal-destination="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" token should be 'empty' or 'string'. Enumeration token is '<xsl:text/>
+               <xsl:value-of select="$expression/@token"/>
+               <xsl:text/>'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>Syntax error: internal-destination="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7726,9 +7905,9 @@
             </xsl:attribute>
             <svrl:text>intrinsic-scale-value="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7793,9 +7972,9 @@
             </xsl:attribute>
             <svrl:text>intrusion-displace="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'none', 'line', 'indent', 'block', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'none', 'line', 'indent', 'block', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7859,9 +8038,9 @@
             </xsl:attribute>
             <svrl:text>keep-together="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'always', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'always', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7925,9 +8104,9 @@
             </xsl:attribute>
             <svrl:text>keep-with-next="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'always', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'always', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -7992,9 +8171,9 @@
             </xsl:attribute>
             <svrl:text>keep-with-previous="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'always', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'always', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8048,10 +8227,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -8075,9 +8254,9 @@
             </xsl:attribute>
             <svrl:text>last-line-end-indent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8142,9 +8321,9 @@
             </xsl:attribute>
             <svrl:text>leader-alignment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'reference-area', 'page', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'reference-area', 'page', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8181,10 +8360,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -8208,9 +8387,9 @@
             </xsl:attribute>
             <svrl:text>leader-length="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8274,9 +8453,9 @@
             </xsl:attribute>
             <svrl:text>leader-pattern="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'space', 'rule', 'dots', 'use-content', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'space', 'rule', 'dots', 'use-content', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8314,10 +8493,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -8341,9 +8520,9 @@
             </xsl:attribute>
             <svrl:text>leader-pattern-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'use-font-metrics' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'use-font-metrics' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8380,10 +8559,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -8407,9 +8586,9 @@
             </xsl:attribute>
             <svrl:text>left="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8446,10 +8625,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -8473,9 +8652,9 @@
             </xsl:attribute>
             <svrl:text>letter-spacing="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'normal' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'normal' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8539,9 +8718,9 @@
             </xsl:attribute>
             <svrl:text>letter-value="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'alphabetic', or 'traditional'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'alphabetic', or 'traditional'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8605,9 +8784,9 @@
             </xsl:attribute>
             <svrl:text>line-height="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'normal' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'normal' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8674,9 +8853,9 @@
             </xsl:attribute>
             <svrl:text>line-height-shift-adjustment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'consider-shifts', 'disregard-shifts', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'consider-shifts', 'disregard-shifts', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8741,9 +8920,9 @@
             </xsl:attribute>
             <svrl:text>line-stacking-strategy="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'line-height', 'font-height', 'max-height', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'line-height', 'font-height', 'max-height', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8808,9 +8987,9 @@
             </xsl:attribute>
             <svrl:text>linefeed-treatment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8863,10 +9042,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -8890,9 +9069,9 @@
             </xsl:attribute>
             <svrl:text>margin-bottom="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8929,10 +9108,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -8956,9 +9135,9 @@
             </xsl:attribute>
             <svrl:text>margin-left="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -8995,10 +9174,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -9022,9 +9201,9 @@
             </xsl:attribute>
             <svrl:text>margin-right="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9061,10 +9240,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -9088,9 +9267,9 @@
             </xsl:attribute>
             <svrl:text>margin-top="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9341,9 +9520,9 @@
             </xsl:attribute>
             <svrl:text>maximum-repeats="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'no-limit' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'no-limit' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9407,9 +9586,9 @@
             </xsl:attribute>
             <svrl:text>media-usage="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'paginate', 'bounded-in-one-dimension', or 'unbounded'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'paginate', 'bounded-in-one-dimension', or 'unbounded'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9476,9 +9655,9 @@
             </xsl:attribute>
             <svrl:text>merge-pages-across-index-key-references="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'merge' or 'leave-separate'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'merge' or 'leave-separate'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9545,9 +9724,9 @@
             </xsl:attribute>
             <svrl:text>merge-ranges-across-index-key-references="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'merge' or 'leave-separate'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'merge' or 'leave-separate'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9614,9 +9793,9 @@
             </xsl:attribute>
             <svrl:text>merge-sequential-page-numbers="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'merge' or 'leave-separate'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'merge' or 'leave-separate'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9868,9 +10047,9 @@
             </xsl:attribute>
             <svrl:text>odd-or-even="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'odd', 'even', 'any', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'odd', 'even', 'any', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -9934,9 +10113,9 @@
             </xsl:attribute>
             <svrl:text>orphans="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10000,9 +10179,9 @@
             </xsl:attribute>
             <svrl:text>overflow="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'visible', 'hidden', 'scroll', 'error-if-overflow', 'repeat', 'replace', 'condense', or 'auto'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'visible', 'hidden', 'scroll', 'error-if-overflow', 'repeat', 'replace', 'condense', or 'auto'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10055,10 +10234,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -10082,9 +10261,9 @@
             </xsl:attribute>
             <svrl:text>padding-after="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10121,10 +10300,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -10148,9 +10327,9 @@
             </xsl:attribute>
             <svrl:text>padding-before="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10187,10 +10366,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -10214,9 +10393,9 @@
             </xsl:attribute>
             <svrl:text>padding-bottom="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10253,10 +10432,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -10280,9 +10459,9 @@
             </xsl:attribute>
             <svrl:text>padding-end="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10319,10 +10498,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -10346,9 +10525,9 @@
             </xsl:attribute>
             <svrl:text>padding-left="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10385,10 +10564,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -10412,9 +10591,9 @@
             </xsl:attribute>
             <svrl:text>padding-right="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10451,10 +10630,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -10478,9 +10657,9 @@
             </xsl:attribute>
             <svrl:text>padding-start="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10517,10 +10696,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -10544,9 +10723,9 @@
             </xsl:attribute>
             <svrl:text>padding-top="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10662,9 +10841,9 @@
             </xsl:attribute>
             <svrl:text>page-citation-strategy="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'all', 'normal', 'non-blank', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'all', 'normal', 'non-blank', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10701,10 +10880,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -10728,9 +10907,9 @@
             </xsl:attribute>
             <svrl:text>page-height="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'indefinite', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'indefinite', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10795,9 +10974,9 @@
             </xsl:attribute>
             <svrl:text>page-number-treatment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'link' or 'no-link'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'link' or 'no-link'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10861,9 +11040,9 @@
             </xsl:attribute>
             <svrl:text>page-position="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'only', 'first', 'last', 'rest', 'any', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'only', 'first', 'last', 'rest', 'any', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -10900,10 +11079,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -10927,9 +11106,9 @@
             </xsl:attribute>
             <svrl:text>page-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'indefinite', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'indefinite', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11025,9 +11204,9 @@
             </xsl:attribute>
             <svrl:text>precedence="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'true', 'false', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'true', 'false', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11067,10 +11246,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -11094,9 +11273,9 @@
             </xsl:attribute>
             <svrl:text>provisional-distance-between-starts="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11136,10 +11315,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -11163,9 +11342,9 @@
             </xsl:attribute>
             <svrl:text>provisional-label-separation="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11381,9 +11560,9 @@
             </xsl:attribute>
             <svrl:text>relative-align="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'before', 'baseline', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'before', 'baseline', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11448,9 +11627,9 @@
             </xsl:attribute>
             <svrl:text>relative-position="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'static', 'relative', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'static', 'relative', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11515,9 +11694,9 @@
             </xsl:attribute>
             <svrl:text>rendering-intent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11582,9 +11761,9 @@
             </xsl:attribute>
             <svrl:text>retrieve-boundary="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'page', 'page-sequence', or 'document'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'page', 'page-sequence', or 'document'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11651,9 +11830,9 @@
             </xsl:attribute>
             <svrl:text>retrieve-boundary-within-table="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'table', 'table-fragment', or 'page'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'table', 'table-fragment', or 'page'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11770,9 +11949,9 @@
             </xsl:attribute>
             <svrl:text>retrieve-position="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', or 'last-ending-within-page'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', or 'last-ending-within-page'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11839,9 +12018,9 @@
             </xsl:attribute>
             <svrl:text>retrieve-position-within-table="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'first-starting', 'first-including-carryover', 'last-starting', or 'last-ending'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'first-starting', 'first-including-carryover', 'last-starting', or 'last-ending'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11878,10 +12057,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -11905,9 +12084,9 @@
             </xsl:attribute>
             <svrl:text>right="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -11987,9 +12166,9 @@
             </xsl:attribute>
             <svrl:text>rule-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12026,10 +12205,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -12104,9 +12283,9 @@
             </xsl:attribute>
             <svrl:text>scale-option="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'width', 'height', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'width', 'height', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12170,9 +12349,9 @@
             </xsl:attribute>
             <svrl:text>scaling="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'uniform', 'non-uniform', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'uniform', 'non-uniform', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12236,9 +12415,9 @@
             </xsl:attribute>
             <svrl:text>scaling-method="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'integer-pixels', 'resample-any-method', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'integer-pixels', 'resample-any-method', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12302,9 +12481,9 @@
             </xsl:attribute>
             <svrl:text>score-spaces="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'true', 'false', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'true', 'false', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12368,9 +12547,9 @@
             </xsl:attribute>
             <svrl:text>script="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'auto', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'auto', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12435,9 +12614,9 @@
             </xsl:attribute>
             <svrl:text>show-destination="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'replace' or 'new'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'replace' or 'new'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12517,9 +12696,9 @@
             </xsl:attribute>
             <svrl:text>source-document="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12556,10 +12735,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -12583,9 +12762,9 @@
             </xsl:attribute>
             <svrl:text>space-after="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12622,10 +12801,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -12649,9 +12828,9 @@
             </xsl:attribute>
             <svrl:text>space-before="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12688,10 +12867,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -12715,9 +12894,9 @@
             </xsl:attribute>
             <svrl:text>space-end="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12754,10 +12933,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -12781,9 +12960,9 @@
             </xsl:attribute>
             <svrl:text>space-start="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12847,9 +13026,9 @@
             </xsl:attribute>
             <svrl:text>span="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'all', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'all', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12902,10 +13081,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -12929,9 +13108,9 @@
             </xsl:attribute>
             <svrl:text>start-indent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -12995,9 +13174,9 @@
             </xsl:attribute>
             <svrl:text>starting-state="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'show' or 'hide'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'show' or 'hide'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13061,9 +13240,9 @@
             </xsl:attribute>
             <svrl:text>starts-row="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'true' or 'false'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13128,9 +13307,9 @@
             </xsl:attribute>
             <svrl:text>suppress-at-line-break="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'suppress', 'retain', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'suppress', 'retain', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13245,9 +13424,9 @@
             </xsl:attribute>
             <svrl:text>table-layout="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'fixed', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'fixed', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13312,9 +13491,9 @@
             </xsl:attribute>
             <svrl:text>table-omit-footer-at-break="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'true' or 'false'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13379,9 +13558,9 @@
             </xsl:attribute>
             <svrl:text>table-omit-header-at-break="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'true' or 'false'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13446,9 +13625,9 @@
             </xsl:attribute>
             <svrl:text>target-presentation-context="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'use-target-processing-context'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'use-target-processing-context'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13513,9 +13692,9 @@
             </xsl:attribute>
             <svrl:text>target-processing-context="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'document-root'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'document-root'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13580,9 +13759,9 @@
             </xsl:attribute>
             <svrl:text>target-stylesheet="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'use-normal-stylesheet'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'use-normal-stylesheet'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13662,9 +13841,9 @@
             </xsl:attribute>
             <svrl:text>text-align-last="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'relative', 'start', 'center', 'end', 'justify', 'inside', 'outside', 'left', 'right', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'relative', 'start', 'center', 'end', 'justify', 'inside', 'outside', 'left', 'right', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13701,10 +13880,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -13728,9 +13907,9 @@
             </xsl:attribute>
             <svrl:text>text-altitude="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'use-font-metrics' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'use-font-metrics' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13794,9 +13973,9 @@
             </xsl:attribute>
             <svrl:text>text-decoration="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13833,10 +14012,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -13860,9 +14039,9 @@
             </xsl:attribute>
             <svrl:text>text-depth="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'use-font-metrics' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'use-font-metrics' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13899,10 +14078,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -13926,9 +14105,9 @@
             </xsl:attribute>
             <svrl:text>text-indent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -13965,10 +14144,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Color', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Color', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Color', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Color', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -14043,9 +14222,9 @@
             </xsl:attribute>
             <svrl:text>text-transform="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14082,10 +14261,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -14109,9 +14288,9 @@
             </xsl:attribute>
             <svrl:text>top="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14176,9 +14355,9 @@
             </xsl:attribute>
             <svrl:text>treat-as-word-space="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto', 'true', 'false', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto', 'true', 'false', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14242,9 +14421,9 @@
             </xsl:attribute>
             <svrl:text>unicode-bidi="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'normal', 'embed', 'bidi-override', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'normal', 'embed', 'bidi-override', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14324,9 +14503,9 @@
             </xsl:attribute>
             <svrl:text>visibility="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'visible', 'hidden', 'collapse', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'visible', 'hidden', 'collapse', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14407,9 +14586,9 @@
             </xsl:attribute>
             <svrl:text>white-space-collapse="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'false', 'true', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'false', 'true', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14474,9 +14653,9 @@
             </xsl:attribute>
             <svrl:text>white-space-treatment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14540,9 +14719,9 @@
             </xsl:attribute>
             <svrl:text>widows="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14579,10 +14758,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -14606,9 +14785,9 @@
             </xsl:attribute>
             <svrl:text>width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14645,10 +14824,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -14672,9 +14851,9 @@
             </xsl:attribute>
             <svrl:text>word-spacing="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'normal' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'normal' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14738,9 +14917,9 @@
             </xsl:attribute>
             <svrl:text>wrap-option="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'no-wrap', 'wrap', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'no-wrap', 'wrap', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14804,9 +14983,9 @@
             </xsl:attribute>
             <svrl:text>writing-mode="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14886,9 +15065,9 @@
             </xsl:attribute>
             <svrl:text>z-index="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.  Token should be 'auto' or 'inherit'.</svrl:text>
+               <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -14927,7 +15106,7 @@
 
 	  <!--RULE axf-1-->
    <xsl:template match="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
-                 priority="1014"
+                 priority="1015"
                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
@@ -14955,7 +15134,7 @@
 
 	  <!--RULE -->
    <xsl:template match="axf:document-info[@name = 'title']"
-                 priority="1013"
+                 priority="1014"
                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:document-info[@name = 'title']"/>
@@ -14980,7 +15159,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-color" priority="1012" mode="M10">
+   <xsl:template match="fo:*/@axf:background-color" priority="1013" mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15033,7 +15212,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-height"
-                 priority="1011"
+                 priority="1012"
                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-height"/>
@@ -15102,7 +15281,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-type"
-                 priority="1010"
+                 priority="1011"
                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-type"/>
@@ -15171,7 +15350,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-width"
-                 priority="1009"
+                 priority="1010"
                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-width"/>
@@ -15239,7 +15418,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-color" priority="1008" mode="M10">
+   <xsl:template match="fo:*/@axf:background-color" priority="1009" mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15291,7 +15470,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-image" priority="1007" mode="M10">
+   <xsl:template match="fo:*/@axf:background-image" priority="1008" mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-image"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15358,7 +15537,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-position" priority="1006" mode="M10">
+   <xsl:template match="fo:*/@background-position" priority="1007" mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-position"/>
 
@@ -15376,7 +15555,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-position-horizontal"
-                 priority="1005"
+                 priority="1006"
                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-horizontal"/>
@@ -15445,7 +15624,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-position-vertical"
-                 priority="1004"
+                 priority="1005"
                  mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-vertical"/>
@@ -15513,7 +15692,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-repeat" priority="1003" mode="M10">
+   <xsl:template match="fo:*/@axf:background-repeat" priority="1004" mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-repeat"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15580,7 +15759,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-color" priority="1002" mode="M10">
+   <xsl:template match="fo:*/@axf:outline-color" priority="1003" mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:outline-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15618,7 +15797,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-level" priority="1001" mode="M10">
+   <xsl:template match="fo:*/@axf:outline-level" priority="1002" mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:outline-level"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15656,7 +15835,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-scaling" priority="1000" mode="M10">
+   <xsl:template match="fo:*/@axf:background-scaling" priority="1001" mode="M10">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-scaling"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15718,6 +15897,24 @@
             <svrl:text>Syntax error: scaling="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@overflow" priority="1000" mode="M10">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@overflow"/>
+
+		    <!--REPORT -->
+      <xsl:if test=". = ('replace', 'condense') and not(local-name(..) = ('block-container', 'inline-container'))">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test=". = ('replace', 'condense') and not(local-name(..) = ('block-container', 'inline-container'))">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>overflow="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" applies only on fo:block-container or fo:inline-container.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>

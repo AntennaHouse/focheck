@@ -215,7 +215,7 @@
     </define>
     <!--
       
-      End of overrides to patterns in 'fo-inherited.rnc'.
+      End of overrides to patterns in 'axf-inherited.rnc'.
       
     -->
   </include>
@@ -331,13 +331,22 @@
     <ref name="axf_background-position-horizontal"/>
     <ref name="axf_background-position-vertical"/>
     <ref name="axf_background-repeat"/>
+    <ref name="background-color"/>
+    <ref name="background-image"/>
+    <ref name="background-position-horizontal"/>
+    <ref name="background-position-vertical"/>
+    <ref name="background-repeat"/>
   </define>
   <define name="fo_simple-page-master.attlist" combine="interleave">
     <ref name="axf_background-color"/>
+    <ref name="axf_background-content-height"/>
+    <ref name="axf_background-content-type"/>
+    <ref name="axf_background-content-width"/>
     <ref name="axf_background-image"/>
     <ref name="axf_background-position-horizontal"/>
     <ref name="axf_background-position-vertical"/>
     <ref name="axf_background-repeat"/>
+    <ref name="axf_background-scaling"/>
     <ref name="axf_bleed"/>
     <ref name="axf_bleed-top"/>
     <ref name="axf_bleed-bottom"/>
@@ -355,6 +364,11 @@
     <ref name="axf_printer-marks-line-width"/>
     <ref name="axf_printer-marks-spine-width"/>
     <ref name="axf_printer-marks-zero-margin"/>
+    <ref name="background-color"/>
+    <ref name="background-image"/>
+    <ref name="background-position-horizontal"/>
+    <ref name="background-position-vertical"/>
+    <ref name="background-repeat"/>
   </define>
   <define name="fo_basic-link.attlist" combine="interleave">
     <ref name="axf_action-type"/>
@@ -399,6 +413,9 @@
   </define>
   <define name="fo_table-column.attlist" combine="interleave">
     <ref name="id"/>
+  </define>
+  <define name="fo_wrapper.attlist" combine="interleave">
+    <ref name="text-decoration"/>
   </define>
   <!--
     
