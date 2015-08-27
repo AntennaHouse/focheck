@@ -268,7 +268,7 @@ text-align
                                                                 'EMPTY',
                                                                 'ERROR',
                                                                 'Object'),
-                                                               ''', ''')}')">
+                                                               ''', ''')}'){if ($use-datatypes = 'Length' and not($use-datatypes = 'Number')) then ' or $expression/@value = ''0''' else ()}">
               <xsl:value-of select="$property" />
               <xsl:text>="</xsl:text>
               <value-of select="." />
