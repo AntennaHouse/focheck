@@ -240,6 +240,9 @@ fo_table-cell.attlist &=
 fo_table-column.attlist &=
     id
 
+fo_wrapper.attlist &=
+    text-decoration
+
 #
 # Extensions to property groups
 #
