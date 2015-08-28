@@ -284,7 +284,7 @@ text-align
             </assert>
 
             <xsl:if test="exists($enum-tokens) and
-                          not($datatypes = ('Color', 'NCName'))">
+                          not($datatypes = ('Color', 'NCName', 'URI'))">
               <report
                   test="{concat('$expression instance of element(EnumerationToken) and not($expression/@token = (''',
                                 string-join($enum-tokens, ''', '''),
