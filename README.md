@@ -7,7 +7,7 @@
 
 **focheck** bundles a Relax NG schema and a Schematron grammar in an oXygen framework for detailed validation
 of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XML Editor.  **focheck** also validates the extension FOs and properties that AH Formatter provides for improved formatted output.  You can, of course,
-also use the **focheck** Relax NG and Schematron outside of oXygen, either together or separately.
+also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside of oXygen, either together or separately.
 
 ![](etc/screenshot.png)
 
@@ -26,9 +26,8 @@ Pull requests and new issues are welcome.
 
 ## Installing
 
-* If you just want to use **focheck** with oXygen, then you can either:
- * Install **focheck** as an add-on oXygen framework.
- * Download and install a static copy of the oXygen framework.
+* If you just want to use **focheck** with oXygen, then you can install **focheck** as an add-on oXygen framework.
+* Alternatively, you can download a static copy of the oXygen framework from here.
 * If you want to easily keep up-to-date with changes, then you can clone this repository and 'pull' the latest version whenever you want.
 * If you want to hack on **focheck** or submit pull requests, then you can fork this repository and clone that onto your local machine.
 
