@@ -18,6 +18,22 @@
      limitations under the License.
 -->
 
+#
+<!--
+BEFORE making a release on GitHub:
+ - Commit all hand-modified files
+ - Make sure that ${version} in build.properties is correct
+ - Run the 'release' target with '-Dforce=yes'
+ - Commit build.properties and the generated files with a
+   'Releasing focheck-x.y.z.' commit message
+ - Push the commits to GitHub.
+
+AFTER making a release on GitHub:
+ - Increment ${version} in build.properties so it's not possible
+   to accidentally overwrite a release's Zip file with different
+   versions of files.
+-->
+
 <!-- Build file with properties and targets useful for running
      'focheck'. -->
 <import file="build-focheck.xml" />
