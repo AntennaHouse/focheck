@@ -217,6 +217,24 @@ fo_block-container.attlist &=
     axf_destination-type,
     axf.block.attlist
 
+fo_float.attlist &=
+    axf_float,
+    axf_float-x,
+    axf_float-y,
+    axf_float-reference,
+    axf_float-move,
+    axf_float-wrap,
+    axf_float-min-wrap-x,
+    axf_float-min-wrap-y,
+    axf_float-centering-x,
+    axf_float-centering-y,
+    axf_float-margin-x,
+    axf_float-margin-y,
+    axf_float-float-margin-x,
+    axf_float-float-margin-y,
+    axf_float-offset-x,
+    axf_float-offset-y
+
 fo_footnote.attlist &=
     space-before,
     axf_footnote-align,
@@ -419,6 +437,118 @@ axf_crop-offset-right =
 axf_destination-type =
     ## The way a link opens in a link destination
     attribute axf:destination-type { text }?
+
+# @axf:float
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html
+axf_float =
+    ## Shorthand for float-related extension properties
+    attribute axf:float { 'none' | 'before' | 'after' | 'start' | 'end' | 'left' | 'right' | 'top' | 'bottom' | 'center' | 'inside' | 'outside' | 'wrap' | 'skip' | 'auto' | 'normal' | 'page' | 'column' | 'multicol' | 'next' | 'auto-next' | 'auto-move' | 'keep' | 'keep-float' }?
+
+# @axf:float-x
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-x
+axf_float-x =
+    ## Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside
+    attribute axf:float-x { 'none' | 'start' | 'end' | 'left' | 'right' | 'top' | 'bottom' | 'center' | 'inside' | 'outside' }?
+
+# @axf:float-y
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-y
+axf_float-y =
+    ## Vertical (or horizontal if writing-mode is vertical) float alignment:    none | before | after | top | bottom | left | right | center | inside | outside
+    attribute axf:float-y { 'none' | 'before' | 'after' | 'top' | 'bottom' | 'left' | 'right' | 'center' | 'inside' | 'outside' }?
+
+# @axf:float-reference
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-reference
+axf_float-reference =
+    ## Reference area where the float is placed: auto | normal | page | column | multicol
+    attribute axf:float-reference { 'auto' | 'normal' | 'page' | 'column' | 'multicol' }?
+
+# @axf:float-move
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-move
+axf_float-move =
+    ## Whether the float moves to the next page (or column): auto | next | auto-next | auto-move | keep | keep-float
+    attribute axf:float-move { 'auto' | 'next' | 'auto-next' | 'auto-move' | 'keep' | 'keep-float' }?
+
+# @axf:float-wrap
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-wrap
+axf_float-wrap =
+    ## Text wrapping: auto | wrap | skip
+    attribute axf:float-wrap { 'auto' | 'wrap' | 'skip' }?
+
+# @axf:float-min-wrap-x
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-x
+axf_float-min-wrap-x =
+    ## Minimum width for the text wrapping around the float: normal | <length> | <percentage>
+    attribute axf:float-min-wrap-x { text }?
+
+# @axf:float-min-wrap-y
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-y
+axf_float-min-wrap-y =
+    ## Minimum extent for the text placed before and after the float: normal | <length> | <percentage>
+    attribute axf:float-min-wrap-y { text }?
+
+# @axf:float-centering-x
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-x
+axf_float-centering-x =
+    ## Whether the float is centered when the width for the text wrapping around the float is insufficient: none | auto | <length> | <percentage>
+    attribute axf:float-centering-x { text }?
+
+# @axf:float-centering-y
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-y
+axf_float-centering-y =
+    ## Whether the float is centered when the extent for the text placed before and after the float is insufficient: none | auto | <length> | <percentage>
+    attribute axf:float-centering-y { text }?
+
+# @axf:float-margin-x
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-x
+axf_float-margin-x =
+    ## Space between the float and the text wrapping around the float (in x-axis): [ <length> | <percentage> ] [ <length> | <percentage> ]?
+    attribute axf:float-margin-x { text }?
+
+# @axf:float-margin-y
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-y
+axf_float-margin-y =
+    ## Space between the float and the text wrapping around the float (in y-axis): [ <length> | <percentage> ] [ <length> | <percentage> ]?
+    attribute axf:float-margin-y { text }?
+
+# @axf:float-float-margin-x
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-x
+axf_float-float-margin-x =
+    ## Space between the float and another neighboring float (in x-axis): auto | [[ <length> | <percentage> ] [ <length> | <percentage> ]?]
+    attribute axf:float-float-margin-x { text }?
+
+# @axf:float-float-margin-y
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-y
+axf_float-float-margin-y =
+    ## Space between the float and another neighboring float (in y-axis): auto | [[ <length> | <percentage> ] [ <length> | <percentage> ]?]
+    attribute axf:float-float-margin-y { text }?
+
+# @axf:float-offset-x
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-x
+axf_float-offset-x =
+    ## Offset placement for the float (in x-axis): <length> | <percentage>
+    attribute axf:float-offset-x { text }?
+
+# @axf:float-offset-y
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-y
+axf_float-offset-y =
+    ## Offset placement for the float (in y-axis): <length> | <percentage>
+    attribute axf:float-offset-y { text }?
 
 # @axf:footnote-align
 #
