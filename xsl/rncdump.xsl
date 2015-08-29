@@ -167,6 +167,26 @@ margin margin-top margin-bottom margin-left margin-right</item>
   <item property="page-height">size</item>
 </xsl:variable>
 
+<xsl:variable name="model-overrides" as="element(item)+">
+  <!-- fo:declarations -->
+  <!-- http://www.w3.org/TR/xsl/#fo_declarations -->
+  <item element="declarations">(fo_color-profile | non-xsl-element)*</item>
+  <!-- fo:instream-foreign-object -->
+  <!-- http://www.w3.org/TR/xsl/#fo_instream-foreign-object -->
+  <item element="instream-foreign-object">non-xsl</item>
+  <!-- fo:marker -->
+  <!-- http://www.w3.org/TR/xsl/#fo_marker -->
+  <!-- fo:marker, particularly if it is to be retrieved by an
+       fo:retrieve-table-marker, should be able to contain
+       fo:table-row or fo:table-cell, but shouldn't be allowed to mix
+       either of them with anything else. -->
+  <item element="marker">( ((text|inline.fo.list|block.fo.list|neutral.fo.list)* | fo_table-row+ | fo_table-cell+) &amp; (inline.out-of-line.fo.list)* )</item>
+  <!-- fo:table-header and fo:table-footer should allow
+       fo:retrieve-table-marker, but that's not specificed in the XSL
+       1.1 content model. -->
+  <item element="table-header">( (fo_retrieve-table-marker | fo_table-row)+ | (fo_retrieve-table-marker | fo_table-cell)+ )</item>
+  <item element="table-footer">( (fo_retrieve-table-marker | fo_table-row)+ | (fo_retrieve-table-marker | fo_table-cell)+ )</item>
+</xsl:variable>
 
 <!-- ============================================================= -->
 <!-- TEMPLATES                                                     -->
@@ -265,7 +285,14 @@ fo_</xsl:text>
     </xsl:if>
     <xsl:text>    ( </xsl:text>
     <xsl:variable name="model" as="xs:string+">
-      <xsl:apply-templates select="p[. eq 'Contents:']" />
+      <xsl:choose>
+        <xsl:when test="exists($model-overrides[@element = $element])">
+          <xsl:value-of select="$model-overrides[@element = $element]" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates select="p[. eq 'Contents:']" />
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:variable>
     <!-- fo:wrapper may only contain what its parent may contain, so
          there's three separate patterns for fo:wrapper and three
@@ -575,6 +602,27 @@ point.fo.list =
 </xsl:text>
 </xsl:template>
 
+<!-- ============================================================= -->
+<!-- CONTENT MODEL PROCESSING                                      -->
+<!-- ============================================================= -->
+
+<!-- Sample content model markup from fo:block definition:
+
+<p><emph>Contents:</emph></p>
+<eg xml:space="preserve">
+(#PCDATA|<loc href="#inline.fo.list" xlink:type="simple"
+xlink:show="replace" xlink:actuate="onRequest"
+xmlns:xlink="http://www.w3.org/1999/xlink">%inline;</loc>|<loc
+href="#block.fo.list" xlink:type="simple" xlink:show="replace"
+xlink:actuate="onRequest"
+xmlns:xlink="http://www.w3.org/1999/xlink">%block;</loc>)*
+</eg>
+
+-->
+
+<!-- "p[. eq 'Contents:']" is useful for locating the content model,
+     but it doesn't contain the content model, so have to process the
+     following <eg> element. -->
 <xsl:template match="p[. eq 'Contents:']">
   <xsl:apply-templates select="following-sibling::eg[1]" />
 </xsl:template>
@@ -583,29 +631,14 @@ point.fo.list =
   <xsl:apply-templates />
 </xsl:template>
 
-<!-- FOs that allow elements in non-XSL namespace. -->
-
-<!-- fo:declarations -->
-<!-- http://www.w3.org/TR/xsl/#fo_declarations -->
-<xsl:template match="p[. eq 'Contents:'][../head eq 'fo:declarations']"
-              priority="5" as="xs:string">
-  <xsl:sequence select="'(fo_color-profile | non-xsl-element)*'" />
-</xsl:template>
-
-<!-- fo:instream-foreign-object -->
-<!-- http://www.w3.org/TR/xsl/#fo_instream-foreign-object -->
-<xsl:template match="p[. eq 'Contents:'][../head eq 'fo:instream-foreign-object']"
-              priority="5" as="xs:string">
-  <xsl:sequence select="'non-xsl'" />
-</xsl:template>
-
+<!-- IDs from XSL 1.1 XML make good pattern names. -->
 <xsl:template match="loc" as="xs:string">
   <xsl:sequence select="substring-after(@href, '#')" />
 </xsl:template>
 
 <xsl:template match="eg/text()" as="xs:string">
-  <!-- Convert '#PCDATA' to 'text' keyword and convert 'EMPTY' to
-       'empty' keyword. -->
+  <!-- Convert '#PCDATA' to 'text' keyword.
+       Convert 'EMPTY' to 'empty' keyword. -->
   <xsl:sequence
       select="replace(replace(normalize-space(.), '#PCDATA', 'text'),
                       'EMPTY',
