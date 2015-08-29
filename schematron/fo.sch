@@ -46,6 +46,14 @@
     <report test="exists(descendant::fo:*[local-name() = ('float', 'footnote', 'marker')])">An 'fo:footnote' is not permitted to have an 'fo:float', 'fo:footnote', or 'fo:marker' as a descendant.</report>
   </rule>
 
+  <rule context="fo:marker">
+    <!-- http://www.w3.org/TR/xsl/#fo_marker -->
+    <assert test="exists(ancestor::fo:flow)">An fo:marker is only permitted as the descendant of an fo:flow.</assert>
+    <assert test="empty(ancestor::fo:marker)">An fo:marker is not permitted as a descendant of an fo:marker.</assert>
+    <assert test="empty(ancestor::fo:retrieve-marker)">An fo:marker is not permitted as a descendant of an fo:retrieve-marker.</assert>
+    <assert test="empty(ancestor::fo:retrieve-table-marker)">An fo:marker is not permitted as a descendant of an fo:retrieve-table-marker.</assert>
+  </rule>
+
   <rule context="fo:retrieve-marker">
     <!-- http://www.w3.org/TR/xsl/#fo_retrieve-marker -->
     <assert test="exists(ancestor::fo:static-content)">An fo:retrieve-marker is only permitted as the descendant of an fo:static-content.</assert>
@@ -122,6 +130,12 @@
     <!-- http://www.w3.org/TR/xsl11/#d0e4626 -->
     <report test="$expression instance of element(EnumerationToken) and string-length($expression/@token) = 2" id="language_2-letter" role="Warning">language="<value-of select="." />" uses a 2-letter code.  A 2-letter code in conformance with ISO639 will be converted to the corresponding 3-letter ISO639-2 terminology code.</report>
     <report test="$expression instance of element(EnumerationToken) and $expression/@token = ('mul', 'none')" id="language_und" role="Warning">language="<value-of select="." />" will be converted to 'und'.</report>
+  </rule>
+
+  <rule context="fo:marker/@marker-class-name">
+    <!-- http://www.w3.org/TR/xsl/#fo_marker -->
+    <!-- Error in XSL 1.1 spec, but AH Formatter not complaining. -->
+    <assert test="count(../../fo:marker[@marker-class-name eq current()]) = 1" role="Warning">marker-class-name="<value-of select="." />" should be unique among fo:marker with the same parent.</assert>
   </rule>
 
   <rule context="fo:*/@master-name">
