@@ -124,7 +124,17 @@ include "fo.rnc"
     <xsl:message select="$inherited-properties" />
   </xsl:if>
 
-  <xsl:for-each select="key('all-fo-divs', true())">
+  <!-- From http://www.w3.org/TR/xsl11/#fo_marker:
+
+          Property values set on an fo:marker or its ancestors will
+          not be inherited by the children of the fo:marker when they
+          are retrieved by an fo:retrieve-marker or
+          fo:retrieve-table-marker.
+
+       so don't add any inherited properties to fo:marker, because
+       they won't do anything. -->
+  <xsl:for-each
+      select="key('all-fo-divs', true())[not(@id eq 'fo_marker')]">
 
     <xsl:variable name="element"
                   select="substring-after(head, 'fo:')"/>
