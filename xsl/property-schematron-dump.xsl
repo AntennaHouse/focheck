@@ -217,15 +217,18 @@ text-align
       <xsl:text>&#10;   </xsl:text>
       <rule context="fo:*/@{$property}">
         <xsl:choose>
-          <xsl:when test="($property = $skipped-properties-list or
-                           ahf:is-shorthand($property)) and
-                          not($initial-value eq 'empty string')">
-            <report test=". eq ''" role="Warning">
-              <xsl:value-of select="$property" />
-              <xsl:text>="" should be '</xsl:text>
-              <xsl:value-of select="ahf:values($property)" />
-              <xsl:text>'.</xsl:text>
-            </report>
+          <xsl:when test="$property = $skipped-properties-list or
+                          ahf:is-shorthand($property)">
+            <!-- 'internal-destination' and 'external-destination' are
+                 skipped, but they both can be an empty string. -->
+            <xsl:if test="not($initial-value eq 'empty string')">
+              <report test=". eq ''" role="Warning">
+                <xsl:value-of select="$property" />
+                <xsl:text>="" should be '</xsl:text>
+                <xsl:value-of select="ahf:values($property)" />
+                <xsl:text>'.</xsl:text>
+              </report>
+            </xsl:if>
           </xsl:when>
           <xsl:otherwise>
             <let name="expression" value="ahf:parser-runner(.)"/>
