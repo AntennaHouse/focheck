@@ -74,6 +74,10 @@ If you don't have permission to modify the oXygen installation – for example, 
 
 When you open an XSL-FO document – where the document element is `root` in the XSL-FO namespace – oXygen will automatically validate the document against both the Relax NG schema and the Schematron grammar.
 
+#### Transformation scenarios
+
+As well as providing validation, **focheck** defines two validation scenarios for processing your FO file with Antenna House Formatter.  See https://github.com/AntennaHouse/focheck/wiki/focheck
+
 ### Ant
 
 Use the `build-focheck.xml` Ant build file and the `validate.single` target to validate a file using both Relax NG and Schematron.  Alternatively, use the `schematron.single` or `schematron.dir` target to run Schematron on one or multiple files.
