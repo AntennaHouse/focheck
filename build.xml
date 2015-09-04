@@ -191,8 +191,8 @@ AFTER making a release on GitHub:
 <target name="xsd" depends="trang, rnc, -xsd.uptodate"
 	unless="xsd.uptodate">
   <java jar="${trang.jar}" fork="true">
-    <arg value="${schema.dir}/${schema.basename}.rnc" />
-    <arg value="${schema.dir}/xsd/${schema.basename}.xsd" />
+    <arg value="${schema.dir}/${xsd.schema.basename}.rnc" />
+    <arg value="${schema.dir}/xsd/${xsd.schema.basename}.xsd" />
   </java>
 </target>
 
