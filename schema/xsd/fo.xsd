@@ -12066,6 +12066,22 @@
     <xs:attributeGroup ref="axf:axf_vertical-underline-side"/>
     <xs:attributeGroup ref="axf:axf_word-break"/>
     <xs:attributeGroup ref="axf:axf_word-wrap"/>
+    <xs:attributeGroup ref="axf:axf_float"/>
+    <xs:attributeGroup ref="axf:axf_float-x"/>
+    <xs:attributeGroup ref="axf:axf_float-y"/>
+    <xs:attributeGroup ref="axf:axf_float-reference"/>
+    <xs:attributeGroup ref="axf:axf_float-move"/>
+    <xs:attributeGroup ref="axf:axf_float-wrap"/>
+    <xs:attributeGroup ref="axf:axf_float-min-wrap-x"/>
+    <xs:attributeGroup ref="axf:axf_float-min-wrap-y"/>
+    <xs:attributeGroup ref="axf:axf_float-centering-x"/>
+    <xs:attributeGroup ref="axf:axf_float-centering-y"/>
+    <xs:attributeGroup ref="axf:axf_float-margin-x"/>
+    <xs:attributeGroup ref="axf:axf_float-margin-y"/>
+    <xs:attributeGroup ref="axf:axf_float-float-margin-x"/>
+    <xs:attributeGroup ref="axf:axf_float-float-margin-y"/>
+    <xs:attributeGroup ref="axf:axf_float-offset-x"/>
+    <xs:attributeGroup ref="axf:axf_float-offset-y"/>
   </xs:attributeGroup>
   <xs:element name="footnote" substitutionGroup="fo:inline.out-of-line.fo.list">
     <xs:annotation>

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  Antenna House extension elements and non-inherited extension
+  attributes.
+  
   Copyright 2015 Antenna House, Inc.
   
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -571,6 +574,280 @@
     <xs:attribute name="destination-type" form="qualified">
       <xs:annotation>
         <xs:documentation>The way a link opens in a link destination</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html
+  -->
+  <xs:attributeGroup name="axf_float">
+    <xs:attribute name="float" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Shorthand for float-related extension properties</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="before"/>
+          <xs:enumeration value="after"/>
+          <xs:enumeration value="start"/>
+          <xs:enumeration value="end"/>
+          <xs:enumeration value="left"/>
+          <xs:enumeration value="right"/>
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="bottom"/>
+          <xs:enumeration value="center"/>
+          <xs:enumeration value="inside"/>
+          <xs:enumeration value="outside"/>
+          <xs:enumeration value="wrap"/>
+          <xs:enumeration value="skip"/>
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="column"/>
+          <xs:enumeration value="multicol"/>
+          <xs:enumeration value="next"/>
+          <xs:enumeration value="auto-next"/>
+          <xs:enumeration value="auto-move"/>
+          <xs:enumeration value="keep"/>
+          <xs:enumeration value="keep-float"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-x
+  -->
+  <xs:attributeGroup name="axf_float-x">
+    <xs:attribute name="float-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="start"/>
+          <xs:enumeration value="end"/>
+          <xs:enumeration value="left"/>
+          <xs:enumeration value="right"/>
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="bottom"/>
+          <xs:enumeration value="center"/>
+          <xs:enumeration value="inside"/>
+          <xs:enumeration value="outside"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-y
+  -->
+  <xs:attributeGroup name="axf_float-y">
+    <xs:attribute name="float-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Vertical (or horizontal if writing-mode is vertical) float alignment:    none | before | after | top | bottom | left | right | center | inside | outside</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="before"/>
+          <xs:enumeration value="after"/>
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="bottom"/>
+          <xs:enumeration value="left"/>
+          <xs:enumeration value="right"/>
+          <xs:enumeration value="center"/>
+          <xs:enumeration value="inside"/>
+          <xs:enumeration value="outside"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-reference
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-reference
+  -->
+  <xs:attributeGroup name="axf_float-reference">
+    <xs:attribute name="float-reference" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Reference area where the float is placed: auto | normal | page | column | multicol</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="column"/>
+          <xs:enumeration value="multicol"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-move
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-move
+  -->
+  <xs:attributeGroup name="axf_float-move">
+    <xs:attribute name="float-move" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Whether the float moves to the next page (or column): auto | next | auto-next | auto-move | keep | keep-float</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="next"/>
+          <xs:enumeration value="auto-next"/>
+          <xs:enumeration value="auto-move"/>
+          <xs:enumeration value="keep"/>
+          <xs:enumeration value="keep-float"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-wrap
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-wrap
+  -->
+  <xs:attributeGroup name="axf_float-wrap">
+    <xs:attribute name="float-wrap" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Text wrapping: auto | wrap | skip</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="wrap"/>
+          <xs:enumeration value="skip"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-min-wrap-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-x
+  -->
+  <xs:attributeGroup name="axf_float-min-wrap-x">
+    <xs:attribute name="float-min-wrap-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Minimum width for the text wrapping around the float: normal | &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-min-wrap-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-y
+  -->
+  <xs:attributeGroup name="axf_float-min-wrap-y">
+    <xs:attribute name="float-min-wrap-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Minimum extent for the text placed before and after the float: normal | &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-centering-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-x
+  -->
+  <xs:attributeGroup name="axf_float-centering-x">
+    <xs:attribute name="float-centering-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Whether the float is centered when the width for the text wrapping around the float is insufficient: none | auto | &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-centering-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-y
+  -->
+  <xs:attributeGroup name="axf_float-centering-y">
+    <xs:attribute name="float-centering-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Whether the float is centered when the extent for the text placed before and after the float is insufficient: none | auto | &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-margin-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-x
+  -->
+  <xs:attributeGroup name="axf_float-margin-x">
+    <xs:attribute name="float-margin-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Space between the float and the text wrapping around the float (in x-axis): [ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-margin-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-y
+  -->
+  <xs:attributeGroup name="axf_float-margin-y">
+    <xs:attribute name="float-margin-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Space between the float and the text wrapping around the float (in y-axis): [ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-float-margin-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-x
+  -->
+  <xs:attributeGroup name="axf_float-float-margin-x">
+    <xs:attribute name="float-float-margin-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Space between the float and another neighboring float (in x-axis): auto | [[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?]</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-float-margin-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-y
+  -->
+  <xs:attributeGroup name="axf_float-float-margin-y">
+    <xs:attribute name="float-float-margin-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Space between the float and another neighboring float (in y-axis): auto | [[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?]</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-offset-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-x
+  -->
+  <xs:attributeGroup name="axf_float-offset-x">
+    <xs:attribute name="float-offset-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Offset placement for the float (in x-axis): &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-offset-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-y
+  -->
+  <xs:attributeGroup name="axf_float-offset-y">
+    <xs:attribute name="float-offset-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Offset placement for the float (in y-axis): &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>

@@ -1,0 +1,42 @@
+# Adds MathML m:math to fo:instream-foriegn-object.
+#
+# Copyright 2015 Antenna House, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+default namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
+namespace fo = "http://www.w3.org/1999/XSL/Format"
+namespace m = "http://www.w3.org/1998/Math/MathML"
+namespace local = ""
+
+
+# MathML 3.0 schema with Antenna House overrides.
+math = external "axf-mathml3-override.rnc"
+
+include "axf.rnc" {
+
+# For fo:instream-foreign-object
+# Exclude axf:* elements and attributes from counting as 'non-xsl'.
+# Allow MathML m:math
+non-xsl =
+  ( attribute * - ( local:* | axf:* | xml:* ) { text }*,
+    ( ( element * - ( local:* | fo:* | axf:* | m:* ) { attribute * - (id | ref-id | internal-destination ) { text }*, anything }* ) | math ) )
+
+# For fo:instream-foreign-object
+anything =
+   ( element * -( fo:* ) {
+        attribute * - (id | ref-id | internal-destination ) { text }*,
+        anything } |
+     text )*
+
+}

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+  Antenna House extension elements and non-inherited extension
+  attributes.
+  
   Copyright 2015 Antenna House, Inc.
   
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -391,6 +394,24 @@
     <ref name="axf_destination-type"/>
     <ref name="axf.block.attlist"/>
   </define>
+  <define name="fo_float.attlist" combine="interleave">
+    <ref name="axf_float"/>
+    <ref name="axf_float-x"/>
+    <ref name="axf_float-y"/>
+    <ref name="axf_float-reference"/>
+    <ref name="axf_float-move"/>
+    <ref name="axf_float-wrap"/>
+    <ref name="axf_float-min-wrap-x"/>
+    <ref name="axf_float-min-wrap-y"/>
+    <ref name="axf_float-centering-x"/>
+    <ref name="axf_float-centering-y"/>
+    <ref name="axf_float-margin-x"/>
+    <ref name="axf_float-margin-y"/>
+    <ref name="axf_float-float-margin-x"/>
+    <ref name="axf_float-float-margin-y"/>
+    <ref name="axf_float-offset-x"/>
+    <ref name="axf_float-offset-y"/>
+  </define>
   <define name="fo_footnote.attlist" combine="interleave">
     <ref name="space-before"/>
     <ref name="axf_footnote-align"/>
@@ -737,6 +758,268 @@
     <optional>
       <attribute name="axf:destination-type">
         <a:documentation>The way a link opens in a link destination</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html
+  -->
+  <define name="axf_float">
+    <optional>
+      <attribute name="axf:float">
+        <a:documentation>Shorthand for float-related extension properties</a:documentation>
+        <choice>
+          <value>none</value>
+          <value>before</value>
+          <value>after</value>
+          <value>start</value>
+          <value>end</value>
+          <value>left</value>
+          <value>right</value>
+          <value>top</value>
+          <value>bottom</value>
+          <value>center</value>
+          <value>inside</value>
+          <value>outside</value>
+          <value>wrap</value>
+          <value>skip</value>
+          <value>auto</value>
+          <value>normal</value>
+          <value>page</value>
+          <value>column</value>
+          <value>multicol</value>
+          <value>next</value>
+          <value>auto-next</value>
+          <value>auto-move</value>
+          <value>keep</value>
+          <value>keep-float</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-x
+  -->
+  <define name="axf_float-x">
+    <optional>
+      <attribute name="axf:float-x">
+        <a:documentation>Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside</a:documentation>
+        <choice>
+          <value>none</value>
+          <value>start</value>
+          <value>end</value>
+          <value>left</value>
+          <value>right</value>
+          <value>top</value>
+          <value>bottom</value>
+          <value>center</value>
+          <value>inside</value>
+          <value>outside</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-y
+  -->
+  <define name="axf_float-y">
+    <optional>
+      <attribute name="axf:float-y">
+        <a:documentation>Vertical (or horizontal if writing-mode is vertical) float alignment:    none | before | after | top | bottom | left | right | center | inside | outside</a:documentation>
+        <choice>
+          <value>none</value>
+          <value>before</value>
+          <value>after</value>
+          <value>top</value>
+          <value>bottom</value>
+          <value>left</value>
+          <value>right</value>
+          <value>center</value>
+          <value>inside</value>
+          <value>outside</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-reference
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-reference
+  -->
+  <define name="axf_float-reference">
+    <optional>
+      <attribute name="axf:float-reference">
+        <a:documentation>Reference area where the float is placed: auto | normal | page | column | multicol</a:documentation>
+        <choice>
+          <value>auto</value>
+          <value>normal</value>
+          <value>page</value>
+          <value>column</value>
+          <value>multicol</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-move
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-move
+  -->
+  <define name="axf_float-move">
+    <optional>
+      <attribute name="axf:float-move">
+        <a:documentation>Whether the float moves to the next page (or column): auto | next | auto-next | auto-move | keep | keep-float</a:documentation>
+        <choice>
+          <value>auto</value>
+          <value>next</value>
+          <value>auto-next</value>
+          <value>auto-move</value>
+          <value>keep</value>
+          <value>keep-float</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-wrap
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-wrap
+  -->
+  <define name="axf_float-wrap">
+    <optional>
+      <attribute name="axf:float-wrap">
+        <a:documentation>Text wrapping: auto | wrap | skip</a:documentation>
+        <choice>
+          <value>auto</value>
+          <value>wrap</value>
+          <value>skip</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-min-wrap-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-x
+  -->
+  <define name="axf_float-min-wrap-x">
+    <optional>
+      <attribute name="axf:float-min-wrap-x">
+        <a:documentation>Minimum width for the text wrapping around the float: normal | &lt;length&gt; | &lt;percentage&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-min-wrap-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-y
+  -->
+  <define name="axf_float-min-wrap-y">
+    <optional>
+      <attribute name="axf:float-min-wrap-y">
+        <a:documentation>Minimum extent for the text placed before and after the float: normal | &lt;length&gt; | &lt;percentage&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-centering-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-x
+  -->
+  <define name="axf_float-centering-x">
+    <optional>
+      <attribute name="axf:float-centering-x">
+        <a:documentation>Whether the float is centered when the width for the text wrapping around the float is insufficient: none | auto | &lt;length&gt; | &lt;percentage&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-centering-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-y
+  -->
+  <define name="axf_float-centering-y">
+    <optional>
+      <attribute name="axf:float-centering-y">
+        <a:documentation>Whether the float is centered when the extent for the text placed before and after the float is insufficient: none | auto | &lt;length&gt; | &lt;percentage&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-margin-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-x
+  -->
+  <define name="axf_float-margin-x">
+    <optional>
+      <attribute name="axf:float-margin-x">
+        <a:documentation>Space between the float and the text wrapping around the float (in x-axis): [ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-margin-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-y
+  -->
+  <define name="axf_float-margin-y">
+    <optional>
+      <attribute name="axf:float-margin-y">
+        <a:documentation>Space between the float and the text wrapping around the float (in y-axis): [ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-float-margin-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-x
+  -->
+  <define name="axf_float-float-margin-x">
+    <optional>
+      <attribute name="axf:float-float-margin-x">
+        <a:documentation>Space between the float and another neighboring float (in x-axis): auto | [[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?]</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-float-margin-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-y
+  -->
+  <define name="axf_float-float-margin-y">
+    <optional>
+      <attribute name="axf:float-float-margin-y">
+        <a:documentation>Space between the float and another neighboring float (in y-axis): auto | [[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?]</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-offset-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-x
+  -->
+  <define name="axf_float-offset-x">
+    <optional>
+      <attribute name="axf:float-offset-x">
+        <a:documentation>Offset placement for the float (in x-axis): &lt;length&gt; | &lt;percentage&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:float-offset-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-y
+  -->
+  <define name="axf_float-offset-y">
+    <optional>
+      <attribute name="axf:float-offset-y">
+        <a:documentation>Offset placement for the float (in y-axis): &lt;length&gt; | &lt;percentage&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
