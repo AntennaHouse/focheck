@@ -16,6 +16,9 @@
             </fo:change-bar-begin>
             <fo:block font-size="#aabbcc"><fo:inline font-weight="bold">focheck</fo:inline> validates XSL-FO 1.1 as well as Antenna House extensions.</fo:block>
             <fo:change-bar-end change-bar-class="a"/>
+            <fo:block><fo:inline font-weight="bold">focheck</fo:inline> validates MathML3 and SVG1.1
+                inside <fo:inline font-family="monospace"
+                >fo:instream-foreign-object</fo:inline>.</fo:block>
         </fo:flow>
     </fo:page-sequence>
 </fo:root>
