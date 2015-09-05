@@ -68,7 +68,7 @@ extensions.</description>
 <!-- Where to find XSLT files. -->
 <property name="xsl.dir" value="${focheck.basedir.converted}/xsl" />
 <!-- Basename of main (outermost) schema file. -->
-<property name="schema.basename" value="axf-mathml" />
+<property name="schema.basename" value="axf-mathml3-svg11" />
 <!-- Basename of main (outermost) schema file to convert to XSD. -->
 <property name="xsd.schema.basename" value="axf" />
 <!-- Main Schematron file. -->
