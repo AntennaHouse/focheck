@@ -16,7 +16,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<grammar ns="http://www.w3.org/1999/XSL/Format" xmlns="http://relaxng.org/ns/structure/1.0">
+<grammar ns="http://www.w3.org/2000/svg" xmlns="http://relaxng.org/ns/structure/1.0">
   <!-- MathML 3.0 -->
   <include href="mathml3.rng" ns="http://www.antennahouse.com/names/XSL/Extensions">
     <define name="anyElement">
@@ -26,6 +26,7 @@
             <nsName ns="http://www.w3.org/1998/Math/MathML"/>
             <nsName/>
             <nsName ns="http://www.w3.org/1999/XSL/Format"/>
+            <nsName ns="http://www.w3.org/2000/svg"/>
           </except>
         </anyName>
         <zeroOrMore>

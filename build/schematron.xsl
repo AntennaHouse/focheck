@@ -223,7 +223,7 @@
 
 
 	  <!--RULE -->
-   <xsl:template match="fo:basic-link" priority="1016" mode="M3">
+   <xsl:template match="fo:basic-link" priority="1018" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:basic-link"/>
 
 		    <!--REPORT Warning-->
@@ -243,7 +243,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:float" priority="1015" mode="M3">
+   <xsl:template match="fo:float" priority="1017" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:float"/>
 
 		    <!--REPORT -->
@@ -262,7 +262,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:footnote" priority="1014" mode="M3">
+   <xsl:template match="fo:footnote" priority="1016" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:footnote"/>
 
 		    <!--REPORT -->
@@ -315,7 +315,69 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:retrieve-marker" priority="1013" mode="M3">
+   <xsl:template match="fo:marker" priority="1015" mode="M3">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:marker"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="exists(ancestor::fo:flow)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists(ancestor::fo:flow)">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>An fo:marker is only permitted as the descendant of an fo:flow.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="empty(ancestor::fo:marker)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="empty(ancestor::fo:marker)">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>An fo:marker is not permitted as a descendant of an fo:marker.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="empty(ancestor::fo:retrieve-marker)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="empty(ancestor::fo:retrieve-marker)">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>An fo:marker is not permitted as a descendant of an fo:retrieve-marker.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="empty(ancestor::fo:retrieve-table-marker)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="empty(ancestor::fo:retrieve-table-marker)">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>An fo:marker is not permitted as a descendant of an fo:retrieve-table-marker.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="@*|*" mode="M3"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:retrieve-marker" priority="1014" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:retrieve-marker"/>
 
 		    <!--ASSERT -->
@@ -335,7 +397,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:retrieve-table-marker" priority="1012" mode="M3">
+   <xsl:template match="fo:retrieve-table-marker" priority="1013" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:retrieve-table-marker"/>
 
@@ -356,7 +418,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:root" priority="1011" mode="M3">
+   <xsl:template match="fo:root" priority="1012" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:root"/>
 
 		    <!--ASSERT -->
@@ -378,7 +440,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@column-count | fo:*/@number-columns-spanned"
-                 priority="1010"
+                 priority="1011"
                  mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@column-count | fo:*/@number-columns-spanned"/>
@@ -404,7 +466,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-width" priority="1009" mode="M3">
+   <xsl:template match="fo:*/@column-width" priority="1010" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-width"/>
       <xsl:variable name="number-columns-spanned"
                     select="ahf:parser-runner(../@number-columns-spanned)"/>
@@ -427,7 +489,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-map-reference" priority="1008" mode="M3">
+   <xsl:template match="fo:*/@flow-map-reference" priority="1009" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@flow-map-reference"/>
 
@@ -446,7 +508,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name" priority="1007" mode="M3">
+   <xsl:template match="fo:*/@flow-name" priority="1008" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-name"/>
 
 		    <!--ASSERT -->
@@ -481,7 +543,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name-reference" priority="1006" mode="M3">
+   <xsl:template match="fo:*/@flow-name-reference" priority="1007" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@flow-name-reference"/>
 
@@ -520,7 +582,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@language" priority="1005" mode="M3">
+   <xsl:template match="fo:*/@language" priority="1006" mode="M3">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@language"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -569,36 +631,29 @@
                <xsl:text/>"'</svrl:text>
          </svrl:successful-report>
       </xsl:if>
+   </xsl:template>
 
-		    <!--REPORT Warning-->
-      <xsl:if test="$expression instance of element(EnumerationToken) and string-length($expression/@token) = 2">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and string-length($expression/@token) = 2">
-            <xsl:attribute name="id">language_2-letter</xsl:attribute>
-            <xsl:attribute name="role">Warning</xsl:attribute>
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>language="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" uses a 2-letter code.  A 2-letter code in conformance with ISO639 will be converted to the corresponding 3-letter ISO639-2 terminology code.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
+	  <!--RULE -->
+   <xsl:template match="fo:marker/@marker-class-name" priority="1005" mode="M3">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:marker/@marker-class-name"/>
 
-		    <!--REPORT Warning-->
-      <xsl:if test="$expression instance of element(EnumerationToken) and $expression/@token = ('mul', 'none')">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and $expression/@token = ('mul', 'none')">
-            <xsl:attribute name="id">language_und</xsl:attribute>
-            <xsl:attribute name="role">Warning</xsl:attribute>
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>language="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" will be converted to 'und'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
+		    <!--ASSERT Warning-->
+      <xsl:choose>
+         <xsl:when test="count(../../fo:marker[@marker-class-name eq current()]) = 1"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="count(../../fo:marker[@marker-class-name eq current()]) = 1">
+               <xsl:attribute name="role">Warning</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>marker-class-name="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be unique among fo:marker with the same parent.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
    </xsl:template>
 
 	  <!--RULE -->
@@ -809,7 +864,7 @@
 
    <!--PATTERN fo-property-->
    <xsl:include xmlns="http://purl.oclc.org/dsdl/schematron"
-                href="file:/E:/Projects/oxygen/focheck/xsl/parser-runner.xsl"/>
+                href="file:/C:/projects/oxygen/focheck/xsl/parser-runner.xsl"/>
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@absolute-position" priority="1253" mode="M4">
@@ -1438,21 +1493,6 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>background-image="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" token should be 'none' or 'inherit'. Enumeration token is '<xsl:text/>
-               <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
 
 		    <!--REPORT Warning-->
       <xsl:if test="local-name($expression) = 'EMPTY'">
@@ -5979,55 +6019,6 @@
    <xsl:template match="fo:*/@external-destination" priority="1162" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@external-destination"/>
-      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'URI', 'EMPTY', 'ERROR', 'Object')"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'URI', 'EMPTY', 'ERROR', 'Object')">
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>external-destination="<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>" should be 'empty', 'string', or URI.  '<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>' is a <xsl:text/>
-                  <xsl:value-of select="local-name($expression)"/>
-                  <xsl:text/>.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('empty', 'string'))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('empty', 'string'))">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>external-destination="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" token should be 'empty' or 'string'. Enumeration token is '<xsl:text/>
-               <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
-		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'ERROR'">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>Syntax error: external-destination="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
    </xsl:template>
 
 	  <!--RULE -->
@@ -7819,55 +7810,6 @@
    <xsl:template match="fo:*/@internal-destination" priority="1128" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@internal-destination"/>
-      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>internal-destination="<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>" should be 'empty' or 'string'.  '<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>' is a <xsl:text/>
-                  <xsl:value-of select="local-name($expression)"/>
-                  <xsl:text/>.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('empty', 'string'))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('empty', 'string'))">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>internal-destination="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" token should be 'empty' or 'string'. Enumeration token is '<xsl:text/>
-               <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
-		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'ERROR'">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>Syntax error: internal-destination="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
    </xsl:template>
 
 	  <!--RULE -->
@@ -12687,21 +12629,6 @@
          </xsl:otherwise>
       </xsl:choose>
 
-		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>source-document="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" token should be 'none' or 'inherit'. Enumeration token is '<xsl:text/>
-               <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
 		    <!--REPORT Warning-->
       <xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13616,21 +13543,6 @@
          </xsl:otherwise>
       </xsl:choose>
 
-		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-target-processing-context'))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-target-processing-context'))">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>target-presentation-context="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" token should be 'use-target-processing-context'. Enumeration token is '<xsl:text/>
-               <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
 		    <!--REPORT Warning-->
       <xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13683,21 +13595,6 @@
          </xsl:otherwise>
       </xsl:choose>
 
-		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('document-root'))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('document-root'))">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>target-processing-context="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" token should be 'document-root'. Enumeration token is '<xsl:text/>
-               <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
 		    <!--REPORT Warning-->
       <xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13749,21 +13646,6 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-normal-stylesheet'))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-normal-stylesheet'))">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>target-stylesheet="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" token should be 'use-normal-stylesheet'. Enumeration token is '<xsl:text/>
-               <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
 
 		    <!--REPORT Warning-->
       <xsl:if test="local-name($expression) = 'EMPTY'">

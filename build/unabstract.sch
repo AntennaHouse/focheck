@@ -27,6 +27,14 @@
     <report test="exists(descendant::fo:*[local-name() = ('float', 'footnote', 'marker')])">An 'fo:footnote' is not permitted to have an 'fo:float', 'fo:footnote', or 'fo:marker' as a descendant.</report>
   </rule>
 
+  <rule context="fo:marker">
+    
+    <assert test="exists(ancestor::fo:flow)">An fo:marker is only permitted as the descendant of an fo:flow.</assert>
+    <assert test="empty(ancestor::fo:marker)">An fo:marker is not permitted as a descendant of an fo:marker.</assert>
+    <assert test="empty(ancestor::fo:retrieve-marker)">An fo:marker is not permitted as a descendant of an fo:retrieve-marker.</assert>
+    <assert test="empty(ancestor::fo:retrieve-table-marker)">An fo:marker is not permitted as a descendant of an fo:retrieve-table-marker.</assert>
+  </rule>
+
   <rule context="fo:retrieve-marker">
     
     <assert test="exists(ancestor::fo:static-content)">An fo:retrieve-marker is only permitted as the descendant of an fo:static-content.</assert>
@@ -81,8 +89,14 @@
     <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit') or string-length($expression/@token) = 2 or string-length($expression/@token) = 3)">language="<value-of select="."/>" should be a 3-letter code conforming to a ISO639-2 terminology or bibliographic code or a 2-letter code conforming to a ISO639 2-letter code or 'none' or 'inherit'.</report>
     <report test="local-name($expression) = 'ERROR'">Syntax error: 'language="<value-of select="."/>"'</report>
     
-    <report test="$expression instance of element(EnumerationToken) and string-length($expression/@token) = 2" id="language_2-letter" role="Warning">language="<value-of select="."/>" uses a 2-letter code.  A 2-letter code in conformance with ISO639 will be converted to the corresponding 3-letter ISO639-2 terminology code.</report>
-    <report test="$expression instance of element(EnumerationToken) and $expression/@token = ('mul', 'none')" id="language_und" role="Warning">language="<value-of select="."/>" will be converted to 'und'.</report>
+    
+    
+  </rule>
+
+  <rule context="fo:marker/@marker-class-name">
+    
+    
+    <assert test="count(../../fo:marker[@marker-class-name eq current()]) = 1" role="Warning">marker-class-name="<value-of select="."/>" should be unique among fo:marker with the same parent.</assert>
   </rule>
 
   <rule context="fo:*/@master-name">
@@ -118,7 +132,7 @@
 
 </pattern>
     <pattern xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" id="fo-property">
-   <xsl:include href="file:/E:/Projects/oxygen/focheck/xsl/parser-runner.xsl"/>
+   <xsl:include href="file:/C:/projects/oxygen/focheck/xsl/parser-runner.xsl"/>
 
    
    
@@ -253,7 +267,6 @@
    <rule context="fo:*/@background-image">
       <let name="expression" value="ahf:parser-runner(.)"/>
       <assert test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-image="<value-of select="."/>" should be URI, 'none', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">background-image="<value-of select="."/>" token should be 'none' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
       <report test="local-name($expression) = 'EMPTY'" role="Warning">background-image="" should be URI, 'none', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-image="<value-of select="."/>"</report>
    </rule>
@@ -1240,12 +1253,7 @@
    
    
    
-   <rule context="fo:*/@external-destination">
-      <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'URI', 'EMPTY', 'ERROR', 'Object')">external-destination="<value-of select="."/>" should be 'empty', 'string', or URI.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('empty', 'string'))">external-destination="<value-of select="."/>" token should be 'empty' or 'string'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'ERROR'">Syntax error: external-destination="<value-of select="."/>"</report>
-   </rule>
+   <rule context="fo:*/@external-destination"/>
 
    
    
@@ -1649,12 +1657,7 @@
    
    
    
-   <rule context="fo:*/@internal-destination">
-      <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">internal-destination="<value-of select="."/>" should be 'empty' or 'string'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('empty', 'string'))">internal-destination="<value-of select="."/>" token should be 'empty' or 'string'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'ERROR'">Syntax error: internal-destination="<value-of select="."/>"</report>
-   </rule>
+   <rule context="fo:*/@internal-destination"/>
 
    
    
@@ -2717,7 +2720,6 @@
    <rule context="fo:*/@source-document">
       <let name="expression" value="ahf:parser-runner(.)"/>
       <assert test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">source-document="<value-of select="."/>" should be URI, 'none', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">source-document="<value-of select="."/>" token should be 'none' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
       <report test="local-name($expression) = 'EMPTY'" role="Warning">source-document="" should be URI, 'none', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: source-document="<value-of select="."/>"</report>
    </rule>
@@ -2907,7 +2909,6 @@
    <rule context="fo:*/@target-presentation-context">
       <let name="expression" value="ahf:parser-runner(.)"/>
       <assert test="local-name($expression) = ('EnumerationToken', 'URI', 'EMPTY', 'ERROR', 'Object')">target-presentation-context="<value-of select="."/>" should be 'use-target-processing-context' or URI.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-target-processing-context'))">target-presentation-context="<value-of select="."/>" token should be 'use-target-processing-context'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
       <report test="local-name($expression) = 'EMPTY'" role="Warning">target-presentation-context="" should be 'use-target-processing-context' or URI.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: target-presentation-context="<value-of select="."/>"</report>
    </rule>
@@ -2920,7 +2921,6 @@
    <rule context="fo:*/@target-processing-context">
       <let name="expression" value="ahf:parser-runner(.)"/>
       <assert test="local-name($expression) = ('EnumerationToken', 'URI', 'EMPTY', 'ERROR', 'Object')">target-processing-context="<value-of select="."/>" should be 'document-root' or URI.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('document-root'))">target-processing-context="<value-of select="."/>" token should be 'document-root'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
       <report test="local-name($expression) = 'EMPTY'" role="Warning">target-processing-context="" should be 'document-root' or URI.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: target-processing-context="<value-of select="."/>"</report>
    </rule>
@@ -2933,7 +2933,6 @@
    <rule context="fo:*/@target-stylesheet">
       <let name="expression" value="ahf:parser-runner(.)"/>
       <assert test="local-name($expression) = ('EnumerationToken', 'URI', 'EMPTY', 'ERROR', 'Object')">target-stylesheet="<value-of select="."/>" should be 'use-normal-stylesheet' or URI.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-normal-stylesheet'))">target-stylesheet="<value-of select="."/>" token should be 'use-normal-stylesheet'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
       <report test="local-name($expression) = 'EMPTY'" role="Warning">target-stylesheet="" should be 'use-normal-stylesheet' or URI.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: target-stylesheet="<value-of select="."/>"</report>
    </rule>
