@@ -384,9 +384,11 @@ AFTER making a release on GitHub:
        excludes="**"
        update="true">
     <zipfileset dir="."
-		includes="README.md, LICENSE.md, *.framework"
+		includes="README.md, LICENSE*.md, *.framework"
 		prefix="${ant.project.name}" />
     <!--<zipfileset dir="css" includes="*.css" prefix="${ant.project.name}/css" />-->
+    <zipfileset dir="schema" includes="catalog.xml, *.ent"
+		prefix="${ant.project.name}/schema" />
     <zipfileset dir="schema/rng" includes="*.rng"
 		prefix="${ant.project.name}/schema/rng" />
     <zipfileset dir="schematron" includes="*.sch"
