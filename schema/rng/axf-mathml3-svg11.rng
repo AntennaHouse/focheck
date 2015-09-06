@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Adds MathML m:math to fo:instream-foriegn-object.
+  Adds MathML3 m:math and SVG1.1 svg:svg to fo:instream-foriegn-object.
   
   Copyright 2015 Antenna House, Inc.
   
@@ -20,6 +20,9 @@
   <!-- MathML 3.0 schema with Antenna House overrides. -->
   <define name="math">
     <externalRef href="axf-mathml3-override.rng" ns="http://www.antennahouse.com/names/XSL/Extensions"/>
+  </define>
+  <define name="svg">
+    <externalRef href="svg11-flat-20110816.rng" ns="http://www.antennahouse.com/names/XSL/Extensions"/>
   </define>
   <include href="axf.rng" ns="http://www.antennahouse.com/names/XSL/Extensions">
     <!--
@@ -48,6 +51,7 @@
                 <nsName ns="http://www.w3.org/1999/XSL/Format"/>
                 <nsName/>
                 <nsName ns="http://www.w3.org/1998/Math/MathML"/>
+                <nsName ns="http://www.w3.org/2000/svg"/>
               </except>
             </anyName>
             <zeroOrMore>
@@ -65,6 +69,7 @@
           </element>
         </zeroOrMore>
         <ref name="math"/>
+        <ref name="svg"/>
       </choice>
     </define>
     <!-- For fo:instream-foreign-object -->

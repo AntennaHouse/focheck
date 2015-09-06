@@ -1,4 +1,4 @@
-# Adds MathML m:math to fo:instream-foriegn-object.
+# Adds MathML3 m:math and SVG1.1 svg:svg to fo:instream-foriegn-object.
 #
 # Copyright 2015 Antenna House, Inc.
 #
@@ -17,11 +17,13 @@
 default namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
 namespace fo = "http://www.w3.org/1999/XSL/Format"
 namespace m = "http://www.w3.org/1998/Math/MathML"
+namespace svg = "http://www.w3.org/2000/svg"
 namespace local = ""
 
 
 # MathML 3.0 schema with Antenna House overrides.
 math = external "axf-mathml3-override.rnc"
+svg = external "svg11-flat-20110816.rnc"
 
 include "axf.rnc" {
 
@@ -30,7 +32,7 @@ include "axf.rnc" {
 # Allow MathML m:math
 non-xsl =
   ( attribute * - ( local:* | axf:* | xml:* ) { text }*,
-    ( ( element * - ( local:* | fo:* | axf:* | m:* ) { attribute * - (id | ref-id | internal-destination ) { text }*, anything }* ) | math ) )
+    ( ( element * - ( local:* | fo:* | axf:* | m:* | svg:* ) { attribute * - (id | ref-id | internal-destination ) { text }*, anything }* ) | math | svg) )
 
 # For fo:instream-foreign-object
 anything =
