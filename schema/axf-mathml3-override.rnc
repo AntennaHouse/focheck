@@ -17,12 +17,13 @@
 default namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
 namespace fo = "http://www.w3.org/1999/XSL/Format"
 namespace m = "http://www.w3.org/1998/Math/MathML"
+namespace svg = "http://www.w3.org/2000/svg"
 namespace local = ""
 
 
 # MathML 3.0
 include "mathml3.rnc" {
 
-anyElement =  element (* - (m:* | axf:* | fo:*)) {(attribute * {text}|text| anyElement)*}
+anyElement =  element (* - (m:* | axf:* | fo:* | svg:*)) {(attribute * {text}|text| anyElement)*}
 
 }
