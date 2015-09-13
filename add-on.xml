@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
     <xt:extension id="focheck">
-        <xt:location href="https://github.com/AntennaHouse/focheck/releases/download/v0.3.0/focheck-framework-0.3.0.zip"/>
-        <xt:version>0.3.0</xt:version>
+        <xt:location href="https://github.com/AntennaHouse/focheck/releases/download/v0.3.1/focheck-framework-0.3.1.zip"/>
+        <xt:version>0.3.1</xt:version>
         <xt:oxy_version>14.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Antenna House, Inc.</xt:author>

@@ -1450,9 +1450,9 @@
    
    <rule context="fo:*/@glyph-orientation-horizontal">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">glyph-orientation-horizontal="<value-of select="."/>" should be 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <assert test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">glyph-orientation-horizontal="<value-of select="."/>" should be Literal or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
       <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">glyph-orientation-horizontal="<value-of select="."/>" token should be 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">glyph-orientation-horizontal="" should be 'inherit'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">glyph-orientation-horizontal="" should be Literal or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: glyph-orientation-horizontal="<value-of select="."/>"</report>
    </rule>
 
@@ -1463,9 +1463,9 @@
    
    <rule context="fo:*/@glyph-orientation-vertical">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">glyph-orientation-vertical="<value-of select="."/>" should be 'auto' or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <assert test="local-name($expression) = ('EnumerationToken', 'Literal', 'EMPTY', 'ERROR', 'Object')">glyph-orientation-vertical="<value-of select="."/>" should be 'auto', 'inherit', or Literal.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
       <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">glyph-orientation-vertical="<value-of select="."/>" token should be 'auto' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">glyph-orientation-vertical="" should be 'auto' or 'inherit'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">glyph-orientation-vertical="" should be 'auto', 'inherit', or Literal.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: glyph-orientation-vertical="<value-of select="."/>"</report>
    </rule>
 

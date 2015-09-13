@@ -22,13 +22,13 @@
     <externalRef href="axf-mathml3-override.rng" ns="http://www.antennahouse.com/names/XSL/Extensions"/>
   </define>
   <define name="svg">
-    <externalRef href="svg11-flat-20110816.rng" ns="http://www.antennahouse.com/names/XSL/Extensions"/>
+    <externalRef href="axf-svg11-override.rng" ns="http://www.antennahouse.com/names/XSL/Extensions"/>
   </define>
   <include href="axf.rng" ns="http://www.antennahouse.com/names/XSL/Extensions">
     <!--
       For fo:instream-foreign-object
       Exclude axf:* elements and attributes from counting as 'non-xsl'.
-      Allow MathML m:math
+      Allow MathML m:math and svg:svg
     -->
     <define name="non-xsl">
       <zeroOrMore>

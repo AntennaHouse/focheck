@@ -6832,16 +6832,16 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>glyph-orientation-horizontal="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be 'inherit'.  '<xsl:text/>
+                  <xsl:text/>" should be Literal or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6873,7 +6873,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>glyph-orientation-horizontal="" should be 'inherit'.</svrl:text>
+            <svrl:text>glyph-orientation-horizontal="" should be Literal or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -6899,16 +6899,16 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Literal', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('EnumerationToken', 'Literal', 'EMPTY', 'ERROR', 'Object')">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>glyph-orientation-vertical="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be 'auto' or 'inherit'.  '<xsl:text/>
+                  <xsl:text/>" should be 'auto', 'inherit', or Literal.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -6940,7 +6940,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>glyph-orientation-vertical="" should be 'auto' or 'inherit'.</svrl:text>
+            <svrl:text>glyph-orientation-vertical="" should be 'auto', 'inherit', or Literal.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
