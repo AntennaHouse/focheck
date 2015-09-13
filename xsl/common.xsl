@@ -273,8 +273,7 @@
 </xsl:function>
 
 <!-- ahf:allowed-datatypes-text($datatypes as xs:string+) as xs:string -->
-<!-- Returns true() if $property is an aural property.  Returns
-     false() if not. -->
+<!-- Returns string of allowed datatypes for use in a message. -->
 <xsl:function name="ahf:allowed-datatypes-text" as="xs:string">
   <xsl:param name="datatypes" as="xs:string+" />
   <xsl:param name="enum-tokens" as="xs:string*" />
