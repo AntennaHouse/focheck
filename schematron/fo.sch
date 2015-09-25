@@ -74,6 +74,10 @@
 
   <!-- Properties -->
 
+  <rule context="fo:*/@character | fo:*/@grouping-separator">
+    <assert test="string-length(.) = 1" id="character_grouping-separator"><value-of select="local-name()" />="<value-of select="."/>" should be a single character.</assert>
+  </rule>
+
   <rule context="fo:*/@column-count | fo:*/@number-columns-spanned">
     <let name="expression" value="ahf:parser-runner(.)"/>
     <report test="local-name($expression) = 'Number' and
@@ -118,6 +122,10 @@
     <!-- These flows must be either all fo:flow formatting objects or
          all fo:static-content formatting objects. -->
     <assert test="count(distinct-values(for $fo in key('flow-name', .)[ancestor::fo:page-sequence/@flow-map-reference = current()/ancestor::fo:flow-map/@flow-map-name] return local-name($fo))) = 1" role="Warning">flow-name-reference="<value-of select="."/>" should only be used with all fo:flow or all fo:static-content.</assert>
+  </rule>
+
+  <rule context="fo:*/@hyphenation-character">
+    <assert test="string-length(.) = 1 or . eq 'inherit'" id="hyphenation-character"><value-of select="local-name()" />="<value-of select="."/>" should be a single character or 'inherit'.</assert>
   </rule>
 
   <rule context="fo:*/@language">

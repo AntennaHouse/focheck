@@ -88,9 +88,12 @@
 <!-- Properties for which no Schematron rule will be generated.
      Mostly the properties that can have string values. -->
 <xsl:variable name="skipped-properties" as="xs:string">
+character
 external-destination
 font-family
 format
+grouping-separator
+hyphenation-character
 id
 index-key
 internal-destination
