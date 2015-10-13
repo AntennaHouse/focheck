@@ -249,8 +249,8 @@ text-align
                 select="distinct-values(for $datatype in $datatypes
                                           return if ($datatype = ('NCName'))
                                                    then 'EnumerationToken'
-                                                 else if ($datatype = ('Color'))
-                                                   then ('Color', 'EnumerationToken')
+                                                 else if ($datatype = ('Color', 'Literal'))
+                                                   then ($datatype, 'EnumerationToken')
                                                  else $datatype)"
                 as="xs:string+" />
 
