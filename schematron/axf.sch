@@ -20,6 +20,9 @@
     <xsl:key name="flow-name"
 	     match="fo:flow | fo:static-content"
 	     use="@flow-name" />
+    <xsl:key name="index-key"
+	     match="*[exists(@index-key)]"
+	     use="@index-key" />
     <xsl:key name="master-name"
 	     match="fo:simple-page-master | fo:page-sequence-master"
 	     use="@master-name" />

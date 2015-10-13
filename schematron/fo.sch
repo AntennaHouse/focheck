@@ -165,6 +165,15 @@
     <report test=". eq 'repeat' and ../@absolute-position = ('absolute', 'fixed')" role="Warning">overflow="<value-of select="."/>" on an absolutely-positioned area will be treated as 'auto'.</report>
   </rule>
 
+  <rule context="fo:index-key-reference/@ref-index-key">
+    <!-- http://www.w3.org/TR/xsl11/#ref-index-key -->
+    <let name="index-key-reference" value="." />
+    <report
+	test="empty(key('index-key', .))" role="Warning">ref-index-key="<value-of select="."/>" does not match any index-key values.</report>
+    <report
+	test="exists(key('index-key', .)) and (some $index-hit in key('index-key', .) satisfies $index-hit >> $index-key-reference)" role="Warning">ref-index-key="<value-of select="."/>" occurs before a matching index-key value.</report>
+  </rule>
+
   <rule context="fo:*/@region-name">
     <!-- http://www.w3.org/TR/xsl11/#region-name -->
     <assert test="count(distinct-values(for $fo in key('region-name', .) return local-name($fo))) = 1" role="Warning">region-name="<value-of select="."/>" should only be used with regions of the same class.</assert>
