@@ -36,6 +36,7 @@
    <xsl:key name="flow-name"
             match="fo:flow | fo:static-content"
             use="@flow-name"/>
+   <xsl:key name="index-key" match="*[exists(@index-key)]" use="@index-key"/>
    <xsl:key name="master-name"
             match="fo:simple-page-master | fo:page-sequence-master"
             use="@master-name"/>
@@ -189,7 +190,7 @@
             <xsl:attribute name="name">fo-fo</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M3"/>
+         <xsl:apply-templates select="/" mode="M4"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
@@ -198,7 +199,7 @@
             <xsl:attribute name="name">fo-property</xsl:attribute>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M4"/>
+         <xsl:apply-templates select="/" mode="M5"/>
          <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/1999/XSL/Format" prefix="fo"/>
          <svrl:ns-prefix-in-attribute-values uri="http://www.antennahouse.com/names/XSLT/Functions/Document"
                                              prefix="ahf"/>
@@ -212,7 +213,7 @@
             <svrl:text>http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info</svrl:text>
             <xsl:apply-templates/>
          </svrl:active-pattern>
-         <xsl:apply-templates select="/" mode="M10"/>
+         <xsl:apply-templates select="/" mode="M11"/>
       </svrl:schematron-output>
    </xsl:template>
 
@@ -223,7 +224,7 @@
 
 
 	  <!--RULE -->
-   <xsl:template match="fo:basic-link" priority="1018" mode="M3">
+   <xsl:template match="fo:basic-link" priority="1021" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:basic-link"/>
 
 		    <!--REPORT Warning-->
@@ -239,11 +240,11 @@
                <xsl:text/>' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
-      <xsl:apply-templates select="@*|*" mode="M3"/>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:float" priority="1017" mode="M3">
+   <xsl:template match="fo:float" priority="1020" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:float"/>
 
 		    <!--REPORT -->
@@ -258,11 +259,11 @@
                <xsl:text/>' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
-      <xsl:apply-templates select="@*|*" mode="M3"/>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:footnote" priority="1016" mode="M3">
+   <xsl:template match="fo:footnote" priority="1019" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:footnote"/>
 
 		    <!--REPORT -->
@@ -311,11 +312,11 @@
             <svrl:text>An 'fo:footnote' is not permitted to have an 'fo:float', 'fo:footnote', or 'fo:marker' as a descendant.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
-      <xsl:apply-templates select="@*|*" mode="M3"/>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:marker" priority="1015" mode="M3">
+   <xsl:template match="fo:marker" priority="1018" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:marker"/>
 
 		    <!--ASSERT -->
@@ -373,11 +374,11 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="@*|*" mode="M3"/>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:retrieve-marker" priority="1014" mode="M3">
+   <xsl:template match="fo:retrieve-marker" priority="1017" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:retrieve-marker"/>
 
 		    <!--ASSERT -->
@@ -393,11 +394,11 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="@*|*" mode="M3"/>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:retrieve-table-marker" priority="1013" mode="M3">
+   <xsl:template match="fo:retrieve-table-marker" priority="1016" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:retrieve-table-marker"/>
 
@@ -414,11 +415,11 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="@*|*" mode="M3"/>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:root" priority="1012" mode="M3">
+   <xsl:template match="fo:root" priority="1015" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:root"/>
 
 		    <!--ASSERT -->
@@ -435,13 +436,40 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="@*|*" mode="M3"/>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@character | fo:*/@grouping-separator"
+                 priority="1014"
+                 mode="M4">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@character | fo:*/@grouping-separator"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="string-length(.) = 1"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="string-length(.) = 1">
+               <xsl:attribute name="id">character_grouping-separator</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>
+                  <xsl:text/>
+                  <xsl:value-of select="local-name()"/>
+                  <xsl:text/>="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be a single character.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
    </xsl:template>
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@column-count | fo:*/@number-columns-spanned"
-                 priority="1011"
-                 mode="M3">
+                 priority="1013"
+                 mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@column-count | fo:*/@number-columns-spanned"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -466,7 +494,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-width" priority="1010" mode="M3">
+   <xsl:template match="fo:*/@column-width" priority="1012" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-width"/>
       <xsl:variable name="number-columns-spanned"
                     select="ahf:parser-runner(../@number-columns-spanned)"/>
@@ -489,7 +517,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-map-reference" priority="1009" mode="M3">
+   <xsl:template match="fo:*/@flow-map-reference" priority="1011" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@flow-map-reference"/>
 
@@ -508,7 +536,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name" priority="1008" mode="M3">
+   <xsl:template match="fo:*/@flow-name" priority="1010" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-name"/>
 
 		    <!--ASSERT -->
@@ -543,7 +571,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name-reference" priority="1007" mode="M3">
+   <xsl:template match="fo:*/@flow-name-reference" priority="1009" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@flow-name-reference"/>
 
@@ -582,7 +610,33 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@language" priority="1006" mode="M3">
+   <xsl:template match="fo:*/@hyphenation-character" priority="1008" mode="M4">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@hyphenation-character"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="string-length(.) = 1 or . eq 'inherit'"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="string-length(.) = 1 or . eq 'inherit'">
+               <xsl:attribute name="id">hyphenation-character</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>
+                  <xsl:text/>
+                  <xsl:value-of select="local-name()"/>
+                  <xsl:text/>="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be a single character or 'inherit'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@language" priority="1007" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@language"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -634,7 +688,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:marker/@marker-class-name" priority="1005" mode="M3">
+   <xsl:template match="fo:marker/@marker-class-name" priority="1006" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:marker/@marker-class-name"/>
 
@@ -657,7 +711,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-name" priority="1004" mode="M3">
+   <xsl:template match="fo:*/@master-name" priority="1005" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@master-name"/>
 
 		    <!--ASSERT Warning-->
@@ -679,7 +733,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-reference" priority="1003" mode="M3">
+   <xsl:template match="fo:*/@master-reference" priority="1004" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@master-reference"/>
 
@@ -716,7 +770,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@overflow" priority="1002" mode="M3">
+   <xsl:template match="fo:*/@overflow" priority="1003" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@overflow"/>
 
 		    <!--REPORT Warning-->
@@ -735,7 +789,44 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@region-name" priority="1001" mode="M3">
+   <xsl:template match="fo:index-key-reference/@ref-index-key"
+                 priority="1002"
+                 mode="M4">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:index-key-reference/@ref-index-key"/>
+      <xsl:variable name="index-key-reference" select="."/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="empty(key('index-key', .))">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="empty(key('index-key', .))">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>ref-index-key="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" does not match any index-key values.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="exists(key('index-key', .)) and (some $index-hit in key('index-key', .) satisfies $index-hit &gt;&gt; $index-key-reference)">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="exists(key('index-key', .)) and (some $index-hit in key('index-key', .) satisfies $index-hit &gt;&gt; $index-key-reference)">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>ref-index-key="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" occurs before a matching index-key value.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@region-name" priority="1001" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@region-name"/>
 
 		    <!--ASSERT Warning-->
@@ -837,7 +928,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@region-name-reference" priority="1000" mode="M3">
+   <xsl:template match="fo:*/@region-name-reference" priority="1000" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@region-name-reference"/>
 
@@ -857,17 +948,17 @@
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M3"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M3">
-      <xsl:apply-templates select="@*|*" mode="M3"/>
+   <xsl:template match="text()" priority="-1" mode="M4"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M4">
+      <xsl:apply-templates select="@*|*" mode="M4"/>
    </xsl:template>
 
    <!--PATTERN fo-property-->
    <xsl:include xmlns="http://purl.oclc.org/dsdl/schematron"
-                href="file:/C:/projects/oxygen/focheck/xsl/parser-runner.xsl"/>
+                href="file:/E:/Projects/oxygen/focheck/xsl/parser-runner.xsl"/>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@absolute-position" priority="1253" mode="M4">
+   <xsl:template match="fo:*/@absolute-position" priority="1253" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@absolute-position"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -934,7 +1025,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@active-state" priority="1252" mode="M4">
+   <xsl:template match="fo:*/@active-state" priority="1252" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@active-state"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -1000,7 +1091,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@alignment-adjust" priority="1251" mode="M4">
+   <xsl:template match="fo:*/@alignment-adjust" priority="1251" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@alignment-adjust"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1067,7 +1158,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@alignment-baseline" priority="1250" mode="M4">
+   <xsl:template match="fo:*/@alignment-baseline" priority="1250" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@alignment-baseline"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1134,7 +1225,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@allowed-height-scale" priority="1249" mode="M4">
+   <xsl:template match="fo:*/@allowed-height-scale" priority="1249" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@allowed-height-scale"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1201,7 +1292,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@allowed-width-scale" priority="1248" mode="M4">
+   <xsl:template match="fo:*/@allowed-width-scale" priority="1248" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@allowed-width-scale"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1268,7 +1359,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@auto-restore" priority="1247" mode="M4">
+   <xsl:template match="fo:*/@auto-restore" priority="1247" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@auto-restore"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -1334,7 +1425,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background" priority="1246" mode="M4">
+   <xsl:template match="fo:*/@background" priority="1246" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@background"/>
 
 		    <!--REPORT Warning-->
@@ -1350,7 +1441,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-attachment" priority="1245" mode="M4">
+   <xsl:template match="fo:*/@background-attachment" priority="1245" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-attachment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1417,7 +1508,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-color" priority="1244" mode="M4">
+   <xsl:template match="fo:*/@background-color" priority="1244" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1469,7 +1560,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-image" priority="1243" mode="M4">
+   <xsl:template match="fo:*/@background-image" priority="1243" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-image"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1521,7 +1612,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-position" priority="1242" mode="M4">
+   <xsl:template match="fo:*/@background-position" priority="1242" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-position"/>
 
@@ -1540,7 +1631,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@background-position-horizontal"
                  priority="1241"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-position-horizontal"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1609,7 +1700,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@background-position-vertical"
                  priority="1240"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-position-vertical"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1676,7 +1767,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-repeat" priority="1239" mode="M4">
+   <xsl:template match="fo:*/@background-repeat" priority="1239" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-repeat"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1743,7 +1834,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@baseline-shift" priority="1238" mode="M4">
+   <xsl:template match="fo:*/@baseline-shift" priority="1238" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@baseline-shift"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -1809,7 +1900,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@blank-or-not-blank" priority="1237" mode="M4">
+   <xsl:template match="fo:*/@blank-or-not-blank" priority="1237" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@blank-or-not-blank"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1876,7 +1967,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@block-progression-dimension" priority="1236" mode="M4">
+   <xsl:template match="fo:*/@block-progression-dimension" priority="1236" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@block-progression-dimension"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -1943,7 +2034,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border" priority="1235" mode="M4">
+   <xsl:template match="fo:*/@border" priority="1235" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border"/>
 
 		    <!--REPORT Warning-->
@@ -1959,7 +2050,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-after-color" priority="1234" mode="M4">
+   <xsl:template match="fo:*/@border-after-color" priority="1234" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-after-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2011,7 +2102,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-after-precedence" priority="1233" mode="M4">
+   <xsl:template match="fo:*/@border-after-precedence" priority="1233" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-after-precedence"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2078,7 +2169,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-after-style" priority="1232" mode="M4">
+   <xsl:template match="fo:*/@border-after-style" priority="1232" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-after-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2145,7 +2236,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-after-width" priority="1231" mode="M4">
+   <xsl:template match="fo:*/@border-after-width" priority="1231" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-after-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2212,7 +2303,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-before-color" priority="1230" mode="M4">
+   <xsl:template match="fo:*/@border-before-color" priority="1230" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-before-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2264,7 +2355,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-before-precedence" priority="1229" mode="M4">
+   <xsl:template match="fo:*/@border-before-precedence" priority="1229" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-before-precedence"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2331,7 +2422,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-before-style" priority="1228" mode="M4">
+   <xsl:template match="fo:*/@border-before-style" priority="1228" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-before-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2398,7 +2489,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-before-width" priority="1227" mode="M4">
+   <xsl:template match="fo:*/@border-before-width" priority="1227" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-before-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2465,7 +2556,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-bottom" priority="1226" mode="M4">
+   <xsl:template match="fo:*/@border-bottom" priority="1226" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-bottom"/>
 
 		    <!--REPORT Warning-->
@@ -2481,7 +2572,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-bottom-color" priority="1225" mode="M4">
+   <xsl:template match="fo:*/@border-bottom-color" priority="1225" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-bottom-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2533,7 +2624,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-bottom-style" priority="1224" mode="M4">
+   <xsl:template match="fo:*/@border-bottom-style" priority="1224" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-bottom-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2600,7 +2691,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-bottom-width" priority="1223" mode="M4">
+   <xsl:template match="fo:*/@border-bottom-width" priority="1223" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-bottom-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2667,7 +2758,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-collapse" priority="1222" mode="M4">
+   <xsl:template match="fo:*/@border-collapse" priority="1222" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-collapse"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -2733,7 +2824,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-color" priority="1221" mode="M4">
+   <xsl:template match="fo:*/@border-color" priority="1221" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-color"/>
 
 		    <!--REPORT Warning-->
@@ -2749,7 +2840,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-end-color" priority="1220" mode="M4">
+   <xsl:template match="fo:*/@border-end-color" priority="1220" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-end-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2801,7 +2892,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-end-precedence" priority="1219" mode="M4">
+   <xsl:template match="fo:*/@border-end-precedence" priority="1219" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-end-precedence"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2868,7 +2959,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-end-style" priority="1218" mode="M4">
+   <xsl:template match="fo:*/@border-end-style" priority="1218" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-end-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -2935,7 +3026,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-end-width" priority="1217" mode="M4">
+   <xsl:template match="fo:*/@border-end-width" priority="1217" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-end-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3002,7 +3093,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-left" priority="1216" mode="M4">
+   <xsl:template match="fo:*/@border-left" priority="1216" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-left"/>
 
 		    <!--REPORT Warning-->
@@ -3018,7 +3109,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-left-color" priority="1215" mode="M4">
+   <xsl:template match="fo:*/@border-left-color" priority="1215" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-left-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3070,7 +3161,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-left-style" priority="1214" mode="M4">
+   <xsl:template match="fo:*/@border-left-style" priority="1214" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-left-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3137,7 +3228,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-left-width" priority="1213" mode="M4">
+   <xsl:template match="fo:*/@border-left-width" priority="1213" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-left-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3204,7 +3295,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-right" priority="1212" mode="M4">
+   <xsl:template match="fo:*/@border-right" priority="1212" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-right"/>
 
 		    <!--REPORT Warning-->
@@ -3220,7 +3311,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-right-color" priority="1211" mode="M4">
+   <xsl:template match="fo:*/@border-right-color" priority="1211" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-right-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3272,7 +3363,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-right-style" priority="1210" mode="M4">
+   <xsl:template match="fo:*/@border-right-style" priority="1210" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-right-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3339,7 +3430,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-right-width" priority="1209" mode="M4">
+   <xsl:template match="fo:*/@border-right-width" priority="1209" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-right-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3406,7 +3497,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-separation" priority="1208" mode="M4">
+   <xsl:template match="fo:*/@border-separation" priority="1208" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-separation"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3473,7 +3564,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-spacing" priority="1207" mode="M4">
+   <xsl:template match="fo:*/@border-spacing" priority="1207" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-spacing"/>
 
 		    <!--REPORT Warning-->
@@ -3489,7 +3580,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-start-color" priority="1206" mode="M4">
+   <xsl:template match="fo:*/@border-start-color" priority="1206" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-start-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3541,7 +3632,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-start-precedence" priority="1205" mode="M4">
+   <xsl:template match="fo:*/@border-start-precedence" priority="1205" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-start-precedence"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3608,7 +3699,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-start-style" priority="1204" mode="M4">
+   <xsl:template match="fo:*/@border-start-style" priority="1204" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-start-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3675,7 +3766,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-start-width" priority="1203" mode="M4">
+   <xsl:template match="fo:*/@border-start-width" priority="1203" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-start-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3742,7 +3833,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-style" priority="1202" mode="M4">
+   <xsl:template match="fo:*/@border-style" priority="1202" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-style"/>
 
 		    <!--REPORT Warning-->
@@ -3758,7 +3849,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-top" priority="1201" mode="M4">
+   <xsl:template match="fo:*/@border-top" priority="1201" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-top"/>
 
 		    <!--REPORT Warning-->
@@ -3774,7 +3865,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-top-color" priority="1200" mode="M4">
+   <xsl:template match="fo:*/@border-top-color" priority="1200" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-top-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3826,7 +3917,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-top-style" priority="1199" mode="M4">
+   <xsl:template match="fo:*/@border-top-style" priority="1199" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-top-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3893,7 +3984,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-top-width" priority="1198" mode="M4">
+   <xsl:template match="fo:*/@border-top-width" priority="1198" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-top-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -3960,7 +4051,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-width" priority="1197" mode="M4">
+   <xsl:template match="fo:*/@border-width" priority="1197" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-width"/>
 
 		    <!--REPORT Warning-->
@@ -3976,7 +4067,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@bottom" priority="1196" mode="M4">
+   <xsl:template match="fo:*/@bottom" priority="1196" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@bottom"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -4042,7 +4133,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@break-after" priority="1195" mode="M4">
+   <xsl:template match="fo:*/@break-after" priority="1195" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@break-after"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -4108,7 +4199,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@break-before" priority="1194" mode="M4">
+   <xsl:template match="fo:*/@break-before" priority="1194" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@break-before"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -4174,7 +4265,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@caption-side" priority="1193" mode="M4">
+   <xsl:template match="fo:*/@caption-side" priority="1193" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@caption-side"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -4240,7 +4331,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@case-name" priority="1192" mode="M4">
+   <xsl:template match="fo:*/@case-name" priority="1192" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@case-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -4291,22 +4382,22 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@case-title" priority="1191" mode="M4">
+   <xsl:template match="fo:*/@case-title" priority="1191" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@case-title"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>case-title="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Literal.  '<xsl:text/>
+                  <xsl:text/>" should be Literal or EnumerationToken.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -4323,7 +4414,7 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>case-title="" should be Literal.</svrl:text>
+            <svrl:text>case-title="" should be Literal or EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -4342,7 +4433,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-class" priority="1190" mode="M4">
+   <xsl:template match="fo:*/@change-bar-class" priority="1190" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@change-bar-class"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -4394,7 +4485,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-color" priority="1189" mode="M4">
+   <xsl:template match="fo:*/@change-bar-color" priority="1189" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@change-bar-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -4446,7 +4537,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-offset" priority="1188" mode="M4">
+   <xsl:template match="fo:*/@change-bar-offset" priority="1188" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@change-bar-offset"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -4498,7 +4589,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-placement" priority="1187" mode="M4">
+   <xsl:template match="fo:*/@change-bar-placement" priority="1187" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@change-bar-placement"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -4565,7 +4656,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-style" priority="1186" mode="M4">
+   <xsl:template match="fo:*/@change-bar-style" priority="1186" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@change-bar-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -4632,7 +4723,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-width" priority="1185" mode="M4">
+   <xsl:template match="fo:*/@change-bar-width" priority="1185" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@change-bar-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -4699,58 +4790,23 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@character" priority="1184" mode="M4">
+   <xsl:template match="fo:*/@character" priority="1184" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@character"/>
-      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')">
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>character="<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>" should be Literal.  '<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>' is a <xsl:text/>
-                  <xsl:value-of select="local-name($expression)"/>
-                  <xsl:text/>.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'EMPTY'">
+      <xsl:if test=". eq ''">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>character="" should be Literal.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
-		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'ERROR'">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>Syntax error: character="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+            <svrl:text>character="" should be '&lt;character&gt;'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@clear" priority="1183" mode="M4">
+   <xsl:template match="fo:*/@clear" priority="1183" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@clear"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -4816,7 +4872,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@clip" priority="1182" mode="M4">
+   <xsl:template match="fo:*/@clip" priority="1182" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@clip"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -4882,7 +4938,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@color" priority="1181" mode="M4">
+   <xsl:template match="fo:*/@color" priority="1181" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -4933,7 +4989,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@color-profile-name" priority="1180" mode="M4">
+   <xsl:template match="fo:*/@color-profile-name" priority="1180" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@color-profile-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -4985,7 +5041,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-count" priority="1179" mode="M4">
+   <xsl:template match="fo:*/@column-count" priority="1179" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-count"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5051,7 +5107,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-gap" priority="1178" mode="M4">
+   <xsl:template match="fo:*/@column-gap" priority="1178" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-gap"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5117,7 +5173,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-number" priority="1177" mode="M4">
+   <xsl:template match="fo:*/@column-number" priority="1177" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-number"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5168,7 +5224,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-width" priority="1176" mode="M4">
+   <xsl:template match="fo:*/@column-width" priority="1176" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5219,7 +5275,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@content-height" priority="1175" mode="M4">
+   <xsl:template match="fo:*/@content-height" priority="1175" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@content-height"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5285,7 +5341,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@content-type" priority="1174" mode="M4">
+   <xsl:template match="fo:*/@content-type" priority="1174" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@content-type"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5351,7 +5407,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@content-width" priority="1173" mode="M4">
+   <xsl:template match="fo:*/@content-width" priority="1173" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@content-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5417,7 +5473,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@country" priority="1172" mode="M4">
+   <xsl:template match="fo:*/@country" priority="1172" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@country"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5483,7 +5539,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@cue" priority="1171" mode="M4">
+   <xsl:template match="fo:*/@cue" priority="1171" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@cue"/>
 
 		    <!--REPORT Warning-->
@@ -5501,7 +5557,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@destination-placement-offset"
                  priority="1170"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@destination-placement-offset"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -5553,7 +5609,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@direction" priority="1169" mode="M4">
+   <xsl:template match="fo:*/@direction" priority="1169" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@direction"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5619,7 +5675,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@display-align" priority="1168" mode="M4">
+   <xsl:template match="fo:*/@display-align" priority="1168" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@display-align"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5685,7 +5741,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@dominant-baseline" priority="1167" mode="M4">
+   <xsl:template match="fo:*/@dominant-baseline" priority="1167" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@dominant-baseline"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -5752,7 +5808,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@empty-cells" priority="1166" mode="M4">
+   <xsl:template match="fo:*/@empty-cells" priority="1166" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@empty-cells"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5818,7 +5874,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@end-indent" priority="1165" mode="M4">
+   <xsl:template match="fo:*/@end-indent" priority="1165" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@end-indent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5884,7 +5940,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@ends-row" priority="1164" mode="M4">
+   <xsl:template match="fo:*/@ends-row" priority="1164" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@ends-row"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -5950,7 +6006,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@extent" priority="1163" mode="M4">
+   <xsl:template match="fo:*/@extent" priority="1163" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@extent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -6016,13 +6072,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@external-destination" priority="1162" mode="M4">
+   <xsl:template match="fo:*/@external-destination" priority="1162" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@external-destination"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@float" priority="1161" mode="M4">
+   <xsl:template match="fo:*/@float" priority="1161" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@float"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -6088,7 +6144,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-map-name" priority="1160" mode="M4">
+   <xsl:template match="fo:*/@flow-map-name" priority="1160" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-map-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -6139,7 +6195,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-map-reference" priority="1159" mode="M4">
+   <xsl:template match="fo:*/@flow-map-reference" priority="1159" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@flow-map-reference"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -6191,7 +6247,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name" priority="1158" mode="M4">
+   <xsl:template match="fo:*/@flow-name" priority="1158" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -6242,7 +6298,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name-reference" priority="1157" mode="M4">
+   <xsl:template match="fo:*/@flow-name-reference" priority="1157" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@flow-name-reference"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -6294,7 +6350,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font" priority="1156" mode="M4">
+   <xsl:template match="fo:*/@font" priority="1156" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font"/>
 
 		    <!--REPORT Warning-->
@@ -6310,7 +6366,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-family" priority="1155" mode="M4">
+   <xsl:template match="fo:*/@font-family" priority="1155" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-family"/>
 
 		    <!--REPORT Warning-->
@@ -6326,7 +6382,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-selection-strategy" priority="1154" mode="M4">
+   <xsl:template match="fo:*/@font-selection-strategy" priority="1154" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@font-selection-strategy"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -6393,7 +6449,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-size" priority="1153" mode="M4">
+   <xsl:template match="fo:*/@font-size" priority="1153" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-size"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -6459,7 +6515,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-size-adjust" priority="1152" mode="M4">
+   <xsl:template match="fo:*/@font-size-adjust" priority="1152" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@font-size-adjust"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -6526,7 +6582,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-stretch" priority="1151" mode="M4">
+   <xsl:template match="fo:*/@font-stretch" priority="1151" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-stretch"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -6592,7 +6648,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-style" priority="1150" mode="M4">
+   <xsl:template match="fo:*/@font-style" priority="1150" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -6658,7 +6714,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-variant" priority="1149" mode="M4">
+   <xsl:template match="fo:*/@font-variant" priority="1149" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-variant"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -6724,7 +6780,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-weight" priority="1148" mode="M4">
+   <xsl:template match="fo:*/@font-weight" priority="1148" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-weight"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -6790,7 +6846,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@force-page-count" priority="1147" mode="M4">
+   <xsl:template match="fo:*/@force-page-count" priority="1147" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@force-page-count"/>
 
@@ -6807,7 +6863,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@format" priority="1146" mode="M4">
+   <xsl:template match="fo:*/@format" priority="1146" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@format"/>
 
 		    <!--REPORT Warning-->
@@ -6825,7 +6881,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@glyph-orientation-horizontal"
                  priority="1145"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@glyph-orientation-horizontal"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -6892,7 +6948,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@glyph-orientation-vertical" priority="1144" mode="M4">
+   <xsl:template match="fo:*/@glyph-orientation-vertical" priority="1144" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@glyph-orientation-vertical"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -6959,59 +7015,24 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@grouping-separator" priority="1143" mode="M4">
+   <xsl:template match="fo:*/@grouping-separator" priority="1143" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@grouping-separator"/>
-      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')">
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>grouping-separator="<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>" should be Literal.  '<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>' is a <xsl:text/>
-                  <xsl:value-of select="local-name($expression)"/>
-                  <xsl:text/>.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'EMPTY'">
+      <xsl:if test=". eq ''">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>grouping-separator="" should be Literal.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
-		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'ERROR'">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>Syntax error: grouping-separator="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+            <svrl:text>grouping-separator="" should be '&lt;character&gt;'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@grouping-size" priority="1142" mode="M4">
+   <xsl:template match="fo:*/@grouping-size" priority="1142" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@grouping-size"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -7062,7 +7083,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@height" priority="1141" mode="M4">
+   <xsl:template match="fo:*/@height" priority="1141" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@height"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -7128,7 +7149,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenate" priority="1140" mode="M4">
+   <xsl:template match="fo:*/@hyphenate" priority="1140" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@hyphenate"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -7194,74 +7215,24 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenation-character" priority="1139" mode="M4">
+   <xsl:template match="fo:*/@hyphenation-character" priority="1139" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@hyphenation-character"/>
-      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <svrl:text>hyphenation-character="<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>" should be Literal or 'inherit'.  '<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>' is a <xsl:text/>
-                  <xsl:value-of select="local-name($expression)"/>
-                  <xsl:text/>.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>hyphenation-character="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
-               <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'EMPTY'">
+      <xsl:if test=". eq ''">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>hyphenation-character="" should be Literal or 'inherit'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
-		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'ERROR'">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <svrl:text>Syntax error: hyphenation-character="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+            <svrl:text>hyphenation-character="" should be '&lt;character&gt; | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenation-keep" priority="1138" mode="M4">
+   <xsl:template match="fo:*/@hyphenation-keep" priority="1138" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@hyphenation-keep"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -7328,7 +7299,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenation-ladder-count" priority="1137" mode="M4">
+   <xsl:template match="fo:*/@hyphenation-ladder-count" priority="1137" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@hyphenation-ladder-count"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -7397,7 +7368,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@hyphenation-push-character-count"
                  priority="1136"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@hyphenation-push-character-count"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -7466,7 +7437,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@hyphenation-remain-character-count"
                  priority="1135"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@hyphenation-remain-character-count"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -7533,7 +7504,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@id" priority="1134" mode="M4">
+   <xsl:template match="fo:*/@id" priority="1134" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@id"/>
 
 		    <!--REPORT Warning-->
@@ -7549,22 +7520,22 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@index-class" priority="1133" mode="M4">
+   <xsl:template match="fo:*/@index-class" priority="1133" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@index-class"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:when test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')">
+                                test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
                <svrl:text>index-class="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Literal.  '<xsl:text/>
+                  <xsl:text/>" should be Literal or EnumerationToken.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -7588,7 +7559,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@index-key" priority="1132" mode="M4">
+   <xsl:template match="fo:*/@index-key" priority="1132" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@index-key"/>
 
 		    <!--REPORT Warning-->
@@ -7604,7 +7575,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@indicate-destination" priority="1131" mode="M4">
+   <xsl:template match="fo:*/@indicate-destination" priority="1131" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@indicate-destination"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -7671,7 +7642,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@initial-page-number" priority="1130" mode="M4">
+   <xsl:template match="fo:*/@initial-page-number" priority="1130" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@initial-page-number"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -7740,7 +7711,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@inline-progression-dimension"
                  priority="1129"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@inline-progression-dimension"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -7807,13 +7778,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@internal-destination" priority="1128" mode="M4">
+   <xsl:template match="fo:*/@internal-destination" priority="1128" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@internal-destination"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@intrinsic-scale-value" priority="1127" mode="M4">
+   <xsl:template match="fo:*/@intrinsic-scale-value" priority="1127" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@intrinsic-scale-value"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -7880,7 +7851,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@intrusion-displace" priority="1126" mode="M4">
+   <xsl:template match="fo:*/@intrusion-displace" priority="1126" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@intrusion-displace"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -7947,7 +7918,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@keep-together" priority="1125" mode="M4">
+   <xsl:template match="fo:*/@keep-together" priority="1125" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@keep-together"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -8013,7 +7984,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@keep-with-next" priority="1124" mode="M4">
+   <xsl:template match="fo:*/@keep-with-next" priority="1124" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@keep-with-next"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -8079,7 +8050,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@keep-with-previous" priority="1123" mode="M4">
+   <xsl:template match="fo:*/@keep-with-previous" priority="1123" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@keep-with-previous"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -8146,7 +8117,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@language" priority="1122" mode="M4">
+   <xsl:template match="fo:*/@language" priority="1122" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@language"/>
 
 		    <!--REPORT Warning-->
@@ -8162,7 +8133,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@last-line-end-indent" priority="1121" mode="M4">
+   <xsl:template match="fo:*/@last-line-end-indent" priority="1121" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@last-line-end-indent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -8229,7 +8200,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@leader-alignment" priority="1120" mode="M4">
+   <xsl:template match="fo:*/@leader-alignment" priority="1120" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@leader-alignment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -8296,7 +8267,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@leader-length" priority="1119" mode="M4">
+   <xsl:template match="fo:*/@leader-length" priority="1119" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@leader-length"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -8362,7 +8333,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@leader-pattern" priority="1118" mode="M4">
+   <xsl:template match="fo:*/@leader-pattern" priority="1118" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@leader-pattern"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -8428,7 +8399,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@leader-pattern-width" priority="1117" mode="M4">
+   <xsl:template match="fo:*/@leader-pattern-width" priority="1117" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@leader-pattern-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -8495,7 +8466,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@left" priority="1116" mode="M4">
+   <xsl:template match="fo:*/@left" priority="1116" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@left"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -8561,7 +8532,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@letter-spacing" priority="1115" mode="M4">
+   <xsl:template match="fo:*/@letter-spacing" priority="1115" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@letter-spacing"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -8627,7 +8598,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@letter-value" priority="1114" mode="M4">
+   <xsl:template match="fo:*/@letter-value" priority="1114" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@letter-value"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -8693,7 +8664,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@line-height" priority="1113" mode="M4">
+   <xsl:template match="fo:*/@line-height" priority="1113" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@line-height"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -8761,7 +8732,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@line-height-shift-adjustment"
                  priority="1112"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@line-height-shift-adjustment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -8828,7 +8799,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@line-stacking-strategy" priority="1111" mode="M4">
+   <xsl:template match="fo:*/@line-stacking-strategy" priority="1111" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@line-stacking-strategy"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -8895,7 +8866,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@linefeed-treatment" priority="1110" mode="M4">
+   <xsl:template match="fo:*/@linefeed-treatment" priority="1110" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@linefeed-treatment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -8962,7 +8933,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@margin" priority="1109" mode="M4">
+   <xsl:template match="fo:*/@margin" priority="1109" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@margin"/>
 
 		    <!--REPORT Warning-->
@@ -8978,7 +8949,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@margin-bottom" priority="1108" mode="M4">
+   <xsl:template match="fo:*/@margin-bottom" priority="1108" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@margin-bottom"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -9044,7 +9015,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@margin-left" priority="1107" mode="M4">
+   <xsl:template match="fo:*/@margin-left" priority="1107" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@margin-left"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -9110,7 +9081,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@margin-right" priority="1106" mode="M4">
+   <xsl:template match="fo:*/@margin-right" priority="1106" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@margin-right"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -9176,7 +9147,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@margin-top" priority="1105" mode="M4">
+   <xsl:template match="fo:*/@margin-top" priority="1105" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@margin-top"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -9242,7 +9213,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@marker-class-name" priority="1104" mode="M4">
+   <xsl:template match="fo:*/@marker-class-name" priority="1104" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@marker-class-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -9294,7 +9265,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-name" priority="1103" mode="M4">
+   <xsl:template match="fo:*/@master-name" priority="1103" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@master-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -9345,7 +9316,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-reference" priority="1102" mode="M4">
+   <xsl:template match="fo:*/@master-reference" priority="1102" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@master-reference"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -9397,7 +9368,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@max-height" priority="1101" mode="M4">
+   <xsl:template match="fo:*/@max-height" priority="1101" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@max-height"/>
 
 		    <!--REPORT Warning-->
@@ -9413,7 +9384,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@max-width" priority="1100" mode="M4">
+   <xsl:template match="fo:*/@max-width" priority="1100" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@max-width"/>
 
 		    <!--REPORT Warning-->
@@ -9429,7 +9400,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@maximum-repeats" priority="1099" mode="M4">
+   <xsl:template match="fo:*/@maximum-repeats" priority="1099" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@maximum-repeats"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -9495,7 +9466,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@media-usage" priority="1098" mode="M4">
+   <xsl:template match="fo:*/@media-usage" priority="1098" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@media-usage"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -9563,7 +9534,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@merge-pages-across-index-key-references"
                  priority="1097"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@merge-pages-across-index-key-references"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -9632,7 +9603,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@merge-ranges-across-index-key-references"
                  priority="1096"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@merge-ranges-across-index-key-references"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -9701,7 +9672,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@merge-sequential-page-numbers"
                  priority="1095"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@merge-sequential-page-numbers"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -9768,7 +9739,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@min-height" priority="1094" mode="M4">
+   <xsl:template match="fo:*/@min-height" priority="1094" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@min-height"/>
 
 		    <!--REPORT Warning-->
@@ -9784,7 +9755,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@min-width" priority="1093" mode="M4">
+   <xsl:template match="fo:*/@min-width" priority="1093" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@min-width"/>
 
 		    <!--REPORT Warning-->
@@ -9800,7 +9771,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@number-columns-repeated" priority="1092" mode="M4">
+   <xsl:template match="fo:*/@number-columns-repeated" priority="1092" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@number-columns-repeated"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -9852,7 +9823,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@number-columns-spanned" priority="1091" mode="M4">
+   <xsl:template match="fo:*/@number-columns-spanned" priority="1091" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@number-columns-spanned"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -9904,7 +9875,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@number-rows-spanned" priority="1090" mode="M4">
+   <xsl:template match="fo:*/@number-rows-spanned" priority="1090" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@number-rows-spanned"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -9956,7 +9927,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@odd-or-even" priority="1089" mode="M4">
+   <xsl:template match="fo:*/@odd-or-even" priority="1089" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@odd-or-even"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10022,7 +9993,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@orphans" priority="1088" mode="M4">
+   <xsl:template match="fo:*/@orphans" priority="1088" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@orphans"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10088,7 +10059,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@overflow" priority="1087" mode="M4">
+   <xsl:template match="fo:*/@overflow" priority="1087" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@overflow"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10154,7 +10125,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding" priority="1086" mode="M4">
+   <xsl:template match="fo:*/@padding" priority="1086" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding"/>
 
 		    <!--REPORT Warning-->
@@ -10170,7 +10141,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-after" priority="1085" mode="M4">
+   <xsl:template match="fo:*/@padding-after" priority="1085" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-after"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10236,7 +10207,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-before" priority="1084" mode="M4">
+   <xsl:template match="fo:*/@padding-before" priority="1084" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-before"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10302,7 +10273,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-bottom" priority="1083" mode="M4">
+   <xsl:template match="fo:*/@padding-bottom" priority="1083" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-bottom"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10368,7 +10339,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-end" priority="1082" mode="M4">
+   <xsl:template match="fo:*/@padding-end" priority="1082" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-end"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10434,7 +10405,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-left" priority="1081" mode="M4">
+   <xsl:template match="fo:*/@padding-left" priority="1081" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-left"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10500,7 +10471,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-right" priority="1080" mode="M4">
+   <xsl:template match="fo:*/@padding-right" priority="1080" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-right"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10566,7 +10537,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-start" priority="1079" mode="M4">
+   <xsl:template match="fo:*/@padding-start" priority="1079" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-start"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10632,7 +10603,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-top" priority="1078" mode="M4">
+   <xsl:template match="fo:*/@padding-top" priority="1078" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-top"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10698,7 +10669,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-break-after" priority="1077" mode="M4">
+   <xsl:template match="fo:*/@page-break-after" priority="1077" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@page-break-after"/>
 
@@ -10715,7 +10686,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-break-before" priority="1076" mode="M4">
+   <xsl:template match="fo:*/@page-break-before" priority="1076" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@page-break-before"/>
 
@@ -10732,7 +10703,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-break-inside" priority="1075" mode="M4">
+   <xsl:template match="fo:*/@page-break-inside" priority="1075" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@page-break-inside"/>
 
@@ -10749,7 +10720,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-citation-strategy" priority="1074" mode="M4">
+   <xsl:template match="fo:*/@page-citation-strategy" priority="1074" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@page-citation-strategy"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -10816,7 +10787,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-height" priority="1073" mode="M4">
+   <xsl:template match="fo:*/@page-height" priority="1073" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@page-height"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -10882,7 +10853,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-number-treatment" priority="1072" mode="M4">
+   <xsl:template match="fo:*/@page-number-treatment" priority="1072" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@page-number-treatment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -10949,7 +10920,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-position" priority="1071" mode="M4">
+   <xsl:template match="fo:*/@page-position" priority="1071" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@page-position"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -11015,7 +10986,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-width" priority="1070" mode="M4">
+   <xsl:template match="fo:*/@page-width" priority="1070" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@page-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -11081,7 +11052,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@pause" priority="1069" mode="M4">
+   <xsl:template match="fo:*/@pause" priority="1069" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@pause"/>
 
 		    <!--REPORT Warning-->
@@ -11097,7 +11068,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@position" priority="1068" mode="M4">
+   <xsl:template match="fo:*/@position" priority="1068" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@position"/>
 
 		    <!--REPORT Warning-->
@@ -11113,7 +11084,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@precedence" priority="1067" mode="M4">
+   <xsl:template match="fo:*/@precedence" priority="1067" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@precedence"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -11181,7 +11152,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@provisional-distance-between-starts"
                  priority="1066"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@provisional-distance-between-starts"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -11250,7 +11221,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@provisional-label-separation"
                  priority="1065"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@provisional-label-separation"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -11317,7 +11288,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@ref-id" priority="1064" mode="M4">
+   <xsl:template match="fo:*/@ref-id" priority="1064" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@ref-id"/>
 
 		    <!--REPORT Warning-->
@@ -11333,7 +11304,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@ref-index-key" priority="1063" mode="M4">
+   <xsl:template match="fo:*/@ref-index-key" priority="1063" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@ref-index-key"/>
 
 		    <!--REPORT Warning-->
@@ -11349,7 +11320,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@reference-orientation" priority="1062" mode="M4">
+   <xsl:template match="fo:*/@reference-orientation" priority="1062" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@reference-orientation"/>
 
@@ -11366,7 +11337,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@region-name" priority="1061" mode="M4">
+   <xsl:template match="fo:*/@region-name" priority="1061" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@region-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -11417,7 +11388,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@region-name-reference" priority="1060" mode="M4">
+   <xsl:template match="fo:*/@region-name-reference" priority="1060" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@region-name-reference"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -11469,7 +11440,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@relative-align" priority="1059" mode="M4">
+   <xsl:template match="fo:*/@relative-align" priority="1059" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@relative-align"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -11535,7 +11506,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@relative-position" priority="1058" mode="M4">
+   <xsl:template match="fo:*/@relative-position" priority="1058" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@relative-position"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -11602,7 +11573,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@rendering-intent" priority="1057" mode="M4">
+   <xsl:template match="fo:*/@rendering-intent" priority="1057" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@rendering-intent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -11669,7 +11640,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@retrieve-boundary" priority="1056" mode="M4">
+   <xsl:template match="fo:*/@retrieve-boundary" priority="1056" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@retrieve-boundary"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -11738,7 +11709,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@retrieve-boundary-within-table"
                  priority="1055"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@retrieve-boundary-within-table"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -11805,7 +11776,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@retrieve-class-name" priority="1054" mode="M4">
+   <xsl:template match="fo:*/@retrieve-class-name" priority="1054" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@retrieve-class-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -11857,7 +11828,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@retrieve-position" priority="1053" mode="M4">
+   <xsl:template match="fo:*/@retrieve-position" priority="1053" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@retrieve-position"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -11926,7 +11897,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@retrieve-position-within-table"
                  priority="1052"
-                 mode="M4">
+                 mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@retrieve-position-within-table"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -11993,7 +11964,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@right" priority="1051" mode="M4">
+   <xsl:template match="fo:*/@right" priority="1051" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@right"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12059,7 +12030,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@role" priority="1050" mode="M4">
+   <xsl:template match="fo:*/@role" priority="1050" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@role"/>
 
 		    <!--REPORT Warning-->
@@ -12075,7 +12046,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@rule-style" priority="1049" mode="M4">
+   <xsl:template match="fo:*/@rule-style" priority="1049" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@rule-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12141,7 +12112,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@rule-thickness" priority="1048" mode="M4">
+   <xsl:template match="fo:*/@rule-thickness" priority="1048" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@rule-thickness"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12192,7 +12163,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@scale-option" priority="1047" mode="M4">
+   <xsl:template match="fo:*/@scale-option" priority="1047" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@scale-option"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12258,7 +12229,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@scaling" priority="1046" mode="M4">
+   <xsl:template match="fo:*/@scaling" priority="1046" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@scaling"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12324,7 +12295,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@scaling-method" priority="1045" mode="M4">
+   <xsl:template match="fo:*/@scaling-method" priority="1045" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@scaling-method"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12390,7 +12361,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@score-spaces" priority="1044" mode="M4">
+   <xsl:template match="fo:*/@score-spaces" priority="1044" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@score-spaces"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12456,7 +12427,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@script" priority="1043" mode="M4">
+   <xsl:template match="fo:*/@script" priority="1043" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@script"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12522,7 +12493,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@show-destination" priority="1042" mode="M4">
+   <xsl:template match="fo:*/@show-destination" priority="1042" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@show-destination"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -12589,7 +12560,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@size" priority="1041" mode="M4">
+   <xsl:template match="fo:*/@size" priority="1041" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@size"/>
 
 		    <!--REPORT Warning-->
@@ -12605,7 +12576,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@source-document" priority="1040" mode="M4">
+   <xsl:template match="fo:*/@source-document" priority="1040" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@source-document"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12656,7 +12627,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@space-after" priority="1039" mode="M4">
+   <xsl:template match="fo:*/@space-after" priority="1039" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@space-after"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12722,7 +12693,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@space-before" priority="1038" mode="M4">
+   <xsl:template match="fo:*/@space-before" priority="1038" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@space-before"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12788,7 +12759,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@space-end" priority="1037" mode="M4">
+   <xsl:template match="fo:*/@space-end" priority="1037" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@space-end"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12854,7 +12825,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@space-start" priority="1036" mode="M4">
+   <xsl:template match="fo:*/@space-start" priority="1036" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@space-start"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12920,7 +12891,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@span" priority="1035" mode="M4">
+   <xsl:template match="fo:*/@span" priority="1035" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@span"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -12986,7 +12957,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@src" priority="1034" mode="M4">
+   <xsl:template match="fo:*/@src" priority="1034" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@src"/>
 
 		    <!--REPORT Warning-->
@@ -13002,7 +12973,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@start-indent" priority="1033" mode="M4">
+   <xsl:template match="fo:*/@start-indent" priority="1033" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@start-indent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -13068,7 +13039,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@starting-state" priority="1032" mode="M4">
+   <xsl:template match="fo:*/@starting-state" priority="1032" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@starting-state"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -13134,7 +13105,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@starts-row" priority="1031" mode="M4">
+   <xsl:template match="fo:*/@starts-row" priority="1031" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@starts-row"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -13200,7 +13171,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@suppress-at-line-break" priority="1030" mode="M4">
+   <xsl:template match="fo:*/@suppress-at-line-break" priority="1030" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@suppress-at-line-break"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -13267,7 +13238,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@switch-to" priority="1029" mode="M4">
+   <xsl:template match="fo:*/@switch-to" priority="1029" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@switch-to"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -13318,7 +13289,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@table-layout" priority="1028" mode="M4">
+   <xsl:template match="fo:*/@table-layout" priority="1028" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@table-layout"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -13384,7 +13355,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@table-omit-footer-at-break" priority="1027" mode="M4">
+   <xsl:template match="fo:*/@table-omit-footer-at-break" priority="1027" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@table-omit-footer-at-break"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -13451,7 +13422,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@table-omit-header-at-break" priority="1026" mode="M4">
+   <xsl:template match="fo:*/@table-omit-header-at-break" priority="1026" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@table-omit-header-at-break"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -13518,7 +13489,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@target-presentation-context" priority="1025" mode="M4">
+   <xsl:template match="fo:*/@target-presentation-context" priority="1025" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@target-presentation-context"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -13570,7 +13541,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@target-processing-context" priority="1024" mode="M4">
+   <xsl:template match="fo:*/@target-processing-context" priority="1024" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@target-processing-context"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -13622,7 +13593,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@target-stylesheet" priority="1023" mode="M4">
+   <xsl:template match="fo:*/@target-stylesheet" priority="1023" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@target-stylesheet"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -13674,7 +13645,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-align" priority="1022" mode="M4">
+   <xsl:template match="fo:*/@text-align" priority="1022" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-align"/>
 
 		    <!--REPORT Warning-->
@@ -13690,7 +13661,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-align-last" priority="1021" mode="M4">
+   <xsl:template match="fo:*/@text-align-last" priority="1021" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-align-last"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -13756,7 +13727,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-altitude" priority="1020" mode="M4">
+   <xsl:template match="fo:*/@text-altitude" priority="1020" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-altitude"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -13822,7 +13793,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-decoration" priority="1019" mode="M4">
+   <xsl:template match="fo:*/@text-decoration" priority="1019" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-decoration"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -13888,7 +13859,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-depth" priority="1018" mode="M4">
+   <xsl:template match="fo:*/@text-depth" priority="1018" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-depth"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -13954,7 +13925,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-indent" priority="1017" mode="M4">
+   <xsl:template match="fo:*/@text-indent" priority="1017" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-indent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14020,7 +13991,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-shadow" priority="1016" mode="M4">
+   <xsl:template match="fo:*/@text-shadow" priority="1016" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-shadow"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14071,7 +14042,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-transform" priority="1015" mode="M4">
+   <xsl:template match="fo:*/@text-transform" priority="1015" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-transform"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14137,7 +14108,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@top" priority="1014" mode="M4">
+   <xsl:template match="fo:*/@top" priority="1014" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@top"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14203,7 +14174,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@treat-as-word-space" priority="1013" mode="M4">
+   <xsl:template match="fo:*/@treat-as-word-space" priority="1013" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@treat-as-word-space"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -14270,7 +14241,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@unicode-bidi" priority="1012" mode="M4">
+   <xsl:template match="fo:*/@unicode-bidi" priority="1012" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@unicode-bidi"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14336,7 +14307,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@vertical-align" priority="1011" mode="M4">
+   <xsl:template match="fo:*/@vertical-align" priority="1011" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@vertical-align"/>
 
 		    <!--REPORT Warning-->
@@ -14352,7 +14323,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@visibility" priority="1010" mode="M4">
+   <xsl:template match="fo:*/@visibility" priority="1010" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@visibility"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14418,7 +14389,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@white-space" priority="1009" mode="M4">
+   <xsl:template match="fo:*/@white-space" priority="1009" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@white-space"/>
 
 		    <!--REPORT Warning-->
@@ -14434,7 +14405,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@white-space-collapse" priority="1008" mode="M4">
+   <xsl:template match="fo:*/@white-space-collapse" priority="1008" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@white-space-collapse"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -14501,7 +14472,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@white-space-treatment" priority="1007" mode="M4">
+   <xsl:template match="fo:*/@white-space-treatment" priority="1007" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@white-space-treatment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -14568,7 +14539,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@widows" priority="1006" mode="M4">
+   <xsl:template match="fo:*/@widows" priority="1006" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@widows"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14634,7 +14605,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@width" priority="1005" mode="M4">
+   <xsl:template match="fo:*/@width" priority="1005" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14700,7 +14671,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@word-spacing" priority="1004" mode="M4">
+   <xsl:template match="fo:*/@word-spacing" priority="1004" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@word-spacing"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14766,7 +14737,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@wrap-option" priority="1003" mode="M4">
+   <xsl:template match="fo:*/@wrap-option" priority="1003" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@wrap-option"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14832,7 +14803,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@writing-mode" priority="1002" mode="M4">
+   <xsl:template match="fo:*/@writing-mode" priority="1002" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@writing-mode"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14898,7 +14869,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@xml.lang" priority="1001" mode="M4">
+   <xsl:template match="fo:*/@xml.lang" priority="1001" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@xml.lang"/>
 
 		    <!--REPORT Warning-->
@@ -14914,7 +14885,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@z-index" priority="1000" mode="M4">
+   <xsl:template match="fo:*/@z-index" priority="1000" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@z-index"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -14978,9 +14949,9 @@
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M4"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M4">
-      <xsl:apply-templates select="@*|*" mode="M4"/>
+   <xsl:template match="text()" priority="-1" mode="M5"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M5">
+      <xsl:apply-templates select="@*|*" mode="M5"/>
    </xsl:template>
 
    <!--PATTERN axf-->
@@ -14989,7 +14960,7 @@
 	  <!--RULE axf-1-->
    <xsl:template match="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
                  priority="1015"
-                 mode="M10">
+                 mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
                        id="axf-1"
@@ -15011,13 +14982,13 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="@*|*" mode="M10"/>
+      <xsl:apply-templates select="@*|*" mode="M11"/>
    </xsl:template>
 
 	  <!--RULE -->
    <xsl:template match="axf:document-info[@name = 'title']"
                  priority="1014"
-                 mode="M10">
+                 mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:document-info[@name = 'title']"/>
 
@@ -15037,11 +15008,11 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="@*|*" mode="M10"/>
+      <xsl:apply-templates select="@*|*" mode="M11"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-color" priority="1013" mode="M10">
+   <xsl:template match="fo:*/@axf:background-color" priority="1013" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15095,7 +15066,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-height"
                  priority="1012"
-                 mode="M10">
+                 mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-height"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15164,7 +15135,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-type"
                  priority="1011"
-                 mode="M10">
+                 mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-type"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15233,7 +15204,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-width"
                  priority="1010"
-                 mode="M10">
+                 mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15300,7 +15271,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-color" priority="1009" mode="M10">
+   <xsl:template match="fo:*/@axf:background-color" priority="1009" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15352,7 +15323,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-image" priority="1008" mode="M10">
+   <xsl:template match="fo:*/@axf:background-image" priority="1008" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-image"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15419,7 +15390,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-position" priority="1007" mode="M10">
+   <xsl:template match="fo:*/@background-position" priority="1007" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-position"/>
 
@@ -15438,7 +15409,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-position-horizontal"
                  priority="1006"
-                 mode="M10">
+                 mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-horizontal"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15507,7 +15478,7 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-position-vertical"
                  priority="1005"
-                 mode="M10">
+                 mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-vertical"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15574,7 +15545,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-repeat" priority="1004" mode="M10">
+   <xsl:template match="fo:*/@axf:background-repeat" priority="1004" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-repeat"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15641,7 +15612,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-color" priority="1003" mode="M10">
+   <xsl:template match="fo:*/@axf:outline-color" priority="1003" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:outline-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15679,7 +15650,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-level" priority="1002" mode="M10">
+   <xsl:template match="fo:*/@axf:outline-level" priority="1002" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:outline-level"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15717,7 +15688,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-scaling" priority="1001" mode="M10">
+   <xsl:template match="fo:*/@axf:background-scaling" priority="1001" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-scaling"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15784,7 +15755,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@overflow" priority="1000" mode="M10">
+   <xsl:template match="fo:*/@overflow" priority="1000" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@overflow"/>
 
 		    <!--REPORT -->
@@ -15800,8 +15771,8 @@
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M10"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M10">
-      <xsl:apply-templates select="@*|*" mode="M10"/>
+   <xsl:template match="text()" priority="-1" mode="M11"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M11">
+      <xsl:apply-templates select="@*|*" mode="M11"/>
    </xsl:template>
 </xsl:stylesheet>

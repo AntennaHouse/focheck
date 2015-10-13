@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
     <xsl:key name="flow-name" match="fo:flow | fo:static-content" use="@flow-name"/>
+    <xsl:key name="index-key" match="*[exists(@index-key)]" use="@index-key"/>
     <xsl:key name="master-name" match="fo:simple-page-master | fo:page-sequence-master" use="@master-name"/>
     <xsl:key name="region-name" match="fo:region-before | fo:region-after |       fo:region-start | fo:region-end |       fo:region-body" use="@region-name"/>
 
@@ -52,6 +53,10 @@
 
   
 
+  <rule context="fo:*/@character | fo:*/@grouping-separator">
+    <assert test="string-length(.) = 1" id="character_grouping-separator"><value-of select="local-name()"/>="<value-of select="."/>" should be a single character.</assert>
+  </rule>
+
   <rule context="fo:*/@column-count | fo:*/@number-columns-spanned">
     <let name="expression" value="ahf:parser-runner(.)"/>
     <report test="local-name($expression) = 'Number' and                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or                    $expression/@is-zero = 'yes' or                    exists($expression/@value) and not($expression/@value castable as xs:integer))" id="column-count" role="Warning"><value-of select="local-name()"/>="<value-of select="."/>" should be a positive integer.  A non-positive or non-integer value will be rounded to the nearest integer value greater than or equal to 1.</report>
@@ -79,6 +84,10 @@
     
     
     <assert test="count(distinct-values(for $fo in key('flow-name', .)[ancestor::fo:page-sequence/@flow-map-reference = current()/ancestor::fo:flow-map/@flow-map-name] return local-name($fo))) = 1" role="Warning">flow-name-reference="<value-of select="."/>" should only be used with all fo:flow or all fo:static-content.</assert>
+  </rule>
+
+  <rule context="fo:*/@hyphenation-character">
+    <assert test="string-length(.) = 1 or . eq 'inherit'" id="hyphenation-character"><value-of select="local-name()"/>="<value-of select="."/>" should be a single character or 'inherit'.</assert>
   </rule>
 
   <rule context="fo:*/@language">
@@ -115,6 +124,13 @@
     <report test=". eq 'repeat' and ../@absolute-position = ('absolute', 'fixed')" role="Warning">overflow="<value-of select="."/>" on an absolutely-positioned area will be treated as 'auto'.</report>
   </rule>
 
+  <rule context="fo:index-key-reference/@ref-index-key">
+    
+    <let name="index-key-reference" value="."/>
+    <report test="empty(key('index-key', .))" role="Warning">ref-index-key="<value-of select="."/>" does not match any index-key values.</report>
+    <report test="exists(key('index-key', .)) and (some $index-hit in key('index-key', .) satisfies $index-hit &gt;&gt; $index-key-reference)" role="Warning">ref-index-key="<value-of select="."/>" occurs before a matching index-key value.</report>
+  </rule>
+
   <rule context="fo:*/@region-name">
     
     <assert test="count(distinct-values(for $fo in key('region-name', .) return local-name($fo))) = 1" role="Warning">region-name="<value-of select="."/>" should only be used with regions of the same class.</assert>
@@ -132,7 +148,7 @@
 
 </pattern>
     <pattern xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" id="fo-property">
-   <xsl:include href="file:/C:/projects/oxygen/focheck/xsl/parser-runner.xsl"/>
+   <xsl:include href="file:/E:/Projects/oxygen/focheck/xsl/parser-runner.xsl"/>
 
    
    
@@ -892,8 +908,8 @@
    
    <rule context="fo:*/@case-title">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')">case-title="<value-of select="."/>" should be Literal.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">case-title="" should be Literal.</report>
+      <assert test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">case-title="<value-of select="."/>" should be Literal or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">case-title="" should be Literal or EnumerationToken.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: case-title="<value-of select="."/>"</report>
    </rule>
 
@@ -978,10 +994,7 @@
    
    
    <rule context="fo:*/@character">
-      <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')">character="<value-of select="."/>" should be Literal.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">character="" should be Literal.</report>
-      <report test="local-name($expression) = 'ERROR'">Syntax error: character="<value-of select="."/>"</report>
+      <report test=". eq ''" role="Warning">character="" should be '&lt;character&gt;'.</report>
    </rule>
 
    
@@ -1475,10 +1488,7 @@
    
    
    <rule context="fo:*/@grouping-separator">
-      <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')">grouping-separator="<value-of select="."/>" should be Literal.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">grouping-separator="" should be Literal.</report>
-      <report test="local-name($expression) = 'ERROR'">Syntax error: grouping-separator="<value-of select="."/>"</report>
+      <report test=". eq ''" role="Warning">grouping-separator="" should be '&lt;character&gt;'.</report>
    </rule>
 
    
@@ -1525,11 +1535,7 @@
    
    
    <rule context="fo:*/@hyphenation-character">
-      <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">hyphenation-character="<value-of select="."/>" should be Literal or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">hyphenation-character="<value-of select="."/>" token should be 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">hyphenation-character="" should be Literal or 'inherit'.</report>
-      <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenation-character="<value-of select="."/>"</report>
+      <report test=". eq ''" role="Warning">hyphenation-character="" should be '&lt;character&gt; | inherit'.</report>
    </rule>
 
    
@@ -1600,7 +1606,7 @@
    
    <rule context="fo:*/@index-class">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Literal', 'EMPTY', 'ERROR', 'Object')">index-class="<value-of select="."/>" should be Literal.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <assert test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">index-class="<value-of select="."/>" should be Literal or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
       <report test="local-name($expression) = 'ERROR'">Syntax error: index-class="<value-of select="."/>"</report>
    </rule>
 

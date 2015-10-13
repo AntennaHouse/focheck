@@ -16,7 +16,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<grammar ns="http://www.antennahouse.com/names/XSL/Extensions" xmlns:svg="http://www.w3.org/2000/svg" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar ns="http://www.antennahouse.com/names/XSL/Extensions" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:svg="http://www.w3.org/2000/svg" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <!-- SVG 1.1 -->
   <include href="svg11-flat-20110816.rng">
     <!-- Repeat entire 'attlist.svg' pattern just to override @version. -->

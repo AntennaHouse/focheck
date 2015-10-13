@@ -393,6 +393,7 @@
     <ref name="axf_column-gap"/>
     <ref name="axf_destination-type"/>
     <ref name="axf.block.attlist"/>
+    <ref name="role"/>
   </define>
   <define name="fo_float.attlist" combine="interleave">
     <ref name="axf_float"/>
