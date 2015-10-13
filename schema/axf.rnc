@@ -218,7 +218,8 @@ fo_block-container.attlist &=
     axf_column-count,
     axf_column-gap,
     axf_destination-type,
-    axf.block.attlist
+    axf.block.attlist,
+    role
 
 fo_float.attlist &=
     axf_float,
