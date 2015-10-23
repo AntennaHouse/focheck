@@ -62,9 +62,6 @@ AFTER making a release on GitHub:
 <!-- Additional housekeeping properties not needed in
      'build-focheck.xml'. -->
 
-<!-- Whether to force processing to run. -->
-<property name="force" value="no" />
-
 <tstamp>
   <format property="timestamp" pattern="yyyy-MM-dd"/>
 </tstamp>
@@ -220,18 +217,22 @@ AFTER making a release on GitHub:
 </target>
 
 <target name="-schematron.uptodate">
-  <uptodate property="rng.uptodate" targetfile="${build.dir}/schematron.dir">
-    <srcfiles dir= "${schematron.dir}" includes="*.sch"/>
-    <srcfiles dir= "${xsl.dir}"
-	      includes="${rex-generated-parser.xsl}, parser-runner.xsl" />
-    <srcfiles dir= "${iso.schematron.dir}"
-	      includes="*.xsl" />
-  </uptodate>
+  <condition property="schematron.uptodate">
+    <and>
+      <uptodate targetfile="${build.dir}/schematron.xsl">
+	<srcfiles dir= "${schematron.dir}" includes="*.sch"/>
+	<srcfiles dir= "${xsl.dir}"
+		  includes="${rex-generated-parser.xsl}, parser-runner.xsl" />
+	<srcfiles dir= "${iso.schematron.dir}"
+		  includes="*.xsl" />
+      </uptodate>
+      <isfalse value="${force}" />
+    </and>
+  </condition>
 </target>
 
 <target name="schematron.compile"
 	depends="-schematron.uptodate"
-	if="${force}"
 	unless="schematron.uptodate"
 	description="Compiles Schematron into XSLT using Saxon">
   <!-- expand inclusions -->
@@ -355,9 +356,7 @@ AFTER making a release on GitHub:
     <and>
       <uptodate srcfile="${basedir.converted}/build.properties"
 		targetfile="${basedir.converted}/add-on.xml" />
-     <not>
-	<istrue value="${force}" />
-      </not>
+      <isfalse value="${force}" />
     </and>
   </condition>
 </target>

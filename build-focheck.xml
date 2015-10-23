@@ -152,15 +152,19 @@ extensions.</description>
 
     <mappedresources id="filenames">
       <files />
-      <flattenmapper />
-      </mappedresources>
+      <chainedmapper>
+	<flattenmapper />
+	<globmapper from="*.fo" to="*.svrl" />
+      </chainedmapper>
+    </mappedresources>
 
     <echo message="Validate" />
     <!-- validate -->
     <xslt destdir="${basedir.converted}/out"
 	  style="${build.dir}/schematron.xsl"
 	  useimplicitfileset="false"
-	  classpath="@{saxon.jar}">
+	  classpath="@{saxon.jar}"
+	  force="${force}">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
 	<attribute
 	    name="http://saxon.sf.net/feature/allow-external-functions"
@@ -170,7 +174,10 @@ extensions.</description>
 	    value="true"/>
       </factory>
       <files />
-      <flattenmapper />
+      <chainedmapper>
+	<flattenmapper />
+	<globmapper from="*.fo" to="*.svrl" />
+      </chainedmapper>
     </xslt>
 
     <local name="ignore-me" />
