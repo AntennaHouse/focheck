@@ -49,7 +49,7 @@
 	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">name="<value-of select="@name"/>" cannot be used when axf:document-info with name="xmp" is present.</assert>
         </rule>
         <rule context="axf:document-info[@name = 'title']">
-	  <assert test="true" id="axf-3" role="Warning">name="<value-of select="@name"/>" is deprecated.  Please use name="document-title".</assert>
+	  <assert test="true()" id="axf-3" role="Warning">name="<value-of select="@name"/>" is deprecated.  Please use name="document-title".</assert>
         </rule>
 
 	<!-- axf:background-color -->
