@@ -89,6 +89,8 @@ You can use the Relax NG schema in the `schema` folder and the Schematron files 
 - The Relax NG works with Jing and with Emacs `nxml-mode` but not with `xmllint`.
 - The Schematron requires an XSLT 2.0 binding and a Schematron implementation that will both match on attributes as contexts as well as import and use external XSLT 2.0 stylesheets.
 
+Standalone checking requires Saxon 9 and Jing.  You can get Jing from https://github.com/relaxng/jing-trang/releases.
+
 ## Building
 
 ### oXygen XML Editor
