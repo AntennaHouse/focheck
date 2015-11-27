@@ -14994,9 +14994,9 @@
 
 		    <!--ASSERT Warning-->
       <xsl:choose>
-         <xsl:when test="true"/>
+         <xsl:when test="true()"/>
          <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true">
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
                <xsl:attribute name="id">axf-3</xsl:attribute>
                <xsl:attribute name="role">Warning</xsl:attribute>
                <xsl:attribute name="location">

@@ -348,6 +348,24 @@ AFTER making a release on GitHub:
   <schematron basedir="${basedir.converted}/test/stf" />
 </target>
 
+<!-- Translation targets. -->
+
+<target name="translate">
+  <copy todir="${focheck.basedir.converted}/omegat/source"
+	force="${force}">
+    <fileset dir="${focheck.basedir.converted}/schematron" />
+  </copy>
+  <java jar="omegat/OmegaT.jar" fork="true">
+    <arg value="${focheck.basedir.converted}/omegat" />
+    <arg value="--config-dic=${focheck.basedir.converted}/omegat/config" />
+    <arg value="--mode=console-translate" />
+    <!--<arg value="- -quiet" />-->
+  </java>
+  <copy todir="${focheck.basedir.converted}/schematron-ja"
+	force="${force}">
+    <fileset dir="${focheck.basedir.converted}/omegat/target" />
+  </copy>
+</target>
 
 <!-- Release targets. -->
 
@@ -383,7 +401,7 @@ AFTER making a release on GitHub:
        excludes="**"
        update="true">
     <zipfileset dir="."
-		includes="README.md, LICENSE*.md, *.framework"
+		includes="README.md, LICENSE*.md, AHFormatter.framework"
 		prefix="${ant.project.name}" />
     <!--<zipfileset dir="css" includes="*.css" prefix="${ant.project.name}/css" />-->
     <zipfileset dir="schema" includes="catalog.xml, *.ent"
@@ -401,7 +419,57 @@ AFTER making a release on GitHub:
   </zip>
 </target>
 
-<target name="release" depends="add-on.xml, framework.zip" />
+<target name="add-on-ja.xml.uptodate">
+  <condition property="add-on-ja.xml.uptodate">
+    <and>
+      <uptodate srcfile="${basedir.converted}/build.properties"
+		targetfile="${basedir.converted}/add-on-ja.xml" />
+      <isfalse value="${force}" />
+    </and>
+  </condition>
+</target>
+
+<target name="add-on-ja.xml" depends="add-on-ja.xml.uptodate"
+	unless="add-on-ja.xml.uptodate"
+	description="Update the version information in 'add-on-ja.xml'.">
+  <replaceregexp file="${focheck.basedir.converted}/add-on-ja.xml">
+    <regexp pattern="&lt;xt:version>[^&lt;]+&lt;/xt:version>" />
+    <substitution expression="&lt;xt:version>${version}&lt;/xt:version>"/>
+  </replaceregexp>
+  <replaceregexp file="${focheck.basedir.converted}/add-on-ja.xml">
+    <regexp pattern='releases/download/[^"]+' />
+    <substitution
+	expression="releases/download/v${version}/${ant.project.name}-framework-ja-${version}.zip"/>
+  </replaceregexp>
+</target>
+
+<target name="framework-ja.zip" depends="build, translate, add-on-ja.xml"
+	description="Make a Zip archive of just the oXygen framework.">
+  <mkdir dir="${focheck.basedir.converted}/releases" />
+  <zip destfile="${focheck.basedir.converted}/releases/${ant.project.name}-framework-ja-${version}.zip"
+       basedir="${focheck.basedir.converted}"
+       excludes="**"
+       update="true">
+    <zipfileset dir="."
+		includes="README.md, LICENSE*.md, focheck-ja.framework"
+		prefix="${ant.project.name}-ja" />
+    <!--<zipfileset dir="css" includes="*.css" prefix="${ant.project.name}/css" />-->
+    <zipfileset dir="schema" includes="catalog.xml, *.ent"
+		prefix="${ant.project.name}-ja/schema" />
+    <zipfileset dir="schema/rng" includes="*.rng"
+		prefix="${ant.project.name}-ja/schema/rng" />
+    <zipfileset dir="schematron-ja" includes="*.sch"
+		prefix="${ant.project.name}-ja/schematron-ja" />
+    <zipfileset dir="template" includes="*.xml, *.fo, *.properties"
+		prefix="${ant.project.name}-ja/template" />
+    <zipfileset dir="xsl"
+		includes="parser-runner.xsl,
+			  ${rex-generated-parser.xsl}"
+		prefix="${ant.project.name}-ja/xsl" />
+  </zip>
+</target>
+
+<target name="release" depends="add-on.xml, add-on-ja.xml, framework.zip, framework-ja.zip" />
 
 <!-- Utility targets. -->
 
