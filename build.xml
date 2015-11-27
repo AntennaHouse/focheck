@@ -382,11 +382,13 @@ AFTER making a release on GitHub:
 <target name="add-on.xml" depends="add-on.xml.uptodate"
 	unless="add-on.xml.uptodate"
 	description="Update the version information in 'add-on.xml'.">
-  <replaceregexp file="${focheck.basedir.converted}/add-on.xml">
+  <replaceregexp file="${focheck.basedir.converted}/add-on.xml"
+		 encoding="UTF-8">
     <regexp pattern="&lt;xt:version>[^&lt;]+&lt;/xt:version>" />
     <substitution expression="&lt;xt:version>${version}&lt;/xt:version>"/>
   </replaceregexp>
-  <replaceregexp file="${focheck.basedir.converted}/add-on.xml">
+  <replaceregexp file="${focheck.basedir.converted}/add-on.xml"
+		 encoding="UTF-8">
     <regexp pattern='releases/download/[^"]+' />
     <substitution
 	expression="releases/download/v${version}/${ant.project.name}-framework-${version}.zip"/>
@@ -432,11 +434,13 @@ AFTER making a release on GitHub:
 <target name="add-on-ja.xml" depends="add-on-ja.xml.uptodate"
 	unless="add-on-ja.xml.uptodate"
 	description="Update the version information in 'add-on-ja.xml'.">
-  <replaceregexp file="${focheck.basedir.converted}/add-on-ja.xml">
+  <replaceregexp file="${focheck.basedir.converted}/add-on-ja.xml"
+		 encoding="UTF-8">
     <regexp pattern="&lt;xt:version>[^&lt;]+&lt;/xt:version>" />
     <substitution expression="&lt;xt:version>${version}&lt;/xt:version>"/>
   </replaceregexp>
-  <replaceregexp file="${focheck.basedir.converted}/add-on-ja.xml">
+  <replaceregexp file="${focheck.basedir.converted}/add-on-ja.xml"
+		 encoding="UTF-8">
     <regexp pattern='releases/download/[^"]+' />
     <substitution
 	expression="releases/download/v${version}/${ant.project.name}-framework-ja-${version}.zip"/>

@@ -9,7 +9,7 @@
         <xt:type>framework</xt:type>
         <xt:author>Antenna House, Inc.</xt:author>
         <xt:name>focheck</xt:name>
-        <xt:description xmlns="http://www.w3.org/1999/xhtml">XSL-FOとアン�?ナハウスの拡張要�?とプロパティを検証</xt:description>
+        <xt:description xmlns="http://www.w3.org/1999/xhtml">XSL-FOとアンテナハウスの拡張要素</xt:description>
         <xt:license><![CDATA[   Copyright 2015 Antenna House, Inc.
 
    Licensed under the Apache License, Version 2.0 (the "License");
