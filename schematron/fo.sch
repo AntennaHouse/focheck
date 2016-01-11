@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2015 Antenna House, Inc.
+     Copyright 2015-2016 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
      limitations under the License.
 -->
 <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+	 xmlns:sqf="http://www.schematron-quickfix.com/validator/process"
 	 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	 xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document"
 	 id="fo-fo">
@@ -83,7 +84,13 @@
     <report test="local-name($expression) = 'Number' and
                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or
                    $expression/@is-zero = 'yes' or
-                   exists($expression/@value) and not($expression/@value castable as xs:integer))" id="column-count" role="Warning"><value-of select="local-name()" />="<value-of select="."/>" should be a positive integer.  A non-positive or non-integer value will be rounded to the nearest integer value greater than or equal to 1.</report>
+                   exists($expression/@value) and not($expression/@value castable as xs:integer))" id="column-count" role="Warning" sqf:fix="column-count-fix"><value-of select="local-name()"/>="<value-of select="."/>" should be a positive integer.  A non-positive or non-integer value will be rounded to the nearest integer value greater than or equal to 1.</report>
+    <sqf:fix id="column-count-fix">
+      <sqf:description>
+        <sqf:title>Change the @column-count value</sqf:title>
+      </sqf:description>
+      <sqf:replace node-type="attribute" target="column-count" select="max((1, round(.)))"/>
+    </sqf:fix>
   </rule>
 
   <rule context="fo:*/@column-width">

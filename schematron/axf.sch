@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2015 Antenna House, Inc.
+     Copyright 2015-2016 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
      limitations under the License.
 -->
 <schema xmlns="http://purl.oclc.org/dsdl/schematron"
+	xmlns:sqf="http://www.schematron-quickfix.com/validator/process"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	queryBinding="xslt2">
     <xsl:key name="flow-name"
@@ -49,7 +50,13 @@
 	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">name="<value-of select="@name"/>" cannot be used when axf:document-info with name="xmp" is present.</assert>
         </rule>
         <rule context="axf:document-info[@name = 'title']">
-	  <assert test="true()" id="axf-3" role="Warning">name="<value-of select="@name"/>" is deprecated.  Please use name="document-title".</assert>
+	  <assert test="false()" id="axf-3f" sqf:fix="axf-3fix" role="Warning">name="<value-of select="@name"/>" is deprecated.  Please use name="document-title".</assert>
+          <sqf:fix id="axf-3fix">
+	    <sqf:description>
+              <sqf:title>Change the 'title' axf:document-info into 'document-title'</sqf:title>
+            </sqf:description>
+            <sqf:replace match="@name" node-type="attribute" target="name" select="'document-title'"/>
+          </sqf:fix>
         </rule>
 
 	<!-- axf:background-color -->
