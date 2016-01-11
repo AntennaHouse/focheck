@@ -10,7 +10,7 @@
         <xt:author>Antenna House, Inc.</xt:author>
         <xt:name>focheck</xt:name>
         <xt:description xmlns="http://www.w3.org/1999/xhtml">Validate XSL-FO and Antenna House extensions using Relax NG and Schematron.</xt:description>
-        <xt:license><![CDATA[   Copyright 2015 Antenna House, Inc.
+        <xt:license><![CDATA[   Copyright 2015-2016 Antenna House, Inc.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
