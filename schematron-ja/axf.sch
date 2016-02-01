@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2015 Antenna House, Inc.
+     Copyright 2015-2016 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
---><schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
+--><schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sqf="http://www.schematron-quickfix.com/validator/process" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
     <xsl:key name="flow-name" match="fo:flow | fo:static-content" use="@flow-name"/>
     <xsl:key name="index-key" match="*[exists(@index-key)]" use="@index-key"/>
     <xsl:key name="master-name" match="fo:simple-page-master | fo:page-sequence-master" use="@master-name"/>
@@ -36,7 +36,13 @@
 	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">name=&quot;<value-of select="@name"/>&quot; は　name=&quot;xmp&quot; とのaxf:document-infoが存在している場合、使用することができません。</assert>
         </rule>
         <rule context="axf:document-info[@name = 'title']">
-	  <assert test="true()" id="axf-3" role="Warning">name=&quot;<value-of select="@name"/>&quot; は勧められません。Please use name=&quot;document-title&quot;.</assert>
+	  <assert test="false()" id="axf-3f" sqf:fix="axf-3fix" role="Warning">name=&quot;<value-of select="@name"/>&quot; は勧められません。name=&quot;document-title&quot;　を利用してください。</assert>
+          <sqf:fix id="axf-3fix">
+	    <sqf:description>
+              <sqf:title>axf:document-info の「title」は 「document-title」に変更します。</sqf:title>
+            </sqf:description>
+            <sqf:replace match="@name" node-type="attribute" target="name" select="'document-title'"/>
+          </sqf:fix>
         </rule>
 
 	<!-- axf:background-color -->
@@ -198,7 +204,7 @@
 	<!-- visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto -->
 	<!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.overflow -->
 	<rule context="fo:*/@overflow">
-	  <report test=". = ('replace', 'condense') and not(local-name(..) = ('block-container', 'inline-container'))">overflow=&quot;<value-of select="."/>&quot; fo:block-container 又は fo:inline-containerのみ適用されています。</report>
+	  <report test=". = ('replace', 'condense') and not(local-name(..) = ('block-container', 'inline-container'))">overflow=&quot;<value-of select="."/>&quot; はfo:block-container 又は fo:inline-containerのみに適用されています。</report>
 	</rule>
 
     </pattern>

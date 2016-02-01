@@ -1,0 +1,1163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Antenna House extension elements and non-inherited extension
+  attributes.
+  
+  Copyright 2015 Antenna House, Inc.
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.antennahouse.com/names/XSL/Extensions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions">
+  <xs:include schemaLocation="axf-inherited.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/XSL/Format" schemaLocation="fo.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  <!--
+    
+    Overrides to patterns in 'fo-inherited.rnc' (and patterns in
+    modules that it includes).
+    
+  -->
+  <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#fo.change-bar-begin -->
+  <xs:complexType name="fo_change-bar-begin.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="fo:float"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info -->
+  <xs:complexType name="fo_root.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="axf:document-info"/>
+      <xs:element ref="fo:layout-master-set"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="axf:document-info"/>
+      <xs:element minOccurs="0" ref="fo:declarations"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="axf:document-info"/>
+      <xs:element minOccurs="0" ref="fo:bookmark-tree"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="axf:document-info"/>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="fo:page-sequence"/>
+        <xs:element ref="fo:page-sequence-wrapper"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- AH Formatter allows fo:region-* in any order. -->
+  <xs:complexType name="fo_simple-page-master.model">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="fo:region-body"/>
+      <xs:element ref="fo:region-before"/>
+      <xs:element ref="fo:region-after"/>
+      <xs:element ref="fo:region-start"/>
+      <xs:element ref="fo:region-end"/>
+    </xs:choice>
+  </xs:complexType>
+  <!-- AH Formatter allows empty fo:static-content. -->
+  <xs:complexType name="fo_static-content.model">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:choice>
+        <xs:element ref="fo:block.fo.list"/>
+        <xs:group ref="fo:neutral.fo.list"/>
+      </xs:choice>
+      <xs:element ref="fo:point.fo.list"/>
+    </xs:choice>
+  </xs:complexType>
+  <!-- AH Formatter allows fo:block-container to omit block FOs. -->
+  <xs:complexType name="fo_block-container.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:choice>
+          <xs:element ref="fo:block.fo.list"/>
+          <xs:group ref="fo:neutral.fo.list"/>
+        </xs:choice>
+        <xs:element ref="fo:point.fo.list"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- AH Formatter allows fo:inline-container to omit block FOs. -->
+  <xs:complexType name="fo_inline-container.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:choice>
+          <xs:element ref="fo:block.fo.list"/>
+          <xs:group ref="fo:neutral.fo.list"/>
+        </xs:choice>
+        <xs:element ref="fo:point.fo.list"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- AH Formatter allows empty fo:list-item. -->
+  <xs:complexType name="fo_list-item.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:choice>
+          <xs:element ref="fo:list-item-label"/>
+          <xs:element ref="fo:list-item-body"/>
+        </xs:choice>
+        <xs:element ref="fo:point.fo.list"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- AH Formatter allows fo:list-item-label omit block FOs. -->
+  <xs:complexType name="fo_list-item-label.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:choice>
+          <xs:element ref="fo:block.fo.list"/>
+          <xs:group ref="fo:neutral.fo.list"/>
+        </xs:choice>
+        <xs:element ref="fo:point.fo.list"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!--
+    AH Formatter allows fo:table-cell to omit block FOs.
+    axf:table-cell-repeated-marker used when cell repeats.
+  -->
+  <xs:complexType name="fo_table-cell.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
+      <xs:element minOccurs="0" ref="axf:table-cell-repeated-marker"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:choice>
+          <xs:element ref="fo:block.fo.list"/>
+          <xs:group ref="fo:neutral.fo.list"/>
+        </xs:choice>
+        <xs:element ref="fo:point.fo.list"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!--
+    For fo:instream-foreign-object
+    Exclude axf:* elements and attributes from counting as 'non-xsl'.
+  -->
+  <xs:group name="non-xsl">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:attributeGroup name="non-xsl">
+    <xs:anyAttribute processContents="skip"/>
+  </xs:attributeGroup>
+  <!--
+    
+    End of overrides to patterns in 'axf-inherited.rnc'.
+    
+  -->
+  <!--
+    
+    Antenna House extension elements
+    
+  -->
+  <!--
+    <axf:document-info/>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info
+  -->
+  <xs:element name="document-info">
+    <xs:annotation>
+      <xs:documentation>PDFには、著者やタイトルなどの文書情報を埋め込んでおくことができます </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="name" use="required">
+        <xs:annotation>
+          <xs:documentation>文字情報の名</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="document-title"/>
+            <xs:enumeration value="title"/>
+            <xs:enumeration value="subject"/>
+            <xs:enumeration value="author"/>
+            <xs:enumeration value="author-title"/>
+            <xs:enumeration value="description-writer"/>
+            <xs:enumeration value="keywords"/>
+            <xs:enumeration value="copyright-status"/>
+            <xs:enumeration value="copyright-notice"/>
+            <xs:enumeration value="copyright-info-url"/>
+            <xs:enumeration value="xmp"/>
+            <xs:enumeration value="pagemode"/>
+            <xs:enumeration value="pagelayout"/>
+            <xs:enumeration value="hidetoolbar"/>
+            <xs:enumeration value="hidemenubar"/>
+            <xs:enumeration value="hidewindowui"/>
+            <xs:enumeration value="fitwindow"/>
+            <xs:enumeration value="centerwindow"/>
+            <xs:enumeration value="displaydoctitle"/>
+            <xs:enumeration value="openaction"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="value" use="required">
+        <xs:annotation>
+          <xs:documentation>文字情報の値ある情は許容値の制約があります。</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    <axf:footnote-number/>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-number
+  -->
+  <xs:element name="footnote-number" substitutionGroup="fo:inline.fo.list">
+    <xs:annotation>
+      <xs:documentation>脚注番号を生成します</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="fo:id"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    <axf:footnote-number-citation/>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-number-citation
+  -->
+  <xs:element name="footnote-number-citation" substitutionGroup="fo:inline.fo.list">
+    <xs:annotation>
+      <xs:documentation>脚注番号を引用します</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="ref-id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    <axf:table-cell-repeated-marker>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.table-cell-repeated-marker
+  -->
+  <xs:element name="table-cell-repeated-marker">
+    <xs:annotation>
+      <xs:documentation>内容がaxf:repeat-cell-content-at-break="true"の場合に使われます</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="fo:inline.fo.list"/>
+        <xs:element ref="fo:block.fo.list"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    
+    Antenna House extensions to patterns in included modules.
+    
+  -->
+  <!--
+    
+    Extensions to FO models
+    
+  -->
+  <!--
+    
+    Extensions to FO attlists
+    
+  -->
+  <!--
+    
+    Extensions to property groups
+    
+  -->
+  <!--
+    
+    Antenna House extension properties
+    
+  -->
+  <!--
+    List of extension properties common to all block-level formatting
+    objects
+  -->
+  <xs:attributeGroup name="axf.block.attlist">
+    <xs:attributeGroup ref="axf:axf_outline-expand"/>
+    <xs:attributeGroup ref="axf:axf_outline-group"/>
+    <xs:attributeGroup ref="axf:axf_outline-level"/>
+    <xs:attributeGroup ref="axf:axf_outline-title"/>
+    <xs:attributeGroup ref="axf:axf_outline-color"/>
+    <xs:attributeGroup ref="axf:axf_outline-font-style"/>
+    <xs:attributeGroup ref="axf:axf_outline-font-weight"/>
+  </xs:attributeGroup>
+  <!--
+    @axf:background-color
+    @axf:background-image
+    @axf:background-position-horizontal
+    @axf:background-position-vertical
+    @axf:background-repeat
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#IDAAOLV
+  -->
+  <xs:attributeGroup name="axf_background-color">
+    <xs:attribute name="background-color" form="qualified">
+      <xs:annotation>
+        <xs:documentation>&lt;color&gt; | transparent</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-image">
+    <xs:attribute name="background-image" form="qualified">
+      <xs:annotation>
+        <xs:documentation>&lt;uri-specification&gt; | none</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-position-horizontal">
+    <xs:attribute name="background-position-horizontal" form="qualified">
+      <xs:annotation>
+        <xs:documentation>&lt;percentage&gt; | &lt;length&gt; | left | center | right</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-position-vertical">
+    <xs:attribute name="background-position-vertical" form="qualified">
+      <xs:annotation>
+        <xs:documentation>&lt;percentage&gt; | &lt;length&gt; | top | center | bottom</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-repeat">
+    <xs:attribute name="background-repeat" form="qualified">
+      <xs:annotation>
+        <xs:documentation>repeat | repeat-x | repeat-y | no-repeat | paginate</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:action-type
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type
+  -->
+  <xs:attributeGroup name="axf_action-type">
+    <xs:attribute name="action-type" form="qualified">
+      <xs:annotation>
+        <xs:documentation>外部リンクまたはフォームアクションの動作を指定します</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="gotor"/>
+          <xs:enumeration value="launch"/>
+          <xs:enumeration value="uri"/>
+          <xs:enumeration value="reset"/>
+          <xs:enumeration value="submit"/>
+          <xs:enumeration value="auto"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:alt-text
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.alttext
+  -->
+  <xs:attributeGroup name="axf_alttext">
+    <xs:attribute name="alttext" form="qualified">
+      <xs:annotation>
+        <xs:documentation>alternate text of the image</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:background-content-height
+    @axf:background-content-type
+    @axf:background-content-width
+    @axf:background-scaling
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.background-content
+  -->
+  <xs:attributeGroup name="axf_background-content-height">
+    <xs:attribute name="background-content-height" form="qualified">
+      <xs:annotation>
+        <xs:documentation>auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-content-type">
+    <xs:attribute name="background-content-type" form="qualified">
+      <xs:annotation>
+        <xs:documentation>&lt;string&gt; | auto</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-content-width">
+    <xs:attribute name="background-content-width" form="qualified">
+      <xs:annotation>
+        <xs:documentation>auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_background-scaling">
+    <xs:attribute name="background-scaling" form="qualified">
+      <xs:annotation>
+        <xs:documentation>uniform | non-uniform | inherit</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="uniform"/>
+          <xs:enumeration value="non-uniform"/>
+          <xs:enumeration value="inherit"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:border-radius
+    @axf:border-top-left-radius
+    @axf:border-top-right-radius
+    @axf:border-bottom-left-radius
+    @axf:border-bottom-right-radius
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.border-radius
+  -->
+  <xs:attributeGroup name="axf_border-radius">
+    <xs:attribute name="border-radius" form="qualified">
+      <xs:annotation>
+        <xs:documentation>丸め罫の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_border-top-left-radius">
+    <xs:attribute name="border-top-left-radius" form="qualified">
+      <xs:annotation>
+        <xs:documentation>丸め罫の左上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_border-top-right-radius">
+    <xs:attribute name="border-top-right-radius" form="qualified">
+      <xs:annotation>
+        <xs:documentation>丸め罫の右上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_border-bottom-left-radius">
+    <xs:attribute name="border-bottom-left-radius" form="qualified">
+      <xs:annotation>
+        <xs:documentation>丸め罫の左下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_border-bottom-right-radius">
+    <xs:attribute name="border-bottom-right-radius" form="qualified">
+      <xs:annotation>
+        <xs:documentation>丸め罫の右下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:bleed
+    @axf:bleed-top
+    @axf:bleed-bottom
+    @axf:bleed-left
+    @axf:bleed-right
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.bleed
+  -->
+  <xs:attributeGroup name="axf_bleed">
+    <xs:attribute name="bleed" form="qualified">
+      <xs:annotation>
+        <xs:documentation>塗り足しの領域の幅： &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_bleed-top">
+    <xs:attribute name="bleed-top" form="qualified">
+      <xs:annotation>
+        <xs:documentation>塗り足しの領域の上の幅: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_bleed-bottom">
+    <xs:attribute name="bleed-bottom" form="qualified">
+      <xs:annotation>
+        <xs:documentation>塗り足しの領域の下の幅: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_bleed-left">
+    <xs:attribute name="bleed-left" form="qualified">
+      <xs:annotation>
+        <xs:documentation>塗り足しの領域の左の幅: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_bleed-right">
+    <xs:attribute name="bleed-right" form="qualified">
+      <xs:annotation>
+        <xs:documentation>塗り足しの領域の右の幅: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:column-count
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.column-count
+  -->
+  <xs:attributeGroup name="axf_column-count">
+    <xs:attribute name="column-count" form="qualified">
+      <xs:annotation>
+        <xs:documentation>段数： &lt;number&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:column-gap
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.column-gap
+  -->
+  <xs:attributeGroup name="axf_column-gap">
+    <xs:attribute name="column-gap" form="qualified">
+      <xs:annotation>
+        <xs:documentation>段と段の間： &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:crop-area-visibility
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.crop-area-visibility
+  -->
+  <xs:attributeGroup name="axf_crop-area-visibility">
+    <xs:attribute name="crop-area-visibility" form="qualified">
+      <xs:annotation>
+        <xs:documentation>仕上がり寸法からはみ出した領域を表示するかどうか</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="hidden"/>
+          <xs:enumeration value="visible"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:crop-offset
+    @axf:crop-offset-top
+    @axf:crop-offset-bottom
+    @axf:crop-offset-left
+    @axf:crop-offset-right
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.crop-offset
+  -->
+  <xs:attributeGroup name="axf_crop-offset">
+    <xs:attribute name="crop-offset" form="qualified">
+      <xs:annotation>
+        <xs:documentation>出力媒体の物理的な端から仕上がり寸法までの距： &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_crop-offset-top">
+    <xs:attribute name="crop-offset-top" form="qualified">
+      <xs:annotation>
+        <xs:documentation>出力媒体の物理的な上端から仕上がり寸法までの距： &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_crop-offset-bottom">
+    <xs:attribute name="crop-offset-bottom" form="qualified">
+      <xs:annotation>
+        <xs:documentation>出力媒体の物理的な下端から仕上がり寸法までの距： &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_crop-offset-left">
+    <xs:attribute name="crop-offset-left" form="qualified">
+      <xs:annotation>
+        <xs:documentation>出力媒体の物理的な左端から仕上がり寸法までの距： &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="axf_crop-offset-right">
+    <xs:attribute name="crop-offset-right" form="qualified">
+      <xs:annotation>
+        <xs:documentation>出力媒体の物理的な右端から仕上がり寸法までの距： &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:destination-type
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.destination-type
+  -->
+  <xs:attributeGroup name="axf_destination-type">
+    <xs:attribute name="destination-type" form="qualified">
+      <xs:annotation>
+        <xs:documentation>リンクは、リンク先に開く方法</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html
+  -->
+  <xs:attributeGroup name="axf_float">
+    <xs:attribute name="float" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロート関連拡張プロパティのためのショートハンド</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="before"/>
+          <xs:enumeration value="after"/>
+          <xs:enumeration value="start"/>
+          <xs:enumeration value="end"/>
+          <xs:enumeration value="left"/>
+          <xs:enumeration value="right"/>
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="bottom"/>
+          <xs:enumeration value="center"/>
+          <xs:enumeration value="inside"/>
+          <xs:enumeration value="outside"/>
+          <xs:enumeration value="wrap"/>
+          <xs:enumeration value="skip"/>
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="column"/>
+          <xs:enumeration value="multicol"/>
+          <xs:enumeration value="next"/>
+          <xs:enumeration value="auto-next"/>
+          <xs:enumeration value="auto-move"/>
+          <xs:enumeration value="keep"/>
+          <xs:enumeration value="keep-float"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-x
+  -->
+  <xs:attributeGroup name="axf_float-x">
+    <xs:attribute name="float-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>水平方向のフロート配置（writing-modeがverticalのときは垂直方向）： none | start | end | left | right | top | bottom | center | inside | outside</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="start"/>
+          <xs:enumeration value="end"/>
+          <xs:enumeration value="left"/>
+          <xs:enumeration value="right"/>
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="bottom"/>
+          <xs:enumeration value="center"/>
+          <xs:enumeration value="inside"/>
+          <xs:enumeration value="outside"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-y
+  -->
+  <xs:attributeGroup name="axf_float-y">
+    <xs:attribute name="float-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>垂直方向のフロート配置 （writing-modeがverticalのときは水平方向 ）： none | before | after | top | bottom | left | right | center | inside | outside</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="before"/>
+          <xs:enumeration value="after"/>
+          <xs:enumeration value="top"/>
+          <xs:enumeration value="bottom"/>
+          <xs:enumeration value="left"/>
+          <xs:enumeration value="right"/>
+          <xs:enumeration value="center"/>
+          <xs:enumeration value="inside"/>
+          <xs:enumeration value="outside"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-reference
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-reference
+  -->
+  <xs:attributeGroup name="axf_float-reference">
+    <xs:attribute name="float-reference" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートを配置する参照エリア ： auto | normal | page | column | multicol</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="column"/>
+          <xs:enumeration value="multicol"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-move
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-move
+  -->
+  <xs:attributeGroup name="axf_float-move">
+    <xs:attribute name="float-move" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートは次のページまたは段に送るかどうか： auto | next | auto-next | auto-move | keep | keep-float</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="next"/>
+          <xs:enumeration value="auto-next"/>
+          <xs:enumeration value="auto-move"/>
+          <xs:enumeration value="keep"/>
+          <xs:enumeration value="keep-float"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-wrap
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-wrap
+  -->
+  <xs:attributeGroup name="axf_float-wrap">
+    <xs:attribute name="float-wrap" form="qualified">
+      <xs:annotation>
+        <xs:documentation>テキストの回り込みについて： auto | wrap | skip</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="wrap"/>
+          <xs:enumeration value="skip"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-min-wrap-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-x
+  -->
+  <xs:attributeGroup name="axf_float-min-wrap-x">
+    <xs:attribute name="float-min-wrap-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートへのテキスト回り込みのための幅： normal | &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-min-wrap-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-y
+  -->
+  <xs:attributeGroup name="axf_float-min-wrap-y">
+    <xs:attribute name="float-min-wrap-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートの前後に配置するテキスト量の最小値： normal | &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-centering-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-x
+  -->
+  <xs:attributeGroup name="axf_float-centering-x">
+    <xs:attribute name="float-centering-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートへのテキスト回り込みのための幅が足りないときフロートをセンタリングするかどうか： none | auto | &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-centering-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-y
+  -->
+  <xs:attributeGroup name="axf_float-centering-y">
+    <xs:attribute name="float-centering-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートの前後にテキストを配置する高さが足りないときフロートをセンタリングするかどうか： none | auto | &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-margin-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-x
+  -->
+  <xs:attributeGroup name="axf_float-margin-x">
+    <xs:attribute name="float-margin-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートと回り込むテキストとの間の余白を指定します（x方向）： [ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-margin-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-y
+  -->
+  <xs:attributeGroup name="axf_float-margin-y">
+    <xs:attribute name="float-margin-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートと前後のテキストとの間の余白を指定します（y方向）： [ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-float-margin-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-x
+  -->
+  <xs:attributeGroup name="axf_float-float-margin-x">
+    <xs:attribute name="float-float-margin-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートと別の隣接するフロートとの間の余白を指定します（x方向）： auto | [[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?]</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-float-margin-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-y
+  -->
+  <xs:attributeGroup name="axf_float-float-margin-y">
+    <xs:attribute name="float-float-margin-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートと別の隣接するフロートとの間の余白を指定します（y方向）： auto | [[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?]</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-offset-x
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-x
+  -->
+  <xs:attributeGroup name="axf_float-offset-x">
+    <xs:attribute name="float-offset-x" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートのオフセット配置を指定します（x方向）： &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:float-offset-y
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-y
+  -->
+  <xs:attributeGroup name="axf_float-offset-y">
+    <xs:attribute name="float-offset-y" form="qualified">
+      <xs:annotation>
+        <xs:documentation>フロートのオフセット配置を指定します（y方向）： &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:footnote-align
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-align
+  -->
+  <xs:attributeGroup name="axf_footnote-align">
+    <xs:attribute name="footnote-align" form="qualified">
+      <xs:annotation>
+        <xs:documentation>脚注の配置を指定します。 </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="before"/>
+          <xs:enumeration value="after"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:footnote-stacking
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-stacking
+  -->
+  <xs:attributeGroup name="axf_footnote-stacking">
+    <xs:attribute name="footnote-stacking" form="qualified">
+      <xs:annotation>
+        <xs:documentation>脚注の配置の方法</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="block"/>
+          <xs:enumeration value="inline"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:footnote-position
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-position
+  -->
+  <xs:attributeGroup name="axf_footnote-position">
+    <xs:attribute name="footnote-position" form="qualified">
+      <xs:annotation>
+        <xs:documentation>脚注を配置する場所</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="start"/>
+          <xs:enumeration value="end"/>
+          <xs:enumeration value="inside"/>
+          <xs:enumeration value="outside"/>
+          <xs:enumeration value="column"/>
+          <xs:enumeration value="start-column"/>
+          <xs:enumeration value="end-column"/>
+          <xs:enumeration value="inside-column"/>
+          <xs:enumeration value="outside-column"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:footnote-keep
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-keep
+  -->
+  <xs:attributeGroup name="axf_footnote-keep">
+    <xs:attribute name="footnote-keep" form="qualified">
+      <xs:annotation>
+        <xs:documentation>脚注とアンカを同一ページ内または段内に配置するように</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="always"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:footnote-max-height
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-max-height
+  -->
+  <xs:attributeGroup name="axf_footnote-max-height">
+    <xs:attribute name="footnote-max-height" form="qualified">
+      <xs:annotation>
+        <xs:documentation>脚注の最大高さ： auto | &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-expand
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-expand
+  -->
+  <xs:attributeGroup name="axf_outline-expand">
+    <xs:attribute name="outline-expand" form="qualified">
+      <xs:annotation>
+        <xs:documentation>しおりの初期状態で、下位の階層を表示するかどうか</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-group
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-group
+  -->
+  <xs:attributeGroup name="axf_outline-group">
+    <xs:attribute name="outline-group" form="qualified">
+      <xs:annotation>
+        <xs:documentation>出力グループの名： &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-level
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-level
+  -->
+  <xs:attributeGroup name="axf_outline-level">
+    <xs:attribute name="outline-level" form="qualified">
+      <xs:annotation>
+        <xs:documentation>しおりの項目の階層レベル</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-title
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-title
+  -->
+  <xs:attributeGroup name="axf_outline-title">
+    <xs:attribute name="outline-title" form="qualified">
+      <xs:annotation>
+        <xs:documentation>しおりのタイトルとして表示される文字列</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-color
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-color
+  -->
+  <xs:attributeGroup name="axf_outline-color">
+    <xs:attribute name="outline-color" form="qualified">
+      <xs:annotation>
+        <xs:documentation>しおりのタイトルとして表示される文字列の色</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-font-style
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf_outline-font-style
+  -->
+  <xs:attributeGroup name="axf_outline-font-style">
+    <xs:attribute name="outline-font-style" form="qualified">
+      <xs:annotation>
+        <xs:documentation>しおりのタイトルとして表示される文字列のフォントスタイル</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="italic"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:outline-font-weight
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf:outline-font-weight
+  -->
+  <xs:attributeGroup name="axf_outline-font-weight">
+    <xs:attribute name="outline-font-weight" form="qualified">
+      <xs:annotation>
+        <xs:documentation>しおりのタイトルとして表示される文字列のフォントの太さ</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="bold"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks
+  -->
+  <xs:attributeGroup name="axf_printer-marks">
+    <xs:attribute name="printer-marks" form="qualified">
+      <xs:annotation>
+        <xs:documentation>トンボなどの印刷マーク</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks-line-color
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-color
+  -->
+  <xs:attributeGroup name="axf_printer-marks-line-color">
+    <xs:attribute name="printer-marks-line-color" form="qualified">
+      <xs:annotation>
+        <xs:documentation>トンボの色： &lt;line&gt; | auto</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks-line-length
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-length
+  -->
+  <xs:attributeGroup name="axf_printer-marks-line-length">
+    <xs:attribute name="printer-marks-line-length" form="qualified">
+      <xs:annotation>
+        <xs:documentation>トンボの線の長さ： &lt;length&gt; | auto</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks-line-width
+    Line width of printer marks: <length> | auto
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-width
+  -->
+  <xs:attributeGroup name="axf_printer-marks-line-width">
+    <xs:attribute name="printer-marks-line-width" form="qualified">
+      <xs:annotation>
+        <xs:documentation>トンボの線の幅</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks-zero-margin
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-zero-margin
+  -->
+  <xs:attributeGroup name="axf_printer-marks-zero-margin">
+    <xs:attribute name="printer-marks-zero-margin" form="qualified">
+      <xs:annotation>
+        <xs:documentation>bleedが0のときの、版面とトンボの間のマージン： &lt;length&gt; | auto</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks-spine-width
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-spine-width
+  -->
+  <xs:attributeGroup name="axf_printer-marks-spine-width">
+    <xs:attribute name="printer-marks-spine-width" form="qualified">
+      <xs:annotation>
+        <xs:documentation>見開きの背表紙の幅： &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:repeat-cell-content-at-break
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.repeat-cell-content-at-break
+  -->
+  <xs:attributeGroup name="axf_repeat-cell-content-at-break">
+    <xs:attribute name="repeat-cell-content-at-break" form="qualified">
+      <xs:annotation>
+        <xs:documentation>セルの分割時にセル内容をコピーするかどうか</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:table-summary
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.table-summary
+  -->
+  <xs:attributeGroup name="axf_table-summary">
+    <xs:attribute name="table-summary" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Summary describing the table.  Included in Tagged PDF output.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+</xs:schema>

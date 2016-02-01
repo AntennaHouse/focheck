@@ -1,0 +1,769 @@
+# Antenna House extension elements and non-inherited extension
+# attributes.
+# 
+# Copyright 2015 Antenna House, Inc.
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
+namespace fo = "http://www.w3.org/1999/XSL/Format"
+namespace local = ""
+
+include "axf-inherited.rnc" inherit = axf {
+  # 
+  # Overrides to patterns in 'fo-inherited.rnc' (and patterns in
+  # modules that it includes).
+  #
+  
+  # http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#fo.change-bar-begin
+  fo_change-bar-begin.model = fo_float?
+  # http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info
+  fo_root.model =
+    axf_document-info*,
+    fo_layout-master-set,
+    axf_document-info*,
+    fo_declarations?,
+    axf_document-info*,
+    fo_bookmark-tree?,
+    axf_document-info*,
+    (fo_page-sequence | fo_page-sequence-wrapper)+
+  # AH Formatter allows fo:region-* in any order.
+  fo_simple-page-master.model =
+    fo_region-body+
+    & fo_region-before?
+    & fo_region-after?
+    & fo_region-start?
+    & fo_region-end?
+  # AH Formatter allows empty fo:static-content.
+  fo_static-content.model =
+    (block.fo.list | neutral.fo.list)* & point.fo.list*
+  # AH Formatter allows fo:block-container to omit block FOs.
+  fo_block-container.model =
+    fo_marker*,
+    ((block.fo.list | neutral.fo.list)* & point.fo.list*)
+  # AH Formatter allows fo:inline-container to omit block FOs.
+  fo_inline-container.model =
+    fo_marker*,
+    ((block.fo.list | neutral.fo.list)* & point.fo.list*)
+  # AH Formatter allows empty fo:list-item.
+  fo_list-item.model =
+    fo_marker*,
+    ((fo_list-item-label, fo_list-item-body)? & point.fo.list*)
+  # AH Formatter allows fo:list-item-label omit block FOs.
+  fo_list-item-label.model =
+    fo_marker*,
+    ((block.fo.list | neutral.fo.list)* & point.fo.list*)
+  # AH Formatter allows fo:table-cell to omit block FOs.
+  # axf:table-cell-repeated-marker used when cell repeats.
+  fo_table-cell.model =
+    fo_marker*,
+    axf_table-cell-repeated-marker?,
+    ((block.fo.list | neutral.fo.list)* & point.fo.list*)
+  # For fo:instream-foreign-object
+  # Exclude axf:* elements and attributes from counting as 'non-xsl'.
+  non-xsl =
+    attribute * - (local:* | axf:* | xml:*) { text }*,
+    element * - (local:* | fo:* | axf:*) {
+      attribute * { text }*,
+      anything
+    }*
+  # 
+  # End of overrides to patterns in 'axf-inherited.rnc'.
+  #
+  
+}
+# 
+# Antenna House extension elements
+#
+
+# <axf:document-info/>
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info
+axf_document-info =
+  
+  ## PDFには、著者やタイトルなどの文書情報を埋め込んでおくことができます 
+  element axf:document-info {
+    # 'name="title"' was used in V5.1 and still works but is
+    # undocumented in V6.2.
+    
+    ## 文字情報の名
+    attribute name {
+      "document-title"
+      | "title"
+      | "subject"
+      | "author"
+      | "author-title"
+      | "description-writer"
+      | "keywords"
+      | "copyright-status"
+      | "copyright-notice"
+      | "copyright-info-url"
+      | "xmp"
+      | "pagemode"
+      | "pagelayout"
+      | "hidetoolbar"
+      | "hidemenubar"
+      | "hidewindowui"
+      | "fitwindow"
+      | "centerwindow"
+      | "displaydoctitle"
+      | "openaction"
+    },
+    
+    ## 文字情報の値ある情は許容値の制約があります。
+    attribute value { text },
+    empty
+  }
+# <axf:footnote-number/>
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-number
+axf_footnote-number =
+  
+  ## 脚注番号を生成します
+  element axf:footnote-number { id, empty }
+# <axf:footnote-number-citation/>
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-number-citation
+axf_footnote-number-citation =
+  
+  ## 脚注番号を引用します
+  element axf:footnote-number-citation {
+    attribute ref-id { text },
+    empty
+  }
+# <axf:table-cell-repeated-marker>
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.table-cell-repeated-marker
+axf_table-cell-repeated-marker =
+  
+  ## 内容がaxf:repeat-cell-content-at-break="true"の場合に使われます
+  element axf:table-cell-repeated-marker {
+    (text | inline.fo.list | block.fo.list)*
+  }
+# 
+# Antenna House extensions to patterns in included modules.
+#
+
+# 
+# Extensions to FO models
+#
+inline.fo.list |= axf_footnote-number | axf_footnote-number-citation
+# 
+# Extensions to FO attlists
+#
+fo_page-sequence.attlist &=
+  axf_background-color,
+  axf_background-image,
+  axf_background-position-horizontal,
+  axf_background-position-vertical,
+  axf_background-repeat,
+  background-color,
+  background-image,
+  background-position-horizontal,
+  background-position-vertical,
+  background-repeat
+fo_simple-page-master.attlist &=
+  axf_background-color,
+  axf_background-content-height,
+  axf_background-content-type,
+  axf_background-content-width,
+  axf_background-image,
+  axf_background-position-horizontal,
+  axf_background-position-vertical,
+  axf_background-repeat,
+  axf_background-scaling,
+  axf_bleed,
+  axf_bleed-top,
+  axf_bleed-bottom,
+  axf_bleed-left,
+  axf_bleed-right,
+  axf_crop-area-visibility,
+  axf_crop-offset,
+  axf_crop-offset-top,
+  axf_crop-offset-bottom,
+  axf_crop-offset-left,
+  axf_crop-offset-right,
+  axf_printer-marks,
+  axf_printer-marks-line-color,
+  axf_printer-marks-line-length,
+  axf_printer-marks-line-width,
+  axf_printer-marks-spine-width,
+  axf_printer-marks-zero-margin,
+  background-color,
+  background-image,
+  background-position-horizontal,
+  background-position-vertical,
+  background-repeat
+fo_basic-link.attlist &= axf_action-type, text-decoration
+fo_block.attlist &=
+  axf_destination-type,
+  height,
+  max-height,
+  max-width,
+  min-height,
+  min-width,
+  text-decoration,
+  width,
+  axf.block.attlist
+fo_block-container.attlist &=
+  axf_column-count,
+  axf_column-gap,
+  axf_destination-type,
+  axf.block.attlist,
+  role
+fo_float.attlist &=
+  axf_float,
+  axf_float-x,
+  axf_float-y,
+  axf_float-reference,
+  axf_float-move,
+  axf_float-wrap,
+  axf_float-min-wrap-x,
+  axf_float-min-wrap-y,
+  axf_float-centering-x,
+  axf_float-centering-y,
+  axf_float-margin-x,
+  axf_float-margin-y,
+  axf_float-float-margin-x,
+  axf_float-float-margin-y,
+  axf_float-offset-x,
+  axf_float-offset-y
+fo_footnote.attlist &=
+  space-before,
+  axf_footnote-align,
+  axf_footnote-stacking,
+  axf_footnote-position,
+  axf_footnote-keep,
+  axf_footnote-max-height
+fo_instream-foreign-object.attlist &= axf_alttext
+fo_list-block.attlist &= axf.block.attlist
+fo_table.attlist &= axf.block.attlist
+fo_table-and-caption.attlist &= axf.block.attlist
+fo_table.attlist &= axf_table-summary
+fo_table-cell.attlist &= axf_repeat-cell-content-at-break
+fo_table-column.attlist &= id
+fo_wrapper.attlist &= text-decoration
+# 
+# Extensions to property groups
+#
+common-border-padding-and-background-properties &=
+  axf_background-content-width,
+  axf_background-content-height,
+  axf_background-content-type,
+  axf_background-scaling,
+  axf_border-radius,
+  axf_border-top-left-radius,
+  axf_border-top-right-radius,
+  axf_border-bottom-left-radius,
+  axf_border-bottom-right-radius
+# 
+# Antenna House extension properties
+#
+
+# List of extension properties common to all block-level formatting
+# objects
+axf.block.attlist =
+  axf_outline-expand,
+  axf_outline-group,
+  axf_outline-level,
+  axf_outline-title,
+  axf_outline-color,
+  axf_outline-font-style,
+  axf_outline-font-weight
+# @axf:background-color
+# @axf:background-image
+# @axf:background-position-horizontal
+# @axf:background-position-vertical
+# @axf:background-repeat
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#IDAAOLV
+axf_background-color =
+  
+  ## <color> | transparent
+  attribute axf:background-color { text }?
+axf_background-image =
+  
+  ## <uri-specification> | none
+  attribute axf:background-image { text }?
+axf_background-position-horizontal =
+  
+  ## <percentage> | <length> | left | center | right
+  attribute axf:background-position-horizontal { text }?
+axf_background-position-vertical =
+  
+  ## <percentage> | <length> | top | center | bottom
+  attribute axf:background-position-vertical { text }?
+axf_background-repeat =
+  
+  ## repeat | repeat-x | repeat-y | no-repeat | paginate
+  attribute axf:background-repeat { text }?
+# @axf:action-type
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type
+axf_action-type =
+  
+  ## 外部リンクまたはフォームアクションの動作を指定します
+  attribute axf:action-type {
+    "gotor" | "launch" | "uri" | "reset" | "submit" | "auto"
+  }?
+# @axf:alt-text
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.alttext
+axf_alttext =
+  
+  ## alternate text of the image
+  attribute axf:alttext { text }?
+# @axf:background-content-height
+# @axf:background-content-type
+# @axf:background-content-width
+# @axf:background-scaling
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.background-content
+axf_background-content-height =
+  
+  ## auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit
+  attribute axf:background-content-height { text }?
+axf_background-content-type =
+  
+  ## <string> | auto
+  attribute axf:background-content-type { text }?
+axf_background-content-width =
+  
+  ## auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit
+  attribute axf:background-content-width { text }?
+axf_background-scaling =
+  
+  ## uniform | non-uniform | inherit
+  attribute axf:background-scaling {
+    "uniform" | "non-uniform" | "inherit"
+  }?
+# @axf:border-radius
+# @axf:border-top-left-radius
+# @axf:border-top-right-radius
+# @axf:border-bottom-left-radius
+# @axf:border-bottom-right-radius
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.border-radius
+axf_border-radius =
+  
+  ## 丸め罫の径： [<length>|<percentage>] [<length>|<percentage>]?
+  attribute axf:border-radius { text }?
+axf_border-top-left-radius =
+  
+  ## 丸め罫の左上の径： [<length>|<percentage>] [<length>|<percentage>]?
+  attribute axf:border-top-left-radius { text }?
+axf_border-top-right-radius =
+  
+  ## 丸め罫の右上の径： [<length>|<percentage>] [<length>|<percentage>]?
+  attribute axf:border-top-right-radius { text }?
+axf_border-bottom-left-radius =
+  
+  ## 丸め罫の左下の径： [<length>|<percentage>] [<length>|<percentage>]?
+  attribute axf:border-bottom-left-radius { text }?
+axf_border-bottom-right-radius =
+  
+  ## 丸め罫の右下の径： [<length>|<percentage>] [<length>|<percentage>]?
+  attribute axf:border-bottom-right-radius { text }?
+# @axf:bleed
+# @axf:bleed-top
+# @axf:bleed-bottom
+# @axf:bleed-left
+# @axf:bleed-right
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.bleed
+axf_bleed =
+  
+  ## 塗り足しの領域の幅： <length>
+  attribute axf:bleed { text }?
+axf_bleed-top =
+  
+  ## 塗り足しの領域の上の幅: <length>
+  attribute axf:bleed-top { text }?
+axf_bleed-bottom =
+  
+  ## 塗り足しの領域の下の幅: <length>
+  attribute axf:bleed-bottom { text }?
+axf_bleed-left =
+  
+  ## 塗り足しの領域の左の幅: <length>
+  attribute axf:bleed-left { text }?
+axf_bleed-right =
+  
+  ## 塗り足しの領域の右の幅: <length>
+  attribute axf:bleed-right { text }?
+# @axf:column-count
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.column-count
+axf_column-count =
+  
+  ## 段数： <number>
+  attribute axf:column-count { text }?
+# @axf:column-gap
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.column-gap
+axf_column-gap =
+  
+  ## 段と段の間： <length> | <percentage>
+  attribute axf:column-gap { text }?
+# @axf:crop-area-visibility
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.crop-area-visibility
+axf_crop-area-visibility =
+  
+  ## 仕上がり寸法からはみ出した領域を表示するかどうか
+  attribute axf:crop-area-visibility { "hidden" | "visible" }?
+# @axf:crop-offset
+# @axf:crop-offset-top
+# @axf:crop-offset-bottom
+# @axf:crop-offset-left
+# @axf:crop-offset-right
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.crop-offset
+axf_crop-offset =
+  
+  ## 出力媒体の物理的な端から仕上がり寸法までの距： <length>
+  attribute axf:crop-offset { text }?
+axf_crop-offset-top =
+  
+  ## 出力媒体の物理的な上端から仕上がり寸法までの距： <length>
+  attribute axf:crop-offset-top { text }?
+axf_crop-offset-bottom =
+  
+  ## 出力媒体の物理的な下端から仕上がり寸法までの距： <length>
+  attribute axf:crop-offset-bottom { text }?
+axf_crop-offset-left =
+  
+  ## 出力媒体の物理的な左端から仕上がり寸法までの距： <length>
+  attribute axf:crop-offset-left { text }?
+axf_crop-offset-right =
+  
+  ## 出力媒体の物理的な右端から仕上がり寸法までの距： <length>
+  attribute axf:crop-offset-right { text }?
+# @axf:destination-type
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.destination-type
+axf_destination-type =
+  
+  ## リンクは、リンク先に開く方法
+  attribute axf:destination-type { text }?
+# @axf:float
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html
+axf_float =
+  
+  ## フロート関連拡張プロパティのためのショートハンド
+  attribute axf:float {
+    "none"
+    | "before"
+    | "after"
+    | "start"
+    | "end"
+    | "left"
+    | "right"
+    | "top"
+    | "bottom"
+    | "center"
+    | "inside"
+    | "outside"
+    | "wrap"
+    | "skip"
+    | "auto"
+    | "normal"
+    | "page"
+    | "column"
+    | "multicol"
+    | "next"
+    | "auto-next"
+    | "auto-move"
+    | "keep"
+    | "keep-float"
+  }?
+# @axf:float-x
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-x
+axf_float-x =
+  
+  ## 水平方向のフロート配置（writing-modeがverticalのときは垂直方向）： none | start | end | left | right | top | bottom | center | inside | outside
+  attribute axf:float-x {
+    "none"
+    | "start"
+    | "end"
+    | "left"
+    | "right"
+    | "top"
+    | "bottom"
+    | "center"
+    | "inside"
+    | "outside"
+  }?
+# @axf:float-y
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-y
+axf_float-y =
+  
+  ## 垂直方向のフロート配置 （writing-modeがverticalのときは水平方向 ）： none | before | after | top | bottom | left | right | center | inside | outside
+  attribute axf:float-y {
+    "none"
+    | "before"
+    | "after"
+    | "top"
+    | "bottom"
+    | "left"
+    | "right"
+    | "center"
+    | "inside"
+    | "outside"
+  }?
+# @axf:float-reference
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-reference
+axf_float-reference =
+  
+  ## フロートを配置する参照エリア ： auto | normal | page | column | multicol
+  attribute axf:float-reference {
+    "auto" | "normal" | "page" | "column" | "multicol"
+  }?
+# @axf:float-move
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-move
+axf_float-move =
+  
+  ## フロートは次のページまたは段に送るかどうか： auto | next | auto-next | auto-move | keep | keep-float
+  attribute axf:float-move {
+    "auto" | "next" | "auto-next" | "auto-move" | "keep" | "keep-float"
+  }?
+# @axf:float-wrap
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-wrap
+axf_float-wrap =
+  
+  ## テキストの回り込みについて： auto | wrap | skip
+  attribute axf:float-wrap { "auto" | "wrap" | "skip" }?
+# @axf:float-min-wrap-x
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-x
+axf_float-min-wrap-x =
+  
+  ## フロートへのテキスト回り込みのための幅： normal | <length> | <percentage>
+  attribute axf:float-min-wrap-x { text }?
+# @axf:float-min-wrap-y
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-y
+axf_float-min-wrap-y =
+  
+  ## フロートの前後に配置するテキスト量の最小値： normal | <length> | <percentage>
+  attribute axf:float-min-wrap-y { text }?
+# @axf:float-centering-x
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-x
+axf_float-centering-x =
+  
+  ## フロートへのテキスト回り込みのための幅が足りないときフロートをセンタリングするかどうか： none | auto | <length> | <percentage>
+  attribute axf:float-centering-x { text }?
+# @axf:float-centering-y
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-y
+axf_float-centering-y =
+  
+  ## フロートの前後にテキストを配置する高さが足りないときフロートをセンタリングするかどうか： none | auto | <length> | <percentage>
+  attribute axf:float-centering-y { text }?
+# @axf:float-margin-x
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-x
+axf_float-margin-x =
+  
+  ## フロートと回り込むテキストとの間の余白を指定します（x方向）： [ <length> | <percentage> ] [ <length> | <percentage> ]?
+  attribute axf:float-margin-x { text }?
+# @axf:float-margin-y
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-y
+axf_float-margin-y =
+  
+  ## フロートと前後のテキストとの間の余白を指定します（y方向）： [ <length> | <percentage> ] [ <length> | <percentage> ]?
+  attribute axf:float-margin-y { text }?
+# @axf:float-float-margin-x
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-x
+axf_float-float-margin-x =
+  
+  ## フロートと別の隣接するフロートとの間の余白を指定します（x方向）： auto | [[ <length> | <percentage> ] [ <length> | <percentage> ]?]
+  attribute axf:float-float-margin-x { text }?
+# @axf:float-float-margin-y
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-y
+axf_float-float-margin-y =
+  
+  ## フロートと別の隣接するフロートとの間の余白を指定します（y方向）： auto | [[ <length> | <percentage> ] [ <length> | <percentage> ]?]
+  attribute axf:float-float-margin-y { text }?
+# @axf:float-offset-x
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-x
+axf_float-offset-x =
+  
+  ## フロートのオフセット配置を指定します（x方向）： <length> | <percentage>
+  attribute axf:float-offset-x { text }?
+# @axf:float-offset-y
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-y
+axf_float-offset-y =
+  
+  ## フロートのオフセット配置を指定します（y方向）： <length> | <percentage>
+  attribute axf:float-offset-y { text }?
+# @axf:footnote-align
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-align
+axf_footnote-align =
+  
+  ## 脚注の配置を指定します。 
+  attribute axf:footnote-align { "auto" | "before" | "after" }?
+# @axf:footnote-stacking
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-stacking
+axf_footnote-stacking =
+  
+  ## 脚注の配置の方法
+  attribute axf:footnote-stacking { "block" | "inline" }?
+# @axf:footnote-position
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-position
+axf_footnote-position =
+  
+  ## 脚注を配置する場所
+  attribute axf:footnote-position {
+    "page"
+    | "start"
+    | "end"
+    | "inside"
+    | "outside"
+    | "column"
+    | "start-column"
+    | "end-column"
+    | "inside-column"
+    | "outside-column"
+  }?
+# @axf:footnote-keep
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-keep
+axf_footnote-keep =
+  
+  ## 脚注とアンカを同一ページ内または段内に配置するように
+  attribute axf:footnote-keep { "auto" | "always" }?
+# @axf:footnote-max-height
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-max-height
+axf_footnote-max-height =
+  
+  ## 脚注の最大高さ： auto | <length> | <percentage>
+  attribute axf:footnote-max-height { text }?
+# @axf:outline-expand
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-expand
+axf_outline-expand =
+  
+  ## しおりの初期状態で、下位の階層を表示するかどうか
+  attribute axf:outline-expand { "true" | "false" }?
+# @axf:outline-group
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-group
+axf_outline-group =
+  
+  ## 出力グループの名： <string>
+  attribute axf:outline-group { text }?
+# @axf:outline-level
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-level
+axf_outline-level =
+  
+  ## しおりの項目の階層レベル
+  attribute axf:outline-level { text }?
+# @axf:outline-title
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-title
+axf_outline-title =
+  
+  ## しおりのタイトルとして表示される文字列
+  attribute axf:outline-title { text }?
+# @axf:outline-color
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-color
+axf_outline-color =
+  
+  ## しおりのタイトルとして表示される文字列の色
+  attribute axf:outline-color { text }?
+# @axf:outline-font-style
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf_outline-font-style
+axf_outline-font-style =
+  
+  ## しおりのタイトルとして表示される文字列のフォントスタイル
+  attribute axf:outline-font-style { "normal" | "italic" }?
+# @axf:outline-font-weight
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf:outline-font-weight
+axf_outline-font-weight =
+  
+  ## しおりのタイトルとして表示される文字列のフォントの太さ
+  attribute axf:outline-font-weight { "normal" | "bold" }?
+# @axf:printer-marks
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks
+axf_printer-marks =
+  
+  ## トンボなどの印刷マーク
+  attribute axf:printer-marks { text }?
+# @axf:printer-marks-line-color
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-color
+axf_printer-marks-line-color =
+  
+  ## トンボの色： <line> | auto
+  attribute axf:printer-marks-line-color { text }?
+# @axf:printer-marks-line-length
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-length
+axf_printer-marks-line-length =
+  
+  ## トンボの線の長さ： <length> | auto
+  attribute axf:printer-marks-line-length { text }?
+# @axf:printer-marks-line-width
+# Line width of printer marks: <length> | auto
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-width
+axf_printer-marks-line-width =
+  
+  ## トンボの線の幅
+  attribute axf:printer-marks-line-width { text }?
+# @axf:printer-marks-zero-margin
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-zero-margin
+axf_printer-marks-zero-margin =
+  
+  ## bleedが0のときの、版面とトンボの間のマージン： <length> | auto
+  attribute axf:printer-marks-zero-margin { text }?
+# @axf:printer-marks-spine-width
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-spine-width
+axf_printer-marks-spine-width =
+  
+  ## 見開きの背表紙の幅： <length>
+  attribute axf:printer-marks-spine-width { text }?
+# @axf:repeat-cell-content-at-break
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.repeat-cell-content-at-break
+axf_repeat-cell-content-at-break =
+  
+  ## セルの分割時にセル内容をコピーするかどうか
+  attribute axf:repeat-cell-content-at-break { "true" | "false" }?
+# @axf:table-summary
+# 
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.table-summary
+axf_table-summary =
+  
+  ## Summary describing the table.  Included in Tagged PDF output.
+  attribute axf:table-summary { text }?

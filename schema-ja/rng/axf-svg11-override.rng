@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Antenna House overrides to W3C MathML schema.
+  
+  Copyright 2015 Antenna House, Inc.
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><grammar ns="http://www.antennahouse.com/names/XSL/Extensions" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:svg="http://www.w3.org/2000/svg" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <!-- SVG 1.1 -->
+  <include href="svg11-flat-20110816.rng">
+    <!-- Repeat entire 'attlist.svg' pattern just to override @version. -->
+    <define name="attlist.svg" combine="interleave">
+      <ref name="SVG.xmlns.attrib"/>
+      <ref name="SVG.Core.attrib"/>
+      <ref name="SVG.Conditional.attrib"/>
+      <ref name="SVG.Style.attrib"/>
+      <ref name="SVG.Presentation.attrib"/>
+      <ref name="SVG.DocumentEvents.attrib"/>
+      <ref name="SVG.GraphicalEvents.attrib"/>
+      <ref name="SVG.External.attrib"/>
+      <optional>
+        <attribute name="x">
+          <ref name="Coordinate.datatype"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="y">
+          <ref name="Coordinate.datatype"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="width">
+          <ref name="Length.datatype"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="height">
+          <ref name="Length.datatype"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="viewBox">
+          <ref name="ViewBoxSpec.datatype"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="preserveAspectRatio" a:defaultValue="xMidYMid meet">
+          <ref name="PreserveAspectRatioSpec.datatype"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="zoomAndPan" a:defaultValue="magnify">
+          <choice>
+            <value>disable</value>
+            <value>magnify</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="version" a:defaultValue="1.1">
+          <data type="string" datatypeLibrary=""/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="baseProfile">
+          <ref name="Text.datatype"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="contentScriptType" a:defaultValue="application/ecmascript">
+          <ref name="ContentType.datatype"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="contentStyleType" a:defaultValue="text/css">
+          <ref name="ContentType.datatype"/>
+        </attribute>
+      </optional>
+    </define>
+    <!-- end of SVG.svg.attlist -->
+    <!--
+      Don't treat SVG @id as an ID since may be repeated in multiple SVGs
+      in one FO document.
+    -->
+    <define name="SVG.id.attrib">
+      <optional>
+        <attribute name="id">
+          <data type="NMTOKEN"/>
+        </attribute>
+      </optional>
+    </define>
+  </include>
+</grammar>

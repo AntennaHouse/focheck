@@ -54,6 +54,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>&lt;s0&gt; &lt;s1&gt; &lt;s2&gt;Delete this axf:document-info with name="&lt;v3/&gt;"&lt;/s2&gt; &lt;/s1&gt; &lt;s4/&gt; &lt;/s0&gt; &lt;s5&gt; &lt;s6&gt; &lt;s7&gt;Delete the axf:document-info with name="xmp"&lt;/s7&gt; &lt;/s6&gt; &lt;s8/&gt; &lt;/s5&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T140239Z" creationid="mtan" creationdate="20160112T135122Z">
+        <seg>&lt;s0&gt; &lt;s1&gt; &lt;s2&gt;Delete this axf:document-info with name="&lt;v3/&gt;"&lt;/s2&gt; &lt;/s1&gt; &lt;s4/&gt; &lt;/s0&gt; &lt;s5&gt; &lt;s6&gt; &lt;s7&gt;Delete the axf:document-info with name="xmp"&lt;/s7&gt; &lt;/s6&gt; &lt;s8/&gt; &lt;/s5&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>&lt;x0&gt;スキーマエラー：古い名前空間と新しい名前空間にはSchematron 要素が見つかりました。&lt;/x0&gt; &lt;x1&gt;スキーマエラー：検索結合属性では、 'xslt'を使用する。&lt;/x1&gt; &lt;x2&gt;失敗： ISO Schematron の 実行 は、スキーマが検索言語を使用してできない。&lt;/x2&gt; &lt;x3/&gt; &lt;x4&gt;フェーズ エラー: フェーズは名前で定義されていない。&lt;/x4&gt; &lt;x5/&gt; &lt;x6&gt;マークアップエラー: &lt;active&gt;にはパターンの属性がない&lt;/x6&gt; &lt;x7&gt;参照エラー： パターン が "&lt;/x7&gt; &lt;x8&gt;" 活性化されているが宣言されていない。&lt;/x8&gt; &lt;x9&gt;マークアップエラー: &lt;assert&gt; にはtestの属性がない&lt;/x9&gt; &lt;x10&gt;マークアップエラー: &lt;report&gt; にはtestの属性がない&lt;/x10&gt; &lt;x11&gt;マークアップエラー: &lt;diagnostic&gt; にはidの属性がない &lt;/x11&gt; &lt;x12&gt;マークアップエラー: &lt;extends&gt; にはruleの属性がない&lt;/x12&gt; &lt;x13&gt;参照エラー: 抽象的な規則が "&lt;/x13&gt; &lt;x14&gt;" 参照されているが宣言されていない。&lt;/x14&gt; &lt;x15&gt;マークアップエラー: &lt;key&gt;にはnameの属性がない&lt;/x15&gt; &lt;x16&gt;マークアップエラー: &lt;key&gt;にはpath か 又は useの 属性がない&lt;/x16&gt; &lt;x17&gt;マークアップエラー: &lt;key&gt;には path か 又は useの 属性がない&lt;/x17&gt; &lt;x18&gt;スキーマエラー： &lt;key&gt; の要素はISO Schematronの 名前空間にはない.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T155026Z" creationid="mtan" creationdate="20151103T155026Z">
@@ -118,6 +126,86 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151105T121157Z" creationid="mtan" creationdate="20151105T114149Z">
         <seg>非正又は非整数値は一番近い整数値に丸められます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Alignment of line numbers in the line area</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T165403Z" creationid="mtan" creationdate="20160118T165403Z">
+        <seg>行番号の配置</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Alignment of the overflowed block</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T171146Z" creationid="mtan" creationdate="20160118T171146Z">
+        <seg>オーバーフローしたブロックの位置揃え</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Alignment, in the block-progression-direction, of line numbers in the line area</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T164827Z" creationid="mtan" creationdate="20160118T164827Z">
+        <seg>行番号のブロック進行方向の配置 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Alternative character string for the specified overflow text</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T171619Z" creationid="mtan" creationdate="20160118T171619Z">
+        <seg>オーバーフローしたテキストに対する代替文字列</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Alternative glyph of a character: &lt;number&gt; | &lt;string&gt; &lt;number&gt;?</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T154456Z" creationid="mtan" creationdate="20160118T152630Z">
+        <seg>文字の代替字形： &lt;number&gt; | &lt;string&gt; &lt;number&gt;?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An '&lt;v0/&gt;' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T141356Z" creationid="mtan" creationdate="20160112T122605Z">
+        <seg>「&lt;v0/&gt;」は 「fo:float」 又は 「fo:footnote」の子孫として許されていません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An '&lt;v0/&gt;' should not have both 'internal-destination' and 'external-destination' properties.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T144148Z" creationid="mtan" creationdate="20160112T122605Z">
+        <seg>「&lt;v0/&gt;」 は「internal-destination」と「external-destination」のプロパティの両方を持ってなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An 'fo:footnote' is not permitted to have an 'fo:float', 'fo:footnote', or 'fo:marker' as a descendant.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T141806Z" creationid="mtan" creationdate="20160112T141709Z">
+        <seg>「fo:footnote'」は「fo:float」、 「fo:footnote」 又は 「fo:marker」の子孫として許されていません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An 'fo:footnote' is not permitted to have as a descendant an 'fo:block-container' that generates an absolutely positioned area.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T142733Z" creationid="mtan" creationdate="20160112T142733Z">
+        <seg>fo:footnoteは、子孫として、絶対位置の領域を生成する fo:block-container を持つことが許されていません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An 'fo:footnote' that is a descendant of an 'fo:block-container' that generates an absolutely positioned area will be placed as normal block-level areas.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T142706Z" creationid="mtan" creationdate="20160112T142706Z">
+        <seg>絶対位置の領域を生成するfo:block-containerの子孫である fo:footnoteは、通常のブロックレベルの領域として配置されます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -194,6 +282,30 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An fo:page-sequence-wrapper can also occur as the child of fo:root.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T135136Z" creationid="mtan" creationdate="20160121T144941Z">
+        <seg>fo:page-sequence-wrapperはfo:rootの子として起こることができる。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An fo:page-sequence-wrapper can contain zero or more fo:page-sequence objects or fo:page-sequence-wrappers.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T135208Z" creationid="mtan" creationdate="20160121T145245Z">
+        <seg>fo:page-sequence-wrapperは fo:page-sequence 又は fo:page-sequence-wrappersを０以上含めることができる。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An fo:repeatable-page-master-reference is the next simplest sub-sequence-specifier.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T153638Z" creationid="mtan" creationdate="20160125T153526Z">
+        <seg>fo:repeatable-page-master-referenceは、次の最も単純な sub-sequence-specifierです。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>An fo:retrieve-marker is only permitted as the descendant of an fo:static-content.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151104T164624Z" creationid="mtan" creationdate="20151104T164624Z">
@@ -210,10 +322,940 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An fo:single-page-master-reference is the simplest sub-sequence-specifier.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T153339Z" creationid="mtan" creationdate="20160125T153339Z">
+        <seg>fo:single-page-master-referenceは最も単純な sub-sequence-specifierです。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Assumed page number</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T154630Z" creationid="mtan" creationdate="20160118T152756Z">
+        <seg>ページ番号の予想値</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Background color of line continued marks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T162119Z" creationid="mtan" creationdate="20160118T162119Z">
+        <seg>行継続マークの背景色</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Background color of line numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T163805Z" creationid="mtan" creationdate="20160118T163805Z">
+        <seg>行番号の背景色</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Block overflow limit value</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T171506Z" creationid="mtan" creationdate="20160118T171506Z">
+        <seg>ブロック方向オーバーフロー制限値</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Change the 'title' axf:document-info into 'document-title'</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T135642Z" creationid="mtan" creationdate="20160112T135642Z">
+        <seg>axf:document-info の「title」は 「document-title」に変更します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Change the @column-count value</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T141928Z" creationid="mtan" creationdate="20160112T141928Z">
+        <seg>@column-count 値を変更します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Character used for Japanese numerals: kanji | latin | &lt;string&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T160705Z" creationid="mtan" creationdate="20160118T160705Z">
+        <seg>漢数字に使用する文字： kanji | latin | &lt;string&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Characters to which emphasis marks are not applied: none | [ spaces || punctuation || symbols || narrow ]</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T181232Z" creationid="mtan" creationdate="20160118T181232Z">
+        <seg>圏点を付けない文字： none | [ spaces || punctuation || symbols || narrow ]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Cites a footnote number</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T161056Z" creationid="mtan" creationdate="20160119T161056Z">
+        <seg>脚注番号を引用します</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Color of emphasis marks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T180752Z" creationid="mtan" creationdate="20160118T180752Z">
+        <seg>圏点の色</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Color of line continued marks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T164252Z" creationid="mtan" creationdate="20160118T162156Z">
+        <seg>行継続マークの文字列の色</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Color of line numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T163910Z" creationid="mtan" creationdate="20160118T163820Z">
+        <seg>行番号の文字列の色</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Color of the diagonal border</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T155500Z" creationid="mtan" creationdate="20160118T153030Z">
+        <seg>対角罫の色</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Color of the reverse diagonal border</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T174015Z" creationid="mtan" creationdate="20160118T174015Z">
+        <seg>逆対角罫の色</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Color of the revision bar</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T174121Z" creationid="mtan" creationdate="20160118T174121Z">
+        <seg>改訂バーの色</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Color which appears as a title of bookmark</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125827Z" creationid="mtan" creationdate="20160120T125827Z">
+        <seg>しおりのタイトルとして表示される文字列の色</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Contents used when axf:repeat-cell-content-at-break="true"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T141959Z" creationid="mtan" creationdate="20160119T161537Z">
+        <seg>内容がaxf:repeat-cell-content-at-break="true"の場合に使われます</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Converts the number sequence in the character string: none | kansuji | kansuji-if-vertical | &lt;list-style-type&gt; | &lt;string&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T171045Z" creationid="mtan" creationdate="20160118T171045Z">
+        <seg>文字列中の数字列の変換をします： none | kansuji | kansuji-if-vertical | &lt;list-style-type&gt; | &lt;string&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Distance from the physical bottom edge to the trim size of the output medium: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T115714Z" creationid="mtan" creationdate="20160120T115714Z">
+        <seg>出力媒体の物理的な下端から仕上がり寸法までの距： &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Distance from the physical edges to the trim size of the output medium: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T115235Z" creationid="mtan" creationdate="20160120T115235Z">
+        <seg>出力媒体の物理的な端から仕上がり寸法までの距： &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Distance from the physical left edge to the trim size of the output medium: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T115941Z" creationid="mtan" creationdate="20160120T115941Z">
+        <seg>出力媒体の物理的な左端から仕上がり寸法までの距： &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Distance from the physical right edge to the trim size of the output medium: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T120003Z" creationid="mtan" creationdate="20160120T120003Z">
+        <seg>出力媒体の物理的な右端から仕上がり寸法までの距： &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Distance from the physical top edge to the trim size of the output medium: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T115435Z" creationid="mtan" creationdate="20160120T115435Z">
+        <seg>出力媒体の物理的な上端から仕上がり寸法までの距： &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Document information such as an author and title that can be embedded in the PDF</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T154811Z" creationid="mtan" creationdate="20160119T154811Z">
+        <seg>PDFには、著者やタイトルなどの文書情報を埋め込んでおくことができます </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Each fo:page-sequence represents a sequence of pages that result from formatting the content children of the fo:page-sequence.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160121T144834Z" creationid="mtan" creationdate="20160121T144548Z">
+        <seg>それぞれの fo:page-sequenceは fo:page-sequenceの内容の子の組版からのページシーケンスを表します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Enumeration token is '&lt;v1/&gt;'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T124816Z" creationid="mtan" creationdate="20151029T110759Z">
         <seg>列挙トークンは「&lt;v1/&gt;」です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Font family of emphasis marks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T180817Z" creationid="mtan" creationdate="20160118T180817Z">
+        <seg>圏点のフォントファミリ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Font family of line continued marks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T162226Z" creationid="mtan" creationdate="20160118T162226Z">
+        <seg>行継続マークのフォントファミリ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Font family of line numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T151055Z" creationid="mtan" creationdate="20160118T164858Z">
+        <seg>行番号のフォントファミリ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Font size of emphasis marks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T180830Z" creationid="mtan" creationdate="20160118T180830Z">
+        <seg>圏点のフォントサイズ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Font size of line continued marks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T162325Z" creationid="mtan" creationdate="20160118T162325Z">
+        <seg>行継続マークのフォントサイズ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Font size of line numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T164913Z" creationid="mtan" creationdate="20160118T164913Z">
+        <seg>行番号のフォントサイズ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Font stretching of emphasis marks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T180911Z" creationid="mtan" creationdate="20160118T180911Z">
+        <seg>圏点のフォントの伸縮</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Font style which appears as a title of bookmark</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125800Z" creationid="mtan" creationdate="20160120T125800Z">
+        <seg>しおりのタイトルとして表示される文字列のフォントスタイル</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Font weight of emphasis marks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T181040Z" creationid="mtan" creationdate="20160118T181040Z">
+        <seg>圏点のフォントの太さ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Font weight of line numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T163133Z" creationid="mtan" creationdate="20160118T163133Z">
+        <seg>行番号のフォントの太さ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Font weight which appears as a title of bookmark</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125733Z" creationid="mtan" creationdate="20160120T125733Z">
+        <seg>しおりのタイトルとして表示される文字列のフォントの太さ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For example, the content of the fo:title can be formatted and displayed in a "title" window or in a "tool tip".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T102826Z" creationid="mtan" creationdate="20160128T102826Z">
+        <seg>例えば、fo:title 組版され、「title」画面 又は「tool tip」で表示されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Generates a footnote number</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T161043Z" creationid="mtan" creationdate="20160119T161043Z">
+        <seg>脚注番号を生成します</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Glyph of Japanese Kanji</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T160308Z" creationid="mtan" creationdate="20160118T160308Z">
+        <seg>日本語の漢字の字形</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Grouping character used for Japanese numerals</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T160541Z" creationid="mtan" creationdate="20160118T160541Z">
+        <seg>漢数字に使用する位取り文字</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T122836Z" creationid="mtan" creationdate="20160120T122357Z">
+        <seg>水平方向のフロート配置（writing-modeがverticalのときは垂直方向）： none | start | end | left | right | top | bottom | center | inside | outside</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>How to condense the overflowed text within the region</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T171212Z" creationid="mtan" creationdate="20160118T171212Z">
+        <seg>オーバフローしたテキストを領域内にどのように詰め込むか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>How to treat full width punctuations in Japanese</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T172841Z" creationid="mtan" creationdate="20160118T172506Z">
+        <seg>日本語で、全角約物の詰め処理をどのようにする</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In addition, it can also be used with a different reference-orientation to rotate its content.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T114458Z" creationid="mtan" creationdate="20160128T114437Z">
+        <seg>さらに、それはまた、その内容を回転するために異なる different reference-orientationを使用することができます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In lr-tb writing-mode, this region corresponds to a left sidebar.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T160037Z" creationid="mtan" creationdate="20160125T160037Z">
+        <seg>lr-tb writing-modeでは、この領域は、左のサイドバーに対応している。 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In lr-tb writing-mode, this region corresponds to a right sidebar.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T160246Z" creationid="mtan" creationdate="20160125T160246Z">
+        <seg>lr-tb writing-modeでは、この領域は、右のサイドバーに対応している。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In lr-tb writing-mode, this region corresponds to the footer region.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T122806Z" creationid="mtan" creationdate="20160127T122806Z">
+        <seg>lr-tb writing-modeでは、この領域はフッタ領域に対応します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In lr-tb writing-mode, this region corresponds to the header region.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T160000Z" creationid="mtan" creationdate="20160126T155708Z">
+        <seg>lr-tb writing-modeでは、この領域はヘッダ領域に対応します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Inline overflow limit value</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T171524Z" creationid="mtan" creationdate="20160118T171524Z">
+        <seg>インライン方向オーバーフロー制限値</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It forces a string of text to be written in a specific direction.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T115209Z" creationid="mtan" creationdate="20160128T115209Z">
+        <seg>テキストの文字列が特定方向に強制的に書き込みます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It holds an fo:layout-master-set formatting object (which holds all masters used in the document), an optional fo:declarations, an optional fo:bookmark-tree, and one or more fo:page-sequence or fo:page-sequence-wrapper objects.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T134955Z" creationid="mtan" creationdate="20160121T143846Z">
+        <seg>fo:layout-master-set （文書で使用されている全てのマスターを保持する ）、 任意、 fo:declarations、任意の fo:bookmark-treeなど持っています。 それとも、１以上 のfo:page-sequence 又は fo:page-sequence-wrapper 要素が持っています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is an atomic unit to the formatter.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T161052Z" creationid="mtan" creationdate="20160125T161052Z">
+        <seg>これは、 	フォーマッタ の原子単位です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is used to specify the use of a particular page-master at a given point in the sequence of pages that would be generated using the fo:page-sequence-master that is the parent of the fo:single-page-master-reference.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T113703Z" creationid="mtan" creationdate="20160127T113703Z">
+        <seg> これは、fo:single-page-master-referenceの親である fo:page-sequence-masterを使用して生成されるページシーケンスにとられた位置で特定のpage-masterの使用を指定するために使用します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It specifies a sub-sequence consisting of a single instance of a single page-master.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T151856Z" creationid="mtan" creationdate="20160126T151856Z">
+        <seg>単一の page-masterの単一のインスタンスのあるsub-sequence を指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It specifies a sub-sequence consisting of repeated instances of a set of alternative page-masters.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T152750Z" creationid="mtan" creationdate="20160126T152750Z">
+        <seg>代替 page-mastersのセットの繰り返しインスタンスのあるsub-sequence を指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It specifies a sub-sequence consisting of repeated instances of a single page-master.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T152143Z" creationid="mtan" creationdate="20160126T152129Z">
+        <seg>単一の page-masterの繰り返したインスタンスのあるsub-sequence を指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Its common use is for repeating or running headers and footers.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T124630Z" creationid="mtan" creationdate="20160127T124630Z">
+        <seg>その一般的な用は、繰り返し、又はヘッダとフッタを実行するためです。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Layer to which the area is arranged.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T161244Z" creationid="mtan" creationdate="20160118T161244Z">
+        <seg>エリアをどのレイヤに配置するか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Line color of printer marks: &lt;line&gt; | auto</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125452Z" creationid="mtan" creationdate="20160120T125452Z">
+        <seg>トンボの色： &lt;line&gt; | auto</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Line length of printer marks: &lt;length&gt; | auto</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125408Z" creationid="mtan" creationdate="20160120T125408Z">
+        <seg>トンボの線の長さ： &lt;length&gt; | auto</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Line width of printer marks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125343Z" creationid="mtan" creationdate="20160120T125343Z">
+        <seg>トンボの線の幅</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Line-breaking method</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T161922Z" creationid="mtan" creationdate="20160118T161922Z">
+        <seg>行分割の方法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>List style: &lt;glyph&gt; | &lt;algorithmic&gt; | &lt;numeric&gt; | &lt;alphabetic&gt; | &lt;symbolic&gt; | &lt;non-repeating&gt; | normal | none</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T165627Z" creationid="mtan" creationdate="20160118T165627Z">
+        <seg>リストスタイル： &lt;glyph&gt; | &lt;algorithmic&gt; | &lt;numeric&gt; | &lt;alphabetic&gt; | &lt;symbolic&gt; | &lt;non-repeating&gt; | normal | none</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Location to layout the footnote.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T130403Z" creationid="mtan" creationdate="20160120T130403Z">
+        <seg>脚注を配置する場所</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Location which becomes the base of relative URI</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T155336Z" creationid="mtan" creationdate="20160118T155336Z">
+        <seg>相対指定のURIのベースとなる位置</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Margin between the page and the printer marks when bleed is 0: &lt;length&gt; | auto</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125205Z" creationid="mtan" creationdate="20160120T125205Z">
+        <seg>bleedが0のときの、版面とトンボの間のマージン： &lt;length&gt; | auto</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Maximum height of footnote: auto | &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T130203Z" creationid="mtan" creationdate="20160120T130203Z">
+        <seg>脚注の最大高さ： auto | &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Method to layout the footnote.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T130429Z" creationid="mtan" creationdate="20160120T130429Z">
+        <seg>脚注の配置の方法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Minimum extent for the text placed before and after the float: normal | &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T144906Z" creationid="mtan" creationdate="20160120T144906Z">
+        <seg>フロートの前後に配置するテキスト量の最小値： normal | &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Minimum font size when axf:overflow-condense="font-size" is specified: &lt;length&gt; [ visible | hidden | scroll | error-if-overflow | repeat ]</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T171320Z" creationid="mtan" creationdate="20160118T171320Z">
+        <seg>axf:overflow-condense="font-size" の下限のフォントサイズを指定します
+： &lt;length&gt; [ visible | hidden | scroll | error-if-overflow | repeat ]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Minimum number of characters considered to be an abbreviation</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T145255Z" creationid="mtan" creationdate="20160118T152454Z">
+        <seg>略語とみなす最小文字数</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Minimum number of the character to hyphenate</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T155838Z" creationid="mtan" creationdate="20160118T153903Z">
+        <seg>ハイフネーション処理をする語の最小文字数</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Minimum value when axf:overflow-condense="font-stretch" is specified: [ &lt;number&gt; | &lt;percentage&gt; ] [ visible | hidden | scroll | error-if-overflow | repeat ]</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T171357Z" creationid="mtan" creationdate="20160118T171357Z">
+        <seg>axf:overflow-condense="font-stretch" の下限の値を指定します
+： [ &lt;number&gt; | &lt;percentage&gt; ] [ visible | hidden | scroll | error-if-overflow | repeat ]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Minimum width for the text wrapping around the float: normal | &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T144810Z" creationid="mtan" creationdate="20160120T144810Z">
+        <seg>フロートへのテキスト回り込みのための幅： normal | &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Name of the document information</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T155211Z" creationid="mtan" creationdate="20160119T155211Z">
+        <seg>文字情報の名</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Name of the output group: &lt;string&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T152604Z" creationid="mtan" creationdate="20160120T130030Z">
+        <seg>出力グループの名： &lt;string&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Offset of line continued marks: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T163626Z" creationid="mtan" creationdate="20160118T163626Z">
+        <seg>行継続マークの表示オフセット： &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Offset of line numbers: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T151216Z" creationid="mtan" creationdate="20160118T165201Z">
+        <seg>行番号の表示オフセット：&lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Offset of the revision bar</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T174146Z" creationid="mtan" creationdate="20160118T174146Z">
+        <seg>改訂バーの表示オフセット</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Offset placement for the float (in x-axis): &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T145432Z" creationid="mtan" creationdate="20160120T145432Z">
+        <seg>フロートのオフセット配置を指定します（x方向）： &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Offset placement for the float (in y-axis): &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T145502Z" creationid="mtan" creationdate="20160120T145502Z">
+        <seg>フロートのオフセット配置を指定します（y方向）： &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Orientation of text in vertical writing mode</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T182435Z" creationid="mtan" creationdate="20160118T182435Z">
+        <seg>縦書きでの文字の向き</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Overflow limit value: &lt;length&gt;1 2</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T171436Z" creationid="mtan" creationdate="20160118T171436Z">
+        <seg>オーバーフロー制限値： &lt;length&gt;1 2</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Overprint setting</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T171819Z" creationid="mtan" creationdate="20160118T171819Z">
+        <seg>オーバープリント指定</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Pages are automatically generated when the fo:page-sequence-master is used in formatting an fo:page-sequence.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T153221Z" creationid="mtan" creationdate="20160125T153221Z">
+        <seg>fo:page-sequence-masterは fo:page-sequenceで組版される場合、ページが自動的に生成されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Percentage of Kashida in Arabic justification: &lt;percentage&gt; | auto</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T182309Z" creationid="mtan" creationdate="20160118T182309Z">
+        <seg>アラビア語の均等割り付けで、Kashidaの割り合い： &lt;percentage&gt; | auto</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Please use name="document-title".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T143633Z" creationid="mtan" creationdate="20160112T143633Z">
+        <seg>name="document-title"　を利用してください。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Position of line numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T151449Z" creationid="mtan" creationdate="20160118T165225Z">
+        <seg>行番号の表示位置</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Position of the revision bar</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T174202Z" creationid="mtan" creationdate="20160118T174202Z">
+        <seg>改訂バーの表示位置</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Printing marks, such as a crop mark</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125532Z" creationid="mtan" creationdate="20160120T125532Z">
+        <seg>トンボなどの印刷マーク</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Radii of the bottom-left corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T150437Z" creationid="mtan" creationdate="20160120T131609Z">
+        <seg>丸め罫の左下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Radii of the bottom-right corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T150451Z" creationid="mtan" creationdate="20160120T131638Z">
+        <seg>丸め罫の右下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Radii of the rounded corners: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T161847Z" creationid="mtan" creationdate="20160119T161847Z">
+        <seg>丸め罫の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Radii of the top-left corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T150348Z" creationid="mtan" creationdate="20160120T131413Z">
+        <seg>丸め罫の左上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Radii of the top-right corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T150417Z" creationid="mtan" creationdate="20160120T131447Z">
+        <seg>丸め罫の右上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Range where a hyphenation is available: none | &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T160104Z" creationid="mtan" creationdate="20160118T160104Z">
+        <seg>ハイフネーション可能な範囲： none | &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Reference area where the float is placed: auto | normal | page | column | multicol</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T151541Z" creationid="mtan" creationdate="20160120T124227Z">
+        <seg>フロートを配置する参照エリア ： auto | normal | page | column | multicol</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>See for details.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T160725Z" creationid="mtan" creationdate="20160125T160725Z">
+        <seg>詳細については、参照して下さい。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Sets horizontal-in-vertical composition in vertical writing mode automatically: none | all | [ digits &lt;integer&gt; || alpha &lt;integer&gt; || alphanumeric &lt;integer&gt; ]</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T180429Z" creationid="mtan" creationdate="20160118T180429Z">
+        <seg>縦書きでの自動縦中横を行います： none | all | [ digits &lt;integer&gt; || alpha &lt;integer&gt; || alphanumeric &lt;integer&gt; ]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Shorthand for float-related extension properties</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T151354Z" creationid="mtan" creationdate="20160120T122112Z">
+        <seg>フロート関連拡張プロパティのためのショートハンド</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Some information has constraints on the allowed values.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T150719Z" creationid="mtan" creationdate="20160120T141816Z">
+        <seg>ある情は許容値の制約があります。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Space between emphasis marks and the base characters</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T181135Z" creationid="mtan" creationdate="20160118T181135Z">
+        <seg>圏点と親文字の間隔</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Space between the float and another neighboring float (in x-axis): auto | [[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?]</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T145345Z" creationid="mtan" creationdate="20160120T145345Z">
+        <seg>フロートと別の隣接するフロートとの間の余白を指定します（x方向）： auto | [[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Space between the float and another neighboring float (in y-axis): auto | [[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?]</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T145407Z" creationid="mtan" creationdate="20160120T145407Z">
+        <seg>フロートと別の隣接するフロートとの間の余白を指定します（y方向）： auto | [[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Space between the float and the text wrapping around the float (in x-axis): [ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T145213Z" creationid="mtan" creationdate="20160120T145213Z">
+        <seg>フロートと回り込むテキストとの間の余白を指定します（x方向）： [ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Space between the float and the text wrapping around the float (in y-axis): [ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T145243Z" creationid="mtan" creationdate="20160120T145243Z">
+        <seg>フロートと前後のテキストとの間の余白を指定します（y方向）： [ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Space to trim between a full width punctuation and a full width character in Japanese</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T172211Z" creationid="mtan" creationdate="20160118T172211Z">
+        <seg>日本語での全角約物と全角文字の間の詰め</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Spacing behavior between words or characters so that the last line of the paragraph does not have only one word left (one character for CJK)</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T145545Z" creationid="mtan" creationdate="20160118T155051Z">
+        <seg>段落の最後の行が１語（CJKのときは１文字）だけにならないようにします </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Specifies the action of external link or form action</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T161728Z" creationid="mtan" creationdate="20160119T161728Z">
+        <seg>外部リンクまたはフォームアクションの動作を指定します</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Specifies the alignment of the footnotes.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T130455Z" creationid="mtan" creationdate="20160120T130455Z">
+        <seg>脚注の配置を指定します。 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Spine width of the facing page: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125110Z" creationid="mtan" creationdate="20160120T125110Z">
+        <seg>見開きの背表紙の幅： &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>String which appears as a title of bookmark: &lt;string&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125843Z" creationid="mtan" creationdate="20160120T125843Z">
+        <seg>しおりのタイトルとして表示される文字列</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Style of emphasis marks: none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | &lt;string&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T181321Z" creationid="mtan" creationdate="20160118T181321Z">
+        <seg>圏点のスタイル： none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | &lt;string&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Style of the revision bar</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T174220Z" creationid="mtan" creationdate="20160118T174220Z">
+        <seg>改訂バーのスタイル</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Style used for Japanese numerals</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T160824Z" creationid="mtan" creationdate="20160118T160824Z">
+        <seg>漢数字の形式</seg>
       </tuv>
     </tu>
     <tu>
@@ -564,8 +1606,8 @@
       <tuv lang="EN-US">
         <seg>Syntax error: border-start-precedence="&lt;v0/&gt;"</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>Sシンタックスエラー：border-start-precedence="&lt;v0/&gt;"</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T155109Z" creationid="mtan" creationdate="20151029T130611Z">
+        <seg>シンタックスエラー：border-start-precedence="&lt;v0/&gt;"</seg>
       </tuv>
     </tu>
     <tu>
@@ -1914,10 +2956,723 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Text alignment of the first line</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T175457Z" creationid="mtan" creationdate="20160118T175457Z">
+        <seg>最初の行のテキストの配置</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Text alignment when text-align="&lt;string&gt;"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T175718Z" creationid="mtan" creationdate="20160118T175718Z">
+        <seg>text-align="&lt;string&gt;" のときのテキストの配置</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Text decoration of line numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T165426Z" creationid="mtan" creationdate="20160118T165426Z">
+        <seg>行番号の文字列の修飾</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Text wrapping: auto | wrap | skip</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T144730Z" creationid="mtan" creationdate="20160120T144730Z">
+        <seg>テキストの回り込みについて： auto | wrap | skip</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The "switch-to" property value of the fo:multi-toggle typically matches the "case-name" property value of the fo:multi-case to switch to.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160129T125449Z" creationid="mtan" creationdate="20160129T125449Z">
+        <seg> fo:multi-toggleの「switch-to」プロパティの値は一般的に切り替えるfo:multi-caseの「case-name」プロパティのと一致します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The FO processor may report an error or may use 'internal-destination'.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T141244Z" creationid="mtan" creationdate="20160112T141244Z">
+        <seg>FO プロセサーはエラーを報告できるし、「internal-destination」も使用できる。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The color-profile is referenced again via the name specified in the "color-profile-name" property.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T140657Z" creationid="mtan" creationdate="20160121T151005Z">
+        <seg>color-profileを「color-profile-name」 プロパティで指定された名を経由して、再び参照されています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The content of the fo:flow formatting object is a sequence of flow objects that provides the flowing text content that is distributed into pages.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T123950Z" creationid="mtan" creationdate="20160127T123600Z">
+        <seg>fo:flowの内容は、ページに割り当たるフローイングテキスト内容を提供するフロー対象体のシーケンスです。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The content of these pages comes from flow children of the fo:page-sequence as assigned by the flow-map in effect for that fo:page-sequence.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T142719Z" creationid="mtan" creationdate="20160126T142719Z">
+        <seg>そのfo:page-sequenceのための 有効な flow-mapによって 対して、これらのページ内容は、fo:page-sequenceのフロー子から来ています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:basic-link is used for representing the start resource of a simple one-directional single-target link.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T170945Z" creationid="mtan" creationdate="20160128T170805Z">
+        <seg>fo:basic-linkは、単純なone-directional single-target リンクのスタートリソースを表すために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:bidi-override formatting object is used when the Unicode BIDI algorithm fails.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T114941Z" creationid="mtan" creationdate="20160128T114853Z">
+        <seg>Unicode BIDI アルゴリズムが失敗したらfo:bidi-overrideが使用されています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:block formatting object is commonly used for formatting paragraphs, titles, headlines, figure and table captions, etc.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T110625Z" creationid="mtan" creationdate="20160128T110555Z">
+        <seg>fo:blockは、一般的に段落、タイトル、見出し、図、表キャプションなど組版に使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:block-container flow object is used to generate a block-level reference-area, typically containing text blocks with a different writing-mode.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T113841Z" creationid="mtan" creationdate="20160128T113841Z">
+        <seg>fo:block-containerフローは、 一般的には、異なるwriting-modeのテキストブロックを持って、block-level reference-areaを生成するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:character flow object represents a character that is mapped to a glyph for presentation.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T115937Z" creationid="mtan" creationdate="20160128T115937Z">
+        <seg>fo:characterフローは、表示用のグリフにマップされている文字を表します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:color-profile formatting object is used to declare an ICC Color Profile for a stylesheet.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T140709Z" creationid="mtan" creationdate="20160121T150927Z">
+        <seg> fo:color-profileはスタイルシートの ICC Color Profileを宣言するために使用しています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:conditional-page-master-reference is used to identify a page-master that is to be used when the conditions on its use are satisfied.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T120721Z" creationid="mtan" creationdate="20160127T120721Z">
+        <seg>fo:conditional-page-master-referenceは、使用条件が満たされたときに、使用されるpage-masterを見分けるために使用します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:declarations formatting object is used to group global declarations for a stylesheet.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T140532Z" creationid="mtan" creationdate="20160121T150036Z">
+        <seg>fo:declarationsはスタイルシートのグローバルグループの宣言に使用します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:external-graphic flow object is used for a graphic where the graphics data resides outside of the fo:element tree.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T121259Z" creationid="mtan" creationdate="20160128T121259Z">
+        <seg>fo:external-graphic フローオブジェクトは、グラフィックスデータが fo:element ツリーの外部にあるグラフのために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:flow-assignment is used to specify the assignment of one sequence of flows to a sequence of regions.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T103857Z" creationid="mtan" creationdate="20160128T103709Z">
+        <seg>The fo:flow-map is used to specify the assignment of flows to regions.fo:flow-assignmentは、領域のシーケンスへのフローの一つのシーケンスの割当を指定するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:flow-map is used to specify the assignment of flows to regions.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T103249Z" creationid="mtan" creationdate="20160128T103249Z">
+        <seg>fo:flow-mapは、領域へのフローの割当を指定するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:flow-name-specifier is used to specify one flow in a source-list.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T104831Z" creationid="mtan" creationdate="20160128T104710Z">
+        <seg>fo:flow-name-specifierは、source-list内に一つのフローを指定するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:flow-source-list is used to specify the sequence of flows to assign in a particular fo:flow-assignment.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T104519Z" creationid="mtan" creationdate="20160128T104519Z">
+        <seg>fo:flow-source-listは、特定のfo:flow-assignmentを割り当てることでフローのシーケンスを指定するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:flow-target-list is used to specify the sequence of regions to which flows are assigned in a particular fo:flow-assignment.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T105008Z" creationid="mtan" creationdate="20160128T105008Z">
+        <seg>fo:flow-target-lisは、t 特定のfo:flow-assignmentを割り当てることでフローのシーケンスを指定するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:folio-prefix formatting object specifies a static prefix for the folio numbers within a page-sequence.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160129T115753Z" creationid="mtan" creationdate="20160128T150327Z">
+        <seg>fo:folio-prefix フォーマッティングオブジェクトは、page-sequence内のフォリオ番号の静的な接頭を指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:folio-suffix formatting object specifies a static suffix for the folio numbers within a page-sequence.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160129T115818Z" creationid="mtan" creationdate="20160128T150414Z">
+        <seg>fo:folio-suffix フォーマッティングオブジェクトは、page-sequence内のフォリオ番号の静的な接尾を指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:index-page-number-prefix formatting object specifies a static prefix for the cited page items created by fo:index-key-reference.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160129T120614Z" creationid="mtan" creationdate="20160129T120614Z">
+        <seg>fo:index-page-number-prefix フォーマッティングオブジェクトは、 fo:index-key-referenceによって作成された引用されたページ項目の静的な接頭を指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:index-page-number-suffix formatting object specifies a static suffix for the cited page items created by fo:index-key-reference.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160129T120750Z" creationid="mtan" creationdate="20160129T120750Z">
+        <seg>fo:index-page-number-suffixフォーマッティングオブジェクトは、 fo:index-key-referenceによって作成された引用されたページ項目の静的な接尾を指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:index-range-begin formatting object is used to indicate the beginning of an "indexed range" associated with an index key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160129T125939Z" creationid="mtan" creationdate="20160129T125939Z">
+        <seg>fo:index-range-begin フォーマッティングオブジェクトは、索引きーに関連付けられた「indexed range」の開始を示すために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:initial-property-set auxiliary formatting object specifies formatting properties for the first line of an fo:block.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T155721Z" creationid="mtan" creationdate="20160128T120859Z">
+        <seg>fo:initial-property-set 補助フォーマッティングオブジェクトは、fo:blockの最小の行の組版プロパティを指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:inline formatting object is commonly used for formatting a portion of text with a background or enclosing it in a border.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T122654Z" creationid="mtan" creationdate="20160128T122332Z">
+        <seg>fo:inlineフォーマッティングオブジェクトは、一般的な背景のあるテキストの一部を組版や境界線で囲むために使用れています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:inline-container flow object is used to generate an inline reference-area, typically containing text blocks with a different writing-mode.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T124334Z" creationid="mtan" creationdate="20160128T123004Z">
+        <seg>fo:inline-containerフローオブジェクトは、 一般的には、異なるwriting-modeのテキストブロックを持って、行内 reference-areaを生成するために使用されます。 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:instream-foreign-object flow object is used for an inline graphic or other "generic" object where the object data resides as descendants of the fo:instream-foreign-object, typically as an XML element subtree in a non-XSL namespace.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T145510Z" creationid="mtan" creationdate="20160128T121744Z">
+        <seg>+fo:instream-foreign-objectフローオブジェクトは、一般的には、 non-XSL 名前空間内のXML要素サブツリーとして、fo:instream-foreign-object の子孫として存在し、行内グラフィックや他の「generic」オブジェクトのために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:layout-master-set is a wrapper around all masters used in the document.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T152930Z" creationid="mtan" creationdate="20160125T152930Z">
+        <seg>fo:layout-master-setは文書で使用されている全てのマスターズの周りのラッパーです。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:leader formatting object is often used:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T161143Z" creationid="mtan" creationdate="20160125T161143Z">
+        <seg>fo:leaderはよく使用されている。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:list-block flow object is used to format a list.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T160438Z" creationid="mtan" creationdate="20160125T160438Z">
+        <seg>fo:list-blockフローはリストを組版するために使用される。 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:list-item formatting object contains the label and the body of an item in a list.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T165501Z" creationid="mtan" creationdate="20160128T165501Z">
+        <seg>fo:list-item フォーマッティングオブジェクトは、 リスト内に項目のラベルと本体が含まれています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:list-item-body formatting object contains the content of the body of a list-item.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T165720Z" creationid="mtan" creationdate="20160128T165720Z">
+        <seg>fo:list-item-bodyフォーマッティングオブジェクトは、 list-itemの本体の内容が含まれています。 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:list-item-label formatting object contains the content of the label of a list-item, typically used to either enumerate, identify, or adorn the list-item's body.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T170211Z" creationid="mtan" creationdate="20160128T170211Z">
+        <seg>fo:list-item-label フォーマッティングオブジェクトは、 list-itemの本体の内容が含まれて、一般的に、列挙、識別、又は list-itemの本体を飾り付けるためにも使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:multi-case is used to contain (within an fo:multi-switch) each alternative sub-tree of formatting objects among which the parent fo:multi-switch will choose one to show and will hide the rest.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160129T123753Z" creationid="mtan" creationdate="20160129T123753Z">
+        <seg>fo:multi-caseは、（fo:multi-switch内にある）、親のfo:multi-switchが表示するものを選択し、残りの部分を隠して、その中でフォーマッティングオブジェクトの各代替 sub-treeを格納するために使用されます。 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:multi-properties is used to switch between two or more property sets that are associated with a given portion of content.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T172912Z" creationid="mtan" creationdate="20160128T172912Z">
+        <seg>fo:multi-properties は、内容の振り当たった部分に関連された二つ以上のプロパティセットの間で切り替えるために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:multi-property-set auxiliary formatting object is used to specify an alternative set of formatting properties that can be used to provide an alternate presentation of the children flow objects of the fo:wrapper child of the parent of this fo:multi-property-set.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160129T115227Z" creationid="mtan" creationdate="20160129T115227Z">
+        <seg>fo:multi-property-set 補助フォーマッティングオブジェクトは、このfo:multi-property-setの親のfo:wrapper子のフローオブジェクトの子の代替表示を備えるために、使用できる組版プロパティの別のセットを指定するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:multi-switch wraps the specification of alternative sub-trees of formatting objects (each sub-tree being within an fo:multi-case), and controls the switching (activated via fo:multi-toggle) from one alternative to another.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160129T122259Z" creationid="mtan" creationdate="20160129T122259Z">
+        <seg>fo:multi-switchは、 フォーマッティングオブジェクトの代替 sub-trees（fo:multi-case内にある各sub-tree）の仕様をラップし、別の代替（ fo:multi-toggleを通じて活性化）からの切り替えを制御します。 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:multi-toggle is typically used to establish an area that when actuated (for example implemented as "clicked"), has the effect of switching from one fo:multi-case to another.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160129T125015Z" creationid="mtan" creationdate="20160129T125015Z">
+        <seg>fo:multi-toggleは、一般的に、動かす（例えば、「clicked」として実装されている）ときに別のfo:multi-caseの切り替えの効果を有すること領域を定めるために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:page-number formatting object is used to obtain an inline-area whose content is the page-number for the page on which the inline-area is placed.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T130003Z" creationid="mtan" creationdate="20160128T123406Z">
+        <seg>fo:page-numberフォーマッティングオブジェクトは、その内容の行内領域が配置されている page-numberのページである 行内領域を得るために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:page-number-citation is used to reference the page-number for the page containing the first normal area returned by the cited formatting object.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T125949Z" creationid="mtan" creationdate="20160128T123936Z">
+        <seg>fo:page-number-citationは、引用されたフォーマッティングオブジェクトによって返される最初の正規領域を含むページのpage-numberを参照するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:page-number-citation-last is used to reference the page-number for the last page containing an area that is (a) returned by the cited formatting object and (b) has an area-class that is consistent with the specified page-citation-strategy.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T125901Z" creationid="mtan" creationdate="20160128T124844Z">
+        <seg>fo:page-number-citation-lastの（a）は、引用されたフォーマッティングオブジェクトによって返される最後の正ページのpage-numberを参照するために使用される、  （b）に指定されたpage-citation-strategyと一致している area-class があります。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:page-sequence formatting object is used to specify how to create a (sub-)sequence of pages within a document; for example, a chapter of a report.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T141553Z" creationid="mtan" creationdate="20160121T151305Z">
+        <seg>fo:page-sequenceは 文書内の(sub-)sequence ページを作成する方法を指定するために使用しています。例えば 、報告の章。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:page-sequence-master is used to specify the constraints on and the order in which a given set of page-masters will be used in generating a sequence of pages.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T112806Z" creationid="mtan" creationdate="20160127T112806Z">
+        <seg>fo:page-sequence-masterは制約やpage-mastersの取られたセットが、ページシーケンスを生成するのに使用される順序を指定するために使用します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:page-sequence-wrapper formatting object is used to specify inherited properties for a group of fo:page-sequence formatting objects.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T151324Z" creationid="mtan" creationdate="20160126T145609Z">
+        <seg>fo:page-sequenceのグループの継承されたプロパティを指定するとpage-sequence-wrapperを使用しています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:page-sequence-wrapper is used to specify inherited properties for the fo:page-sequence objects it wraps; it has no additional formatting semantics.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T151150Z" creationid="mtan" creationdate="20160125T151818Z">
+        <seg>fo:page-sequenceの要素を回り込むのために継承されたプロパティを指定すると fo:page-sequence-wrapper を使用しています。追加の意味がない。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:region-name-specifier is used to specify one region in a target-list.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T105059Z" creationid="mtan" creationdate="20160128T105059Z">
+        <seg>fo:region-name-specifier iは、target-list内に一つのフローを指定するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:repeatable-page-master-alternatives formatting object is the most complex sub-sequence-specifier.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T152400Z" creationid="mtan" creationdate="20160126T152400Z">
+        <seg>fo:repeatable-page-master-alternativesは最も複雑な sub-sequence-specifierです。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:scaling-value-citation is used to obtain the scale-factor applied to the cited fo:external-graphic.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T150841Z" creationid="mtan" creationdate="20160128T150841Z">
+        <seg>fo:scaling-value-citationは、引用された fo:external-graphicに適用される
+scale-factorを得るために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:simple-page-master is used in the generation of pages and specifies the geometry of the page.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T154100Z" creationid="mtan" creationdate="20160126T154100Z">
+        <seg>fo:simple-page-masterはページの生成に使用され、ページのジオメトリを指定しています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:static-content formatting object holds a sequence or a tree of formatting objects that is to be presented in a single region or repeated in like-named regions on one or more pages in the page-sequence.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T102409Z" creationid="mtan" creationdate="20160128T102409Z">
+        <seg>fo:static-content はＦＯシーケンス又はＦＯツリーを持って、それは、 単一の領域で提示し、 page-sequence内の１以上のページにlike-named領域で繰り返されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:table flow object is used for formatting the tabular material of a table.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T151705Z" creationid="mtan" creationdate="20160128T151705Z">
+        <seg>fo:table フローオブジェクトは、 表の表形式の資料を組版すれために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:table-and-caption flow object is used for formatting a table together with its caption.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T151104Z" creationid="mtan" creationdate="20160128T151104Z">
+        <seg>fo:table-and-caption フローオブジェクトは、キャプションと一緒に表を組版するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:table-body formatting object is used to contain the content of the table body.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T163000Z" creationid="mtan" creationdate="20160128T163000Z">
+        <seg>fo:table-body フォーマッティングオブジェクトは、 テーブル本体の内容を含むために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:table-caption formatting object is used to contain block-level formatting objects containing the caption for the table only when using the fo:table-and-caption.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T162357Z" creationid="mtan" creationdate="20160128T162357Z">
+        <seg>fo:table-caption フォーマッティングオブジェクトは、fo:table-and-captionを使用しているだけにテーブルキャプションを含む block-level フォーマッティングオブジェクトを格納するために使用されます</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:table-cell formatting object is used to group content to be placed in a table cell.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T165039Z" creationid="mtan" creationdate="20160128T165039Z">
+        <seg>fo:table-cell フォーマッティングオブジェクトは、内容を集めて、テーブルセル内に配置されるために使用されます。 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:table-column auxiliary formatting object specifies characteristics applicable to table cells that have the same column and span.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T160551Z" creationid="mtan" creationdate="20160128T160551Z">
+        <seg>fo:table-column 補助フォーマッティングオブジェクトは、同様段と全長のあるテーブルセルに適用可能な特性を指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:table-footer formatting object is used to contain the content of the table footer.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T162721Z" creationid="mtan" creationdate="20160128T162721Z">
+        <seg>fo:table-footer フォーマッティングオブジェクトは、 テーブルフッタの内容を含むために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:table-header formatting object is used to contain the content of the table header.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T162636Z" creationid="mtan" creationdate="20160128T162636Z">
+        <seg>fo:table-header フォーマッティングオブジェクトは、 テーブルヘッダの内容を含むために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:table-row formatting object is used to group table-cells into rows; all table-cells in a table-row start in the same geometric row on the table grid.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T163921Z" creationid="mtan" creationdate="20160128T163921Z">
+        <seg>fo:table-row フォーマッティングオブジェクトは、 行に グループのtable-cellsに使用されます。  table-rowの全てのtable-cellsは、テーブルグリッド上の同様な幾何学 行で開始します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:title formatting object is used to associate a title with a given page-sequence.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T125048Z" creationid="mtan" creationdate="20160127T125048Z">
+        <seg>fo:title は与えられたpage-sequenceでタイトルを付き合うために使用します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:wrapper formatting object is used to specify inherited properties for a group of formatting objects.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T110817Z" creationid="mtan" creationdate="20160127T110817Z">
+        <seg>仕様項目グループの継承されたプロパティを指定するとfo:wrapperを使用しています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The full set of conditions allows different page-masters to be used for the first page, for odd and even pages, for blank pages, etc.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T115212Z" creationid="mtan" creationdate="20160127T115212Z">
+        <seg>揃えた条件は、異なるpage-mastersは、最初のページ、奇数と偶数ページ、 空白ページなどのために使用することができます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The gap between columns: &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T114855Z" creationid="mtan" creationdate="20160120T114855Z">
+        <seg>段と段の間： &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The hierarchy level of bookmark items: &lt;number&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125907Z" creationid="mtan" creationdate="20160120T125907Z">
+        <seg>しおりの項目の階層レベル</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The layout of these pages comes from the fo:page-sequence-master or page-master referenced by the master-reference trait on the fo:page-sequence.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T143720Z" creationid="mtan" creationdate="20160125T161537Z">
+        <seg>これらのページレイアウトが fo:page-sequence-master 又は、 fo:page-sequenceにmaster-reference特色によって参照されたpage-master から来ています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The most important property is the "column-width" property.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T160826Z" creationid="mtan" creationdate="20160128T160826Z">
+        <seg>最も重要なプロパティは、「column-width」 プロパティです。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The number of columns: &lt;number&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T162752Z" creationid="mtan" creationdate="20160119T162711Z">
+        <seg>段数： &lt;number&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The number of repetitions may be bounded or potentially unbounded.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T155307Z" creationid="mtan" creationdate="20160125T155307Z">
+        <seg>繰り返し数は、囲まれていて、潜在的に囲まれていない可能もあります。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The object allows for traversal to the destination resource, typically by clicking on any of the containing areas.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160128T171446Z" creationid="mtan" creationdate="20160128T171446Z">
+        <seg>オブジェクトは、一般的に含む領域のいずれかをクリックすることで、先のリソースの走査を許します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The overflow trait controls how much of the underlying region-reference-area is visible; that is, whether the region-reference-area is clipped by its parent region-viewport-area.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T112218Z" creationid="mtan" creationdate="20160127T112218Z">
+        <seg>オーバフロー形質は、下にあるregion-reference-area のどのくらいが表示されているコントロールします。すなわち、region-reference-area は 親 region-viewport-areaによって切取りされているかどうか。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The page is subdivided into regions: one or more region-body, and up to four other regions: region-before, region-after, region-start, and region-end.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T154439Z" creationid="mtan" creationdate="20160126T154439Z">
+        <seg>ページ領域に細部されています：１以上の region-bodyまたは、４つまでの他の領域： region-before、 region-after、region-start、region-end。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The sequence of areas returned by each of the flow-object children of the fo:page-sequence are made descendants of the generated pages as described below.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T144630Z" creationid="mtan" creationdate="20160126T144630Z">
+        <seg>fo:page-sequenceのそれぞれの flow-object 子によって返される領域のシーケンス が生成されたページの子孫を作られて、以下のように説明します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The way a link opens in a link destination</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T120954Z" creationid="mtan" creationdate="20160120T120954Z">
+        <seg>リンクは、リンク先に開く方法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The way to trim spaces between characters in justified text</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T154337Z" creationid="mtan" creationdate="20160118T182119Z">
+        <seg>文字の間を詰めの対象として追い込みの処理方法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>There must be at least one fo:page-sequence descendant of fo:root.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151105T112749Z" creationid="mtan" creationdate="20151105T112749Z">
-        <seg> fo:rootの少なくとも一つのfo:page-sequenceの子孫でなくてはいけません。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T144813Z" creationid="mtan" creationdate="20151105T112749Z">
+        <seg> fo:rootの少なくとも一つのfo:page-sequenceの子孫でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This allows different page-masters to be used, for example, for even and odd pages, for the first page in a page-sequence, or for blank pages.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T115606Z" creationid="mtan" creationdate="20160127T115606Z">
+        <seg>これは、異なるpage-mastersは、　奇数と偶数ページ、 page-sequenceの最初のページ、空白ページなどのために使用することができます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This includes page-sequence-masters, page-masters, and flow-maps.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160125T152541Z" creationid="mtan" creationdate="20160125T152541Z">
+        <seg>これは、page-sequence-masters、 page-masters、 flow-mapsが含まれています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This is the top node of the formatting object tree.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160121T145552Z" creationid="mtan" creationdate="20160121T142926Z">
+        <seg>これは、formatting objectツリーのトップノードです。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This region specifies a viewport/reference pair that is located in the "center" of the fo:simple-page-master.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T155138Z" creationid="mtan" creationdate="20160126T155138Z">
+        <seg>この領域は、fo:simple-page-masterの「center」に位置している表示域/参照ペアを指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This region specifies a viewport/reference pair that is located on the "after" side of the page-reference-area.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T122929Z" creationid="mtan" creationdate="20160127T122726Z">
+        <seg>この領域は、page-reference-areaの「after」側に位置している表示域/参照ペアを指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This region specifies a viewport/reference pair that is located on the "before" side of the page-reference-area.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T155427Z" creationid="mtan" creationdate="20160126T155427Z">
+        <seg>この領域は、page-reference-areaの「before」側に位置している表示域/参照ペアを指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This region specifies a viewport/reference pair that is located on the "end" side of the page-reference-area.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T123030Z" creationid="mtan" creationdate="20160127T123030Z">
+        <seg>この領域は、page-reference-areaの「end」側に位置している表示域/参照ペアを指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This region specifies a viewport/reference pair that is located on the "start" side of the page-reference-area.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T122918Z" creationid="mtan" creationdate="20160127T122918Z">
+        <seg>この領域は、page-reference-areaの「start」側に位置している表示域/参照ペアを指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This title may be used by an interactive User Agent to identify the pages.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T130001Z" creationid="mtan" creationdate="20160127T130001Z">
+        <seg>このタイトルは、ページを 聞き分けるための対話のUser Agent によって使用できます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This usage is typical in chapters of a book or report where the first page has a different layout than the rest of the chapter and the headings and footings on even and odd pages may be different as well.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T122349Z" creationid="mtan" creationdate="20160127T122349Z">
+        <seg>この使用法は本や報告の章に一般的な物です。最初のページには、章の残り部分とは異なるレイアウトになって、偶数と奇数ページの見出しとフッタの異なる場合もあると言うことです。</seg>
       </tuv>
     </tu>
     <tu>
@@ -1974,6 +3729,366 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T124537Z" creationid="mtan" creationdate="20151028T174126Z">
         <seg>トークンは「uniform」、「non-uniform」又は「inherit」でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Typical conditions include, testing whether the page which is generated using the alternative is the first or last page in a page-sequence or is the page blank.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160127T114434Z" creationid="mtan" creationdate="20160127T114434Z">
+        <seg>特異条件は代替を使用して生成されたページは、page-sequenceの最初又は最後のページであるか、ページの空白であうかどうか含みます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Unicode normalization to perform on text</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T152226Z" creationid="mtan" creationdate="20160118T165806Z">
+        <seg>Unicode の文字列の正規化処理</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Used in constructing a simple-page-master.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160121T151339Z" creationid="mtan" creationdate="20160121T151339Z">
+        <seg>simple-page-masterを構成するのに使用される。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Value of the document information.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T155353Z" creationid="mtan" creationdate="20160119T155353Z">
+        <seg>文字情報の値</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Vertical (or horizontal if writing-mode is vertical) float alignment: none | before | after | top | bottom | left | right | center | inside | outside</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T123433Z" creationid="mtan" creationdate="20160120T123158Z">
+        <seg>垂直方向のフロート配置 （writing-modeがverticalのときは水平方向 ）： none | before | after | top | bottom | left | right | center | inside | outside</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Wdth of the bleed region: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T162235Z" creationid="mtan" creationdate="20160119T162235Z">
+        <seg>塗り足しの領域の幅： &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Wdth of the bottom bleed region: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T150042Z" creationid="mtan" creationdate="20160120T130946Z">
+        <seg>塗り足しの領域の下の幅: &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Wdth of the left bleed region: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T150059Z" creationid="mtan" creationdate="20160120T131004Z">
+        <seg>塗り足しの領域の左の幅: &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Wdth of the right bleed region: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T150113Z" creationid="mtan" creationdate="20160120T131016Z">
+        <seg>塗り足しの領域の右の幅: &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Wdth of the top bleed region: &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T150027Z" creationid="mtan" creationdate="20160120T130903Z">
+        <seg>塗り足しの領域の上の幅: &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether Composition Exclusions are excluded or not when the normalization (axf:normalize) is specified</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T152550Z" creationid="mtan" creationdate="20160118T170124Z">
+        <seg>文字列の正規化「axf:normalize」の時に、合成除外文字「Composition Exclusions」を除外するかどうか を指定します</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether emphasis marks are made Italic</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T181011Z" creationid="mtan" creationdate="20160118T181011Z">
+        <seg>圏点を斜体にするかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether the float is centered when the extent for the text placed before and after the float is insufficient: none | auto | &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T145129Z" creationid="mtan" creationdate="20160120T145129Z">
+        <seg>フロートの前後にテキストを配置する高さが足りないときフロートをセンタリングするかどうか： none | auto | &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether the float is centered when the width for the text wrapping around the float is insufficient: none | auto | &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T145007Z" creationid="mtan" creationdate="20160120T145007Z">
+        <seg>フロートへのテキスト回り込みのための幅が足りないときフロートをセンタリングするかどうか： none | auto | &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether the float moves to the next page (or column): auto | next | auto-next | auto-move | keep | keep-float</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T124504Z" creationid="mtan" creationdate="20160120T124504Z">
+        <seg>フロートは次のページまたは段に送るかどうか： auto | next | auto-next | auto-move | keep | keep-float</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to add space surrounding ideographic glyphs: none | [ ideograph-numeric || ideograph-alpha || ideograph-parenthesis ] | auto</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T175853Z" creationid="mtan" creationdate="20160118T175853Z">
+        <seg>和欧文間にアキを入れるかどうか： none | [ ideograph-numeric || ideograph-alpha || ideograph-parenthesis ] | auto</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to arrange a footnote and an anchor in the same page</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T130332Z" creationid="mtan" creationdate="20160120T130332Z">
+        <seg>脚注とアンカを同一ページ内または段内に配置するように</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to copy the contents of a cell when a cell breaks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T125000Z" creationid="mtan" creationdate="20160120T125000Z">
+        <seg>セルの分割時にセル内容をコピーするかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to delete duplicated page numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T175242Z" creationid="mtan" creationdate="20160118T175242Z">
+        <seg>同一のページ番号を削除するかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to delete footnotes duplicated in the same page</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T174942Z" creationid="mtan" creationdate="20160118T174942Z">
+        <seg>同一ページ内の同一の脚注を削除するかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to display the area beyond the finished page size</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T114951Z" creationid="mtan" creationdate="20160120T114951Z">
+        <seg>仕上がり寸法からはみ出した領域を表示するかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to display the lower hierarchy of bookmark items or not</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160120T130108Z" creationid="mtan" creationdate="20160120T130108Z">
+        <seg>しおりの初期状態で、下位の階層を表示するかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to enable line breaking even inside a word</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T182700Z" creationid="mtan" creationdate="20160118T182700Z">
+        <seg>単語の途中でも行分割可能にするかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to forcibly break a word when line break cannot be performed</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T182752Z" creationid="mtan" creationdate="20160118T182752Z">
+        <seg>行分割できないとき、無理やり分割するかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to forcibly expand a leader</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T161321Z" creationid="mtan" creationdate="20160118T161321Z">
+        <seg>リーダを強制的に広げるかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to hang punctuations at the start of the line or end of the line: none | [ start || first || [ force-end | allow-end ] || last ]</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T155802Z" creationid="mtan" creationdate="20160118T155802Z">
+        <seg>行頭での突き出し、行末でのぶら下げを行うかどうか： none | [ start || first || [ force-end | allow-end ] || last ]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to hyphenate an already hyphenated word</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T155857Z" creationid="mtan" creationdate="20160118T153928Z">
+        <seg>すでにハイフン付けされている語をハイフネーションするかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to justify NON-BREAKING SPACE</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T160419Z" creationid="mtan" creationdate="20160118T160419Z">
+        <seg>NON-BREAKING SPACE を均等割り付けの対象にするかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to make the font style italic</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T164950Z" creationid="mtan" creationdate="20160118T162347Z">
+        <seg>斜体にするかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to perform kerning</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T161106Z" creationid="mtan" creationdate="20160118T161106Z">
+        <seg>カーニング（詰め処理）を行うかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to perform the ligature processing: none | [ latin || kana ] | all | auto</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T161742Z" creationid="mtan" creationdate="20160118T161742Z">
+        <seg>リガチャ（合字処理）を行うかどうか： none | [ latin || kana ] | all | auto</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to print SOFT HYPHEN (U+00AD)</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T174634Z" creationid="mtan" creationdate="20160118T174634Z">
+        <seg>SOFT HYPHEN (U+00AD)を印刷するかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to repeat the fo:footnote in the fo:table-footer that is repeated by table-omit-footer-at-break="false"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T173404Z" creationid="mtan" creationdate="20160118T173404Z">
+        <seg>table-omit-footer-at-break="false" によって繰り返された fo:table-footer 中の fo:footnote も繰り返すかどうか </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to repeat the fo:footnote in the fo:table-header that is repeated by table-omit-header-at-break="false"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T173535Z" creationid="mtan" creationdate="20160118T173535Z">
+        <seg>table-omit-header-at-break="false" によって繰り返された fo:table-header 中の fo:footnote も繰り返すかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to show line continued marks: &lt;string&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T162025Z" creationid="mtan" creationdate="20160118T162025Z">
+        <seg>行継続マークを表示するかどうか： &lt;string&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to show line numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T163732Z" creationid="mtan" creationdate="20160118T163732Z">
+        <seg>行番号を表示するかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Which of the alternative page-masters is used at any point in the sequence depends on the evaluation of a condition on the use of the alternative.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160126T153433Z" creationid="mtan" creationdate="20160126T153433Z">
+        <seg>代替page-mastersのどちらの順序で任意の位置で使用していますが、代替の使用に条件の評価に依存します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Which side of base characters emphasis marks are put</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T181206Z" creationid="mtan" creationdate="20160118T181206Z">
+        <seg>圏点を親文字のどちら側に付けるか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Which side of the character the space by letter-spacing is distributed</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160119T150531Z" creationid="mtan" creationdate="20160118T161655Z">
+        <seg>letter-spacingによるアキを文字のどちら側に付けるか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Which side of the text to put underline in vertical writing-mode</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T182616Z" creationid="mtan" creationdate="20160118T182616Z">
+        <seg>縦書きでの下線（傍線）をどちら側に付けるか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Width for axf:text-autospace</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T180100Z" creationid="mtan" creationdate="20160118T180100Z">
+        <seg>和欧文間のアキ量</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Width of line numbers: auto | &lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T165500Z" creationid="mtan" creationdate="20160118T165451Z">
+        <seg>行番号の幅： auto | &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Width of the diagonal border</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T155526Z" creationid="mtan" creationdate="20160118T153113Z">
+        <seg>対角罫の幅</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Width of the reverse diagonal border</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T174036Z" creationid="mtan" creationdate="20160118T174036Z">
+        <seg>逆対角罫の幅</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Width of the revision bar</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T174233Z" creationid="mtan" creationdate="20160118T174233Z">
+        <seg>改訂バーの幅</seg>
       </tuv>
     </tu>
     <tu>
@@ -2252,8 +4367,8 @@
       <tuv lang="EN-US">
         <seg>background-position-horizontal="" should be Percent, Length, 'left', 'center', 'right', or 'inherit'.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T131757Z" creationid="mtan" creationdate="20151029T121725Z">
-        <seg>background-position-horizontal=""は パーセント、長さ、 left」、 center」、「right」又は inherit」でなければなりません。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T154041Z" creationid="mtan" creationdate="20151029T121725Z">
+        <seg>background-position-horizontal=""は パーセント、長さ、「 left」、 center」、「right」又は inherit」でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -4060,8 +6175,8 @@
       <tuv lang="EN-US">
         <seg>flow-name-reference="&lt;v0/&gt;" must be unique within its fo:flow-map.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151105T125457Z" creationid="mtan" creationdate="20151105T125457Z">
-        <seg>flow-name-reference="&lt;v0/&gt;" は fo:flow-map内で特殊でなくてはいけません。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T145713Z" creationid="mtan" creationdate="20151105T125457Z">
+        <seg>flow-name-reference="&lt;v0/&gt;" は fo:flow-map内で特殊でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -4098,10 +6213,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>flow-name="&lt;v0/&gt;" does not match any named or reserved region-name or a flow-name-reference.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T145640Z" creationid="mtan" creationdate="20160112T142552Z">
+        <seg>flow-name="&lt;v0/&gt;"は任意の名前付き又は指定 された「region-name」又は「flow-name-reference」と一致しません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>flow-name="&lt;v0/&gt;" must be unique within its fo:page-sequence.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151105T120437Z" creationid="mtan" creationdate="20151105T120437Z">
-        <seg>flow-name="&lt;v0/&gt;" は fo:page-sequence内で特殊でなくてはいけません。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T145248Z" creationid="mtan" creationdate="20151105T120437Z">
+        <seg>flow-name="&lt;v0/&gt;" は fo:page-sequence内で特殊でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -4292,7 +6415,7 @@
       <tuv lang="EN-US">
         <seg>font="" should be '[ [ &lt;font-style&gt; || &lt;font-variant&gt; || &lt;font-weight&gt; ]?</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T154140Z" creationid="mtan" creationdate="20151029T160915Z">
+      <tuv lang="JA" changeid="mtan" changedate="20160118T151550Z" creationid="mtan" creationdate="20151029T160915Z">
         <seg>font="" は「[ [ &lt;font-style&gt; || &lt;font-variant&gt; || &lt;font-weight&gt; ]?</seg>
       </tuv>
     </tu>
@@ -4620,8 +6743,8 @@
       <tuv lang="EN-US">
         <seg>inline-progression-dimension="" should be 'auto', 'inherit', Length, or Percent.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T150814Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>inline-progression-dimension="" は auto」、「inherit」、 長さ、又は パーセントでなければなりません。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T161221Z" creationid="mtan" creationdate="20151102T153431Z">
+        <seg>inline-progression-dimension="" は「 auto」、「inherit」、 長さ、又は パーセントでなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -5250,6 +7373,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>master-reference="&lt;v0/&gt;" refers to multiple master-name within the document.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T150028Z" creationid="mtan" creationdate="20160112T142319Z">
+        <seg>master-reference="&lt;v0/&gt;" は文書にある複数の「master-name」を参照しています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>master-reference="&lt;v0/&gt;" should be EnumerationToken.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151102T172431Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -5261,6 +7392,14 @@
         <seg>master-reference="&lt;v0/&gt;" should refer to a 'master-name' that exists within the document.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151105T124552Z" creationid="mtan" creationdate="20151105T124456Z">
+        <seg>master-reference="&lt;v0/&gt;" は文書内にある「master-name」を参照する必要があります。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>master-reference="&lt;v0/&gt;" should refer to a master-name that exists within the document.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T142343Z" creationid="mtan" creationdate="20160112T142343Z">
         <seg>master-reference="&lt;v0/&gt;" は文書内にある「master-name」を参照する必要があります。</seg>
       </tuv>
     </tu>
@@ -5548,16 +7687,16 @@
       <tuv lang="EN-US">
         <seg>overflow="&lt;v0/&gt;" applies only on fo:block-container or fo:inline-container.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151028T174327Z" creationid="mtan" creationdate="20151028T174327Z">
-        <seg>overflow="&lt;v0/&gt;" fo:block-container 又は fo:inline-containerのみ適用されています。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T151058Z" creationid="mtan" creationdate="20151028T174327Z">
+        <seg>overflow="&lt;v0/&gt;" はfo:block-container 又は fo:inline-containerのみに適用されています。</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>overflow="&lt;v0/&gt;" on an absolutely-positioned area will be treated as 'auto'.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151105T125332Z" creationid="mtan" creationdate="20151102T161353Z">
-        <seg>overflow="&lt;v0/&gt;" の絶対位置の領域は「auto」を処理します。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160118T150114Z" creationid="mtan" creationdate="20151102T161353Z">
+        <seg>overflow="&lt;v0/&gt;" の絶対位置の領域は「auto」を処理されます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -6034,10 +8173,26 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>ref-index-key="&lt;v0/&gt;" does not match any index-key values.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T142211Z" creationid="mtan" creationdate="20160112T142211Z">
+        <seg>ref-index-key="&lt;v0/&gt;" は任意の「index-key」値と一致しません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>ref-index-key="&lt;v0/&gt;" occurs before a matching 'index-key' value.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151105T120049Z" creationid="mtan" creationdate="20151104T170244Z">
         <seg>ref-index-key="&lt;v0/&gt;" は一致する「index-key」値の前に発生します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ref-index-key="&lt;v0/&gt;" occurs before a matching index-key value.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T142222Z" creationid="mtan" creationdate="20160112T142138Z">
+        <seg>ref-index-key="&lt;v0/&gt;"は一致する「index-key」値の前に発生します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -7244,8 +9399,8 @@
       <tuv lang="EN-US">
         <seg>white-space-treatment="" should be 'ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', or 'inherit'.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T150939Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>￥white-space-treatment="" は「ignore」、「preserve」、「ignore-if-before-linefeed」、「ignore-if-after-linefeed」、「ignore-if-surrounding-linefeed」又は「inherit」でなければなりません。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160112T162658Z" creationid="mtan" creationdate="20151102T153431Z">
+        <seg>white-space-treatment="" は「ignore」、「preserve」、「ignore-if-before-linefeed」、「ignore-if-after-linefeed」、「ignore-if-surrounding-linefeed」又は「inherit」でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>

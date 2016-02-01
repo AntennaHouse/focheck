@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="17.0" xml:space="preserve">
+<serialized version="17.1" xml:space="preserve">
 	<serializableOrderedMap>
 		<entry>
 			<String>document.types</String>
@@ -17,7 +17,7 @@
 								<Integer>4</Integer>
 							</field>
 							<field name="uri">
-								<String>${framework}/schema/rng/axf.rng</String>
+								<String>${framework}/schema-ja/rng/axf.rng</String>
 							</field>
 						</docTypeSchema>
 					</field>
@@ -129,7 +129,7 @@
 					</field>
 					<field name="xmlCatalogs">
 						<String-array>
-							<String>${framework}/schema/catalog.xml</String>
+							<String>${framework}/schema-ja/catalog.xml</String>
 						</String-array>
 					</field>
 					<field name="description">
@@ -385,7 +385,7 @@
 														<Integer>4</Integer>
 													</field>
 													<field name="uri">
-														<String>${framework}/schema/rng/axf-mathml3-svg11.rng</String>
+														<String>${framework}/schema-ja/rng/axf-mathml3-svg11.rng</String>
 													</field>
 												</validationUnitSchema>
 											</field>
@@ -429,7 +429,7 @@
 														<Integer>7</Integer>
 													</field>
 													<field name="uri">
-														<String>${framework}/schematron/axf.sch</String>
+														<String>${framework}/schematron-ja/axf.sch</String>
 													</field>
 												</validationUnitSchema>
 											</field>
@@ -485,7 +485,7 @@
 														<Integer>4</Integer>
 													</field>
 													<field name="uri">
-														<String>${framework}/schema/rng/axf.rng</String>
+														<String>${framework}/schema-ja/rng/axf.rng</String>
 													</field>
 												</validationUnitSchema>
 											</field>
@@ -529,7 +529,7 @@
 														<Integer>7</Integer>
 													</field>
 													<field name="uri">
-														<String>${framework}/schematron/axf.sch</String>
+														<String>${framework}/schematron-ja/axf.sch</String>
 													</field>
 												</validationUnitSchema>
 											</field>

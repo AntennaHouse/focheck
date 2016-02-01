@@ -1,0 +1,45 @@
+# Adds MathML3 m:math and SVG1.1 svg:svg to fo:instream-foriegn-object.
+# 
+# Copyright 2015 Antenna House, Inc.
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+namespace local = ""
+namespace ns1 = "http://www.antennahouse.com/names/XSL/Extensions"
+namespace ns2 = "http://www.w3.org/1999/XSL/Format"
+namespace ns3 = "http://www.w3.org/1998/Math/MathML"
+namespace ns4 = "http://www.w3.org/2000/svg"
+
+# MathML 3.0 schema with Antenna House overrides.
+math = external "axf-mathml3-override.rnc" inherit = ns1
+svg = external "axf-svg11-override.rnc" inherit = ns1
+include "axf.rnc" inherit = ns1 {
+  # For fo:instream-foreign-object
+  # Exclude axf:* elements and attributes from counting as 'non-xsl'.
+  # Allow MathML m:math and svg:svg
+  non-xsl =
+    attribute * - (local:* | ns1:* | xml:*) { text }*,
+    (element * - (local:* | ns2:* | ns1:* | ns3:* | ns4:*) {
+       attribute * - (id | ref-id | internal-destination) { text }*,
+       anything
+     }*
+     | math
+     | svg)
+  # For fo:instream-foreign-object
+  anything =
+    (element * - ns2:* {
+       attribute * - (id | ref-id | internal-destination) { text }*,
+       anything
+     }
+     | text)*
+}

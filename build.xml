@@ -350,10 +350,15 @@ AFTER making a release on GitHub:
 
 <!-- Translation targets. -->
 
-<target name="translate">
+<target name="translate" depends="rng">
   <copy todir="${focheck.basedir.converted}/omegat/source"
 	force="${force}">
     <fileset dir="${focheck.basedir.converted}/schematron" />
+  </copy>
+  <copy todir="${focheck.basedir.converted}/omegat/source"
+	force="${force}">
+    <fileset dir="${focheck.basedir.converted}/schema/rng"
+	     includes="*.rng" />
   </copy>
   <java jar="omegat/OmegaT.jar" fork="true">
     <arg value="${focheck.basedir.converted}/omegat" />
@@ -363,8 +368,29 @@ AFTER making a release on GitHub:
   </java>
   <copy todir="${focheck.basedir.converted}/schematron-ja"
 	force="${force}">
-    <fileset dir="${focheck.basedir.converted}/omegat/target" />
+    <fileset dir="${focheck.basedir.converted}/omegat/target"
+	     includes="*.sch" />
   </copy>
+  <copy todir="${focheck.basedir.converted}/schema-ja/rng"
+	force="${force}">
+    <fileset dir="${focheck.basedir.converted}/omegat/target"
+	     includes="*.rng" />
+  </copy>
+</target>
+
+<target name="rnc-ja" depends="trang"
+	unless="rng.uptodate">
+  <java jar="${trang.jar}" fork="true">
+    <arg value="${focheck.basedir.converted}/schema-ja/rng/${schema.basename}.rng" />
+    <arg value="${focheck.basedir.converted}/schema-ja/${schema.basename}.rnc" />
+  </java>
+</target>
+
+<target name="xsd-ja" depends="trang">
+  <java jar="${trang.jar}" fork="true">
+    <arg value="${focheck.basedir.converted}/schema-ja/rng/${xsd.schema.basename}.rng" />
+    <arg value="${focheck.basedir.converted}/schema-ja/xsd/${xsd.schema.basename}.xsd" />
+  </java>
 </target>
 
 <!-- Release targets. -->
@@ -447,7 +473,8 @@ AFTER making a release on GitHub:
   </replaceregexp>
 </target>
 
-<target name="framework-ja.zip" depends="build, translate, add-on-ja.xml"
+<target name="framework-ja.zip"
+	depends="build, translate, rnc-ja, xsd-ja, add-on-ja.xml"
 	description="Make a Zip archive of just the oXygen framework.">
   <mkdir dir="${focheck.basedir.converted}/releases" />
   <zip destfile="${focheck.basedir.converted}/releases/${ant.project.name}-framework-ja-${version}.zip"
@@ -458,10 +485,10 @@ AFTER making a release on GitHub:
 		includes="README.md, LICENSE*.md, focheck-ja.framework"
 		prefix="${ant.project.name}-ja" />
     <!--<zipfileset dir="css" includes="*.css" prefix="${ant.project.name}/css" />-->
-    <zipfileset dir="schema" includes="catalog.xml, *.ent"
-		prefix="${ant.project.name}-ja/schema" />
-    <zipfileset dir="schema/rng" includes="*.rng"
-		prefix="${ant.project.name}-ja/schema/rng" />
+    <zipfileset dir="schema-ja" includes="catalog.xml, *.ent"
+		prefix="${ant.project.name}-ja/schema-ja" />
+    <zipfileset dir="schema-ja/rng" includes="*.rng"
+		prefix="${ant.project.name}-ja/schema-ja/rng" />
     <zipfileset dir="schematron-ja" includes="*.sch"
 		prefix="${ant.project.name}-ja/schematron-ja" />
     <zipfileset dir="template" includes="*.xml, *.fo, *.properties"

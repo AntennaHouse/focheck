@@ -171,7 +171,7 @@
       <let name="expression" value="ahf:parser-runner(.)"></let>
       <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">background-position-horizontal=&quot;<value-of select="."/>&quot; は パーセント、長さ、「left」、「center」、「right」又は「inherit」でなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
       <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('left', 'center', 'right', 'inherit'))">background-position-horizontal=&quot;<value-of select="."/>&quot; のトークンは「left」、「center」、「right」又は「inherit」でなければなりません。列挙トークンは「<value-of select="$expression/@token"/>」です。</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">background-position-horizontal=&quot;&quot;は パーセント、長さ、 left」、 center」、「right」又は inherit」でなければなりません。</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">background-position-horizontal=&quot;&quot;は パーセント、長さ、「 left」、 center」、「right」又は inherit」でなければなりません。</report>
       <report test="local-name($expression) = 'ERROR'">シンタックスエラー：background-position-horizontal=&quot;<value-of select="."/>&quot;</report>
    </rule>
 
@@ -609,7 +609,7 @@
       <assert test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')">border-start-precedence=&quot;<value-of select="."/>&quot; は「force」、「inherit」又は 数でなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
       <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">border-start-precedence=&quot;<value-of select="."/>&quot; のトークンは「force」又は「inherit」でなければなりません。列挙トークンは「<value-of select="$expression/@token"/>」です。</report>
       <report test="local-name($expression) = 'EMPTY'" role="Warning">border-start-precedence=&quot;&quot; は「force」、「inherit」又は 数でなければなりません。</report>
-      <report test="local-name($expression) = 'ERROR'">Sシンタックスエラー：border-start-precedence=&quot;<value-of select="."/>&quot;</report>
+      <report test="local-name($expression) = 'ERROR'">シンタックスエラー：border-start-precedence=&quot;<value-of select="."/>&quot;</report>
    </rule>
 
    <!-- border-start-style -->
@@ -1520,7 +1520,7 @@
       <let name="expression" value="ahf:parser-runner(.)"></let>
       <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">inline-progression-dimension=&quot;<value-of select="."/>&quot; は「auto」、「inherit」、 長さ、又は パーセントでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
       <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">inline-progression-dimension=&quot;<value-of select="."/>&quot; のトークンは「auto」又は「inherit」でなければなりません。列挙トークンは「<value-of select="$expression/@token"/>」です。</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">inline-progression-dimension=&quot;&quot; は auto」、「inherit」、 長さ、又は パーセントでなければなりません。</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">inline-progression-dimension=&quot;&quot; は「 auto」、「inherit」、 長さ、又は パーセントでなければなりません。</report>
       <report test="local-name($expression) = 'ERROR'">シンタックスエラー：inline-progression-dimension=&quot;<value-of select="."/>&quot;</report>
    </rule>
 
@@ -3000,7 +3000,7 @@
       <let name="expression" value="ahf:parser-runner(.)"></let>
       <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">white-space-treatment=&quot;<value-of select="."/>&quot; は「ignore」、「preserve」、「ignore-if-before-linefeed」、「ignore-if-after-linefeed」、「ignore-if-surrounding-linefeed」又は「inherit」でなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
       <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', 'inherit'))">white-space-treatment=&quot;<value-of select="."/>&quot; のトークンは「ignore」、「preserve」、「ignore-if-before-linefeed」、「ignore-if-after-linefeed」、「ignore-if-surrounding-linefeed」又は「inherit」でなければなりません。列挙トークンは「<value-of select="$expression/@token"/>」です。</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">￥white-space-treatment=&quot;&quot; は「ignore」、「preserve」、「ignore-if-before-linefeed」、「ignore-if-after-linefeed」、「ignore-if-surrounding-linefeed」又は「inherit」でなければなりません。</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">white-space-treatment=&quot;&quot; は「ignore」、「preserve」、「ignore-if-before-linefeed」、「ignore-if-after-linefeed」、「ignore-if-surrounding-linefeed」又は「inherit」でなければなりません。</report>
       <report test="local-name($expression) = 'ERROR'">シンタックスエラー：white-space-treatment=&quot;<value-of select="."/>&quot;</report>
    </rule>
 
