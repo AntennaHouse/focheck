@@ -421,6 +421,9 @@
     <ref name="axf_footnote-keep"/>
     <ref name="axf_footnote-max-height"/>
   </define>
+  <define name="fo_instream-foreign-object.attlist" combine="interleave">
+    <ref name="axf_alttext"/>
+  </define>
   <define name="fo_list-block.attlist" combine="interleave">
     <ref name="axf.block.attlist"/>
   </define>
@@ -429,6 +432,9 @@
   </define>
   <define name="fo_table-and-caption.attlist" combine="interleave">
     <ref name="axf.block.attlist"/>
+  </define>
+  <define name="fo_table.attlist" combine="interleave">
+    <ref name="axf_table-summary"/>
   </define>
   <define name="fo_table-cell.attlist" combine="interleave">
     <ref name="axf_repeat-cell-content-at-break"/>
@@ -534,6 +540,18 @@
           <value>submit</value>
           <value>auto</value>
         </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:alt-text
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.alttext
+  -->
+  <define name="axf_alttext">
+    <optional>
+      <attribute name="axf:alttext">
+        <a:documentation>alternate text of the image</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1290,6 +1308,18 @@
           <value>true</value>
           <value>false</value>
         </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:table-summary
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.table-summary
+  -->
+  <define name="axf_table-summary">
+    <optional>
+      <attribute name="axf:table-summary">
+        <a:documentation>Summary describing the table.  Included in Tagged PDF output.</a:documentation>
       </attribute>
     </optional>
   </define>

@@ -349,6 +349,18 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:alt-text
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.alttext
+  -->
+  <xs:attributeGroup name="axf_alttext">
+    <xs:attribute name="alttext" form="qualified">
+      <xs:annotation>
+        <xs:documentation>alternate text of the image</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:background-content-height
     @axf:background-content-type
     @axf:background-content-width
@@ -1134,6 +1146,18 @@
           <xs:enumeration value="false"/>
         </xs:restriction>
       </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:table-summary
+    
+    http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.table-summary
+  -->
+  <xs:attributeGroup name="axf_table-summary">
+    <xs:attribute name="table-summary" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Summary describing the table.  Included in Tagged PDF output.</xs:documentation>
+      </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
 </xs:schema>

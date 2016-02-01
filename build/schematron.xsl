@@ -955,6 +955,7 @@
 
    <!--PATTERN fo-property-->
    <xsl:include xmlns="http://purl.oclc.org/dsdl/schematron"
+                xmlns:sqf="http://www.schematron-quickfix.com/validator/process"
                 href="file:/E:/Projects/oxygen/focheck/xsl/parser-runner.xsl"/>
 
 	  <!--RULE -->
@@ -14994,10 +14995,10 @@
 
 		    <!--ASSERT Warning-->
       <xsl:choose>
-         <xsl:when test="true()"/>
+         <xsl:when test="false()"/>
          <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
-               <xsl:attribute name="id">axf-3</xsl:attribute>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
+               <xsl:attribute name="id">axf-3f</xsl:attribute>
                <xsl:attribute name="role">Warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!--
-     Copyright 2015 Antenna House, Inc.
+     Copyright 2015-2016 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
---><schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
+--><schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sqf="http://www.schematron-quickfix.com/validator/process" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
     <xsl:key name="flow-name" match="fo:flow | fo:static-content" use="@flow-name"/>
     <xsl:key name="index-key" match="*[exists(@index-key)]" use="@index-key"/>
     <xsl:key name="master-name" match="fo:simple-page-master | fo:page-sequence-master" use="@master-name"/>
@@ -78,7 +78,13 @@
 
   <rule context="fo:*/@column-count | fo:*/@number-columns-spanned">
     <let name="expression" value="ahf:parser-runner(.)"/>
-    <report test="local-name($expression) = 'Number' and                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or                    $expression/@is-zero = 'yes' or                    exists($expression/@value) and not($expression/@value castable as xs:integer))" id="column-count" role="Warning"><value-of select="local-name()"/>="<value-of select="."/>" should be a positive integer.  A non-positive or non-integer value will be rounded to the nearest integer value greater than or equal to 1.</report>
+    <report test="local-name($expression) = 'Number' and                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or                    $expression/@is-zero = 'yes' or                    exists($expression/@value) and not($expression/@value castable as xs:integer))" id="column-count" role="Warning" sqf:fix="column-count-fix"><value-of select="local-name()"/>="<value-of select="."/>" should be a positive integer.  A non-positive or non-integer value will be rounded to the nearest integer value greater than or equal to 1.</report>
+    <sqf:fix id="column-count-fix">
+      <sqf:description>
+        <sqf:title>Change the @column-count value</sqf:title>
+      </sqf:description>
+      <sqf:replace node-type="attribute" target="column-count" select="max((1, round(.)))"/>
+    </sqf:fix>
   </rule>
 
   <rule context="fo:*/@column-width">
@@ -3263,7 +3269,13 @@
 	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">name="<value-of select="@name"/>" cannot be used when axf:document-info with name="xmp" is present.</assert>
         </rule>
         <rule context="axf:document-info[@name = 'title']">
-	  <assert test="true()" id="axf-3" role="Warning">name="<value-of select="@name"/>" is deprecated.  Please use name="document-title".</assert>
+	  <assert test="false()" id="axf-3f" sqf:fix="axf-3fix" role="Warning">name="<value-of select="@name"/>" is deprecated.  Please use name="document-title".</assert>
+          <sqf:fix id="axf-3fix">
+	    <sqf:description>
+              <sqf:title>Change the 'title' axf:document-info into 'document-title'</sqf:title>
+            </sqf:description>
+            <sqf:replace match="@name" node-type="attribute" target="name" select="'document-title'"/>
+          </sqf:fix>
         </rule>
 
 	<!-- axf:background-color -->
