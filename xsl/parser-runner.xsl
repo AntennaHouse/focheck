@@ -84,6 +84,8 @@
   <function name="abs" returns="Number" />
   <function name="body-start" returns="Length" />
   <function name="ceiling" returns="Number" />
+  <function name="cmyk" returns="Color" />
+  <function name="cmyka" returns="Color" />
   <function name="floor" returns="Number" />
   <function name="from-nearest-specified-value" returns="Object" />
   <function name="from-page-master-region" returns="Object" />
@@ -96,6 +98,7 @@
   <function name="min" returns="Number" />
   <function name="proportional-column-width" returns="Length" />
   <function name="rgb" returns="Color" />
+  <function name="rgba" returns="Color" />
   <function name="rgb-icc" returns="Color" />
   <function name="round" returns="Number" />
   <function name="system-color" returns="Color" />
