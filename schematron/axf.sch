@@ -25,12 +25,13 @@
 	     match="*[exists(@index-key)]"
 	     use="@index-key" />
     <xsl:key name="master-name"
-	     match="fo:simple-page-master | fo:page-sequence-master"
+	     match="fo:simple-page-master | fo:page-sequence-master |
+		    axf:spread-page-master"
 	     use="@master-name" />
     <xsl:key name="region-name"
 	     match="fo:region-before | fo:region-after |
 		    fo:region-start | fo:region-end |
-		    fo:region-body"
+		    fo:region-body | axf:spread-region"
 	     use="@region-name" />
 
     <include href="fo.sch"/>

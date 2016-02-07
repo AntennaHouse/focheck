@@ -804,18 +804,11 @@
     <xs:attributeGroup ref="axf:axf_word-break"/>
     <xs:attributeGroup ref="axf:axf_word-wrap"/>
   </xs:attributeGroup>
-  <xs:element name="layout-master-set" type="fo:fo_layout-master-set.model">
+  <xs:element name="layout-master-set" type="axf:fo_layout-master-set.model">
     <xs:annotation>
       <xs:documentation>The fo:layout-master-set is a wrapper around all masters used in the document. This includes page-sequence-masters, page-masters, and flow-maps.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name="fo_layout-master-set.model">
-    <xs:choice maxOccurs="unbounded">
-      <xs:element ref="fo:simple-page-master"/>
-      <xs:element ref="fo:page-sequence-master"/>
-      <xs:element ref="fo:flow-map"/>
-    </xs:choice>
-  </xs:complexType>
   <xs:element name="page-sequence-master">
     <xs:annotation>
       <xs:documentation>The fo:page-sequence-master is used to specify the constraints on and the order in which a given set of page-masters will be used in generating a sequence of pages. Pages are automatically generated when the fo:page-sequence-master is used in formatting an fo:page-sequence.</xs:documentation>
