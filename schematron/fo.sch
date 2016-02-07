@@ -47,6 +47,26 @@
     <report test="exists(descendant::fo:*[local-name() = ('float', 'footnote', 'marker')])">An 'fo:footnote' is not permitted to have an 'fo:float', 'fo:footnote', or 'fo:marker' as a descendant.</report>
   </rule>
 
+  <rule context="fo:list-item-body[empty(@start-indent)]">
+    <report test="true()" id="list-item-body-start-indent" role="Warning" sqf:fix="list-item-body-start-indent-fix">fo:list-item-body with no 'start-indent' will use default 'start-indent="0pt"'.</report>
+    <sqf:fix id="list-item-body-start-indent-fix">
+      <sqf:description>
+        <sqf:title>Add 'start-indent="body-start()"'</sqf:title>
+      </sqf:description>
+      <sqf:add node-type="attribute" target="start-indent" select="'body-start()'"/>
+    </sqf:fix>
+  </rule>
+
+  <rule context="fo:list-item-label[empty(@end-indent)]">
+    <report test="true()" id="list-item-label-end-indent" role="Warning" sqf:fix="list-item-label-end-indent-fix">fo:list-item-label with no 'end-indent' will use default 'end-indent="0pt"'.</report>
+    <sqf:fix id="list-item-label-end-indent-fix">
+      <sqf:description>
+        <sqf:title>Add 'end-indent="label-end()"'</sqf:title>
+      </sqf:description>
+      <sqf:add node-type="attribute" target="end-indent" select="'label-end()'"/>
+    </sqf:fix>
+  </rule>
+
   <rule context="fo:marker">
     <!-- http://www.w3.org/TR/xsl/#fo_marker -->
     <assert test="exists(ancestor::fo:flow)">An fo:marker is only permitted as the descendant of an fo:flow.</assert>
