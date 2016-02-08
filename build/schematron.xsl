@@ -38,10 +38,10 @@
             use="@flow-name"/>
    <xsl:key name="index-key" match="*[exists(@index-key)]" use="@index-key"/>
    <xsl:key name="master-name"
-            match="fo:simple-page-master | fo:page-sequence-master"
+            match="fo:simple-page-master | fo:page-sequence-master |       axf:spread-page-master"
             use="@master-name"/>
    <xsl:key name="region-name"
-            match="fo:region-before | fo:region-after |       fo:region-start | fo:region-end |       fo:region-body"
+            match="fo:region-before | fo:region-after |       fo:region-start | fo:region-end |       fo:region-body | axf:spread-region"
             use="@region-name"/>
 
    <!--DEFAULT RULES-->
@@ -224,7 +224,7 @@
 
 
 	  <!--RULE -->
-   <xsl:template match="fo:basic-link" priority="1021" mode="M4">
+   <xsl:template match="fo:basic-link" priority="1023" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:basic-link"/>
 
 		    <!--REPORT Warning-->
@@ -244,7 +244,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:float" priority="1020" mode="M4">
+   <xsl:template match="fo:float" priority="1022" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:float"/>
 
 		    <!--REPORT -->
@@ -263,7 +263,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:footnote" priority="1019" mode="M4">
+   <xsl:template match="fo:footnote" priority="1021" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:footnote"/>
 
 		    <!--REPORT -->
@@ -310,6 +310,48 @@
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
             <svrl:text>An 'fo:footnote' is not permitted to have an 'fo:float', 'fo:footnote', or 'fo:marker' as a descendant.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:list-item-body[empty(@start-indent)]"
+                 priority="1020"
+                 mode="M4">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:list-item-body[empty(@start-indent)]"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="true()">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
+            <xsl:attribute name="id">list-item-body-start-indent</xsl:attribute>
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>fo:list-item-body with no 'start-indent' will use default 'start-indent="0pt"'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:list-item-label[empty(@end-indent)]"
+                 priority="1019"
+                 mode="M4">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:list-item-label[empty(@end-indent)]"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="true()">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
+            <xsl:attribute name="id">list-item-label-end-indent</xsl:attribute>
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <svrl:text>fo:list-item-label with no 'end-indent' will use default 'end-indent="0pt"'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates select="@*|*" mode="M4"/>

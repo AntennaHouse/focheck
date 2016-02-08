@@ -28,6 +28,11 @@ include "axf-inherited.rnc" inherit = axf {
   
   # http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#fo.change-bar-begin
   fo_change-bar-begin.model = fo_float?
+  fo_layout-master-set.model =
+    (axf_spread-page-master
+     | fo_simple-page-master
+     | fo_page-sequence-master
+     | fo_flow-map)+
   # http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info
   fo_root.model =
     axf_document-info*,
@@ -137,6 +142,37 @@ axf_footnote-number-citation =
   ## 脚注番号を引用します
   element axf:footnote-number-citation {
     attribute ref-id { text },
+    empty
+  }
+# <axf:spread-page-master>
+# http://www.antennahouse.com/product/ahf60/docs/ahf-spread.html#axf.spread-page-master
+axf_spread-page-master =
+  
+  ## A two-page spread.
+  element axf:spread-page-master {
+    common-margin-properties-block,
+    attribute left-page-master-reference { xsd:NCName },
+    master-name,
+    reference-orientation,
+    attribute right-page-master-reference { xsd:NCName },
+    writing-mode,
+    axf_spread-region+
+  }
+# <axf:spread-region>
+# http://www.antennahouse.com/product/ahf60/docs/ahf-spread.html#axf.spread-region
+axf_spread-region =
+  
+  ## Region in a two-page spread.
+  element axf:spread-region {
+    common-absolute-position-properties,
+    common-border-padding-and-background-properties,
+    common-margin-properties-block,
+    height,
+    region-name,
+    reference-orientation,
+    overflow,
+    width,
+    writing-mode,
     empty
   }
 # <axf:table-cell-repeated-marker>

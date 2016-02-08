@@ -33,6 +33,14 @@
       <xs:element minOccurs="0" ref="fo:float"/>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="fo_layout-master-set.model">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element ref="axf:spread-page-master"/>
+      <xs:element ref="fo:simple-page-master"/>
+      <xs:element ref="fo:page-sequence-master"/>
+      <xs:element ref="fo:flow-map"/>
+    </xs:choice>
+  </xs:complexType>
   <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info -->
   <xs:complexType name="fo_root.model">
     <xs:sequence>
@@ -227,6 +235,46 @@
     </xs:annotation>
     <xs:complexType>
       <xs:attribute name="ref-id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    <axf:spread-page-master>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-spread.html#axf.spread-page-master
+  -->
+  <xs:element name="spread-page-master">
+    <xs:annotation>
+      <xs:documentation>A two-page spread.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="axf:spread-region"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="fo:common-margin-properties-block"/>
+      <xs:attribute name="left-page-master-reference" use="required" type="xs:NCName"/>
+      <xs:attributeGroup ref="fo:master-name"/>
+      <xs:attributeGroup ref="fo:reference-orientation"/>
+      <xs:attribute name="right-page-master-reference" use="required" type="xs:NCName"/>
+      <xs:attributeGroup ref="fo:writing-mode"/>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    <axf:spread-region>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-spread.html#axf.spread-region
+  -->
+  <xs:element name="spread-region">
+    <xs:annotation>
+      <xs:documentation>Region in a two-page spread.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="fo:common-absolute-position-properties"/>
+      <xs:attributeGroup ref="fo:common-border-padding-and-background-properties"/>
+      <xs:attributeGroup ref="fo:common-margin-properties-block"/>
+      <xs:attributeGroup ref="fo:height"/>
+      <xs:attributeGroup ref="fo:region-name"/>
+      <xs:attributeGroup ref="fo:reference-orientation"/>
+      <xs:attributeGroup ref="fo:overflow"/>
+      <xs:attributeGroup ref="fo:width"/>
+      <xs:attributeGroup ref="fo:writing-mode"/>
     </xs:complexType>
   </xs:element>
   <!--

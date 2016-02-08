@@ -16,7 +16,7 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
---><grammar ns="http://www.antennahouse.com/names/XSL/Extensions" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0">
+--><grammar ns="http://www.antennahouse.com/names/XSL/Extensions" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <include href="axf-inherited.rng">
     <!--
       
@@ -29,6 +29,16 @@
       <optional>
         <ref name="fo_float"/>
       </optional>
+    </define>
+    <define name="fo_layout-master-set.model">
+      <oneOrMore>
+        <choice>
+          <ref name="axf_spread-page-master"/>
+          <ref name="fo_simple-page-master"/>
+          <ref name="fo_page-sequence-master"/>
+          <ref name="fo_flow-map"/>
+        </choice>
+      </oneOrMore>
     </define>
     <!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info -->
     <define name="fo_root.model">
@@ -287,6 +297,47 @@
     <element name="axf:footnote-number-citation">
       <a:documentation>脚注番号を引用します</a:documentation>
       <attribute name="ref-id"/>
+      <empty/>
+    </element>
+  </define>
+  <!--
+    <axf:spread-page-master>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-spread.html#axf.spread-page-master
+  -->
+  <define name="axf_spread-page-master">
+    <element name="axf:spread-page-master">
+      <a:documentation>A two-page spread.</a:documentation>
+      <ref name="common-margin-properties-block"/>
+      <attribute name="left-page-master-reference">
+        <data type="NCName"/>
+      </attribute>
+      <ref name="master-name"/>
+      <ref name="reference-orientation"/>
+      <attribute name="right-page-master-reference">
+        <data type="NCName"/>
+      </attribute>
+      <ref name="writing-mode"/>
+      <oneOrMore>
+        <ref name="axf_spread-region"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <!--
+    <axf:spread-region>
+    http://www.antennahouse.com/product/ahf60/docs/ahf-spread.html#axf.spread-region
+  -->
+  <define name="axf_spread-region">
+    <element name="axf:spread-region">
+      <a:documentation>Region in a two-page spread.</a:documentation>
+      <ref name="common-absolute-position-properties"/>
+      <ref name="common-border-padding-and-background-properties"/>
+      <ref name="common-margin-properties-block"/>
+      <ref name="height"/>
+      <ref name="region-name"/>
+      <ref name="reference-orientation"/>
+      <ref name="overflow"/>
+      <ref name="width"/>
+      <ref name="writing-mode"/>
       <empty/>
     </element>
   </define>
