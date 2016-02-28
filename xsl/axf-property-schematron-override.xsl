@@ -89,6 +89,7 @@
      Mostly the properties that can have string values. -->
 <xsl:variable name="skipped-properties" as="xs:string">
 character
+content-type
 external-destination
 font-family
 format
