@@ -215,6 +215,28 @@
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: scaling="<value-of select="."/>"</report>
 	</rule>
 
+	<!-- axf:hyphenation-zone -->
+	<!-- none | <length> -->
+	<!-- Inherited: yes -->
+	<!-- Shorthand: no -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.hyphenation-zone -->
+	<rule context="fo:*/@axf:hyphenation-zone">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:hyphenation-zone="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">axf:hyphenation-zone="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'none'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:hyphenation-zone="" should be EnumerationToken or Length.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:hyphenation-zone="<value-of select="."/>"</report>
+	  <report test="local-name($expression) = 'Length' and
+			(exists($expression/@is-positive) and $expression/@is-positive eq 'no' or
+			$expression/@is-zero = 'yes')" id="axf.hyphenation-zone" role="Warning" sqf:fix="axf.hyphenation-zone-fix">axf:hyphenation-zone="<value-of select="."/>" should be a positive length.</report>
+    <sqf:fix id="axf.hyphenation-zone-fix">
+      <sqf:description>
+        <sqf:title>Change the @axf:hyphenation-zone value to 'none'</sqf:title>
+      </sqf:description>
+      <sqf:replace node-type="attribute" target="axf:hyphenation-zone" select="'none'"/>
+    </sqf:fix>
+	</rule>
+
 	<!-- overflow -->
 	<!-- visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto -->
 	<!-- http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.overflow -->
