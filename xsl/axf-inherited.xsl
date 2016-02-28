@@ -197,6 +197,12 @@
 <property name="axf:overflow-limit" model="text" description="Overflow limit value: &lt;length>{1,2}" />
 <property name="axf:overflow-limit-inline" model="text" description="Inline overflow limit value" />
 <property name="axf:overflow-limit-block" model="text" description="Block overflow limit value" />
+<property name="axf:tab-overlap-treatment" model="'auto' | 'ignore-tab' | 'next-tab'" description="Behavior when tab alignment makes letters overlap" />
+<property name="axf:tab-treatment" model="text" description="Treatment for literal tab characters" />
+<property name="axf:tab-stops" model="text" description="Tab stop positions" />
+<property name="axf:text-justify" model="'auto' | 'inter-word' | 'distribute'" description="How to justify text" />
+<property name="axf:border-double-width" model="text" description="Line thickness of border-style=&quot;double&quot;" />
+<property name="axf:border-wave-form" model="text" description="Wave form for border-style=&quot;wave&quot;" />
 </xsl:variable>
 
 
