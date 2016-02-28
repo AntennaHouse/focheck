@@ -100,6 +100,20 @@ non-xsl =
 # Antenna House extension elements
 #
 
+# <axf:form>
+# https://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.form
+axf_form =
+  element axf:form {
+    axf_form.attlist,
+    axf_form.model
+}
+
+axf_form.attlist =
+  attribute axf:field-submit-method { 'get' | 'post' }?
+
+axf_form.model =
+  ( block.fo.list )*
+
 # <axf:document-info/>
 # http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info
 axf_document-info =
@@ -167,6 +181,15 @@ axf_spread-region =
     empty
 }
 
+# <axf:tab>
+# https://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.tab
+axf_tab =
+  ## Places a white space up to a tab stop position
+  element axf:tab {
+    axf_tab-align,
+    empty
+}
+
 # <axf:table-cell-repeated-marker>
 # http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.table-cell-repeated-marker
 axf_table-cell-repeated-marker =
@@ -183,9 +206,13 @@ axf_table-cell-repeated-marker =
 # Extensions to FO models
 #
 
+block.fo.list |=
+    axf_form
+
 inline.fo.list |=
     axf_footnote-number |
-    axf_footnote-number-citation
+    axf_footnote-number-citation |
+    axf_tab
 
 #
 # Extensions to FO attlists
@@ -256,6 +283,7 @@ fo_block-container.attlist &=
     axf_column-gap,
     axf_destination-type,
     axf.block.attlist,
+    column-count,
     role
 
 fo_float.attlist &=
@@ -736,6 +764,13 @@ axf_printer-marks-spine-width =
 axf_repeat-cell-content-at-break =
     ## Whether to copy the contents of a cell when a cell breaks
     attribute axf:repeat-cell-content-at-break { 'true' | 'false' }?
+
+# @axf:tab-align
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.tab-align
+axf_tab-align =
+    ## Tab alignment at the tab stop position
+    attribute axf:tab-align { 'auto' | 'start' | 'center' | 'end' | 'left' | 'right' | 'decimal' | text }?
 
 # @axf:table-summary
 #
