@@ -340,6 +340,9 @@ fo_wrapper.attlist &=
 # Extensions to property groups
 #
 
+common-accessibility-properties &=
+    axf_pdftag
+
 common-border-padding-and-background-properties &=
     axf_background-content-width,
     axf_background-content-height,
@@ -722,6 +725,13 @@ axf_outline-font-weight =
 axf_printer-marks =
     ## Printing marks, such as a crop mark
     attribute axf:printer-marks { text }?
+
+# @axf:pdftag
+#
+# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.pdftag
+axf_pdftag =
+    ## Tag name of Tagged PDF
+    attribute axf:pdftag { text }?
 
 # @axf:printer-marks-line-color
 #
