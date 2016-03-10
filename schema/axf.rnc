@@ -224,6 +224,13 @@ fo_page-sequence.attlist &=
     axf_background-position-horizontal,
     axf_background-position-vertical,
     axf_background-repeat,
+    axf_line-number-format,
+    axf_line-number-initial,
+    axf_line-number-interval,
+    axf_line-number-orientation,
+    axf_line-number-prefix,
+    axf_line-number-reset,
+    axf_line-number-start,
     background-color,
     background-image,
     background-position-horizontal,
@@ -269,6 +276,7 @@ fo_basic-link.attlist &=
 
 fo_block.attlist &=
     axf_destination-type,
+    axf_line-number-reset,
     axf_suppress-if-first-on-page,
     height,
     max-height,
@@ -672,11 +680,60 @@ axf_footnote-max-height =
     ## Maximum height of footnote: auto | <length> | <percentage>
     attribute axf:footnote-max-height { text }?
 
+# @axf:line-number-format
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.line-number-format
+axf_line-number-format =
+    ## Format of line numbers
+    attribute axf:line-number-format { text }?
+
+# @axf:line-number-initial
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.line-number-initial
+axf_line-number-initial =
+    ## Line number of the first line
+    attribute axf:line-number-initial { text }?
+
+# @axf:line-number-interval
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.line-number-interval
+axf_line-number-interval =
+    ## Interval of line numbers
+    attribute axf:line-number-interval { text }?
+
+# @axf:line-number-orientation
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.line-number-orientation
+axf_line-number-orientation =
+    ## Orientation of line numbers
+    attribute axf:line-number-orientation { '0' | '90' | '180' | '270' | '-90' | '-180' | '-270' }?
+
+# @axf:line-number-prefix
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.line-number-prefix
+axf_line-number-prefix =
+    ## Prefix of line number
+    attribute axf:line-number-prefix { text }?
+
+# @axf:line-number-reset
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.line-number-reset
+axf_line-number-reset =
+    ## Resets line numbering: auto | none | page | column | force
+    attribute axf:line-number-reset { 'auto' | 'none' | 'page' | 'column' | 'force' }?
+
+# @axf:line-number-start
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.line-number-start
+axf_line-number-start =
+    ## Starting line number: <number> | auto
+    attribute axf:line-number-start { text }?
+
 # @axf:outline-expand
 #
 # http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.outline-expand
 axf_outline-expand =
-    ## Whether to display the lower hierarchy of bookmark items or not
+    ## Whether to display the lower hierarchy of bookmark items or not: true | false
     attribute axf:outline-expand { 'true' | 'false' }?
 
 # @axf:outline-group
@@ -711,14 +768,14 @@ axf_outline-color =
 #
 # http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf_outline-font-style
 axf_outline-font-style =
-    ## Font style which appears as a title of bookmark
+    ## Font style which appears as a title of bookmark: normal | italic
     attribute axf:outline-font-style { 'normal' | 'italic' }?
 
 # @axf:outline-font-weight
 #
 # http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf:outline-font-weight
 axf_outline-font-weight =
-    ## Font weight which appears as a title of bookmark
+    ## Font weight which appears as a title of bookmark: normal | bold
     attribute axf:outline-font-weight { 'normal' | 'bold' }?
 
 # @axf:printer-marks
@@ -781,7 +838,7 @@ axf_repeat-cell-content-at-break =
 #
 # http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.suppress-if-first-on-page
 axf_suppress-if-first-on-page =
-    ## Whether to suppress the block at the beginning of a page
+    ## Whether to suppress the block at the beginning of a page: true | false
     attribute axf:suppress-if-first-on-page { 'true' | 'false' }?
 
 # @axf:tab-align
