@@ -353,7 +353,8 @@ AFTER making a release on GitHub:
 <target name="translate" depends="rng">
   <copy todir="${focheck.basedir.converted}/omegat/source"
 	force="${force}">
-    <fileset dir="${focheck.basedir.converted}/schematron" />
+    <fileset dir="${focheck.basedir.converted}/schematron"
+	     includes="*.sch" />
   </copy>
   <copy todir="${focheck.basedir.converted}/omegat/source"
 	force="${force}">
