@@ -1,7 +1,7 @@
 # Antenna House extension elements and non-inherited extension
 # attributes.
 #
-# Copyright 2015 Antenna House, Inc.
+# Copyright 2015-2016 Antenna House, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ include "axf-inherited.rnc" {
 # modules that it includes).
 #
 
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#fo.change-bar-begin
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#fo.change-bar-begin
 fo_change-bar-begin.model =
     ( fo_float? )
 
@@ -35,7 +35,7 @@ fo_layout-master-set.model =
        fo_page-sequence-master|
        fo_flow-map)+ )
 
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.document-info
 fo_root.model =
     ( (axf_document-info*,
        fo_layout-master-set,
@@ -115,7 +115,7 @@ axf_form.model =
   ( block.fo.list )*
 
 # <axf:document-info/>
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.document-info
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.document-info
 axf_document-info =
   ## Document information such as an author and title that can be embedded in the PDF
   element axf:document-info {
@@ -133,7 +133,7 @@ axf_document-info =
 }
 
 # <axf:footnote-number/>
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-number
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.footnote-number
 axf_footnote-number =
   ## Generates a footnote number
   element axf:footnote-number {
@@ -142,7 +142,7 @@ axf_footnote-number =
 }
 
 # <axf:footnote-number-citation/>
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-number-citation
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.footnote-number-citation
 axf_footnote-number-citation =
   ## Cites a footnote number
   element axf:footnote-number-citation {
@@ -151,7 +151,7 @@ axf_footnote-number-citation =
 }
 
 # <axf:spread-page-master>
-# http://www.antennahouse.com/product/ahf60/docs/ahf-spread.html#axf.spread-page-master
+# http://www.antennahouse.com/product/ahf63/ahf-spread.html#axf.spread-page-master
 axf_spread-page-master =
   ## A two-page spread.
   element axf:spread-page-master {
@@ -165,7 +165,7 @@ axf_spread-page-master =
 }
 
 # <axf:spread-region>
-# http://www.antennahouse.com/product/ahf60/docs/ahf-spread.html#axf.spread-region
+# http://www.antennahouse.com/product/ahf63/ahf-spread.html#axf.spread-region
 axf_spread-region =
   ## Region in a two-page spread.
   element axf:spread-region {
@@ -191,7 +191,7 @@ axf_tab =
 }
 
 # <axf:table-cell-repeated-marker>
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.table-cell-repeated-marker
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.table-cell-repeated-marker
 axf_table-cell-repeated-marker =
   ## Contents used when axf:repeat-cell-content-at-break="true"
   element axf:table-cell-repeated-marker {
@@ -378,7 +378,7 @@ axf.block.attlist =
 # @axf:background-position-vertical
 # @axf:background-repeat
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#IDAAOLV
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#IDAAOLV
 axf_background-color =
     ## <color> | transparent
     attribute axf:background-color { text }?
@@ -397,14 +397,14 @@ axf_background-repeat =
 
 # @axf:action-type
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.action-type
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.action-type
 axf_action-type =
     ## Specifies the action of external link or form action
     attribute axf:action-type { 'gotor' | 'launch' | 'uri' | 'reset' | 'submit' | 'auto' }?
 
 # @axf:alt-text
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.alttext
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.alttext
 axf_alttext =
     ## alternate text of the image
     attribute axf:alttext { text }?
@@ -414,7 +414,7 @@ axf_alttext =
 # @axf:background-content-width
 # @axf:background-scaling
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.background-content
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.background-content
 axf_background-content-height =
     ## auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit
     attribute axf:background-content-height { text }?
@@ -434,7 +434,7 @@ axf_background-scaling =
 # @axf:border-bottom-left-radius
 # @axf:border-bottom-right-radius
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.border-radius
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.border-radius
 axf_border-radius =
     ## Radii of the rounded corners: [<length>|<percentage>] [<length>|<percentage>]?
     attribute axf:border-radius { text }?
@@ -457,7 +457,7 @@ axf_border-bottom-right-radius =
 # @axf:bleed-left
 # @axf:bleed-right
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.bleed
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.bleed
 axf_bleed =
     ## Wdth of the bleed region: <length>
     attribute axf:bleed { text }?
@@ -476,21 +476,21 @@ axf_bleed-right =
 
 # @axf:column-count
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.column-count
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.column-count
 axf_column-count =
     ## The number of columns: <number>
     attribute axf:column-count { text }?
 
 # @axf:column-gap
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.column-gap
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.column-gap
 axf_column-gap =
     ## The gap between columns: <length> | <percentage>
     attribute axf:column-gap { text }?
 
 # @axf:crop-area-visibility
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.crop-area-visibility
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.crop-area-visibility
 axf_crop-area-visibility =
     ## Whether to display the area beyond the finished page size
     attribute axf:crop-area-visibility { 'hidden' | 'visible' }?
@@ -501,7 +501,7 @@ axf_crop-area-visibility =
 # @axf:crop-offset-left
 # @axf:crop-offset-right
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.crop-offset
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.crop-offset
 axf_crop-offset =
     ## Distance from the physical edges to the trim size of the output medium: <length>
     attribute axf:crop-offset { text }?
@@ -520,280 +520,280 @@ axf_crop-offset-right =
 
 # @axf:destination-type
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.destination-type
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.destination-type
 axf_destination-type =
     ## The way a link opens in a link destination
     attribute axf:destination-type { text }?
 
 # @axf:float
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html
+# http://www.antennahouse.com/product/ahf63/ahf-float.html
 axf_float =
     ## Shorthand for float-related extension properties
     attribute axf:float { 'none' | 'before' | 'after' | 'start' | 'end' | 'left' | 'right' | 'top' | 'bottom' | 'center' | 'inside' | 'outside' | 'wrap' | 'skip' | 'auto' | 'normal' | 'page' | 'column' | 'multicol' | 'next' | 'auto-next' | 'auto-move' | 'keep' | 'keep-float' }?
 
 # @axf:float-x
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-x
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-x
 axf_float-x =
     ## Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside
     attribute axf:float-x { 'none' | 'start' | 'end' | 'left' | 'right' | 'top' | 'bottom' | 'center' | 'inside' | 'outside' }?
 
 # @axf:float-y
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-y
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-y
 axf_float-y =
     ## Vertical (or horizontal if writing-mode is vertical) float alignment:    none | before | after | top | bottom | left | right | center | inside | outside
     attribute axf:float-y { 'none' | 'before' | 'after' | 'top' | 'bottom' | 'left' | 'right' | 'center' | 'inside' | 'outside' }?
 
 # @axf:float-reference
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-reference
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-reference
 axf_float-reference =
     ## Reference area where the float is placed: auto | normal | page | column | multicol
     attribute axf:float-reference { 'auto' | 'normal' | 'page' | 'column' | 'multicol' }?
 
 # @axf:float-move
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-move
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-move
 axf_float-move =
     ## Whether the float moves to the next page (or column): auto | next | auto-next | auto-move | keep | keep-float
     attribute axf:float-move { 'auto' | 'next' | 'auto-next' | 'auto-move' | 'keep' | 'keep-float' }?
 
 # @axf:float-wrap
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-wrap
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-wrap
 axf_float-wrap =
     ## Text wrapping: auto | wrap | skip
     attribute axf:float-wrap { 'auto' | 'wrap' | 'skip' }?
 
 # @axf:float-min-wrap-x
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-x
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-min-wrap-x
 axf_float-min-wrap-x =
     ## Minimum width for the text wrapping around the float: normal | <length> | <percentage>
     attribute axf:float-min-wrap-x { text }?
 
 # @axf:float-min-wrap-y
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-min-wrap-y
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-min-wrap-y
 axf_float-min-wrap-y =
     ## Minimum extent for the text placed before and after the float: normal | <length> | <percentage>
     attribute axf:float-min-wrap-y { text }?
 
 # @axf:float-centering-x
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-x
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-centering-x
 axf_float-centering-x =
     ## Whether the float is centered when the width for the text wrapping around the float is insufficient: none | auto | <length> | <percentage>
     attribute axf:float-centering-x { text }?
 
 # @axf:float-centering-y
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-centering-y
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-centering-y
 axf_float-centering-y =
     ## Whether the float is centered when the extent for the text placed before and after the float is insufficient: none | auto | <length> | <percentage>
     attribute axf:float-centering-y { text }?
 
 # @axf:float-margin-x
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-x
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-margin-x
 axf_float-margin-x =
     ## Space between the float and the text wrapping around the float (in x-axis): [ <length> | <percentage> ] [ <length> | <percentage> ]?
     attribute axf:float-margin-x { text }?
 
 # @axf:float-margin-y
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-margin-y
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-margin-y
 axf_float-margin-y =
     ## Space between the float and the text wrapping around the float (in y-axis): [ <length> | <percentage> ] [ <length> | <percentage> ]?
     attribute axf:float-margin-y { text }?
 
 # @axf:float-float-margin-x
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-x
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-float-margin-x
 axf_float-float-margin-x =
     ## Space between the float and another neighboring float (in x-axis): auto | [[ <length> | <percentage> ] [ <length> | <percentage> ]?]
     attribute axf:float-float-margin-x { text }?
 
 # @axf:float-float-margin-y
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-float-margin-y
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-float-margin-y
 axf_float-float-margin-y =
     ## Space between the float and another neighboring float (in y-axis): auto | [[ <length> | <percentage> ] [ <length> | <percentage> ]?]
     attribute axf:float-float-margin-y { text }?
 
 # @axf:float-offset-x
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-x
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-offset-x
 axf_float-offset-x =
     ## Offset placement for the float (in x-axis): <length> | <percentage>
     attribute axf:float-offset-x { text }?
 
 # @axf:float-offset-y
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-float.html#axf.float-offset-y
+# http://www.antennahouse.com/product/ahf63/ahf-float.html#axf.float-offset-y
 axf_float-offset-y =
     ## Offset placement for the float (in y-axis): <length> | <percentage>
     attribute axf:float-offset-y { text }?
 
 # @axf:footnote-align
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-align
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.footnote-align
 axf_footnote-align =
     ## Specifies the alignment of the footnotes.
     attribute axf:footnote-align { 'auto' | 'before' | 'after' }?
 
 # @axf:footnote-stacking
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-stacking
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.footnote-stacking
 axf_footnote-stacking =
     ## Method to layout the footnote.
     attribute axf:footnote-stacking { 'block' | 'inline' }?
 
 # @axf:footnote-position
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-position
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.footnote-position
 axf_footnote-position =
     ## Location to layout the footnote.
     attribute axf:footnote-position { 'page' | 'start' | 'end' | 'inside' | 'outside' | 'column' | 'start-column' | 'end-column' | 'inside-column' | 'outside-column' }?
 
 # @axf:footnote-keep
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-keep
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.footnote-keep
 axf_footnote-keep =
     ## Whether to arrange a footnote and an anchor in the same page
     attribute axf:footnote-keep { 'auto' | 'always' }?
 
 # @axf:footnote-max-height
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.footnote-max-height
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.footnote-max-height
 axf_footnote-max-height =
     ## Maximum height of footnote: auto | <length> | <percentage>
     attribute axf:footnote-max-height { text }?
 
 # @axf:outline-expand
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-expand
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.outline-expand
 axf_outline-expand =
     ## Whether to display the lower hierarchy of bookmark items or not
     attribute axf:outline-expand { 'true' | 'false' }?
 
 # @axf:outline-group
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-group
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.outline-group
 axf_outline-group =
     ## Name of the output group: <string>
     attribute axf:outline-group { text }?
 
 # @axf:outline-level
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-level
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.outline-level
 axf_outline-level =
     ## The hierarchy level of bookmark items: <number>
     attribute axf:outline-level { text }?
 
 # @axf:outline-title
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-title
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.outline-title
 axf_outline-title =
     ## String which appears as a title of bookmark: <string>
     attribute axf:outline-title { text }?
 
 # @axf:outline-color
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.outline-color
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.outline-color
 axf_outline-color =
     ## Color which appears as a title of bookmark
     attribute axf:outline-color { text }?
 
 # @axf:outline-font-style
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf_outline-font-style
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf_outline-font-style
 axf_outline-font-style =
     ## Font style which appears as a title of bookmark
     attribute axf:outline-font-style { 'normal' | 'italic' }?
 
 # @axf:outline-font-weight
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf:outline-font-weight
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf:outline-font-weight
 axf_outline-font-weight =
     ## Font weight which appears as a title of bookmark
     attribute axf:outline-font-weight { 'normal' | 'bold' }?
 
 # @axf:printer-marks
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.printer-marks
 axf_printer-marks =
     ## Printing marks, such as a crop mark
     attribute axf:printer-marks { text }?
 
 # @axf:pdftag
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.pdftag
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.pdftag
 axf_pdftag =
     ## Tag name of Tagged PDF
     attribute axf:pdftag { text }?
 
 # @axf:printer-marks-line-color
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-color
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.printer-marks-line-color
 axf_printer-marks-line-color =
     ## Line color of printer marks: <line> | auto
     attribute axf:printer-marks-line-color { text }?
 
 # @axf:printer-marks-line-length
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-length
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.printer-marks-line-length
 axf_printer-marks-line-length =
     ## Line length of printer marks: <length> | auto
     attribute axf:printer-marks-line-length { text }?
 
 # @axf:printer-marks-line-width
 # Line width of printer marks: <length> | auto
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-line-width
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.printer-marks-line-width
 axf_printer-marks-line-width =
     ## Line width of printer marks
     attribute axf:printer-marks-line-width { text }?
 
 # @axf:printer-marks-zero-margin
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-zero-margin
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.printer-marks-zero-margin
 axf_printer-marks-zero-margin =
     ## Margin between the page and the printer marks when bleed is 0: <length> | auto
     attribute axf:printer-marks-zero-margin { text }?
 
 # @axf:printer-marks-spine-width
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.printer-marks-spine-width
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.printer-marks-spine-width
 axf_printer-marks-spine-width =
     ## Spine width of the facing page: <length>
     attribute axf:printer-marks-spine-width { text }?
 
 # @axf:repeat-cell-content-at-break
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.repeat-cell-content-at-break
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.repeat-cell-content-at-break
 axf_repeat-cell-content-at-break =
     ## Whether to copy the contents of a cell when a cell breaks
     attribute axf:repeat-cell-content-at-break { 'true' | 'false' }?
 
 # @axf:suppress-if-first-on-page
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.suppress-if-first-on-page
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.suppress-if-first-on-page
 axf_suppress-if-first-on-page =
     ## Whether to suppress the block at the beginning of a page
     attribute axf:suppress-if-first-on-page { 'true' | 'false' }?
 
 # @axf:tab-align
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.tab-align
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.tab-align
 axf_tab-align =
     ## Tab alignment at the tab stop position
     attribute axf:tab-align { 'auto' | 'start' | 'center' | 'end' | 'left' | 'right' | 'decimal' | text }?
 
 # @axf:table-summary
 #
-# http://www.antennahouse.com/product/ahf60/docs/ahf-ext.html#axf.table-summary
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.table-summary
 axf_table-summary =
     ## Summary describing the table.  Included in Tagged PDF output.
     attribute axf:table-summary { text }?
