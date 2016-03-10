@@ -229,12 +229,37 @@
 	  <report test="local-name($expression) = 'Length' and
 			(exists($expression/@is-positive) and $expression/@is-positive eq 'no' or
 			$expression/@is-zero = 'yes')" id="axf.hyphenation-zone" role="Warning" sqf:fix="axf.hyphenation-zone-fix">axf:hyphenation-zone="<value-of select="."/>" should be a positive length.</report>
-    <sqf:fix id="axf.hyphenation-zone-fix">
-      <sqf:description>
-        <sqf:title>Change the @axf:hyphenation-zone value to 'none'</sqf:title>
-      </sqf:description>
-      <sqf:replace node-type="attribute" target="axf:hyphenation-zone" select="'none'"/>
-    </sqf:fix>
+	  <sqf:fix id="axf.hyphenation-zone-fix">
+	    <sqf:description>
+              <sqf:title>Change the @axf:hyphenation-zone value to 'none'</sqf:title>
+	    </sqf:description>
+	    <sqf:replace node-type="attribute" target="axf:hyphenation-zone" select="'none'"/>
+	  </sqf:fix>
+	</rule>
+
+	<!-- axf:line-number-interval -->
+	<!-- <number> | auto -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.line-number-interval -->
+	<rule context="fo:*/@axf:line-number-interval">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')">axf:line-number-interval="<value-of select="."/>" should be EnumerationToken or Number.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">axf:line-number-interval="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:line-number-interval="" should be EnumerationToken or Number.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:line-number-interval="<value-of select="."/>"</report>
+	</rule>
+
+	<!-- axf:line-number-offset -->
+	<!-- <length> -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.line-number-offset -->
+	<rule context="fo:*/@axf:line-number-offset">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Length', 'EMPTY', 'ERROR')">axf:line-number-offset="<value-of select="."/>" should be Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:line-number-offset="" should be Length.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:line-number-offset="<value-of select="."/>"</report>
 	</rule>
 
 	<!-- overflow -->
