@@ -121,6 +121,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -186,6 +188,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -201,6 +206,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -313,6 +319,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -378,6 +386,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -393,6 +404,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -516,6 +528,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -581,6 +595,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -596,6 +613,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -607,6 +625,13 @@
     <xs:attributeGroup ref="axf:axf_background-position-horizontal"/>
     <xs:attributeGroup ref="axf:axf_background-position-vertical"/>
     <xs:attributeGroup ref="axf:axf_background-repeat"/>
+    <xs:attributeGroup ref="axf:axf_line-number-format"/>
+    <xs:attributeGroup ref="axf:axf_line-number-initial"/>
+    <xs:attributeGroup ref="axf:axf_line-number-interval"/>
+    <xs:attributeGroup ref="axf:axf_line-number-orientation"/>
+    <xs:attributeGroup ref="axf:axf_line-number-prefix"/>
+    <xs:attributeGroup ref="axf:axf_line-number-reset"/>
+    <xs:attributeGroup ref="axf:axf_line-number-start"/>
     <xs:attributeGroup ref="fo:background-color"/>
     <xs:attributeGroup ref="fo:background-image"/>
     <xs:attributeGroup ref="fo:background-position-horizontal"/>
@@ -717,6 +742,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -782,6 +809,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -797,6 +827,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -912,6 +943,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -977,6 +1010,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -992,6 +1028,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -1091,6 +1128,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -1156,6 +1195,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -1171,6 +1213,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -1271,6 +1314,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -1336,6 +1381,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -1351,6 +1399,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -1459,6 +1508,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -1524,6 +1575,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -1539,6 +1593,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -1641,6 +1696,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -1706,6 +1763,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -1721,6 +1781,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -1827,6 +1888,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -1892,6 +1955,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -1907,6 +1973,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -2042,6 +2109,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -2107,6 +2176,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -2122,6 +2194,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -2227,6 +2300,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -2292,6 +2367,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -2307,6 +2385,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -2412,6 +2491,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -2477,6 +2558,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -2492,6 +2576,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -2596,6 +2681,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -2661,6 +2748,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -2676,6 +2766,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -2780,6 +2871,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -2845,6 +2938,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -2860,6 +2956,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -2978,6 +3075,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -3043,6 +3142,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -3058,6 +3160,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -3164,6 +3267,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -3229,6 +3334,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -3244,6 +3352,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -3351,6 +3460,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -3416,6 +3527,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -3431,6 +3545,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -3539,6 +3654,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -3604,6 +3721,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -3619,6 +3739,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -3739,6 +3860,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -3804,6 +3927,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -3819,6 +3945,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -3928,6 +4055,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -3993,6 +4122,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -4008,6 +4140,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -4129,6 +4262,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -4194,6 +4329,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -4209,6 +4347,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -4216,6 +4355,8 @@
     <xs:attributeGroup ref="axf:axf_word-break"/>
     <xs:attributeGroup ref="axf:axf_word-wrap"/>
     <xs:attributeGroup ref="axf:axf_destination-type"/>
+    <xs:attributeGroup ref="axf:axf_line-number-reset"/>
+    <xs:attributeGroup ref="axf:axf_suppress-if-first-on-page"/>
     <xs:attributeGroup ref="fo:height"/>
     <xs:attributeGroup ref="fo:max-height"/>
     <xs:attributeGroup ref="fo:max-width"/>
@@ -4344,6 +4485,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -4409,6 +4552,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -4424,6 +4570,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -4433,7 +4580,9 @@
     <xs:attributeGroup ref="axf:axf_column-count"/>
     <xs:attributeGroup ref="axf:axf_column-gap"/>
     <xs:attributeGroup ref="axf:axf_destination-type"/>
+    <xs:attributeGroup ref="axf:axf_suppress-if-first-on-page"/>
     <xs:attributeGroup ref="axf:axf.block.attlist"/>
+    <xs:attributeGroup ref="fo:column-count"/>
     <xs:attributeGroup ref="fo:role"/>
   </xs:attributeGroup>
   <xs:element name="bidi-override" substitutionGroup="fo:inline.fo.list">
@@ -4545,6 +4694,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -4610,6 +4761,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -4625,6 +4779,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -4730,6 +4885,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -4795,6 +4952,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -4810,6 +4970,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -4906,6 +5067,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -4971,6 +5134,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -4986,6 +5152,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -5114,6 +5281,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -5179,6 +5348,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -5194,6 +5366,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -5332,6 +5505,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -5397,6 +5572,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -5412,6 +5590,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -5547,6 +5726,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -5612,6 +5793,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -5627,6 +5811,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -5753,6 +5938,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -5818,6 +6005,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -5833,6 +6023,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -5957,6 +6148,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -6022,6 +6215,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -6037,6 +6233,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -6146,6 +6343,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -6211,6 +6410,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -6226,6 +6428,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -6336,6 +6539,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -6401,6 +6606,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -6416,6 +6624,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -6527,6 +6736,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -6592,6 +6803,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -6607,6 +6821,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -6749,6 +6964,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -6814,6 +7031,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -6829,6 +7049,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -6955,6 +7176,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -7020,6 +7243,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -7035,6 +7261,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -7179,6 +7406,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -7244,6 +7473,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -7259,6 +7491,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -7368,6 +7601,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -7433,6 +7668,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -7448,6 +7686,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -7577,6 +7816,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -7642,6 +7883,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -7657,6 +7901,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -7787,6 +8032,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -7852,6 +8099,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -7867,6 +8117,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -7997,6 +8248,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -8062,6 +8315,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -8077,6 +8333,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -8201,6 +8458,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -8266,6 +8525,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -8281,6 +8543,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -8410,6 +8673,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -8475,6 +8740,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -8490,6 +8758,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -8615,6 +8884,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -8680,6 +8951,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -8695,6 +8969,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -8819,6 +9094,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -8884,6 +9161,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -8899,6 +9179,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -9013,6 +9294,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -9078,6 +9361,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -9093,6 +9379,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -9211,6 +9498,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -9276,6 +9565,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -9291,6 +9583,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -9397,6 +9690,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -9462,6 +9757,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -9477,6 +9775,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -9617,6 +9916,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -9682,6 +9983,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -9697,6 +10001,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -9811,6 +10116,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -9876,6 +10183,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -9891,6 +10201,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -10013,6 +10324,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -10078,6 +10391,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -10093,6 +10409,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -10213,6 +10530,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -10278,6 +10597,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -10293,6 +10615,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -10405,6 +10728,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -10470,6 +10795,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -10485,6 +10813,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -10587,6 +10916,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -10652,6 +10983,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -10667,6 +11001,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -10802,6 +11137,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -10867,6 +11204,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -10882,6 +11222,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -10981,6 +11322,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -11046,6 +11389,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -11061,6 +11407,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -11173,6 +11520,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -11238,6 +11587,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -11253,6 +11605,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -11365,6 +11718,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -11430,6 +11785,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -11445,6 +11803,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -11604,6 +11963,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -11669,6 +12030,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -11684,6 +12048,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -11792,6 +12157,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -11857,6 +12224,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -11872,6 +12242,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -11988,6 +12359,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -12053,6 +12426,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -12068,6 +12444,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -12192,6 +12569,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -12257,6 +12636,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -12272,6 +12654,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -12393,6 +12776,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -12458,6 +12843,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -12473,6 +12861,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -12578,6 +12967,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -12643,6 +13034,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -12658,6 +13052,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -12758,6 +13153,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -12823,6 +13220,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -12838,6 +13238,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -12963,6 +13364,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -13028,6 +13431,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -13043,6 +13449,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -13087,6 +13494,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -13152,6 +13561,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -13167,6 +13579,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -13268,6 +13681,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -13333,6 +13748,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -13348,6 +13766,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -13449,6 +13868,8 @@
     <xs:attributeGroup ref="axf:axf_assumed-page-number"/>
     <xs:attributeGroup ref="axf:axf_avoid-widow-words"/>
     <xs:attributeGroup ref="axf:axf_base-uri"/>
+    <xs:attributeGroup ref="axf:axf_border-double-width"/>
+    <xs:attributeGroup ref="axf:axf_border-wave-form"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-color"/>
     <xs:attributeGroup ref="axf:axf_diagonal-border-width"/>
     <xs:attributeGroup ref="axf:axf_hanging-punctuation"/>
@@ -13514,6 +13935,9 @@
     <xs:attributeGroup ref="axf:axf_soft-hyphen-treatment"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-footnote"/>
     <xs:attributeGroup ref="axf:axf_suppress-duplicate-page-number"/>
+    <xs:attributeGroup ref="axf:axf_tab-overlap-treatment"/>
+    <xs:attributeGroup ref="axf:axf_tab-stops"/>
+    <xs:attributeGroup ref="axf:axf_tab-treatment"/>
     <xs:attributeGroup ref="axf:axf_text-align-first"/>
     <xs:attributeGroup ref="axf:axf_text-align-string"/>
     <xs:attributeGroup ref="axf:axf_text-autospace"/>
@@ -13529,6 +13953,7 @@
     <xs:attributeGroup ref="axf:axf_text-emphasis-position"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-skip"/>
     <xs:attributeGroup ref="axf:axf_text-emphasis-style"/>
+    <xs:attributeGroup ref="axf:axf_text-justify"/>
     <xs:attributeGroup ref="axf:axf_text-justify-trim"/>
     <xs:attributeGroup ref="axf:axf_text-kashida-space"/>
     <xs:attributeGroup ref="axf:axf_text-orientation"/>
@@ -13548,6 +13973,7 @@
   <xs:attributeGroup name="common-accessibility-properties">
     <xs:attributeGroup ref="fo:role"/>
     <xs:attributeGroup ref="fo:source-document"/>
+    <xs:attributeGroup ref="axf:axf_pdftag"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="common-absolute-position-properties">
     <xs:attributeGroup ref="fo:absolute-position"/>

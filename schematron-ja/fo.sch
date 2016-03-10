@@ -43,20 +43,20 @@
   </rule>
 
   <rule context="fo:list-item-body[empty(@start-indent)]">
-    <report test="true()" id="list-item-body-start-indent" role="Warning" sqf:fix="list-item-body-start-indent-fix">fo:list-item-body with no 'start-indent' will use default 'start-indent=&quot;0pt&quot;'.</report>
+    <report test="true()" id="list-item-body-start-indent" role="Warning" sqf:fix="list-item-body-start-indent-fix">「start-indent」のない fo:list-item-body はデフォルト「start-indent=&quot;0pt&quot;」を使用します。</report>
     <sqf:fix id="list-item-body-start-indent-fix">
       <sqf:description>
-        <sqf:title>Add 'start-indent=&quot;body-start()&quot;'</sqf:title>
+        <sqf:title>「start-indent=&quot;body-start()&quot;」を追加します。</sqf:title>
       </sqf:description>
       <sqf:add node-type="attribute" target="start-indent" select="'body-start()'"/>
     </sqf:fix>
   </rule>
 
   <rule context="fo:list-item-label[empty(@end-indent)]">
-    <report test="true()" id="list-item-label-end-indent" role="Warning" sqf:fix="list-item-label-end-indent-fix">fo:list-item-label with no 'end-indent' will use default 'end-indent=&quot;0pt&quot;'.</report>
+    <report test="true()" id="list-item-label-end-indent" role="Warning" sqf:fix="list-item-label-end-indent-fix">「end-indent」のない fo:list-item-label　は  デフォルト 「end-indent=&quot;0pt&quot;」を使用します。</report>
     <sqf:fix id="list-item-label-end-indent-fix">
       <sqf:description>
-        <sqf:title>Add 'end-indent=&quot;label-end()&quot;'</sqf:title>
+        <sqf:title>「end-indent=&quot;label-end()&quot;」を追加します。</sqf:title>
       </sqf:description>
       <sqf:add node-type="attribute" target="end-indent" select="'label-end()'"/>
     </sqf:fix>

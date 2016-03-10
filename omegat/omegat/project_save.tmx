@@ -1,9 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tmx SYSTEM "tmx11.dtd">
 <tmx version="1.1">
-  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="3.5.3" segtype="sentence" srclang="EN-US"/>
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="3.6.0_0_r8101M" segtype="sentence" srclang="EN-US"/>
   <body>
 <!-- Default translations -->
+    <tu>
+      <tuv lang="EN-US">
+        <seg># &lt;a name="en"&gt;&lt;/a&gt;focheck – Validate XSL-FO and Antenna House extensions in oXygen or standalone</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T150129Z" creationid="mtan" creationdate="20160303T145853Z">
+        <seg># &lt;a name="en"&gt;&lt;/a&gt;focheck – oXygenまたはスタンドアロンでのXSL-FOとアンテナハウスの拡張を有効にします。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>## Disclaimer</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160303T163357Z" creationid="mtan" creationdate="20160303T163357Z">
+        <seg>## 免責事項</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>## Installing</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T110157Z" creationid="mtan" creationdate="20160303T171149Z">
+        <seg>## インストール
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>## License</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160303T171816Z" creationid="mtan" creationdate="20160303T171816Z">
+        <seg>## ライセンス
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>## Other Ant targets</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160303T172209Z" creationid="mtan" creationdate="20160303T172013Z">
+        <seg>## その他の Ant ターゲット
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>## Using **focheck**</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T144828Z" creationid="mtan" creationdate="20160304T144828Z">
+        <seg>##  **focheck**の使用</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>### Installing a ZIP archive to an alternative frameworks location</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T114834Z" creationid="mtan" creationdate="20160304T114834Z">
+        <seg>###代替 フレームワークスの場所にZIPアーカイブのインストール</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>### Installing a ZIP archive to oXygen `frameworks` directory</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T102358Z" creationid="mtan" creationdate="20160304T112905Z">
+        <seg>### oXygen　`frameworks`　ディレクトリのZIPアーカイブのインストール</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>### Installing a repository clone</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T121841Z" creationid="mtan" creationdate="20160304T121841Z">
+        <seg>###リポジトリクローンのインストール</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>### Installing as add-on oXygen framework</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T110139Z" creationid="mtan" creationdate="20160304T110043Z">
+        <seg>### アドオン oXygen フレームワークとしてのインストール
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>### Standalone</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160303T172456Z" creationid="mtan" creationdate="20160303T172456Z">
+        <seg>### スタンドアロン</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>### `run.parser`</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T122341Z" creationid="mtan" creationdate="20160307T163103Z">
+        <seg>###  `run.parser`</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>### oXygen XML Editor</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160303T172717Z" creationid="mtan" creationdate="20160303T172643Z">
+        <seg>### oXygen XML エディタ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>#### Transformation scenarios</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T145606Z" creationid="mtan" creationdate="20160304T145606Z">
+        <seg>#### 変換のシナリオ</seg>
+      </tuv>
+    </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>'&lt;v0/&gt;' is a &lt;v1/&gt;.</seg>
@@ -34,6 +150,155 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151028T173903Z" creationid="mtan" creationdate="20151028T173903Z">
         <seg>「axf:outline-level 」は数でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>* **focheck** is bundled with oXgen 17.1.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160307T153524Z" creationid="mtan" creationdate="20160304T102150Z">
+        <seg>* **focheck**は oXgen 17.1とバンドルされています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>* Alternatively, you can download a static copy of the oXygen framework from here.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T104008Z" creationid="mtan" creationdate="20160304T104008Z">
+        <seg>* 代わりに、ここからoXygen フレームワークの静的なコピーをダウンロードすることができます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>* If you want to easily keep up-to-date with changes, then you can clone this repository and 'pull' the latest version whenever you want.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T104958Z" creationid="mtan" creationdate="20160304T104958Z">
+        <seg>*最新の変更を続けたい場合、このリポジトリをクローンして、いつでも好きな時に最新版を「pull」することができます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>* If you want to hack on **focheck** or submit pull requests, then you can fork this repository and clone that onto your local machine.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T153716Z" creationid="mtan" creationdate="20160304T105558Z">
+        <seg>* **focheck** をハックしたりpullリクエストをサブミットしたり場合は、このリポジトリをフォークして、ローカルマシンにクローンすることができます。
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>* If you want to use **focheck** with an older oXygen version or update from the **focheck** version in oXygen, then you can install **focheck** as an add-on oXygen framework.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160307T154745Z" creationid="mtan" creationdate="20160304T103610Z">
+        <seg>*oXygenの古い版やoXygenでの **focheck** からアップデートで **focheck** を使用する場合、oXygenのアドオンフレームワークとして **focheck**  をインストールすることができます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>**focheck** also validates the extension FOs and properties that AH Formatter provides for improved formatted output.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T103421Z" creationid="mtan" creationdate="20160303T164942Z">
+        <seg>**focheck** は、AH Formatterが改善された組版出力を用意する拡張とプロパティも有効にします。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>**focheck** bundles a Relax NG schema and a Schematron grammar in an oXygen framework for detailed validation
+of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XML Editor.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T101429Z" creationid="mtan" creationdate="20160303T163200Z">
+        <seg> XMLエデイタ内ー XSL 1.1 に追加された FOとプロパティを含むー**focheck**はoXygenフレームワークでXSL-FOの詳細な有効のために、 Relax NGとSchematron文法がバンドルします。
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>**focheck** is a work in progress.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160303T163420Z" creationid="mtan" creationdate="20160303T163420Z">
+        <seg>**focheck**の開発は進行中です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>- **focheck** incorporates **[stf](https://github.com/MenteaXML/stf)** as a submodule.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T143137Z" creationid="mtan" creationdate="20160304T143137Z">
+        <seg>- **focheck** はサブモジュールとして **[stf](https://github.com/MenteaXML/stf)**を組み込まれています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>- If you don't have permission to copy the folder to the `frameworks` directory, then you can use an alternative location as described below.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T102445Z" creationid="mtan" creationdate="20160304T114523Z">
+        <seg>-`frameworks`　ディレクトリにフォルダをコピーする許可がない場合は、以下に説明するように、別の場所を使用することができます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>- If you've already checked out **focheck**, you can run</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T102900Z" creationid="mtan" creationdate="20160304T144519Z">
+        <seg>-**focheck**を既に確認していた場合、次下を実行できます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>- On Windows, this is `C:\Program Files\Oxygen XML Editor 16\frameworks`, or something similar.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T154326Z" creationid="mtan" creationdate="20160304T114218Z">
+        <seg>-Windowsでは、これは  `C:\Program Files\Oxygen XML Editor 16\frameworks`　か同様のものです。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>- Pass `--recursive` to `git clone` when you check out **focheck**</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T102835Z" creationid="mtan" creationdate="20160304T144108Z">
+        <seg>- **focheck** を確認すると、`git clone`　に　`--recursive`　を飛び出します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>- See http://oxygenxml.com/doc/ug-editor/index.html#topics/framework-location.html
+1.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T121807Z" creationid="mtan" creationdate="20160304T121807Z">
+        <seg>- http://oxygenxml.com/doc/ug-editor/index.html#topics/framework-location.htmlを参照して下さい。
+1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>- The Relax NG works with Jing and with Emacs `nxml-mode` but not with `xmllint`.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T121904Z" creationid="mtan" creationdate="20160304T153059Z">
+        <seg>- Relax NG は、 `xmllint`　ではなく、 Jing と Emacs  `nxml-mode` と動作します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>- The Schematron requires an XSLT 2.0 binding and a Schematron implementation that will both match on attributes as contexts as well as import and use external XSLT 2.0 stylesheets.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T160209Z" creationid="mtan" creationdate="20160304T154349Z">
+        <seg>- Schematron は  XSLT 2.0 の結合と Schematron 実行を必要とします。それは、コンテキストの属性 の両方に一致するだけでなく、外部 XSLT 2.0 スタイルシートを読み込んで使用します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>- You can delete or comment out any properties in `build.local.properties` that you don't need to change.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T122318Z" creationid="mtan" creationdate="20160303T172201Z">
+        <seg>- `build.local.properties` にあるいずれのプロパティーも変更する必要はない場合、削除するか、コメントアウトもできます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>1.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160303T172507Z" creationid="mtan" creationdate="20160303T172507Z">
+        <seg>1</seg>
       </tuv>
     </tu>
     <tu>
@@ -122,10 +387,42 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A given bookmark may be further subdivided into a sequence of (sub-)bookmarks to as many levels as the authors desire.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T103642Z" creationid="mtan" creationdate="20160212T103642Z">
+        <seg>著者が 望むよう指定されたしおりがさらにとして多くのレベルに(sub-)bookmarksのシーケンスに細分することができます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A non-positive or non-integer value will be rounded to the nearest integer value greater than or equal to 1.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151105T121157Z" creationid="mtan" creationdate="20151105T114149Z">
         <seg>非正又は非整数値は一番近い整数値に丸められます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A two-page spread.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T103648Z" creationid="mtan" creationdate="20160310T103648Z">
+        <seg>見開きページマスタ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Add 'end-indent="label-end()"'</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T114408Z" creationid="mtan" creationdate="20160310T114408Z">
+        <seg>「end-indent="label-end()"」を追加します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Add 'start-indent="body-start()"'</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T114755Z" creationid="mtan" creationdate="20160310T114755Z">
+        <seg>「start-indent="body-start()"」を追加します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -166,6 +463,14 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T154456Z" creationid="mtan" creationdate="20160118T152630Z">
         <seg>文字の代替字形： &lt;number&gt; | &lt;string&gt; &lt;number&gt;?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Alternatively, use the `schematron.single` or `schematron.dir` target to run Schematron on one or multiple files.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T121719Z" creationid="mtan" creationdate="20160304T151936Z">
+        <seg>代わりに、一つ又は複数のファイルでのSchematronを実行するには、 `schematron.single`  又は  `schematron.dir` ターゲットを使用します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -330,6 +635,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As well as providing validation, **focheck** defines two validation scenarios for processing your FO file with Antenna House Formatter.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T103026Z" creationid="mtan" creationdate="20160304T150315Z">
+        <seg>同様に有効を用意するとして、**focheck** は、Antenna House Formatterを使用してFOファイルを処理するための二つの有効なシナリオを定義します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Assumed page number</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T154630Z" creationid="mtan" creationdate="20160118T152756Z">
@@ -354,6 +667,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Behavior when tab alignment makes letters overlap</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T144743Z" creationid="mtan" creationdate="20160309T130101Z">
+        <seg>タブ揃えで文字が重なるときの扱い</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Block overflow limit value</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T171506Z" creationid="mtan" creationdate="20160118T171506Z">
@@ -366,6 +687,14 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160112T135642Z" creationid="mtan" creationdate="20160112T135642Z">
         <seg>axf:document-info の「title」は 「document-title」に変更します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Change the @axf:hyphenation-zone value to 'none'</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112628Z" creationid="mtan" creationdate="20160310T112628Z">
+        <seg> 「none」に@axf:hyphenation-zone 値を変更します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -398,6 +727,22 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160119T161056Z" creationid="mtan" creationdate="20160119T161056Z">
         <seg>脚注番号を引用します</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Click on the "Download ZIP" button on this project's main page to download the files.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T121153Z" creationid="mtan" creationdate="20160304T121153Z">
+        <seg> ファイルをダウンロードするには、このプロジェクトのメインページの「Download ZIP」をクリックします。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Clone the repository into either the oXygen `frameworks` directory or another directory.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T102445Z" creationid="mtan" creationdate="20160304T142825Z">
+        <seg>oXygen  `frameworks`　ディレクトリ又は別のディレクトリのどちらかにリポジトリをクローンします。</seg>
       </tuv>
     </tu>
     <tu>
@@ -522,6 +867,30 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Download the ZIP archive from the latest release on the 'Releases' page.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160307T160612Z" creationid="mtan" creationdate="20160304T113112Z">
+        <seg>「Releases」ページにある最新リリースからZIPアーカイブをダウンロードして下さい。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Each access point is called a bookmark.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160211T162231Z" creationid="mtan" creationdate="20160211T162011Z">
+        <seg>各アクセスポイントはしおりと呼ばれています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Each fo:index-key-reference child provides formatting properties for the corresponding cited page items.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160211T155630Z" creationid="mtan" creationdate="20160210T165202Z">
+        <seg>それぞれの fo:index-key-reference 子は、対応する引用されたページ項目の組版プロパティを用意します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Each fo:page-sequence represents a sequence of pages that result from formatting the content children of the fo:page-sequence.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160121T144834Z" creationid="mtan" creationdate="20160121T144548Z">
@@ -534,6 +903,30 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T124816Z" creationid="mtan" creationdate="20151029T110759Z">
         <seg>列挙トークンは「&lt;v1/&gt;」です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Extract the folder in the ZIP archive to a folder where you can create the new folder.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T121530Z" creationid="mtan" creationdate="20160304T121530Z">
+        <seg>新しいフォルダを作成することができるフォルダにZIPアーカイブ内のフォルダを解凍します。 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Extract the folder in the ZIP archive to the oXygen `frameworks` directory.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T102445Z" creationid="mtan" creationdate="20160304T113508Z">
+        <seg>oXygen `frameworks` ディレクトリにZIPアーカイブにあるフォルダーを解凍します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Follow the instructions in the oXygen manual at http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.html</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160307T160444Z" creationid="mtan" creationdate="20160304T111910Z">
+        <seg>http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.htmlのoXygenのマニュアルの指示に従ってください。</seg>
       </tuv>
     </tu>
     <tu>
@@ -602,6 +995,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Font style which appears as a title of bookmark: normal | italic</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T105029Z" creationid="mtan" creationdate="20160310T105029Z">
+        <seg>しおりのタイトルとして表示される文字列のフォントスタイル: normal | italic</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Font weight of emphasis marks</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T181040Z" creationid="mtan" creationdate="20160118T181040Z">
@@ -626,10 +1027,26 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Font weight which appears as a title of bookmark: normal | bold</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T105055Z" creationid="mtan" creationdate="20160310T105055Z">
+        <seg>しおりのタイトルとして表示される文字列のフォントの太さ: normal | bold</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For example, the content of the fo:title can be formatted and displayed in a "title" window or in a "tool tip".</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160128T102826Z" creationid="mtan" creationdate="20160128T102826Z">
         <seg>例えば、fo:title 組版され、「title」画面 又は「tool tip」で表示されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Format of line numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T104206Z" creationid="mtan" creationdate="20160310T104206Z">
+        <seg>行番号のための書式</seg>
       </tuv>
     </tu>
     <tu>
@@ -674,6 +1091,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>How to justify text</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T145327Z" creationid="mtan" creationdate="20160309T130619Z">
+        <seg>均等割り付けの処理方法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>How to treat full width punctuations in Japanese</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T172841Z" creationid="mtan" creationdate="20160118T172506Z">
@@ -682,10 +1107,42 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T121826Z" creationid="mtan" creationdate="20160304T152812Z">
+        <seg>しかし：</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If necessary, add the **focheck** folder as an alternative frameworks location.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T144637Z" creationid="mtan" creationdate="20160304T144637Z">
+        <seg>必要ならば、別のフレームワークスの場所として**focheck**フォルダを追加します。 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the properties in `build.properties` are not correct for your system, then copy `build.properties` to `build.local.properties` in the same directory and set the correct values there.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T102445Z" creationid="mtan" creationdate="20160303T172443Z">
+        <seg> `build.properties` の プロパティーが使用するシステムに合わない場合は、同じディレクトリで `build.properties`  を  `build.local.properties`  に コピーして、そこに正しい値を設定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If you don't have permission to modify the oXygen installation – for example, if oXygen is installed on Windows under `C:\Program Files\` and you are not an Administrator – you can set oXygen to also use an alternative frameworks location.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T120818Z" creationid="mtan" creationdate="20160304T120338Z">
+        <seg>インストールを変更する許可がない場合は、例えば、oXygen は `C:\Program Files\`でWindowsにインストール場合、あなたは管理者でない場合、代替フレームワークの場所も使用するようにoXygenを設定することができます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In addition, it can also be used with a different reference-orientation to rotate its content.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160128T114458Z" creationid="mtan" creationdate="20160128T114437Z">
-        <seg>さらに、それはまた、その内容を回転するために異なる different reference-orientationを使用することができます。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160210T162020Z" creationid="mtan" creationdate="20160128T114437Z">
+        <seg>さらに、それはまた、その内容を回転するために異なるreference-orientationを使用することができます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -722,10 +1179,42 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In your oXygen preferences, add the **focheck** folder as an alternative frameworks location.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T120934Z" creationid="mtan" creationdate="20160304T121709Z">
+        <seg>oXygen の環境設定で、代替フレームワークスの場所として解凍した**focheck**フォルダを追加します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Included in Tagged PDF output.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T110435Z" creationid="mtan" creationdate="20160310T110337Z">
+        <seg>タグ付きPDFに含まれます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Inline overflow limit value</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T171524Z" creationid="mtan" creationdate="20160118T171524Z">
         <seg>インライン方向オーバーフロー制限値</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Interval of line numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T104308Z" creationid="mtan" creationdate="20160310T104308Z">
+        <seg>出力する行番号の間隔</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It does not (yet) handle every XSL-FO property or every requirement in the XSL-FO spec, nor does it evaluate either functions or relative lengths.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T153300Z" creationid="mtan" creationdate="20160303T171034Z">
+        <seg>まだ全てのXSL-FOプロパティ又はXSL-FO仕様の全ての必要条件を扱わない、またそれは、機能や相対的な長さのいずれかを評価しません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -740,8 +1229,8 @@
       <tuv lang="EN-US">
         <seg>It holds an fo:layout-master-set formatting object (which holds all masters used in the document), an optional fo:declarations, an optional fo:bookmark-tree, and one or more fo:page-sequence or fo:page-sequence-wrapper objects.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160126T134955Z" creationid="mtan" creationdate="20160121T143846Z">
-        <seg>fo:layout-master-set （文書で使用されている全てのマスターを保持する ）、 任意、 fo:declarations、任意の fo:bookmark-treeなど持っています。 それとも、１以上 のfo:page-sequence 又は fo:page-sequence-wrapper 要素が持っています。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T144117Z" creationid="mtan" creationdate="20160121T143846Z">
+        <seg>fo:layout-master-set （文書で使用されている全てのマスターを保持する ）、 任意、 fo:declarations、任意の fo:bookmark-treeなど持っています。 それとも、一つ以上 のfo:page-sequence 又は fo:page-sequence-wrapper 要素を持っています。</seg>
       </tuv>
     </tu>
     <tu>
@@ -756,8 +1245,8 @@
       <tuv lang="EN-US">
         <seg>It is used to specify the use of a particular page-master at a given point in the sequence of pages that would be generated using the fo:page-sequence-master that is the parent of the fo:single-page-master-reference.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160127T113703Z" creationid="mtan" creationdate="20160127T113703Z">
-        <seg> これは、fo:single-page-master-referenceの親である fo:page-sequence-masterを使用して生成されるページシーケンスにとられた位置で特定のpage-masterの使用を指定するために使用します。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T151903Z" creationid="mtan" creationdate="20160127T113703Z">
+        <seg>これは、fo:single-page-master-referenceの親である fo:page-sequence-masterを使用して生成されるページシーケンスにとられた位置で特定のpage-masterの使用を指定するために使用されます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -818,6 +1307,22 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Line number of the first line</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T104223Z" creationid="mtan" creationdate="20160310T104223Z">
+        <seg>最初の行の行番号</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Line thickness of border-style="double"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T145018Z" creationid="mtan" creationdate="20160309T123652Z">
+        <seg>border-style="double"の線の太さ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Line width of printer marks</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T125343Z" creationid="mtan" creationdate="20160120T125343Z">
@@ -854,6 +1359,15 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T155336Z" creationid="mtan" creationdate="20160118T155336Z">
         <seg>相対指定のURIのベースとなる位置</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Makes a Zip archive of just the oXygen framework.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160303T171856Z" creationid="mtan" creationdate="20160303T171856Z">
+        <seg>oXygenフレームワークのZipアーカイブを生成します。
+</seg>
       </tuv>
     </tu>
     <tu>
@@ -948,6 +1462,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that oXygen will require you to restart the editor after installing the add-on framework.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T154105Z" creationid="mtan" creationdate="20160303T171708Z">
+        <seg>oXygen はアドオンフレームワークをインストールした後、エデイタの再起動する必要になります。
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Offset of line continued marks: &lt;length&gt;</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T163626Z" creationid="mtan" creationdate="20160118T163626Z">
@@ -984,6 +1507,22 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T145502Z" creationid="mtan" creationdate="20160120T145502Z">
         <seg>フロートのオフセット配置を指定します（y方向）： &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Open `build.xml` in oXygen.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T122109Z" creationid="mtan" creationdate="20160303T172603Z">
+        <seg> oXygenで `build.xml` を開きます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Orientation of line numbers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T104528Z" creationid="mtan" creationdate="20160310T104528Z">
+        <seg>行番号を回転させます</seg>
       </tuv>
     </tu>
     <tu>
@@ -1028,6 +1567,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Places a white space up to a tab stop position</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T103903Z" creationid="mtan" creationdate="20160310T103903Z">
+        <seg>タブ位置までスペースを空けます</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Please use name="document-title".</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160112T143633Z" creationid="mtan" creationdate="20160112T143633Z">
@@ -1052,10 +1599,26 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Prefix of line number</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T104605Z" creationid="mtan" creationdate="20160310T104605Z">
+        <seg>行番号の前置文字列</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Printing marks, such as a crop mark</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T125532Z" creationid="mtan" creationdate="20160120T125532Z">
         <seg>トンボなどの印刷マーク</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Pull requests and new issues are welcome.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160303T171134Z" creationid="mtan" creationdate="20160303T171134Z">
+        <seg>Pullリクエストや問題がありましたらお知らせください。</seg>
       </tuv>
     </tu>
     <tu>
@@ -1116,10 +1679,68 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Region in a two-page spread.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T103806Z" creationid="mtan" creationdate="20160310T103806Z">
+        <seg>見開きページの領域</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Resets line numbering: auto | none | page | column | force</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T104640Z" creationid="mtan" creationdate="20160310T104640Z">
+        <seg>行番号のリセット: auto | none | page | column | force</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Restart oXygen.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T144656Z" creationid="mtan" creationdate="20160304T114548Z">
+        <seg>oXygenを再起動します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Run Ant.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160303T172031Z" creationid="mtan" creationdate="20160303T172031Z">
+        <seg>Antを実行します。
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Run the default "ANT" transformation scenario.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160307T162417Z" creationid="mtan" creationdate="20160303T172545Z">
+        <seg>デフォルトの「ANT」変換のシナリオを実行します。
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Runs the parser on `${input}`.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T113215Z" creationid="mtan" creationdate="20160303T171949Z">
+        <seg>`${input}`でパーサーを実行します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>See for details.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160125T160725Z" creationid="mtan" creationdate="20160125T160725Z">
         <seg>詳細については、参照して下さい。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>See https://github.com/AntennaHouse/focheck/wiki/focheck</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T150418Z" creationid="mtan" creationdate="20160304T150343Z">
+        <seg>https://github.com/AntennaHouse/focheck/wiki/focheckを参照して下さい。</seg>
       </tuv>
     </tu>
     <tu>
@@ -1198,8 +1819,8 @@
       <tuv lang="EN-US">
         <seg>Spacing behavior between words or characters so that the last line of the paragraph does not have only one word left (one character for CJK)</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160119T145545Z" creationid="mtan" creationdate="20160118T155051Z">
-        <seg>段落の最後の行が１語（CJKのときは１文字）だけにならないようにします </seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T122940Z" creationid="mtan" creationdate="20160118T155051Z">
+        <seg>段落の最後の行が１語（CJKのときは１文字）だけにならないようにします。 </seg>
       </tuv>
     </tu>
     <tu>
@@ -1224,6 +1845,22 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T125110Z" creationid="mtan" creationdate="20160120T125110Z">
         <seg>見開きの背表紙の幅： &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Standalone checking requires Saxon 9 and Jing.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T103223Z" creationid="mtan" creationdate="20160304T154623Z">
+        <seg>Standalone の確認は  Saxon 9 と Jingが必要です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Starting line number: &lt;number&gt; | auto</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T104712Z" creationid="mtan" creationdate="20160310T104712Z">
+        <seg>出力を開始する行番号: &lt;number&gt; | auto</seg>
       </tuv>
     </tu>
     <tu>
@@ -1256,6 +1893,14 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T160824Z" creationid="mtan" creationdate="20160118T160824Z">
         <seg>漢数字の形式</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Summary describing the table.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T105549Z" creationid="mtan" creationdate="20160310T105549Z">
+        <seg>テーブルの要約を記述します。 </seg>
       </tuv>
     </tu>
     <tu>
@@ -1336,6 +1981,30 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151029T120545Z" creationid="mtan" creationdate="20151029T120545Z">
         <seg>シンタックスエラー：auto-restore="&lt;v0/&gt;"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Syntax error: axf:hyphenation-zone="&lt;v0/&gt;"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112415Z" creationid="mtan" creationdate="20160310T112415Z">
+        <seg>シンタックスエラー： axf:hyphenation-zone="&lt;v0/&gt;"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Syntax error: axf:line-number-interval="&lt;v0/&gt;"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112907Z" creationid="mtan" creationdate="20160310T112907Z">
+        <seg>シンタックスエラー： axf:line-number-interval="&lt;v0/&gt;"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Syntax error: axf:line-number-offset="&lt;v0/&gt;"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T113003Z" creationid="mtan" creationdate="20160310T113003Z">
+        <seg>シンタックスエラー： axf:line-number-offset="&lt;v0/&gt;"</seg>
       </tuv>
     </tu>
     <tu>
@@ -2956,6 +3625,30 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Tab alignment at the tab stop position</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T105425Z" creationid="mtan" creationdate="20160310T105425Z">
+        <seg>タブ位置での配置</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Tab stop positions</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T144303Z" creationid="mtan" creationdate="20160309T130158Z">
+        <seg>タブ位置</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Tag name of Tagged PDF</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T105151Z" creationid="mtan" creationdate="20160310T105151Z">
+        <seg>タグ付きPDFのタグ名</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Text alignment of the first line</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T175457Z" creationid="mtan" creationdate="20160118T175457Z">
@@ -2996,6 +3689,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The **focheck** update site URL is https://github.com/AntennaHouse/focheck/raw/master/add-on.xml</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T112022Z" creationid="mtan" creationdate="20160304T112022Z">
+        <seg> **focheck**の最新サイトのURL は https://github.com/AntennaHouse/focheck/raw/master/add-on.xmlです。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The FO processor may report an error or may use 'internal-destination'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160112T141244Z" creationid="mtan" creationdate="20160112T141244Z">
@@ -3004,10 +3705,32 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Relax NG handles structural validation and the
+Schematron handles the additional constraints that cannot be
+expressed in Relax NG.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T101921Z" creationid="mtan" creationdate="20160303T170439Z">
+        <seg>Relax NGは、構造の有効を扱い、SchematronのはRelax NGでは表現できない追加の制約を扱います。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Schematron parses property value
+expressions using an XSLT-based parser generated by the REx
+parser generator plus an XSLT library for reducing the parse tree
+to XSL-FO datatypes.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T152805Z" creationid="mtan" creationdate="20160303T170911Z">
+        <seg>SchematronはRExパーサージエネレーターによって生成されたXSLTベースのパーサとXSL-FOのデータタイプにパースツリーを縮小するために作成されたXSLTライブラリーを使用してプロパティ値を解析します。
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The color-profile is referenced again via the name specified in the "color-profile-name" property.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160126T140657Z" creationid="mtan" creationdate="20160121T151005Z">
-        <seg>color-profileを「color-profile-name」 プロパティで指定された名を経由して、再び参照されています。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T144755Z" creationid="mtan" creationdate="20160121T151005Z">
+        <seg>color-profileは、「color-profile-name」 プロパティで指定された名を経由して、再び参照されます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3060,6 +3783,46 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The fo:bookmark formatting object is used to identify an access point, by name, and to specify where that access point is within the current document or another external document.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T102121Z" creationid="mtan" creationdate="20160212T102121Z">
+        <seg>fo:bookmark フォーマッティングオブジェクは、名でアクセスポイントを識別するために、そのアクセスポイントは、現在文書又は他の外部文書の場所を指定するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:bookmark-title formatting object is used to identify, in human readable form, an access point.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160211T163009Z" creationid="mtan" creationdate="20160211T163009Z">
+        <seg>fo:bookmark-titleフォーマッティングオブジェクは、人間が読み取り可能形式でアクセスポイントを識別するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:bookmark-tree formatting object is used to hold a list of access points within the document such as a table of contents, a list of figures or tables, etc.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T101600Z" creationid="mtan" creationdate="20160212T101600Z">
+        <seg>fo:bookmark-treeフォーマッティングオブジェクは、目次や図又は表のリストなど文書内のアクセスポイントリストを保持するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:change-bar-begin is used to indicate the beginning of a "change region" that is ended by the subsequent fo:change-bar-end whose change-bar-class property value matches that of the change-bar-class property on this fo:change-bar-begin and is at the same nesting level (relative to other fo:change-bar-begin/fo:change-bar-end pairs with the same change-bar-class property value) of this fo:change-bar-begin.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T143910Z" creationid="mtan" creationdate="20160212T115735Z">
+        <seg>fo:change-bar-beginは、そのchange-bar-class プロパティ値このfo:change-bar-beginにそのchange-bar-class プロパティのそれと一致し、このfo:change-bar-beginと同時に入れ子レベルであり（同様のchange-bar-classプロパティ値のある他のfo:change-bar-begin/fo:change-bar-end ペアに対して）、その後の fo:change-bar-endで終了した「change region」の始まりを示すために使用されます。 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:change-bar-end is used to indicate the end of a "change region" that is started by its matching fo:change-bar-begin.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T113621Z" creationid="mtan" creationdate="20160212T113621Z">
+        <seg>fo:change-bar-endは、 一致している fo:change-bar-beginによって開始される「change region」の終わりを示すために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The fo:character flow object represents a character that is mapped to a glyph for presentation.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160128T115937Z" creationid="mtan" creationdate="20160128T115937Z">
@@ -3070,8 +3833,8 @@
       <tuv lang="EN-US">
         <seg>The fo:color-profile formatting object is used to declare an ICC Color Profile for a stylesheet.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160126T140709Z" creationid="mtan" creationdate="20160121T150927Z">
-        <seg> fo:color-profileはスタイルシートの ICC Color Profileを宣言するために使用しています。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T144605Z" creationid="mtan" creationdate="20160121T150927Z">
+        <seg> fo:color-profileはスタイルシートの ICC Color Profileを宣言するために使用されます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3086,8 +3849,8 @@
       <tuv lang="EN-US">
         <seg>The fo:declarations formatting object is used to group global declarations for a stylesheet.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160126T140532Z" creationid="mtan" creationdate="20160121T150036Z">
-        <seg>fo:declarationsはスタイルシートのグローバルグループの宣言に使用します。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T144528Z" creationid="mtan" creationdate="20160121T150036Z">
+        <seg>fo:declarationsはスタイルシートのグローバルグループの宣言に使用されます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3096,6 +3859,14 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160128T121259Z" creationid="mtan" creationdate="20160128T121259Z">
         <seg>fo:external-graphic フローオブジェクトは、グラフィックスデータが fo:element ツリーの外部にあるグラフのために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:float formatting object is typically used either to cause an image to be positioned in a separate area at the beginning of a page, or to cause an image to be positioned to one side, with normal content flowing around and along-side the image.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T105614Z" creationid="mtan" creationdate="20160212T105614Z">
+        <seg>fo:floatフォーマッティングオブジェクは、一般的には、画像がページの初めに別々の領域に位置されるために、又は画像 を画像の側の内容の周流するとに沿って、片側に配置されるかのいずれかを使用します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3156,6 +3927,54 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The fo:footnote is typically used to produce footnote-citations within the region-body of a page and the corresponding footnote in a separate area nearer the after-edge of the page.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T110942Z" creationid="mtan" creationdate="20160212T110942Z">
+        <seg>fo:footnoteは、一般的には、ページのregion-bodyと ページのafter-edgeに近い別々の領域内の対応する脚注内の footnote-citations を生成するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:footnote-body is used to generate the footnote content.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T111054Z" creationid="mtan" creationdate="20160212T111054Z">
+        <seg>fo:footnote-bodyは、脚注内容を生成するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:index-key-reference formatting object is used to generate a set of cited page items for all the occurrences of the specified index-key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160210T164207Z" creationid="mtan" creationdate="20160210T164207Z">
+        <seg>fo:index-key-reference フォーマッティングオブジェクトは、指定された index-keyの全ての出現のために引用したページ項目のセットを生成するために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:index-page-citation-list formatting object is used to group together the sets of cited page items generated by its fo:index-key-reference children.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160210T164726Z" creationid="mtan" creationdate="20160210T164726Z">
+        <seg>fo:index-page-citation-list フォーマッティングオブジェクトは、グループと共にその fo:index-key-reference子によって生成されたページ項目のセットを使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:index-page-citation-list-separator formatting object specifies the formatting objects used to separate singleton page numbers or page number ranges in the generated list of page numbers.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160211T161627Z" creationid="mtan" creationdate="20160211T161627Z">
+        <seg>fo:index-page-citation-list-separatorフォーマッティングオブジェクは、ページ番号の生成されたリストで、単生児ページ番号又はページ番号範囲を分離するために使用し、フォーマッティングオブジェクを指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:index-page-citation-range-separator formatting object specifies the formatting objects used to separate two page numbers forming a range in the generated list of page numbers.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T100551Z" creationid="mtan" creationdate="20160212T100312Z">
+        <seg>fo:index-page-citation-range-separator フォーマッティングオブジェクは、ページ番号の生成されたリスト内の範囲を形成する2つのページ番号を分離するために使用されるフォーマットのオブジェクトを指定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The fo:index-page-number-prefix formatting object specifies a static prefix for the cited page items created by fo:index-key-reference.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160129T120614Z" creationid="mtan" creationdate="20160129T120614Z">
@@ -3174,8 +3993,16 @@
       <tuv lang="EN-US">
         <seg>The fo:index-range-begin formatting object is used to indicate the beginning of an "indexed range" associated with an index key.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160129T125939Z" creationid="mtan" creationdate="20160129T125939Z">
-        <seg>fo:index-range-begin フォーマッティングオブジェクトは、索引きーに関連付けられた「indexed range」の開始を示すために使用されます。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160210T162246Z" creationid="mtan" creationdate="20160129T125939Z">
+        <seg>fo:index-range-begin フォーマッティングオブジェクトは、索引キーに関連付けられた「indexed range」の開始を示すために使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:index-range-end is used to indicate the end of an "indexed range" that is started by its matching fo:index-range-begin.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160210T163548Z" creationid="mtan" creationdate="20160210T163548Z">
+        <seg>fo:index-range-end は、一致しているfo:index-range-beginによって開始され、「indexed range」の終了を示すために使用されます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3260,6 +4087,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The fo:marker is used in conjunction with fo:retrieve-marker or fo:retrieve-table-marker to produce running headers or footers and dynamic table headers or footers.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T113036Z" creationid="mtan" creationdate="20160212T113036Z">
+        <seg>fo:marker は、欄外見出し又はフッターと動的表見出しの見出しやフッタを生成するためのfo:retrieve-marker 又は fo:retrieve-table-marker と組み合わせて使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The fo:multi-case is used to contain (within an fo:multi-switch) each alternative sub-tree of formatting objects among which the parent fo:multi-switch will choose one to show and will hide the rest.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160129T123753Z" creationid="mtan" creationdate="20160129T123753Z">
@@ -3326,16 +4161,16 @@
       <tuv lang="EN-US">
         <seg>The fo:page-sequence formatting object is used to specify how to create a (sub-)sequence of pages within a document; for example, a chapter of a report.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160126T141553Z" creationid="mtan" creationdate="20160121T151305Z">
-        <seg>fo:page-sequenceは 文書内の(sub-)sequence ページを作成する方法を指定するために使用しています。例えば 、報告の章。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T144841Z" creationid="mtan" creationdate="20160121T151305Z">
+        <seg>fo:page-sequenceは 文書内の(sub-)sequence ページを作成する方法を指定するために使用されます。例えば 、報告の章。</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>The fo:page-sequence-master is used to specify the constraints on and the order in which a given set of page-masters will be used in generating a sequence of pages.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160127T112806Z" creationid="mtan" creationdate="20160127T112806Z">
-        <seg>fo:page-sequence-masterは制約やpage-mastersの取られたセットが、ページシーケンスを生成するのに使用される順序を指定するために使用します。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T151721Z" creationid="mtan" creationdate="20160127T112806Z">
+        <seg>fo:page-sequence-masterは制約やpage-mastersの取られたセットが、ページシーケンスを生成するのに使用される順序を指定するために使用されます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3350,8 +4185,8 @@
       <tuv lang="EN-US">
         <seg>The fo:page-sequence-wrapper is used to specify inherited properties for the fo:page-sequence objects it wraps; it has no additional formatting semantics.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160126T151150Z" creationid="mtan" creationdate="20160125T151818Z">
-        <seg>fo:page-sequenceの要素を回り込むのために継承されたプロパティを指定すると fo:page-sequence-wrapper を使用しています。追加の意味がない。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T144510Z" creationid="mtan" creationdate="20160125T151818Z">
+        <seg>fo:page-sequenceの要素を回り込むのために継承されたプロパティを指定すると fo:page-sequence-wrapper を使用しています。追加の組版意味がありません。。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3368,6 +4203,22 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160126T152400Z" creationid="mtan" creationdate="20160126T152400Z">
         <seg>fo:repeatable-page-master-alternativesは最も複雑な sub-sequence-specifierです。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:retrieve-marker is used in conjunction with fo:marker to produce running headers or footers.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T111753Z" creationid="mtan" creationdate="20160212T111555Z">
+        <seg>fo:retrieve-marker は、欄外見出し又はフッターを生成するためのfo:markerと組み合わせて使用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fo:retrieve-table-marker is used in conjunction with fo:marker to produce table-headers and table-footers whose content can change over different pages, different regions or different columns.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T114331Z" creationid="mtan" creationdate="20160212T114331Z">
+        <seg>fo:retrieve-table-markerは、その内容が異なるページ、異なる領域又は異なる段で変更することができて、 table-headers と table-footersを生成するためにfo:marker と組み合わせて使用されます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3509,6 +4360,14 @@ scale-factorを得るために使用されます。</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The index range is ended by a corresponding fo:index-range-end.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160210T163617Z" creationid="mtan" creationdate="20160210T162528Z">
+        <seg>索引範囲は、対応する fo:index-range-endによって終われます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The layout of these pages comes from the fo:page-sequence-master or page-master referenced by the master-reference trait on the fo:page-sequence.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160126T143720Z" creationid="mtan" creationdate="20160125T161537Z">
@@ -3565,10 +4424,26 @@ scale-factorを得るために使用されます。</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The resulting cited page items are sorted and collated together.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160211T155541Z" creationid="mtan" creationdate="20160211T155541Z">
+        <seg>効果として引用されたページ項目を区分して、一緒に照合されています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The sequence of areas returned by each of the flow-object children of the fo:page-sequence are made descendants of the generated pages as described below.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160126T144630Z" creationid="mtan" creationdate="20160126T144630Z">
-        <seg>fo:page-sequenceのそれぞれの flow-object 子によって返される領域のシーケンス が生成されたページの子孫を作られて、以下のように説明します。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T145323Z" creationid="mtan" creationdate="20160126T144630Z">
+        <seg>fo:page-sequenceのそれぞれの flow-object 子によって返される領域のシーケンス が生成されたページの子孫を作られて、以下のように説明されています。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The ultimate effect of the fo:index-page-citation-list is to generate a formatted list of page numbers and ranges.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160211T160356Z" creationid="mtan" creationdate="20160211T160356Z">
+        <seg>fo:index-page-citation-list の最大効果は、ページ番号と範囲の組版リストを生成することです。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3585,6 +4460,14 @@ scale-factorを得るために使用されます。</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160119T154337Z" creationid="mtan" creationdate="20160118T182119Z">
         <seg>文字の間を詰めの対象として追い込みの処理方法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>There are two ways to also check out **stf**:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T102815Z" creationid="mtan" creationdate="20160304T143456Z">
+        <seg> **stf**を確認するのは、二つの方法があります。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3615,8 +4498,8 @@ scale-factorを得るために使用されます。</seg>
       <tuv lang="EN-US">
         <seg>This is the top node of the formatting object tree.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160121T145552Z" creationid="mtan" creationdate="20160121T142926Z">
-        <seg>これは、formatting objectツリーのトップノードです。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160211T154447Z" creationid="mtan" creationdate="20160121T142926Z">
+        <seg>これは、フォーマッティングオブジェクトツリーのトップノードです。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3709,6 +4592,14 @@ scale-factorを得るために使用されます。</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Token should be 'none'.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112318Z" creationid="mtan" creationdate="20160310T112318Z">
+        <seg>トークンは「none」でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Token should be 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', or 'paginate'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T124442Z" creationid="mtan" creationdate="20151028T173546Z">
@@ -3733,10 +4624,26 @@ scale-factorを得るために使用されます。</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Treatment for literal tab characters</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T145846Z" creationid="mtan" creationdate="20160309T130345Z">
+        <seg>リテラルタブ文字の扱い</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Typical conditions include, testing whether the page which is generated using the alternative is the first or last page in a page-sequence or is the page blank.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160127T114434Z" creationid="mtan" creationdate="20160127T114434Z">
-        <seg>特異条件は代替を使用して生成されたページは、page-sequenceの最初又は最後のページであるか、ページの空白であうかどうか含みます。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T152221Z" creationid="mtan" creationdate="20160127T114434Z">
+        <seg>特異条件は代替を使用して生成されたページは、page-sequenceの最初又は最後のページであるか、ページの空白であるかどうか含みます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Typical examples include:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T111222Z" creationid="mtan" creationdate="20160212T111222Z">
+        <seg>一般的な例としては：</seg>
       </tuv>
     </tu>
     <tu>
@@ -3745,6 +4652,14 @@ scale-factorを得るために使用されます。</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160119T152226Z" creationid="mtan" creationdate="20160118T165806Z">
         <seg>Unicode の文字列の正規化処理</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Use the `build-focheck.xml` Ant build file and the `validate.single` target to validate a file using both Relax NG and Schematron.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T155644Z" creationid="mtan" creationdate="20160304T151245Z">
+        <seg>Relax NGとSchematronの両方を使用してファイルを有効するために、Antのビルドファイルの `build-focheck.xml` と `validate.single` のターゲットを使用します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3769,6 +4684,14 @@ scale-factorを得るために使用されます。</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T123433Z" creationid="mtan" creationdate="20160120T123158Z">
         <seg>垂直方向のフロート配置 （writing-modeがverticalのときは水平方向 ）： none | before | after | top | bottom | left | right | center | inside | outside</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Wave form for border-style="wave"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T145100Z" creationid="mtan" creationdate="20160309T124108Z">
+        <seg>border-style="wave"の形状</seg>
       </tuv>
     </tu>
     <tu>
@@ -3809,6 +4732,14 @@ scale-factorを得るために使用されます。</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T150027Z" creationid="mtan" creationdate="20160120T130903Z">
         <seg>塗り足しの領域の上の幅: &lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When you open an XSL-FO document – where the document element is `root` in the XSL-FO namespace – oXygen will automatically validate the document against both the Relax NG schema and the Schematron grammar.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T155343Z" creationid="mtan" creationdate="20160304T145211Z">
+        <seg>文書要素がXSL-FOの名前空間内の `root` であるXSL-FO文書を開くと、oXygenは自動的にRelax NGスキーマとSchematron文法の両方に対して文書を有効にします。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3905,6 +4836,14 @@ scale-factorを得るために使用されます。</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T130108Z" creationid="mtan" creationdate="20160120T130108Z">
         <seg>しおりの初期状態で、下位の階層を表示するかどうか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to display the lower hierarchy of bookmark items or not: true | false</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T104927Z" creationid="mtan" creationdate="20160310T104927Z">
+        <seg>しおりの初期状態で、下位の階層を表示するかどうか: true | false</seg>
       </tuv>
     </tu>
     <tu>
@@ -4021,10 +4960,18 @@ scale-factorを得るために使用されます。</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Whether to suppress the block at the beginning of a page: true | false</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T105343Z" creationid="mtan" creationdate="20160310T105343Z">
+        <seg>ページ先頭のブロックを削除するかどうか: true | false</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Which of the alternative page-masters is used at any point in the sequence depends on the evaluation of a condition on the use of the alternative.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160126T153433Z" creationid="mtan" creationdate="20160126T153433Z">
-        <seg>代替page-mastersのどちらの順序で任意の位置で使用していますが、代替の使用に条件の評価に依存します。</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160212T152030Z" creationid="mtan" creationdate="20160126T153433Z">
+        <seg>代替page-mastersのどちらの順序で任意の位置で使用されていますが、代替の使用に条件の評価に依存します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -4097,6 +5044,31 @@ scale-factorを得るために使用されます。</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T082800Z" creationid="mtan" creationdate="20151103T082800Z">
         <seg>XSLTの名前空間を使用する。&lt;/x20&gt; &lt;x21&gt;スキーマエラー： &lt;include&gt;のために空hrefの属性がある。&lt;/x21&gt; &lt;x22&gt;エラー: Schematron &lt;include&gt;には不可能なURL がある&lt;/x22&gt; &lt;x23&gt;エラー: 参照したファイルが含まれて、開けない : &lt;/x23&gt; &lt;x24/&gt; &lt;x25&gt;スキーマエラー：全体のスキーマではなく、フラグメントを含む &lt;include&gt; を使用する。&lt;/x25&gt; &lt;x26&gt;スキーマエラー： 'xslt2'の検索言語結合を使用している場合はXSDスキーマのみ読み込みできる。&lt;/x26&gt; &lt;x27&gt;スキーマエラー：ISO Schematron の名前空間には &lt;import-schema&gt;の要素は無効です。 XSLTの 名前空間を使用する。&lt;/x27&gt; &lt;x28&gt;注意: 変数は、"xpath" 検索言語結合を使用すべきではない。&lt;/x28&gt; &lt;x29&gt;注意: 変数は、"xpath" 検索言語結合を使用すべきではない。&lt;/x29&gt; &lt;x30&gt;マークアップエラー: &lt;ns&gt;にはＵＲＩの属性がない&lt;/x30&gt; &lt;x31&gt;マークアップエラー: &lt;ns&gt;にはprefixの属性がない&lt;/x31&gt; &lt;x32&gt;スキーマ実行 エラー: このスキーマは抽象的なパターンを持って、まだすでに前加工されることになっている。&lt;/x32&gt; &lt;x33&gt;マークアップエラー: &lt;phase&gt;にはidの属性がない&lt;/x33&gt; &lt;x34&gt;マークアップエラー: &lt;rule&gt;にはcontextの要素がない&lt;/x34&gt; &lt;x35&gt;マークアップエラー: 抽象的な &lt;rule&gt;にはid属性がない。&lt;/x35&gt; &lt;x36&gt;マークアップエラー: (2) 抽象的な &lt;rule&gt;にはcontext属性がない。&lt;/x36&gt; &lt;x37&gt;マークアップエラー: 抽象的な &lt;rule&gt;にはcontext属性がない。&lt;/x37&gt; &lt;x38&gt;マークアップエラー: &lt;value-of&gt;には selectの属性がない&lt;/x38&gt; &lt;x39&gt;注意: &lt;/x39&gt; &lt;x40&gt; 子要素が含まれなくてはならない&lt;/x40&gt; &lt;x41&gt;参照エラー: 診断は "&lt;/x41&gt; &lt;x42&gt;" 参照されているが宣言されていない。&lt;/x42&gt; &lt;x43&gt;注意: Schematron規則で"xsl"以外の接頭辞 XSLT 名前空間を使用することは、このプロセサーで サーポトしていない。&lt;/x43&gt; &lt;x44/&gt; &lt;x45&gt;エラー: ISO Schematron 名前空間に不明な要素がある: 綴り字と大文字使用を確認する&lt;/x45&gt; &lt;x46/&gt; &lt;x47&gt;注意: 不明な要素&lt;/x47&gt; &lt;x48/&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>You can get Jing from https://github.com/relaxng/jing-trang/releases.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160304T155238Z" creationid="mtan" creationdate="20160304T155238Z">
+        <seg>Jing は https://github.com/relaxng/jing-trang/releasesからダウンロードできます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>You can use the Relax NG schema in the `schema` folder and the Schematron files in the `schematron` folder outside of oXygen and Ant.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T121815Z" creationid="mtan" creationdate="20160304T152710Z">
+        <seg>oXygenとantを使用せずに、 `schema` のフォルダにRelax NGのスキーマと `schematron` のフォルダにSchematronファイルを使用することができます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>You can, of course,
+also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside of oXygen, either together or separately.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160309T151405Z" creationid="mtan" creationdate="20160303T170023Z">
+        <seg>もちろん、 **focheck** Relax NG （または、W3C XSDと等しい） と oXygen以外のSchematronを一緒に又は別々に使用することもできます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -4245,6 +5217,14 @@ scale-factorを得るために使用されます。</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>alternate text of the image</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T104025Z" creationid="mtan" creationdate="20160310T104025Z">
+        <seg>画像の代替テキスト</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>auto-restore="" should be 'true' or 'false'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T130811Z" creationid="mtan" creationdate="20151029T120535Z">
@@ -4265,6 +5245,78 @@ scale-factorを得るために使用されます。</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T130741Z" creationid="mtan" creationdate="20151029T120514Z">
         <seg>auto-restore="&lt;v0/&gt;" のトークンは「true」又は「false」でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>axf:hyphenation-zone="" should be EnumerationToken or Length.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112353Z" creationid="mtan" creationdate="20160310T112353Z">
+        <seg>axf:hyphenation-zone="" は 列挙トークン又は長さでなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>axf:hyphenation-zone="&lt;v0/&gt;" enumeration token is '&lt;v1/&gt;'.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112814Z" creationid="mtan" creationdate="20160310T112238Z">
+        <seg>axf:hyphenation-zone="&lt;v0/&gt;" の列挙トークンは「&lt;v1/&gt;」です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>axf:hyphenation-zone="&lt;v0/&gt;" should be EnumerationToken or Length.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T110709Z" creationid="mtan" creationdate="20160310T110709Z">
+        <seg>axf:hyphenation-zone="&lt;v0/&gt;"は 列挙トークン又は長さでなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>axf:hyphenation-zone="&lt;v0/&gt;" should be a positive length.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112450Z" creationid="mtan" creationdate="20160310T112450Z">
+        <seg>axf:hyphenation-zone="&lt;v0/&gt;" は正の長さでなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>axf:line-number-interval="" should be EnumerationToken or Number.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112848Z" creationid="mtan" creationdate="20160310T112848Z">
+        <seg>axf:line-number-interval="" は 列挙トークン又は数でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>axf:line-number-interval="&lt;v0/&gt;" enumeration token is '&lt;v1/&gt;'.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112803Z" creationid="mtan" creationdate="20160310T112803Z">
+        <seg>axf:line-number-interval="&lt;v0/&gt;"の列挙トークンは「&lt;v1/&gt;」です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>axf:line-number-interval="&lt;v0/&gt;" should be EnumerationToken or Number.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112727Z" creationid="mtan" creationdate="20160310T112727Z">
+        <seg>axf:line-number-interval="&lt;v0/&gt;"は 列挙トークン又は数でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>axf:line-number-offset="" should be Length.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112941Z" creationid="mtan" creationdate="20160310T112941Z">
+        <seg>axf:line-number-offset=""は長さでなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>axf:line-number-offset="&lt;v0/&gt;" should be Length.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T112921Z" creationid="mtan" creationdate="20160310T112921Z">
+        <seg>axf:line-number-offset="&lt;v0/&gt;" は長さでなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -6237,6 +7289,22 @@ scale-factorを得るために使用されます。</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>fo:list-item-body with no 'start-indent' will use default 'start-indent="0pt"'.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T114923Z" creationid="mtan" creationdate="20160310T114923Z">
+        <seg>「start-indent」のない fo:list-item-body はデフォルト「start-indent="0pt"」を使用します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>fo:list-item-label with no 'end-indent' will use default 'end-indent="0pt"'.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T114718Z" creationid="mtan" creationdate="20160310T114718Z">
+        <seg>「end-indent」のない fo:list-item-label　は  デフォルト 「end-indent="0pt"」を使用します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>font-family="" should be '[[ &lt;family-name&gt; | &lt;generic-family&gt; ],]* [&lt;family-name&gt; | &lt;generic-family&gt;] | inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T150814Z" creationid="mtan" creationdate="20151029T161015Z">
@@ -7401,6 +8469,14 @@ scale-factorを得るために使用されます。</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160112T142343Z" creationid="mtan" creationdate="20160112T142343Z">
         <seg>master-reference="&lt;v0/&gt;" は文書内にある「master-name」を参照する必要があります。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>math and semantics common to both Content and Presentation</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T114156Z" creationid="mtan" creationdate="20160310T114156Z">
+        <seg> Content と Presentationの両方に共通数学と意味論</seg>
       </tuv>
     </tu>
     <tu>
