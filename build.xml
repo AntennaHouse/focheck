@@ -351,12 +351,17 @@ AFTER making a release on GitHub:
 <!-- Translation targets. -->
 
 <target name="translate" depends="rng">
+  <!-- Preserve modification dates for ease of comparison with
+       'reference' OmegaT project where original translations are
+       done. -->
   <copy todir="${focheck.basedir.converted}/omegat/source"
+	preservelastmodified="true"
 	force="${force}">
     <fileset dir="${focheck.basedir.converted}/schematron"
 	     includes="*.sch" />
   </copy>
   <copy todir="${focheck.basedir.converted}/omegat/source"
+	preservelastmodified="true"
 	force="${force}">
     <fileset dir="${focheck.basedir.converted}/schema/rng"
 	     includes="*.rng" />
@@ -368,11 +373,13 @@ AFTER making a release on GitHub:
     <!--<arg value="- -quiet" />-->
   </java>
   <copy todir="${focheck.basedir.converted}/schematron-ja"
+	preservelastmodified="true"
 	force="${force}">
     <fileset dir="${focheck.basedir.converted}/omegat/target"
 	     includes="*.sch" />
   </copy>
   <copy todir="${focheck.basedir.converted}/schema-ja/rng"
+	preservelastmodified="true"
 	force="${force}">
     <fileset dir="${focheck.basedir.converted}/omegat/target"
 	     includes="*.rng" />
