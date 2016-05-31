@@ -109,7 +109,9 @@ axf_form =
 }
 
 axf_form.attlist =
-  attribute axf:field-submit-method { 'get' | 'post' }?
+  axf_field-submit-coordinates?,
+  axf_field-submit-method?,
+  external-destination?
 
 axf_form.model =
   ( block.fo.list )*
@@ -161,6 +163,11 @@ axf_spread-page-master =
     reference-orientation,
     attribute right-page-master-reference { xsd:NCName },
     writing-mode,
+    background-attachment,
+    background-image,
+    background-position-horizontal,
+    background-position-vertical,
+    background-repeat,
     axf_spread-region+
 }
 
@@ -631,6 +638,28 @@ axf_crop-offset-right =
 axf_destination-type =
     ## The way a link opens in a link destination
     attribute axf:destination-type { text }?
+
+# @axf:field-submit-coordinates
+# @field-submit-coordinates
+#
+# https://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.field-submit-coordinates
+axf_field-submit-coordinates =
+  (
+  ## Whether to send out the coordinates of the mouse when submitting a form field: false | true
+  attribute axf:field-submit-coordinates { 'false' | 'true' } |
+  ## Whether to send out the coordinates of the mouse when submitting a form field: false | true
+  attribute field-submit-coordinates { 'false' | 'true' } )
+
+# @axf:field-submit-method
+# @field-submit-method
+#
+# https://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.field-submit-method
+axf_field-submit-method =
+  (
+  ## The way to send the information when submitting a form field: get | post
+  attribute axf:field-submit-method { 'get' | 'post' } |
+  ## The way to send the information when submitting a form field: get | post
+  attribute field-submit-method { 'get' | 'post' } )
 
 # @axf:float
 #
