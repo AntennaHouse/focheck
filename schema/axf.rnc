@@ -218,6 +218,11 @@ inline.fo.list |=
 # Extensions to FO attlists
 #
 
+# FOs that are not descendants of fo:flow
+
+fo_root.attlist &=
+    xml_id
+
 fo_page-sequence.attlist &=
     axf_background-color,
     axf_background-image,
@@ -235,7 +240,11 @@ fo_page-sequence.attlist &=
     background-image,
     background-position-horizontal,
     background-position-vertical,
-    background-repeat
+    background-repeat,
+    xml_id
+
+fo_page-sequence-wrapper.attlist &=
+    xml_id
 
 fo_simple-page-master.attlist &=
     axf_background-color,
@@ -270,9 +279,21 @@ fo_simple-page-master.attlist &=
     background-position-vertical,
     background-repeat
 
+fo_flow.attlist &=
+    xml_id
+
+fo_static-content.attlist &=
+    xml_id
+
+# FOs in flow listed in alphabetic order
+
 fo_basic-link.attlist &=
     axf_action-type,
-    text-decoration
+    text-decoration,
+    xml_id
+
+fo_bidi-override.attlist &=
+    xml_id
 
 fo_block.attlist &=
     axf_destination-type,
@@ -285,6 +306,7 @@ fo_block.attlist &=
     min-width,
     text-decoration,
     width,
+    xml_id,
     axf.block.attlist
 
 fo_block-container.attlist &=
@@ -294,7 +316,14 @@ fo_block-container.attlist &=
     axf_suppress-if-first-on-page,
     axf.block.attlist,
     column-count,
-    role
+    role,
+    xml_id
+
+fo_character.attlist &=
+    xml_id
+
+fo_external-graphic.attlist &=
+    xml_id
 
 fo_float.attlist &=
     axf_float,
@@ -312,7 +341,8 @@ fo_float.attlist &=
     axf_float-float-margin-x,
     axf_float-float-margin-y,
     axf_float-offset-x,
-    axf_float-offset-y
+    axf_float-offset-y,
+    xml_id
 
 fo_footnote.attlist &=
     space-before,
@@ -320,31 +350,100 @@ fo_footnote.attlist &=
     axf_footnote-stacking,
     axf_footnote-position,
     axf_footnote-keep,
-    axf_footnote-max-height
+    axf_footnote-max-height,
+    xml_id
+
+fo_footnote-body.attlist &=
+    xml_id
+
+fo_index-range-begin.attlist &=
+    xml_id
+
+fo_inline.attlist &=
+    xml_id
+
+fo_inline-container.attlist &=
+    xml_id
 
 fo_instream-foreign-object.attlist &=
-    axf_alttext
+    axf_alttext,
+    xml_id
+
+fo_leader.attlist &=
+    xml_id
 
 fo_list-block.attlist &=
-    axf.block.attlist
+    axf.block.attlist,
+    xml_id
+
+fo_list-item.attlist &=
+    xml_id
+
+fo_list-item-body.attlist &=
+    xml_id
+
+fo_list-item-label.attlist &=
+    xml_id
+
+fo_multi-case.attlist &=
+    xml_id
+
+fo_multi-property-set.attlist &=
+    xml_id
+
+fo_multi-switch.attlist &=
+    xml_id
+
+fo_multi-toggle.attlist &=
+    xml_id
+
+fo_page-number.attlist &=
+    xml_id
+
+fo_page-number-citation.attlist &=
+    xml_id
+
+fo_page-number-citation-last.attlist &=
+    xml_id
+
+fo_scaling-value-citation.attlist &=
+    xml_id
 
 fo_table.attlist &=
-    axf.block.attlist
+    axf.block.attlist,
+    xml_id
 
 fo_table-and-caption.attlist &=
+    axf_table-summary,
+    xml_id,
     axf.block.attlist
 
-fo_table.attlist &=
-    axf_table-summary
+fo_table-caption.attlist &=
+    xml_id
 
 fo_table-cell.attlist &=
-    axf_repeat-cell-content-at-break
+    axf_repeat-cell-content-at-break,
+    xml_id
 
 fo_table-column.attlist &=
-    id
+    id,
+    xml_id
+
+fo_table-body.attlist &=
+    xml_id
+
+fo_table-footer.attlist &=
+    xml_id
+
+fo_table-header.attlist &=
+    xml_id
+
+fo_table-row.attlist &=
+    xml_id
 
 fo_wrapper.attlist &=
-    text-decoration
+    text-decoration,
+    xml_id
 
 #
 # Extensions to property groups
@@ -854,3 +953,10 @@ axf_tab-align =
 axf_table-summary =
     ## Summary describing the table.  Included in Tagged PDF output.
     attribute axf:table-summary { text }?
+
+# @xml:id
+#
+# https://www.w3.org/TR/xml-id/
+xml_id =
+    ## <id>
+    attribute xml:id { xsd:ID }?
