@@ -26,7 +26,7 @@ Pull requests and new issues are welcome.
 
 ## Installing
 
-* **focheck** is bundled with oXgen 17.1.
+* **focheck** 0.3.1 is bundled with oXgen 17.1 and 18.0.
 * If you want to use **focheck** with an older oXygen version or update from the **focheck** version in oXygen, then you can install **focheck** as an add-on oXygen framework.
 * Alternatively, you can download a static copy of the oXygen framework from here.
 * If you want to easily keep up-to-date with changes, then you can clone this repository and 'pull' the latest version whenever you want.
@@ -152,7 +152,7 @@ Pullリクエストや問題がありましたらお知らせください。
 ## インストール
 
 
-* **focheck**は oXgen 17.1とバンドルされています。
+* **focheck** 0.3.1は oXgen 17.1とバンドルされています。
 * oXygenの古い版やoXygenでの **focheck** からアップデートで **focheck** を使用する場合、oXygenのアドオンフレームワークとして **focheck**  をインストールすることができます。
 * 代わりに、ここからoXygen フレームワークの静的なコピーをダウンロードすることができます。
 * 最新の変更を続けたい場合、このリポジトリをクローンして、いつでも好きな時に最新版を「pull」することができます。
