@@ -24,6 +24,7 @@ namespace local = ""
 # MathML 3.0
 include "mathml3.rnc" {
 
-anyElement =  element (* - (m:* | axf:* | fo:* | svg:*)) {(attribute * {text}|text| anyElement)*}
+anyElement =  element (* - (m:* | axf:* | fo:* | svg:*))
+                 {(attribute * {text}|text| anyElement)*}
 
 }

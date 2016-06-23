@@ -23,6 +23,7 @@ namespace local = ""
 
 # MathML 3.0 schema with Antenna House overrides.
 math = external "axf-mathml3-override.rnc"
+# SVG 1.1 schema with Antenna House overrides.
 svg = external "axf-svg11-override.rnc"
 
 include "axf.rnc" {
@@ -32,7 +33,10 @@ include "axf.rnc" {
 # Allow MathML m:math and svg:svg
 non-xsl =
   ( attribute * - ( local:* | axf:* | xml:* ) { text }*,
-    ( ( element * - ( local:* | fo:* | axf:* | m:* | svg:* ) { attribute * - (id | ref-id | internal-destination ) { text }*, anything }* ) | math | svg) )
+  ( ( element * - ( local:* | fo:* | axf:* | m:* | svg:* )
+      { attribute * - (id | ref-id | internal-destination ) { text }*,
+      anything }* ) |
+     math | svg) )
 
 # For fo:instream-foreign-object
 anything =
