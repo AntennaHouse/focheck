@@ -30,7 +30,7 @@
      	 (local-file (file-relative-name
 		      temp-file
 		      (file-name-directory buffer-file-name))))
-    (list "java" (list "-jar" "C:/saxon/saxon9he.jar" local-file "C:/projects/oxygen/focheck/build/schematron.xsl"))))
+    (list "java" (list "-jar" "E:/saxon/saxon9he.jar" "-l:on" local-file "E:/projects/oxygen/focheck/build/schematron.xsl"))))
 
 (add-to-list 'flymake-allowed-file-name-masks
       '(".+\\.fo$"
@@ -50,5 +50,8 @@
   (setq imenu-create-index-function 'xsl-imenu-create-index-function)
   (setq imenu-extract-index-name-function 'xsl-imenu-create-index-function)
   (modify-syntax-entry ?' "."))
+
+
+(provide 'fo-mode)
 
 ;;; focheck.el ends here
