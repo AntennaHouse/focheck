@@ -157,6 +157,16 @@ axf_footnote-number-citation =
 axf_spread-page-master =
   ## A two-page spread.
   element axf:spread-page-master {
+    axf_background-color,
+    axf_background-content-height,
+    axf_background-content-type,
+    axf_background-content-width,
+    axf_background-image,
+    axf_background-position-horizontal,
+    axf_background-position-vertical,
+    axf_background-repeat,
+    axf_background-scaling,
+    axf_bleed,
     common-margin-properties-block,
     attribute left-page-master-reference { xsd:NCName },
     master-name,
@@ -285,6 +295,9 @@ fo_simple-page-master.attlist &=
     background-position-horizontal,
     background-position-vertical,
     background-repeat
+
+fo_region-body.attlist &=
+    axf_footnote-position
 
 fo_flow.attlist &=
     xml_id
@@ -792,7 +805,7 @@ axf_footnote-stacking =
 # http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.footnote-position
 axf_footnote-position =
     ## Location to layout the footnote.
-    attribute axf:footnote-position { 'page' | 'start' | 'end' | 'inside' | 'outside' | 'column' | 'start-column' | 'end-column' | 'inside-column' | 'outside-column' }?
+    attribute axf:footnote-position { 'page' | 'odd-page' | 'even-page' | 'start' | 'end' | 'inside' | 'outside' | 'column' | 'start-column' | 'end-column' | 'inside-column' | 'outside-column' }?
 
 # @axf:footnote-keep
 #
