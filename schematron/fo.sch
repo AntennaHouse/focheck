@@ -22,8 +22,9 @@
 
   <!-- FOs -->
 
-  <rule context="fo:basic-link">
+  <rule context="fo:basic-link | fo:bookmark">
     <!-- http://www.w3.org/TR/xsl/#fo_basic-link -->
+    <!-- https://www.w3.org/TR/xsl11/#fo_bookmark -->
     <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning">An '<value-of select="local-name()" />' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</report>
   </rule>
 
@@ -48,7 +49,7 @@
   </rule>
 
   <rule context="fo:list-item-body[empty(@start-indent)]">
-    <report test="true()" id="list-item-body-start-indent" role="Warning" sqf:fix="list-item-body-start-indent-fix">fo:list-item-body with no 'start-indent' will use default 'start-indent="0pt"'.</report>
+    <report test="true()" id="list-item-body-start-indent" role="Warning" sqf:fix="list-item-body-start-indent-fix">fo:list-item-body with no 'start-indent' will use inherited 'start-indent' value.</report>
     <sqf:fix id="list-item-body-start-indent-fix">
       <sqf:description>
         <sqf:title>Add 'start-indent="body-start()"'</sqf:title>
@@ -58,7 +59,7 @@
   </rule>
 
   <rule context="fo:list-item-label[empty(@end-indent)]">
-    <report test="true()" id="list-item-label-end-indent" role="Warning" sqf:fix="list-item-label-end-indent-fix">fo:list-item-label with no 'end-indent' will use default 'end-indent="0pt"'.</report>
+    <report test="true()" id="list-item-label-end-indent" role="Warning" sqf:fix="list-item-label-end-indent-fix">fo:list-item-label with no 'end-indent' will use inherited 'end-indent' value.</report>
     <sqf:fix id="list-item-label-end-indent-fix">
       <sqf:description>
         <sqf:title>Add 'end-indent="label-end()"'</sqf:title>
