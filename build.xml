@@ -225,6 +225,7 @@ AFTER making a release on GitHub:
 		  includes="${rex-generated-parser.xsl}, parser-runner.xsl" />
 	<srcfiles dir= "${iso.schematron.dir}"
 		  includes="*.xsl" />
+	<srcfiles file="${etc.dir}/check.sch" />
       </uptodate>
       <isfalse value="${force}" />
     </and>
