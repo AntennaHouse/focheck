@@ -253,6 +253,8 @@ fo_page-sequence.attlist &=
     axf_line-number-prefix,
     axf_line-number-reset,
     axf_line-number-start,
+    axf_output-volume-break,
+    axf_output-volume-filename,
     background-color,
     background-image,
     background-position-horizontal,
@@ -297,7 +299,11 @@ fo_simple-page-master.attlist &=
     background-repeat
 
 fo_region-body.attlist &=
-    axf_footnote-position
+    axf_footnote-align,
+    axf_footnote-keep,
+    axf_footnote-max-height,
+    axf_footnote-position,
+    axf_footnote-stacking
 
 fo_flow.attlist &=
     xml_id
@@ -370,7 +376,6 @@ fo_footnote.attlist &=
     axf_footnote-stacking,
     axf_footnote-position,
     axf_footnote-keep,
-    axf_footnote-max-height,
     xml_id
 
 fo_footnote-body.attlist &=
@@ -919,6 +924,20 @@ axf_outline-font-weight =
     ## Font weight which appears as a title of bookmark: normal | bold
     attribute axf:outline-font-weight { 'normal' | 'bold' }?
 
+# @axf:output-volume-break
+#
+# https://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.output-volume-break
+axf_output-volume-break =
+    ## Whether this fo:page-sequence starts a new volume: true | false
+    attribute axf:output-volume-break { 'true' | 'false' }?
+
+# @axf:output-volume-filename
+#
+# https://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.output-volume-filename
+axf_output-volume-filename =
+    ## Whether this fo:page-sequence starts a new volume
+    attribute axf:output-volume-filename { text }?
+
 # @axf:printer-marks
 #
 # http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.printer-marks
@@ -972,7 +991,7 @@ axf_printer-marks-spine-width =
 #
 # http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.repeat-cell-content-at-break
 axf_repeat-cell-content-at-break =
-    ## Whether to copy the contents of a cell when a cell breaks
+    ## Whether to copy the contents of a cell when a cell breaks: true | false
     attribute axf:repeat-cell-content-at-break { 'true' | 'false' }?
 
 # @axf:suppress-if-first-on-page
