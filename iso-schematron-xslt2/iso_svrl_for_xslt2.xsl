@@ -292,6 +292,8 @@
 				<axsl:apply-templates select="." mode="schematron-select-full-path"/>
 			</axsl:attribute>
 		</xsl:if>
+                <axsl:attribute name="line-number" select="saxon:line-number()" />
+                <axsl:attribute name="column-number" select="saxon:column-number()" />
 		  
 		<svrl:text>
 			<xsl:apply-templates mode="text" />
@@ -368,6 +370,8 @@
 				<axsl:apply-templates select="." mode="schematron-select-full-path"/>
 			</axsl:attribute>
 		</xsl:if>
+                <axsl:attribute name="line-number" select="saxon:line-number()" />
+                <axsl:attribute name="column-number" select="saxon:column-number()" />
 	 
 		<svrl:text>
 			<xsl:apply-templates mode="text" />
