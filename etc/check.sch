@@ -15,7 +15,7 @@
   <sch:pattern  id="P1"> 
      <sch:rule context="svrl:failed-assert | svrl:successful-report">
 	<sch:report test="true()"
-		><sch:value-of select="preceding::svrl:active-pattern[1]/@document"/>: <sch:value-of select="svrl:text"/></sch:report>
+	  ><sch:value-of select="replace(preceding::svrl:active-pattern[1]/@document, '^file:/.:', '')"/>:<sch:value-of select="@line-number"/>:<sch:value-of select="@column-number"/>: error:<sch:value-of select="svrl:text"/></sch:report>
      </sch:rule>
      
   </sch:pattern>
