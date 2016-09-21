@@ -24,13 +24,37 @@
 
 
 (require 'flymake)
+
+;;; Customization
+
+(defgroup focheck nil
+  "XSL-FO editing mode."
+  :group 'languages)
+
+(defcustom focheck-home nil
+  "focheck home directory."
+  :group 'focheck
+  :type '(directory :must-match t))
+
+(defcustom focheck-saxon nil
+  "Location of Saxon 9 executable for use with Schematron."
+  :group 'focheck
+  :type '(file :must-match t))
+
+(defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
+    (setq flymake-check-was-interrupted t))
+(ad-activate 'flymake-post-syntax-check)
+
 (defun flymake-focheck-init ()
   (let* ((temp-file (flymake-init-create-temp-buffer-copy
 		     'flymake-create-temp-inplace))
      	 (local-file (file-relative-name
 		      temp-file
-		      (file-name-directory buffer-file-name))))
-    (list "java" (list "-jar" "E:/saxon/saxon9he.jar" "-l:on" local-file "E:/projects/oxygen/focheck/build/schematron.xsl"))))
+		      (file-name-directory buffer-file-name)))
+	 (build-file (concat focheck-home "build-focheck.xml")))
+;;;    (list "java" (list "-jar" focheck-saxon "-l:on" local-file (concat focheck-home "build/schematron.xsl")))))
+    ;; cmd /c ant.bat -emacs -f C:/projects/oxygen/focheck/build-focheck.xml schematron.single -Dsingle=C:/projects/oxygen/focheck/test/samples/test.fo
+    (list "cmd" (list "/c" "ant.bat" "-emacs" "-f" build-file "schematron.single" (concat "-Dsingle=" local-file) ))))
 
 (add-to-list 'flymake-allowed-file-name-masks
       '(".+\\.fo$"
