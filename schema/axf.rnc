@@ -342,6 +342,7 @@ fo_block-container.attlist &=
     axf_suppress-if-first-on-page,
     axf.block.attlist,
     column-count,
+    column-gap,
     role,
     xml_id
 
