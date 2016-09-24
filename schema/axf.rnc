@@ -152,6 +152,27 @@ axf_footnote-number-citation =
     empty
 }
 
+# <axf:ruby>
+# https://www.antennahouse.com/product/ahf63/ahf-ruby.html#axf.ruby
+axf_ruby =
+  ## The ruby structure.
+  element axf:ruby {
+     axf.ruby.attlist,
+     (axf_ruby-base, axf_ruby-text)+
+}
+
+# <axf:ruby-base>
+# https://www.antennahouse.com/product/ahf63/ahf-ruby.html#axf.ruby-base
+axf_ruby-base =
+  ## Base character of ruby.
+  element axf:ruby-base { text | axf_ruby }
+
+# <axf:ruby-text>
+# https://www.antennahouse.com/product/ahf63/ahf-ruby.html#axf.ruby-text
+axf_ruby-text =
+  ## Ruby.
+  element axf:ruby-text { text }
+
 # <axf:spread-page-master>
 # http://www.antennahouse.com/product/ahf63/ahf-spread.html#axf.spread-page-master
 axf_spread-page-master =
@@ -168,9 +189,11 @@ axf_spread-page-master =
     axf_background-scaling,
     axf_bleed,
     common-margin-properties-block,
+    ## Master name of the page master for the left page of a two-page spread.
     attribute left-page-master-reference { xsd:NCName },
     master-name,
     reference-orientation,
+    ## Master name of the page master for the right page of a two-page spread.
     attribute right-page-master-reference { xsd:NCName },
     writing-mode,
     background-attachment,
@@ -229,6 +252,7 @@ block.fo.list |=
 inline.fo.list |=
     axf_footnote-number |
     axf_footnote-number-citation |
+    axf_ruby |
     axf_tab
 
 #
@@ -489,7 +513,6 @@ common-border-padding-and-background-properties &=
     axf_border-bottom-left-radius,
     axf_border-bottom-right-radius
 
-
 #
 # Antenna House extension properties
 #
@@ -504,6 +527,24 @@ axf.block.attlist =
     axf_outline-color,
     axf_outline-font-style,
     axf_outline-font-weight
+
+axf.ruby.attlist =
+    axf_ruby-align,
+    axf_ruby-position,
+    axf_ruby-offset,
+    axf_ruby-overhang,
+    axf_ruby-limit-overhang,
+    axf_ruby-limit-space,
+    axf_ruby-small-kana,
+    axf_ruby-font-family,
+    axf_ruby-font-size,
+    axf_ruby-minimum-font-size,
+    axf_ruby-font-style,
+    axf_ruby-font-weight,
+    axf_ruby-font-stretch,
+    axf_ruby-condense,
+    axf_ruby-color
+
 
 # @axf:background-color
 # @axf:background-image

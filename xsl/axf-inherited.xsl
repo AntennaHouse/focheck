@@ -197,6 +197,21 @@
 <property name="axf:overflow-limit" model="text" description="Overflow limit value: &lt;length>{1,2}" />
 <property name="axf:overflow-limit-inline" model="text" description="Inline overflow limit value" />
 <property name="axf:overflow-limit-block" model="text" description="Block overflow limit value" />
+<property name="axf:ruby-align" model="text" description="Alignment of the ruby: auto | [[distribute-space | distribute-letter] || [center | start | end | start-if-vertical]]" />
+<property name="axf:ruby-color" model="text" description="Color of ruby text: &lt;color>" />
+<property name="axf:ruby-condense" model="text" description="Font condense when the ruby text is longer than its base: none | &lt;percentage> | &lt;number>" />
+<property name="axf:ruby-font-family" model="text" description="Font family of ruby text: [ &lt;family-name> | &lt;generic-family> ]#" />
+<property name="axf:ruby-font-size" model="text" description="Font size of ruby text: &lt;number> | &lt;absolute-size> | &lt;relative-size> | &lt;length> | &lt;percentage>" />
+<property name="axf:ruby-font-stretch" model="text" description="Font stretch of ruby text: normal | wider | narrower | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded | &lt;percentage> | &lt;number>" />
+<property name="axf:ruby-font-style" model="'normal' | 'italic'" description="Font style of ruby text: normal | italic" />
+<property name="axf:ruby-font-weight" model="'normal' | 'bold' | 'bolder' | 'lighter' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900'" description="Font weight of ruby text: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900" />
+<property name="axf:ruby-limit-overhang" model="text" description="Limit of the amount that ruby overhangs the adjacent base character when ruby is longer than its own base character: &lt;number> | &lt;length> | &lt;percentage>" />
+<property name="axf:ruby-limit-space" model="text" description="Limit of the amount of spaces leading and following the ruby text when the ruby text is shorter than its base characters: &lt;number> | &lt;length> | &lt;percentage> | none" />
+<property name="axf:ruby-minimum-font-size" model="text" description="Minimum font size of ruby text: none | &lt;absolute-size> | &lt;relative-size> | &lt;length> | &lt;percentage>" />
+<property name="axf:ruby-offset" model="text" description="Spacing between the ruby text and its base characters: &lt;number> | &lt;length> | &lt;percentage>" />
+<property name="axf:ruby-overhang" model="text" description="How ruby overhangs an adjacent base character: none | auto | [start || end || except-kanji || except-katakana || except-start-open-parenthesis || except-end-close-parenthesis]" />
+<property name="axf:ruby-position" model="'before' | 'after'" description="Side of the base characters on which the ruby text appears: before | after" />
+<property name="axf:ruby-small-kana" model="'auto' | 'convert'" description="Whether to allow using small kana for ruby text: auto | convert" />
 <property name="axf:tab-overlap-treatment" model="'auto' | 'ignore-tab' | 'next-tab'" description="Behavior when tab alignment makes letters overlap" />
 <property name="axf:tab-treatment" model="text" description="Treatment for literal tab characters" />
 <property name="axf:tab-stops" model="text" description="Tab stop positions" />
