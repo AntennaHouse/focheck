@@ -46,6 +46,8 @@
         <active pattern="fo-property"></active>
     </phase>
     <pattern id="axf">
+	<!-- axf:document-info -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.document-info -->
         <p>http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.document-info</p>
         <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1" role="axf-1">
 	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">name="<value-of select="@name"/>" cannot be used when axf:document-info with name="xmp" is present.</assert>
@@ -60,6 +62,25 @@
           </sqf:fix>
         </rule>
 
+	<!-- axf:annotation-color -->
+	<!-- <color> | none -->
+	<!-- Inherited: no -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-color -->
+	<rule context="fo:*/@axf:annotation-color">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">axf:annotation-color="<value-of select="."/>" should be Color or 'none'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">annotation-color="" should be Color or 'none'.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: annotation-color="<value-of select="."/>"</report>
+	</rule>
+
+	<!-- axf:annotation-contents -->
+	<!-- <contents> | none -->
+	<!-- Inherited: no -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-contents -->
+	<rule context="fo:*/@axf:annotation-contents">
+	  <assert test="normalize-space(../@axf:annotation-type) = ('Text', 'FreeText', 'Stamp', 'FileAttachment')" role="Warning"><value-of select="name(.)"/> should be used only when @axf:annotation-type is 'Text', 'FreeText', 'Stamp', or 'FileAnnotation'.</assert>
+	</rule>
+
 	<!-- axf:background-color -->
 	<!-- <color> | transparent | inherit -->
 	<!-- Inherited: no -->
@@ -67,16 +88,16 @@
 	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#background-color -->
 	<rule context="fo:*/@axf:background-color">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-color="<value-of select="."/>" should be Color or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-	  <report test="local-name($expression) = 'EMPTY'" role="Warning">background-color="" should be Color or EnumerationToken.</report>
-	  <report test="local-name($expression) = 'ERROR'">Syntax error: background-color="<value-of select="."/>"</report>
+	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">axf:background-color="<value-of select="."/>" should be Color or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name(.)"/>="" should be Color or EnumerationToken.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="name(.)"/>="<value-of select="."/>"</report>
 	</rule>
 
 	<!-- axf:background-content-height -->
 	<!-- auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#background-content-height -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-height">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">content-height="<value-of select="."/>" should be EnumerationToken, Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -89,7 +110,7 @@
 	<!-- <string> | auto -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#background-content-type -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-type">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">content-type="<value-of select="."/>" should be Literal or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -102,7 +123,7 @@
 	<!-- auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#background-content-width -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-width">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">content-width="<value-of select="."/>" should be EnumerationToken, Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -115,7 +136,7 @@
 	<!-- <color> | transparent | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#background-color -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.background-color -->
 	<rule context="fo:*/@axf:background-color">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-color="<value-of select="."/>" should be Color or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -127,7 +148,7 @@
 	<!-- <uri-specification> | none | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#background-image -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.background-image -->
 	<rule context="fo:*/@axf:background-image">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-image="<value-of select="."/>" should be URI or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -140,7 +161,7 @@
 	<!-- [ [<percentage> | <length> ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: yes -->
-	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#background-position -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.background-position -->
 	<rule context="fo:*/@background-position">
 	  <report test=". eq ''" role="Warning">background-position="" should be '[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit'.</report>
 	</rule>
@@ -149,7 +170,7 @@
 	<!-- <percentage> | <length> | left | center | right | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#background-position-horizontal -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.background-position-horizontal -->
 	<rule context="fo:*/@axf:background-position-horizontal">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-position-horizontal="<value-of select="."/>" should be Percent, Length, or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -162,7 +183,7 @@
 	<!-- <percentage> | <length> | top | center | bottom -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#background-position-vertical -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.background-position-vertical -->
 	<rule context="fo:*/@axf:background-position-vertical">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-position-vertical="<value-of select="."/>" should be Percent, Length, or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -175,7 +196,7 @@
 	<!-- repeat | repeat-x | repeat-y | no-repeat | paginate -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#background-repeat -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.background-repeat -->
 	<rule context="fo:*/@axf:background-repeat">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-repeat="<value-of select="."/>" should be EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -206,7 +227,7 @@
 	<!-- uniform | non-uniform | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#scaling -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-scaling">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">scaling="<value-of select="."/>" should be EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
