@@ -7,4 +7,9 @@
       <xs:documentation>&lt;language-country&gt; | inherit</xs:documentation>
     </xs:annotation>
   </xs:attribute>
+  <xs:attribute name="id" type="xs:ID">
+    <xs:annotation>
+      <xs:documentation>&lt;id&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
 </xs:schema>
