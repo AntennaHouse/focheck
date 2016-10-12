@@ -339,11 +339,14 @@ fo_static-content.attlist &=
 
 fo_basic-link.attlist &=
     axf_action-type,
+    axf_alttext,
     text-decoration,
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_bidi-override.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_block.attlist &=
     axf_destination-type,
@@ -357,6 +360,7 @@ fo_block.attlist &=
     text-decoration,
     width,
     xml_id,
+    axf.annotation.attlist,
     axf.block.attlist
 
 fo_block-container.attlist &=
@@ -368,13 +372,16 @@ fo_block-container.attlist &=
     column-count,
     column-gap,
     role,
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_character.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_external-graphic.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_float.attlist &=
     axf_float,
@@ -393,7 +400,8 @@ fo_float.attlist &=
     axf_float-float-margin-y,
     axf_float-offset-x,
     axf_float-offset-y,
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_footnote.attlist &=
     space-before,
@@ -401,67 +409,87 @@ fo_footnote.attlist &=
     axf_footnote-stacking,
     axf_footnote-position,
     axf_footnote-keep,
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_footnote-body.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_index-range-begin.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_inline.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_inline-container.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_instream-foreign-object.attlist &=
     axf_alttext,
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_leader.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_list-block.attlist &=
     axf.block.attlist,
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_list-item.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_list-item-body.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_list-item-label.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_multi-case.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_multi-property-set.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_multi-switch.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_multi-toggle.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_page-number.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_page-number-citation.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_page-number-citation-last.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_scaling-value-citation.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_table.attlist &=
     axf.block.attlist,
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_table-and-caption.attlist &=
     axf_table-summary,
@@ -469,31 +497,39 @@ fo_table-and-caption.attlist &=
     axf.block.attlist
 
 fo_table-caption.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_table-cell.attlist &=
     axf_repeat-cell-content-at-break,
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_table-column.attlist &=
     id,
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_table-body.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_table-footer.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_table-header.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_table-row.attlist &=
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 fo_wrapper.attlist &=
     text-decoration,
-    xml_id
+    xml_id,
+    axf.annotation.attlist
 
 #
 # Extensions to property groups
@@ -516,6 +552,15 @@ common-border-padding-and-background-properties &=
 #
 # Antenna House extension properties
 #
+
+# List of annotation-related properties common to block-level and
+# inline-level formatting objects
+axf.annotation.attlist =
+    axf_annotation-author,
+    axf_annotation-color,
+    axf_annotation-contents,
+    axf_annotation-title,
+    axf_annotation-type
 
 # List of extension properties common to all block-level formatting
 # objects
@@ -544,7 +589,6 @@ axf.ruby.attlist =
     axf_ruby-font-stretch,
     axf_ruby-condense,
     axf_ruby-color
-
 
 # @axf:background-color
 # @axf:background-image
@@ -582,6 +626,41 @@ axf_action-type =
 axf_alttext =
     ## alternate text of the image
     attribute axf:alttext { text }?
+
+# @axf:annotation-author
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-author
+axf_annotation-author =
+   ## Author of the annotation: <string>
+   attribute axf:annotation-author { text }?
+
+# @axf:annotation-color
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-color
+axf_annotation-color =
+   ## Color used for the background of the annotation: <color> | none
+   attribute axf:annotation-color { text }?
+
+# @axf:annotation-contents
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-contents
+axf_annotation-contents =
+   ## Content of the annotation: <string>
+   attribute axf:annotation-contents { text }?
+
+# @axf:annotation-title
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-title
+axf_annotation-title =
+   ## Title of the annotation: <string>
+   attribute axf:annotation-title { text }?
+
+# @axf:annotation-type
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-type
+axf_annotation-type =
+   ## Type of the annotation: Empty string | Text | FreeText | Stamp | FileAttachment
+   attribute axf:annotation-type { ('Text' | 'FreeText' | 'Stamp' | 'FileAttachment')? }?
 
 # @axf:background-content-height
 # @axf:background-content-type
