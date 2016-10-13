@@ -283,6 +283,23 @@
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:line-number-offset="<value-of select="."/>"</report>
 	</rule>
 
+	<!-- axf:page-number-prefix -->
+	<!-- <string> -->
+	<!-- Inherited: no -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.page-number-prefix -->
+	<rule context="fo:*/@axf:page-number-prefix">
+	  <report test="true()" sqf:fix="axf_page-number-prefix_fix" role="Warning">axf:page-number-prefix: A similar function is provided in XSL 1.1. Please use fo:folio-prefix.</report>
+          <sqf:fix id="axf_page-number-prefix_fix">
+	    <sqf:description>
+              <sqf:title>Change @axf:page-number-prefix into fo:folio-prefix.</sqf:title>
+            </sqf:description>
+            <sqf:add node-type="element" target="fo:folio-prefix">
+	      <value-of select="." />
+	    </sqf:add>
+	    <sqf:delete />
+          </sqf:fix>
+	</rule>
+
 	<!-- overflow -->
 	<!-- visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto -->
 	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.overflow -->
