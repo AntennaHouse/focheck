@@ -177,20 +177,20 @@
 <property name="axf:line-continued-mark-font-style" model="'normal' | 'italic'" description="Whether to make the font style italic" />
 <property name="axf:line-continued-mark-font-weight" model="'normal' | 'bold' | 'bolder' | 'lighter' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900'" description="Font weight of line numbers" />
 <property name="axf:line-continued-mark-offset" model="text" description="Offset of line continued marks: &lt;length>" />
-<property name="axf:revision-bar-color" model="text" description="Color of the revision bar" />
-<property name="axf:revision-bar-offset" model="text" description="Offset of the revision bar" />
-<property name="axf:revision-bar-position" model="'start' | 'end' | 'inside' | 'outside' | 'alternate' | 'both'" description="Position of the revision bar" />
-<property name="axf:revision-bar-style" model="text" description="Style of the revision bar" />
-<property name="axf:revision-bar-width" model="text" description="Width of the revision bar" />
+<property name="axf:revision-bar-color" model="text" description="Color of the revision bar: &lt;color>" />
+<property name="axf:revision-bar-offset" model="text" description="Offset of the revision bar: &lt;length>" />
+<property name="axf:revision-bar-position" model="'start' | 'end' | 'inside' | 'outside' | 'alternate' | 'both'" description="Position of the revision bar: start | end | inside | outside | alternate | both" />
+<property name="axf:revision-bar-style" model="text" description="Style of the revision bar: &lt;border-style>" />
+<property name="axf:revision-bar-width" model="text" description="Width of the revision bar: &lt;border-width>" />
 <property name="axf:suppress-duplicate-footnote" model="'true' | 'false'" description="Whether to delete footnotes duplicated in the same page" />
 <property name="axf:diagonal-border-color" model="text" description="Color of the diagonal border" />
 <property name="axf:diagonal-border-width" model="text" description="Width of the diagonal border" />
 <property name="axf:reverse-diagonal-border-color" model="text" description="Color of the reverse diagonal border" />
 <property name="axf:reverse-diagonal-border-width" model="text" description="Width of the reverse diagonal border" />
 <property name="axf:repeat-footnote-in-table-footer" model="'true' | 'false'" description="Whether to repeat the fo:footnote in the fo:table-footer that is repeated by table-omit-footer-at-break=&quot;false&quot;" />
-<property name="axf:repeat-footnote-in-table-header" model="'true' | 'false'" description="Whether to repeat the fo:footnote in the fo:table-header that is repeated by table-omit-header-at-break=&quot;false&quot;" />
-<property name="axf:overflow-align" model="'normal' | 'start' | 'end' | 'center'" description="Alignment of the overflowed block" />
-<property name="axf:overflow-condense" model="'letter-spacing' | 'font-stretch' | 'font-size' | 'line-height' | 'auto' | 'none'" description="How to condense the overflowed text within the region" />
+<property name="axf:repeat-footnote-in-table-header" model="'true' | 'false'" description="Whether to repeat the fo:footnote in the fo:table-header that is repeated by table-omit-header-at-break=&quot;false&quot;: true | false" />
+<property name="axf:overflow-align" model="'normal' | 'start' | 'end' | 'center'" description="Alignment of the overflowed block: normal | start | end | center" />
+<property name="axf:overflow-condense" model="'letter-spacing' | 'font-stretch' | 'font-size' | 'line-height' | 'auto' | 'none'" description="How to condense the overflowed text within the region: letter-spacing | font-stretch | font-size | line-height | auto | none" />
 <property name="axf:overflow-condense-limit-font-size" model="text" description="Minimum font size when axf:overflow-condense=&quot;font-size&quot; is specified: &lt;length> [ visible | hidden | scroll | error-if-overflow | repeat ]" />
 <property name="axf:overflow-condense-limit-font-stretch" model="text" description="Minimum value when axf:overflow-condense=&quot;font-stretch&quot; is specified: [ &lt;number> | &lt;percentage> ] [ visible | hidden | scroll | error-if-overflow | repeat ]" />
 <property name="axf:overflow-replace" model="text" description="Alternative character string for the specified overflow text" />
