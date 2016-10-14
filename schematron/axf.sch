@@ -300,6 +300,90 @@
           </sqf:fix>
 	</rule>
 
+	<!-- axf:revision-bar-color -->
+	<!-- <color> -->
+	<!-- Inherited: yes -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.revision-bar-color -->
+	<rule context="fo:*/@axf:revision-bar-color">
+	  <report test="true()" sqf:fix="axf_revision-bar-color_fix" role="Warning">axf:revision-bar-color: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
+          <sqf:fix id="axf_revision-bar-color_fix">
+	    <sqf:description>
+              <sqf:title>Delete @axf:revision-bar-color.</sqf:title>
+            </sqf:description>
+	    <sqf:delete />
+          </sqf:fix>
+	</rule>
+
+	<!-- axf:revision-bar-offset -->
+	<!-- <length> -->
+	<!-- Inherited: yes -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.revision-bar-offset -->
+	<rule context="fo:*/@axf:revision-bar-offset">
+	  <report test="true()" sqf:fix="axf_revision-bar-offset_fix" role="Warning">axf:revision-bar-offset: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
+          <sqf:fix id="axf_revision-bar-offset_fix">
+	    <sqf:description>
+              <sqf:title>Delete @axf:revision-bar-offset.</sqf:title>
+            </sqf:description>
+	    <sqf:delete />
+          </sqf:fix>
+	</rule>
+
+	<!-- axf:revision-bar-position -->
+	<!-- start | end | inside | outside | alternate | both -->
+	<!-- Inherited: yes -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.revision-bar-position -->
+	<rule context="fo:*/@axf:revision-bar-position">
+	  <report test="true()" sqf:fix="axf_revision-bar-position_fix" role="Warning">axf:revision-bar-position: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
+          <sqf:fix id="axf_revision-bar-position_fix">
+	    <sqf:description>
+              <sqf:title>Delete @axf:revision-bar-position.</sqf:title>
+            </sqf:description>
+	    <sqf:delete />
+          </sqf:fix>
+	</rule>
+
+	<!-- axf:revision-bar-style -->
+	<!-- <border-style> -->
+	<!-- Inherited: yes -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.revision-bar-style -->
+	<rule context="fo:*/@axf:revision-bar-style">
+	  <report test="true()" sqf:fix="axf_revision-bar-style_fix" role="Warning">axf:revision-bar-style: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
+          <sqf:fix id="axf_revision-bar-style_fix">
+	    <sqf:description>
+              <sqf:title>Delete @axf:revision-bar-style.</sqf:title>
+            </sqf:description>
+	    <sqf:delete />
+          </sqf:fix>
+	</rule>
+
+	<!-- axf:revision-bar-width -->
+	<!-- <border-width> -->
+	<!-- Inherited: yes -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.revision-bar-width -->
+	<rule context="fo:*/@axf:revision-bar-width">
+	  <report test="true()" sqf:fix="axf_revision-bar-width_fix" role="Warning">axf:revision-bar-width: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
+          <sqf:fix id="axf_revision-bar-width_fix">
+	    <sqf:description>
+              <sqf:title>Delete @axf:revision-bar-width.</sqf:title>
+            </sqf:description>
+	    <sqf:delete />
+          </sqf:fix>
+	</rule>
+
+	<!-- axf:suppress-duplicate-page-number -->
+	<!-- <string> -->
+	<!-- Inherited: no -->
+	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.suppress-duplicate-page-number -->
+	<rule context="fo:*/@axf:suppress-duplicate-page-number">
+	  <report test="true()" sqf:fix="axf_suppress-duplicate-page-number_fix" role="Warning">axf:suppress-duplicate-page-number: A similar function is provided in XSL 1.1. Please use merge-*-index-key-references.</report>
+          <sqf:fix id="axf_suppress-duplicate-page-number_fix">
+	    <sqf:description>
+              <sqf:title>Delete @axf:suppress-duplicate-page-number.</sqf:title>
+            </sqf:description>
+	    <sqf:delete />
+          </sqf:fix>
+	</rule>
+
 	<!-- overflow -->
 	<!-- visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto -->
 	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.overflow -->
