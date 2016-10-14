@@ -279,6 +279,7 @@ fo_page-sequence.attlist &=
     axf_line-number-start,
     axf_output-volume-break,
     axf_output-volume-filename,
+    axf_page-number-prefix,
     background-color,
     background-image,
     background-position-horizontal,
@@ -471,14 +472,26 @@ fo_multi-toggle.attlist &=
     axf.annotation.attlist
 
 fo_page-number.attlist &=
+    axf_number-type,
+    axf_origin-id,
+    axf_suppress-folio-prefix,
+    axf_suppress-folio-suffix,
     xml_id,
     axf.annotation.attlist
 
 fo_page-number-citation.attlist &=
+    axf_number-type,
+    axf_origin-id,
+    axf_suppress-folio-prefix,
+    axf_suppress-folio-suffix,
     xml_id,
     axf.annotation.attlist
 
 fo_page-number-citation-last.attlist &=
+    axf_number-type,
+    axf_origin-id,
+    axf_suppress-folio-prefix,
+    axf_suppress-folio-suffix,
     xml_id,
     axf.annotation.attlist
 
@@ -996,12 +1009,26 @@ axf_line-number-start =
     ## Starting line number: <number> | auto
     attribute axf:line-number-start { text }?
 
+# @axf:number-type
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.number-type
+axf_number-type =
+    ## Whether to output the page number, column number, or both: page | column | page-and-column
+    attribute axf:number-type { 'page' | 'column' | 'page-and-column' }?
+
 # @axf:outline-expand
 #
 # http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.outline-expand
 axf_outline-expand =
     ## Whether to display the lower hierarchy of bookmark items or not: true | false
     attribute axf:outline-expand { 'true' | 'false' }?
+
+# @axf:origin-id
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.origin-id
+axf_origin-id =
+    ## Origin of the page number: <idref>
+    attribute axf:origin-id { xsd:IDREF }?
 
 # @axf:outline-group
 #
@@ -1059,6 +1086,13 @@ axf_output-volume-filename =
     ## Whether this fo:page-sequence starts a new volume
     attribute axf:output-volume-filename { text }?
 
+# @axf:page-number-prefix
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.page-number-prefix
+axf_page-number-prefix =
+    ## Sets the prefix of page number. CAUTION: A similar function is provided in XSL1.1. Please use fo:folio-prefix.
+    attribute axf:page-number-prefix { text }?
+
 # @axf:printer-marks
 #
 # http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.printer-marks
@@ -1114,6 +1148,20 @@ axf_printer-marks-spine-width =
 axf_repeat-cell-content-at-break =
     ## Whether to copy the contents of a cell when a cell breaks: true | false
     attribute axf:repeat-cell-content-at-break { 'true' | 'false' }?
+
+# @axf:suppress-folio-prefix
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.suppress-folio-prefix
+axf_suppress-folio-prefix =
+    ## Suppresses rendering of the page number prefix: true | false
+    attribute axf:suppress-folio-prefix { 'true' | 'false' }?
+
+# @axf:suppress-folio-suffix
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.suppress-folio-suffix
+axf_suppress-folio-suffix =
+    ## Suppresses rendering of the page number suffix: true | false
+    attribute axf:suppress-folio-suffix { 'true' | 'false' }?
 
 # @axf:suppress-if-first-on-page
 #
