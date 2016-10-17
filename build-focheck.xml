@@ -48,7 +48,7 @@ extensions.</description>
 <!-- XML file of properties determining or describing local
      configuration. -->
 <property name="build.properties.xml"
-	  location="${fochek.basedir.converted}/properties.xml"/>
+	  location="${focheck.basedir.converted}/properties.xml"/>
 <property file="${build.properties.xml}"/>
 
 <!-- File of properties determining or describing local
