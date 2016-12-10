@@ -381,6 +381,7 @@ fo_character.attlist &=
     axf.annotation.attlist
 
 fo_external-graphic.attlist &=
+    axf_alttext,
     xml_id,
     axf.annotation.attlist
 
@@ -514,7 +515,9 @@ fo_table-caption.attlist &=
     axf.annotation.attlist
 
 fo_table-cell.attlist &=
+    axf_headers,
     axf_repeat-cell-content-at-break,
+    axf_scope,
     xml_id,
     axf.annotation.attlist
 
@@ -572,8 +575,15 @@ axf.annotation.attlist =
     axf_annotation-author,
     axf_annotation-color,
     axf_annotation-contents,
+    axf_annotation-file-attachment,
+    axf_annotation-height,
+    axf_annotation-icon-name,
+    axf_annotation-open,
+    axf_annotation-position-horizontal,
+    axf_annotation-position-vertical,
     axf_annotation-title,
-    axf_annotation-type
+    axf_annotation-type,
+    axf_annotation-width
 
 # List of extension properties common to all block-level formatting
 # objects
@@ -661,6 +671,48 @@ axf_annotation-contents =
    ## Content of the annotation: <string>
    attribute axf:annotation-contents { text }?
 
+# @axf:annotation-icon-name
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-icon-name
+axf_annotation-icon-name =
+   ## Name of the icon used for displaying the annotation: <string>
+   attribute axf:annotation-icon-name { text }?
+
+# @axf:annotation-file-attachment
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-file-attachment
+axf_annotation-file-attachment =
+   ## File with which file attachment annotation is related: <uri-specification>
+   attribute axf:annotation-file-attachment { xsd:anyURI }?
+
+# @axf:annotation-height
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-height
+axf_annotation-height =
+   ## Height of the annotation: <length>
+   attribute axf:annotation-height { text }?
+
+# @axf:annotation-open
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-open
+axf_annotation-open =
+   ## Initial state of the annotation: true | false
+   attribute axf:annotation-open { 'true' | 'false' }?
+
+# @axf:annotation-position-horizontal
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-position-horizontal
+axf_annotation-position-horizontal =
+   ## Horizontal position of the annotation: <length>
+   attribute axf:annotation-position-horizontal { text }?
+
+# @axf:annotation-position-vertical
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-position-vertical
+axf_annotation-position-vertical =
+   ## Vertical position of the annotation: <length>
+   attribute axf:annotation-position-vertical { text }?
+
 # @axf:annotation-title
 #
 # http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-title
@@ -674,6 +726,13 @@ axf_annotation-title =
 axf_annotation-type =
    ## Type of the annotation: Empty string | Text | FreeText | Stamp | FileAttachment
    attribute axf:annotation-type { ('Text' | 'FreeText' | 'Stamp' | 'FileAttachment')? }?
+
+# @axf:annotation-width
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-width
+axf_annotation-width =
+   ## Width of the annotation: <length>
+   attribute axf:annotation-width { text }?
 
 # @axf:background-content-height
 # @axf:background-content-type
@@ -960,6 +1019,13 @@ axf_footnote-max-height =
     ## Maximum height of footnote: auto | <length> | <percentage>
     attribute axf:footnote-max-height { text }?
 
+# @axf:headers
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.headers
+axf_headers =
+    ## Table header cells associated with this cell: <idrefs>
+    attribute axf:headers { xsd:IDREFS }?
+
 # @axf:line-number-format
 #
 # http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.line-number-format
@@ -1148,6 +1214,13 @@ axf_printer-marks-spine-width =
 axf_repeat-cell-content-at-break =
     ## Whether to copy the contents of a cell when a cell breaks: true | false
     attribute axf:repeat-cell-content-at-break { 'true' | 'false' }?
+
+# @axf:scope
+#
+# http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.scope
+axf_scope =
+    ## Range of cells with which this table header cell is associated: auto | row | col | rowgroup | colgroup | both
+    attribute axf:scope { 'auto' | 'row' | 'col' | 'rowgroup' | 'colgroup' | 'both' }?
 
 # @axf:suppress-folio-prefix
 #
