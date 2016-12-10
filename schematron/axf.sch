@@ -78,7 +78,7 @@
 	<!-- Inherited: no -->
 	<!-- http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.annotation-contents -->
 	<rule context="fo:*/@axf:annotation-contents">
-	  <assert test="normalize-space(../@axf:annotation-type) = ('Text', 'FreeText', 'Stamp', 'FileAttachment')" role="Warning"><value-of select="name(.)"/> should be used only when @axf:annotation-type is 'Text', 'FreeText', 'Stamp', or 'FileAnnotation'.</assert>
+	  <assert test="normalize-space(../@axf:annotation-type) = ('Text', 'FreeText', 'Stamp', 'FileAttachment') or local-name(..) = 'basic-link'" role="Warning"><value-of select="name(.)"/> should be used only when @axf:annotation-type is 'Text', 'FreeText', 'Stamp', or 'FileAnnotation' or on fo:basic-link.</assert>
 	</rule>
 
 	<!-- axf:background-color -->
