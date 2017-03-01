@@ -29,6 +29,13 @@ include "axf-inherited.rnc" {
 fo_change-bar-begin.model =
     ( fo_float? )
 
+# Nested fo:page-sequence
+# https://www.antennahouse.com/product/ahf64/ahf-ext.html#fo.page-sequence
+fo_flow.model =
+    fo_marker*,
+    ( (block.fo.list | neutral.fo.list.block | fo_page-sequence)+
+     & (point.fo.list)* )
+
 fo_layout-master-set.model =
     ( (axf_spread-page-master|
        fo_simple-page-master|
@@ -100,22 +107,6 @@ non-xsl =
 # Antenna House extension elements
 #
 
-# <axf:form>
-# https://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.form
-axf_form =
-  element axf:form {
-    axf_form.attlist,
-    axf_form.model
-}
-
-axf_form.attlist =
-  axf_field-submit-coordinates?,
-  axf_field-submit-method?,
-  external-destination?
-
-axf_form.model =
-  ( block.fo.list )*
-
 # <axf:document-info/>
 # http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.document-info
 axf_document-info =
@@ -150,6 +141,49 @@ axf_footnote-number-citation =
   element axf:footnote-number-citation {
     attribute ref-id { text },
     empty
+}
+
+# <axf:form>
+# https://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.form
+axf_form =
+  element axf:form {
+    axf_form.attlist,
+    axf_form.model
+}
+
+axf_form.attlist =
+  axf_field-submit-coordinates?,
+  axf_field-submit-method?,
+  external-destination?
+
+axf_form.model =
+  ( block.fo.list )*
+
+# <axf:form-field>
+#
+# https://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.form-field
+axf_form-field =
+  ## Generates a form field
+  element axf:form-field {
+    (axf_form-field-option | axf_form-field-event)*
+}
+
+# <axf:form-field-event>
+#
+# https://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.form-field-event
+axf_form-field-event =
+  ## Defines the form action corresponding to an event
+  element axf:form-field-event {
+    text
+}
+
+# <axf:form-field-option>
+#
+# https://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.form-field-option
+axf_form-field-option =
+  ## Specifies the component elements of the list box, combo box
+  element axf:form-field-option {
+    text
 }
 
 # <axf:ruby>
@@ -252,6 +286,7 @@ block.fo.list |=
 inline.fo.list |=
     axf_footnote-number |
     axf_footnote-number-citation |
+    axf_form-field |
     axf_ruby |
     axf_tab
 
@@ -446,7 +481,8 @@ fo_list-block.attlist &=
 
 fo_list-item.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf-outline-properties
 
 fo_list-item-body.attlist &=
     xml_id,
@@ -501,12 +537,12 @@ fo_scaling-value-citation.attlist &=
     axf.annotation.attlist
 
 fo_table.attlist &=
-    axf.block.attlist,
+    axf_table-summary,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf.block.attlist
 
 fo_table-and-caption.attlist &=
-    axf_table-summary,
     xml_id,
     axf.block.attlist
 
@@ -585,9 +621,9 @@ axf.annotation.attlist =
     axf_annotation-type,
     axf_annotation-width
 
-# List of extension properties common to all block-level formatting
-# objects
-axf.block.attlist =
+# List of outline-related extension properties
+# https://www.antennahouse.com/product/ahf64/ahf-ext.html#bookmark-and-link
+axf-outline-properties =
     axf_outline-expand,
     axf_outline-group,
     axf_outline-level,
@@ -595,6 +631,11 @@ axf.block.attlist =
     axf_outline-color,
     axf_outline-font-style,
     axf_outline-font-weight
+
+# List of extension properties common to all block-level formatting
+# objects
+axf.block.attlist =
+    axf-outline-properties
 
 axf.ruby.attlist =
     axf_ruby-align,
