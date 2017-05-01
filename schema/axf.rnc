@@ -305,13 +305,6 @@ fo_page-sequence.attlist &=
     axf_background-position-horizontal,
     axf_background-position-vertical,
     axf_background-repeat,
-    axf_line-number-format,
-    axf_line-number-initial,
-    axf_line-number-interval,
-    axf_line-number-orientation,
-    axf_line-number-prefix,
-    axf_line-number-reset,
-    axf_line-number-start,
     axf_output-volume-break,
     axf_output-volume-filename,
     axf_page-number-prefix,
@@ -366,9 +359,11 @@ fo_region-body.attlist &=
     axf_footnote-stacking
 
 fo_flow.attlist &=
+    axf_baseline-grid,
     xml_id
 
 fo_static-content.attlist &=
+    axf_baseline-grid,
     xml_id
 
 # FOs in flow listed in alphabetic order
@@ -386,7 +381,6 @@ fo_bidi-override.attlist &=
 
 fo_block.attlist &=
     axf_destination-type,
-    axf_line-number-reset,
     axf_suppress-if-first-on-page,
     height,
     max-height,
@@ -621,6 +615,12 @@ axf.annotation.attlist =
     axf_annotation-type,
     axf_annotation-width
 
+# List of baseline-grid-related extension properties
+# https://www.antennahouse.com/product/ahf64/ahf-ext.html#https://www.antennahouse.com/product/ahf64/ahf-ext.html
+axf-baseline-grid-properties =
+    axf_baseline-grid,
+    axf_baseline-block-snap
+
 # List of outline-related extension properties
 # https://www.antennahouse.com/product/ahf64/ahf-ext.html#bookmark-and-link
 axf-outline-properties =
@@ -635,6 +635,7 @@ axf-outline-properties =
 # List of extension properties common to all block-level formatting
 # objects
 axf.block.attlist =
+    axf-baseline-grid-properties,
     axf-outline-properties
 
 axf.ruby.attlist =
@@ -793,6 +794,20 @@ axf_background-content-width =
 axf_background-scaling =
     ## uniform | non-uniform | inherit
     attribute axf:background-scaling { 'uniform' | 'non-uniform' | 'inherit' }?
+
+# @axf:baseline-block-snap
+#
+# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.baseline-block-snap
+axf_baseline-block-snap =
+    ## How to align blocks on the baseline grid: none | [auto | before | after | center] || [border-box | margin-box]
+    attribute axf:baseline-block-snap { text }?
+
+# @axf:baseline-grid
+#
+# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.baseline-grid
+axf_baseline-grid =
+    ## Sets or clears the baseline grid: normal | none | root | new
+    attribute axf:baseline-grid { 'normal' | 'none' | 'root' | 'new' }?
 
 # @axf:border-radius
 # @axf:border-top-left-radius
@@ -1066,55 +1081,6 @@ axf_footnote-max-height =
 axf_headers =
     ## Table header cells associated with this cell: <idrefs>
     attribute axf:headers { xsd:IDREFS }?
-
-# @axf:line-number-format
-#
-# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-format
-axf_line-number-format =
-    ## Format of line numbers
-    attribute axf:line-number-format { text }?
-
-# @axf:line-number-initial
-#
-# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-initial
-axf_line-number-initial =
-    ## Line number of the first line
-    attribute axf:line-number-initial { text }?
-
-# @axf:line-number-interval
-#
-# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-interval
-axf_line-number-interval =
-    ## Interval of line numbers
-    attribute axf:line-number-interval { text }?
-
-# @axf:line-number-orientation
-#
-# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-orientation
-axf_line-number-orientation =
-    ## Orientation of line numbers
-    attribute axf:line-number-orientation { '0' | '90' | '180' | '270' | '-90' | '-180' | '-270' }?
-
-# @axf:line-number-prefix
-#
-# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-prefix
-axf_line-number-prefix =
-    ## Prefix of line number
-    attribute axf:line-number-prefix { text }?
-
-# @axf:line-number-reset
-#
-# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-reset
-axf_line-number-reset =
-    ## Resets line numbering: auto | none | page | column | force
-    attribute axf:line-number-reset { 'auto' | 'none' | 'page' | 'column' | 'force' }?
-
-# @axf:line-number-start
-#
-# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-start
-axf_line-number-start =
-    ## Starting line number: <number> | auto
-    attribute axf:line-number-start { text }?
 
 # @axf:number-type
 #
