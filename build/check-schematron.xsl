@@ -174,8 +174,12 @@
       <xsl:if test="true()">
          <xsl:message>
             <xsl:text/>
-            <xsl:value-of select="preceding::svrl:active-pattern[1]/@document"/>
-            <xsl:text/>: <xsl:text/>
+            <xsl:value-of select="replace(preceding::svrl:active-pattern[1]/@document, '^file:/.:', '')"/>
+            <xsl:text/>:<xsl:text/>
+            <xsl:value-of select="@line-number"/>
+            <xsl:text/>:<xsl:text/>
+            <xsl:value-of select="@column-number"/>
+            <xsl:text/>: error:<xsl:text/>
             <xsl:value-of select="svrl:text"/>
             <xsl:text/> (true())</xsl:message>
       </xsl:if>

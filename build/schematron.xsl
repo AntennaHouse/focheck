@@ -210,7 +210,7 @@
             </xsl:attribute>
             <xsl:attribute name="id">axf</xsl:attribute>
             <xsl:attribute name="name">axf</xsl:attribute>
-            <svrl:text>http://www.antennahouse.com/product/ahf63/ahf-ext.html#axf.document-info</svrl:text>
+            <svrl:text>http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.document-info</svrl:text>
             <xsl:apply-templates/>
          </svrl:active-pattern>
          <xsl:apply-templates select="/" mode="M11"/>
@@ -224,8 +224,9 @@
 
 
 	  <!--RULE -->
-   <xsl:template match="fo:basic-link" priority="1023" mode="M4">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:basic-link"/>
+   <xsl:template match="fo:basic-link | fo:bookmark" priority="1023" mode="M4">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:basic-link | fo:bookmark"/>
 
 		    <!--REPORT Warning-->
       <xsl:if test="exists(@internal-destination) and exists(@external-destination)">
@@ -235,6 +236,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>An '<xsl:text/>
                <xsl:value-of select="local-name()"/>
                <xsl:text/>' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</svrl:text>
@@ -254,6 +257,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>An '<xsl:text/>
                <xsl:value-of select="local-name()"/>
                <xsl:text/>' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</svrl:text>
@@ -273,6 +278,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>An '<xsl:text/>
                <xsl:value-of select="local-name()"/>
                <xsl:text/>' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</svrl:text>
@@ -287,6 +294,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>An 'fo:footnote' that is a descendant of an 'fo:block-container' that generates an absolutely positioned area will be placed as normal block-level areas.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -298,6 +307,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>An 'fo:footnote' is not permitted to have as a descendant an 'fo:block-container' that generates an absolutely positioned area.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -309,6 +320,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>An 'fo:footnote' is not permitted to have an 'fo:float', 'fo:footnote', or 'fo:marker' as a descendant.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -330,7 +343,9 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>fo:list-item-body with no 'start-indent' will use default 'start-indent="0pt"'.</svrl:text>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>fo:list-item-body with no 'start-indent' will use inherited 'start-indent' value.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates select="@*|*" mode="M4"/>
@@ -351,7 +366,9 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>fo:list-item-label with no 'end-indent' will use default 'end-indent="0pt"'.</svrl:text>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>fo:list-item-label with no 'end-indent' will use inherited 'end-indent' value.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
       <xsl:apply-templates select="@*|*" mode="M4"/>
@@ -370,6 +387,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>An fo:marker is only permitted as the descendant of an fo:flow.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
@@ -384,6 +403,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>An fo:marker is not permitted as a descendant of an fo:marker.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
@@ -398,6 +419,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>An fo:marker is not permitted as a descendant of an fo:retrieve-marker.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
@@ -412,6 +435,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>An fo:marker is not permitted as a descendant of an fo:retrieve-table-marker.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
@@ -432,6 +457,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>An fo:retrieve-marker is only permitted as the descendant of an fo:static-content.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
@@ -453,6 +480,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>An fo:retrieve-table-marker is only permitted as the descendant of an fo:table-header or fo:table-footer or as a child of fo:table in a position where fo:table-header or fo:table-footer is permitted.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
@@ -474,6 +503,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>There must be at least one fo:page-sequence descendant of fo:root.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
@@ -497,6 +528,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>
                   <xsl:text/>
                   <xsl:value-of select="local-name()"/>
@@ -525,6 +558,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>
                <xsl:text/>
                <xsl:value-of select="local-name()"/>
@@ -550,6 +585,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>
                <xsl:text/>
                <xsl:value-of select="local-name()"/>
@@ -570,6 +607,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>flow-map-reference="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" does not match any fo:flow-map name.</svrl:text>
@@ -590,6 +629,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>flow-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" must be unique within its fo:page-sequence.</svrl:text>
@@ -605,6 +646,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>flow-name="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" does not match any named or reserved region-name or a flow-name-reference.</svrl:text>
@@ -626,6 +669,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>flow-name-reference="<xsl:text/>
                   <xsl:value-of select="., ancestor::fo-flow-map//fo:flow-name-specifier/@flow-name-reference[. eq current()]"/>
                   <xsl:text/>" must be unique within its fo:flow-map.</svrl:text>
@@ -643,6 +688,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>flow-name-reference="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should only be used with all fo:flow or all fo:static-content.</svrl:text>
@@ -666,6 +713,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>
                   <xsl:text/>
                   <xsl:value-of select="local-name()"/>
@@ -691,6 +740,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>language="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be an EnumerationToken.  '<xsl:text/>
@@ -709,6 +760,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>language="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" should be a 3-letter code conforming to a ISO639-2 terminology or bibliographic code or a 2-letter code conforming to a ISO639 2-letter code or 'none' or 'inherit'.</svrl:text>
@@ -722,6 +775,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: 'language="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"'</svrl:text>
@@ -744,6 +799,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>marker-class-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be unique among fo:marker with the same parent.</svrl:text>
@@ -766,6 +823,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>master-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be unique.</svrl:text>
@@ -789,6 +848,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>master-reference="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should refer to a master-name that exists within the document.</svrl:text>
@@ -804,6 +865,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>master-reference="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" refers to multiple master-name within the document.</svrl:text>
@@ -823,6 +886,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>overflow="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" on an absolutely-positioned area will be treated as 'auto'.</svrl:text>
@@ -846,6 +911,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>ref-index-key="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" does not match any index-key values.</svrl:text>
@@ -860,6 +927,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>ref-index-key="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" occurs before a matching index-key value.</svrl:text>
@@ -881,6 +950,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>region-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should only be used with regions of the same class.</svrl:text>
@@ -897,6 +968,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>region-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should only be used with fo:region-body.</svrl:text>
@@ -913,6 +986,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>region-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should only be used with fo:region-start.</svrl:text>
@@ -929,6 +1004,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>region-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should only be used with fo:region-end.</svrl:text>
@@ -945,6 +1022,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>region-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should only be used with fo:region-before.</svrl:text>
@@ -961,6 +1040,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>region-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should only be used with fo:region-after.</svrl:text>
@@ -983,6 +1064,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>region-name-reference="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" must be unique within its fo:flow-map.</svrl:text>
@@ -998,7 +1081,7 @@
    <!--PATTERN fo-property-->
    <xsl:include xmlns="http://purl.oclc.org/dsdl/schematron"
                 xmlns:sqf="http://www.schematron-quickfix.com/validator/process"
-                href="file:/E:/Projects/oxygen/focheck/xsl/parser-runner.xsl"/>
+                href="file:/E:/Projects/oxygen/focheck-internal/focheck/xsl/parser-runner.xsl"/>
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@absolute-position" priority="1253" mode="M5">
@@ -1015,6 +1098,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>absolute-position="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'absolute', 'fixed', or 'inherit'.  '<xsl:text/>
@@ -1033,6 +1118,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>absolute-position="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'absolute', 'fixed', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -1049,6 +1136,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>absolute-position="" should be 'auto', 'absolute', 'fixed', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1060,6 +1149,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: absolute-position="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1081,6 +1172,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>active-state="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'link', 'visited', 'active', 'hover', or 'focus'.  '<xsl:text/>
@@ -1099,6 +1192,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>active-state="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'link', 'visited', 'active', 'hover', or 'focus'. Enumeration token is '<xsl:text/>
@@ -1115,6 +1210,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>active-state="" should be 'link', 'visited', 'active', 'hover', or 'focus'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1126,6 +1223,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: active-state="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1148,6 +1247,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>alignment-adjust="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'inherit', Percent, or Length.  '<xsl:text/>
@@ -1166,6 +1267,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>alignment-adjust="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -1182,6 +1285,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>alignment-adjust="" should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'inherit', Percent, or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1193,6 +1298,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: alignment-adjust="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1215,6 +1322,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>alignment-baseline="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'.  '<xsl:text/>
@@ -1233,6 +1342,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>alignment-baseline="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -1249,6 +1360,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>alignment-baseline="" should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1260,6 +1373,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: alignment-baseline="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1282,6 +1397,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>allowed-height-scale="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'any', 'inherit', or Percent.  '<xsl:text/>
@@ -1300,6 +1417,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>allowed-height-scale="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'any' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -1316,6 +1435,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>allowed-height-scale="" should be 'any', 'inherit', or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1327,6 +1448,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: allowed-height-scale="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1349,6 +1472,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>allowed-width-scale="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'any', 'inherit', or Percent.  '<xsl:text/>
@@ -1367,6 +1492,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>allowed-width-scale="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'any' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -1383,6 +1510,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>allowed-width-scale="" should be 'any', 'inherit', or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1394,6 +1523,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: allowed-width-scale="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1415,6 +1546,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>auto-restore="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
@@ -1433,6 +1566,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>auto-restore="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
@@ -1449,6 +1584,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>auto-restore="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1460,6 +1597,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: auto-restore="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1478,6 +1617,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background="" should be '[&lt;background-color&gt; || &lt;background-image&gt; || &lt;background-repeat&gt; || &lt;background-attachment&gt; || &lt;background-position&gt; ]] | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1498,6 +1639,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>background-attachment="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'scroll', 'fixed', or 'inherit'.  '<xsl:text/>
@@ -1516,6 +1659,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-attachment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'scroll', 'fixed', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -1532,6 +1677,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-attachment="" should be 'scroll', 'fixed', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1543,6 +1690,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-attachment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1565,6 +1714,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>background-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
@@ -1584,6 +1735,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1595,6 +1748,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1617,6 +1772,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>background-image="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be URI, 'none', or 'inherit'.  '<xsl:text/>
@@ -1636,6 +1793,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-image="" should be URI, 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1647,6 +1806,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-image="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1666,6 +1827,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-position="" should be '[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1688,6 +1851,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>background-position-horizontal="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Percent, Length, 'left', 'center', 'right', or 'inherit'.  '<xsl:text/>
@@ -1706,6 +1871,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-position-horizontal="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'left', 'center', 'right', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -1722,6 +1889,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-position-horizontal="" should be Percent, Length, 'left', 'center', 'right', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1733,6 +1902,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-position-horizontal="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1757,6 +1928,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>background-position-vertical="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Percent, Length, 'top', 'center', 'bottom', or 'inherit'.  '<xsl:text/>
@@ -1775,6 +1948,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-position-vertical="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'top', 'center', 'bottom', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -1791,6 +1966,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-position-vertical="" should be Percent, Length, 'top', 'center', 'bottom', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1802,6 +1979,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-position-vertical="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1824,6 +2003,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>background-repeat="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', or 'inherit'.  '<xsl:text/>
@@ -1842,6 +2023,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-repeat="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -1858,6 +2041,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-repeat="" should be 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1869,6 +2054,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-repeat="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1890,6 +2077,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>baseline-shift="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'baseline', 'sub', 'super', 'inherit', Percent, or Length.  '<xsl:text/>
@@ -1908,6 +2097,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>baseline-shift="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'baseline', 'sub', 'super', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -1924,6 +2115,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>baseline-shift="" should be 'baseline', 'sub', 'super', 'inherit', Percent, or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -1935,6 +2128,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: baseline-shift="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -1957,6 +2152,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>blank-or-not-blank="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'blank', 'not-blank', 'any', or 'inherit'.  '<xsl:text/>
@@ -1975,6 +2172,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>blank-or-not-blank="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'blank', 'not-blank', 'any', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -1991,6 +2190,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>blank-or-not-blank="" should be 'blank', 'not-blank', 'any', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2002,6 +2203,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: blank-or-not-blank="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2024,6 +2227,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>block-progression-dimension="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -2042,6 +2247,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>block-progression-dimension="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -2058,6 +2265,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>block-progression-dimension="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2069,6 +2278,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: block-progression-dimension="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2087,6 +2298,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2107,6 +2320,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-after-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
@@ -2126,6 +2341,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-after-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2137,6 +2354,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-after-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2159,6 +2378,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-after-precedence="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'force', 'inherit', or Number.  '<xsl:text/>
@@ -2177,6 +2398,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-after-precedence="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'force' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -2193,6 +2416,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-after-precedence="" should be 'force', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2204,6 +2429,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-after-precedence="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2226,6 +2453,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-after-style="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
@@ -2244,6 +2473,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-after-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -2260,6 +2491,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-after-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2271,6 +2504,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-after-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2293,6 +2528,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-after-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
@@ -2311,6 +2548,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-after-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -2327,6 +2566,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-after-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2338,6 +2579,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-after-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2360,6 +2603,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-before-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
@@ -2379,6 +2624,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-before-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2390,6 +2637,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-before-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2412,6 +2661,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-before-precedence="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'force', 'inherit', or Number.  '<xsl:text/>
@@ -2430,6 +2681,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-before-precedence="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'force' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -2446,6 +2699,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-before-precedence="" should be 'force', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2457,6 +2712,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-before-precedence="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2479,6 +2736,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-before-style="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
@@ -2497,6 +2756,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-before-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -2513,6 +2774,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-before-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2524,6 +2787,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-before-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2546,6 +2811,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-before-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
@@ -2564,6 +2831,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-before-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -2580,6 +2849,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-before-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2591,6 +2862,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-before-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2609,6 +2882,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-bottom="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2629,6 +2904,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-bottom-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
@@ -2648,6 +2925,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-bottom-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2659,6 +2938,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-bottom-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2681,6 +2962,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-bottom-style="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
@@ -2699,6 +2982,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-bottom-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -2715,6 +3000,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-bottom-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2726,6 +3013,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-bottom-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2748,6 +3037,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-bottom-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
@@ -2766,6 +3057,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-bottom-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -2782,6 +3075,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-bottom-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2793,6 +3088,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-bottom-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2814,6 +3111,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-collapse="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'collapse', 'collapse-with-precedence', 'separate', or 'inherit'.  '<xsl:text/>
@@ -2832,6 +3131,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-collapse="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'collapse', 'collapse-with-precedence', 'separate', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -2848,6 +3149,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-collapse="" should be 'collapse', 'collapse-with-precedence', 'separate', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2859,6 +3162,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-collapse="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2877,6 +3182,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-color="" should be '[ &lt;color&gt; | transparent ]{1,4} | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2897,6 +3204,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-end-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
@@ -2916,6 +3225,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-end-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2927,6 +3238,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-end-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -2949,6 +3262,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-end-precedence="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'force', 'inherit', or Number.  '<xsl:text/>
@@ -2967,6 +3282,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-end-precedence="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'force' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -2983,6 +3300,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-end-precedence="" should be 'force', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -2994,6 +3313,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-end-precedence="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3016,6 +3337,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-end-style="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
@@ -3034,6 +3357,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-end-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -3050,6 +3375,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-end-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3061,6 +3388,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-end-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3083,6 +3412,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-end-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
@@ -3101,6 +3432,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-end-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -3117,6 +3450,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-end-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3128,6 +3463,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-end-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3146,6 +3483,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-left="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3166,6 +3505,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-left-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
@@ -3185,6 +3526,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-left-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3196,6 +3539,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-left-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3218,6 +3563,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-left-style="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
@@ -3236,6 +3583,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-left-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -3252,6 +3601,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-left-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3263,6 +3614,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-left-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3285,6 +3638,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-left-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
@@ -3303,6 +3658,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-left-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -3319,6 +3676,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-left-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3330,6 +3689,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-left-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3348,6 +3709,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-right="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3368,6 +3731,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-right-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
@@ -3387,6 +3752,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-right-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3398,6 +3765,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-right-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3420,6 +3789,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-right-style="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
@@ -3438,6 +3809,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-right-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -3454,6 +3827,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-right-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3465,6 +3840,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-right-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3487,6 +3864,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-right-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
@@ -3505,6 +3884,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-right-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -3521,6 +3902,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-right-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3532,6 +3915,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-right-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3554,6 +3939,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-separation="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length or 'inherit'.  '<xsl:text/>
@@ -3572,6 +3959,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-separation="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -3588,6 +3977,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-separation="" should be Length or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3599,6 +3990,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-separation="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3617,6 +4010,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-spacing="" should be '&lt;length&gt; &lt;length&gt;? | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3637,6 +4032,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-start-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
@@ -3656,6 +4053,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-start-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3667,6 +4066,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-start-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3689,6 +4090,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-start-precedence="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'force', 'inherit', or Number.  '<xsl:text/>
@@ -3707,6 +4110,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-start-precedence="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'force' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -3723,6 +4128,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-start-precedence="" should be 'force', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3734,6 +4141,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-start-precedence="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3756,6 +4165,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-start-style="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
@@ -3774,6 +4185,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-start-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -3790,6 +4203,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-start-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3801,6 +4216,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-start-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3823,6 +4240,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-start-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
@@ -3841,6 +4260,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-start-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -3857,6 +4278,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-start-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3868,6 +4291,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-start-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3886,6 +4311,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-style="" should be '&lt;border-style&gt;{1,4} | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3902,6 +4329,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-top="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3922,6 +4351,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-top-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<xsl:text/>
@@ -3941,6 +4372,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-top-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -3952,6 +4385,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-top-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -3974,6 +4409,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-top-style="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.  '<xsl:text/>
@@ -3992,6 +4429,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-top-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -4008,6 +4447,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-top-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4019,6 +4460,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-top-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4041,6 +4484,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>border-top-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'thin', 'medium', 'thick', 'inherit', or Length.  '<xsl:text/>
@@ -4059,6 +4504,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-top-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'thin', 'medium', 'thick', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -4075,6 +4522,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-top-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4086,6 +4535,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-top-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4104,6 +4555,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>border-width="" should be '&lt;border-width&gt;{1,4} | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4123,6 +4576,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>bottom="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
@@ -4141,6 +4596,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>bottom="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -4157,6 +4614,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>bottom="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4168,6 +4627,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: bottom="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4189,6 +4650,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>break-after="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.  '<xsl:text/>
@@ -4207,6 +4670,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>break-after="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -4223,6 +4688,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>break-after="" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4234,6 +4701,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: break-after="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4255,6 +4724,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>break-before="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.  '<xsl:text/>
@@ -4273,6 +4744,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>break-before="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -4289,6 +4762,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>break-before="" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4300,6 +4775,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: break-before="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4321,6 +4798,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>caption-side="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', or 'inherit'.  '<xsl:text/>
@@ -4339,6 +4818,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>caption-side="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -4355,6 +4836,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>caption-side="" should be 'before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4366,6 +4849,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: caption-side="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4387,6 +4872,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>case-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -4406,6 +4893,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>case-name="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4417,6 +4906,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: case-name="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4438,6 +4929,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>case-title="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Literal or EnumerationToken.  '<xsl:text/>
@@ -4457,6 +4950,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>case-title="" should be Literal or EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4468,6 +4963,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: case-title="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4490,6 +4987,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>change-bar-class="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -4509,6 +5008,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>change-bar-class="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4520,6 +5021,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-class="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4542,6 +5045,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>change-bar-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', or 'yellow'.  '<xsl:text/>
@@ -4561,6 +5066,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>change-bar-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', or 'yellow'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4572,6 +5079,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4594,6 +5103,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>change-bar-offset="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length.  '<xsl:text/>
@@ -4613,6 +5124,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>change-bar-offset="" should be Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4624,6 +5137,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-offset="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4646,6 +5161,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>change-bar-placement="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'start', 'end', 'left', 'right', 'inside', 'outside', or 'alternate'.  '<xsl:text/>
@@ -4664,6 +5181,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>change-bar-placement="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'start', 'end', 'left', 'right', 'inside', 'outside', or 'alternate'. Enumeration token is '<xsl:text/>
@@ -4680,6 +5199,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>change-bar-placement="" should be 'start', 'end', 'left', 'right', 'inside', 'outside', or 'alternate'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4691,6 +5212,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-placement="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4713,6 +5236,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>change-bar-style="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', or 'outset'.  '<xsl:text/>
@@ -4731,6 +5256,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>change-bar-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', or 'outset'. Enumeration token is '<xsl:text/>
@@ -4747,6 +5274,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>change-bar-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', or 'outset'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4758,6 +5287,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4780,6 +5311,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>change-bar-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'thin', 'medium', 'thick', or Length.  '<xsl:text/>
@@ -4798,6 +5331,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>change-bar-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'thin', 'medium', or 'thick'. Enumeration token is '<xsl:text/>
@@ -4814,6 +5349,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>change-bar-width="" should be 'thin', 'medium', 'thick', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4825,6 +5362,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4843,6 +5382,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>character="" should be '&lt;character&gt;'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4862,6 +5403,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>clear="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'start', 'end', 'left', 'right', 'inside', 'outside', 'both', 'none', or 'inherit'.  '<xsl:text/>
@@ -4880,6 +5423,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>clear="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'start', 'end', 'left', 'right', 'inside', 'outside', 'both', 'none', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -4896,6 +5441,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>clear="" should be 'start', 'end', 'left', 'right', 'inside', 'outside', 'both', 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4907,6 +5454,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: clear="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4928,6 +5477,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>clip="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Function, 'auto', or 'inherit'.  '<xsl:text/>
@@ -4946,6 +5497,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>clip="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -4962,6 +5515,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>clip="" should be Function, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -4973,6 +5528,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: clip="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -4994,6 +5551,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', or 'inherit'.  '<xsl:text/>
@@ -5013,6 +5572,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5024,6 +5585,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5046,6 +5609,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>color-profile-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'inherit'.  '<xsl:text/>
@@ -5065,6 +5630,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>color-profile-name="" should be 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5076,6 +5643,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: color-profile-name="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5097,6 +5666,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>column-count="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number or 'inherit'.  '<xsl:text/>
@@ -5115,6 +5686,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>column-count="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -5131,6 +5704,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>column-count="" should be Number or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5142,6 +5717,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: column-count="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5163,6 +5740,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>column-gap="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -5181,6 +5760,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>column-gap="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -5197,6 +5778,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>column-gap="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5208,6 +5791,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: column-gap="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5229,6 +5814,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>column-number="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number.  '<xsl:text/>
@@ -5248,6 +5835,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>column-number="" should be Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5259,6 +5848,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: column-number="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5280,6 +5871,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>column-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length or Percent.  '<xsl:text/>
@@ -5299,6 +5892,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>column-width="" should be Length or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5310,6 +5905,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: column-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5331,6 +5928,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>content-height="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -5349,6 +5948,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>content-height="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -5365,6 +5966,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>content-height="" should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5376,6 +5979,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: content-height="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5394,6 +5999,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>content-type="" should be '&lt;string&gt; | auto'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5413,6 +6020,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>content-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -5431,6 +6040,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>content-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -5447,6 +6058,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>content-width="" should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5458,6 +6071,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: content-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5479,6 +6094,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>country="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'inherit', or Literal.  '<xsl:text/>
@@ -5497,6 +6114,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>country="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -5513,6 +6132,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>country="" should be 'none', 'inherit', or Literal.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5524,6 +6145,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: country="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5542,6 +6165,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>cue="" should be '&lt;cue-before&gt; || &lt;cue-after&gt; | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5564,6 +6189,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>destination-placement-offset="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length.  '<xsl:text/>
@@ -5583,6 +6210,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>destination-placement-offset="" should be Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5594,6 +6223,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: destination-placement-offset="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5615,6 +6246,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>direction="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'ltr', 'rtl', or 'inherit'.  '<xsl:text/>
@@ -5633,6 +6266,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>direction="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'ltr', 'rtl', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -5649,6 +6284,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>direction="" should be 'ltr', 'rtl', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5660,6 +6297,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: direction="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5681,6 +6320,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>display-align="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'before', 'center', 'after', or 'inherit'.  '<xsl:text/>
@@ -5699,6 +6340,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>display-align="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'before', 'center', 'after', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -5715,6 +6358,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>display-align="" should be 'auto', 'before', 'center', 'after', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5726,6 +6371,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: display-align="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5748,6 +6395,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>dominant-baseline="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', or 'inherit'.  '<xsl:text/>
@@ -5766,6 +6415,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>dominant-baseline="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -5782,6 +6433,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>dominant-baseline="" should be 'auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5793,6 +6446,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: dominant-baseline="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5814,6 +6469,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>empty-cells="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'show', 'hide', or 'inherit'.  '<xsl:text/>
@@ -5832,6 +6489,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>empty-cells="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'show', 'hide', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -5848,6 +6507,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>empty-cells="" should be 'show', 'hide', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5859,6 +6520,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: empty-cells="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5880,6 +6543,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>end-indent="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -5898,6 +6563,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>end-indent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -5914,6 +6581,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>end-indent="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5925,6 +6594,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: end-indent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -5946,6 +6617,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>ends-row="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
@@ -5964,6 +6637,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>ends-row="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
@@ -5980,6 +6655,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>ends-row="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -5991,6 +6668,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: ends-row="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6012,6 +6691,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>extent="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -6030,6 +6711,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>extent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -6046,6 +6729,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>extent="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6057,6 +6742,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: extent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6084,6 +6771,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>float="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'before', 'start', 'end', 'left', 'right', 'inside', 'outside', 'none', or 'inherit'.  '<xsl:text/>
@@ -6102,6 +6791,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>float="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'before', 'start', 'end', 'left', 'right', 'inside', 'outside', 'none', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -6118,6 +6809,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>float="" should be 'before', 'start', 'end', 'left', 'right', 'inside', 'outside', 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6129,6 +6822,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: float="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6150,6 +6845,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>flow-map-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -6169,6 +6866,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>flow-map-name="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6180,6 +6879,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: flow-map-name="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6202,6 +6903,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>flow-map-reference="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -6221,6 +6924,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>flow-map-reference="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6232,6 +6937,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: flow-map-reference="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6253,6 +6960,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>flow-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -6272,6 +6981,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>flow-name="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6283,6 +6994,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: flow-name="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6305,6 +7018,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>flow-name-reference="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -6324,6 +7039,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>flow-name-reference="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6335,6 +7052,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: flow-name-reference="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6353,6 +7072,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font="" should be '[ [ &lt;font-style&gt; || &lt;font-variant&gt; || &lt;font-weight&gt; ]? &lt;font-size&gt; [ / &lt;line-height&gt;]? &lt;font-family&gt; ] | caption | icon | menu | message-box | small-caption | status-bar | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6369,6 +7090,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-family="" should be '[[ &lt;family-name&gt; | &lt;generic-family&gt; ],]* [&lt;family-name&gt; | &lt;generic-family&gt;] | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6389,6 +7112,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>font-selection-strategy="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'character-by-character', or 'inherit'.  '<xsl:text/>
@@ -6407,6 +7132,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-selection-strategy="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'character-by-character', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -6423,6 +7150,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-selection-strategy="" should be 'auto', 'character-by-character', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6434,6 +7163,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-selection-strategy="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6455,6 +7186,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>font-size="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -6473,6 +7206,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-size="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -6489,6 +7224,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-size="" should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6500,6 +7237,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-size="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6522,6 +7261,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>font-size-adjust="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number, 'none', or 'inherit'.  '<xsl:text/>
@@ -6540,6 +7281,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-size-adjust="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -6556,6 +7299,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-size-adjust="" should be Number, 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6567,6 +7312,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-size-adjust="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6588,6 +7335,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>font-stretch="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', or Percent.  '<xsl:text/>
@@ -6606,6 +7355,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-stretch="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -6622,6 +7373,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-stretch="" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6633,6 +7386,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-stretch="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6654,6 +7409,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>font-style="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'normal', 'italic', 'oblique', 'backslant', or 'inherit'.  '<xsl:text/>
@@ -6672,6 +7429,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'normal', 'italic', 'oblique', 'backslant', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -6688,6 +7447,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-style="" should be 'normal', 'italic', 'oblique', 'backslant', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6699,6 +7460,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6720,6 +7483,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>font-variant="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'normal', 'small-caps', or 'inherit'.  '<xsl:text/>
@@ -6738,6 +7503,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-variant="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'normal', 'small-caps', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -6754,6 +7521,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-variant="" should be 'normal', 'small-caps', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6765,6 +7534,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-variant="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6786,6 +7557,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>font-weight="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'normal', 'bold', 'bolder', 'lighter', 'inherit', or Number.  '<xsl:text/>
@@ -6804,6 +7577,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-weight="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'normal', 'bold', 'bolder', 'lighter', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -6820,6 +7595,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>font-weight="" should be 'normal', 'bold', 'bolder', 'lighter', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6831,6 +7608,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-weight="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6850,6 +7629,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>force-page-count="" should be 'auto | even | odd | end-on-even | end-on-odd | no-force | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6866,6 +7647,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>format="" should be '&lt;string&gt;'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6888,6 +7671,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>glyph-orientation-horizontal="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Literal or 'inherit'.  '<xsl:text/>
@@ -6906,6 +7691,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>glyph-orientation-horizontal="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -6922,6 +7709,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>glyph-orientation-horizontal="" should be Literal or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -6933,6 +7722,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: glyph-orientation-horizontal="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -6955,6 +7746,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>glyph-orientation-vertical="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'inherit', or Literal.  '<xsl:text/>
@@ -6973,6 +7766,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>glyph-orientation-vertical="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -6989,6 +7784,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>glyph-orientation-vertical="" should be 'auto', 'inherit', or Literal.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7000,6 +7797,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: glyph-orientation-vertical="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7019,6 +7818,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>grouping-separator="" should be '&lt;character&gt;'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7038,6 +7839,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>grouping-size="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number.  '<xsl:text/>
@@ -7057,6 +7860,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>grouping-size="" should be Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7068,6 +7873,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: grouping-size="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7089,6 +7896,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>height="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
@@ -7107,6 +7916,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>height="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -7123,6 +7934,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>height="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7134,6 +7947,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: height="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7155,6 +7970,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>hyphenate="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'false', 'true', or 'inherit'.  '<xsl:text/>
@@ -7173,6 +7990,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenate="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'false', 'true', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -7189,6 +8008,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenate="" should be 'false', 'true', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7200,6 +8021,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: hyphenate="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7219,6 +8042,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenation-character="" should be '&lt;character&gt; | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7239,6 +8064,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>hyphenation-keep="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'column', 'page', or 'inherit'.  '<xsl:text/>
@@ -7257,6 +8084,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenation-keep="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'column', 'page', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -7273,6 +8102,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenation-keep="" should be 'auto', 'column', 'page', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7284,6 +8115,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: hyphenation-keep="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7306,6 +8139,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>hyphenation-ladder-count="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'no-limit', 'inherit', or Number.  '<xsl:text/>
@@ -7324,6 +8159,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenation-ladder-count="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'no-limit' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -7340,6 +8177,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenation-ladder-count="" should be 'no-limit', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7351,6 +8190,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: hyphenation-ladder-count="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7375,6 +8216,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>hyphenation-push-character-count="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number or 'inherit'.  '<xsl:text/>
@@ -7393,6 +8236,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenation-push-character-count="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -7409,6 +8254,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenation-push-character-count="" should be Number or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7420,6 +8267,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: hyphenation-push-character-count="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7444,6 +8293,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>hyphenation-remain-character-count="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number or 'inherit'.  '<xsl:text/>
@@ -7462,6 +8313,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenation-remain-character-count="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -7478,6 +8331,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenation-remain-character-count="" should be Number or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7489,6 +8344,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: hyphenation-remain-character-count="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7507,6 +8364,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>id="" should be '&lt;id&gt;'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7526,6 +8385,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>index-class="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Literal or EnumerationToken.  '<xsl:text/>
@@ -7544,6 +8405,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: index-class="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7562,6 +8425,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>index-key="" should be '&lt;string&gt;'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7582,6 +8447,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>indicate-destination="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
@@ -7600,6 +8467,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>indicate-destination="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
@@ -7616,6 +8485,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>indicate-destination="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7627,6 +8498,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: indicate-destination="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7649,6 +8522,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>initial-page-number="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'auto-odd', 'auto-even', 'inherit', or Number.  '<xsl:text/>
@@ -7667,6 +8542,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>initial-page-number="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'auto-odd', 'auto-even', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -7683,6 +8560,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>initial-page-number="" should be 'auto', 'auto-odd', 'auto-even', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7694,6 +8573,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: initial-page-number="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7718,6 +8599,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>inline-progression-dimension="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -7736,6 +8619,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>inline-progression-dimension="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -7752,6 +8637,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>inline-progression-dimension="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7763,6 +8650,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: inline-progression-dimension="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7791,6 +8680,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>intrinsic-scale-value="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Percent or 'inherit'.  '<xsl:text/>
@@ -7809,6 +8700,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>intrinsic-scale-value="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -7825,6 +8718,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>intrinsic-scale-value="" should be Percent or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7836,6 +8731,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: intrinsic-scale-value="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7858,6 +8755,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>intrusion-displace="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'none', 'line', 'indent', 'block', or 'inherit'.  '<xsl:text/>
@@ -7876,6 +8775,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>intrusion-displace="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'none', 'line', 'indent', 'block', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -7892,6 +8793,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>intrusion-displace="" should be 'auto', 'none', 'line', 'indent', 'block', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7903,6 +8806,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: intrusion-displace="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7924,6 +8829,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>keep-together="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'always', 'inherit', or Number.  '<xsl:text/>
@@ -7942,6 +8849,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>keep-together="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'always', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -7958,6 +8867,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>keep-together="" should be 'auto', 'always', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -7969,6 +8880,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: keep-together="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -7990,6 +8903,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>keep-with-next="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'always', 'inherit', or Number.  '<xsl:text/>
@@ -8008,6 +8923,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>keep-with-next="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'always', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8024,6 +8941,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>keep-with-next="" should be 'auto', 'always', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8035,6 +8954,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: keep-with-next="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8057,6 +8978,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>keep-with-previous="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'always', 'inherit', or Number.  '<xsl:text/>
@@ -8075,6 +8998,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>keep-with-previous="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'always', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8091,6 +9016,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>keep-with-previous="" should be 'auto', 'always', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8102,6 +9029,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: keep-with-previous="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8120,6 +9049,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>language="" should be 'none | &lt;language&gt; | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8140,6 +9071,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>last-line-end-indent="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -8158,6 +9091,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>last-line-end-indent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -8174,6 +9109,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>last-line-end-indent="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8185,6 +9122,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: last-line-end-indent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8207,6 +9146,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>leader-alignment="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'reference-area', 'page', or 'inherit'.  '<xsl:text/>
@@ -8225,6 +9166,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>leader-alignment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'reference-area', 'page', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8241,6 +9184,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>leader-alignment="" should be 'none', 'reference-area', 'page', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8252,6 +9197,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: leader-alignment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8273,6 +9220,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>leader-length="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -8291,6 +9240,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>leader-length="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -8307,6 +9258,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>leader-length="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8318,6 +9271,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: leader-length="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8339,6 +9294,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>leader-pattern="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'space', 'rule', 'dots', 'use-content', or 'inherit'.  '<xsl:text/>
@@ -8357,6 +9314,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>leader-pattern="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'space', 'rule', 'dots', 'use-content', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8373,6 +9332,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>leader-pattern="" should be 'space', 'rule', 'dots', 'use-content', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8384,6 +9345,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: leader-pattern="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8406,6 +9369,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>leader-pattern-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'use-font-metrics', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -8424,6 +9389,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>leader-pattern-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'use-font-metrics' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8440,6 +9407,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>leader-pattern-width="" should be 'use-font-metrics', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8451,6 +9420,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: leader-pattern-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8472,6 +9443,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>left="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
@@ -8490,6 +9463,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>left="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8506,6 +9481,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>left="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8517,6 +9494,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: left="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8538,6 +9517,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>letter-spacing="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'normal', 'inherit', or Length.  '<xsl:text/>
@@ -8556,6 +9537,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>letter-spacing="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'normal' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8572,6 +9555,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>letter-spacing="" should be 'normal', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8583,6 +9568,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: letter-spacing="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8604,6 +9591,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>letter-value="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'alphabetic', or 'traditional'.  '<xsl:text/>
@@ -8622,6 +9611,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>letter-value="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'alphabetic', or 'traditional'. Enumeration token is '<xsl:text/>
@@ -8638,6 +9629,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>letter-value="" should be 'auto', 'alphabetic', or 'traditional'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8649,6 +9642,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: letter-value="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8670,6 +9665,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>line-height="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'normal', 'inherit', Length, Number, or Percent.  '<xsl:text/>
@@ -8688,6 +9685,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>line-height="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'normal' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8704,6 +9703,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>line-height="" should be 'normal', 'inherit', Length, Number, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8715,6 +9716,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: line-height="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8739,6 +9742,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>line-height-shift-adjustment="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'consider-shifts', 'disregard-shifts', or 'inherit'.  '<xsl:text/>
@@ -8757,6 +9762,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>line-height-shift-adjustment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'consider-shifts', 'disregard-shifts', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8773,6 +9780,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>line-height-shift-adjustment="" should be 'consider-shifts', 'disregard-shifts', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8784,6 +9793,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: line-height-shift-adjustment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8806,6 +9817,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>line-stacking-strategy="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'line-height', 'font-height', 'max-height', or 'inherit'.  '<xsl:text/>
@@ -8824,6 +9837,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>line-stacking-strategy="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'line-height', 'font-height', 'max-height', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8840,6 +9855,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>line-stacking-strategy="" should be 'line-height', 'font-height', 'max-height', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8851,6 +9868,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: line-stacking-strategy="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8873,6 +9892,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>linefeed-treatment="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', or 'inherit'.  '<xsl:text/>
@@ -8891,6 +9912,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>linefeed-treatment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8907,6 +9930,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>linefeed-treatment="" should be 'ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8918,6 +9943,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: linefeed-treatment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -8936,6 +9963,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>margin="" should be '&lt;margin-width&gt;{1,4} | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -8955,6 +9984,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>margin-bottom="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -8973,6 +10004,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>margin-bottom="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -8989,6 +10022,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>margin-bottom="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9000,6 +10035,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: margin-bottom="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9021,6 +10058,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>margin-left="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -9039,6 +10078,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>margin-left="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -9055,6 +10096,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>margin-left="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9066,6 +10109,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: margin-left="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9087,6 +10132,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>margin-right="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -9105,6 +10152,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>margin-right="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -9121,6 +10170,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>margin-right="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9132,6 +10183,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: margin-right="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9153,6 +10206,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>margin-top="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -9171,6 +10226,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>margin-top="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -9187,6 +10244,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>margin-top="" should be 'auto', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9198,6 +10257,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: margin-top="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9220,6 +10281,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>marker-class-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -9239,6 +10302,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>marker-class-name="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9250,6 +10315,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: marker-class-name="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9271,6 +10338,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>master-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -9290,6 +10359,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>master-name="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9301,6 +10372,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: master-name="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9323,6 +10396,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>master-reference="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -9342,6 +10417,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>master-reference="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9353,6 +10430,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: master-reference="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9371,6 +10450,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>max-height="" should be '&lt;length&gt; | &lt;percentage&gt; | none | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9387,6 +10468,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>max-width="" should be '&lt;length&gt; | &lt;percentage&gt; | none | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9406,6 +10489,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>maximum-repeats="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number, 'no-limit', or 'inherit'.  '<xsl:text/>
@@ -9424,6 +10509,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>maximum-repeats="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'no-limit' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -9440,6 +10527,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>maximum-repeats="" should be Number, 'no-limit', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9451,6 +10540,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: maximum-repeats="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9472,6 +10563,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>media-usage="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'paginate', 'bounded-in-one-dimension', or 'unbounded'.  '<xsl:text/>
@@ -9490,6 +10583,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>media-usage="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'paginate', 'bounded-in-one-dimension', or 'unbounded'. Enumeration token is '<xsl:text/>
@@ -9506,6 +10601,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>media-usage="" should be 'auto', 'paginate', 'bounded-in-one-dimension', or 'unbounded'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9517,6 +10614,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: media-usage="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9541,6 +10640,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>merge-pages-across-index-key-references="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'merge' or 'leave-separate'.  '<xsl:text/>
@@ -9559,6 +10660,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>merge-pages-across-index-key-references="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'merge' or 'leave-separate'. Enumeration token is '<xsl:text/>
@@ -9575,6 +10678,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>merge-pages-across-index-key-references="" should be 'merge' or 'leave-separate'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9586,6 +10691,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: merge-pages-across-index-key-references="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9610,6 +10717,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>merge-ranges-across-index-key-references="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'merge' or 'leave-separate'.  '<xsl:text/>
@@ -9628,6 +10737,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>merge-ranges-across-index-key-references="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'merge' or 'leave-separate'. Enumeration token is '<xsl:text/>
@@ -9644,6 +10755,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>merge-ranges-across-index-key-references="" should be 'merge' or 'leave-separate'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9655,6 +10768,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: merge-ranges-across-index-key-references="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9679,6 +10794,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>merge-sequential-page-numbers="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'merge' or 'leave-separate'.  '<xsl:text/>
@@ -9697,6 +10814,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>merge-sequential-page-numbers="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'merge' or 'leave-separate'. Enumeration token is '<xsl:text/>
@@ -9713,6 +10832,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>merge-sequential-page-numbers="" should be 'merge' or 'leave-separate'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9724,6 +10845,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: merge-sequential-page-numbers="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9742,6 +10865,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>min-height="" should be '&lt;length&gt; | &lt;percentage&gt; | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9758,6 +10883,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>min-width="" should be '&lt;length&gt; | &lt;percentage&gt; | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9778,6 +10905,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>number-columns-repeated="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number.  '<xsl:text/>
@@ -9797,6 +10926,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>number-columns-repeated="" should be Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9808,6 +10939,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: number-columns-repeated="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9830,6 +10963,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>number-columns-spanned="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number.  '<xsl:text/>
@@ -9849,6 +10984,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>number-columns-spanned="" should be Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9860,6 +10997,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: number-columns-spanned="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9882,6 +11021,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>number-rows-spanned="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number.  '<xsl:text/>
@@ -9901,6 +11042,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>number-rows-spanned="" should be Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9912,6 +11055,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: number-rows-spanned="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9933,6 +11078,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>odd-or-even="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'odd', 'even', 'any', or 'inherit'.  '<xsl:text/>
@@ -9951,6 +11098,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>odd-or-even="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'odd', 'even', 'any', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -9967,6 +11116,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>odd-or-even="" should be 'odd', 'even', 'any', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -9978,6 +11129,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: odd-or-even="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -9999,6 +11152,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>orphans="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number or 'inherit'.  '<xsl:text/>
@@ -10017,6 +11172,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>orphans="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -10033,6 +11190,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>orphans="" should be Number or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10044,6 +11203,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: orphans="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10065,6 +11226,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>overflow="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'visible', 'hidden', 'scroll', 'error-if-overflow', 'repeat', 'replace', 'condense', or 'auto'.  '<xsl:text/>
@@ -10083,6 +11246,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>overflow="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'visible', 'hidden', 'scroll', 'error-if-overflow', 'repeat', 'replace', 'condense', or 'auto'. Enumeration token is '<xsl:text/>
@@ -10099,6 +11264,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>overflow="" should be 'visible', 'hidden', 'scroll', 'error-if-overflow', 'repeat', 'replace', 'condense', or 'auto'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10110,6 +11277,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: overflow="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10128,6 +11297,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding="" should be '&lt;padding-width&gt;{1,4} | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10147,6 +11318,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>padding-after="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -10165,6 +11338,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-after="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -10181,6 +11356,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-after="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10192,6 +11369,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-after="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10213,6 +11392,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>padding-before="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -10231,6 +11412,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-before="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -10247,6 +11430,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-before="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10258,6 +11443,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-before="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10279,6 +11466,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>padding-bottom="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -10297,6 +11486,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-bottom="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -10313,6 +11504,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-bottom="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10324,6 +11517,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-bottom="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10345,6 +11540,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>padding-end="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -10363,6 +11560,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-end="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -10379,6 +11578,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-end="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10390,6 +11591,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-end="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10411,6 +11614,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>padding-left="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -10429,6 +11634,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-left="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -10445,6 +11652,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-left="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10456,6 +11665,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-left="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10477,6 +11688,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>padding-right="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -10495,6 +11708,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-right="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -10511,6 +11726,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-right="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10522,6 +11739,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-right="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10543,6 +11762,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>padding-start="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -10561,6 +11782,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-start="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -10577,6 +11800,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-start="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10588,6 +11813,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-start="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10609,6 +11836,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>padding-top="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -10627,6 +11856,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-top="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -10643,6 +11874,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>padding-top="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10654,6 +11887,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-top="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10673,6 +11908,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-break-after="" should be 'auto | always | avoid | left | right | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10690,6 +11927,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-break-before="" should be 'auto | always | avoid | left | right | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10707,6 +11946,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-break-inside="" should be 'avoid | auto | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10727,6 +11968,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>page-citation-strategy="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'all', 'normal', 'non-blank', or 'inherit'.  '<xsl:text/>
@@ -10745,6 +11988,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-citation-strategy="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'all', 'normal', 'non-blank', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -10761,6 +12006,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-citation-strategy="" should be 'all', 'normal', 'non-blank', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10772,6 +12019,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: page-citation-strategy="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10793,6 +12042,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>page-height="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'indefinite', 'inherit', or Length.  '<xsl:text/>
@@ -10811,6 +12062,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-height="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'indefinite', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -10827,6 +12080,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-height="" should be 'auto', 'indefinite', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10838,6 +12093,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: page-height="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10860,6 +12117,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>page-number-treatment="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'link' or 'no-link'.  '<xsl:text/>
@@ -10878,6 +12137,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-number-treatment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'link' or 'no-link'. Enumeration token is '<xsl:text/>
@@ -10894,6 +12155,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-number-treatment="" should be 'link' or 'no-link'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10905,6 +12168,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: page-number-treatment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10926,6 +12191,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>page-position="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'only', 'first', 'last', 'rest', 'any', or 'inherit'.  '<xsl:text/>
@@ -10944,6 +12211,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-position="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'only', 'first', 'last', 'rest', 'any', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -10960,6 +12229,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-position="" should be 'only', 'first', 'last', 'rest', 'any', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -10971,6 +12242,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: page-position="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -10992,6 +12265,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>page-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'indefinite', 'inherit', or Length.  '<xsl:text/>
@@ -11010,6 +12285,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'indefinite', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -11026,6 +12303,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>page-width="" should be 'auto', 'indefinite', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11037,6 +12316,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: page-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11055,6 +12336,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>pause="" should be '[&lt;time&gt; | &lt;percentage&gt;]{1,2} | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11071,6 +12354,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>position="" should be 'static | relative | absolute | fixed | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11090,6 +12375,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>precedence="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'true', 'false', or 'inherit'.  '<xsl:text/>
@@ -11108,6 +12395,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>precedence="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'true', 'false', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -11124,6 +12413,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>precedence="" should be 'true', 'false', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11135,6 +12426,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: precedence="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11159,6 +12452,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>provisional-distance-between-starts="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -11177,6 +12472,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>provisional-distance-between-starts="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -11193,6 +12490,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>provisional-distance-between-starts="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11204,6 +12503,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: provisional-distance-between-starts="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11228,6 +12529,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>provisional-label-separation="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -11246,6 +12549,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>provisional-label-separation="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -11262,6 +12567,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>provisional-label-separation="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11273,6 +12580,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: provisional-label-separation="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11291,6 +12600,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>ref-id="" should be '&lt;idref&gt; | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11307,6 +12618,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>ref-index-key="" should be '&lt;string&gt;'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11324,6 +12637,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>reference-orientation="" should be '0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11343,6 +12658,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>region-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'xsl-region-body', 'xsl-region-start', 'xsl-region-end', 'xsl-region-before', or 'xsl-region-after'.  '<xsl:text/>
@@ -11362,6 +12679,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>region-name="" should be 'xsl-region-body', 'xsl-region-start', 'xsl-region-end', 'xsl-region-before', or 'xsl-region-after'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11373,6 +12692,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: region-name="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11395,6 +12716,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>region-name-reference="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -11414,6 +12737,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>region-name-reference="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11425,6 +12750,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: region-name-reference="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11446,6 +12773,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>relative-align="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'before', 'baseline', or 'inherit'.  '<xsl:text/>
@@ -11464,6 +12793,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>relative-align="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'before', 'baseline', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -11480,6 +12811,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>relative-align="" should be 'before', 'baseline', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11491,6 +12824,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: relative-align="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11513,6 +12848,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>relative-position="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'static', 'relative', or 'inherit'.  '<xsl:text/>
@@ -11531,6 +12868,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>relative-position="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'static', 'relative', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -11547,6 +12886,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>relative-position="" should be 'static', 'relative', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11558,6 +12899,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: relative-position="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11580,6 +12923,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>rendering-intent="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', or 'inherit'.  '<xsl:text/>
@@ -11598,6 +12943,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>rendering-intent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -11614,6 +12961,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>rendering-intent="" should be 'auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11625,6 +12974,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: rendering-intent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11647,6 +12998,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>retrieve-boundary="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'page', 'page-sequence', or 'document'.  '<xsl:text/>
@@ -11665,6 +13018,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>retrieve-boundary="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'page', 'page-sequence', or 'document'. Enumeration token is '<xsl:text/>
@@ -11681,6 +13036,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>retrieve-boundary="" should be 'page', 'page-sequence', or 'document'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11692,6 +13049,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: retrieve-boundary="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11716,6 +13075,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>retrieve-boundary-within-table="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'table', 'table-fragment', or 'page'.  '<xsl:text/>
@@ -11734,6 +13095,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>retrieve-boundary-within-table="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'table', 'table-fragment', or 'page'. Enumeration token is '<xsl:text/>
@@ -11750,6 +13113,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>retrieve-boundary-within-table="" should be 'table', 'table-fragment', or 'page'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11761,6 +13126,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: retrieve-boundary-within-table="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11783,6 +13150,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>retrieve-class-name="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -11802,6 +13171,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>retrieve-class-name="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11813,6 +13184,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: retrieve-class-name="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11835,6 +13208,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>retrieve-position="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', or 'last-ending-within-page'.  '<xsl:text/>
@@ -11853,6 +13228,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>retrieve-position="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', or 'last-ending-within-page'. Enumeration token is '<xsl:text/>
@@ -11869,6 +13246,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>retrieve-position="" should be 'first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', or 'last-ending-within-page'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11880,6 +13259,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: retrieve-position="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11904,6 +13285,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>retrieve-position-within-table="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'first-starting', 'first-including-carryover', 'last-starting', or 'last-ending'.  '<xsl:text/>
@@ -11922,6 +13305,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>retrieve-position-within-table="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'first-starting', 'first-including-carryover', 'last-starting', or 'last-ending'. Enumeration token is '<xsl:text/>
@@ -11938,6 +13323,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>retrieve-position-within-table="" should be 'first-starting', 'first-including-carryover', 'last-starting', or 'last-ending'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -11949,6 +13336,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: retrieve-position-within-table="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -11970,6 +13359,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>right="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
@@ -11988,6 +13379,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>right="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -12004,6 +13397,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>right="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12015,6 +13410,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: right="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12033,6 +13430,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>role="" should be '&lt;string&gt; | &lt;uri-specification&gt; | none | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12052,6 +13451,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>rule-style="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', or 'inherit'.  '<xsl:text/>
@@ -12070,6 +13471,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>rule-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -12086,6 +13489,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>rule-style="" should be 'none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12097,6 +13502,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: rule-style="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12118,6 +13525,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>rule-thickness="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length.  '<xsl:text/>
@@ -12137,6 +13546,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>rule-thickness="" should be Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12148,6 +13559,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: rule-thickness="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12169,6 +13582,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>scale-option="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'width', 'height', or 'inherit'.  '<xsl:text/>
@@ -12187,6 +13602,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>scale-option="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'width', 'height', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -12203,6 +13620,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>scale-option="" should be 'width', 'height', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12214,6 +13633,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: scale-option="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12235,6 +13656,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>scaling="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'uniform', 'non-uniform', or 'inherit'.  '<xsl:text/>
@@ -12253,6 +13676,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>scaling="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'uniform', 'non-uniform', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -12269,6 +13694,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>scaling="" should be 'uniform', 'non-uniform', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12280,6 +13707,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: scaling="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12301,6 +13730,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>scaling-method="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'integer-pixels', 'resample-any-method', or 'inherit'.  '<xsl:text/>
@@ -12319,6 +13750,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>scaling-method="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'integer-pixels', 'resample-any-method', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -12335,6 +13768,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>scaling-method="" should be 'auto', 'integer-pixels', 'resample-any-method', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12346,6 +13781,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: scaling-method="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12367,6 +13804,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>score-spaces="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'true', 'false', or 'inherit'.  '<xsl:text/>
@@ -12385,6 +13824,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>score-spaces="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'true', 'false', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -12401,6 +13842,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>score-spaces="" should be 'true', 'false', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12412,6 +13855,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: score-spaces="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12433,6 +13878,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>script="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'auto', 'inherit', or Literal.  '<xsl:text/>
@@ -12451,6 +13898,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>script="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'auto', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -12467,6 +13916,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>script="" should be 'none', 'auto', 'inherit', or Literal.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12478,6 +13929,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: script="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12500,6 +13953,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>show-destination="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'replace' or 'new'.  '<xsl:text/>
@@ -12518,6 +13973,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>show-destination="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'replace' or 'new'. Enumeration token is '<xsl:text/>
@@ -12534,6 +13991,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>show-destination="" should be 'replace' or 'new'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12545,6 +14004,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: show-destination="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12563,6 +14024,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>size="" should be '&lt;length&gt;{1,2} | auto | landscape | portrait | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12582,6 +14045,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>source-document="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be URI, 'none', or 'inherit'.  '<xsl:text/>
@@ -12601,6 +14066,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>source-document="" should be URI, 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12612,6 +14079,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: source-document="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12633,6 +14102,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>space-after="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length or 'inherit'.  '<xsl:text/>
@@ -12651,6 +14122,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>space-after="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -12667,6 +14140,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>space-after="" should be Length or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12678,6 +14153,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: space-after="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12699,6 +14176,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>space-before="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length or 'inherit'.  '<xsl:text/>
@@ -12717,6 +14196,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>space-before="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -12733,6 +14214,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>space-before="" should be Length or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12744,6 +14227,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: space-before="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12765,6 +14250,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>space-end="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -12783,6 +14270,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>space-end="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -12799,6 +14288,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>space-end="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12810,6 +14301,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: space-end="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12831,6 +14324,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>space-start="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -12849,6 +14344,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>space-start="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -12865,6 +14362,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>space-start="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12876,6 +14375,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: space-start="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12897,6 +14398,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>span="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'all', or 'inherit'.  '<xsl:text/>
@@ -12915,6 +14418,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>span="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'all', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -12931,6 +14436,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>span="" should be 'none', 'all', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12942,6 +14449,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: span="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -12960,6 +14469,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>src="" should be '&lt;uri-specification&gt; | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -12979,6 +14490,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>start-indent="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -12997,6 +14510,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>start-indent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -13013,6 +14528,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>start-indent="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13024,6 +14541,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: start-indent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13045,6 +14564,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>starting-state="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'show' or 'hide'.  '<xsl:text/>
@@ -13063,6 +14584,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>starting-state="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'show' or 'hide'. Enumeration token is '<xsl:text/>
@@ -13079,6 +14602,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>starting-state="" should be 'show' or 'hide'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13090,6 +14615,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: starting-state="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13111,6 +14638,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>starts-row="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
@@ -13129,6 +14658,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>starts-row="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
@@ -13145,6 +14676,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>starts-row="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13156,6 +14689,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: starts-row="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13178,6 +14713,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>suppress-at-line-break="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'suppress', 'retain', or 'inherit'.  '<xsl:text/>
@@ -13196,6 +14733,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>suppress-at-line-break="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'suppress', 'retain', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -13212,6 +14751,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>suppress-at-line-break="" should be 'auto', 'suppress', 'retain', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13223,6 +14764,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: suppress-at-line-break="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13244,6 +14787,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>switch-to="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'xsl-preceding', 'xsl-following', or 'xsl-any'.  '<xsl:text/>
@@ -13263,6 +14808,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>switch-to="" should be 'xsl-preceding', 'xsl-following', or 'xsl-any'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13274,6 +14821,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: switch-to="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13295,6 +14844,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>table-layout="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'fixed', or 'inherit'.  '<xsl:text/>
@@ -13313,6 +14864,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>table-layout="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'fixed', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -13329,6 +14882,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>table-layout="" should be 'auto', 'fixed', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13340,6 +14895,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: table-layout="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13362,6 +14919,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>table-omit-footer-at-break="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
@@ -13380,6 +14939,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>table-omit-footer-at-break="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
@@ -13396,6 +14957,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>table-omit-footer-at-break="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13407,6 +14970,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: table-omit-footer-at-break="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13429,6 +14994,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>table-omit-header-at-break="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'true' or 'false'.  '<xsl:text/>
@@ -13447,6 +15014,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>table-omit-header-at-break="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'true' or 'false'. Enumeration token is '<xsl:text/>
@@ -13463,6 +15032,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>table-omit-header-at-break="" should be 'true' or 'false'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13474,6 +15045,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: table-omit-header-at-break="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13496,6 +15069,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>target-presentation-context="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'use-target-processing-context' or URI.  '<xsl:text/>
@@ -13515,6 +15090,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>target-presentation-context="" should be 'use-target-processing-context' or URI.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13526,6 +15103,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: target-presentation-context="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13548,6 +15127,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>target-processing-context="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'document-root' or URI.  '<xsl:text/>
@@ -13567,6 +15148,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>target-processing-context="" should be 'document-root' or URI.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13578,6 +15161,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: target-processing-context="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13600,6 +15185,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>target-stylesheet="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'use-normal-stylesheet' or URI.  '<xsl:text/>
@@ -13619,6 +15206,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>target-stylesheet="" should be 'use-normal-stylesheet' or URI.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13630,6 +15219,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: target-stylesheet="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13648,6 +15239,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-align="" should be 'start | center | end | justify | inside | outside | left | right | &lt;string&gt; | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13667,6 +15260,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>text-align-last="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'relative', 'start', 'center', 'end', 'justify', 'inside', 'outside', 'left', 'right', or 'inherit'.  '<xsl:text/>
@@ -13685,6 +15280,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-align-last="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'relative', 'start', 'center', 'end', 'justify', 'inside', 'outside', 'left', 'right', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -13701,6 +15298,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-align-last="" should be 'relative', 'start', 'center', 'end', 'justify', 'inside', 'outside', 'left', 'right', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13712,6 +15311,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-align-last="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13733,6 +15334,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>text-altitude="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'use-font-metrics', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -13751,6 +15354,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-altitude="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'use-font-metrics' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -13767,6 +15372,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-altitude="" should be 'use-font-metrics', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13778,6 +15385,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-altitude="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13799,6 +15408,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>text-decoration="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.  '<xsl:text/>
@@ -13817,6 +15428,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-decoration="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -13833,6 +15446,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-decoration="" should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13844,6 +15459,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-decoration="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13865,6 +15482,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>text-depth="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'use-font-metrics', 'inherit', Length, or Percent.  '<xsl:text/>
@@ -13883,6 +15502,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-depth="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'use-font-metrics' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -13899,6 +15520,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-depth="" should be 'use-font-metrics', 'inherit', Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13910,6 +15533,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-depth="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13931,6 +15556,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>text-indent="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, or 'inherit'.  '<xsl:text/>
@@ -13949,6 +15576,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-indent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -13965,6 +15594,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-indent="" should be Length, Percent, or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -13976,6 +15607,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-indent="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -13997,6 +15630,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>text-shadow="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'none', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'inherit', Color, or Length.  '<xsl:text/>
@@ -14016,6 +15651,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-shadow="" should be 'none', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'inherit', Color, or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14027,6 +15664,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-shadow="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14048,6 +15687,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>text-transform="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.  '<xsl:text/>
@@ -14066,6 +15707,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-transform="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14082,6 +15725,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>text-transform="" should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14093,6 +15738,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-transform="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14114,6 +15761,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>top="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
@@ -14132,6 +15781,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>top="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14148,6 +15799,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>top="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14159,6 +15812,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: top="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14181,6 +15836,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>treat-as-word-space="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'true', 'false', or 'inherit'.  '<xsl:text/>
@@ -14199,6 +15856,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>treat-as-word-space="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto', 'true', 'false', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14215,6 +15874,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>treat-as-word-space="" should be 'auto', 'true', 'false', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14226,6 +15887,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: treat-as-word-space="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14247,6 +15910,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>unicode-bidi="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'normal', 'embed', 'bidi-override', or 'inherit'.  '<xsl:text/>
@@ -14265,6 +15930,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>unicode-bidi="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'normal', 'embed', 'bidi-override', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14281,6 +15948,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>unicode-bidi="" should be 'normal', 'embed', 'bidi-override', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14292,6 +15961,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: unicode-bidi="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14310,6 +15981,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>vertical-align="" should be 'baseline | middle | sub | super | text-top | text-bottom | &lt;percentage&gt; | &lt;length&gt; | top | bottom | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14329,6 +16002,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>visibility="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'visible', 'hidden', 'collapse', or 'inherit'.  '<xsl:text/>
@@ -14347,6 +16022,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>visibility="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'visible', 'hidden', 'collapse', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14363,6 +16040,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>visibility="" should be 'visible', 'hidden', 'collapse', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14374,6 +16053,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: visibility="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14392,6 +16073,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>white-space="" should be 'normal | pre | nowrap | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14412,6 +16095,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>white-space-collapse="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'false', 'true', or 'inherit'.  '<xsl:text/>
@@ -14430,6 +16115,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>white-space-collapse="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'false', 'true', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14446,6 +16133,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>white-space-collapse="" should be 'false', 'true', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14457,6 +16146,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: white-space-collapse="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14479,6 +16170,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>white-space-treatment="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', or 'inherit'.  '<xsl:text/>
@@ -14497,6 +16190,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>white-space-treatment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14513,6 +16208,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>white-space-treatment="" should be 'ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14524,6 +16221,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: white-space-treatment="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14545,6 +16244,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>widows="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Number or 'inherit'.  '<xsl:text/>
@@ -14563,6 +16264,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>widows="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
@@ -14579,6 +16282,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>widows="" should be Number or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14590,6 +16295,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: widows="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14611,6 +16318,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length, Percent, 'auto', or 'inherit'.  '<xsl:text/>
@@ -14629,6 +16338,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14645,6 +16356,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>width="" should be Length, Percent, 'auto', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14656,6 +16369,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14677,6 +16392,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>word-spacing="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'normal', 'inherit', or Length.  '<xsl:text/>
@@ -14695,6 +16412,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>word-spacing="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'normal' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14711,6 +16430,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>word-spacing="" should be 'normal', 'inherit', or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14722,6 +16443,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: word-spacing="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14743,6 +16466,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>wrap-option="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'no-wrap', 'wrap', or 'inherit'.  '<xsl:text/>
@@ -14761,6 +16486,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>wrap-option="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'no-wrap', 'wrap', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14777,6 +16504,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>wrap-option="" should be 'no-wrap', 'wrap', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14788,6 +16517,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: wrap-option="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14809,6 +16540,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>writing-mode="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', or 'inherit'.  '<xsl:text/>
@@ -14827,6 +16560,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>writing-mode="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14843,6 +16578,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>writing-mode="" should be 'lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14854,6 +16591,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: writing-mode="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14872,6 +16611,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>xml.lang="" should be '&lt;language-country&gt; | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14891,6 +16632,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>z-index="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be 'auto', 'inherit', or Number.  '<xsl:text/>
@@ -14909,6 +16652,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>z-index="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" token should be 'auto' or 'inherit'. Enumeration token is '<xsl:text/>
@@ -14925,6 +16670,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>z-index="" should be 'auto', 'inherit', or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -14936,6 +16683,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: z-index="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -14952,7 +16701,7 @@
 
 	  <!--RULE axf-1-->
    <xsl:template match="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
-                 priority="1018"
+                 priority="1035"
                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
@@ -14969,6 +16718,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>name="<xsl:text/>
                   <xsl:value-of select="@name"/>
                   <xsl:text/>" cannot be used when axf:document-info with name="xmp" is present.</svrl:text>
@@ -14980,7 +16731,7 @@
 
 	  <!--RULE -->
    <xsl:template match="axf:document-info[@name = 'title']"
-                 priority="1017"
+                 priority="1034"
                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:document-info[@name = 'title']"/>
@@ -14995,6 +16746,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>name="<xsl:text/>
                   <xsl:value-of select="@name"/>
                   <xsl:text/>" is deprecated.  Please use name="document-title".</svrl:text>
@@ -15005,7 +16758,91 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-color" priority="1016" mode="M11">
+   <xsl:template match="fo:*/@axf:annotation-color" priority="1033" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:annotation-color"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>axf:annotation-color="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be Color or 'none'.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="local-name($expression) = 'EMPTY'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'EMPTY'">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>annotation-color="" should be Color or 'none'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: annotation-color="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:annotation-contents" priority="1032" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:annotation-contents"/>
+
+		    <!--ASSERT Warning-->
+      <xsl:choose>
+         <xsl:when test="normalize-space(../@axf:annotation-type) = ('Text', 'FreeText', 'Stamp', 'FileAttachment') or local-name(..) = 'basic-link'"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="normalize-space(../@axf:annotation-type) = ('Text', 'FreeText', 'Stamp', 'FileAttachment') or local-name(..) = 'basic-link'">
+               <xsl:attribute name="role">Warning</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>
+                  <xsl:text/>
+                  <xsl:value-of select="name(.)"/>
+                  <xsl:text/> should be used only when @axf:annotation-type is 'Text', 'FreeText', 'Stamp', or 'FileAnnotation' or on fo:basic-link.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:background-color" priority="1031" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15019,7 +16856,9 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>background-color="<xsl:text/>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>axf:background-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
                   <xsl:value-of select="."/>
@@ -15038,7 +16877,12 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>background-color="" should be Color or EnumerationToken.</svrl:text>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="" should be Color or EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -15049,7 +16893,11 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>Syntax error: background-color="<xsl:text/>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
          </svrl:successful-report>
@@ -15058,7 +16906,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-height"
-                 priority="1015"
+                 priority="1030"
                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-height"/>
@@ -15073,6 +16921,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>content-height="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
@@ -15091,6 +16941,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>content-height="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" enumeration token is '<xsl:text/>
@@ -15107,6 +16959,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>content-height="" should be EnumerationToken, Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15118,6 +16972,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: content-height="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -15127,7 +16983,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-type"
-                 priority="1014"
+                 priority="1029"
                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-type"/>
@@ -15142,6 +16998,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>content-type="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Literal or EnumerationToken.  '<xsl:text/>
@@ -15160,6 +17018,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>content-type="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" enumeration token is '<xsl:text/>
@@ -15176,6 +17036,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>content-type="" should be Literal or EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15187,6 +17049,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: content-type="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -15196,7 +17060,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-width"
-                 priority="1013"
+                 priority="1028"
                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-width"/>
@@ -15211,6 +17075,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>content-width="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken, Length, or Percent.  '<xsl:text/>
@@ -15229,6 +17095,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>content-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" enumeration token is '<xsl:text/>
@@ -15245,6 +17113,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>content-width="" should be EnumerationToken, Length, or Percent.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15256,6 +17126,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: content-width="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -15264,7 +17136,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-color" priority="1012" mode="M11">
+   <xsl:template match="fo:*/@axf:background-color" priority="1027" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15278,6 +17150,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>background-color="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Color or EnumerationToken.  '<xsl:text/>
@@ -15297,6 +17171,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-color="" should be Color or EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15308,6 +17184,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -15316,7 +17194,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-image" priority="1011" mode="M11">
+   <xsl:template match="fo:*/@axf:background-image" priority="1026" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-image"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15330,6 +17208,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>background-image="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be URI or EnumerationToken.  '<xsl:text/>
@@ -15348,6 +17228,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-image="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" enumeration token is '<xsl:text/>
@@ -15364,6 +17246,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-image="" should be URI or EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15375,6 +17259,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-image="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -15383,7 +17269,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-position" priority="1010" mode="M11">
+   <xsl:template match="fo:*/@background-position" priority="1025" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-position"/>
 
@@ -15394,6 +17280,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-position="" should be '[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15401,7 +17289,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-position-horizontal"
-                 priority="1009"
+                 priority="1024"
                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-horizontal"/>
@@ -15416,6 +17304,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>background-position-horizontal="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Percent, Length, or EnumerationToken.  '<xsl:text/>
@@ -15434,6 +17324,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-position-horizontal="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" enumeration token is '<xsl:text/>
@@ -15450,6 +17342,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-position-horizontal="" should be Percent, Length, or EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15461,6 +17355,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-position-horizontal="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -15470,7 +17366,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-position-vertical"
-                 priority="1008"
+                 priority="1023"
                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-vertical"/>
@@ -15485,6 +17381,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>background-position-vertical="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Percent, Length, or EnumerationToken.  '<xsl:text/>
@@ -15503,6 +17401,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-position-vertical="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" enumeration token is '<xsl:text/>
@@ -15519,6 +17419,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-position-vertical="" should be Percent, Length, or EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15530,6 +17432,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-position-vertical="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -15538,7 +17442,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-repeat" priority="1007" mode="M11">
+   <xsl:template match="fo:*/@axf:background-repeat" priority="1022" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-repeat"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15552,6 +17456,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>background-repeat="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -15570,6 +17476,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-repeat="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" enumeration token is '<xsl:text/>
@@ -15586,6 +17494,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>background-repeat="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15597,6 +17507,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-repeat="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -15605,7 +17517,30 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-color" priority="1006" mode="M11">
+   <xsl:template match="fo:*/@axf:baseline-block-snap" priority="1021" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:baseline-block-snap"/>
+
+		    <!--ASSERT Warning-->
+      <xsl:choose>
+         <xsl:when test="exists(../@axf:baseline-grid) and normalize-space(../@axf:baseline-grid) = ('new', 'none')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists(../@axf:baseline-grid) and normalize-space(../@axf:baseline-grid) = ('new', 'none')">
+               <xsl:attribute name="role">Warning</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>axf:baseline-block-snap applies only when axf:baseline-grid is 'new' or 'none'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:outline-color" priority="1020" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:outline-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15619,6 +17554,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>'axf:outline-color' should be Color or a color name.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
@@ -15635,6 +17572,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: 'axf:outline-color="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"'</svrl:text>
@@ -15643,7 +17582,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-level" priority="1005" mode="M11">
+   <xsl:template match="fo:*/@axf:outline-level" priority="1019" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:outline-level"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15657,6 +17596,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>'axf:outline-level should be Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
@@ -15673,6 +17614,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: 'outline-level="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"'</svrl:text>
@@ -15681,7 +17624,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-scaling" priority="1004" mode="M11">
+   <xsl:template match="fo:*/@axf:background-scaling" priority="1018" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-scaling"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15695,6 +17638,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>scaling="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken.  '<xsl:text/>
@@ -15713,6 +17658,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>scaling="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" enumeration token is '<xsl:text/>
@@ -15729,6 +17676,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>scaling="" should be EnumerationToken.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15740,6 +17689,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: scaling="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -15748,7 +17699,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:hyphenation-zone" priority="1003" mode="M11">
+   <xsl:template match="fo:*/@axf:hyphenation-zone" priority="1017" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:hyphenation-zone"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15762,6 +17713,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>axf:hyphenation-zone="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
@@ -15780,6 +17733,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>axf:hyphenation-zone="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" enumeration token is '<xsl:text/>
@@ -15796,6 +17751,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>axf:hyphenation-zone="" should be EnumerationToken or Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15807,6 +17764,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: axf:hyphenation-zone="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
@@ -15822,6 +17781,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>axf:hyphenation-zone="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" should be a positive length.</svrl:text>
@@ -15830,9 +17791,216 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-interval" priority="1002" mode="M11">
+   <xsl:template match="fo:*/@axf:line-number-interval" priority="1016" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:line-number-interval"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Color', 'EMPTY', 'ERROR')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('EnumerationToken', 'Color', 'EMPTY', 'ERROR')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>
+                  <xsl:text/>
+                  <xsl:value-of select="name(.)"/>
+                  <xsl:text/>="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be a Color, a color name, or 'transparent'.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="local-name($expression) = 'EMPTY'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'EMPTY'">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="" should be EnumerationToken or Color.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:line-number-interval" priority="1015" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:line-number-interval"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('Color', 'EMPTY', 'ERROR')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('Color', 'EMPTY', 'ERROR')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>
+                  <xsl:text/>
+                  <xsl:value-of select="name(.)"/>
+                  <xsl:text/>="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be a Color or a color name.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="local-name($expression) = 'EMPTY'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'EMPTY'">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="" should be a Color or a color name.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:line-number-font-size" priority="1014" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:line-number-font-size"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>axf:line-number-font-size="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', Length, or Percent.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT -->
+      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller'))">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller'))">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>axf:line-number-font-size="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" token should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', or 'smaller'. Enumeration token is '<xsl:text/>
+               <xsl:value-of select="$expression/@token"/>
+               <xsl:text/>'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="local-name($expression) = 'EMPTY'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'EMPTY'">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>axf:line-number-font-size="" should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', Length, or Percent.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: axf:line-number-font-size="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:line-number-initial" priority="1013" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:line-number-initial"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
@@ -15844,7 +18012,12 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>axf:line-number-interval="<xsl:text/>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>
+                  <xsl:text/>
+                  <xsl:value-of select="name(.)"/>
+                  <xsl:text/>="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
                   <xsl:value-of select="."/>
@@ -15862,7 +18035,12 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>axf:line-number-interval="<xsl:text/>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" enumeration token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
@@ -15878,7 +18056,12 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>axf:line-number-interval="" should be EnumerationToken or Number.</svrl:text>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="" should be EnumerationToken or Number.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -15889,7 +18072,11 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
-            <svrl:text>Syntax error: axf:line-number-interval="<xsl:text/>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
          </svrl:successful-report>
@@ -15897,7 +18084,93 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-offset" priority="1001" mode="M11">
+   <xsl:template match="fo:*/@axf:line-number-interval" priority="1012" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:line-number-interval"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>
+                  <xsl:text/>
+                  <xsl:value-of select="name(.)"/>
+                  <xsl:text/>="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT -->
+      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:value-of select="$expression/@token"/>
+               <xsl:text/>'.  Token should be 'auto'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="local-name($expression) = 'EMPTY'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'EMPTY'">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="" should be EnumerationToken or Number.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:line-number-offset" priority="1011" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:line-number-offset"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -15911,6 +18184,8 @@
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>axf:line-number-offset="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be Length.  '<xsl:text/>
@@ -15930,6 +18205,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>axf:line-number-offset="" should be Length.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -15941,9 +18218,392 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: axf:line-number-offset="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:line-number-start" priority="1010" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:line-number-start"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>
+                  <xsl:text/>
+                  <xsl:value-of select="name(.)"/>
+                  <xsl:text/>="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be EnumerationToken or Number.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT -->
+      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:value-of select="$expression/@token"/>
+               <xsl:text/>'.  Token should be 'auto'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="local-name($expression) = 'EMPTY'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'EMPTY'">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="" should be EnumerationToken or Number.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@text-decoration" priority="1009" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-decoration"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>text-decoration="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT -->
+      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', 'inherit'))">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', 'inherit'))">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>text-decoration="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" token should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'. Enumeration token is '<xsl:text/>
+               <xsl:value-of select="$expression/@token"/>
+               <xsl:text/>'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="local-name($expression) = 'EMPTY'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'EMPTY'">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>text-decoration="" should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: text-decoration="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:line-number-width" priority="1008" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:line-number-width"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>
+                  <xsl:text/>
+                  <xsl:value-of select="name(.)"/>
+                  <xsl:text/>="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be EnumerationToken or Length.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT -->
+      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" enumeration token is '<xsl:text/>
+               <xsl:value-of select="$expression/@token"/>
+               <xsl:text/>'.  Token should be 'auto'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="local-name($expression) = 'EMPTY'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'EMPTY'">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="" should be EnumerationToken or Length.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/>="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:page-number-prefix" priority="1007" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:page-number-prefix"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="true()">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>axf:page-number-prefix: A similar function is provided in XSL 1.1. Please use fo:folio-prefix.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:revision-bar-color" priority="1006" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:revision-bar-color"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="true()">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>axf:revision-bar-color: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:revision-bar-offset" priority="1005" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:revision-bar-offset"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="true()">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>axf:revision-bar-offset: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:revision-bar-position" priority="1004" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:revision-bar-position"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="true()">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>axf:revision-bar-position: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:revision-bar-style" priority="1003" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:revision-bar-style"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="true()">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>axf:revision-bar-style: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:revision-bar-width" priority="1002" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:revision-bar-width"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="true()">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>axf:revision-bar-width: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:suppress-duplicate-page-number"
+                 priority="1001"
+                 mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:suppress-duplicate-page-number"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="true()">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>axf:suppress-duplicate-page-number: A similar function is provided in XSL 1.1. Please use merge-*-index-key-references.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15959,6 +18619,8 @@
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>overflow="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" applies only on fo:block-container or fo:inline-container.</svrl:text>

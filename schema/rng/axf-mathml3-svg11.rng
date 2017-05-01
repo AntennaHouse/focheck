@@ -21,6 +21,7 @@
   <define name="math">
     <externalRef href="axf-mathml3-override.rng" ns="http://www.antennahouse.com/names/XSL/Extensions"/>
   </define>
+  <!-- SVG 1.1 schema with Antenna House overrides. -->
   <define name="svg">
     <externalRef href="axf-svg11-override.rng" ns="http://www.antennahouse.com/names/XSL/Extensions"/>
   </define>
