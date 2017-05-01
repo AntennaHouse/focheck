@@ -157,18 +157,25 @@
 <property name="axf:suppress-duplicate-page-number" model="'true' | 'false'" description="Whether to delete duplicated page numbers" />
 <property name="axf:assumed-page-number" model="text" description="Assumed page number" />
 <property name="axf:line-number" model="'none' | 'show' | 'hide'" description="Whether to show line numbers" />
-<property name="axf:line-number-background-color" model="text" description="Background color of line numbers" />
+<property name="axf:line-number-background-color" model="text" description="Background color of line numbers: &lt;color> | transparent" />
 <property name="axf:line-number-color" model="text" description="Color of line numbers" />
 <property name="axf:line-number-display-align" model="'auto' | 'before' | 'center' | 'after'" description="Alignment, in the block-progression-direction, of line numbers in the line area" />
 <property name="axf:line-number-font-family" model="text" description="Font family of line numbers" />
 <property name="axf:line-number-font-size" model="text" description="Font size of line numbers" />
 <property name="axf:line-number-font-style" model="'normal' | 'italic'" description="Whether to make the font style italic" />
 <property name="axf:line-number-font-weight" model="'normal' | 'bold' | 'bolder' | 'lighter' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900'" description="Font weight of line numbers" />
+<property name="axf:line-number-format" model="text" description="format of line numbers: &lt;string>" />
+<property name="axf:line-number-initial" model="text" description="Line number of the first line: auto | &lt;number>" />
+<property name="axf:line-number-interval" model="text" description="Interval of line numbers: &lt;snumber> | auto" />
 <property name="axf:line-number-offset" model="text" description="Offset of line numbers: &lt;length>" />
-<property name="axf:line-number-position" model="'start' | 'end' | 'inside' | 'outside' | 'alternate'" description="Position of line numbers" />
-<property name="axf:line-number-text-align" model="'auto' | 'start' | 'center' | 'end' | 'inside' | 'outside' | 'left' | 'right'" description="Alignment of line numbers in the line area" />
+<property name="axf:line-number-orientation" model="'0' | '90' | '180' | '270' | '-90' | '-180' | '-270'" description="Rotates line numbers: 0 | 90 | 180 | 270 | -90 | -180 | -270" />
+<property name="axf:line-number-position" model="'start' | 'end' | 'inside' | 'outside' | 'alternate'" description="Position of line numbers: start | end | inside | outside | alternate" />
+<property name="axf:line-number-prefix" model="text" description="Prefix of line number: &lt;string>" />
+<property name="axf:line-number-reset" model="'auto' | 'none' | 'page' | 'column' | 'force'" description="When to reset line numbers: auto | none | page | column | force" />
+<property name="axf:line-number-start" model="text" description="Starting line number: &lt;snumber> | auto" />
+<property name="axf:line-number-text-align" model="'auto' | 'start' | 'center' | 'end' | 'inside' | 'outside' | 'left' | 'right'" description="Alignment of line numbers in the line area: auto | start | center | end | inside | outside | left | right" />
 <property name="axf:line-number-text-decoration" model="text" description="Text decoration of line numbers" />
-<property name="axf:line-number-text-width" model="text" description="Width of line numbers: auto | &lt;length>" />
+<property name="axf:line-number-width" model="text" description="Width of line numbers: auto | &lt;length>" />
 <property name="axf:line-continued-mark" model="text" description="Whether to show line continued marks: &lt;string>" />
 <property name="axf:line-continued-mark-background-color" model="text" description="Background color of line continued marks" />
 <property name="axf:line-continued-mark-color" model="text" description="Color of line continued marks" />
