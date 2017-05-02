@@ -271,7 +271,7 @@
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
 	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-background-color -->
-	<rule context="fo:*/@axf:line-number-interval">
+	<rule context="fo:*/@axf:line-number-background-color">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Color', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be a Color, a color name, or 'transparent'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name(.)"/>="" should be EnumerationToken or Color.</report>
@@ -283,7 +283,7 @@
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
 	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-color -->
-	<rule context="fo:*/@axf:line-number-interval">
+	<rule context="fo:*/@axf:line-number-color">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Color', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be a Color or a color name.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name(.)"/>="" should be a Color or a color name.</report>
