@@ -352,6 +352,7 @@ AFTER making a release on GitHub:
 <!-- Translation targets. -->
 
 <target name="translate" depends="rng">
+  <mkdir dir="${focheck.basedir.converted}/omegat/target" />
   <!-- Preserve modification dates for ease of comparison with
        'reference' OmegaT project where original translations are
        done. -->

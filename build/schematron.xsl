@@ -17791,9 +17791,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-interval" priority="1016" mode="M11">
+   <xsl:template match="fo:*/@axf:line-number-background-color"
+                 priority="1016"
+                 mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:line-number-interval"/>
+                       context="fo:*/@axf:line-number-background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
@@ -17857,9 +17859,9 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-interval" priority="1015" mode="M11">
+   <xsl:template match="fo:*/@axf:line-number-color" priority="1015" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:line-number-interval"/>
+                       context="fo:*/@axf:line-number-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
