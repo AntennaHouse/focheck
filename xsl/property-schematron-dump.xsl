@@ -113,6 +113,7 @@
 <xsl:variable name="skipped-properties" as="xs:string">
 character
 content-type
+country
 external-destination
 font-family
 format
