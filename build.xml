@@ -195,7 +195,10 @@ AFTER making a release on GitHub:
 
 <target name="fo-property.sch">
   <dependset>
-    <srcfilelist dir="${xsl.dir}" files="common.xsl, property-schematron-dump.xsl" />
+    <srcfilelist dir="${xsl.dir}"
+		 files="common.xsl,
+			property-schematron-dump.xsl,
+			${property-schematron-dump.xsl}" />
     <targetfileset dir="${schematron.dir}" includes="fo-property.sch"/>
   </dependset> 
   <xslt in="${etc.dir}/xslspec.xml"
