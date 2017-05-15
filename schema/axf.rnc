@@ -453,7 +453,8 @@ fo_index-range-begin.attlist &=
 
 fo_inline.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf_indent-here
 
 fo_inline-container.attlist &=
     xml_id,
@@ -1081,6 +1082,13 @@ axf_footnote-max-height =
 axf_headers =
     ## Table header cells associated with this cell: <idrefs>
     attribute axf:headers { xsd:IDREFS }?
+
+# @axf:indent-here
+#
+# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.indent-here
+axf_indent-here =
+    ## Aligns the indent position to the region position when a line break occurs: none | <length>
+    attribute axf:indent-here { text }?
 
 # @axf:number-type
 #

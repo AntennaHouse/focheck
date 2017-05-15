@@ -266,6 +266,19 @@
 	  </sqf:fix>
 	</rule>
 
+	<!-- axf:indent-here -->
+	<!-- none | <length> -->
+	<!-- Inherited: yes -->
+	<!-- Shorthand: no -->
+	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.indent-here -->
+	<rule context="fo:*/@axf:indent-here">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:indent-here="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">axf:indent-here="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'none'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:indent-here="" should be EnumerationToken or Length.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:indent-here="<value-of select="."/>"</report>
+	</rule>
+
 	<!-- axf:line-number-background-color -->
 	<!-- <color> | transparent -->
 	<!-- Inherited: yes -->
