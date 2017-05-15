@@ -6467,6 +6467,7 @@
     <xs:attributeGroup ref="axf:axf_word-wrap"/>
     <xs:attributeGroup ref="axf:xml_id"/>
     <xs:attributeGroup ref="axf:axf.annotation.attlist"/>
+    <xs:attributeGroup ref="axf:axf_indent-here"/>
   </xs:attributeGroup>
   <xs:element name="inline-container" substitutionGroup="fo:inline.fo.list">
     <xs:annotation>

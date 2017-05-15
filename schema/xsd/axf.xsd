@@ -1481,6 +1481,18 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:indent-here
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.indent-here
+  -->
+  <xs:attributeGroup name="axf_indent-here">
+    <xs:attribute name="indent-here" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Aligns the indent position to the region position when a line break occurs: none | &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:number-type
     
     http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.number-type

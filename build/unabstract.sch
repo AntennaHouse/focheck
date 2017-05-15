@@ -3481,6 +3481,19 @@
 	
 	
 	
+	<rule context="fo:*/@axf:indent-here">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:indent-here="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">axf:indent-here="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'none'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:indent-here="" should be EnumerationToken or Length.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:indent-here="<value-of select="."/>"</report>
+	</rule>
+
+	
+	
+	
+	
+	
 	<rule context="fo:*/@axf:line-number-background-color">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Color', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be a Color, a color name, or 'transparent'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>

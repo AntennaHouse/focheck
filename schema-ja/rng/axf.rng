@@ -692,6 +692,7 @@
   <define name="fo_inline.attlist" combine="interleave">
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
+    <ref name="axf_indent-here"/>
   </define>
   <define name="fo_inline-container.attlist" combine="interleave">
     <ref name="xml_id"/>
@@ -1798,6 +1799,18 @@
       <attribute name="axf:headers">
         <a:documentation>Table header cells associated with this cell: &lt;idrefs&gt;</a:documentation>
         <data type="IDREFS"/>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:indent-here
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.indent-here
+  -->
+  <define name="axf_indent-here">
+    <optional>
+      <attribute name="axf:indent-here">
+        <a:documentation>Aligns the indent position to the region position when a line break occurs: none | &lt;length&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
