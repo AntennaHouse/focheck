@@ -934,14 +934,14 @@ axf_field-submit-method =
 # http://www.antennahouse.com/product/ahf64/ahf-float.html
 axf_float =
     ## Shorthand for float-related extension properties
-    attribute axf:float { 'none' | 'before' | 'after' | 'start' | 'end' | 'left' | 'right' | 'top' | 'bottom' | 'center' | 'inside' | 'outside' | 'wrap' | 'skip' | 'auto' | 'normal' | 'page' | 'column' | 'multicol' | 'next' | 'auto-next' | 'auto-move' | 'keep' | 'keep-float' }?
+    attribute axf:float { text }?
 
 # @axf:float-x
 #
 # http://www.antennahouse.com/product/ahf64/ahf-float.html#axf.float-x
 axf_float-x =
-    ## Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside
-    attribute axf:float-x { 'none' | 'start' | 'end' | 'left' | 'right' | 'top' | 'bottom' | 'center' | 'inside' | 'outside' }?
+    ## Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside | alternate
+    attribute axf:float-x { 'none' | 'start' | 'end' | 'left' | 'right' | 'top' | 'bottom' | 'center' | 'inside' | 'outside' | 'alternate' }?
 
 # @axf:float-y
 #

@@ -1450,32 +1450,6 @@
     <optional>
       <attribute name="axf:float">
         <a:documentation>Shorthand for float-related extension properties</a:documentation>
-        <choice>
-          <value>none</value>
-          <value>before</value>
-          <value>after</value>
-          <value>start</value>
-          <value>end</value>
-          <value>left</value>
-          <value>right</value>
-          <value>top</value>
-          <value>bottom</value>
-          <value>center</value>
-          <value>inside</value>
-          <value>outside</value>
-          <value>wrap</value>
-          <value>skip</value>
-          <value>auto</value>
-          <value>normal</value>
-          <value>page</value>
-          <value>column</value>
-          <value>multicol</value>
-          <value>next</value>
-          <value>auto-next</value>
-          <value>auto-move</value>
-          <value>keep</value>
-          <value>keep-float</value>
-        </choice>
       </attribute>
     </optional>
   </define>
@@ -1487,7 +1461,7 @@
   <define name="axf_float-x">
     <optional>
       <attribute name="axf:float-x">
-        <a:documentation>Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside</a:documentation>
+        <a:documentation>Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside | alternate</a:documentation>
         <choice>
           <value>none</value>
           <value>start</value>
@@ -1499,6 +1473,7 @@
           <value>center</value>
           <value>inside</value>
           <value>outside</value>
+          <value>alternate</value>
         </choice>
       </attribute>
     </optional>

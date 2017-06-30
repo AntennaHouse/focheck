@@ -222,6 +222,15 @@
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: 'axf:outline-color="<value-of select="."/>"'</report>
 	</rule>
 
+	<!-- axf:float -->
+	<!-- <float-x> || <float-y> || <float-wrap> || <float-reference> || <float-move> -->
+	<!-- Inherited: false -->
+	<rule context="fo:*/@axf:float">
+	  <let name="tokens" value="tokenize(normalize-space(.), '\s+')" />
+	  <assert test="every $token in $tokens satisfies matches($token, '^(after|alternate|auto|auto-move|auto-next|before|bottom|center|column|end|inside|keep|keep-float|left|multicol|next|none|normal|outside|page|right|skip|start|top|wrap)$')">Every token in 'axf:float' should be 'after', 'alternate', 'auto', 'auto-move', 'auto-next', 'before', 'bottom', 'center', 'column', 'end', 'inside', 'keep', 'keep-float', 'left', 'multicol', 'next', 'none', 'normal', 'outside', 'page', 'right', 'skip', 'start', 'top' or 'wrap'.  Value is '<value-of select="."/>'.</assert>
+	  <assert test="every $token in $tokens satisfies count($tokens[. eq $token]) = 1">Tokens in 'axf:float' must not be repeated.  Value is '<value-of select="."/>'.</assert>
+	</rule>
+
 	<!-- axf:outline-level -->
 	<!-- <number> -->
 	<!-- Inherited: false -->
