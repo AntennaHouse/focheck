@@ -22,6 +22,7 @@ namespace ns4 = "http://www.w3.org/2000/svg"
 
 # MathML 3.0 schema with Antenna House overrides.
 math = external "axf-mathml3-override.rnc" inherit = ns1
+# SVG 1.1 schema with Antenna House overrides.
 svg = external "axf-svg11-override.rnc" inherit = ns1
 include "axf.rnc" inherit = ns1 {
   # For fo:instream-foreign-object

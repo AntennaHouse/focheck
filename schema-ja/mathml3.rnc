@@ -18,5 +18,5 @@ include "mathml3-content.rnc" inherit = m
 ## Presentation MathML
 include "mathml3-presentation.rnc" inherit = m
 
-## math and semantics common to both Content and Presentation
+##  Content と Presentationの両方に共通数学と意味論
 include "mathml3-common.rnc" inherit = m

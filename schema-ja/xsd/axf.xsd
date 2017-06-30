@@ -1109,34 +1109,6 @@
       <xs:annotation>
         <xs:documentation>フロート関連拡張プロパティのためのショートハンド</xs:documentation>
       </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:token">
-          <xs:enumeration value="none"/>
-          <xs:enumeration value="before"/>
-          <xs:enumeration value="after"/>
-          <xs:enumeration value="start"/>
-          <xs:enumeration value="end"/>
-          <xs:enumeration value="left"/>
-          <xs:enumeration value="right"/>
-          <xs:enumeration value="top"/>
-          <xs:enumeration value="bottom"/>
-          <xs:enumeration value="center"/>
-          <xs:enumeration value="inside"/>
-          <xs:enumeration value="outside"/>
-          <xs:enumeration value="wrap"/>
-          <xs:enumeration value="skip"/>
-          <xs:enumeration value="auto"/>
-          <xs:enumeration value="normal"/>
-          <xs:enumeration value="page"/>
-          <xs:enumeration value="column"/>
-          <xs:enumeration value="multicol"/>
-          <xs:enumeration value="next"/>
-          <xs:enumeration value="auto-next"/>
-          <xs:enumeration value="auto-move"/>
-          <xs:enumeration value="keep"/>
-          <xs:enumeration value="keep-float"/>
-        </xs:restriction>
-      </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
   <!--
@@ -1147,7 +1119,7 @@
   <xs:attributeGroup name="axf_float-x">
     <xs:attribute name="float-x" form="qualified">
       <xs:annotation>
-        <xs:documentation>水平方向のフロート配置（writing-modeがverticalのときは垂直方向）： none | start | end | left | right | top | bottom | center | inside | outside</xs:documentation>
+        <xs:documentation>Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside | alternate</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1161,6 +1133,7 @@
           <xs:enumeration value="center"/>
           <xs:enumeration value="inside"/>
           <xs:enumeration value="outside"/>
+          <xs:enumeration value="alternate"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
