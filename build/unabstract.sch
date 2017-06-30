@@ -1165,11 +1165,7 @@
    
    
    <rule context="fo:*/@country">
-      <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'Literal', 'EMPTY', 'ERROR', 'Object')">country="<value-of select="."/>" should be 'none', 'inherit', or Literal.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">country="<value-of select="."/>" token should be 'none' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">country="" should be 'none', 'inherit', or Literal.</report>
-      <report test="local-name($expression) = 'ERROR'">Syntax error: country="<value-of select="."/>"</report>
+      <report test=". eq ''" role="Warning">country="" should be 'none | &lt;country&gt; | inherit'.</report>
    </rule>
 
    
@@ -3432,6 +3428,15 @@
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'ERROR', 'Object')">'axf:outline-color' should be Color or a color name.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: 'axf:outline-color="<value-of select="."/>"'</report>
+	</rule>
+
+	
+	
+	
+	<rule context="fo:*/@axf:float">
+	  <let name="tokens" value="tokenize(normalize-space(.), '\s+')"/>
+	  <assert test="every $token in $tokens satisfies matches($token, '^(after|alternate|auto|auto-move|auto-next|before|bottom|center|column|end|inside|keep|keep-float|left|multicol|next|none|normal|outside|page|right|skip|start|top|wrap)$')">Every token in 'axf:float' should be 'after', 'alternate', 'auto', 'auto-move', 'auto-next', 'before', 'bottom', 'center', 'column', 'end', 'inside', 'keep', 'keep-float', 'left', 'multicol', 'next', 'none', 'normal', 'outside', 'page', 'right', 'skip', 'start', 'top' or 'wrap'.  Value is '<value-of select="."/>'.</assert>
+	  <assert test="every $token in $tokens satisfies count($tokens[. eq $token]) = 1">Tokens in 'axf:float' must not be repeated.  Value is '<value-of select="."/>'.</assert>
 	</rule>
 
 	
