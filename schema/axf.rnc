@@ -308,6 +308,8 @@ fo_page-sequence.attlist &=
     axf_output-volume-break,
     axf_output-volume-filename,
     axf_page-number-prefix,
+    axf_printer-bin-selection,
+    axf_printer-duplex,
     background-color,
     background-image,
     background-position-horizontal,
@@ -1206,6 +1208,20 @@ axf_physical-page-number =
 axf_printer-marks =
     ## Printing marks, such as a crop mark
     attribute axf:printer-marks { text }?
+
+# @axf:printer-bin-selection
+#
+# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-bin-selection
+axf_printer-bin-selection =
+    ## Selects the printer tray: <string> | <integer>
+    attribute axf:printer-bin-selection { text }?
+
+# @axf:printer-duplex
+#
+# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-duplex
+axf_printer-duplex =
+    ## Selects printing in duplex mode: <integer>
+    attribute axf:printer-duplex { text }?
 
 # @axf:printer-marks-line-color
 #
