@@ -1708,6 +1708,30 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:printer-bin-selection
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-bin-selection
+  -->
+  <xs:attributeGroup name="axf_printer-bin-selection">
+    <xs:attribute name="printer-bin-selection" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Selects the printer tray: &lt;string&gt; | &lt;integer&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-duplex
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-duplex
+  -->
+  <xs:attributeGroup name="axf_printer-duplex">
+    <xs:attribute name="printer-duplex" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Selects printing in duplex mode: &lt;integer&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:printer-marks-line-color
     
     http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-marks-line-color

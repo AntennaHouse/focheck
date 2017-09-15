@@ -547,6 +547,8 @@
     <ref name="axf_output-volume-break"/>
     <ref name="axf_output-volume-filename"/>
     <ref name="axf_page-number-prefix"/>
+    <ref name="axf_printer-bin-selection"/>
+    <ref name="axf_printer-duplex"/>
     <ref name="background-color"/>
     <ref name="background-image"/>
     <ref name="background-position-horizontal"/>
@@ -2011,6 +2013,30 @@
     <optional>
       <attribute name="axf:printer-marks">
         <a:documentation>トンボなどの印刷マーク</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:printer-bin-selection
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-bin-selection
+  -->
+  <define name="axf_printer-bin-selection">
+    <optional>
+      <attribute name="axf:printer-bin-selection">
+        <a:documentation>Selects the printer tray: &lt;string&gt; | &lt;integer&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:printer-duplex
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-duplex
+  -->
+  <define name="axf_printer-duplex">
+    <optional>
+      <attribute name="axf:printer-duplex">
+        <a:documentation>Selects printing in duplex mode: &lt;integer&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
