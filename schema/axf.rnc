@@ -504,28 +504,19 @@ fo_multi-toggle.attlist &=
     axf.annotation.attlist
 
 fo_page-number.attlist &=
-    axf_number-type,
-    axf_origin-id,
-    axf_suppress-folio-prefix,
-    axf_suppress-folio-suffix,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf-page-number-properties
 
 fo_page-number-citation.attlist &=
-    axf_number-type,
-    axf_origin-id,
-    axf_suppress-folio-prefix,
-    axf_suppress-folio-suffix,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf-page-number-properties
 
 fo_page-number-citation-last.attlist &=
-    axf_number-type,
-    axf_origin-id,
-    axf_suppress-folio-prefix,
-    axf_suppress-folio-suffix,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf-page-number-properties
 
 fo_scaling-value-citation.attlist &=
     xml_id,
@@ -617,7 +608,7 @@ axf.annotation.attlist =
     axf_annotation-width
 
 # List of baseline-grid-related extension properties
-# https://www.antennahouse.com/product/ahf64/ahf-ext.html#https://www.antennahouse.com/product/ahf64/ahf-ext.html
+# https://www.antennahouse.com/product/ahf64/ahf-ext.html#line-grid
 axf-baseline-grid-properties =
     axf_baseline-grid,
     axf_baseline-block-snap
@@ -632,6 +623,20 @@ axf-outline-properties =
     axf_outline-color,
     axf_outline-font-style,
     axf_outline-font-weight
+
+# List of extension properties to control page and column numbers.
+# See https://www.antennahouse.com/product/ahf64/ahf-ext.html#page-number
+axf-page-number-properties =
+    # axf:assumed-page-number is inherited.
+    axf_column-number-format,
+    axf_number-type,
+    # axf:page-number-prefix only applies to fo:page-sequence
+    axf_physical-page-number,
+    axf_origin-id,
+    axf_reverse-page-number,
+    # axf:suppress-duplicate-page-number is deprecated.
+    axf_suppress-folio-prefix,
+    axf_suppress-folio-suffix
 
 # List of extension properties common to all block-level formatting
 # objects
@@ -899,6 +904,13 @@ axf_crop-offset-left =
 axf_crop-offset-right =
     ## Distance from the physical right edge to the trim size of the output medium: <length>
     attribute axf:crop-offset-right { text }?
+
+# @axf:column-number-format
+#
+# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.column-number-format
+axf_column-number-format =
+    ## Format of column number: <string>
+    attribute axf:column-number-format { text }?
 
 # @axf:destination-type
 #
@@ -1174,19 +1186,26 @@ axf_page-number-prefix =
     ## Sets the prefix of page number. CAUTION: A similar function is provided in XSL1.1. Please use fo:folio-prefix.
     attribute axf:page-number-prefix { text }?
 
-# @axf:printer-marks
-#
-# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-marks
-axf_printer-marks =
-    ## Printing marks, such as a crop mark
-    attribute axf:printer-marks { text }?
-
 # @axf:pdftag
 #
 # http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.pdftag
 axf_pdftag =
     ## Tag name of Tagged PDF
     attribute axf:pdftag { text }?
+
+# @axf:physical-page-number
+#
+# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.physical-page-number
+axf_physical-page-number =
+    ## Whether to generate physical page number: true | false
+    attribute axf:physical-page-number { 'true' | 'false' }?
+
+# @axf:printer-marks
+#
+# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-marks
+axf_printer-marks =
+    ## Printing marks, such as a crop mark
+    attribute axf:printer-marks { text }?
 
 # @axf:printer-marks-line-color
 #
@@ -1229,6 +1248,13 @@ axf_printer-marks-spine-width =
 axf_repeat-cell-content-at-break =
     ## Whether to copy the contents of a cell when a cell breaks: true | false
     attribute axf:repeat-cell-content-at-break { 'true' | 'false' }?
+
+# @axf:reverse-page-number
+#
+# http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.reverse-page-number
+axf_reverse-page-number =
+    ## Whether to generate pages in reverse order: true | false
+    attribute axf:reverse-page-number { 'true' | 'false' }?
 
 # @axf:scope
 #

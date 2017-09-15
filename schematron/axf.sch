@@ -81,6 +81,15 @@
 	  <assert test="normalize-space(../@axf:annotation-type) = ('Text', 'FreeText', 'Stamp', 'FileAttachment') or local-name(..) = 'basic-link'" role="Warning"><value-of select="name(.)"/> should be used only when @axf:annotation-type is 'Text', 'FreeText', 'Stamp', or 'FileAnnotation' or on fo:basic-link.</assert>
 	</rule>
 
+	<!-- axf:assumed-page-number -->
+	<!-- <number> -->
+	<!-- Inherited: yes -->
+	<rule context="fo:*/@axf:assumed-page-number">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Number', 'ERROR', 'Object')">'axf:assumed-page-number should be Number.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: 'assumed-page-number="<value-of select="."/>"'</report>
+	</rule>
+
 	<!-- axf:background-color -->
 	<!-- <color> | transparent | inherit -->
 	<!-- Inherited: no -->
