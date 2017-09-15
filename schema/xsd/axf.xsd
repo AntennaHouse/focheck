@@ -489,7 +489,7 @@
   </xs:attributeGroup>
   <!--
     List of baseline-grid-related extension properties
-    https://www.antennahouse.com/product/ahf64/ahf-ext.html#https://www.antennahouse.com/product/ahf64/ahf-ext.html
+    https://www.antennahouse.com/product/ahf64/ahf-ext.html#line-grid
   -->
   <xs:attributeGroup name="axf-baseline-grid-properties">
     <xs:attributeGroup ref="axf:axf_baseline-grid"/>
@@ -507,6 +507,19 @@
     <xs:attributeGroup ref="axf:axf_outline-color"/>
     <xs:attributeGroup ref="axf:axf_outline-font-style"/>
     <xs:attributeGroup ref="axf:axf_outline-font-weight"/>
+  </xs:attributeGroup>
+  <!--
+    List of extension properties to control page and column numbers.
+    See https://www.antennahouse.com/product/ahf64/ahf-ext.html#page-number
+  -->
+  <xs:attributeGroup name="axf-page-number-properties">
+    <xs:attributeGroup ref="axf:axf_column-number-format"/>
+    <xs:attributeGroup ref="axf:axf_number-type"/>
+    <xs:attributeGroup ref="axf:axf_physical-page-number"/>
+    <xs:attributeGroup ref="axf:axf_origin-id"/>
+    <xs:attributeGroup ref="axf:axf_reverse-page-number"/>
+    <xs:attributeGroup ref="axf:axf_suppress-folio-prefix"/>
+    <xs:attributeGroup ref="axf:axf_suppress-folio-suffix"/>
   </xs:attributeGroup>
   <!--
     List of extension properties common to all block-level formatting
@@ -1024,6 +1037,18 @@
     <xs:attribute name="crop-offset-right" form="qualified">
       <xs:annotation>
         <xs:documentation>Distance from the physical right edge to the trim size of the output medium: &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:column-number-format
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.column-number-format
+  -->
+  <xs:attributeGroup name="axf_column-number-format">
+    <xs:attribute name="column-number-format" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Format of column number: &lt;string&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1641,18 +1666,6 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
-    @axf:printer-marks
-    
-    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-marks
-  -->
-  <xs:attributeGroup name="axf_printer-marks">
-    <xs:attribute name="printer-marks" form="qualified">
-      <xs:annotation>
-        <xs:documentation>Printing marks, such as a crop mark</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-  </xs:attributeGroup>
-  <!--
     @axf:pdftag
     
     http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.pdftag
@@ -1661,6 +1674,36 @@
     <xs:attribute name="pdftag" form="qualified">
       <xs:annotation>
         <xs:documentation>Tag name of Tagged PDF</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:physical-page-number
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.physical-page-number
+  -->
+  <xs:attributeGroup name="axf_physical-page-number">
+    <xs:attribute name="physical-page-number" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Whether to generate physical page number: true | false</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-marks
+  -->
+  <xs:attributeGroup name="axf_printer-marks">
+    <xs:attribute name="printer-marks" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Printing marks, such as a crop mark</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1733,6 +1776,24 @@
     <xs:attribute name="repeat-cell-content-at-break" form="qualified">
       <xs:annotation>
         <xs:documentation>Whether to copy the contents of a cell when a cell breaks: true | false</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:reverse-page-number
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.reverse-page-number
+  -->
+  <xs:attributeGroup name="axf_reverse-page-number">
+    <xs:attribute name="reverse-page-number" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Whether to generate pages in reverse order: true | false</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">

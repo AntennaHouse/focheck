@@ -258,11 +258,7 @@
    <!-- Shorthand: no -->
    <!-- http://www.w3.org/TR/xsl11/#allowed-height-scale -->
    <rule context="fo:*/@allowed-height-scale">
-      <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'Percent', 'EMPTY', 'ERROR', 'Object')">allowed-height-scale="<value-of select="."/>" should be 'any', 'inherit', or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('any', 'inherit'))">allowed-height-scale="<value-of select="."/>" token should be 'any' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">allowed-height-scale="" should be 'any', 'inherit', or Percent.</report>
-      <report test="local-name($expression) = 'ERROR'">Syntax error: allowed-height-scale="<value-of select="."/>"</report>
+      <report test=". eq ''" role="Warning">allowed-height-scale="" should be '[ any | &lt;percentage&gt; ]* | inherit'.</report>
    </rule>
 
    <!-- allowed-width-scale -->
@@ -271,11 +267,7 @@
    <!-- Shorthand: no -->
    <!-- http://www.w3.org/TR/xsl11/#allowed-width-scale -->
    <rule context="fo:*/@allowed-width-scale">
-      <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'Percent', 'EMPTY', 'ERROR', 'Object')">allowed-width-scale="<value-of select="."/>" should be 'any', 'inherit', or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('any', 'inherit'))">allowed-width-scale="<value-of select="."/>" token should be 'any' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">allowed-width-scale="" should be 'any', 'inherit', or Percent.</report>
-      <report test="local-name($expression) = 'ERROR'">Syntax error: allowed-width-scale="<value-of select="."/>"</report>
+      <report test=". eq ''" role="Warning">allowed-width-scale="" should be '[ any | &lt;percentage&gt; ]* | inherit'.</report>
    </rule>
 
    <!-- auto-restore -->
@@ -331,10 +323,7 @@
    <!-- Shorthand: no -->
    <!-- http://www.w3.org/TR/xsl11/#background-image -->
    <rule context="fo:*/@background-image">
-      <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-image="<value-of select="."/>" should be URI, 'none', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">background-image="" should be URI, 'none', or 'inherit'.</report>
-      <report test="local-name($expression) = 'ERROR'">Syntax error: background-image="<value-of select="."/>"</report>
+      <report test=". eq ''" role="Warning">background-image="" should be '&lt;uri-specification&gt; | none | inherit'.</report>
    </rule>
 
    <!-- background-position -->
@@ -3310,6 +3299,15 @@
 	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.annotation-contents -->
 	<rule context="fo:*/@axf:annotation-contents">
 	  <assert test="normalize-space(../@axf:annotation-type) = ('Text', 'FreeText', 'Stamp', 'FileAttachment') or local-name(..) = 'basic-link'" role="Warning"><value-of select="name(.)"/> should be used only when @axf:annotation-type is 'Text', 'FreeText', 'Stamp', or 'FileAnnotation' or on fo:basic-link.</assert>
+	</rule>
+
+	<!-- axf:assumed-page-number -->
+	<!-- <number> -->
+	<!-- Inherited: yes -->
+	<rule context="fo:*/@axf:assumed-page-number">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Number', 'ERROR', 'Object')">'axf:assumed-page-number should be Number.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: 'assumed-page-number="<value-of select="."/>"'</report>
 	</rule>
 
 	<!-- axf:background-color -->

@@ -743,28 +743,19 @@
     <ref name="axf.annotation.attlist"/>
   </define>
   <define name="fo_page-number.attlist" combine="interleave">
-    <ref name="axf_number-type"/>
-    <ref name="axf_origin-id"/>
-    <ref name="axf_suppress-folio-prefix"/>
-    <ref name="axf_suppress-folio-suffix"/>
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
+    <ref name="axf-page-number-properties"/>
   </define>
   <define name="fo_page-number-citation.attlist" combine="interleave">
-    <ref name="axf_number-type"/>
-    <ref name="axf_origin-id"/>
-    <ref name="axf_suppress-folio-prefix"/>
-    <ref name="axf_suppress-folio-suffix"/>
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
+    <ref name="axf-page-number-properties"/>
   </define>
   <define name="fo_page-number-citation-last.attlist" combine="interleave">
-    <ref name="axf_number-type"/>
-    <ref name="axf_origin-id"/>
-    <ref name="axf_suppress-folio-prefix"/>
-    <ref name="axf_suppress-folio-suffix"/>
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
+    <ref name="axf-page-number-properties"/>
   </define>
   <define name="fo_scaling-value-citation.attlist" combine="interleave">
     <ref name="xml_id"/>
@@ -861,7 +852,7 @@
   </define>
   <!--
     List of baseline-grid-related extension properties
-    https://www.antennahouse.com/product/ahf64/ahf-ext.html#https://www.antennahouse.com/product/ahf64/ahf-ext.html
+    https://www.antennahouse.com/product/ahf64/ahf-ext.html#line-grid
   -->
   <define name="axf-baseline-grid-properties">
     <ref name="axf_baseline-grid"/>
@@ -879,6 +870,22 @@
     <ref name="axf_outline-color"/>
     <ref name="axf_outline-font-style"/>
     <ref name="axf_outline-font-weight"/>
+  </define>
+  <!--
+    List of extension properties to control page and column numbers.
+    See https://www.antennahouse.com/product/ahf64/ahf-ext.html#page-number
+  -->
+  <define name="axf-page-number-properties">
+    <!-- axf:assumed-page-number is inherited. -->
+    <ref name="axf_column-number-format"/>
+    <ref name="axf_number-type"/>
+    <!-- axf:page-number-prefix only applies to fo:page-sequence -->
+    <ref name="axf_physical-page-number"/>
+    <ref name="axf_origin-id"/>
+    <ref name="axf_reverse-page-number"/>
+    <!-- axf:suppress-duplicate-page-number is deprecated. -->
+    <ref name="axf_suppress-folio-prefix"/>
+    <ref name="axf_suppress-folio-suffix"/>
   </define>
   <!--
     List of extension properties common to all block-level formatting
@@ -1378,6 +1385,18 @@
     <optional>
       <attribute name="axf:crop-offset-right">
         <a:documentation>Distance from the physical right edge to the trim size of the output medium: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:column-number-format
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.column-number-format
+  -->
+  <define name="axf_column-number-format">
+    <optional>
+      <attribute name="axf:column-number-format">
+        <a:documentation>Format of column number: &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1957,18 +1976,6 @@
     </optional>
   </define>
   <!--
-    @axf:printer-marks
-    
-    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-marks
-  -->
-  <define name="axf_printer-marks">
-    <optional>
-      <attribute name="axf:printer-marks">
-        <a:documentation>Printing marks, such as a crop mark</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <!--
     @axf:pdftag
     
     http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.pdftag
@@ -1977,6 +1984,34 @@
     <optional>
       <attribute name="axf:pdftag">
         <a:documentation>Tag name of Tagged PDF</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:physical-page-number
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.physical-page-number
+  -->
+  <define name="axf_physical-page-number">
+    <optional>
+      <attribute name="axf:physical-page-number">
+        <a:documentation>Whether to generate physical page number: true | false</a:documentation>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:printer-marks
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.printer-marks
+  -->
+  <define name="axf_printer-marks">
+    <optional>
+      <attribute name="axf:printer-marks">
+        <a:documentation>Printing marks, such as a crop mark</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2049,6 +2084,22 @@
     <optional>
       <attribute name="axf:repeat-cell-content-at-break">
         <a:documentation>Whether to copy the contents of a cell when a cell breaks: true | false</a:documentation>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:reverse-page-number
+    
+    http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.reverse-page-number
+  -->
+  <define name="axf_reverse-page-number">
+    <optional>
+      <attribute name="axf:reverse-page-number">
+        <a:documentation>Whether to generate pages in reverse order: true | false</a:documentation>
         <choice>
           <value>true</value>
           <value>false</value>

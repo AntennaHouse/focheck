@@ -1386,73 +1386,17 @@
    <xsl:template match="fo:*/@allowed-height-scale" priority="1249" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@allowed-height-scale"/>
-      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Percent', 'EMPTY', 'ERROR', 'Object')">
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <xsl:attribute name="line-number" select="saxon:line-number()"/>
-               <xsl:attribute name="column-number" select="saxon:column-number()"/>
-               <svrl:text>allowed-height-scale="<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>" should be 'any', 'inherit', or Percent.  '<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>' is a <xsl:text/>
-                  <xsl:value-of select="local-name($expression)"/>
-                  <xsl:text/>.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('any', 'inherit'))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('any', 'inherit'))">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <xsl:attribute name="line-number" select="saxon:line-number()"/>
-            <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>allowed-height-scale="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" token should be 'any' or 'inherit'. Enumeration token is '<xsl:text/>
-               <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'EMPTY'">
+      <xsl:if test=". eq ''">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
             <xsl:attribute name="line-number" select="saxon:line-number()"/>
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>allowed-height-scale="" should be 'any', 'inherit', or Percent.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
-		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'ERROR'">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <xsl:attribute name="line-number" select="saxon:line-number()"/>
-            <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>Syntax error: allowed-height-scale="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+            <svrl:text>allowed-height-scale="" should be '[ any | &lt;percentage&gt; ]* | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -1461,73 +1405,17 @@
    <xsl:template match="fo:*/@allowed-width-scale" priority="1248" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@allowed-width-scale"/>
-      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'Percent', 'EMPTY', 'ERROR', 'Object')">
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <xsl:attribute name="line-number" select="saxon:line-number()"/>
-               <xsl:attribute name="column-number" select="saxon:column-number()"/>
-               <svrl:text>allowed-width-scale="<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>" should be 'any', 'inherit', or Percent.  '<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>' is a <xsl:text/>
-                  <xsl:value-of select="local-name($expression)"/>
-                  <xsl:text/>.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('any', 'inherit'))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('any', 'inherit'))">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <xsl:attribute name="line-number" select="saxon:line-number()"/>
-            <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>allowed-width-scale="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>" token should be 'any' or 'inherit'. Enumeration token is '<xsl:text/>
-               <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'EMPTY'">
+      <xsl:if test=". eq ''">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
             <xsl:attribute name="line-number" select="saxon:line-number()"/>
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>allowed-width-scale="" should be 'any', 'inherit', or Percent.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
-		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'ERROR'">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <xsl:attribute name="line-number" select="saxon:line-number()"/>
-            <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>Syntax error: allowed-width-scale="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+            <svrl:text>allowed-width-scale="" should be '[ any | &lt;percentage&gt; ]* | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -1761,56 +1649,17 @@
    <xsl:template match="fo:*/@background-image" priority="1243" mode="M5">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-image"/>
-      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <xsl:attribute name="line-number" select="saxon:line-number()"/>
-               <xsl:attribute name="column-number" select="saxon:column-number()"/>
-               <svrl:text>background-image="<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>" should be URI, 'none', or 'inherit'.  '<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>' is a <xsl:text/>
-                  <xsl:value-of select="local-name($expression)"/>
-                  <xsl:text/>.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'EMPTY'">
+      <xsl:if test=". eq ''">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
             <xsl:attribute name="line-number" select="saxon:line-number()"/>
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>background-image="" should be URI, 'none', or 'inherit'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
-		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'ERROR'">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <xsl:attribute name="line-number" select="saxon:line-number()"/>
-            <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>Syntax error: background-image="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+            <svrl:text>background-image="" should be '&lt;uri-specification&gt; | none | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16645,7 +16494,7 @@
 
 	  <!--RULE axf-1-->
    <xsl:template match="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
-                 priority="1037"
+                 priority="1038"
                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
@@ -16675,7 +16524,7 @@
 
 	  <!--RULE -->
    <xsl:template match="axf:document-info[@name = 'title']"
-                 priority="1036"
+                 priority="1037"
                  mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:document-info[@name = 'title']"/>
@@ -16702,7 +16551,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:annotation-color" priority="1035" mode="M11">
+   <xsl:template match="fo:*/@axf:annotation-color" priority="1036" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:annotation-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -16760,7 +16609,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:annotation-contents" priority="1034" mode="M11">
+   <xsl:template match="fo:*/@axf:annotation-contents" priority="1035" mode="M11">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:annotation-contents"/>
 
@@ -16783,6 +16632,48 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:assumed-page-number" priority="1034" mode="M11">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:assumed-page-number"/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('Number', 'ERROR', 'Object')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('Number', 'ERROR', 'Object')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>'axf:assumed-page-number should be Number.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: 'assumed-page-number="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"'</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
    </xsl:template>
 
 	  <!--RULE -->
