@@ -88,6 +88,9 @@
 <!-- Properties for which no Schematron rule will be generated.
      Mostly the properties that can have string values. -->
 <xsl:variable name="skipped-properties" as="xs:string">
+allowed-height-scale
+allowed-width-scale
+background-image
 character
 content-type
 country

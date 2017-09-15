@@ -111,6 +111,9 @@
      This property may be overridden in a stylesheet that imports this
      stylesheet to produce a different set of skipped properties. -->
 <xsl:variable name="skipped-properties" as="xs:string">
+allowed-height-scale
+allowed-width-scale
+background-image
 character
 content-type
 country
