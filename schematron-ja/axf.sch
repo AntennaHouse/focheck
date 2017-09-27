@@ -32,8 +32,8 @@
     </phase>
     <pattern id="axf">
 	<!-- axf:document-info -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.document-info -->
-        <p>http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.document-info</p>
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
+        <p>http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info</p>
         <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1" role="axf-1">
 	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">name=&quot;<value-of select="@name"/>&quot; は　name=&quot;xmp&quot; とのaxf:document-infoが存在している場合、使用することができません。</assert>
         </rule>
@@ -50,7 +50,7 @@
 	<!-- axf:annotation-color -->
 	<!-- <color> | none -->
 	<!-- Inherited: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.annotation-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-color -->
 	<rule context="fo:*/@axf:annotation-color">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">axf:annotation-color=&quot;<value-of select="."/>&quot; should be Color or 'none'. 「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -61,7 +61,7 @@
 	<!-- axf:annotation-contents -->
 	<!-- <contents> | none -->
 	<!-- Inherited: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.annotation-contents -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-contents -->
 	<rule context="fo:*/@axf:annotation-contents">
 	  <assert test="normalize-space(../@axf:annotation-type) = ('Text', 'FreeText', 'Stamp', 'FileAttachment') or local-name(..) = 'basic-link'" role="Warning"><value-of select="name(.)"/> should be used only when @axf:annotation-type is 'Text', 'FreeText', 'Stamp', or 'FileAnnotation' or on fo:basic-link.</assert>
 	</rule>
@@ -79,7 +79,7 @@
 	<!-- <color> | transparent | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#background-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#background-color -->
 	<rule context="fo:*/@axf:background-color">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">axf:background-color=&quot;<value-of select="."/>&quot; should be Color or EnumerationToken. 「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -91,7 +91,7 @@
 	<!-- auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-content -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-height">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">content-height=&quot;<value-of select="."/>&quot;　は 列挙トークン、長さ又はパーセントでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -104,7 +104,7 @@
 	<!-- <string> | auto -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-content -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-type">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">content-type=&quot;<value-of select="."/>&quot; はリテラル又は列挙トークンでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -117,7 +117,7 @@
 	<!-- auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-content -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-width">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">content-width=&quot;<value-of select="."/>&quot; は列挙トークン、長さ又はパーセントでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -130,7 +130,7 @@
 	<!-- <color> | transparent | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-color -->
 	<rule context="fo:*/@axf:background-color">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-color=&quot;<value-of select="."/>&quot; は色又は列挙トークンでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -142,7 +142,7 @@
 	<!-- <uri-specification> | none | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-image -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-image -->
 	<rule context="fo:*/@axf:background-image">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-image=&quot;<value-of select="."/>&quot; はＵＲＩ又は列挙トークンでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -155,7 +155,7 @@
 	<!-- [ [<percentage> | <length> ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-position -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-position -->
 	<rule context="fo:*/@background-position">
 	  <report test=". eq ''" role="Warning">background-position=&quot;&quot; は「[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit」でなければなりません。</report>
 	</rule>
@@ -164,7 +164,7 @@
 	<!-- <percentage> | <length> | left | center | right | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-position-horizontal -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-position-horizontal -->
 	<rule context="fo:*/@axf:background-position-horizontal">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-position-horizontal=&quot;<value-of select="."/>&quot; はパーセント、長さ又は列挙トークンでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -177,7 +177,7 @@
 	<!-- <percentage> | <length> | top | center | bottom -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-position-vertical -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-position-vertical -->
 	<rule context="fo:*/@axf:background-position-vertical">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-position-vertical=&quot;<value-of select="."/>&quot;はパーセント、長さ又は列挙トークンでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -190,7 +190,7 @@
 	<!-- repeat | repeat-x | repeat-y | no-repeat | paginate -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-repeat -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-repeat -->
 	<rule context="fo:*/@axf:background-repeat">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-repeat=&quot;<value-of select="."/>&quot; は列挙トークンでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -202,7 +202,7 @@
 	<!-- axf:baseline-block-snap -->
 	<!-- <color> | none -->
 	<!-- Inherited: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.baseline-block-snap -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.baseline-block-snap -->
 	<rule context="fo:*/@axf:baseline-block-snap">
 	  <assert test="exists(../@axf:baseline-grid) and normalize-space(../@axf:baseline-grid) = ('new', 'none')" role="Warning">axf:baseline-block-snap applies only when axf:baseline-grid is 'new' or 'none'.</assert>
 	</rule>
@@ -238,7 +238,7 @@
 	<!-- uniform | non-uniform | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-content -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-scaling">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">scaling=&quot;<value-of select="."/>&quot; は列挙トークンでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -251,7 +251,7 @@
 	<!-- none | <length> -->
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.hyphenation-zone -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.hyphenation-zone -->
 	<rule context="fo:*/@axf:hyphenation-zone">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:hyphenation-zone=&quot;<value-of select="."/>&quot;は 列挙トークン又は長さでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -271,7 +271,7 @@
 	<!-- none | <length> -->
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.indent-here -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.indent-here -->
 	<rule context="fo:*/@axf:indent-here">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:indent-here=&quot;<value-of select="."/>&quot; should be EnumerationToken or Length. 「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -284,7 +284,7 @@
 	<!-- <color> | transparent -->
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-background-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-background-color -->
 	<rule context="fo:*/@axf:line-number-background-color">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Color', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>=&quot;<value-of select="."/>&quot; should be a Color, a color name, or 'transparent'. 「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -296,7 +296,7 @@
 	<!-- <color> -->
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-color -->
 	<rule context="fo:*/@axf:line-number-color">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('Color', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>=&quot;<value-of select="."/>&quot; should be a Color or a color name. 「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -321,7 +321,7 @@
 	<!-- auto | <number> -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-initial -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-initial -->
 	<rule context="fo:*/@axf:line-number-initial">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>=&quot;<value-of select="."/>&quot; should be EnumerationToken or Number. 「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -334,7 +334,7 @@
 	<!-- <number> | auto -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-interval -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-interval -->
 	<rule context="fo:*/@axf:line-number-interval">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>=&quot;<value-of select="."/>&quot; should be EnumerationToken or Number. 「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -347,7 +347,7 @@
 	<!-- <length> -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-offset -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-offset -->
 	<rule context="fo:*/@axf:line-number-offset">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('Length', 'EMPTY', 'ERROR')">axf:line-number-offset=&quot;<value-of select="."/>&quot; は長さでなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -359,7 +359,7 @@
 	<!-- <number> | auto -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-start -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-start -->
 	<rule context="fo:*/@axf:line-number-start">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>=&quot;<value-of select="."/>&quot; should be EnumerationToken or Number. 「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -372,7 +372,7 @@
 	<!-- none | [ [ underline | no-underline] || [ overline | no-overline ] || [ line-through | no-line-through ] || [ blink | no-blink ] ] | inherit -->
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-text-decoration -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-text-decoration -->
 	<rule context="fo:*/@text-decoration">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">text-decoration=&quot;<value-of select="."/>&quot; は「none」、「underline」、「no-underline]」、「overline」、「no-overline」、「line-through」、「no-line-through」、「blink」、「no-blink」又は「inherit」でなければなりません。「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -385,7 +385,7 @@
 	<!-- auto | <width> -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-width -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-width -->
 	<rule context="fo:*/@axf:line-number-width">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>=&quot;<value-of select="."/>&quot; should be EnumerationToken or Length. 「<value-of select="."/>」は<value-of select="local-name($expression)"/>です。</assert>
@@ -397,7 +397,7 @@
 	<!-- axf:page-number-prefix -->
 	<!-- <string> -->
 	<!-- Inherited: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.page-number-prefix -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.page-number-prefix -->
 	<rule context="fo:*/@axf:page-number-prefix">
 	  <report test="true()" sqf:fix="axf_page-number-prefix_fix" role="Warning">axf:page-number-prefix: A similar function is provided in XSL 1.1. Please use fo:folio-prefix.</report>
           <sqf:fix id="axf_page-number-prefix_fix">
@@ -414,7 +414,7 @@
 	<!-- axf:revision-bar-color -->
 	<!-- <color> -->
 	<!-- Inherited: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.revision-bar-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.revision-bar-color -->
 	<rule context="fo:*/@axf:revision-bar-color">
 	  <report test="true()" sqf:fix="axf_revision-bar-color_fix" role="Warning">axf:revision-bar-color: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
           <sqf:fix id="axf_revision-bar-color_fix">
@@ -428,7 +428,7 @@
 	<!-- axf:revision-bar-offset -->
 	<!-- <length> -->
 	<!-- Inherited: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.revision-bar-offset -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.revision-bar-offset -->
 	<rule context="fo:*/@axf:revision-bar-offset">
 	  <report test="true()" sqf:fix="axf_revision-bar-offset_fix" role="Warning">axf:revision-bar-offset: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
           <sqf:fix id="axf_revision-bar-offset_fix">
@@ -442,7 +442,7 @@
 	<!-- axf:revision-bar-position -->
 	<!-- start | end | inside | outside | alternate | both -->
 	<!-- Inherited: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.revision-bar-position -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.revision-bar-position -->
 	<rule context="fo:*/@axf:revision-bar-position">
 	  <report test="true()" sqf:fix="axf_revision-bar-position_fix" role="Warning">axf:revision-bar-position: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
           <sqf:fix id="axf_revision-bar-position_fix">
@@ -456,7 +456,7 @@
 	<!-- axf:revision-bar-style -->
 	<!-- <border-style> -->
 	<!-- Inherited: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.revision-bar-style -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.revision-bar-style -->
 	<rule context="fo:*/@axf:revision-bar-style">
 	  <report test="true()" sqf:fix="axf_revision-bar-style_fix" role="Warning">axf:revision-bar-style: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
           <sqf:fix id="axf_revision-bar-style_fix">
@@ -470,7 +470,7 @@
 	<!-- axf:revision-bar-width -->
 	<!-- <border-width> -->
 	<!-- Inherited: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.revision-bar-width -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.revision-bar-width -->
 	<rule context="fo:*/@axf:revision-bar-width">
 	  <report test="true()" sqf:fix="axf_revision-bar-width_fix" role="Warning">axf:revision-bar-width: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
           <sqf:fix id="axf_revision-bar-width_fix">
@@ -484,7 +484,7 @@
 	<!-- axf:suppress-duplicate-page-number -->
 	<!-- <string> -->
 	<!-- Inherited: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.suppress-duplicate-page-number -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.suppress-duplicate-page-number -->
 	<rule context="fo:*/@axf:suppress-duplicate-page-number">
 	  <report test="true()" sqf:fix="axf_suppress-duplicate-page-number_fix" role="Warning">axf:suppress-duplicate-page-number: A similar function is provided in XSL 1.1. Please use merge-*-index-key-references.</report>
           <sqf:fix id="axf_suppress-duplicate-page-number_fix">
@@ -497,7 +497,7 @@
 
 	<!-- overflow -->
 	<!-- visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.overflow -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.overflow -->
 	<rule context="fo:*/@overflow">
 	  <report test=". = ('replace', 'condense') and not(local-name(..) = ('block-container', 'inline-container'))">overflow=&quot;<value-of select="."/>&quot; はfo:block-container 又は fo:inline-containerのみに適用されています。</report>
 	</rule>

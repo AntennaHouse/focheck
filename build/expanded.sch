@@ -23,20 +23,20 @@
   <!-- FOs -->
 
   <rule context="fo:basic-link | fo:bookmark">
-    <!-- http://www.w3.org/TR/xsl/#fo_basic-link -->
+    <!-- https://www.w3.org/TR/xsl/#fo_basic-link -->
     <!-- https://www.w3.org/TR/xsl11/#fo_bookmark -->
     <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning">An '<value-of select="local-name()"/>' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</report>
   </rule>
 
   <rule context="fo:float">
-    <!-- http://www.w3.org/TR/xsl/#d0e6532 -->
+    <!-- https://www.w3.org/TR/xsl/#d0e6532 -->
     <report test="exists(ancestor::fo:float) or exists(ancestor::fo:footnote)">An '<value-of select="local-name()"/>' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
   </rule>
 
   <rule context="fo:footnote">
-    <!-- http://www.w3.org/TR/xsl/#d0e6532 -->
+    <!-- https://www.w3.org/TR/xsl/#d0e6532 -->
     <report test="(for $ancestor in ancestor::fo:* return local-name($ancestor)) = ('float', 'footnote')">An '<value-of select="local-name()"/>' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
-    <!-- http://www.w3.org/TR/xsl/#fo_footnote -->
+    <!-- https://www.w3.org/TR/xsl/#fo_footnote -->
     <!--
     <assert
 	test="ancestor::fo:flow/@flow-name eq 'xsl-region-body' or
@@ -69,7 +69,7 @@
   </rule>
 
   <rule context="fo:marker">
-    <!-- http://www.w3.org/TR/xsl/#fo_marker -->
+    <!-- https://www.w3.org/TR/xsl/#fo_marker -->
     <assert test="exists(ancestor::fo:flow)">An fo:marker is only permitted as the descendant of an fo:flow.</assert>
     <assert test="empty(ancestor::fo:marker)">An fo:marker is not permitted as a descendant of an fo:marker.</assert>
     <assert test="empty(ancestor::fo:retrieve-marker)">An fo:marker is not permitted as a descendant of an fo:retrieve-marker.</assert>
@@ -77,17 +77,17 @@
   </rule>
 
   <rule context="fo:retrieve-marker">
-    <!-- http://www.w3.org/TR/xsl/#fo_retrieve-marker -->
+    <!-- https://www.w3.org/TR/xsl/#fo_retrieve-marker -->
     <assert test="exists(ancestor::fo:static-content)">An fo:retrieve-marker is only permitted as the descendant of an fo:static-content.</assert>
   </rule>
 
   <rule context="fo:retrieve-table-marker">
-    <!-- http://www.w3.org/TR/xsl/#fo_retrieve-table-marker -->
+    <!-- https://www.w3.org/TR/xsl/#fo_retrieve-table-marker -->
     <assert test="exists(ancestor::fo:table-header) or                   exists(ancestor::fo:table-footer) or                   (exists(parent::fo:table) and empty(preceding-sibling::fo:table-body) and empty(following-sibling::fo:table-column))">An fo:retrieve-table-marker is only permitted as the descendant of an fo:table-header or fo:table-footer or as a child of fo:table in a position where fo:table-header or fo:table-footer is permitted.</assert>
   </rule>
 
   <rule context="fo:root">
-    <!-- http://www.w3.org/TR/xsl/#fo_root -->
+    <!-- https://www.w3.org/TR/xsl/#fo_root -->
     <assert id="fo_root-001" test="exists(descendant::fo:page-sequence)">There must be at least one fo:page-sequence descendant of fo:root.</assert>
   </rule>
 
@@ -114,20 +114,20 @@
   </rule>
 
   <rule context="fo:*/@flow-map-reference">
-    <!-- http://www.w3.org/TR/xsl11/#flow-map-reference -->
+    <!-- https://www.w3.org/TR/xsl11/#flow-map-reference -->
     <report test="empty(/fo:root/fo:layout-master-set/fo:flow-map/@flow-map-name[. eq current()])">flow-map-reference="<value-of select="."/>" does not match any fo:flow-map name.</report>
   </rule>
 
   <rule context="fo:*/@flow-name">
-    <!-- http://www.w3.org/TR/xsl11/#flow-name -->
+    <!-- https://www.w3.org/TR/xsl11/#flow-name -->
     <assert test="count(../../*/@flow-name[. eq current()]) = 1">flow-name="<value-of select="."/>" must be unique within its fo:page-sequence.</assert>
     <report test="not(. = ('xsl-region-body',          'xsl-region-start',          'xsl-region-end',          'xsl-region-before',          'xsl-region-after',          'xsl-footnote-separator',          'xsl-before-float-separator')) and               empty(key('region-name', .)) and               empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])" role="Warning">flow-name="<value-of select="."/>" does not match any named or reserved region-name or a flow-name-reference.</report>
   </rule>
 
   <rule context="fo:*/@flow-name-reference">
-    <!-- http://www.w3.org/TR/xsl11/#flow-name-reference -->
+    <!-- https://www.w3.org/TR/xsl11/#flow-name-reference -->
     <assert test="count(ancestor::fo:flow-map//fo:flow-name-specifier/@flow-name-reference[. eq current()]) = 1">flow-name-reference="<value-of select="., ancestor::fo-flow-map//fo:flow-name-specifier/@flow-name-reference[. eq current()]"/>" must be unique within its fo:flow-map.</assert>
-    <!-- http://www.w3.org/TR/xsl11/#fo_flow-source-list -->
+    <!-- https://www.w3.org/TR/xsl11/#fo_flow-source-list -->
     <!-- These flows must be either all fo:flow formatting objects or
          all fo:static-content formatting objects. -->
     <assert test="count(distinct-values(for $fo in key('flow-name', .)[ancestor::fo:page-sequence/@flow-map-reference = current()/ancestor::fo:flow-map/@flow-map-name] return local-name($fo))) = 1" role="Warning">flow-name-reference="<value-of select="."/>" should only be used with all fo:flow or all fo:static-content.</assert>
@@ -140,11 +140,11 @@
   <rule context="fo:*/@language">
     <let name="expression" value="ahf:parser-runner(.)"/>
     <!-- What would be generated if we could... -->
-    <!-- http://www.w3.org/TR/xsl11/#language -->
+    <!-- https://www.w3.org/TR/xsl11/#language -->
     <assert test="local-name($expression) = ('EnumerationToken', 'ERROR', 'Object')">language="<value-of select="."/>" should be an EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
     <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit') or string-length($expression/@token) = 2 or string-length($expression/@token) = 3)">language="<value-of select="."/>" should be a 3-letter code conforming to a ISO639-2 terminology or bibliographic code or a 2-letter code conforming to a ISO639 2-letter code or 'none' or 'inherit'.</report>
     <report test="local-name($expression) = 'ERROR'">Syntax error: 'language="<value-of select="."/>"'</report>
-    <!-- http://www.w3.org/TR/xsl11/#d0e4626 -->
+    <!-- https://www.w3.org/TR/xsl11/#d0e4626 -->
     <!-- Warnings aren't needed (#21) -->
     <!--
     <report test="$expression instance of element(EnumerationToken) and string-length($expression/@token) = 2" id="language_2-letter" role="Warning">language="<value-of select="." />" uses a 2-letter code.  A 2-letter code in conformance with ISO639 will be converted to the corresponding 3-letter ISO639-2 terminology code.</report>
@@ -153,36 +153,36 @@
   </rule>
 
   <rule context="fo:marker/@marker-class-name">
-    <!-- http://www.w3.org/TR/xsl/#fo_marker -->
+    <!-- https://www.w3.org/TR/xsl/#fo_marker -->
     <!-- Error in XSL 1.1 spec, but AH Formatter not complaining. -->
     <assert test="count(../../fo:marker[@marker-class-name eq current()]) = 1" role="Warning">marker-class-name="<value-of select="."/>" should be unique among fo:marker with the same parent.</assert>
   </rule>
 
   <rule context="fo:*/@master-name">
-    <!-- http://www.w3.org/TR/xsl11/#master-name -->
+    <!-- https://www.w3.org/TR/xsl11/#master-name -->
     <assert test="count(key('master-name', .)) = 1" role="Warning">master-name="<value-of select="."/>" should be unique.</assert>
   </rule>
 
   <rule context="fo:*/@master-reference">
-    <!-- http://www.w3.org/TR/xsl11/#master-reference -->
+    <!-- https://www.w3.org/TR/xsl11/#master-reference -->
     <assert test="exists(key('master-name', .))" role="Warning">master-reference="<value-of select="."/>" should refer to a master-name that exists within the document.</assert>
     <report test="count(key('master-name', .)) &gt; 1" role="Warning">master-reference="<value-of select="."/>" refers to multiple master-name within the document.</report>
   </rule>
 
   <rule context="fo:*/@overflow">
-    <!-- http://www.w3.org/TR/xsl11/#overflow -->
+    <!-- https://www.w3.org/TR/xsl11/#overflow -->
     <report test=". eq 'repeat' and ../@absolute-position = ('absolute', 'fixed')" role="Warning">overflow="<value-of select="."/>" on an absolutely-positioned area will be treated as 'auto'.</report>
   </rule>
 
   <rule context="fo:index-key-reference/@ref-index-key">
-    <!-- http://www.w3.org/TR/xsl11/#ref-index-key -->
+    <!-- https://www.w3.org/TR/xsl11/#ref-index-key -->
     <let name="index-key-reference" value="."/>
     <report test="empty(key('index-key', .))" role="Warning">ref-index-key="<value-of select="."/>" does not match any index-key values.</report>
     <report test="exists(key('index-key', .)) and (some $index-hit in key('index-key', .) satisfies $index-hit &gt;&gt; $index-key-reference)" role="Warning">ref-index-key="<value-of select="."/>" occurs before a matching index-key value.</report>
   </rule>
 
   <rule context="fo:*/@region-name">
-    <!-- http://www.w3.org/TR/xsl11/#region-name -->
+    <!-- https://www.w3.org/TR/xsl11/#region-name -->
     <assert test="count(distinct-values(for $fo in key('region-name', .) return local-name($fo))) = 1" role="Warning">region-name="<value-of select="."/>" should only be used with regions of the same class.</assert>
     <assert test="not(. eq 'xsl-region-body') or local-name(..) eq 'region-body'">region-name="<value-of select="."/>" should only be used with fo:region-body.</assert>
     <assert test="not(. eq 'xsl-region-start') or local-name(..) eq 'region-start'">region-name="<value-of select="."/>" should only be used with fo:region-start.</assert>
@@ -192,8 +192,19 @@
   </rule>
 
   <rule context="fo:*/@region-name-reference">
-    <!-- http://www.w3.org/TR/xsl11/#region-name-reference -->
+    <!-- https://www.w3.org/TR/xsl11/#region-name-reference -->
     <assert test="count(ancestor::fo:flow-map//fo:region-name-specifier/@region-name-reference[. eq current()]) = 1">region-name-reference="<value-of select="."/>" must be unique within its fo:flow-map.</assert>
+  </rule>
+
+  <rule context="fo:*/@span">
+    <!-- https://www.w3.org/TR/xsl11/#span -->
+    <report test="exists(ancestor::fo:static-content)" sqf:fix="span_fix" role="warning">@span has effect only on areas returned by an fo:flow.</report>
+    <sqf:fix id="span_fix">
+      <sqf:description>
+        <sqf:title>Delete @span</sqf:title>
+      </sqf:description>
+      <sqf:delete/>
+    </sqf:fix>
   </rule>
 
 </pattern><?DSDL_INCLUDE_END fo.sch?>
@@ -3267,8 +3278,8 @@
     </phase>
     <pattern id="axf">
 	<!-- axf:document-info -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.document-info -->
-        <p>http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.document-info</p>
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
+        <p>http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info</p>
         <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1" role="axf-1">
 	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">name="<value-of select="@name"/>" cannot be used when axf:document-info with name="xmp" is present.</assert>
         </rule>
@@ -3285,7 +3296,7 @@
 	<!-- axf:annotation-color -->
 	<!-- <color> | none -->
 	<!-- Inherited: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.annotation-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-color -->
 	<rule context="fo:*/@axf:annotation-color">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">axf:annotation-color="<value-of select="."/>" should be Color or 'none'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3296,7 +3307,7 @@
 	<!-- axf:annotation-contents -->
 	<!-- <contents> | none -->
 	<!-- Inherited: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.annotation-contents -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-contents -->
 	<rule context="fo:*/@axf:annotation-contents">
 	  <assert test="normalize-space(../@axf:annotation-type) = ('Text', 'FreeText', 'Stamp', 'FileAttachment') or local-name(..) = 'basic-link'" role="Warning"><value-of select="name(.)"/> should be used only when @axf:annotation-type is 'Text', 'FreeText', 'Stamp', or 'FileAnnotation' or on fo:basic-link.</assert>
 	</rule>
@@ -3314,7 +3325,7 @@
 	<!-- <color> | transparent | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#background-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#background-color -->
 	<rule context="fo:*/@axf:background-color">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">axf:background-color="<value-of select="."/>" should be Color or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3326,7 +3337,7 @@
 	<!-- auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-content -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-height">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">content-height="<value-of select="."/>" should be EnumerationToken, Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3339,7 +3350,7 @@
 	<!-- <string> | auto -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-content -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-type">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">content-type="<value-of select="."/>" should be Literal or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3352,7 +3363,7 @@
 	<!-- auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-content -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-width">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">content-width="<value-of select="."/>" should be EnumerationToken, Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3365,7 +3376,7 @@
 	<!-- <color> | transparent | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-color -->
 	<rule context="fo:*/@axf:background-color">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-color="<value-of select="."/>" should be Color or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3377,7 +3388,7 @@
 	<!-- <uri-specification> | none | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-image -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-image -->
 	<rule context="fo:*/@axf:background-image">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-image="<value-of select="."/>" should be URI or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3390,7 +3401,7 @@
 	<!-- [ [<percentage> | <length> ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-position -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-position -->
 	<rule context="fo:*/@background-position">
 	  <report test=". eq ''" role="Warning">background-position="" should be '[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit'.</report>
 	</rule>
@@ -3399,7 +3410,7 @@
 	<!-- <percentage> | <length> | left | center | right | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-position-horizontal -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-position-horizontal -->
 	<rule context="fo:*/@axf:background-position-horizontal">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-position-horizontal="<value-of select="."/>" should be Percent, Length, or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3412,7 +3423,7 @@
 	<!-- <percentage> | <length> | top | center | bottom -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-position-vertical -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-position-vertical -->
 	<rule context="fo:*/@axf:background-position-vertical">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-position-vertical="<value-of select="."/>" should be Percent, Length, or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3425,7 +3436,7 @@
 	<!-- repeat | repeat-x | repeat-y | no-repeat | paginate -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-repeat -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-repeat -->
 	<rule context="fo:*/@axf:background-repeat">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-repeat="<value-of select="."/>" should be EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3437,7 +3448,7 @@
 	<!-- axf:baseline-block-snap -->
 	<!-- <color> | none -->
 	<!-- Inherited: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.baseline-block-snap -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.baseline-block-snap -->
 	<rule context="fo:*/@axf:baseline-block-snap">
 	  <assert test="exists(../@axf:baseline-grid) and normalize-space(../@axf:baseline-grid) = ('new', 'none')" role="Warning">axf:baseline-block-snap applies only when axf:baseline-grid is 'new' or 'none'.</assert>
 	</rule>
@@ -3473,7 +3484,7 @@
 	<!-- uniform | non-uniform | inherit -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.background-content -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-scaling">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">scaling="<value-of select="."/>" should be EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3486,7 +3497,7 @@
 	<!-- none | <length> -->
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.hyphenation-zone -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.hyphenation-zone -->
 	<rule context="fo:*/@axf:hyphenation-zone">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:hyphenation-zone="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3506,7 +3517,7 @@
 	<!-- none | <length> -->
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.indent-here -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.indent-here -->
 	<rule context="fo:*/@axf:indent-here">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:indent-here="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3519,7 +3530,7 @@
 	<!-- <color> | transparent -->
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-background-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-background-color -->
 	<rule context="fo:*/@axf:line-number-background-color">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Color', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be a Color, a color name, or 'transparent'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3531,7 +3542,7 @@
 	<!-- <color> -->
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-color -->
 	<rule context="fo:*/@axf:line-number-color">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Color', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be a Color or a color name.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3556,7 +3567,7 @@
 	<!-- auto | <number> -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-initial -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-initial -->
 	<rule context="fo:*/@axf:line-number-initial">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be EnumerationToken or Number.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3569,7 +3580,7 @@
 	<!-- <number> | auto -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-interval -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-interval -->
 	<rule context="fo:*/@axf:line-number-interval">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be EnumerationToken or Number.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3582,7 +3593,7 @@
 	<!-- <length> -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-offset -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-offset -->
 	<rule context="fo:*/@axf:line-number-offset">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('Length', 'EMPTY', 'ERROR')">axf:line-number-offset="<value-of select="."/>" should be Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3594,7 +3605,7 @@
 	<!-- <number> | auto -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-start -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-start -->
 	<rule context="fo:*/@axf:line-number-start">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be EnumerationToken or Number.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3607,7 +3618,7 @@
 	<!-- none | [ [ underline | no-underline] || [ overline | no-overline ] || [ line-through | no-line-through ] || [ blink | no-blink ] ] | inherit -->
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-text-decoration -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-text-decoration -->
 	<rule context="fo:*/@text-decoration">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">text-decoration="<value-of select="."/>" should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3620,7 +3631,7 @@
 	<!-- auto | <width> -->
 	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.line-number-width -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-width -->
 	<rule context="fo:*/@axf:line-number-width">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
@@ -3632,7 +3643,7 @@
 	<!-- axf:page-number-prefix -->
 	<!-- <string> -->
 	<!-- Inherited: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.page-number-prefix -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.page-number-prefix -->
 	<rule context="fo:*/@axf:page-number-prefix">
 	  <report test="true()" sqf:fix="axf_page-number-prefix_fix" role="Warning">axf:page-number-prefix: A similar function is provided in XSL 1.1. Please use fo:folio-prefix.</report>
           <sqf:fix id="axf_page-number-prefix_fix">
@@ -3649,7 +3660,7 @@
 	<!-- axf:revision-bar-color -->
 	<!-- <color> -->
 	<!-- Inherited: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.revision-bar-color -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.revision-bar-color -->
 	<rule context="fo:*/@axf:revision-bar-color">
 	  <report test="true()" sqf:fix="axf_revision-bar-color_fix" role="Warning">axf:revision-bar-color: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
           <sqf:fix id="axf_revision-bar-color_fix">
@@ -3663,7 +3674,7 @@
 	<!-- axf:revision-bar-offset -->
 	<!-- <length> -->
 	<!-- Inherited: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.revision-bar-offset -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.revision-bar-offset -->
 	<rule context="fo:*/@axf:revision-bar-offset">
 	  <report test="true()" sqf:fix="axf_revision-bar-offset_fix" role="Warning">axf:revision-bar-offset: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
           <sqf:fix id="axf_revision-bar-offset_fix">
@@ -3677,7 +3688,7 @@
 	<!-- axf:revision-bar-position -->
 	<!-- start | end | inside | outside | alternate | both -->
 	<!-- Inherited: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.revision-bar-position -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.revision-bar-position -->
 	<rule context="fo:*/@axf:revision-bar-position">
 	  <report test="true()" sqf:fix="axf_revision-bar-position_fix" role="Warning">axf:revision-bar-position: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
           <sqf:fix id="axf_revision-bar-position_fix">
@@ -3691,7 +3702,7 @@
 	<!-- axf:revision-bar-style -->
 	<!-- <border-style> -->
 	<!-- Inherited: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.revision-bar-style -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.revision-bar-style -->
 	<rule context="fo:*/@axf:revision-bar-style">
 	  <report test="true()" sqf:fix="axf_revision-bar-style_fix" role="Warning">axf:revision-bar-style: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
           <sqf:fix id="axf_revision-bar-style_fix">
@@ -3705,7 +3716,7 @@
 	<!-- axf:revision-bar-width -->
 	<!-- <border-width> -->
 	<!-- Inherited: yes -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.revision-bar-width -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.revision-bar-width -->
 	<rule context="fo:*/@axf:revision-bar-width">
 	  <report test="true()" sqf:fix="axf_revision-bar-width_fix" role="Warning">axf:revision-bar-width: A similar function is provided in XSL 1.1. Please use fo:change-bar-begin and fo:change-bar-end.</report>
           <sqf:fix id="axf_revision-bar-width_fix">
@@ -3719,7 +3730,7 @@
 	<!-- axf:suppress-duplicate-page-number -->
 	<!-- <string> -->
 	<!-- Inherited: no -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.suppress-duplicate-page-number -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.suppress-duplicate-page-number -->
 	<rule context="fo:*/@axf:suppress-duplicate-page-number">
 	  <report test="true()" sqf:fix="axf_suppress-duplicate-page-number_fix" role="Warning">axf:suppress-duplicate-page-number: A similar function is provided in XSL 1.1. Please use merge-*-index-key-references.</report>
           <sqf:fix id="axf_suppress-duplicate-page-number_fix">
@@ -3732,7 +3743,7 @@
 
 	<!-- overflow -->
 	<!-- visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto -->
-	<!-- http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.overflow -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.overflow -->
 	<rule context="fo:*/@overflow">
 	  <report test=". = ('replace', 'condense') and not(local-name(..) = ('block-container', 'inline-container'))">overflow="<value-of select="."/>" applies only on fo:block-container or fo:inline-container.</report>
 	</rule>

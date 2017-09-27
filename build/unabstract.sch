@@ -173,6 +173,17 @@
     <assert test="count(ancestor::fo:flow-map//fo:region-name-specifier/@region-name-reference[. eq current()]) = 1">region-name-reference="<value-of select="."/>" must be unique within its fo:flow-map.</assert>
   </rule>
 
+  <rule context="fo:*/@span">
+    
+    <report test="exists(ancestor::fo:static-content)" sqf:fix="span_fix" role="warning">@span has effect only on areas returned by an fo:flow.</report>
+    <sqf:fix id="span_fix">
+      <sqf:description>
+        <sqf:title>Delete @span</sqf:title>
+      </sqf:description>
+      <sqf:delete/>
+    </sqf:fix>
+  </rule>
+
 </pattern>
     <pattern xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" id="fo-property">
    <xsl:include href="file:/E:/Projects/oxygen/focheck-internal/focheck/xsl/parser-runner.xsl"/>
@@ -3245,7 +3256,7 @@
     <pattern id="axf">
 	
 	
-        <p>http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.document-info</p>
+        <p>http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info</p>
         <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1" role="axf-1">
 	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">name="<value-of select="@name"/>" cannot be used when axf:document-info with name="xmp" is present.</assert>
         </rule>

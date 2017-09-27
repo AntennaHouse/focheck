@@ -210,7 +210,7 @@
             </xsl:attribute>
             <xsl:attribute name="id">axf</xsl:attribute>
             <xsl:attribute name="name">axf</xsl:attribute>
-            <svrl:text>http://www.antennahouse.com/product/ahf64/ahf-ext.html#axf.document-info</svrl:text>
+            <svrl:text>http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info</svrl:text>
             <xsl:apply-templates/>
          </svrl:active-pattern>
          <xsl:apply-templates select="/" mode="M11"/>
@@ -224,7 +224,7 @@
 
 
 	  <!--RULE -->
-   <xsl:template match="fo:basic-link | fo:bookmark" priority="1023" mode="M4">
+   <xsl:template match="fo:basic-link | fo:bookmark" priority="1024" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:basic-link | fo:bookmark"/>
 
@@ -247,7 +247,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:float" priority="1022" mode="M4">
+   <xsl:template match="fo:float" priority="1023" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:float"/>
 
 		    <!--REPORT -->
@@ -268,7 +268,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:footnote" priority="1021" mode="M4">
+   <xsl:template match="fo:footnote" priority="1022" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:footnote"/>
 
 		    <!--REPORT -->
@@ -330,7 +330,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:list-item-body[empty(@start-indent)]"
-                 priority="1020"
+                 priority="1021"
                  mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:list-item-body[empty(@start-indent)]"/>
@@ -353,7 +353,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:list-item-label[empty(@end-indent)]"
-                 priority="1019"
+                 priority="1020"
                  mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:list-item-label[empty(@end-indent)]"/>
@@ -375,7 +375,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:marker" priority="1018" mode="M4">
+   <xsl:template match="fo:marker" priority="1019" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:marker"/>
 
 		    <!--ASSERT -->
@@ -445,7 +445,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:retrieve-marker" priority="1017" mode="M4">
+   <xsl:template match="fo:retrieve-marker" priority="1018" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:retrieve-marker"/>
 
 		    <!--ASSERT -->
@@ -467,7 +467,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:retrieve-table-marker" priority="1016" mode="M4">
+   <xsl:template match="fo:retrieve-table-marker" priority="1017" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:retrieve-table-marker"/>
 
@@ -490,7 +490,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:root" priority="1015" mode="M4">
+   <xsl:template match="fo:root" priority="1016" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:root"/>
 
 		    <!--ASSERT -->
@@ -514,7 +514,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@character | fo:*/@grouping-separator"
-                 priority="1014"
+                 priority="1015"
                  mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@character | fo:*/@grouping-separator"/>
@@ -543,7 +543,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@column-count | fo:*/@number-columns-spanned"
-                 priority="1013"
+                 priority="1014"
                  mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@column-count | fo:*/@number-columns-spanned"/>
@@ -571,7 +571,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-width" priority="1012" mode="M4">
+   <xsl:template match="fo:*/@column-width" priority="1013" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-width"/>
       <xsl:variable name="number-columns-spanned"
                     select="ahf:parser-runner(../@number-columns-spanned)"/>
@@ -596,7 +596,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-map-reference" priority="1011" mode="M4">
+   <xsl:template match="fo:*/@flow-map-reference" priority="1012" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@flow-map-reference"/>
 
@@ -617,7 +617,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name" priority="1010" mode="M4">
+   <xsl:template match="fo:*/@flow-name" priority="1011" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-name"/>
 
 		    <!--ASSERT -->
@@ -656,7 +656,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name-reference" priority="1009" mode="M4">
+   <xsl:template match="fo:*/@flow-name-reference" priority="1010" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@flow-name-reference"/>
 
@@ -699,7 +699,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenation-character" priority="1008" mode="M4">
+   <xsl:template match="fo:*/@hyphenation-character" priority="1009" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@hyphenation-character"/>
 
@@ -727,7 +727,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@language" priority="1007" mode="M4">
+   <xsl:template match="fo:*/@language" priority="1008" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@language"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -785,7 +785,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:marker/@marker-class-name" priority="1006" mode="M4">
+   <xsl:template match="fo:marker/@marker-class-name" priority="1007" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:marker/@marker-class-name"/>
 
@@ -810,7 +810,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-name" priority="1005" mode="M4">
+   <xsl:template match="fo:*/@master-name" priority="1006" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@master-name"/>
 
 		    <!--ASSERT Warning-->
@@ -834,7 +834,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-reference" priority="1004" mode="M4">
+   <xsl:template match="fo:*/@master-reference" priority="1005" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@master-reference"/>
 
@@ -875,7 +875,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@overflow" priority="1003" mode="M4">
+   <xsl:template match="fo:*/@overflow" priority="1004" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@overflow"/>
 
 		    <!--REPORT Warning-->
@@ -897,7 +897,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:index-key-reference/@ref-index-key"
-                 priority="1002"
+                 priority="1003"
                  mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:index-key-reference/@ref-index-key"/>
@@ -937,7 +937,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@region-name" priority="1001" mode="M4">
+   <xsl:template match="fo:*/@region-name" priority="1002" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@region-name"/>
 
 		    <!--ASSERT Warning-->
@@ -1051,7 +1051,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@region-name-reference" priority="1000" mode="M4">
+   <xsl:template match="fo:*/@region-name-reference" priority="1001" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@region-name-reference"/>
 
@@ -1072,6 +1072,25 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@span" priority="1000" mode="M4">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@span"/>
+
+		    <!--REPORT warning-->
+      <xsl:if test="exists(ancestor::fo:static-content)">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="exists(ancestor::fo:static-content)">
+            <xsl:attribute name="role">warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>@span has effect only on areas returned by an fo:flow.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
    </xsl:template>
    <xsl:template match="text()" priority="-1" mode="M4"/>
    <xsl:template match="@*|node()" priority="-2" mode="M4">
