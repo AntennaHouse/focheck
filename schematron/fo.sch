@@ -28,6 +28,11 @@
     <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning">An '<value-of select="local-name()" />' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</report>
   </rule>
 
+  <rule context="fo:change-bar-end">
+    <!-- https://www.w3.org/TR/xsl/#fo_change-bar-end -->
+    <report test="exists(@change-bar-class) and not(@change-bar-class = preceding::fo:change-bar-start/@change-bar-class)" role="Warning">An '<value-of select="local-name()" />' that does not form a matching pair with an 'fo:change-bar-begin' will be ignored.</report>
+  </rule>
+
   <rule context="fo:float">
     <!-- https://www.w3.org/TR/xsl/#d0e6532 -->
     <report test="exists(ancestor::fo:float) or exists(ancestor::fo:footnote)">An '<value-of select="local-name()" />' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
