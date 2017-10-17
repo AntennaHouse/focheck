@@ -58,6 +58,23 @@
     <report test="exists(descendant::fo:*[local-name() = ('float', 'footnote', 'marker')])">An 'fo:footnote' is not permitted to have an 'fo:float', 'fo:footnote', or 'fo:marker' as a descendant.</report>
   </rule>
 
+  <rule context="fo:list-block">
+    <assert test="exists((., ancestor::*)/@provisional-distance-between-starts)" role="Warning" sqf:fix="list-block-pdbs-fix">fo:list-block with no 'provisional-distance-between-starts' and no inherited value will use 24pt.</assert>
+    <sqf:fix id="list-block-pdbs-fix">
+      <sqf:description>
+        <sqf:title>Add 'provisional-distance-between-starts'</sqf:title>
+      </sqf:description>
+      <sqf:add node-type="attribute" target="provisional-distance-between-starts" />
+    </sqf:fix>
+    <assert test="exists((., ancestor::*)/@provisional-label-separation)" role="Warning" sqf:fix="list-block-pls-fix">fo:list-block with no 'provisional-label-separation' and no inherited value will use 6pt.</assert>
+    <sqf:fix id="list-block-pls-fix">
+      <sqf:description>
+        <sqf:title>Add 'provisional-label-separation'</sqf:title>
+      </sqf:description>
+      <sqf:add node-type="attribute" target="provisional-label-separation" />
+    </sqf:fix>
+  </rule>
+
   <rule context="fo:list-item-body[empty(@start-indent)]">
     <report test="true()" id="list-item-body-start-indent" role="Warning" sqf:fix="list-item-body-start-indent-fix">fo:list-item-body with no 'start-indent' will use inherited 'start-indent' value.</report>
     <sqf:fix id="list-item-body-start-indent-fix">
