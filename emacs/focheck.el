@@ -71,8 +71,8 @@
 	(add-to-list 'rng-schema-locating-files
 		     (locate-file "focheck-schemas.xml" load-path)))
   (rng-auto-set-schema)
-  (setq imenu-create-index-function 'xsl-imenu-create-index-function)
-  (setq imenu-extract-index-name-function 'xsl-imenu-create-index-function)
+  ;;(setq imenu-create-index-function 'xsl-imenu-create-index-function)
+  ;;(setq imenu-extract-index-name-function 'xsl-imenu-create-index-function)
   (modify-syntax-entry ?' "."))
 
 
