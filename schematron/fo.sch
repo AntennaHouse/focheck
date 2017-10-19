@@ -25,27 +25,27 @@
   <rule context="fo:basic-link | fo:bookmark">
     <!-- https://www.w3.org/TR/xsl/#fo_basic-link -->
     <!-- https://www.w3.org/TR/xsl11/#fo_bookmark -->
-    <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning">An '<value-of select="local-name()" />' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</report>
+    <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning">An '<value-of select="name()" />' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</report>
   </rule>
 
   <rule context="fo:change-bar-begin">
     <!-- https://www.w3.org/TR/xsl/#fo_change-bar-begin -->
-    <report test="exists(@change-bar-class) and not(@change-bar-class = following::fo:change-bar-start/@change-bar-class)" role="Warning">An '<value-of select="local-name()" />' that does not form a matching pair with an 'fo:change-bar-end' will assume a matching 'change-bar-end' at the end of the document.</report>
+    <report test="exists(@change-bar-class) and not(@change-bar-class = following::fo:change-bar-start/@change-bar-class)" role="Warning">An '<value-of select="name()" />' that does not form a matching pair with an 'fo:change-bar-end' will assume a matching 'change-bar-end' at the end of the document.</report>
   </rule>
 
   <rule context="fo:change-bar-end">
     <!-- https://www.w3.org/TR/xsl/#fo_change-bar-end -->
-    <report test="exists(@change-bar-class) and not(@change-bar-class = preceding::fo:change-bar-start/@change-bar-class)" role="Warning">An '<value-of select="local-name()" />' that does not form a matching pair with an 'fo:change-bar-begin' will be ignored.</report>
+    <report test="exists(@change-bar-class) and not(@change-bar-class = preceding::fo:change-bar-start/@change-bar-class)" role="Warning">An '<value-of select="name()" />' that does not form a matching pair with an 'fo:change-bar-begin' will be ignored.</report>
   </rule>
 
   <rule context="fo:float">
     <!-- https://www.w3.org/TR/xsl/#d0e6532 -->
-    <report test="exists(ancestor::fo:float) or exists(ancestor::fo:footnote)">An '<value-of select="local-name()" />' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
+    <report test="exists(ancestor::fo:float) or exists(ancestor::fo:footnote)">An '<value-of select="name()" />' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
   </rule>
 
   <rule context="fo:footnote">
     <!-- https://www.w3.org/TR/xsl/#d0e6532 -->
-    <report test="(for $ancestor in ancestor::fo:* return local-name($ancestor)) = ('float', 'footnote')">An '<value-of select="local-name()" />' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
+    <report test="(for $ancestor in ancestor::fo:* return local-name($ancestor)) = ('float', 'footnote')">An '<value-of select="name()" />' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</report>
     <!-- https://www.w3.org/TR/xsl/#fo_footnote -->
     <!--
     <assert
@@ -124,7 +124,7 @@
   <!-- Properties -->
 
   <rule context="fo:*/@character | fo:*/@grouping-separator">
-    <assert test="string-length(.) = 1" id="character_grouping-separator"><value-of select="local-name()" />="<value-of select="."/>" should be a single character.</assert>
+    <assert test="string-length(.) = 1" id="character_grouping-separator"><value-of select="name()" />="<value-of select="."/>" should be a single character.</assert>
   </rule>
 
   <rule context="fo:*/@column-count | fo:*/@number-columns-spanned">
@@ -132,7 +132,7 @@
     <report test="local-name($expression) = 'Number' and
                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or
                    $expression/@is-zero = 'yes' or
-                   exists($expression/@value) and not($expression/@value castable as xs:integer))" id="column-count" role="Warning" sqf:fix="column-count-fix"><value-of select="local-name()"/>="<value-of select="."/>" should be a positive integer.  A non-positive or non-integer value will be rounded to the nearest integer value greater than or equal to 1.</report>
+                   exists($expression/@value) and not($expression/@value castable as xs:integer))" id="column-count" role="Warning" sqf:fix="column-count-fix"><value-of select="name()"/>="<value-of select="."/>" should be a positive integer.  A non-positive or non-integer value will be rounded to the nearest integer value greater than or equal to 1.</report>
     <sqf:fix id="column-count-fix">
       <sqf:description>
         <sqf:title>Change the @column-count value</sqf:title>
@@ -147,7 +147,7 @@
     <report test="exists(../@number-columns-spanned) and
 		  local-name($number-columns-spanned) = 'Number' and
                   (exists($number-columns-spanned/@value) and
-		   number($number-columns-spanned/@value) >= 1.5)" id="column-width" role="Warning"><value-of select="local-name()" /> is ignored with 'number-columns-spanned' is present and has a value greater than 1.</report>
+		   number($number-columns-spanned/@value) >= 1.5)" id="column-width" role="Warning"><value-of select="name()" /> is ignored with 'number-columns-spanned' is present and has a value greater than 1.</report>
   </rule>
 
   <rule context="fo:*/@flow-map-reference">
@@ -180,7 +180,7 @@
   </rule>
 
   <rule context="fo:*/@hyphenation-character">
-    <assert test="string-length(.) = 1 or . eq 'inherit'" id="hyphenation-character"><value-of select="local-name()" />="<value-of select="."/>" should be a single character or 'inherit'.</assert>
+    <assert test="string-length(.) = 1 or . eq 'inherit'" id="hyphenation-character"><value-of select="name()" />="<value-of select="."/>" should be a single character or 'inherit'.</assert>
   </rule>
 
   <rule context="fo:*/@language">
