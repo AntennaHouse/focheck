@@ -26,8 +26,9 @@ Pull requests and new issues are welcome.
 
 ## Installing
 
-* **focheck** 0.3.1 is bundled with oXgen 17.1 and 18.0.
-* If you want to use **focheck** with an older oXygen version or update from the **focheck** version in oXygen, then you can install **focheck** as an add-on oXygen framework.
+* If you want to keep up-to-date with **focheck** releases, then you can install **focheck** as an add-on oXygen framework.
+* **focheck** 0.3.1 (from 2015) is bundled with oXgen 17.1 through 19.1.
+* If you want to use **focheck** with an older oXygen version, then you can install **focheck** as an add-on oXygen framework.
 * Alternatively, you can download a static copy of the oXygen framework from here.
 * If you want to easily keep up-to-date with changes, then you can clone this repository and 'pull' the latest version whenever you want.
 * If you want to hack on **focheck** or submit pull requests, then you can fork this repository and clone that onto your local machine.
@@ -44,7 +45,7 @@ Note that oXygen will require you to restart the editor after installing the add
 
 1. Download the ZIP archive from the latest release on the 'Releases' page.
 1. Extract the folder in the ZIP archive to the oXygen `frameworks` directory.
- - On Windows, this is `C:\Program Files\Oxygen XML Editor 17\frameworks`, or something similar.
+ - On Windows, this is `C:\Program Files\Oxygen XML Editor 19\frameworks`, or something similar.
  - If you don't have permission to copy the folder to the `frameworks` directory, then you can use an alternative location as described below.
 1. Restart oXygen.
 
@@ -83,11 +84,15 @@ As well as providing validation, **focheck** defines two validation scenarios fo
 
 Use the `build-focheck.xml` Ant build file and the `validate.single` target to validate a file using both Relax NG and Schematron.  Alternatively, use the `schematron.single` or `schematron.dir` target to run Schematron on one or multiple files.
 
+### Emacs mode
+
+`focheck.el` associates the RELAX NG schema with `.fo` files.
+
 ### Standalone
 
 You can use the Relax NG schema in the `schema` folder and the Schematron files in the `schematron` folder outside of oXygen and Ant.  However:
 
-- The Relax NG works with Jing and with Emacs `nxml-mode` but not with `xmllint`.
+- The Relax NG schema works with Jing and with Emacs `nxml-mode` but not with `xmllint`.
 - The Schematron requires an XSLT 2.0 binding and a Schematron implementation that will both match on attributes as contexts as well as import and use external XSLT 2.0 stylesheets.
 
 Standalone checking requires Saxon 9 and Jing.  You can get Jing from https://github.com/relaxng/jing-trang/releases.
@@ -117,7 +122,7 @@ Makes a Zip archive of just the oXygen framework.
 
 ## License
 
-Copyright 2015-2016 Antenna House, Inc.
+Copyright 2015-2017 Antenna House, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -133,105 +138,110 @@ limitations under the License.
 
 ----
 
-# <a name="ja"></a>focheck – oXygenまたはスタンドアロンでのXSL-FOとアンテナハウスの拡張を有効にします。
+# <a name="ja"></a>focheck – oXygenまたはスタンドアロンでの XSL-FO とアンテナハウスの拡張を有効にします。
 
- XMLエデイタ内ー XSL 1.1 に追加された FOとプロパティを含むー**focheck**はoXygenフレームワークでXSL-FOの詳細な検証のために、 Relax NGとSchematron文法がバンドルします。
-**focheck** は、AH Formatterが改善された組版出力を規定する拡張とプロパティも有効にします。もちろん、 **focheck** Relax NG （または、W3C XSDと等しい） と oXygen以外のSchematronを一緒に又は別々に使用することもできます。
+XML Editor 内ー XSL 1.1 に追加された FO とプロパティを含む **focheck** は oXygen フレームワークで XSL-FO の詳細な有効のために、Relax NG と Schematron 文法がバンドルします。
+**focheck** は、AH Formatter が改善された組版出力を用意する拡張とプロパティも有効にします。もちろん、**focheck** Relax NG （または、W3C XSD と等しい）と oXygen 以外の Schematron を一緒に又は別々に使用することもできます。
 
 ![](etc/screenshot-ja.png)
 
-Relax NGは、構造的な有効を扱い、SchematronのはRelax NGでは表現できない追加の制約を扱います。SchematronはRExパーサージエネレーターによって生成されたXSLTベースのパーサとXSL-FOのデータタイプにパースツリーを縮小するために作成されたXSLTライブラリーを使用してプロパティ値を解析します。
+Relax NG は、構造の有効を扱い、Schematron のは Relax NG では表現できない追加の制約を扱います。Schematron は REx パーサージエネレーターによって生成された XSLT ベースのパーサと XSL-FO のデータタイプにパースツリーを縮小するために作成された XSLT ライブラリーを使用してプロパティ値を解析します。
 
 
 ## 免責事項
 
-**focheck**の開発は進行中です。まだ全てのXSL-FOプロパティ又はXSL-FO仕様の全ての必要条件を扱わない、またそれは、機能や相対的な長さのいずれかを評価しません。
+**focheck** の開発は進行中です。まだ全ての XSL-FO プロパティ又は XSL-FO 仕様の全ての必要条件を扱わない、またそれは、機能や相対的な長さのいずれかを評価しません。
 
 Pullリクエストや問題がありましたらお知らせください。
 
 ## インストール
 
 
-* **focheck** 0.3.1は oXgen 17.1とバンドルされています。
-* oXygenの古い版やoXygenでの **focheck** からアップデートで **focheck** を使用する場合、oXygenのアドオンフレームワークとして **focheck**  をインストールすることができます。
-* 代わりに、ここからoXygen フレームワークの静的なコピーをダウンロードすることができます。
-* 最新の変更を続けたい場合、このリポジトリをクローンして、いつでも好きな時に最新版を「pull」することができます。
-* **focheck** をハックしたりpullリクエストをサブミットしたり場合は、このリポジトリをフォークして、ローカルマシンにクローンすることができます。
+*最新の **focheck** リリースを続けたい場合、oXygen のアドオンフレームワークとして **focheck** をインストールすることができます。
+* **focheck** 0.3.1 は ( 2015 年から) oXgen 17.1 から 19.1 までにバンドルされています。
+** oXygen の古い版での **focheck** を使用する場合、oXygen のアドオンフレームワークとして **focheck** をインストールすることができます。
+*代わりに、ここから oXygen フレームワークの静的なコピーをダウンロードすることができます。
+*最新の変更を続けたい場合、このリポジトリをクローンして、いつでも好きな時に最新版を pull することができます。
+* **focheck** をハックしたり pull リクエストをサブミットしたり場合は、このリポジトリをフォークして、ローカルマシンにクローンすることができます。
 
 
 ### アドオン oXygen フレームワークとしてのインストール
 
 
-http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.htmlのoXygenのマニュアルの指示に従ってください。
+http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.html の oXygen のマニュアルの指示に従ってください。
 
- **focheck**の最新サイトのURLは https://github.com/AntennaHouse/focheck/raw/master/add-on-ja.xml です。
+**focheck** の最新サイトの URL は https://github.com/AntennaHouse/focheck/raw/master/add-on.xml です。
 
 oXygen はアドオンフレームワークをインストールした後、エデイタの再起動する必要になります。
 
 
-### oXygen　`frameworks`　デイレクトリのZIPアーカイブのインストール
+### oXygen `frameworks` ディレクトリの ZIP アーカイブのインストール
 
-1. 「Releases」ページにある最新リリースからZIPアーカイブをダウンロードして下さい。
-1. oXygen `frameworks` デイレクトリにZIPアーカイブにあるフォルダーを解凍します。
- - Windowsでは、これは  `C:\Program Files\Oxygen XML Editor 17\frameworks`　か同様のものです。
- - `frameworks`　デイレクトリにフォルダをコピーする許可がない場合は、以下に説明するように、別の場所を使用することができます。
-1. oXygenを再起動します。
+1. Releases ページにある最新リリースから ZIP アーカイブをダウンロードして下さい。
+1. oXygen `frameworks` ディレクトリに ZIP アーカイブにあるフォルダーを解凍します。
+ - Windows では、これは `C:\Program Files\Oxygen XML Editor 19\frameworks` か同様のものです。
+ - `frameworks` ディレクトリにフォルダをコピーする許可がない場合は、以下に説明するように、別の場所を使用することができます。
+1. oXygen を再起動します。
 
-###代替 フレームワークスの場所にZIPアーカイブのインストール
+### 代替 フレームワークスの場所に ZIP アーカイブのインストール
 
-インストールを変更する許可がない場合は、例えば、oXygen は `C:\Program Files\`でWindowsにインストール場合、あなたは管理者でない場合、代替フレームワークの場所も使用するようにoXygenを設定することができます。
+インストールを変更する許可がない場合は、例えば、oXygen は `C:\Program Files\` で Windows にインストール場合、あなたは管理者でない場合、代替フレームワークの場所も使用するように oXygen を設定することができます。
 
-1. ファイルをダウンロードするには、このプロジェクトのメインページの「Download ZIP」をクリックします。
-1. 新しいフォルダを作成することができるフォルダにZIPアーカイブ内のフォルダを解凍します。 
-1. oXygen の環境設定で、代替フレームワークスの場所として解凍した**focheck**フォルダを追加します。
+1. ファイルをダウンロードするには、このプロジェクトのメインページの Download ZIP をクリックします。
+1. 新しいフォルダを作成することができるフォルダに ZIP アーカイブ内のフォルダを解凍します。 
+1. oXygen の環境設定で、代替フレームワークスの場所として解凍した **focheck** フォルダを追加します。
  - http://oxygenxml.com/doc/ug-editor/index.html#topics/framework-location.html を参照して下さい。
-1. oXygenを再起動します。
+1. oXygen を再起動します。
 
-###リポジトリクローンのインストール
+### リポジトリクローンのインストール
 
-1. oXygen  `frameworks`　デイレクトリ又は別のデイレクトリのどちらかにリポジトリをクローンします。
- - **focheck** はサブモジュールとして **[stf](https://github.com/MenteaXML/stf)** を組み込まれています。 **stf** を調べるのは、二つの方法があります。
-   - **focheck** を調べると、`git clone`　に　`--recursive`　を飛び出します。
-   - **focheck**を既に調べていた場合、次下を実行できます。
-     `git submodule init`
-     `git submodule update`
+1. oXygen `frameworks` ディレクトリ又は別のディレクトリのどちらかにリポジトリをクローンします。
+ - **focheck** はサブモジュールとして **[stf](https://github.com/MenteaXML/stf)** を組み込まれています。**stf** を確認するのは、二つの方法があります。
+   - **focheck** を確認すると、`git clone` に `--recursive` を飛び出します。
+   - **focheck** を既に確認していた場合、次下を実行できます。
+     `git submodule init `
+     `git submodule update` 
 2. 必要ならば、別のフレームワークスの場所として **focheck** フォルダを追加します。 .
-3. oXygenを再起動します。
+3. oXygen を再起動します。
 
-##  **focheck**の使用
+## **focheck** の使用
 
 ### oXygen XML エディタ
 
-文書要素がXSL-FOの名前空間内の `root` であるXSL-FO文書を開くと、oXygenは自動的にRelax NGスキーマとSchematron文法の両方に対して文書を有効にします。
+文書要素が XSL-FO の名前空間内の `root` である XSL-FO 文書を開くと、oXygen は自動的に Relax NG スキーマと Schematron 文法の両方に対して文書を有効にします。
 
 #### 変換のシナリオ
 
-同様に有効を提供するとして、**focheck** は、Antenna House Formatterを使用してFOファイルを処理するための二つの有効なシナリオを定義します。https://github.com/AntennaHouse/focheck/wiki/focheckを参照して下さい。
+同様に有効を用意するとして、**focheck** は、Antenna House Formatter を使用して FO ファイルを処理するための二つの有効なシナリオを定義します。https://github.com/AntennaHouse/focheck/wiki/focheck を参照して下さい。
 
 ### Ant
 
-Relax NGとSchematronの両方を使用してファイルを有効するために、Antのビルドファイルの `build-focheck.xml` と `validate.single` のターゲットを使用します。代わりに、一つ又は複数のファイルでのSchematronを実行するには、 `schematron.single`  又は  `schematron.dir` ターゲットを使用します。
+Relax NG と Schematron の両方を使用してファイルを有効するために、Ant のビルドファイルの `build-focheck.xml` と `validate.single` のターゲットを使用します。代わりに、一つ又は複数のファイルでの Schematron を実行するには、`schematron.single` 又は `schematron.dir` ターゲットを使用します。
+
+### Emacs mode
+
+`focheck.el` は RELAX NG スキーマを `.fo` ファイルに関連付けます。
 
 ### スタンドアロン
 
-oXygenとantを使用せずに、 `schema` のフォルダにRelax NGのスキーマと `schematron` のフォルダにSchematronファイルを使用することができます。しかし：
+oXygen と ant を使用せずに、`schema-ja` のフォルダに Relax NG のスキーマと `schematron-ja` のフォルダに Schematron ファイルを使用することができます。しかし：
 
-- Relax NG は、 `xmllint`　ではなく、 Jing と Emacs  `nxml-mode` と動作します。
-- Schematron は  XSLT 2.0 の結合と Schematron 実行を必要とします。それは、コンテキストの属性 の両方に一致するだけでなく、外部 XSLT 2.0 スタイルシートを読み込んで使用します。
+- Relax NG は、`xmllint` ではなく、Jing と Emacs `nxml-mode` と動作します。
+- Schematron は XSLT 2.0 の結合と Schematron 実行を必要とします。それは、コンテキストの属性 の両方に一致するだけでなく、外部 XSLT 2.0 スタイルシートを読み込んで使用します。
 
-Standalone 点検は  Saxon 9 と Jingが必要です。Jing は https://github.com/relaxng/jing-trang/releases からダウンロードできます。
+Standalone の確認は Saxon 9 と Jing が必要です。Jing は https://github.com/relaxng/jing-trang/releases からダウンロードできます。
 
-## Building
+## 構築
 
 ### oXygen XML エディタ
 
-1. oXygenで `build.xml` を開きます。
-2. デフォルトの「ANT」変換のシナリオを実行します。
+1.  oXygen で `build.xml` を開きます。
+2. デフォルトの ANT 変換のシナリオを実行します。
 
 
 ### スタンドアロン
 
-1. `build.properties` の プロパティーが使用するシステムに合わない場合は、同じデイレクトリで `build.properties`  を  `build.local.properties`  に コピーして、そこに正しい値を設定します。
+1. `build.properties` の プロパティーが使用するシステムに合わない場合は、同じディレクトリで `build.properties` を `build.local.properties` に コピーして、そこに正しい値を設定します。
  - `build.local.properties` にあるいずれのプロパティーも変更する必要はない場合、削除するか、コメントアウトもできます。
 1. Antを実行します。
 
@@ -239,19 +249,19 @@ Standalone 点検は  Saxon 9 と Jingが必要です。Jing は https://github.
 ## その他の Ant ターゲット
 
 
-###  `run.parser`
+### `run.parser` 
 
-`${input}`でパーサーを実行します。
+`${input}` でパーサーを実行します。
 
 ### `framework.zip`
 
-oXygenフレームワークのZipアーカイブを生成します。
+oXygen フレームワークの Zip アーカイブを生成します。
 
 
 ## ライセンス
 
 
-Copyright 2015-2016 Antenna House, Inc.
+Copyright 2015-2017 Antenna House, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
