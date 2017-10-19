@@ -224,7 +224,7 @@
 
 
 	  <!--RULE -->
-   <xsl:template match="fo:basic-link | fo:bookmark" priority="1024" mode="M4">
+   <xsl:template match="fo:basic-link | fo:bookmark" priority="1027" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:basic-link | fo:bookmark"/>
 
@@ -239,7 +239,7 @@
             <xsl:attribute name="line-number" select="saxon:line-number()"/>
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>An '<xsl:text/>
-               <xsl:value-of select="local-name()"/>
+               <xsl:value-of select="name()"/>
                <xsl:text/>' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -247,7 +247,51 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:float" priority="1023" mode="M4">
+   <xsl:template match="fo:change-bar-begin" priority="1026" mode="M4">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:change-bar-begin"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="exists(@change-bar-class) and not(@change-bar-class = following::fo:change-bar-start/@change-bar-class)">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="exists(@change-bar-class) and not(@change-bar-class = following::fo:change-bar-start/@change-bar-class)">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>An '<xsl:text/>
+               <xsl:value-of select="name()"/>
+               <xsl:text/>' that does not form a matching pair with an 'fo:change-bar-end' will assume a matching 'change-bar-end' at the end of the document.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:change-bar-end" priority="1025" mode="M4">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:change-bar-end"/>
+
+		    <!--REPORT Warning-->
+      <xsl:if test="exists(@change-bar-class) and not(@change-bar-class = preceding::fo:change-bar-start/@change-bar-class)">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="exists(@change-bar-class) and not(@change-bar-class = preceding::fo:change-bar-start/@change-bar-class)">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>An '<xsl:text/>
+               <xsl:value-of select="name()"/>
+               <xsl:text/>' that does not form a matching pair with an 'fo:change-bar-begin' will be ignored.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:float" priority="1024" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:float"/>
 
 		    <!--REPORT -->
@@ -260,7 +304,7 @@
             <xsl:attribute name="line-number" select="saxon:line-number()"/>
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>An '<xsl:text/>
-               <xsl:value-of select="local-name()"/>
+               <xsl:value-of select="name()"/>
                <xsl:text/>' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -268,7 +312,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:footnote" priority="1022" mode="M4">
+   <xsl:template match="fo:footnote" priority="1023" mode="M4">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:footnote"/>
 
 		    <!--REPORT -->
@@ -281,7 +325,7 @@
             <xsl:attribute name="line-number" select="saxon:line-number()"/>
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>An '<xsl:text/>
-               <xsl:value-of select="local-name()"/>
+               <xsl:value-of select="name()"/>
                <xsl:text/>' is not allowed as a descendant of 'fo:float' or 'fo:footnote'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -325,6 +369,46 @@
             <svrl:text>An 'fo:footnote' is not permitted to have an 'fo:float', 'fo:footnote', or 'fo:marker' as a descendant.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
+      <xsl:apply-templates select="@*|*" mode="M4"/>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:list-block" priority="1022" mode="M4">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:list-block"/>
+
+		    <!--ASSERT Warning-->
+      <xsl:choose>
+         <xsl:when test="exists((., ancestor::*)/@provisional-distance-between-starts)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists((., ancestor::*)/@provisional-distance-between-starts)">
+               <xsl:attribute name="role">Warning</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>fo:list-block with no 'provisional-distance-between-starts' and no inherited value will use 24pt.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT Warning-->
+      <xsl:choose>
+         <xsl:when test="exists((., ancestor::*)/@provisional-label-separation)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists((., ancestor::*)/@provisional-label-separation)">
+               <xsl:attribute name="role">Warning</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>fo:list-block with no 'provisional-label-separation' and no inherited value will use 6pt.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
       <xsl:apply-templates select="@*|*" mode="M4"/>
    </xsl:template>
 
@@ -532,7 +616,7 @@
                <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>
                   <xsl:text/>
-                  <xsl:value-of select="local-name()"/>
+                  <xsl:value-of select="name()"/>
                   <xsl:text/>="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be a single character.</svrl:text>
@@ -562,7 +646,7 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>
                <xsl:text/>
-               <xsl:value-of select="local-name()"/>
+               <xsl:value-of select="name()"/>
                <xsl:text/>="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>" should be a positive integer.  A non-positive or non-integer value will be rounded to the nearest integer value greater than or equal to 1.</svrl:text>
@@ -589,7 +673,7 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>
                <xsl:text/>
-               <xsl:value-of select="local-name()"/>
+               <xsl:value-of select="name()"/>
                <xsl:text/> is ignored with 'number-columns-spanned' is present and has a value greater than 1.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
@@ -717,7 +801,7 @@
                <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>
                   <xsl:text/>
-                  <xsl:value-of select="local-name()"/>
+                  <xsl:value-of select="name()"/>
                   <xsl:text/>="<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>" should be a single character or 'inherit'.</svrl:text>

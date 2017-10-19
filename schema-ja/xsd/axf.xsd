@@ -284,7 +284,7 @@
   -->
   <xs:element name="form-field" substitutionGroup="fo:inline.fo.list">
     <xs:annotation>
-      <xs:documentation>Generates a form field</xs:documentation>
+      <xs:documentation>フォームフィールドを生成します。</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -300,7 +300,7 @@
   -->
   <xs:element name="form-field-event" type="xs:string">
     <xs:annotation>
-      <xs:documentation>Defines the form action corresponding to an event</xs:documentation>
+      <xs:documentation>イベントに対応したフォームアクションを定義します。</xs:documentation>
     </xs:annotation>
   </xs:element>
   <!--
@@ -310,7 +310,7 @@
   -->
   <xs:element name="form-field-option" type="xs:string">
     <xs:annotation>
-      <xs:documentation>Specifies the component elements of the list box, combo box</xs:documentation>
+      <xs:documentation>リストボックス、コンボボックスの構成要素を指定します。 </xs:documentation>
     </xs:annotation>
   </xs:element>
   <!--
@@ -319,7 +319,7 @@
   -->
   <xs:element name="ruby" substitutionGroup="fo:inline.fo.list">
     <xs:annotation>
-      <xs:documentation>The ruby structure.</xs:documentation>
+      <xs:documentation>ルビ構造</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence maxOccurs="unbounded">
@@ -335,7 +335,7 @@
   -->
   <xs:element name="ruby-base">
     <xs:annotation>
-      <xs:documentation>Base character of ruby.</xs:documentation>
+      <xs:documentation>ルビの親文字。</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:sequence>
@@ -349,7 +349,7 @@
   -->
   <xs:element name="ruby-text" type="xs:string">
     <xs:annotation>
-      <xs:documentation>Ruby.</xs:documentation>
+      <xs:documentation>ルビ。</xs:documentation>
     </xs:annotation>
   </xs:element>
   <!--
@@ -377,14 +377,14 @@
       <xs:attributeGroup ref="fo:common-margin-properties-block"/>
       <xs:attribute name="left-page-master-reference" use="required" type="xs:NCName">
         <xs:annotation>
-          <xs:documentation>Master name of the page master for the left page of a two-page spread.</xs:documentation>
+          <xs:documentation>見開きでの左ページのマスタ名</xs:documentation>
         </xs:annotation>
       </xs:attribute>
       <xs:attributeGroup ref="fo:master-name"/>
       <xs:attributeGroup ref="fo:reference-orientation"/>
       <xs:attribute name="right-page-master-reference" use="required" type="xs:NCName">
         <xs:annotation>
-          <xs:documentation>Master name of the page master for the right page of a two-page spread.</xs:documentation>
+          <xs:documentation>見開きでの右ページのマスタ</xs:documentation>
         </xs:annotation>
       </xs:attribute>
       <xs:attributeGroup ref="fo:writing-mode"/>
@@ -632,7 +632,7 @@
   <xs:attributeGroup name="axf_annotation-author">
     <xs:attribute name="annotation-author" form="qualified">
       <xs:annotation>
-        <xs:documentation>Author of the annotation: &lt;string&gt;</xs:documentation>
+        <xs:documentation>注釈の作成者： &lt;string&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -644,7 +644,7 @@
   <xs:attributeGroup name="axf_annotation-color">
     <xs:attribute name="annotation-color" form="qualified">
       <xs:annotation>
-        <xs:documentation>Color used for the background of the annotation: &lt;color&gt; | none</xs:documentation>
+        <xs:documentation>注釈の背景などに利用される色： &lt;color&gt; | none</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -656,7 +656,7 @@
   <xs:attributeGroup name="axf_annotation-contents">
     <xs:attribute name="annotation-contents" form="qualified">
       <xs:annotation>
-        <xs:documentation>Content of the annotation: &lt;string&gt;</xs:documentation>
+        <xs:documentation>注釈の内容：&lt;string&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -668,7 +668,7 @@
   <xs:attributeGroup name="axf_annotation-icon-name">
     <xs:attribute name="annotation-icon-name" form="qualified">
       <xs:annotation>
-        <xs:documentation>Name of the icon used for displaying the annotation: &lt;string&gt;</xs:documentation>
+        <xs:documentation>注釈の表示に用いるアイコンの名前： &lt;string&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -680,7 +680,7 @@
   <xs:attributeGroup name="axf_annotation-file-attachment">
     <xs:attribute name="annotation-file-attachment" form="qualified" type="xs:anyURI">
       <xs:annotation>
-        <xs:documentation>File with which file attachment annotation is related: &lt;uri-specification&gt;</xs:documentation>
+        <xs:documentation>ファイル添付注釈の関連付けられるファイル： &lt;uri-specification&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -692,7 +692,7 @@
   <xs:attributeGroup name="axf_annotation-height">
     <xs:attribute name="annotation-height" form="qualified">
       <xs:annotation>
-        <xs:documentation>Height of the annotation: &lt;length&gt;</xs:documentation>
+        <xs:documentation>注釈の高さ： &lt;length&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -704,7 +704,7 @@
   <xs:attributeGroup name="axf_annotation-open">
     <xs:attribute name="annotation-open" form="qualified">
       <xs:annotation>
-        <xs:documentation>Initial state of the annotation: true | false</xs:documentation>
+        <xs:documentation>注釈の最初の状態： true | false</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -722,7 +722,7 @@
   <xs:attributeGroup name="axf_annotation-position-horizontal">
     <xs:attribute name="annotation-position-horizontal" form="qualified">
       <xs:annotation>
-        <xs:documentation>Horizontal position of the annotation: &lt;length&gt;</xs:documentation>
+        <xs:documentation>注釈の水平位置： &lt;length&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -734,7 +734,7 @@
   <xs:attributeGroup name="axf_annotation-position-vertical">
     <xs:attribute name="annotation-position-vertical" form="qualified">
       <xs:annotation>
-        <xs:documentation>Vertical position of the annotation: &lt;length&gt;</xs:documentation>
+        <xs:documentation>注釈の垂直位置： &lt;length&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -746,7 +746,7 @@
   <xs:attributeGroup name="axf_annotation-title">
     <xs:attribute name="annotation-title" form="qualified">
       <xs:annotation>
-        <xs:documentation>Title of the annotation: &lt;string&gt;</xs:documentation>
+        <xs:documentation>注釈のタイトル： &lt;string&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -758,7 +758,7 @@
   <xs:attributeGroup name="axf_annotation-type">
     <xs:attribute name="annotation-type" form="qualified">
       <xs:annotation>
-        <xs:documentation>Type of the annotation: Empty string | Text | FreeText | Stamp | FileAttachment</xs:documentation>
+        <xs:documentation>注釈の種類： Empty string | Text | FreeText | Stamp | FileAttachment</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:union>
@@ -787,7 +787,7 @@
   <xs:attributeGroup name="axf_annotation-width">
     <xs:attribute name="annotation-width" form="qualified">
       <xs:annotation>
-        <xs:documentation>Width of the annotation: &lt;length&gt;</xs:documentation>
+        <xs:documentation>注釈の幅： &lt;length&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -842,7 +842,7 @@
   <xs:attributeGroup name="axf_baseline-block-snap">
     <xs:attribute name="baseline-block-snap" form="qualified">
       <xs:annotation>
-        <xs:documentation>How to align blocks on the baseline grid: none | [auto | before | after | center] || [border-box | margin-box]</xs:documentation>
+        <xs:documentation>ブロックを行グリッドにどのように揃えるか： none | [auto | before | after | center] || [border-box | margin-box]</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -854,7 +854,7 @@
   <xs:attributeGroup name="axf_baseline-grid">
     <xs:attribute name="baseline-grid" form="qualified">
       <xs:annotation>
-        <xs:documentation>Sets or clears the baseline grid: normal | none | root | new</xs:documentation>
+        <xs:documentation>行グリッドを設定または解除します： normal | none | root | new</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -974,7 +974,7 @@
   <xs:attributeGroup name="axf_column-fill">
     <xs:attribute name="column-fill" form="qualified">
       <xs:annotation>
-        <xs:documentation>Whether to balance the column height: auto | balance</xs:documentation>
+        <xs:documentation>段の高さをバランスさせるかどう： auto | balance</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1066,7 +1066,7 @@
   <xs:attributeGroup name="axf_column-number-format">
     <xs:attribute name="column-number-format" form="qualified">
       <xs:annotation>
-        <xs:documentation>Format of column number: &lt;string&gt;</xs:documentation>
+        <xs:documentation>段番号のための書式： &lt;string&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1091,7 +1091,7 @@
   <xs:attributeGroup name="axf_field-submit-coordinates">
     <xs:attribute name="field-submit-coordinates" form="qualified">
       <xs:annotation>
-        <xs:documentation>Whether to send out the coordinates of the mouse when submitting a form field: false | true</xs:documentation>
+        <xs:documentation>サブミット時にマウスの座標を送出するかどうか： false | true</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1102,7 +1102,7 @@
     </xs:attribute>
     <xs:attribute name="field-submit-coordinates">
       <xs:annotation>
-        <xs:documentation>Whether to send out the coordinates of the mouse when submitting a form field: false | true</xs:documentation>
+        <xs:documentation>サブミット時にマウスの座標を送出するかどうか： false | true</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1121,7 +1121,7 @@
   <xs:attributeGroup name="axf_field-submit-method">
     <xs:attribute name="field-submit-method" form="qualified">
       <xs:annotation>
-        <xs:documentation>The way to send the information when submitting a form field: get | post</xs:documentation>
+        <xs:documentation>サブミット時の情報の送出方法： get | post</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1132,7 +1132,7 @@
     </xs:attribute>
     <xs:attribute name="field-submit-method">
       <xs:annotation>
-        <xs:documentation>The way to send the information when submitting a form field: get | post</xs:documentation>
+        <xs:documentation>サブミット時の情報の送出方法： get | post</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1162,7 +1162,7 @@
   <xs:attributeGroup name="axf_float-x">
     <xs:attribute name="float-x" form="qualified">
       <xs:annotation>
-        <xs:documentation>Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside | alternate</xs:documentation>
+        <xs:documentation>水平（縦書きでは垂直）方向のフロート配置： none | start | end | left | right | top | bottom | center | inside | outside | alternate</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1189,7 +1189,7 @@
   <xs:attributeGroup name="axf_float-y">
     <xs:attribute name="float-y" form="qualified">
       <xs:annotation>
-        <xs:documentation>垂直方向のフロート配置 （writing-modeがverticalのときは水平方向 ）： none | before | after | top | bottom | left | right | center | inside | outside</xs:documentation>
+        <xs:documentation>垂直（縦書きでは水平）方向のフロート配置： none | before | after | top | bottom | left | right | center | inside | outside</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1492,7 +1492,7 @@
   <xs:attributeGroup name="axf_headers">
     <xs:attribute name="headers" form="qualified" type="xs:IDREFS">
       <xs:annotation>
-        <xs:documentation>Table header cells associated with this cell: &lt;idrefs&gt;</xs:documentation>
+        <xs:documentation>あるセルがどの見出しに対応する内容である： &lt;idrefs&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1504,7 +1504,7 @@
   <xs:attributeGroup name="axf_indent-here">
     <xs:attribute name="indent-here" form="qualified">
       <xs:annotation>
-        <xs:documentation>Aligns the indent position to the region position when a line break occurs: none | &lt;length&gt;</xs:documentation>
+        <xs:documentation>改行時のインデント位置を領域の位置に合わせます： none | &lt;length&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1516,7 +1516,7 @@
   <xs:attributeGroup name="axf_number-type">
     <xs:attribute name="number-type" form="qualified">
       <xs:annotation>
-        <xs:documentation>Whether to output the page number, column number, or both: page | column | page-and-column</xs:documentation>
+        <xs:documentation>ページ番号を出力するのか段番号を出力するのかまた両方を出力するのか： page | column | page-and-column</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1553,7 +1553,7 @@
   <xs:attributeGroup name="axf_origin-id">
     <xs:attribute name="origin-id" form="qualified" type="xs:IDREF">
       <xs:annotation>
-        <xs:documentation>Origin of the page number: &lt;idref&gt;</xs:documentation>
+        <xs:documentation>ページ番号の基点：&lt;idref&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1649,7 +1649,7 @@
   <xs:attributeGroup name="axf_output-volume-break">
     <xs:attribute name="output-volume-break" form="qualified">
       <xs:annotation>
-        <xs:documentation>Whether this fo:page-sequence starts a new volume: true | false</xs:documentation>
+        <xs:documentation>このfo:page-sequenceが新しい冊を開始するかどうか： true | false</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1667,7 +1667,7 @@
   <xs:attributeGroup name="axf_output-volume-filename">
     <xs:attribute name="output-volume-filename" form="qualified">
       <xs:annotation>
-        <xs:documentation>Whether this fo:page-sequence starts a new volume</xs:documentation>
+        <xs:documentation>このfo:page-sequenceが新しい冊を開始するかどうか</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1679,7 +1679,7 @@
   <xs:attributeGroup name="axf_page-number-prefix">
     <xs:attribute name="page-number-prefix" form="qualified">
       <xs:annotation>
-        <xs:documentation>Sets the prefix of page number. CAUTION: A similar function is provided in XSL1.1. Please use fo:folio-prefix.</xs:documentation>
+        <xs:documentation>ページ番号の前置を指定します。注：同様の機能がXSL1.1で用意しています。fo:folio-prefixを利用して下さい。</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1703,7 +1703,7 @@
   <xs:attributeGroup name="axf_physical-page-number">
     <xs:attribute name="physical-page-number" form="qualified">
       <xs:annotation>
-        <xs:documentation>Whether to generate physical page number: true | false</xs:documentation>
+        <xs:documentation>物理的なページ番号を振るかどうか： true | false</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1733,7 +1733,7 @@
   <xs:attributeGroup name="axf_printer-bin-selection">
     <xs:attribute name="printer-bin-selection" form="qualified">
       <xs:annotation>
-        <xs:documentation>Selects the printer tray: &lt;string&gt; | &lt;integer&gt;</xs:documentation>
+        <xs:documentation>プリンタのトレイを選択します： &lt;string&gt; | &lt;integer&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1745,7 +1745,7 @@
   <xs:attributeGroup name="axf_printer-duplex">
     <xs:attribute name="printer-duplex" form="qualified">
       <xs:annotation>
-        <xs:documentation>Selects printing in duplex mode: &lt;integer&gt;</xs:documentation>
+        <xs:documentation>両面印刷の指定をします： &lt;integer&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1817,7 +1817,7 @@
   <xs:attributeGroup name="axf_repeat-cell-content-at-break">
     <xs:attribute name="repeat-cell-content-at-break" form="qualified">
       <xs:annotation>
-        <xs:documentation>Whether to copy the contents of a cell when a cell breaks: true | false</xs:documentation>
+        <xs:documentation>セルの分割時にセル内容をコピーするかどうか： true | false</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1835,7 +1835,7 @@
   <xs:attributeGroup name="axf_reverse-page-number">
     <xs:attribute name="reverse-page-number" form="qualified">
       <xs:annotation>
-        <xs:documentation>Whether to generate pages in reverse order: true | false</xs:documentation>
+        <xs:documentation>ページを逆順に出力するかどうか： true | false</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1853,7 +1853,7 @@
   <xs:attributeGroup name="axf_scope">
     <xs:attribute name="scope" form="qualified">
       <xs:annotation>
-        <xs:documentation>Range of cells with which this table header cell is associated: auto | row | col | rowgroup | colgroup | both</xs:documentation>
+        <xs:documentation>あるセルが見出し用のセルであるとき、そのセルがどちらの方向に対する見出しであるか： auto | row | col | rowgroup | colgroup | both</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1875,7 +1875,7 @@
   <xs:attributeGroup name="axf_suppress-folio-prefix">
     <xs:attribute name="suppress-folio-prefix" form="qualified">
       <xs:annotation>
-        <xs:documentation>Suppresses rendering of the page number prefix: true | false</xs:documentation>
+        <xs:documentation>ページ番号の前置のレンダリングを削除しています： true | false</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1893,7 +1893,7 @@
   <xs:attributeGroup name="axf_suppress-folio-suffix">
     <xs:attribute name="suppress-folio-suffix" form="qualified">
       <xs:annotation>
-        <xs:documentation>Suppresses rendering of the page number suffix: true | false</xs:documentation>
+        <xs:documentation>ページ番号の後置のレンダリングを削除しています： true | false</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
