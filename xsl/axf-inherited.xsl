@@ -106,7 +106,7 @@
 <xsl:variable
     name="inherited-properties"
     as="element(property)+">
-<property name="axf:layer-name" model="'none' | text" description="Layer to which the area is arranged." />
+<property name="axf:layer" model="'none' | text" description="Layer to which the area is arranged." />
 <property name="axf:overprint" model="text" description="Overprint setting" />
 <property name="axf:line-break" model="'normal' | 'strict'" description="Line-breaking method" />
 <property name="axf:word-break" model="'normal' | 'break-all' | 'keep-all'" description="Whether to enable line breaking even inside a word" />
