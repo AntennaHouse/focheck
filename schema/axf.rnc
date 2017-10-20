@@ -297,6 +297,7 @@ inline.fo.list |=
 # FOs that are not descendants of fo:flow
 
 fo_root.attlist &=
+    axf_layer-settings,
     xml_id
 
 fo_page-sequence.attlist &=
@@ -1112,6 +1113,13 @@ axf_headers =
 axf_indent-here =
     ## Aligns the indent position to the region position when a line break occurs: none | <length>
     attribute axf:indent-here { text }?
+
+# @axf:layer-settings
+#
+# http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.layer-settings
+axf_layer-settings =
+    ## Layer definitions: none | <layer-setting>#
+    attribute axf:layer-settings { text }?
 
 # @axf:number-type
 #
