@@ -45,6 +45,7 @@
     <phase id="property">
         <active pattern="fo-property"></active>
     </phase>
+
     <pattern id="axf">
 	<!-- axf:document-info -->
 	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
@@ -215,7 +216,7 @@
 	</rule>
 
 	<!-- axf:baseline-block-snap -->
-	<!-- <color> | none -->
+	<!-- none | [auto | before | after | center] || [border-box | margin-box] -->
 	<!-- Inherited: no -->
 	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.baseline-block-snap -->
 	<rule context="fo:*/@axf:baseline-block-snap">
@@ -260,6 +261,26 @@
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('uniform', 'non-uniform', 'inherit'))">scaling="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'uniform', 'non-uniform', or 'inherit'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">scaling="" should be EnumerationToken.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: scaling="<value-of select="."/>"</report>
+	</rule>
+
+	<!-- axf:column-rule-color -->
+	<!-- <color> -->
+	<!-- Inherited: false -->
+	<rule context="fo:*/@axf:column-rule-color">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'ERROR', 'Object')">'axf:column-rule-color' should be Color or a color name.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: 'axf:column-rule-color="<value-of select="."/>"'</report>
+	</rule>
+
+	<!-- axf:column-rule-length -->
+	<!-- <length> | <percentage> -->
+	<!-- Inherited: no -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-length -->
+	<rule context="fo:*/@axf:column-rule-length">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">axf:column-rule-length="<value-of select="."/>" should be Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:column-rule-length="" should be Length, or Percent.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:column-rule-length="<value-of select="."/>"</report>
 	</rule>
 
 	<!-- axf:hyphenation-zone -->
@@ -325,7 +346,7 @@
 	<!-- <absolute-size> | <relative-size> | <length> | <percentage> -->
 	<!-- Inherited: yes -->
 	<!-- Shorthand: no -->
-	<!-- http://www.w3.org/TR/xsl11/#axf:line-number-font-size -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf:line-number-font-size -->
 	<rule context="fo:*/@axf:line-number-font-size">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">axf:line-number-font-size="<value-of select="."/>" should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>

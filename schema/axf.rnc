@@ -113,7 +113,7 @@ axf_document-info =
   ## Document information such as an author and title that can be embedded in the PDF
   element axf:document-info {
     # 'name="title"' was used in V5.1 and still works but is
-    # undocumented in V6.2.
+    # undocumented in V6.2+.
     ## Name of the document information
     attribute name { ('document-title' | 'title' | 'subject' | 'author' | 'author-title' |
                        'description-writer' | 'keywords' | 'copyright-status' |
@@ -356,6 +356,12 @@ fo_simple-page-master.attlist &=
 
 fo_region-body.attlist &=
     axf_column-fill,
+    axf_column-rule-align,
+    axf_column-rule-color,
+    axf_column-rule-display,
+    axf_column-rule-length,
+    axf_column-rule-style,
+    axf_column-rule-width,
     axf_footnote-align,
     axf_footnote-keep,
     axf_footnote-max-height,
@@ -401,6 +407,12 @@ fo_block-container.attlist &=
     axf_column-count,
     axf_column-fill,
     axf_column-gap,
+    axf_column-rule-align,
+    axf_column-rule-color,
+    axf_column-rule-display,
+    axf_column-rule-length,
+    axf_column-rule-style,
+    axf_column-rule-width,
     axf_destination-type,
     axf_suppress-if-first-on-page,
     axf.block.attlist,
@@ -886,6 +898,48 @@ axf_column-fill =
 axf_column-gap =
     ## The gap between columns: <length> | <percentage>
     attribute axf:column-gap { text }?
+
+# @axf:column-rule-align
+#
+# http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-align
+axf_column-rule-align =
+    ## Alignment of the column rule: before | center | after
+    attribute axf:column-rule-align { 'before' | 'center' | 'after' }?
+
+# @axf:column-rule-color
+#
+# http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-color
+axf_column-rule-color =
+    ## Color of the column rule: <color>
+    attribute axf:column-rule-color { text }?
+
+# @axf:column-rule-display
+#
+# http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-display
+axf_column-rule-display =
+    ## Whether to also display a rule where a column could exist: gap | end | all
+    attribute axf:column-rule-display { 'gap' | 'end' | 'all' }?
+
+# @axf:column-rule-length
+#
+# http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-length
+axf_column-rule-length =
+    ## Length of the column rule: <length> | <percentage>
+    attribute axf:column-rule-length { text }?
+
+# @axf:column-rule-style
+#
+# http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-style
+axf_column-rule-style =
+    ## Style of the column rule: <border-style>
+    attribute axf:column-rule-style { text }?
+
+# @axf:column-rule-width
+#
+# http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-width
+axf_column-rule-width =
+    ## Width of the column rule: <border-width>
+    attribute axf:column-rule-width { text }?
 
 # @axf:crop-area-visibility
 #
