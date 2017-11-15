@@ -47,6 +47,17 @@
     </phase>
 
     <pattern id="axf">
+
+	<!-- axf:custom-property -->
+	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property -->
+        <p>http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property</p>
+        <rule context="axf:custom-property">
+	  <assert test="empty((../../axf:custom-property, ../axf:custom-property)[@name eq 'xmp'])"><value-of select="name()"/>" cannot be used when axf:custom-property with name="xmp" is present.</assert>
+          <assert test="normalize-space(@name) ne ''" role="Warning">name="" should not be empty.</assert>
+          <assert test="not(normalize-space(@name) = ('Title', 'Author', 'Subject', 'Keywords', 'Creator', 'Producer', 'CreationDate', 'ModDate', 'Trapped'))">name="<value-of select="@name"/>" cannot be used with <value-of select="name()"/>.</assert>
+          <assert test="normalize-space(@value) ne ''" role="Warning">value="" should not be empty.</assert>
+        </rule>
+
 	<!-- axf:document-info -->
 	<!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
         <p>http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info</p>

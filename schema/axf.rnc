@@ -61,6 +61,11 @@ fo_simple-page-master.model =
        fo_region-start? &
        fo_region-end?) )
 
+# AH Formatter uses axf:custom-property and axf:document-info within
+# fo:declarations.
+fo_declarations.model |=
+    (axf_custom-property | axf_document-info)*
+
 # AH Formatter allows empty fo:static-content.
 fo_static-content.model =
     ( ( (block.fo.list | neutral.fo.list)* ) & (point.fo.list)* )
@@ -106,6 +111,18 @@ non-xsl =
 #
 # Antenna House extension elements
 #
+
+# <axf:custom-property/>
+# http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property
+axf_custom-property =
+  ## custom property in PDF. Effective with PDF 1.4 or later. Invalid with PDF/A
+  element axf:custom-property {
+    ## Name of the custom property.  Should not be empty.
+    attribute name { text },
+    ## Value of the custom property.  Should not be empty.
+    attribute value { text },
+    empty
+}
 
 # <axf:document-info/>
 # http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info
