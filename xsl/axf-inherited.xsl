@@ -19,7 +19,7 @@
 <!--              3844 Kennett Pike, Suite 200                     -->
 <!--              Greenville, DE 19807                             -->
 <!--              USA                                              -->
-<!--              http://www.antennahouse.com/                     -->
+<!--              https://www.antennahouse.com/                    -->
 <!--              support@antennahouse.com                         -->
 <!--                                                               -->
 <!-- ORIGINAL CREATION DATE:                                       -->
