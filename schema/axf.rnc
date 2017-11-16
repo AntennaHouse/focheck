@@ -619,7 +619,9 @@ common-border-padding-and-background-properties &=
     axf_border-top-left-radius,
     axf_border-top-right-radius,
     axf_border-bottom-left-radius,
-    axf_border-bottom-right-radius
+    axf_border-bottom-right-radius,
+    axf_diagonal-border-style,
+    axf_reverse-diagonal-border-style
 
 #
 # Antenna House extension properties
@@ -1002,6 +1004,13 @@ axf_destination-type =
     ## The way a link opens in a link destination
     attribute axf:destination-type { text }?
 
+# @axf:diagonal-border-style
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.diagonal-border-style
+axf_diagonal-border-style =
+    ## Style of the reverse diagonal border: <border-style>
+    attribute axf:diagonal-border-style { text }?
+
 # @axf:field-submit-coordinates
 # @field-submit-coordinates
 #
@@ -1352,6 +1361,13 @@ axf_printer-marks-spine-width =
 axf_repeat-cell-content-at-break =
     ## Whether to copy the contents of a cell when a cell breaks: true | false
     attribute axf:repeat-cell-content-at-break { 'true' | 'false' }?
+
+# @axf:reverse-diagonal-border-style
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.reverse-diagonal-border-style
+axf_reverse-diagonal-border-style =
+    ## Style of the reverse diagonal border: <border-style>
+    attribute axf:reverse-diagonal-border-style { text }?
 
 # @axf:reverse-page-number
 #
