@@ -27,7 +27,7 @@
     modules that it includes).
     
   -->
-  <!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#fo.change-bar-begin -->
+  <!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#fo.change-bar-begin -->
   <xs:complexType name="fo_change-bar-begin.model">
     <xs:sequence>
       <xs:element minOccurs="0" ref="fo:float"/>
@@ -58,7 +58,7 @@
       <xs:element ref="fo:flow-map"/>
     </xs:choice>
   </xs:complexType>
-  <!-- http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
+  <!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
   <xs:complexType name="fo_root.model">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="axf:document-info"/>
@@ -82,6 +82,16 @@
       <xs:element ref="fo:region-after"/>
       <xs:element ref="fo:region-start"/>
       <xs:element ref="fo:region-end"/>
+    </xs:choice>
+  </xs:complexType>
+  <!--
+    AH Formatter uses axf:custom-property and axf:document-info within
+    fo:declarations.
+  -->
+  <xs:complexType name="fo_declarations.model">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="axf:custom-property"/>
+      <xs:element ref="axf:document-info"/>
     </xs:choice>
   </xs:complexType>
   <!-- AH Formatter allows empty fo:static-content. -->
@@ -186,8 +196,29 @@
     
   -->
   <!--
+    <axf:custom-property/>
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property
+  -->
+  <xs:element name="custom-property">
+    <xs:annotation>
+      <xs:documentation>PDFにカスタムプロパティを設定します。PDF1.4以降のとき有効です。PDF/Aでは無効です。</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="name" use="required">
+        <xs:annotation>
+          <xs:documentation>カスタムプロパティ名どちらも空ではいけません。</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="value" use="required">
+        <xs:annotation>
+          <xs:documentation>カスタムプロパティの値どちらも空ではいけません。</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <!--
     <axf:document-info/>
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info
   -->
   <xs:element name="document-info">
     <xs:annotation>
@@ -232,7 +263,7 @@
   </xs:element>
   <!--
     <axf:footnote-number/>
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-number
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-number
   -->
   <xs:element name="footnote-number" substitutionGroup="fo:inline.fo.list">
     <xs:annotation>
@@ -244,7 +275,7 @@
   </xs:element>
   <!--
     <axf:footnote-number-citation/>
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-number-citation
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-number-citation
   -->
   <xs:element name="footnote-number-citation" substitutionGroup="fo:inline.fo.list">
     <xs:annotation>
@@ -354,7 +385,7 @@
   </xs:element>
   <!--
     <axf:spread-page-master>
-    http://www.antennahouse.com/product/ahf65/ahf-spread.html#axf.spread-page-master
+    https://www.antennahouse.com/product/ahf65/ahf-spread.html#axf.spread-page-master
   -->
   <xs:element name="spread-page-master">
     <xs:annotation>
@@ -397,7 +428,7 @@
   </xs:element>
   <!--
     <axf:spread-region>
-    http://www.antennahouse.com/product/ahf65/ahf-spread.html#axf.spread-region
+    https://www.antennahouse.com/product/ahf65/ahf-spread.html#axf.spread-region
   -->
   <xs:element name="spread-region">
     <xs:annotation>
@@ -429,7 +460,7 @@
   </xs:element>
   <!--
     <axf:table-cell-repeated-marker>
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.table-cell-repeated-marker
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.table-cell-repeated-marker
   -->
   <xs:element name="table-cell-repeated-marker">
     <xs:annotation>
@@ -553,7 +584,7 @@
     @axf:background-position-vertical
     @axf:background-repeat
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#IDAAOLV
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#IDAAOLV
   -->
   <xs:attributeGroup name="axf_background-color">
     <xs:attribute name="background-color" form="qualified">
@@ -593,7 +624,7 @@
   <!--
     @axf:action-type
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.action-type
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.action-type
   -->
   <xs:attributeGroup name="axf_action-type">
     <xs:attribute name="action-type" form="qualified">
@@ -615,7 +646,7 @@
   <!--
     @axf:alt-text
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.alttext
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.alttext
   -->
   <xs:attributeGroup name="axf_alttext">
     <xs:attribute name="alttext" form="qualified">
@@ -627,7 +658,7 @@
   <!--
     @axf:annotation-author
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-author
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-author
   -->
   <xs:attributeGroup name="axf_annotation-author">
     <xs:attribute name="annotation-author" form="qualified">
@@ -639,7 +670,7 @@
   <!--
     @axf:annotation-color
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-color
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-color
   -->
   <xs:attributeGroup name="axf_annotation-color">
     <xs:attribute name="annotation-color" form="qualified">
@@ -651,7 +682,7 @@
   <!--
     @axf:annotation-contents
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-contents
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-contents
   -->
   <xs:attributeGroup name="axf_annotation-contents">
     <xs:attribute name="annotation-contents" form="qualified">
@@ -663,7 +694,7 @@
   <!--
     @axf:annotation-icon-name
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-icon-name
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-icon-name
   -->
   <xs:attributeGroup name="axf_annotation-icon-name">
     <xs:attribute name="annotation-icon-name" form="qualified">
@@ -675,7 +706,7 @@
   <!--
     @axf:annotation-file-attachment
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-file-attachment
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-file-attachment
   -->
   <xs:attributeGroup name="axf_annotation-file-attachment">
     <xs:attribute name="annotation-file-attachment" form="qualified" type="xs:anyURI">
@@ -687,7 +718,7 @@
   <!--
     @axf:annotation-height
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-height
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-height
   -->
   <xs:attributeGroup name="axf_annotation-height">
     <xs:attribute name="annotation-height" form="qualified">
@@ -699,7 +730,7 @@
   <!--
     @axf:annotation-open
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-open
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-open
   -->
   <xs:attributeGroup name="axf_annotation-open">
     <xs:attribute name="annotation-open" form="qualified">
@@ -717,7 +748,7 @@
   <!--
     @axf:annotation-position-horizontal
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-position-horizontal
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-position-horizontal
   -->
   <xs:attributeGroup name="axf_annotation-position-horizontal">
     <xs:attribute name="annotation-position-horizontal" form="qualified">
@@ -729,7 +760,7 @@
   <!--
     @axf:annotation-position-vertical
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-position-vertical
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-position-vertical
   -->
   <xs:attributeGroup name="axf_annotation-position-vertical">
     <xs:attribute name="annotation-position-vertical" form="qualified">
@@ -741,7 +772,7 @@
   <!--
     @axf:annotation-title
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-title
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-title
   -->
   <xs:attributeGroup name="axf_annotation-title">
     <xs:attribute name="annotation-title" form="qualified">
@@ -753,7 +784,7 @@
   <!--
     @axf:annotation-type
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-type
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-type
   -->
   <xs:attributeGroup name="axf_annotation-type">
     <xs:attribute name="annotation-type" form="qualified">
@@ -782,7 +813,7 @@
   <!--
     @axf:annotation-width
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-width
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-width
   -->
   <xs:attributeGroup name="axf_annotation-width">
     <xs:attribute name="annotation-width" form="qualified">
@@ -797,7 +828,7 @@
     @axf:background-content-width
     @axf:background-scaling
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-content
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-content
   -->
   <xs:attributeGroup name="axf_background-content-height">
     <xs:attribute name="background-content-height" form="qualified">
@@ -837,7 +868,7 @@
   <!--
     @axf:baseline-block-snap
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.baseline-block-snap
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.baseline-block-snap
   -->
   <xs:attributeGroup name="axf_baseline-block-snap">
     <xs:attribute name="baseline-block-snap" form="qualified">
@@ -849,7 +880,7 @@
   <!--
     @axf:baseline-grid
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.baseline-grid
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.baseline-grid
   -->
   <xs:attributeGroup name="axf_baseline-grid">
     <xs:attribute name="baseline-grid" form="qualified">
@@ -873,7 +904,7 @@
     @axf:border-bottom-left-radius
     @axf:border-bottom-right-radius
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.border-radius
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.border-radius
   -->
   <xs:attributeGroup name="axf_border-radius">
     <xs:attribute name="border-radius" form="qualified">
@@ -917,7 +948,7 @@
     @axf:bleed-left
     @axf:bleed-right
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.bleed
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.bleed
   -->
   <xs:attributeGroup name="axf_bleed">
     <xs:attribute name="bleed" form="qualified">
@@ -957,7 +988,7 @@
   <!--
     @axf:column-count
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-count
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-count
   -->
   <xs:attributeGroup name="axf_column-count">
     <xs:attribute name="column-count" form="qualified">
@@ -969,7 +1000,7 @@
   <!--
     @axf:column-fill
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-fill
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-fill
   -->
   <xs:attributeGroup name="axf_column-fill">
     <xs:attribute name="column-fill" form="qualified">
@@ -987,7 +1018,7 @@
   <!--
     @axf:column-gap
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-gap
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-gap
   -->
   <xs:attributeGroup name="axf_column-gap">
     <xs:attribute name="column-gap" form="qualified">
@@ -997,9 +1028,95 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:column-rule-align
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-align
+  -->
+  <xs:attributeGroup name="axf_column-rule-align">
+    <xs:attribute name="column-rule-align" form="qualified">
+      <xs:annotation>
+        <xs:documentation>段間罫の配置： before | center | after</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="before"/>
+          <xs:enumeration value="center"/>
+          <xs:enumeration value="after"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:column-rule-color
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-color
+  -->
+  <xs:attributeGroup name="axf_column-rule-color">
+    <xs:attribute name="column-rule-color" form="qualified">
+      <xs:annotation>
+        <xs:documentation>段間罫の色： &lt;color&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:column-rule-display
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-display
+  -->
+  <xs:attributeGroup name="axf_column-rule-display">
+    <xs:attribute name="column-rule-display" form="qualified">
+      <xs:annotation>
+        <xs:documentation>段間が存在する可能性段間罫を表示するかどうか: gap | end | all</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="gap"/>
+          <xs:enumeration value="end"/>
+          <xs:enumeration value="all"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:column-rule-length
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-length
+  -->
+  <xs:attributeGroup name="axf_column-rule-length">
+    <xs:attribute name="column-rule-length" form="qualified">
+      <xs:annotation>
+        <xs:documentation>段間罫の長さ： &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:column-rule-style
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-style
+  -->
+  <xs:attributeGroup name="axf_column-rule-style">
+    <xs:attribute name="column-rule-style" form="qualified">
+      <xs:annotation>
+        <xs:documentation>段間罫のスタイル： &lt;border-style&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:column-rule-width
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-rule-width
+  -->
+  <xs:attributeGroup name="axf_column-rule-width">
+    <xs:attribute name="column-rule-width" form="qualified">
+      <xs:annotation>
+        <xs:documentation>段間罫の幅： &lt;border-width&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:crop-area-visibility
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.crop-area-visibility
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.crop-area-visibility
   -->
   <xs:attributeGroup name="axf_crop-area-visibility">
     <xs:attribute name="crop-area-visibility" form="qualified">
@@ -1021,7 +1138,7 @@
     @axf:crop-offset-left
     @axf:crop-offset-right
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.crop-offset
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.crop-offset
   -->
   <xs:attributeGroup name="axf_crop-offset">
     <xs:attribute name="crop-offset" form="qualified">
@@ -1061,7 +1178,7 @@
   <!--
     @axf:column-number-format
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-number-format
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.column-number-format
   -->
   <xs:attributeGroup name="axf_column-number-format">
     <xs:attribute name="column-number-format" form="qualified">
@@ -1073,12 +1190,24 @@
   <!--
     @axf:destination-type
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.destination-type
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.destination-type
   -->
   <xs:attributeGroup name="axf_destination-type">
     <xs:attribute name="destination-type" form="qualified">
       <xs:annotation>
         <xs:documentation>リンクは、リンク先に開く方法</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:diagonal-border-style
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.diagonal-border-style
+  -->
+  <xs:attributeGroup name="axf_diagonal-border-style">
+    <xs:attribute name="diagonal-border-style" form="qualified">
+      <xs:annotation>
+        <xs:documentation>対角罫のスタイルを指定します: &lt;border-style&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1145,7 +1274,7 @@
   <!--
     @axf:float
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html
+    https://www.antennahouse.com/product/ahf65/ahf-float.html
   -->
   <xs:attributeGroup name="axf_float">
     <xs:attribute name="float" form="qualified">
@@ -1157,7 +1286,7 @@
   <!--
     @axf:float-x
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-x
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-x
   -->
   <xs:attributeGroup name="axf_float-x">
     <xs:attribute name="float-x" form="qualified">
@@ -1184,7 +1313,7 @@
   <!--
     @axf:float-y
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-y
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-y
   -->
   <xs:attributeGroup name="axf_float-y">
     <xs:attribute name="float-y" form="qualified">
@@ -1210,7 +1339,7 @@
   <!--
     @axf:float-reference
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-reference
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-reference
   -->
   <xs:attributeGroup name="axf_float-reference">
     <xs:attribute name="float-reference" form="qualified">
@@ -1231,7 +1360,7 @@
   <!--
     @axf:float-move
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-move
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-move
   -->
   <xs:attributeGroup name="axf_float-move">
     <xs:attribute name="float-move" form="qualified">
@@ -1253,7 +1382,7 @@
   <!--
     @axf:float-wrap
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-wrap
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-wrap
   -->
   <xs:attributeGroup name="axf_float-wrap">
     <xs:attribute name="float-wrap" form="qualified">
@@ -1272,7 +1401,7 @@
   <!--
     @axf:float-min-wrap-x
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-min-wrap-x
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-min-wrap-x
   -->
   <xs:attributeGroup name="axf_float-min-wrap-x">
     <xs:attribute name="float-min-wrap-x" form="qualified">
@@ -1284,7 +1413,7 @@
   <!--
     @axf:float-min-wrap-y
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-min-wrap-y
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-min-wrap-y
   -->
   <xs:attributeGroup name="axf_float-min-wrap-y">
     <xs:attribute name="float-min-wrap-y" form="qualified">
@@ -1296,7 +1425,7 @@
   <!--
     @axf:float-centering-x
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-centering-x
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-centering-x
   -->
   <xs:attributeGroup name="axf_float-centering-x">
     <xs:attribute name="float-centering-x" form="qualified">
@@ -1308,7 +1437,7 @@
   <!--
     @axf:float-centering-y
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-centering-y
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-centering-y
   -->
   <xs:attributeGroup name="axf_float-centering-y">
     <xs:attribute name="float-centering-y" form="qualified">
@@ -1320,7 +1449,7 @@
   <!--
     @axf:float-margin-x
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-margin-x
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-margin-x
   -->
   <xs:attributeGroup name="axf_float-margin-x">
     <xs:attribute name="float-margin-x" form="qualified">
@@ -1332,7 +1461,7 @@
   <!--
     @axf:float-margin-y
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-margin-y
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-margin-y
   -->
   <xs:attributeGroup name="axf_float-margin-y">
     <xs:attribute name="float-margin-y" form="qualified">
@@ -1344,7 +1473,7 @@
   <!--
     @axf:float-float-margin-x
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-float-margin-x
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-float-margin-x
   -->
   <xs:attributeGroup name="axf_float-float-margin-x">
     <xs:attribute name="float-float-margin-x" form="qualified">
@@ -1356,7 +1485,7 @@
   <!--
     @axf:float-float-margin-y
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-float-margin-y
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-float-margin-y
   -->
   <xs:attributeGroup name="axf_float-float-margin-y">
     <xs:attribute name="float-float-margin-y" form="qualified">
@@ -1368,7 +1497,7 @@
   <!--
     @axf:float-offset-x
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-offset-x
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-offset-x
   -->
   <xs:attributeGroup name="axf_float-offset-x">
     <xs:attribute name="float-offset-x" form="qualified">
@@ -1380,7 +1509,7 @@
   <!--
     @axf:float-offset-y
     
-    http://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-offset-y
+    https://www.antennahouse.com/product/ahf65/ahf-float.html#axf.float-offset-y
   -->
   <xs:attributeGroup name="axf_float-offset-y">
     <xs:attribute name="float-offset-y" form="qualified">
@@ -1392,7 +1521,7 @@
   <!--
     @axf:footnote-align
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-align
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-align
   -->
   <xs:attributeGroup name="axf_footnote-align">
     <xs:attribute name="footnote-align" form="qualified">
@@ -1411,7 +1540,7 @@
   <!--
     @axf:footnote-stacking
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-stacking
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-stacking
   -->
   <xs:attributeGroup name="axf_footnote-stacking">
     <xs:attribute name="footnote-stacking" form="qualified">
@@ -1429,7 +1558,7 @@
   <!--
     @axf:footnote-position
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-position
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-position
   -->
   <xs:attributeGroup name="axf_footnote-position">
     <xs:attribute name="footnote-position" form="qualified">
@@ -1457,7 +1586,7 @@
   <!--
     @axf:footnote-keep
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-keep
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-keep
   -->
   <xs:attributeGroup name="axf_footnote-keep">
     <xs:attribute name="footnote-keep" form="qualified">
@@ -1475,7 +1604,7 @@
   <!--
     @axf:footnote-max-height
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-max-height
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-max-height
   -->
   <xs:attributeGroup name="axf_footnote-max-height">
     <xs:attribute name="footnote-max-height" form="qualified">
@@ -1487,7 +1616,7 @@
   <!--
     @axf:headers
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.headers
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.headers
   -->
   <xs:attributeGroup name="axf_headers">
     <xs:attribute name="headers" form="qualified" type="xs:IDREFS">
@@ -1499,7 +1628,7 @@
   <!--
     @axf:indent-here
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.indent-here
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.indent-here
   -->
   <xs:attributeGroup name="axf_indent-here">
     <xs:attribute name="indent-here" form="qualified">
@@ -1509,9 +1638,21 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:layer-settings
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.layer-settings
+  -->
+  <xs:attributeGroup name="axf_layer-settings">
+    <xs:attribute name="layer-settings" form="qualified">
+      <xs:annotation>
+        <xs:documentation>レイヤを定義します: none | &lt;layer-setting&gt;#</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:number-type
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.number-type
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.number-type
   -->
   <xs:attributeGroup name="axf_number-type">
     <xs:attribute name="number-type" form="qualified">
@@ -1530,7 +1671,7 @@
   <!--
     @axf:outline-expand
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.outline-expand
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.outline-expand
   -->
   <xs:attributeGroup name="axf_outline-expand">
     <xs:attribute name="outline-expand" form="qualified">
@@ -1548,7 +1689,7 @@
   <!--
     @axf:origin-id
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.origin-id
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.origin-id
   -->
   <xs:attributeGroup name="axf_origin-id">
     <xs:attribute name="origin-id" form="qualified" type="xs:IDREF">
@@ -1560,7 +1701,7 @@
   <!--
     @axf:outline-group
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.outline-group
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.outline-group
   -->
   <xs:attributeGroup name="axf_outline-group">
     <xs:attribute name="outline-group" form="qualified">
@@ -1572,7 +1713,7 @@
   <!--
     @axf:outline-level
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.outline-level
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.outline-level
   -->
   <xs:attributeGroup name="axf_outline-level">
     <xs:attribute name="outline-level" form="qualified">
@@ -1584,7 +1725,7 @@
   <!--
     @axf:outline-title
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.outline-title
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.outline-title
   -->
   <xs:attributeGroup name="axf_outline-title">
     <xs:attribute name="outline-title" form="qualified">
@@ -1596,7 +1737,7 @@
   <!--
     @axf:outline-color
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.outline-color
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.outline-color
   -->
   <xs:attributeGroup name="axf_outline-color">
     <xs:attribute name="outline-color" form="qualified">
@@ -1608,7 +1749,7 @@
   <!--
     @axf:outline-font-style
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf_outline-font-style
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf_outline-font-style
   -->
   <xs:attributeGroup name="axf_outline-font-style">
     <xs:attribute name="outline-font-style" form="qualified">
@@ -1626,7 +1767,7 @@
   <!--
     @axf:outline-font-weight
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf:outline-font-weight
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf:outline-font-weight
   -->
   <xs:attributeGroup name="axf_outline-font-weight">
     <xs:attribute name="outline-font-weight" form="qualified">
@@ -1674,7 +1815,7 @@
   <!--
     @axf:page-number-prefix
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.page-number-prefix
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.page-number-prefix
   -->
   <xs:attributeGroup name="axf_page-number-prefix">
     <xs:attribute name="page-number-prefix" form="qualified">
@@ -1686,7 +1827,7 @@
   <!--
     @axf:pdftag
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.pdftag
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.pdftag
   -->
   <xs:attributeGroup name="axf_pdftag">
     <xs:attribute name="pdftag" form="qualified">
@@ -1698,7 +1839,7 @@
   <!--
     @axf:physical-page-number
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.physical-page-number
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.physical-page-number
   -->
   <xs:attributeGroup name="axf_physical-page-number">
     <xs:attribute name="physical-page-number" form="qualified">
@@ -1716,7 +1857,7 @@
   <!--
     @axf:printer-marks
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks
   -->
   <xs:attributeGroup name="axf_printer-marks">
     <xs:attribute name="printer-marks" form="qualified">
@@ -1728,7 +1869,7 @@
   <!--
     @axf:printer-bin-selection
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-bin-selection
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-bin-selection
   -->
   <xs:attributeGroup name="axf_printer-bin-selection">
     <xs:attribute name="printer-bin-selection" form="qualified">
@@ -1740,7 +1881,7 @@
   <!--
     @axf:printer-duplex
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-duplex
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-duplex
   -->
   <xs:attributeGroup name="axf_printer-duplex">
     <xs:attribute name="printer-duplex" form="qualified">
@@ -1752,7 +1893,7 @@
   <!--
     @axf:printer-marks-line-color
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks-line-color
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks-line-color
   -->
   <xs:attributeGroup name="axf_printer-marks-line-color">
     <xs:attribute name="printer-marks-line-color" form="qualified">
@@ -1764,7 +1905,7 @@
   <!--
     @axf:printer-marks-line-length
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks-line-length
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks-line-length
   -->
   <xs:attributeGroup name="axf_printer-marks-line-length">
     <xs:attribute name="printer-marks-line-length" form="qualified">
@@ -1776,7 +1917,7 @@
   <!--
     @axf:printer-marks-line-width
     Line width of printer marks: <length> | auto
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks-line-width
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks-line-width
   -->
   <xs:attributeGroup name="axf_printer-marks-line-width">
     <xs:attribute name="printer-marks-line-width" form="qualified">
@@ -1788,7 +1929,7 @@
   <!--
     @axf:printer-marks-zero-margin
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks-zero-margin
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks-zero-margin
   -->
   <xs:attributeGroup name="axf_printer-marks-zero-margin">
     <xs:attribute name="printer-marks-zero-margin" form="qualified">
@@ -1800,7 +1941,7 @@
   <!--
     @axf:printer-marks-spine-width
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks-spine-width
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks-spine-width
   -->
   <xs:attributeGroup name="axf_printer-marks-spine-width">
     <xs:attribute name="printer-marks-spine-width" form="qualified">
@@ -1812,7 +1953,7 @@
   <!--
     @axf:repeat-cell-content-at-break
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.repeat-cell-content-at-break
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.repeat-cell-content-at-break
   -->
   <xs:attributeGroup name="axf_repeat-cell-content-at-break">
     <xs:attribute name="repeat-cell-content-at-break" form="qualified">
@@ -1828,9 +1969,21 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:reverse-diagonal-border-style
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.reverse-diagonal-border-style
+  -->
+  <xs:attributeGroup name="axf_reverse-diagonal-border-style">
+    <xs:attribute name="reverse-diagonal-border-style" form="qualified">
+      <xs:annotation>
+        <xs:documentation>対角罫のスタイルを指定します: &lt;border-style&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:reverse-page-number
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.reverse-page-number
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.reverse-page-number
   -->
   <xs:attributeGroup name="axf_reverse-page-number">
     <xs:attribute name="reverse-page-number" form="qualified">
@@ -1848,7 +2001,7 @@
   <!--
     @axf:scope
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.scope
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.scope
   -->
   <xs:attributeGroup name="axf_scope">
     <xs:attribute name="scope" form="qualified">
@@ -1870,7 +2023,7 @@
   <!--
     @axf:suppress-folio-prefix
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.suppress-folio-prefix
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.suppress-folio-prefix
   -->
   <xs:attributeGroup name="axf_suppress-folio-prefix">
     <xs:attribute name="suppress-folio-prefix" form="qualified">
@@ -1888,7 +2041,7 @@
   <!--
     @axf:suppress-folio-suffix
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.suppress-folio-suffix
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.suppress-folio-suffix
   -->
   <xs:attributeGroup name="axf_suppress-folio-suffix">
     <xs:attribute name="suppress-folio-suffix" form="qualified">
@@ -1906,7 +2059,7 @@
   <!--
     @axf:suppress-if-first-on-page
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.suppress-if-first-on-page
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.suppress-if-first-on-page
   -->
   <xs:attributeGroup name="axf_suppress-if-first-on-page">
     <xs:attribute name="suppress-if-first-on-page" form="qualified">
@@ -1924,7 +2077,7 @@
   <!--
     @axf:tab-align
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.tab-align
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.tab-align
   -->
   <xs:attributeGroup name="axf_tab-align">
     <xs:attribute name="tab-align" form="qualified">
@@ -1936,7 +2089,7 @@
   <!--
     @axf:table-summary
     
-    http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.table-summary
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.table-summary
   -->
   <xs:attributeGroup name="axf_table-summary">
     <xs:attribute name="table-summary" form="qualified">

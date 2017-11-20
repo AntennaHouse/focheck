@@ -54,17 +54,17 @@
   </rule>
 
   <rule context="fo:list-block">
-    <assert test="exists((., ancestor::*)/@provisional-distance-between-starts)" role="Warning" sqf:fix="list-block-pdbs-fix">fo:list-block with no 'provisional-distance-between-starts' and no inherited value will use 24pt.</assert>
+    <assert test="exists((., ancestor::*)/@provisional-distance-between-starts)" role="Warning" sqf:fix="list-block-pdbs-fix">provisional-distance-between-starts がなく、継承された値がない fo:list-block は、24pt を使用します。</assert>
     <sqf:fix id="list-block-pdbs-fix">
       <sqf:description>
-        <sqf:title>Add 'provisional-distance-between-starts'</sqf:title>
+        <sqf:title>provisional-distance-between-starts を追加して下さい。</sqf:title>
       </sqf:description>
       <sqf:add node-type="attribute" target="provisional-distance-between-starts"/>
     </sqf:fix>
-    <assert test="exists((., ancestor::*)/@provisional-label-separation)" role="Warning" sqf:fix="list-block-pls-fix">fo:list-block with no 'provisional-label-separation' and no inherited value will use 6pt.</assert>
+    <assert test="exists((., ancestor::*)/@provisional-label-separation)" role="Warning" sqf:fix="list-block-pls-fix">provisional-label-separation がなく、継承された値がない fo:list-block は、6pt を使用します。</assert>
     <sqf:fix id="list-block-pls-fix">
       <sqf:description>
-        <sqf:title>Add 'provisional-label-separation'</sqf:title>
+        <sqf:title>provisional-label-separation を追加して下さい。</sqf:title>
       </sqf:description>
       <sqf:add node-type="attribute" target="provisional-label-separation"/>
     </sqf:fix>

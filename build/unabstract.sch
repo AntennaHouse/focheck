@@ -1439,9 +1439,9 @@
    
    <rule context="fo:*/@font-stretch">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'Percent', 'EMPTY', 'ERROR', 'Object')">font-stretch="<value-of select="."/>" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <assert test="local-name($expression) = ('EnumerationToken', 'Percent', 'Number', 'EMPTY', 'ERROR', 'Object')">font-stretch="<value-of select="."/>" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', Percent, or Number.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
       <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit'))">font-stretch="<value-of select="."/>" token should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">font-stretch="" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', or Percent.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">font-stretch="" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', Percent, or Number.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-stretch="<value-of select="."/>"</report>
    </rule>
 
@@ -3280,10 +3280,20 @@
     <phase id="property">
         <active pattern="fo-property"/>
     </phase>
+
     <pattern id="axf">
+
 	
 	
-        <p>http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info</p>
+        <rule context="axf:custom-property">
+	  <assert test="empty((../../axf:custom-property, ../axf:custom-property)[@name eq 'xmp'])"><value-of select="name()"/>" cannot be used when axf:custom-property with name="xmp" is present.</assert>
+          <assert test="normalize-space(@name) ne ''" role="Warning">name="" should not be empty.</assert>
+          <assert test="not(normalize-space(@name) = ('Title', 'Author', 'Subject', 'Keywords', 'Creator', 'Producer', 'CreationDate', 'ModDate', 'Trapped'))">name="<value-of select="@name"/>" cannot be used with <value-of select="name()"/>.</assert>
+          <assert test="normalize-space(@value) ne ''" role="Warning">value="" should not be empty.</assert>
+        </rule>
+
+	
+	
         <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1" role="axf-1">
 	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">name="<value-of select="@name"/>" cannot be used when axf:document-info with name="xmp" is present.</assert>
         </rule>
@@ -3495,6 +3505,26 @@
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('uniform', 'non-uniform', 'inherit'))">scaling="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'uniform', 'non-uniform', or 'inherit'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">scaling="" should be EnumerationToken.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: scaling="<value-of select="."/>"</report>
+	</rule>
+
+	
+	
+	
+	<rule context="fo:*/@axf:column-rule-color">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'ERROR', 'Object')">'axf:column-rule-color' should be Color or a color name.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: 'axf:column-rule-color="<value-of select="."/>"'</report>
+	</rule>
+
+	
+	
+	
+	
+	<rule context="fo:*/@axf:column-rule-length">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">axf:column-rule-length="<value-of select="."/>" should be Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:column-rule-length="" should be Length, or Percent.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:column-rule-length="<value-of select="."/>"</report>
 	</rule>
 
 	

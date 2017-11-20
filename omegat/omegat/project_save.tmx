@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tmx SYSTEM "tmx11.dtd">
 <tmx version="1.1">
-  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="4.1.2_1_10060:10062" segtype="sentence" srclang="EN-US"/>
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="4.0.1_1_ef9cdcf" segtype="sentence" srclang="EN-US"/>
   <body>
 <!-- Default translations -->
     <tu>
       <tuv lang="EN-US">
+        <seg>![](etc/screenshot.png)</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100100Z" creationid="tkg" creationdate="20171020T100100Z">
+        <seg>![](etc/screenshot-ja.png)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>" cannot be used when axf:custom-property with name="xmp" is present.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T150755Z" creationid="mtan" creationdate="20171117T150755Z">
+        <seg>"name="xmp"との axf:custom-property が存在している場合、利用することができません.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg># &lt;a name="en"&gt;&lt;/a&gt;focheck – Validate XSL-FO and Antenna House extensions in oXygen or standalone</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T111141Z" creationid="mtan" creationdate="20160303T145853Z">
-        <seg># &lt;a name="en"&gt;&lt;/a&gt;focheck – oXygenまたはスタンドアロンでの XSL-FO とアンテナハウスの拡張を有効にします。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T133807Z" creationid="mtan" creationdate="20160303T145853Z">
+        <seg># &lt;a name="ja"&gt;&lt;/a&gt;focheck – oXygenまたはスタンドアロンでの XSL-FO とアンテナハウスの拡張を有効にします。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>## Building</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T095155Z" creationid="tkg" creationdate="20171019T095155Z">
+        <seg>## 構築</seg>
       </tuv>
     </tu>
     <tu>
@@ -57,26 +81,42 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>### Ant</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100121Z" creationid="tkg" creationdate="20171020T100121Z">
+        <seg>### Ant</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>### Emacs mode</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171120T165250Z" creationid="tkg" creationdate="20171120T165250Z">
+        <seg>### Emacs mode</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>### Installing a ZIP archive to an alternative frameworks location</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115215Z" creationid="mtan" creationdate="20160304T114834Z">
-        <seg>###代替 フレームワークスの場所に ZIP アーカイブのインストール</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094112Z" creationid="mtan" creationdate="20160304T114834Z">
+        <seg>### 代替 フレームワークスの場所に ZIP アーカイブのインストール</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>### Installing a ZIP archive to oXygen `frameworks` directory</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T114735Z" creationid="mtan" creationdate="20160304T112905Z">
-        <seg>### oXygen frameworks ディレクトリの ZIP アーカイブのインストール</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T093943Z" creationid="mtan" creationdate="20160304T112905Z">
+        <seg>### oXygen `frameworks` ディレクトリの ZIP アーカイブのインストール</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>### Installing a repository clone</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160304T121841Z" creationid="mtan" creationdate="20160304T121841Z">
-        <seg>###リポジトリクローンのインストール</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T093912Z" creationid="mtan" creationdate="20160304T121841Z">
+        <seg>### リポジトリクローンのインストール</seg>
       </tuv>
     </tu>
     <tu>
@@ -98,10 +138,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>### `framework.zip`</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100140Z" creationid="tkg" creationdate="20171020T100140Z">
+        <seg>### `framework.zip`</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>### `run.parser`</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160309T122341Z" creationid="mtan" creationdate="20160307T163103Z">
-        <seg>###  `run.parser`</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T095333Z" creationid="mtan" creationdate="20160307T163103Z">
+        <seg>### `run.parser` </seg>
       </tuv>
     </tu>
     <tu>
@@ -142,6 +190,14 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T113321Z" creationid="mtan" creationdate="20171010T145309Z">
         <seg>'axf:assumed-page-number は Number でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>'axf:column-rule-color' should be Color or a color name.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T151355Z" creationid="mtan" creationdate="20171117T151355Z">
+        <seg>'axf:column-rule-color' は Color 又は色名でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -238,8 +294,8 @@
         <seg>**focheck** bundles a Relax NG schema and a Schematron grammar in an oXygen framework for detailed validation
 of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XML Editor.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T111458Z" creationid="mtan" creationdate="20160303T163200Z">
-        <seg>XML Editor 内ー XSL 1.1 に追加された FO とプロパティを含む **focheck**は oXygen フレームワークで XSL-FO の詳細な有効のために、Relax NG と Schematron 文法がバンドルします。
+      <tuv lang="JA" changeid="tkg" changedate="20171019T113212Z" creationid="mtan" creationdate="20160303T163200Z">
+        <seg>XML Editor 内ー XSL 1.1 に追加された FO とプロパティを含む **focheck** は oXygen フレームワークで XSL-FO の詳細な有効のために、Relax NG と Schematron 文法がバンドルします。
 </seg>
       </tuv>
     </tu>
@@ -249,6 +305,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171017T111833Z" creationid="mtan" creationdate="20160303T163420Z">
         <seg>**focheck** の開発は進行中です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>,]* [&lt;color&gt; || &lt;length&gt; &lt;length&gt; &lt;length&gt;?] | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095943Z" creationid="tkg" creationdate="20171020T095943Z">
+        <seg>,]* [&lt;color&gt; || &lt;length&gt; &lt;length&gt; &lt;length&gt;?] | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -263,16 +327,16 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       <tuv lang="EN-US">
         <seg>- If you don't have permission to copy the folder to the `frameworks` directory, then you can use an alternative location as described below.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115158Z" creationid="mtan" creationdate="20160304T114523Z">
-        <seg>-frameworks ディレクトリにフォルダをコピーする許可がない場合は、以下に説明するように、別の場所を使用することができます。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094020Z" creationid="mtan" creationdate="20160304T114523Z">
+        <seg>- `frameworks` ディレクトリにフォルダをコピーする許可がない場合は、以下に説明するように、別の場所を使用することができます。</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>- If you've already checked out **focheck**, you can run</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115458Z" creationid="mtan" creationdate="20160304T144519Z">
-        <seg>-**focheck** を既に確認していた場合、次下を実行できます。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T113601Z" creationid="mtan" creationdate="20160304T144519Z">
+        <seg>- **focheck** を既に確認していた場合、次下を実行できます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -287,16 +351,16 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       <tuv lang="EN-US">
         <seg>- On Windows, this is `C:\Program Files\Oxygen XML Editor 19\frameworks`, or something similar.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T114959Z" creationid="mtan" creationdate="20171017T114959Z">
-        <seg>- Windows では、これは C:\Program Files\Oxygen XML Editor 19\frameworks か同様のものです。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T093552Z" creationid="mtan" creationdate="20171017T114959Z">
+        <seg>- Windows では、これは `C:\Program Files\Oxygen XML Editor 19\frameworks` か同様のものです。</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>- Pass `--recursive` to `git clone` when you check out **focheck**</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115450Z" creationid="mtan" creationdate="20160304T144108Z">
-        <seg>- **focheck** を確認すると、git clone に --recursive を飛び出します。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094324Z" creationid="mtan" creationdate="20160304T144108Z">
+        <seg>- **focheck** を確認すると、`git clone` に `--recursive` を飛び出します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -311,6 +375,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>- The Relax NG schema works with Jing and with Emacs `nxml-mode` but not with `xmllint`.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094802Z" creationid="mtan" creationdate="20171017T172757Z">
+        <seg>- Relax NG は、`xmllint` ではなく、Jing と Emacs `nxml-mode` と動作します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>- The Relax NG works with Jing and with Emacs `nxml-mode` but not with `xmllint`.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171017T120008Z" creationid="mtan" creationdate="20160304T153059Z">
@@ -321,24 +393,72 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       <tuv lang="EN-US">
         <seg>- The Schematron requires an XSLT 2.0 binding and a Schematron implementation that will both match on attributes as contexts as well as import and use external XSLT 2.0 stylesheets.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T120037Z" creationid="mtan" creationdate="20160304T154349Z">
-        <seg>-Schematron は XSLT 2.0 の結合と Schematron 実行を必要とします。それは、コンテキストの属性 の両方に一致するだけでなく、外部 XSLT 2.0 スタイルシートを読み込んで使用します。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T113757Z" creationid="mtan" creationdate="20160304T154349Z">
+        <seg>- Schematron は XSLT 2.0 の結合と Schematron 実行を必要とします。それは、コンテキストの属性 の両方に一致するだけでなく、外部 XSLT 2.0 スタイルシートを読み込んで使用します。</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>- You can delete or comment out any properties in `build.local.properties` that you don't need to change.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160309T122318Z" creationid="mtan" creationdate="20160303T172201Z">
+      <tuv lang="JA" changeid="tkg" changedate="20171019T095306Z" creationid="mtan" creationdate="20160303T172201Z">
         <seg>- `build.local.properties` にあるいずれのプロパティーも変更する必要はない場合、削除するか、コメントアウトもできます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095820Z" creationid="tkg" creationdate="20171020T095820Z">
+        <seg>0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>1.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160303T172507Z" creationid="mtan" creationdate="20160303T172507Z">
-        <seg>1</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T095854Z" creationid="mtan" creationdate="20160303T172507Z">
+        <seg>1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>2.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100131Z" creationid="tkg" creationdate="20171020T100131Z">
+        <seg>2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>3.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100116Z" creationid="tkg" creationdate="20171020T100116Z">
+        <seg>3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;absolute-size&gt; | &lt;relative-size&gt; | &lt;length&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095615Z" creationid="tkg" creationdate="20171020T095615Z">
+        <seg>&lt;absolute-size&gt; | &lt;relative-size&gt; | &lt;length&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;angle&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095629Z" creationid="tkg" creationdate="20171020T095629Z">
+        <seg>&lt;angle&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;border-style&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095513Z" creationid="tkg" creationdate="20171020T095513Z">
+        <seg>&lt;border-style&gt;</seg>
       </tuv>
     </tu>
     <tu>
@@ -351,10 +471,106 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>&lt;border-style&gt;{1,4} | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095450Z" creationid="tkg" creationdate="20171020T095450Z">
+        <seg>&lt;border-style&gt;{1,4} | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;border-width&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095515Z" creationid="tkg" creationdate="20171020T095515Z">
+        <seg>&lt;border-width&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095433Z" creationid="tkg" creationdate="20171020T095433Z">
+        <seg>&lt;border-width&gt; | &lt;length-conditional&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;border-width&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095435Z" creationid="tkg" creationdate="20171020T095435Z">
+        <seg>&lt;border-width&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;border-width&gt;{1,4} | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095453Z" creationid="tkg" creationdate="20171020T095453Z">
+        <seg>&lt;border-width&gt;{1,4} | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;character&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095517Z" creationid="tkg" creationdate="20171020T095517Z">
+        <seg>&lt;character&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;character&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095635Z" creationid="tkg" creationdate="20171020T095635Z">
+        <seg>&lt;character&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;color&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095506Z" creationid="tkg" creationdate="20171020T095506Z">
+        <seg>&lt;color&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;color&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095522Z" creationid="tkg" creationdate="20171020T095522Z">
+        <seg>&lt;color&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;color&gt; | transparent</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T094939Z" creationid="tkg" creationdate="20171020T094939Z">
+        <seg>&lt;color&gt; | transparent</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>&lt;color&gt; | transparent | inherit</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171002T132100Z" creationid="tkg" creationdate="20171002T132100Z">
         <seg>&lt;color&gt; | transparent | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;cue-before&gt; || &lt;cue-after&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095537Z" creationid="tkg" creationdate="20171020T095537Z">
+        <seg>&lt;cue-before&gt; || &lt;cue-after&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;font-family&gt; ] | caption | icon | menu | message-box | small-caption | status-bar | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095606Z" creationid="tkg" creationdate="20171020T095606Z">
+        <seg>&lt;font-family&gt; ] | caption | icon | menu | message-box | small-caption | status-bar | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -375,10 +591,330 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>&lt;id&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095041Z" creationid="tkg" creationdate="20171020T095041Z">
+        <seg>&lt;id&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;idref&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095822Z" creationid="tkg" creationdate="20171020T095822Z">
+        <seg>&lt;idref&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;integer&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095744Z" creationid="tkg" creationdate="20171020T095744Z">
+        <seg>&lt;integer&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;keep&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095658Z" creationid="tkg" creationdate="20171020T095658Z">
+        <seg>&lt;keep&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;language-country&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100003Z" creationid="tkg" creationdate="20171020T100003Z">
+        <seg>&lt;language-country&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;length-bp-ip-direction&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095442Z" creationid="tkg" creationdate="20171020T095442Z">
+        <seg>&lt;length-bp-ip-direction&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;length-range&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095706Z" creationid="tkg" creationdate="20171020T095706Z">
+        <seg>&lt;length-range&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;length&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095508Z" creationid="tkg" creationdate="20171020T095508Z">
+        <seg>&lt;length&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;length&gt; &lt;length&gt;?</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095444Z" creationid="tkg" creationdate="20171020T095444Z">
+        <seg>&lt;length&gt; &lt;length&gt;?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095532Z" creationid="tkg" creationdate="20171020T095532Z">
+        <seg>&lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095455Z" creationid="tkg" creationdate="20171020T095455Z">
+        <seg>&lt;length&gt; | &lt;percentage&gt; | auto | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;length&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095528Z" creationid="tkg" creationdate="20171020T095528Z">
+        <seg>&lt;length&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;length&gt; | &lt;percentage&gt; | none | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095735Z" creationid="tkg" creationdate="20171020T095735Z">
+        <seg>&lt;length&gt; | &lt;percentage&gt; | none | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;length&gt;{1,2} | auto | landscape | portrait | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095904Z" creationid="tkg" creationdate="20171020T095904Z">
+        <seg>&lt;length&gt;{1,2} | auto | landscape | portrait | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;margin-width&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095731Z" creationid="tkg" creationdate="20171020T095731Z">
+        <seg>&lt;margin-width&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;margin-width&gt;{1,4} | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095723Z" creationid="tkg" creationdate="20171020T095723Z">
+        <seg>&lt;margin-width&gt;{1,4} | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;name&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095501Z" creationid="tkg" creationdate="20171020T095501Z">
+        <seg>&lt;name&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;name&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095524Z" creationid="tkg" creationdate="20171020T095524Z">
+        <seg>&lt;name&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;number&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095530Z" creationid="tkg" creationdate="20171020T095530Z">
+        <seg>&lt;number&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;number&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095526Z" creationid="tkg" creationdate="20171020T095526Z">
+        <seg>&lt;number&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;number&gt; | no-limit | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095737Z" creationid="tkg" creationdate="20171020T095737Z">
+        <seg>&lt;number&gt; | no-limit | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;number&gt; | none | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095617Z" creationid="tkg" creationdate="20171020T095617Z">
+        <seg>&lt;number&gt; | none | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;padding-width&gt; | &lt;length-conditional&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095749Z" creationid="tkg" creationdate="20171020T095749Z">
+        <seg>&lt;padding-width&gt; | &lt;length-conditional&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;padding-width&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095751Z" creationid="tkg" creationdate="20171020T095751Z">
+        <seg>&lt;padding-width&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;padding-width&gt;{1,4} | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095748Z" creationid="tkg" creationdate="20171020T095748Z">
+        <seg>&lt;padding-width&gt;{1,4} | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;percentage&gt; | &lt;length&gt; | left | center | right</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095010Z" creationid="tkg" creationdate="20171020T095010Z">
+        <seg>&lt;percentage&gt; | &lt;length&gt; | left | center | right</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;percentage&gt; | &lt;length&gt; | left | center | right | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095418Z" creationid="tkg" creationdate="20171020T095418Z">
+        <seg>&lt;percentage&gt; | &lt;length&gt; | left | center | right | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;percentage&gt; | &lt;length&gt; | top | center | bottom</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095015Z" creationid="tkg" creationdate="20171020T095015Z">
+        <seg>&lt;percentage&gt; | &lt;length&gt; | top | center | bottom</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;percentage&gt; | &lt;length&gt; | top | center | bottom | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095420Z" creationid="tkg" creationdate="20171020T095420Z">
+        <seg>&lt;percentage&gt; | &lt;length&gt; | top | center | bottom | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;percentage&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095646Z" creationid="tkg" creationdate="20171020T095646Z">
+        <seg>&lt;percentage&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>&lt;s0&gt; &lt;s1&gt; &lt;s2&gt;Delete this axf:document-info with name="&lt;v3/&gt;"&lt;/s2&gt; &lt;/s1&gt; &lt;s4/&gt; &lt;/s0&gt; &lt;s5&gt; &lt;s6&gt; &lt;s7&gt;Delete the axf:document-info with name="xmp"&lt;/s7&gt; &lt;/s6&gt; &lt;s8/&gt; &lt;/s5&gt;</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160112T140239Z" creationid="mtan" creationdate="20160112T135122Z">
         <seg>&lt;s0&gt; &lt;s1&gt; &lt;s2&gt;Delete this axf:document-info with name="&lt;v3/&gt;"&lt;/s2&gt; &lt;/s1&gt; &lt;s4/&gt; &lt;/s0&gt; &lt;s5&gt; &lt;s6&gt; &lt;s7&gt;Delete the axf:document-info with name="xmp"&lt;/s7&gt; &lt;/s6&gt; &lt;s8/&gt; &lt;/s5&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;shape&gt; | auto | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095521Z" creationid="tkg" creationdate="20171020T095521Z">
+        <seg>&lt;shape&gt; | auto | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;space&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095912Z" creationid="tkg" creationdate="20171020T095912Z">
+        <seg>&lt;space&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;space&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095909Z" creationid="tkg" creationdate="20171020T095909Z">
+        <seg>&lt;space&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;string&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095503Z" creationid="tkg" creationdate="20171020T095503Z">
+        <seg>&lt;string&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;string&gt; | &lt;uri-specification&gt; | none | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095846Z" creationid="tkg" creationdate="20171020T095846Z">
+        <seg>&lt;string&gt; | &lt;uri-specification&gt; | none | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;string&gt; | auto</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095031Z" creationid="tkg" creationdate="20171020T095031Z">
+        <seg>&lt;string&gt; | auto</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;uri-specification&gt; [&lt;uri-specification&gt;]* | none | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095906Z" creationid="tkg" creationdate="20171020T095906Z">
+        <seg>&lt;uri-specification&gt; [&lt;uri-specification&gt;]* | none | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;uri-specification&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095917Z" creationid="tkg" creationdate="20171020T095917Z">
+        <seg>&lt;uri-specification&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;uri-specification&gt; | none</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095000Z" creationid="tkg" creationdate="20171020T095000Z">
+        <seg>&lt;uri-specification&gt; | none</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&lt;uri-specification&gt; | none | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095412Z" creationid="tkg" creationdate="20171020T095412Z">
+        <seg>&lt;uri-specification&gt; | none | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -563,6 +1099,22 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Add 'provisional-distance-between-starts'</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171017T171709Z" creationid="mtan" creationdate="20171017T171433Z">
+        <seg>provisional-distance-between-starts を追加して下さい。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Add 'provisional-label-separation'</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171017T171747Z" creationid="mtan" creationdate="20171017T171747Z">
+        <seg>provisional-label-separation を追加して下さい。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Add 'start-indent="body-start()"'</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T153317Z" creationid="mtan" creationdate="20160310T114755Z">
@@ -583,6 +1135,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171005T121928Z" creationid="mtan" creationdate="20171005T121928Z">
         <seg>行番号の配置: auto | start | center | end | inside | outside | left | right</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Alignment of the column rule: before | center | after</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T133036Z" creationid="mtan" creationdate="20171117T133036Z">
+        <seg>段間罫の配置： before | center | after</seg>
       </tuv>
     </tu>
     <tu>
@@ -645,8 +1205,8 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       <tuv lang="EN-US">
         <seg>Alternatively, use the `schematron.single` or `schematron.dir` target to run Schematron on one or multiple files.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115859Z" creationid="mtan" creationdate="20160304T151936Z">
-        <seg>代わりに、一つ又は複数のファイルでの Schematron を実行するには、schematron.single 又は schematron.dir ターゲットを使用します。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094552Z" creationid="mtan" creationdate="20160304T151936Z">
+        <seg>代わりに、一つ又は複数のファイルでの Schematron を実行するには、`schematron.single` 又は `schematron.dir` ターゲットを使用します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -965,16 +1525,16 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       <tuv lang="EN-US">
         <seg>Click on the "Download ZIP" button on this project's main page to download the files.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115325Z" creationid="mtan" creationdate="20160304T121153Z">
-        <seg> ファイルをダウンロードするには、このプロジェクトのメインページの Download ZIP をクリックします。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T100248Z" creationid="mtan" creationdate="20160304T121153Z">
+        <seg>ファイルをダウンロードするには、このプロジェクトのメインページの Download ZIP をクリックします。</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>Clone the repository into either the oXygen `frameworks` directory or another directory.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115417Z" creationid="mtan" creationdate="20160304T142825Z">
-        <seg>oXygen frameworks ディレクトリ又は別のディレクトリのどちらかにリポジトリをクローンします。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094216Z" creationid="mtan" creationdate="20160304T142825Z">
+        <seg>oXygen `frameworks` ディレクトリ又は別のディレクトリのどちらかにリポジトリをクローンします。</seg>
       </tuv>
     </tu>
     <tu>
@@ -1007,6 +1567,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171005T150029Z" creationid="mtan" creationdate="20171005T150029Z">
         <seg>ルビの色: &lt;color&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Color of the column rule: &lt;color&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T133105Z" creationid="mtan" creationdate="20171117T133105Z">
+        <seg>段間罫の色： &lt;color&gt;</seg>
       </tuv>
     </tu>
     <tu>
@@ -1059,6 +1627,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Content MathML</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171120T164958Z" creationid="tkg" creationdate="20171120T164958Z">
+        <seg>Content MathML</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Content of the annotation: &lt;string&gt;</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171005T152718Z" creationid="mtan" creationdate="20171005T152718Z">
@@ -1079,6 +1655,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T171045Z" creationid="mtan" creationdate="20160118T171045Z">
         <seg>文字列中の数字列の変換をします： none | kansuji | kansuji-if-vertical | &lt;list-style-type&gt; | &lt;string&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Copyright 2015-2017 Antenna House, Inc.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100147Z" creationid="tkg" creationdate="20171020T100147Z">
+        <seg>Copyright 2015-2017 Antenna House, Inc.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1219,6 +1803,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Effective with PDF 1.4 or later.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T132051Z" creationid="mtan" creationdate="20171117T132051Z">
+        <seg>PDF1.4以降のとき有効です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Enumeration token is '&lt;v1/&gt;'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T155150Z" creationid="mtan" creationdate="20151029T110759Z">
@@ -1245,8 +1837,8 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       <tuv lang="EN-US">
         <seg>Extract the folder in the ZIP archive to the oXygen `frameworks` directory.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T114811Z" creationid="mtan" creationdate="20160304T113508Z">
-        <seg>oXygen frameworks ディレクトリに ZIP アーカイブにあるフォルダーを解凍します。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T093510Z" creationid="mtan" creationdate="20160304T113508Z">
+        <seg>oXygen `frameworks` ディレクトリに ZIP アーカイブにあるフォルダーを解凍します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -1573,16 +2165,16 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       <tuv lang="EN-US">
         <seg>If the properties in `build.properties` are not correct for your system, then copy `build.properties` to `build.local.properties` in the same directory and set the correct values there.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160310T102445Z" creationid="mtan" creationdate="20160303T172443Z">
-        <seg> `build.properties` の プロパティーが使用するシステムに合わない場合は、同じディレクトリで `build.properties`  を  `build.local.properties`  に コピーして、そこに正しい値を設定します。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T095254Z" creationid="mtan" creationdate="20160303T172443Z">
+        <seg>`build.properties` の プロパティーが使用するシステムに合わない場合は、同じディレクトリで `build.properties` を `build.local.properties` に コピーして、そこに正しい値を設定します。</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>If you don't have permission to modify the oXygen installation – for example, if oXygen is installed on Windows under `C:\Program Files\` and you are not an Administrator – you can set oXygen to also use an alternative frameworks location.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115308Z" creationid="mtan" creationdate="20160304T120338Z">
-        <seg>インストールを変更する許可がない場合は、例えば、oXygen は C:\Program Files\ で Windows にインストール場合、あなたは管理者でない場合、代替フレームワークの場所も使用するように oXygen を設定することができます。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T093814Z" creationid="mtan" creationdate="20160304T120338Z">
+        <seg>インストールを変更する許可がない場合は、例えば、oXygen は `C:\Program Files\` で Windows にインストール場合、あなたは管理者でない場合、代替フレームワークの場所も使用するように oXygen を設定することができます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -1675,6 +2267,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Invalid with PDF/A</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T132116Z" creationid="mtan" creationdate="20171117T132116Z">
+        <seg>PDF/Aでは無効です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It does not (yet) handle every XSL-FO property or every requirement in the XSL-FO spec, nor does it evaluate either functions or relative lengths.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171017T111936Z" creationid="mtan" creationdate="20160303T171034Z">
@@ -1747,10 +2347,36 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Layer definitions: none | &lt;layer-setting&gt;#</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095344Z" creationid="tkg" creationdate="20171020T095344Z">
+        <seg>レイヤを定義します: none | &lt;layer-setting&gt;#</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Layer to which the area is arranged.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T161244Z" creationid="mtan" creationdate="20160118T161244Z">
         <seg>エリアをどのレイヤに配置するか</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Length of the column rule: &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T133720Z" creationid="mtan" creationdate="20171117T133720Z">
+        <seg>段間罫の長さ： &lt;length&gt; | &lt;percentage&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100150Z" creationid="tkg" creationdate="20171020T100150Z">
+        <seg>Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1853,8 +2479,8 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       <tuv lang="EN-US">
         <seg>Makes a Zip archive of just the oXygen framework.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160303T171856Z" creationid="mtan" creationdate="20160303T171856Z">
-        <seg>oXygenフレームワークのZipアーカイブを生成します。
+      <tuv lang="JA" changeid="mtan" changedate="20171017T173246Z" creationid="mtan" creationdate="20160303T171856Z">
+        <seg>oXygen フレームワークの Zip アーカイブを生成します。
 </seg>
       </tuv>
     </tu>
@@ -1958,6 +2584,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Name of the custom property.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T132231Z" creationid="mtan" creationdate="20171117T132231Z">
+        <seg>カスタムプロパティ名</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Name of the document information</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160119T155211Z" creationid="mtan" creationdate="20160119T155211Z">
@@ -2041,8 +2675,8 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       <tuv lang="EN-US">
         <seg>Open `build.xml` in oXygen.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T120113Z" creationid="mtan" creationdate="20160303T172603Z">
-        <seg> oXygen で build.xml を開きます。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T095233Z" creationid="mtan" creationdate="20160303T172603Z">
+        <seg> oXygen で `build.xml` を開きます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -2191,6 +2825,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Presentation MathML</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171120T164938Z" creationid="tkg" creationdate="20171120T164938Z">
+        <seg>Presentation MathML</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Printing marks, such as a crop mark</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T125532Z" creationid="mtan" creationdate="20160120T125532Z">
@@ -2322,8 +2964,8 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       <tuv lang="EN-US">
         <seg>Run the default "ANT" transformation scenario.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160307T162417Z" creationid="mtan" creationdate="20160303T172545Z">
-        <seg>デフォルトの「ANT」変換のシナリオを実行します。
+      <tuv lang="JA" changeid="mtan" changedate="20171017T172848Z" creationid="mtan" creationdate="20160303T172545Z">
+        <seg>デフォルトの ANT 変換のシナリオを実行します。
 </seg>
       </tuv>
     </tu>
@@ -2331,8 +2973,8 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       <tuv lang="EN-US">
         <seg>Runs the parser on `${input}`.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160309T113215Z" creationid="mtan" creationdate="20160303T171949Z">
-        <seg>`${input}`でパーサーを実行します。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T095345Z" creationid="mtan" creationdate="20160303T171949Z">
+        <seg>`${input}` でパーサーを実行します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -2349,6 +2991,16 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171017T115750Z" creationid="mtan" creationdate="20160304T150343Z">
         <seg>https://github.com/AntennaHouse/focheck/wiki/focheck を参照して下さい。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>See the License for the specific language governing permissions and
+limitations under the License.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100158Z" creationid="tkg" creationdate="20171020T100158Z">
+        <seg>See the License for the specific language governing permissions and
+limitations under the License.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2397,6 +3049,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T151354Z" creationid="mtan" creationdate="20160120T122112Z">
         <seg>フロート関連拡張プロパティのためのショートハンド</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Should not be empty.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T132445Z" creationid="mtan" creationdate="20171117T132445Z">
+        <seg>どちらも空ではいけません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -2553,6 +3213,22 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Style of the column rule: &lt;border-style&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T133739Z" creationid="mtan" creationdate="20171117T133739Z">
+        <seg>段間罫のスタイル： &lt;border-style&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Style of the reverse diagonal border: &lt;border-style&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171120T165236Z" creationid="tkg" creationdate="20171120T165236Z">
+        <seg>対角罫のスタイルを指定します: &lt;border-style&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Style of the revision bar</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T174220Z" creationid="mtan" creationdate="20160118T174220Z">
@@ -2605,6 +3281,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T100802Z" creationid="mtan" creationdate="20171010T104643Z">
         <seg>シンタックスエラー：'assumed-page-number="&lt;v0/&gt;"'</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Syntax error: 'axf:column-rule-color="&lt;v0/&gt;"'</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T151423Z" creationid="mtan" creationdate="20171117T151423Z">
+        <seg>シンタックスエラー： 'axf:column-rule-color="&lt;v0/&gt;"'</seg>
       </tuv>
     </tu>
     <tu>
@@ -2701,6 +3385,14 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151029T120545Z" creationid="mtan" creationdate="20151029T120545Z">
         <seg>シンタックスエラー：auto-restore="&lt;v0/&gt;"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Syntax error: axf:column-rule-length="&lt;v0/&gt;"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T151535Z" creationid="mtan" creationdate="20171117T151535Z">
+        <seg>シンタックスエラー： axf:column-rule-length="&lt;v0/&gt;"</seg>
       </tuv>
     </tu>
     <tu>
@@ -5439,10 +6131,22 @@ to XSL-FO datatypes.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100156Z" creationid="tkg" creationdate="20171020T100156Z">
+        <seg>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Use the `build-focheck.xml` Ant build file and the `validate.single` target to validate a file using both Relax NG and Schematron.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115837Z" creationid="mtan" creationdate="20160304T151245Z">
-        <seg>Relax NG と Schematron の両方を使用してファイルを有効するために、Ant のビルドファイルの build-focheck.xml と validate.single のターゲットを使用します。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094517Z" creationid="mtan" creationdate="20160304T151245Z">
+        <seg>Relax NG と Schematron の両方を使用してファイルを有効するために、Ant のビルドファイルの `build-focheck.xml` と `validate.single` のターゲットを使用します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -5459,6 +6163,14 @@ to XSL-FO datatypes.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T114351Z" creationid="mtan" creationdate="20171010T110821Z">
         <seg>値は &lt;v0/&gt; です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Value of the custom property.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T132821Z" creationid="mtan" creationdate="20171117T132821Z">
+        <seg>カスタムプロパティの値</seg>
       </tuv>
     </tu>
     <tu>
@@ -5545,8 +6257,8 @@ to XSL-FO datatypes.</seg>
       <tuv lang="EN-US">
         <seg>When you open an XSL-FO document – where the document element is `root` in the XSL-FO namespace – oXygen will automatically validate the document against both the Relax NG schema and the Schematron grammar.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115724Z" creationid="mtan" creationdate="20160304T145211Z">
-        <seg>文書要素が XSL-FO の名前空間内の root である XSL-FO 文書を開くと、oXygen は自動的に Relax NG スキーマと Schematron 文法の両方に対して文書を有効にします。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094418Z" creationid="mtan" creationdate="20160304T145211Z">
+        <seg>文書要素が XSL-FO の名前空間内の `root` である XSL-FO 文書を開くと、oXygen は自動的に Relax NG スキーマと Schematron 文法の両方に対して文書を有効にします。</seg>
       </tuv>
     </tu>
     <tu>
@@ -5619,6 +6331,14 @@ to XSL-FO datatypes.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171005T151646Z" creationid="mtan" creationdate="20171005T151646Z">
         <seg>ルビに小書きのかなを許すかどうか： auto | convert</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whether to also display a rule where a column could exist: gap | end | all</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T133644Z" creationid="mtan" creationdate="20171117T133605Z">
+        <seg>段間が存在する可能性段間罫を表示するかどうか: gap | end | all</seg>
       </tuv>
     </tu>
     <tu>
@@ -5911,6 +6631,14 @@ to XSL-FO datatypes.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Width of the column rule: &lt;border-width&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T133759Z" creationid="mtan" creationdate="20171117T133759Z">
+        <seg>段間罫の幅： &lt;border-width&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Width of the diagonal border</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T155526Z" creationid="mtan" creationdate="20160118T153113Z">
@@ -5961,8 +6689,8 @@ to XSL-FO datatypes.</seg>
       <tuv lang="EN-US">
         <seg>You can use the Relax NG schema in the `schema` folder and the Schematron files in the `schematron` folder outside of oXygen and Ant.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115932Z" creationid="mtan" creationdate="20160304T152710Z">
-        <seg>oXygen と ant を使用せずに、schema のフォルダに Relax NG のスキーマと schematron のフォルダに Schematron ファイルを使用することができます。</seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094721Z" creationid="mtan" creationdate="20160304T152710Z">
+        <seg>oXygen と ant を使用せずに、`schema-ja` のフォルダに Relax NG のスキーマと `schematron-ja` のフォルダに Schematron ファイルを使用することができます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -5976,10 +6704,98 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>You may obtain a copy of the License at</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100152Z" creationid="tkg" creationdate="20171020T100152Z">
+        <seg>You may obtain a copy of the License at</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095430Z" creationid="tkg" creationdate="20171020T095430Z">
+        <seg>[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[ &lt;color&gt; | transparent ]{1,4} | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095439Z" creationid="tkg" creationdate="20171020T095439Z">
+        <seg>[ &lt;color&gt; | transparent ]{1,4} | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[ [ &lt;font-style&gt; || &lt;font-variant&gt; || &lt;font-weight&gt; ]?</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095603Z" creationid="tkg" creationdate="20171020T095603Z">
+        <seg>[ [ &lt;font-style&gt; || &lt;font-variant&gt; || &lt;font-weight&gt; ]?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095415Z" creationid="tkg" creationdate="20171020T095415Z">
+        <seg>[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[ all | normal | non-blank | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095800Z" creationid="tkg" creationdate="20171020T095800Z">
+        <seg>[ all | normal | non-blank | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[ any | &lt;percentage&gt; ]* | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095401Z" creationid="tkg" creationdate="20171020T095401Z">
+        <seg>[ any | &lt;percentage&gt; ]* | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[&lt;background-color&gt; || &lt;background-image&gt; || &lt;background-repeat&gt; || &lt;background-attachment&gt; || &lt;background-position&gt; ]] | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095407Z" creationid="tkg" creationdate="20171020T095407Z">
+        <seg>[&lt;background-color&gt; || &lt;background-image&gt; || &lt;background-repeat&gt; || &lt;background-attachment&gt; || &lt;background-position&gt; ]] | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[&lt;time&gt; | &lt;percentage&gt;]{1,2} | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095808Z" creationid="tkg" creationdate="20171020T095808Z">
+        <seg>[&lt;time&gt; | &lt;percentage&gt;]{1,2} | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[[ &lt;family-name&gt; | &lt;generic-family&gt; ],]* [&lt;family-name&gt; | &lt;generic-family&gt;] | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095611Z" creationid="tkg" creationdate="20171020T095611Z">
+        <seg>[[ &lt;family-name&gt; | &lt;generic-family&gt; ],]* [&lt;family-name&gt; | &lt;generic-family&gt;] | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>`focheck.el` associates the RELAX NG schema with `.fo` files.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094610Z" creationid="mtan" creationdate="20171017T172339Z">
+        <seg>`focheck.el` は RELAX NG スキーマを `.fo` ファイルに関連付けます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>`git submodule init`</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115624Z" creationid="mtan" creationdate="20171017T115624Z">
-        <seg>git submodule init </seg>
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094226Z" creationid="mtan" creationdate="20171017T115624Z">
+        <seg>`git submodule init `</seg>
       </tuv>
     </tu>
     <tu>
@@ -5987,8 +6803,8 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
         <seg>`git submodule update`
 2.</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115600Z" creationid="mtan" creationdate="20171017T115600Z">
-        <seg>git submodule update 
+      <tuv lang="JA" changeid="tkg" changedate="20171019T094241Z" creationid="mtan" creationdate="20171017T115600Z">
+        <seg>`git submodule update` 
 2.</seg>
       </tuv>
     </tu>
@@ -6170,6 +6986,198 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>auto | &lt;angle&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095630Z" creationid="tkg" creationdate="20171020T095630Z">
+        <seg>auto | &lt;angle&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | &lt;integer&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100005Z" creationid="tkg" creationdate="20171020T100005Z">
+        <seg>auto | &lt;integer&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | &lt;length&gt; | &lt;percentage&gt; | &lt;length-range&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095428Z" creationid="tkg" creationdate="20171020T095428Z">
+        <seg>auto | &lt;length&gt; | &lt;percentage&gt; | &lt;length-range&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | absolute | fixed | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095057Z" creationid="tkg" creationdate="20171020T095057Z">
+        <seg>auto | absolute | fixed | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | alphabetic | traditional</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095713Z" creationid="tkg" creationdate="20171020T095713Z">
+        <seg>auto | alphabetic | traditional</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | always | avoid | left | right | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095753Z" creationid="tkg" creationdate="20171020T095753Z">
+        <seg>auto | always | avoid | left | right | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | auto-odd | auto-even | &lt;number&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095641Z" creationid="tkg" creationdate="20171020T095641Z">
+        <seg>auto | auto-odd | auto-even | &lt;number&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical | &lt;percentage&gt; | &lt;length&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095355Z" creationid="tkg" creationdate="20171020T095355Z">
+        <seg>auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical | &lt;percentage&gt; | &lt;length&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095358Z" creationid="tkg" creationdate="20171020T095358Z">
+        <seg>auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | before | center | after | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095541Z" creationid="tkg" creationdate="20171020T095541Z">
+        <seg>auto | before | center | after | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | character-by-character | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095613Z" creationid="tkg" creationdate="20171020T095613Z">
+        <seg>auto | character-by-character | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | column | page | even-page | odd-page | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095457Z" creationid="tkg" creationdate="20171020T095457Z">
+        <seg>auto | column | page | even-page | odd-page | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | column | page | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095637Z" creationid="tkg" creationdate="20171020T095637Z">
+        <seg>auto | column | page | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | even | odd | end-on-even | end-on-odd | no-force | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095627Z" creationid="tkg" creationdate="20171020T095627Z">
+        <seg>auto | even | odd | end-on-even | end-on-odd | no-force | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | fixed | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095927Z" creationid="tkg" creationdate="20171020T095927Z">
+        <seg>auto | fixed | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | indefinite | &lt;length&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095802Z" creationid="tkg" creationdate="20171020T095802Z">
+        <seg>auto | indefinite | &lt;length&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | integer-pixels | resample-any-method | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095853Z" creationid="tkg" creationdate="20171020T095853Z">
+        <seg>auto | integer-pixels | resample-any-method | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | none | line | indent | block | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095648Z" creationid="tkg" creationdate="20171020T095648Z">
+        <seg>auto | none | line | indent | block | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | paginate | bounded-in-one-dimension | unbounded</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095739Z" creationid="tkg" creationdate="20171020T095739Z">
+        <seg>auto | paginate | bounded-in-one-dimension | unbounded</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | perceptual | relative-colorimetric | saturation | absolute-colorimetric | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095833Z" creationid="tkg" creationdate="20171020T095833Z">
+        <seg>auto | perceptual | relative-colorimetric | saturation | absolute-colorimetric | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095027Z" creationid="tkg" creationdate="20171020T095027Z">
+        <seg>auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | &lt;length&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | suppress | retain | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095922Z" creationid="tkg" creationdate="20171020T095922Z">
+        <seg>auto | suppress | retain | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | true | false | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095946Z" creationid="tkg" creationdate="20171020T095946Z">
+        <seg>auto | true | false | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>auto | use-script | no-change | reset-size | ideographic | alphabetic | hanging | mathematical | central | middle | text-after-edge | text-before-edge | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095545Z" creationid="tkg" creationdate="20171020T095545Z">
+        <seg>auto | use-script | no-change | reset-size | ideographic | alphabetic | hanging | mathematical | central | middle | text-after-edge | text-before-edge | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>auto-restore="" should be 'true' or 'false'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T155907Z" creationid="mtan" creationdate="20151029T120535Z">
@@ -6194,6 +7202,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>avoid | auto | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095756Z" creationid="tkg" creationdate="20171020T095756Z">
+        <seg>avoid | auto | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>axf:annotation-color="&lt;v0/&gt;" should be Color or 'none'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T113228Z" creationid="mtan" creationdate="20171010T101650Z">
@@ -6214,6 +7230,24 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T114245Z" creationid="mtan" creationdate="20171010T112840Z">
         <seg>axf:baseline-block-snap は axf:baseline-grid が new 又は none の場合のみに適用されます。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>axf:column-rule-length="" should be Length, or Percent.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T151507Z" creationid="mtan" creationdate="20171117T151507Z">
+        <seg>axf:column-rule-length="" は Length 又は Percent でなければなりません。
+&lt;50/62/78% &gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>axf:column-rule-length="&lt;v0/&gt;" should be Length, or Percent.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T151454Z" creationid="mtan" creationdate="20171117T151454Z">
+        <seg>axf:column-rule-length="&lt;v0/&gt;" は Length 又は Percent でなければなりません。
+&lt;50/62/78% &gt;</seg>
       </tuv>
     </tu>
     <tu>
@@ -6658,6 +7692,22 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>baseline | middle | sub | super | text-top | text-bottom | &lt;percentage&gt; | &lt;length&gt; | top | bottom | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095951Z" creationid="tkg" creationdate="20171020T095951Z">
+        <seg>baseline | middle | sub | super | text-top | text-bottom | &lt;percentage&gt; | &lt;length&gt; | top | bottom | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>baseline | sub | super | &lt;percentage&gt; | &lt;length&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095424Z" creationid="tkg" creationdate="20171020T095424Z">
+        <seg>baseline | sub | super | &lt;percentage&gt; | &lt;length&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>baseline-shift="" should be 'baseline', 'sub', 'super', 'inherit', Percent, or Length.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T160440Z" creationid="mtan" creationdate="20151029T122710Z">
@@ -6678,6 +7728,38 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T160422Z" creationid="mtan" creationdate="20151029T122639Z">
         <seg>baseline-shift="&lt;v0/&gt;" のトークンは baseline、sub、super 又は inherit でなければなりません。.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>before | after | start | end | top | bottom | left | right | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095459Z" creationid="tkg" creationdate="20171020T095459Z">
+        <seg>before | after | start | end | top | bottom | left | right | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>before | baseline | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095828Z" creationid="tkg" creationdate="20171020T095828Z">
+        <seg>before | baseline | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>before | start | end | left | right | inside | outside | none | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095600Z" creationid="tkg" creationdate="20171020T095600Z">
+        <seg>before | start | end | left | right | inside | outside | none | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>blank | not-blank | any | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095426Z" creationid="tkg" creationdate="20171020T095426Z">
+        <seg>blank | not-blank | any | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -7530,6 +8612,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>capitalize | uppercase | lowercase | none | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095944Z" creationid="tkg" creationdate="20171020T095944Z">
+        <seg>capitalize | uppercase | lowercase | none | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>caption-side="" should be 'before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T101234Z" creationid="mtan" creationdate="20151029T152037Z">
@@ -7762,6 +8852,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>collapse | collapse-with-precedence | separate | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095437Z" creationid="tkg" creationdate="20171020T095437Z">
+        <seg>collapse | collapse-with-precedence | separate | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>color-profile-name="" should be 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T111224Z" creationid="mtan" creationdate="20151029T153847Z">
@@ -7870,6 +8968,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T111530Z" creationid="mtan" creationdate="20151029T154250Z">
         <seg>column-width="&lt;v0/&gt;" は Length 又は Percent でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>consider-shifts | disregard-shifts | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095719Z" creationid="tkg" creationdate="20171020T095719Z">
+        <seg>consider-shifts | disregard-shifts | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -8066,6 +9172,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>custom property in PDF.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T131950Z" creationid="mtan" creationdate="20171117T131950Z">
+        <seg>PDFにカスタムプロパティを設定します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>destination-placement-offset="" should be Length.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T112247Z" creationid="mtan" creationdate="20151029T155205Z">
@@ -8130,6 +9244,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>document-root | &lt;uri-specification&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095930Z" creationid="tkg" creationdate="20171020T095930Z">
+        <seg>document-root | &lt;uri-specification&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>dominant-baseline="" should be 'auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T113146Z" creationid="mtan" creationdate="20151029T155941Z">
@@ -8150,6 +9272,22 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T113055Z" creationid="mtan" creationdate="20151029T155919Z">
         <seg>dominant-baseline="&lt;v0/&gt;" のトークンは auto、use-script、no-change、reset-size、ideographic、alphabetic、hanging、mathematical、central、middle、text-after-edge、text-before-edge 又は inherit でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>empty string | &lt;idref&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095644Z" creationid="tkg" creationdate="20171020T095644Z">
+        <seg>empty string | &lt;idref&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>empty string | &lt;uri-specification&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095556Z" creationid="tkg" creationdate="20171020T095556Z">
+        <seg>empty string | &lt;uri-specification&gt;</seg>
       </tuv>
     </tu>
     <tu>
@@ -8246,6 +9384,30 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T113630Z" creationid="mtan" creationdate="20151029T160407Z">
         <seg>extent="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>false | true | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095633Z" creationid="tkg" creationdate="20171020T095633Z">
+        <seg>false | true | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>first-starting | first-including-carryover | last-starting | last-ending</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095843Z" creationid="tkg" creationdate="20171020T095843Z">
+        <seg>first-starting | first-including-carryover | last-starting | last-ending</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>first-starting-within-page | first-including-carryover | last-starting-within-page | last-ending-within-page</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095840Z" creationid="tkg" creationdate="20171020T095840Z">
+        <seg>first-starting-within-page | first-including-carryover | last-starting-within-page | last-ending-within-page</seg>
       </tuv>
     </tu>
     <tu>
@@ -8386,6 +9548,22 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>fo:list-block with no 'provisional-distance-between-starts' and no inherited value will use 24pt.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171017T170244Z" creationid="mtan" creationdate="20171017T170244Z">
+        <seg>provisional-distance-between-starts がなく、継承された値がない fo:list-block は、24pt を使用します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>fo:list-block with no 'provisional-label-separation' and no inherited value will use 6pt.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171017T172037Z" creationid="mtan" creationdate="20171017T171614Z">
+        <seg>provisional-label-separation がなく、継承された値がない fo:list-block は、6pt を使用します。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>fo:list-item-body with no 'start-indent' will use default 'start-indent="0pt"'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160310T114923Z" creationid="mtan" creationdate="20160310T114923Z">
@@ -8498,10 +9676,26 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>font-stretch="" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', Percent, or Number.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171120T171325Z" creationid="tkg" creationdate="20171120T171325Z">
+        <seg>font-stretch="&lt;v0/&gt;" は normal、wider、narrower、ultra-condensed、extra-condensed、condensed、semi-condensed、semi-expanded、expanded、extra-expanded、ultra-expanded、inherit、Percent 又は Number でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>font-stretch="" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', or Percent.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T114914Z" creationid="mtan" creationdate="20151029T162112Z">
         <seg>font-stretch="" は normal、wider、narrower、ultra-condensed、extra-condensed、condensed、semi-condensed、semi-expanded、expanded、extra-expanded、ultra-expanded、inherit又は Percent でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>font-stretch="&lt;v0/&gt;" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', Percent, or Number.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171120T171235Z" creationid="tkg" creationdate="20171120T171235Z">
+        <seg>font-stretch="&lt;v0/&gt;" は normal、wider、narrower、ultra-condensed、extra-condensed、condensed、semi-condensed、semi-expanded、expanded、extra-expanded、ultra-expanded、inherit、Percent 又は Number でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8738,6 +9932,22 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095049Z" creationid="tkg" creationdate="20171020T095049Z">
+        <seg>http://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>http://www.apache.org/licenses/LICENSE-2.0</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100154Z" creationid="tkg" creationdate="20171020T100154Z">
+        <seg>http://www.apache.org/licenses/LICENSE-2.0</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>hyphenate="" should be 'false', 'true', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T120151Z" creationid="mtan" creationdate="20151102T153326Z">
@@ -8870,6 +10080,22 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T120559Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>id="" は &lt;id&gt; でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ignore | preserve | ignore-if-before-linefeed | ignore-if-after-linefeed | ignore-if-surrounding-linefeed | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095956Z" creationid="tkg" creationdate="20171020T095956Z">
+        <seg>ignore | preserve | ignore-if-before-linefeed | ignore-if-after-linefeed | ignore-if-surrounding-linefeed | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ignore | preserve | treat-as-space | treat-as-zero-width-space | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095715Z" creationid="tkg" creationdate="20171020T095715Z">
+        <seg>ignore | preserve | treat-as-space | treat-as-zero-width-space | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -9306,6 +10532,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>line-height | font-height | max-height | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095721Z" creationid="tkg" creationdate="20171020T095721Z">
+        <seg>line-height | font-height | max-height | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>line-height-shift-adjustment="" should be 'consider-shifts', 'disregard-shifts', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T140656Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9398,6 +10632,38 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T140851Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>linefeed-treatment="&lt;v0/&gt;" のトークンは ignore、preserve、treat-as-space、treat-as-zero-width-space 又は inherit でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>link | no-link</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095804Z" creationid="tkg" creationdate="20171020T095804Z">
+        <seg>link | no-link</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>link | visited | active | hover | focus</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095102Z" creationid="tkg" creationdate="20171020T095102Z">
+        <seg>link | visited | active | hover | focus</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>lr-tb | rl-tb | tb-rl | tb-lr | bt-lr | bt-rl | lr-bt | rl-bt | lr-alternating-rl-bt | lr-alternating-rl-tb | lr-inverting-rl-bt | lr-inverting-rl-tb | tb-lr-in-lr-pairs | lr | rl | tb | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T100000Z" creationid="tkg" creationdate="20171020T100000Z">
+        <seg>lr-tb | rl-tb | tb-rl | tb-lr | bt-lr | bt-rl | lr-bt | rl-bt | lr-alternating-rl-bt | lr-alternating-rl-tb | lr-inverting-rl-bt | lr-inverting-rl-tb | tb-lr-in-lr-pairs | lr | rl | tb | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ltr | rtl | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095539Z" creationid="tkg" creationdate="20171020T095539Z">
+        <seg>ltr | rtl | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -9674,6 +10940,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>merge | leave-separate</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095740Z" creationid="tkg" creationdate="20171020T095740Z">
+        <seg>merge | leave-separate</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>merge-pages-across-index-key-references="" should be 'merge' or 'leave-separate'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142006Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9762,10 +11036,26 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>name="" should not be empty.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T150840Z" creationid="mtan" creationdate="20171117T150840Z">
+        <seg>name="" は空ではいけません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>name="&lt;v0/&gt;" cannot be used when axf:document-info with name="xmp" is present.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T113143Z" creationid="mtan" creationdate="20151028T164141Z">
         <seg>name="&lt;v0/&gt;" は name="xmp" との axf:document-infoが存在している場合、利用することができません.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>name="&lt;v0/&gt;" cannot be used with &lt;v1/&gt;.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T151239Z" creationid="mtan" creationdate="20171117T151239Z">
+        <seg>name="&lt;v0/&gt;" は &lt;v1/&gt;と利用することができません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9782,6 +11072,150 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20151028T141043Z" creationid="tkg" creationdate="20151028T141043Z">
         <seg>a name="{@name}" cannot be used when axf:document-info with name="xmp" is present.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>no-limit | &lt;number&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095639Z" creationid="tkg" creationdate="20171020T095639Z">
+        <seg>no-limit | &lt;number&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>no-wrap | wrap | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095958Z" creationid="tkg" creationdate="20171020T095958Z">
+        <seg>no-wrap | wrap | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>none | &lt;country&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095536Z" creationid="tkg" creationdate="20171020T095536Z">
+        <seg>none | &lt;country&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>none | &lt;language&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095702Z" creationid="tkg" creationdate="20171020T095702Z">
+        <seg>none | &lt;language&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>none | [ [ underline | no-underline] || [ overline | no-overline ] || [ line-through | no-line-through ] || [ blink | no-blink ] ] | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095939Z" creationid="tkg" creationdate="20171020T095939Z">
+        <seg>none | [ [ underline | no-underline] || [ overline | no-overline ] || [ line-through | no-line-through ] || [ blink | no-blink ] ] | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>none | [&lt;color&gt; || &lt;length&gt; &lt;length&gt; &lt;length&gt;?</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095941Z" creationid="tkg" creationdate="20171020T095941Z">
+        <seg>none | [&lt;color&gt; || &lt;length&gt; &lt;length&gt; &lt;length&gt;?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>none | all | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095914Z" creationid="tkg" creationdate="20171020T095914Z">
+        <seg>none | all | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>none | auto | &lt;script&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095900Z" creationid="tkg" creationdate="20171020T095900Z">
+        <seg>none | auto | &lt;script&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>none | dotted | dashed | solid | double | groove | ridge | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095849Z" creationid="tkg" creationdate="20171020T095849Z">
+        <seg>none | dotted | dashed | solid | double | groove | ridge | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>none | reference-area | page | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095703Z" creationid="tkg" creationdate="20171020T095703Z">
+        <seg>none | reference-area | page | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>normal | &lt;length&gt; | &lt;number&gt; | &lt;percentage&gt; | &lt;space&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095717Z" creationid="tkg" creationdate="20171020T095717Z">
+        <seg>normal | &lt;length&gt; | &lt;number&gt; | &lt;percentage&gt; | &lt;space&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>normal | &lt;length&gt; | &lt;space&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095712Z" creationid="tkg" creationdate="20171020T095712Z">
+        <seg>normal | &lt;length&gt; | &lt;space&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095624Z" creationid="tkg" creationdate="20171020T095624Z">
+        <seg>normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>normal | embed | bidi-override | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095949Z" creationid="tkg" creationdate="20171020T095949Z">
+        <seg>normal | embed | bidi-override | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>normal | italic | oblique | backslant | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095621Z" creationid="tkg" creationdate="20171020T095621Z">
+        <seg>normal | italic | oblique | backslant | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>normal | pre | nowrap | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095954Z" creationid="tkg" creationdate="20171020T095954Z">
+        <seg>normal | pre | nowrap | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>normal | small-caps | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095623Z" creationid="tkg" creationdate="20171020T095623Z">
+        <seg>normal | small-caps | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>normal | wider | narrower | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095619Z" creationid="tkg" creationdate="20171020T095619Z">
+        <seg>normal | wider | narrower | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -9834,6 +11268,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>odd | even | any | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095743Z" creationid="tkg" creationdate="20171020T095743Z">
+        <seg>odd | even | any | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>odd-or-even="" should be 'odd', 'even', 'any', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142409Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9854,6 +11296,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142349Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>odd-or-even="&lt;v0/&gt;" のトークンは odd、even、any 又は inherit でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>only | first | last | rest | any | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095806Z" creationid="tkg" creationdate="20171020T095806Z">
+        <seg>only | first | last | rest | any | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -10118,6 +11568,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142643Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>padding="" は &lt;padding-width&gt;{1,4} | inherit でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>page | page-sequence | document</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095835Z" creationid="tkg" creationdate="20171020T095835Z">
+        <seg>page | page-sequence | document</seg>
       </tuv>
     </tu>
     <tu>
@@ -10498,6 +11956,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>relative | start | center | end | justify | inside | outside | left | right | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095936Z" creationid="tkg" creationdate="20171020T095936Z">
+        <seg>relative | start | center | end | justify | inside | outside | left | right | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>relative-align="" should be 'before', 'baseline', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T144724Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10566,6 +12032,30 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T144939Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>rendering-intent="&lt;v0/&gt;" のトークンは auto、perceptual、relative-colorimetric、saturation、absolute-colorimetric 又は inherit でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>repeat | repeat-x | repeat-y | no-repeat | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095422Z" creationid="tkg" creationdate="20171020T095422Z">
+        <seg>repeat | repeat-x | repeat-y | no-repeat | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>repeat | repeat-x | repeat-y | no-repeat | paginate</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095021Z" creationid="tkg" creationdate="20171020T095021Z">
+        <seg>repeat | repeat-x | repeat-y | no-repeat | paginate</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>replace | new</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095902Z" creationid="tkg" creationdate="20171020T095902Z">
+        <seg>replace | new</seg>
       </tuv>
     </tu>
     <tu>
@@ -10898,10 +12388,34 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>scroll | fixed | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095409Z" creationid="tkg" creationdate="20171020T095409Z">
+        <seg>scroll | fixed | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>should be used only when @axf:annotation-type is 'Text', 'FreeText', 'Stamp', or 'FileAnnotation' or on fo:basic-link.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T113308Z" creationid="mtan" creationdate="20171010T104600Z">
         <seg>@axf:annotation-type が Text、FreeText、Stamp、FileAnnotation 又は fo:basic-link の場合のみに利用しなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>show | hide</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095919Z" creationid="tkg" creationdate="20171020T095919Z">
+        <seg>show | hide</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>show | hide | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095552Z" creationid="tkg" creationdate="20171020T095552Z">
+        <seg>show | hide | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -10950,6 +12464,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150528Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>source-document="&lt;v0/&gt;" は ＵＲＩ、none 又は inherit でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>space | rule | dots | use-content | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095708Z" creationid="tkg" creationdate="20171020T095708Z">
+        <seg>space | rule | dots | use-content | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -11082,6 +12604,30 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>start | center | end | justify | inside | outside | left | right | &lt;string&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095934Z" creationid="tkg" creationdate="20171020T095934Z">
+        <seg>start | center | end | justify | inside | outside | left | right | &lt;string&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>start | end | left | right | inside | outside | alternate</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095511Z" creationid="tkg" creationdate="20171020T095511Z">
+        <seg>start | end | left | right | inside | outside | alternate</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>start | end | left | right | inside | outside | both | none | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095519Z" creationid="tkg" creationdate="20171020T095519Z">
+        <seg>start | end | left | right | inside | outside | both | none | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>start-indent="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T151104Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11154,6 +12700,22 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>static | relative | absolute | fixed | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095809Z" creationid="tkg" creationdate="20171020T095809Z">
+        <seg>static | relative | absolute | fixed | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>static | relative | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095830Z" creationid="tkg" creationdate="20171020T095830Z">
+        <seg>static | relative | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>suppress-at-line-break="" should be 'auto', 'suppress', 'retain', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T105137Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11190,6 +12752,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T105200Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>switch-to="&lt;v0/&gt;" は xsl-preceding、xsl-following 又は xsl-any でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>table | table-fragment | page</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095838Z" creationid="tkg" creationdate="20171020T095838Z">
+        <seg>table | table-fragment | page</seg>
       </tuv>
     </tu>
     <tu>
@@ -11530,6 +13100,22 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>true | false</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095404Z" creationid="tkg" creationdate="20171020T095404Z">
+        <seg>true | false</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>true | false | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095856Z" creationid="tkg" creationdate="20171020T095856Z">
+        <seg>true | false | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>unicode-bidi="" should be 'normal', 'embed', 'bidi-override', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T111251Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11550,6 +13136,46 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T111228Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>unicode-bidi="&lt;v0/&gt;" のトークンは normal、embed、bidi-override 又は inherit でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>uniform | non-uniform | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095035Z" creationid="tkg" creationdate="20171020T095035Z">
+        <seg>uniform | non-uniform | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>use-font-metrics | &lt;length&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095710Z" creationid="tkg" creationdate="20171020T095710Z">
+        <seg>use-font-metrics | &lt;length&gt; | &lt;percentage&gt; | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>use-normal-stylesheet | &lt;uri-specification&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095932Z" creationid="tkg" creationdate="20171020T095932Z">
+        <seg>use-normal-stylesheet | &lt;uri-specification&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>use-target-processing-context | &lt;uri-specification&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095929Z" creationid="tkg" creationdate="20171020T095929Z">
+        <seg>use-target-processing-context | &lt;uri-specification&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>value="" should not be empty.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20171117T151311Z" creationid="mtan" creationdate="20171117T151311Z">
+        <seg>value="" は空ではいけません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11582,6 +13208,22 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T111432Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>visibility="&lt;v0/&gt;" のトークンは visible、hidden、collapse 又は inherit でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>visible | hidden | collapse | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095953Z" creationid="tkg" creationdate="20171020T095953Z">
+        <seg>visible | hidden | collapse | inherit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>visible | hidden | scroll | error-if-overflow | repeat | auto | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095746Z" creationid="tkg" creationdate="20171020T095746Z">
+        <seg>visible | hidden | scroll | error-if-overflow | repeat | auto | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -11662,6 +13304,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T111835Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>widows="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>width | height | inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095851Z" creationid="tkg" creationdate="20171020T095851Z">
+        <seg>width | height | inherit</seg>
       </tuv>
     </tu>
     <tu>
@@ -11770,6 +13420,22 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>xsl-preceding | xsl-following | xsl-any | &lt;name&gt;[ &lt;name&gt;]*</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095924Z" creationid="tkg" creationdate="20171020T095924Z">
+        <seg>xsl-preceding | xsl-following | xsl-any | &lt;name&gt;[ &lt;name&gt;]*</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>xsl-region-body | xsl-region-start | xsl-region-end | xsl-region-before | xsl-region-after | &lt;name&gt;</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095825Z" creationid="tkg" creationdate="20171020T095825Z">
+        <seg>xsl-region-body | xsl-region-start | xsl-region-end | xsl-region-before | xsl-region-after | &lt;name&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>z-index="" should be 'auto', 'inherit', or Number.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T112606Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11790,6 +13456,14 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T112548Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>z-index="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>| inherit</seg>
+      </tuv>
+      <tuv lang="JA" changeid="tkg" changedate="20171020T095447Z" creationid="tkg" creationdate="20171020T095447Z">
+        <seg>| inherit</seg>
       </tuv>
     </tu>
     <tu>
