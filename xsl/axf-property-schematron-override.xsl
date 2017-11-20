@@ -80,7 +80,7 @@
 <!-- Extended property values to override definitions in XSL spec.  -->
 <xsl:variable name="property-value-overrides" as="element(item)+">
   <!-- AH Formatter allows <percentage>. -->
-  <item property="font-stretch">normal | wider | narrower | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded | inherit | &lt;percentage></item>
+  <item property="font-stretch">normal | wider | narrower | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded | inherit | &lt;percentage> | &lt;number></item>
   <item property="font-weight">normal | bold | bolder | lighter | &lt;integer> | inherit</item>
   <item property="overflow">visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto</item>
 </xsl:variable>
