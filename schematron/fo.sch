@@ -121,6 +121,20 @@
 	    test="exists(descendant::fo:page-sequence)">There must be at least one fo:page-sequence descendant of fo:root.</assert>
   </rule>
 
+  <rule context="fo:table-cell">
+    <report test="empty(*) and normalize-space() ne ''" role="Warning" sqf:fix="table-cell-empty-fix">fo:table-cell should contain block-level FOs.</report>
+    <sqf:fix id="table-cell-empty-fix">
+      <let name="text" value="." />
+      <sqf:description>
+        <sqf:title>Add 'fo:block' around text</sqf:title>
+      </sqf:description>
+      <sqf:delete match="node()" />
+      <sqf:add node-type="element" target="fo:block">
+	<value-of select="." />
+      </sqf:add>
+    </sqf:fix>
+  </rule>
+
   <!-- Properties -->
 
   <rule context="fo:*/@character | fo:*/@grouping-separator">
