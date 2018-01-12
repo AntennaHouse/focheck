@@ -1,5 +1,5 @@
-;;;; focheck.el --- XSL Integrated Development Environment
-;; Copyright (C) 1998, 1999, 2000, 2001, 2003, 2011, 2013 Tony Graham
+;;;; focheck.el --- XSL-FO mode
+;; Copyright (C) 2016, 2017, 2018 Antenna House
 
 ;; Author: Tony Graham, Antenna House <tgraham@antenna.co.jp>
 ;; Contributors: 
