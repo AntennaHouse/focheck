@@ -82,6 +82,8 @@
   <!-- AH Formatter allows <percentage>. -->
   <item property="font-stretch">normal | wider | narrower | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded | inherit | &lt;percentage> | &lt;number></item>
   <item property="font-weight">normal | bold | bolder | lighter | &lt;integer> | inherit</item>
+  <item property="leader-alignment">none | reference-area | page | start | center | end</item>
+  <item property="odd-or-even">odd | even | odd-document | even-document | any</item>
   <item property="overflow">visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto</item>
 </xsl:variable>
 
@@ -110,6 +112,7 @@ role
 src
 text-align
 
+font-variant
 force-page-count
 </xsl:variable>
 
