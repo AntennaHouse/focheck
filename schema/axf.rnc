@@ -678,7 +678,8 @@ axf-page-number-properties =
 # objects
 axf.block.attlist =
     axf-baseline-grid-properties,
-    axf-outline-properties
+    axf-outline-properties,
+    axf_text-overflow
 
 axf.ruby.attlist =
     axf_ruby-align,
@@ -1417,6 +1418,13 @@ axf_tab-align =
 axf_table-summary =
     ## Summary describing the table.  Included in Tagged PDF output.
     attribute axf:table-summary { text }?
+
+# @axf:text-overflow
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-overflow
+axf_text-overflow =
+    ## What to display when text overflows in the inline progression direction: clip | ellipsis | <string>
+    attribute axf:text-overflow { text }?
 
 # @xml:id
 #
