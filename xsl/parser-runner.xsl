@@ -168,7 +168,7 @@
       select="ahf:raw-parser-runner(replace(replace($input,
                                                     'url\(([^''&quot;)]+)\)',
                                                     'url(''$1'')'),
-                                            '(\d)(cm|mm|in|pt|pc|px|em|ex|jpt|q|dpi|dd|cc|rem|ch|wch|lh|rlh|vw|vh|vmin|vmax|pvw|pvh|pvmin|pvmax|gr)($|\s)',
+                                            '(\d)(cm|mm|in|pt|pc|px|em|ex|jpt|q|dpi|dd|cc|rem|ch|wch|lh|rlh|vw|vh|vmin|vmax|pvw|pvh|pvmin|pvmax|gr)($|[\s),+])',
                                             '$1 $2$3'),
                                     $debug)" />
 </xsl:function>
