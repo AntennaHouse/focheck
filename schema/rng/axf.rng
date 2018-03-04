@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Antenna House extension elements and non-inherited extension
-  attributes.
+  Schema for Antenna House extension elements and non-inherited
+  extension attributes.
   
-  Copyright 2015-2016 Antenna House, Inc.
+  Copyright 2015-2018 Antenna House, Inc.
   
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -17,11 +17,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<grammar ns="http://www.antennahouse.com/names/XSL/Extensions" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations" ns="http://www.antennahouse.com/names/XSL/Extensions" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="axh.rng"/>
   <include href="axf-inherited.rng">
     <!--
       
-      Overrides to patterns in 'fo-inherited.rnc' (and patterns in
+      Overrides to patterns in 'axf-inherited.rnc' (and patterns in
       modules that it includes).
       
     -->
@@ -119,6 +120,7 @@
         <choice>
           <ref name="axf_custom-property"/>
           <ref name="axf_document-info"/>
+          <ref name="axf_hyphenation-info"/>
         </choice>
       </zeroOrMore>
     </define>
@@ -415,12 +417,33 @@
     </element>
   </define>
   <!--
+    <axf:hyphenation-info>
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.hyphenation-info
+  -->
+  <define name="axf_hyphenation-info">
+    <element name="axf:hyphenation-info">
+      <a:documentation>Additional hyphenation information</a:documentation>
+      <ref name="axf_hyphenation-info.attlist"/>
+      <optional>
+        <ref name="axh_exceptions"/>
+      </optional>
+    </element>
+  </define>
+  <define name="axf_hyphenation-info.attlist">
+    <optional>
+      <attribute name="language"/>
+    </optional>
+    <optional>
+      <attribute name="src"/>
+    </optional>
+  </define>
+  <!--
     <axf:ruby>
     https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby
   -->
   <define name="axf_ruby">
     <element name="axf:ruby">
-      <a:documentation>The ruby structure.</a:documentation>
+      <a:documentation>The ruby structure</a:documentation>
       <ref name="axf.ruby.attlist"/>
       <oneOrMore>
         <ref name="axf_ruby-base"/>
@@ -434,7 +457,7 @@
   -->
   <define name="axf_ruby-base">
     <element name="axf:ruby-base">
-      <a:documentation>Base character of ruby.</a:documentation>
+      <a:documentation>Base character of ruby</a:documentation>
       <choice>
         <text/>
         <ref name="axf_ruby"/>
@@ -447,7 +470,7 @@
   -->
   <define name="axf_ruby-text">
     <element name="axf:ruby-text">
-      <a:documentation>Ruby.</a:documentation>
+      <a:documentation>Ruby</a:documentation>
       <text/>
     </element>
   </define>
@@ -457,7 +480,7 @@
   -->
   <define name="axf_spread-page-master">
     <element name="axf:spread-page-master">
-      <a:documentation>A two-page spread.</a:documentation>
+      <a:documentation>A two-page spread</a:documentation>
       <ref name="axf_background-color"/>
       <ref name="axf_background-content-height"/>
       <ref name="axf_background-content-type"/>
@@ -941,6 +964,7 @@
   <define name="axf.block.attlist">
     <ref name="axf-baseline-grid-properties"/>
     <ref name="axf-outline-properties"/>
+    <ref name="axf_text-overflow"/>
   </define>
   <define name="axf.ruby.attlist">
     <ref name="axf_ruby-align"/>
@@ -2411,6 +2435,18 @@
     <optional>
       <attribute name="axf:table-summary">
         <a:documentation>Summary describing the table.  Included in Tagged PDF output.</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:text-overflow
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-overflow
+  -->
+  <define name="axf_text-overflow">
+    <optional>
+      <attribute name="axf:text-overflow">
+        <a:documentation>What to display when text overflows in the inline progression direction: clip | ellipsis | &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>

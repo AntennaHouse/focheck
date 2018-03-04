@@ -1,5 +1,5 @@
-# Antenna House extension elements and non-inherited extension
-# attributes.
+# Schema for Antenna House extension elements and non-inherited
+# extension attributes.
 #
 # Copyright 2015-2018 Antenna House, Inc.
 #
@@ -17,11 +17,14 @@
 
 default namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
 namespace fo = "http://www.w3.org/1999/XSL/Format"
+namespace axh = "http://www.antennahouse.com/names/XSL/Hyphenations"
 namespace local = ""
+
+include "axh.rnc"
 
 include "axf-inherited.rnc" {
 #
-# Overrides to patterns in 'fo-inherited.rnc' (and patterns in
+# Overrides to patterns in 'axf-inherited.rnc' (and patterns in
 # modules that it includes).
 #
 
@@ -64,7 +67,7 @@ fo_simple-page-master.model =
 # AH Formatter uses axf:custom-property and axf:document-info within
 # fo:declarations.
 fo_declarations.model |=
-    (axf_custom-property | axf_document-info)*
+    (axf_custom-property | axf_document-info | axf_hyphenation-info)*
 
 # AH Formatter allows empty fo:static-content.
 fo_static-content.model =
@@ -203,10 +206,23 @@ axf_form-field-option =
     text
 }
 
+# <axf:hyphenation-info>
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.hyphenation-info
+axf_hyphenation-info =
+  ## Additional hyphenation information
+  element axf:hyphenation-info {
+     axf_hyphenation-info.attlist,
+     axh_exceptions?
+}
+
+axf_hyphenation-info.attlist =
+   attribute language { text }?,
+   attribute src { text }?
+
 # <axf:ruby>
 # https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby
 axf_ruby =
-  ## The ruby structure.
+  ## The ruby structure
   element axf:ruby {
      axf.ruby.attlist,
      (axf_ruby-base, axf_ruby-text)+
@@ -215,19 +231,19 @@ axf_ruby =
 # <axf:ruby-base>
 # https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby-base
 axf_ruby-base =
-  ## Base character of ruby.
+  ## Base character of ruby
   element axf:ruby-base { text | axf_ruby }
 
 # <axf:ruby-text>
 # https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby-text
 axf_ruby-text =
-  ## Ruby.
+  ## Ruby
   element axf:ruby-text { text }
 
 # <axf:spread-page-master>
 # https://www.antennahouse.com/product/ahf65/ahf-spread.html#axf.spread-page-master
 axf_spread-page-master =
-  ## A two-page spread.
+  ## A two-page spread
   element axf:spread-page-master {
     axf_background-color,
     axf_background-content-height,

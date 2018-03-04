@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Antenna House extension elements and non-inherited extension
-  attributes.
+  Schema for Antenna House extension elements and non-inherited
+  extension attributes.
   
-  Copyright 2015-2016 Antenna House, Inc.
+  Copyright 2015-2018 Antenna House, Inc.
   
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -17,13 +17,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.antennahouse.com/names/XSL/Extensions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.antennahouse.com/names/XSL/Extensions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations">
   <xs:include schemaLocation="axf-inherited.xsd"/>
+  <xs:import namespace="http://www.antennahouse.com/names/XSL/Hyphenations" schemaLocation="axh.xsd"/>
   <xs:import namespace="http://www.w3.org/1999/XSL/Format" schemaLocation="fo.xsd"/>
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <!--
     
-    Overrides to patterns in 'fo-inherited.rnc' (and patterns in
+    Overrides to patterns in 'axf-inherited.rnc' (and patterns in
     modules that it includes).
     
   -->
@@ -92,6 +93,7 @@
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element ref="axf:custom-property"/>
       <xs:element ref="axf:document-info"/>
+      <xs:element ref="axf:hyphenation-info"/>
     </xs:choice>
   </xs:complexType>
   <!-- AH Formatter allows empty fo:static-content. -->
@@ -345,12 +347,31 @@
     </xs:annotation>
   </xs:element>
   <!--
+    <axf:hyphenation-info>
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.hyphenation-info
+  -->
+  <xs:element name="hyphenation-info">
+    <xs:annotation>
+      <xs:documentation>Additional hyphenation information</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="axh:exceptions"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="axf:axf_hyphenation-info.attlist"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="axf_hyphenation-info.attlist">
+    <xs:attribute name="language"/>
+    <xs:attribute name="src"/>
+  </xs:attributeGroup>
+  <!--
     <axf:ruby>
     https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby
   -->
   <xs:element name="ruby" substitutionGroup="fo:inline.fo.list">
     <xs:annotation>
-      <xs:documentation>The ruby structure.</xs:documentation>
+      <xs:documentation>The ruby structure</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence maxOccurs="unbounded">
@@ -366,7 +387,7 @@
   -->
   <xs:element name="ruby-base">
     <xs:annotation>
-      <xs:documentation>Base character of ruby.</xs:documentation>
+      <xs:documentation>Base character of ruby</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:sequence>
@@ -380,7 +401,7 @@
   -->
   <xs:element name="ruby-text" type="xs:string">
     <xs:annotation>
-      <xs:documentation>Ruby.</xs:documentation>
+      <xs:documentation>Ruby</xs:documentation>
     </xs:annotation>
   </xs:element>
   <!--
@@ -389,7 +410,7 @@
   -->
   <xs:element name="spread-page-master">
     <xs:annotation>
-      <xs:documentation>A two-page spread.</xs:documentation>
+      <xs:documentation>A two-page spread</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
@@ -559,6 +580,7 @@
   <xs:attributeGroup name="axf.block.attlist">
     <xs:attributeGroup ref="axf:axf-baseline-grid-properties"/>
     <xs:attributeGroup ref="axf:axf-outline-properties"/>
+    <xs:attributeGroup ref="axf:axf_text-overflow"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="axf.ruby.attlist">
     <xs:attributeGroup ref="axf:axf_ruby-align"/>
@@ -2095,6 +2117,18 @@
     <xs:attribute name="table-summary" form="qualified">
       <xs:annotation>
         <xs:documentation>Summary describing the table.  Included in Tagged PDF output.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:text-overflow
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-overflow
+  -->
+  <xs:attributeGroup name="axf_text-overflow">
+    <xs:attribute name="text-overflow" form="qualified">
+      <xs:annotation>
+        <xs:documentation>What to display when text overflows in the inline progression direction: clip | ellipsis | &lt;string&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>

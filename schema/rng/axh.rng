@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Schema for Antenna House hyphenation information.
+  
+  Copyright 2015-2018 Antenna House, Inc.
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<grammar ns="http://www.antennahouse.com/names/XSL/Hyphenations" xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations" xmlns="http://relaxng.org/ns/structure/1.0">
+  <define name="hyphenation-info">
+    <element name="axh_hyphenation-info">
+      <ref name="axh_hyphenation-info.attlist"/>
+      <optional>
+        <ref name="axh_hyphen-char"/>
+      </optional>
+      <optional>
+        <ref name="axh_exceptions"/>
+      </optional>
+      <optional>
+        <ref name="axh_non-eol-words"/>
+      </optional>
+    </element>
+  </define>
+  <define name="axh_hyphenation-info.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="axh_hyphen-char">
+    <element name="axh:hyphen-char">
+      <ref name="axh_hyphen-char.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="axh_hyphen-char.attlist" combine="interleave">
+    <attribute name="value"/>
+  </define>
+  <define name="axh_exceptions">
+    <element name="axh:exceptions">
+      <ref name="axh_exceptions.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="axh_hyphen"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="axh_exceptions.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="axh_hyphen">
+    <element name="axh:hyphen">
+      <ref name="axh_hyphen.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="axh_hyphen.attlist" combine="interleave">
+    <optional>
+      <attribute name="pre"/>
+    </optional>
+  </define>
+  <define name="axh_hyphen.attlist" combine="interleave">
+    <optional>
+      <attribute name="no"/>
+    </optional>
+  </define>
+  <define name="axh_hyphen.attlist" combine="interleave">
+    <optional>
+      <attribute name="post"/>
+    </optional>
+  </define>
+  <define name="axh_non-eol-words">
+    <element name="axh:non-eol-words">
+      <ref name="axh_non-eol-words.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="axh_non-eol-words.attlist" combine="interleave">
+    <empty/>
+  </define>
+</grammar>
