@@ -51,7 +51,7 @@
 	<!-- axf:custom-property -->
 	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property -->
         <rule context="axf:custom-property">
-	  <assert test="empty((../../axf:custom-property, ../axf:custom-property)[@name eq 'xmp'])"><value-of select="name()"/>" cannot be used when axf:custom-property with name="xmp" is present.</assert>
+	  <assert test="empty((../../axf:document-info, ../axf:document-info)[@name eq 'xmp'])" role="Warning"><value-of select="name()"/>" is ignored when axf:document-info with name="xmp" is present.</assert>
           <assert test="normalize-space(@name) ne ''" role="Warning">name="" should not be empty.</assert>
           <assert test="not(normalize-space(@name) = ('Title', 'Author', 'Subject', 'Keywords', 'Creator', 'Producer', 'CreationDate', 'ModDate', 'Trapped'))">name="<value-of select="@name"/>" cannot be used with <value-of select="name()"/>.</assert>
           <assert test="normalize-space(@value) ne ''" role="Warning">value="" should not be empty.</assert>
@@ -59,8 +59,8 @@
 
 	<!-- axf:document-info -->
 	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
-        <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1" role="axf-1">
-	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="axf-2">name="<value-of select="@name"/>" cannot be used when axf:document-info with name="xmp" is present.</assert>
+        <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1">
+	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="Warning">name="<value-of select="@name"/>" is ignored when axf:document-info with name="xmp" is present.</assert>
         </rule>
         <rule context="axf:document-info[@name = 'title']">
 	  <assert test="false()" id="axf-3f" sqf:fix="axf-3fix" role="Warning">name="<value-of select="@name"/>" is deprecated.  Please use name="document-title".</assert>

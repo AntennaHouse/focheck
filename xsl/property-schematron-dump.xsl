@@ -254,7 +254,7 @@ text-align
                 select="distinct-values(for $datatype in $datatypes
                                           return if ($datatype = ('NCName'))
                                                    then 'EnumerationToken'
-                                                 else if ($datatype = ('Color', 'Literal'))
+                                                 else if ($datatype = 'Literal')
                                                    then ($datatype, 'EnumerationToken')
                                                  else $datatype)"
                 as="xs:string+" />
@@ -292,7 +292,7 @@ text-align
             </assert>
 
             <xsl:if test="exists($enum-tokens) and
-                          not($datatypes = ('Color', 'NCName', 'URI'))">
+                          not($datatypes = ('NCName', 'URI'))">
               <report
                   test="{concat('$expression instance of element(EnumerationToken) and not($expression/@token = (''',
                                 string-join($enum-tokens, ''', '''),
@@ -468,7 +468,6 @@ text-align
     <map datatype="border-width">thin | medium | thick | &lt;length> </map>
     <map datatype="generic-family">serif | sans-serif | cursive | fantasy | monospace </map>
     <map datatype="family-name">&lt;string></map>
-    <map datatype="color">&lt;literal-color> | aqua | black | blue | fuchsia | gray | green | lime | maroon | navy | olive | purple | red | silver | teal | white | yellow </map>
     <map datatype="country">&lt;string></map>
     <map datatype="language">&lt;string></map>
     <map datatype="script">&lt;string></map>
@@ -588,7 +587,7 @@ text-align
               <xsl:variable name="datatype-map" as="element(map)+">
                 <map datatype="angle">Literal</map>
                 <map datatype="character">Literal</map>
-                <map datatype="literal-color">Color</map>
+                <map datatype="color">Color</map>
                 <map datatype="id">EnumerationToken</map>
                 <map datatype="shape">Function</map>
                 <map datatype="idref">EnumerationToken</map>

@@ -30,12 +30,12 @@
 
   <rule context="fo:change-bar-begin">
     <!-- https://www.w3.org/TR/xsl/#fo_change-bar-begin -->
-    <report test="exists(@change-bar-class) and not(@change-bar-class = following::fo:change-bar-start/@change-bar-class)" role="Warning">An '<value-of select="name()" />' that does not form a matching pair with an 'fo:change-bar-end' will assume a matching 'change-bar-end' at the end of the document.</report>
+    <report test="exists(@change-bar-class) and not(@change-bar-class = following::fo:change-bar-end/@change-bar-class)" role="Warning">An '<value-of select="name()" />' that does not form a matching pair with an 'fo:change-bar-end' will assume a matching 'change-bar-end' at the end of the document.</report>
   </rule>
 
   <rule context="fo:change-bar-end">
     <!-- https://www.w3.org/TR/xsl/#fo_change-bar-end -->
-    <report test="exists(@change-bar-class) and not(@change-bar-class = preceding::fo:change-bar-start/@change-bar-class)" role="Warning">An '<value-of select="name()" />' that does not form a matching pair with an 'fo:change-bar-begin' will be ignored.</report>
+    <report test="exists(@change-bar-class) and not(@change-bar-class = preceding::fo:change-bar-begin/@change-bar-class)" role="Warning">An '<value-of select="name()" />' that does not form a matching pair with an 'fo:change-bar-begin' will be ignored.</report>
   </rule>
 
   <rule context="fo:float">

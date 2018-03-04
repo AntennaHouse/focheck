@@ -80,7 +80,7 @@
 
 <!-- Return values of functions. Should be expanded to specify number
      and allowed types of function arguments. -->
-<xsl:variable name="functions" as="element(function)+">
+<xsl:variable name="ahf:functions" as="element(function)+">
   <function name="abs" returns="Number" />
   <function name="body-start" returns="Length" />
   <function name="ceiling" returns="Number" />
@@ -110,6 +110,47 @@
   <function name="repeating-radial-gradient" returns="Color" />
   <function name="rgba" returns="Color" />
 </xsl:variable>
+
+<xsl:variable
+    name="ahf:color-keywords"
+    select="'k100', 'aliceblue', 'antiquewhite', 'aqua', 'aquamarine',
+            'azure', 'beige', 'bisque', 'black', 'blanchedalmond',
+            'blue', 'blueviolet', 'brown', 'burlywood', 'cadetblue',
+            'chartreuse', 'chocolate', 'coral', 'cornflowerblue',
+            'cornsilk', 'crimson', 'cyan', 'darkblue', 'darkcyan',
+            'darkgoldenrod', 'darkgray', 'darkgreen', 'darkgrey',
+            'darkkhaki', 'darkmagenta', 'darkolivegreen',
+            'darkorange', 'darkorchid', 'darkred', 'darksalmon',
+            'darkseagreen', 'darkslateblue', 'darkslategray',
+            'darkslategrey', 'darkturquoise', 'darkviolet',
+            'deeppink', 'deepskyblue', 'dimgray', 'dimgrey',
+            'dodgerblue', 'firebrick', 'floralwhite', 'forestgreen',
+            'fuchsia', 'gainsboro', 'ghostwhite', 'gold', 'goldenrod',
+            'gray', 'grey', 'green', 'greenyellow', 'honeydew',
+            'hotpink', 'indianred', 'indigo', 'ivory', 'khaki',
+            'lavender', 'lavenderblush', 'lawngreen', 'lemonchiffon',
+            'lightblue', 'lightcoral', 'lightcyan',
+            'lightgoldenrodyellow', 'lightgray', 'lightgreen',
+            'lightgrey', 'lightpink', 'lightsalmon', 'lightseagreen',
+            'lightskyblue', 'lightslategray', 'lightslategrey',
+            'lightsteelblue', 'lightyellow', 'lime', 'limegreen',
+            'linen', 'magenta', 'maroon', 'mediumaquamarine',
+            'mediumblue', 'mediumorchid', 'mediumpurple',
+            'mediumseagreen', 'mediumslateblue', 'mediumspringgreen',
+            'mediumturquoise', 'mediumvioletred', 'midnightblue',
+            'mintcream', 'mistyrose', 'moccasin', 'navajowhite',
+            'navy', 'oldlace', 'olive', 'olivedrab', 'orange',
+            'orangered', 'orchid', 'palegoldenrod', 'palegreen',
+            'paleturquoise', 'palevioletred', 'papayawhip',
+            'peachpuff', 'peru', 'pink', 'plum', 'powderblue',
+            'purple', 'rebeccapurple', 'red', 'rosybrown',
+            'royalblue', 'saddlebrown', 'salmon', 'sandybrown',
+            'seagreen', 'seashell', 'sienna', 'silver', 'skyblue',
+            'slateblue', 'slategray', 'slategrey', 'snow',
+            'springgreen', 'steelblue', 'tan', 'teal', 'thistle',
+            'tomato', 'turquoise', 'violet', 'wheat', 'white',
+            'whitesmoke', 'yellow', 'yellowgreen'"
+    as="xs:string+" />
 
 <!-- ============================================================= -->
 <!-- TEMPLATES                                                     -->
@@ -313,7 +354,14 @@ else for $node in $parse-tree/* return ahf:reduce-tree($node)" />
 <xsl:function name="ahf:EnumerationToken" as="element()">
   <xsl:param name="parse-tree" as="element()*" />
 
-  <EnumerationToken token="{$parse-tree}" />
+  <xsl:choose>
+    <xsl:when test="lower-case($parse-tree) = $ahf:color-keywords">
+      <Color value="{$parse-tree/AlphaOrDigits}" />
+    </xsl:when>
+    <xsl:otherwise>
+      <EnumerationToken token="{$parse-tree}" />
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:function>
 
 <xsl:function name="ahf:MultiplicativeExpr" as="element()">
@@ -448,9 +496,9 @@ else for $node in $parse-tree/* return ahf:reduce-tree($node)" />
   <xsl:param name="parse-tree" as="element()*" />
 
   <xsl:choose>
-    <xsl:when test="exists($functions[@name = $parse-tree/FunctionName/NCName])">
+    <xsl:when test="exists($ahf:functions[@name = $parse-tree/FunctionName/NCName])">
       <xsl:element
-          name="{($functions[@name = $parse-tree/FunctionName/NCName]/@returns, 'Number')[1]}" />
+          name="{($ahf:functions[@name = $parse-tree/FunctionName/NCName]/@returns, 'Number')[1]}" />
     </xsl:when>
     <xsl:when test="$parse-tree/FunctionName/NCName = 'url'">
       <URI />

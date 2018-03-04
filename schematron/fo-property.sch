@@ -134,8 +134,9 @@
    <!-- http://www.w3.org/TR/xsl11/#background-color -->
    <rule context="fo:*/@background-color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-color="<value-of select="."/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">background-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</report>
+      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-color="<value-of select="."/>" should be Color, 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">background-color="<value-of select="."/>" token should be 'transparent' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">background-color="" should be Color, 'transparent', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-color="<value-of select="."/>"</report>
    </rule>
 
@@ -251,8 +252,9 @@
    <!-- http://www.w3.org/TR/xsl11/#border-after-color -->
    <rule context="fo:*/@border-after-color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-after-color="<value-of select="."/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-after-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</report>
+      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-after-color="<value-of select="."/>" should be Color, 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">border-after-color="<value-of select="."/>" token should be 'transparent' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-after-color="" should be Color, 'transparent', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-after-color="<value-of select="."/>"</report>
    </rule>
 
@@ -302,8 +304,9 @@
    <!-- http://www.w3.org/TR/xsl11/#border-before-color -->
    <rule context="fo:*/@border-before-color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-before-color="<value-of select="."/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-before-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</report>
+      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-before-color="<value-of select="."/>" should be Color, 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">border-before-color="<value-of select="."/>" token should be 'transparent' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-before-color="" should be Color, 'transparent', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-before-color="<value-of select="."/>"</report>
    </rule>
 
@@ -362,8 +365,9 @@
    <!-- http://www.w3.org/TR/xsl11/#border-bottom-color -->
    <rule context="fo:*/@border-bottom-color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-bottom-color="<value-of select="."/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-bottom-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</report>
+      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-bottom-color="<value-of select="."/>" should be Color, 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">border-bottom-color="<value-of select="."/>" token should be 'transparent' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-bottom-color="" should be Color, 'transparent', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-bottom-color="<value-of select="."/>"</report>
    </rule>
 
@@ -422,8 +426,9 @@
    <!-- http://www.w3.org/TR/xsl11/#border-end-color -->
    <rule context="fo:*/@border-end-color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-end-color="<value-of select="."/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-end-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</report>
+      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-end-color="<value-of select="."/>" should be Color, 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">border-end-color="<value-of select="."/>" token should be 'transparent' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-end-color="" should be Color, 'transparent', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-end-color="<value-of select="."/>"</report>
    </rule>
 
@@ -482,8 +487,9 @@
    <!-- http://www.w3.org/TR/xsl11/#border-left-color -->
    <rule context="fo:*/@border-left-color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-left-color="<value-of select="."/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-left-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</report>
+      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-left-color="<value-of select="."/>" should be Color, 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">border-left-color="<value-of select="."/>" token should be 'transparent' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-left-color="" should be Color, 'transparent', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-left-color="<value-of select="."/>"</report>
    </rule>
 
@@ -529,8 +535,9 @@
    <!-- http://www.w3.org/TR/xsl11/#border-right-color -->
    <rule context="fo:*/@border-right-color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-right-color="<value-of select="."/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-right-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</report>
+      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-right-color="<value-of select="."/>" should be Color, 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">border-right-color="<value-of select="."/>" token should be 'transparent' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-right-color="" should be Color, 'transparent', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-right-color="<value-of select="."/>"</report>
    </rule>
 
@@ -589,8 +596,9 @@
    <!-- http://www.w3.org/TR/xsl11/#border-start-color -->
    <rule context="fo:*/@border-start-color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-start-color="<value-of select="."/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-start-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</report>
+      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-start-color="<value-of select="."/>" should be Color, 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">border-start-color="<value-of select="."/>" token should be 'transparent' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-start-color="" should be Color, 'transparent', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-start-color="<value-of select="."/>"</report>
    </rule>
 
@@ -658,8 +666,9 @@
    <!-- http://www.w3.org/TR/xsl11/#border-top-color -->
    <rule context="fo:*/@border-top-color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-top-color="<value-of select="."/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-top-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</report>
+      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">border-top-color="<value-of select="."/>" should be Color, 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">border-top-color="<value-of select="."/>" token should be 'transparent' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">border-top-color="" should be Color, 'transparent', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-top-color="<value-of select="."/>"</report>
    </rule>
 
@@ -793,8 +802,8 @@
    <!-- http://www.w3.org/TR/xsl11/#change-bar-color -->
    <rule context="fo:*/@change-bar-color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">change-bar-color="<value-of select="."/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', or 'yellow'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">change-bar-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', or 'yellow'.</report>
+      <assert test="local-name($expression) = ('Color', 'EMPTY', 'ERROR', 'Object')">change-bar-color="<value-of select="."/>" should be Color.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">change-bar-color="" should be Color.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-color="<value-of select="."/>"</report>
    </rule>
 
@@ -891,8 +900,9 @@
    <!-- http://www.w3.org/TR/xsl11/#color -->
    <rule context="fo:*/@color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">color="<value-of select="."/>" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', or 'inherit'.</report>
+      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">color="<value-of select="."/>" should be Color or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">color="<value-of select="."/>" token should be 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">color="" should be Color or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: color="<value-of select="."/>"</report>
    </rule>
 
@@ -2873,8 +2883,9 @@
    <!-- http://www.w3.org/TR/xsl11/#text-shadow -->
    <rule context="fo:*/@text-shadow">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'Color', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">text-shadow="<value-of select="."/>" should be 'none', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'inherit', Color, or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">text-shadow="" should be 'none', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'inherit', Color, or Length.</report>
+      <assert test="local-name($expression) = ('EnumerationToken', 'Color', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">text-shadow="<value-of select="."/>" should be 'none', 'inherit', Color, or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">text-shadow="<value-of select="."/>" token should be 'none' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">text-shadow="" should be 'none', 'inherit', Color, or Length.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-shadow="<value-of select="."/>"</report>
    </rule>
 
