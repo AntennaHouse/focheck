@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="focheck" basedir="." default="build">
+<project name="focheck" basedir="." default="build"
+	 xmlns:if="ant:if"
+	 xmlns:unless="ant:unless">
 <description>Additional properties and targets used when developing
 'focheck' and making a release.</description>
 <!--
@@ -100,6 +102,8 @@ AFTER making a release on GitHub:
           name="http://saxon.sf.net/feature/validation" 
           value="false"/>
     </factory>
+    <param name="copyright-year" expression="${copyright.year}"
+	   if="copyright.year" />
     <param name="debug" expression="${debug}" if="debug" />
     <param name="version" expression="${version}" />
   </xslt>
@@ -123,6 +127,8 @@ AFTER making a release on GitHub:
           name="http://saxon.sf.net/feature/validation" 
           value="false"/>
     </factory>
+    <param name="copyright-year" expression="${copyright.year}"
+	   if="copyright.year" />
     <param name="debug" expression="${debug}" if="debug" />
     <param name="version" expression="${version}" />
   </xslt>
@@ -146,6 +152,8 @@ AFTER making a release on GitHub:
           name="http://saxon.sf.net/feature/validation" 
           value="false"/>
     </factory>
+    <param name="copyright-year" expression="${copyright.year}"
+	   if="copyright.year" />
     <param name="debug" expression="${debug}" if="debug" />
     <param name="version" expression="${version}" />
   </xslt>
@@ -214,6 +222,8 @@ AFTER making a release on GitHub:
           name="http://saxon.sf.net/feature/validation" 
           value="false"/>
     </factory>
+    <param name="copyright-year" expression="${copyright.year}"
+	   if="copyright.year" />
     <param name="debug" expression="${debug}" if="debug" />
     <param name="version" expression="${version}" />
   </xslt>
