@@ -23,7 +23,11 @@
 ;; Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 
+(require 'cl)
+(require 'compile)
 (require 'flymake)
+
+(require 'focheck-format "focheck-format")
 
 ;;; Customization
 
@@ -40,6 +44,16 @@
   "Location of Saxon 9 executable for use with Schematron."
   :group 'focheck
   :type '(file :must-match t))
+
+(defcustom focheck-template-file (locate-library "XSL-FO.fo" t)
+  "*File containing initial FO stylesheet inserted into empty `focheck' buffers."
+  :type '(choice (file :must-match t) (const :tag "No initial FO file" nil))
+  :group 'xsl)
+
+(defcustom focheck-template-file-initial-point 460
+  "*Initial position of point in initial FO stylesheet."
+  :type '(integer)
+  :group 'xsl)
 
 (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
     (setq flymake-check-was-interrupted t))
@@ -65,6 +79,24 @@
 (add-hook 'focheck-mode-hook
 	  'flymake-mode)
 
+
+(defun fo-read-from-minibuffer (prompt default history)
+  "Read from minibuffer with default and command history."
+(let ((value nil))
+  (if (string-equal
+       ""
+       (setq value
+	     (read-from-minibuffer (if default
+				       (format
+					"%s(default `%s') "
+					prompt default)
+				     (format "%s" prompt))
+				   nil nil nil
+				   history)))
+	     default
+	     value)))
+
+
 (define-derived-mode fo-mode nxml-mode "focheck"
   "Major mode for editing XSL-FO."
   (setq rng-schema-locating-files
@@ -73,7 +105,13 @@
   (rng-auto-set-schema)
   ;;(setq imenu-create-index-function 'xsl-imenu-create-index-function)
   ;;(setq imenu-extract-index-name-function 'xsl-imenu-create-index-function)
-  (modify-syntax-entry ?' "."))
+  (modify-syntax-entry ?' ".")
+  (if (and
+       focheck-template-file
+       (eq (point-min) (point-max)))
+      (progn
+	(insert-file-contents focheck-template-file)
+	(goto-char focheck-template-file-initial-point))))
 
 
 (provide 'fo-mode)
