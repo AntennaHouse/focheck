@@ -647,14 +647,24 @@ common-border-padding-and-background-properties &=
 # inline-level formatting objects
 axf.annotation.attlist =
     axf_annotation-author,
+    axf_annotation-border-color,
+    axf_annotation-border-style,
+    axf_annotation-border-width,
     axf_annotation-color,
     axf_annotation-contents,
     axf_annotation-file-attachment,
+    axf_annotation-flags,
+    axf_annotation-font-family,
+    axf_annotation-font-size,
+    axf_annotation-font-style,
+    axf_annotation-font-weight,
     axf_annotation-height,
     axf_annotation-icon-name,
     axf_annotation-open,
     axf_annotation-position-horizontal,
     axf_annotation-position-vertical,
+    axf_annotation-text-align,
+    axf_annotation-text-color,
     axf_annotation-title,
     axf_annotation-type,
     axf_annotation-width
@@ -758,6 +768,27 @@ axf_annotation-author =
    ## Author of the annotation: <string>
    attribute axf:annotation-author { text }?
 
+# @axf:annotation-border-color
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-border-color
+axf_annotation-border-color =
+   ## Border color of the free text annotation: <color>
+   attribute axf:annotation-border-color { text }?
+
+# @axf:annotation-border-style
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-border-style
+axf_annotation-border-style =
+   ## Border style of the free text annotation: solid | dotted | dashed | dot-dash | dot-dot-dash
+   attribute axf:annotation-border-style { 'solid' | 'dotted' | 'dashed' | 'dot-dash' | 'dot-dot-dash' }?
+
+# @axf:annotation-border-width
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-border-width
+axf_annotation-border-width =
+   ## Border width of the free text annotation: <border-width>
+   attribute axf:annotation-border-width { text }?
+
 # @axf:annotation-color
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-color
@@ -772,13 +803,6 @@ axf_annotation-contents =
    ## Content of the annotation: <string>
    attribute axf:annotation-contents { text }?
 
-# @axf:annotation-icon-name
-#
-# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-icon-name
-axf_annotation-icon-name =
-   ## Name of the icon used for displaying the annotation: <string>
-   attribute axf:annotation-icon-name { text }?
-
 # @axf:annotation-file-attachment
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-file-attachment
@@ -786,12 +810,54 @@ axf_annotation-file-attachment =
    ## File with which file attachment annotation is related: <uri-specification>
    attribute axf:annotation-file-attachment { xsd:anyURI }?
 
+# @axf:annotation-flags
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-flags
+axf_annotation-flags =
+   ## Characteristics of the annotation: Invisible | Hidden | Print | NoZoom | NoRotate | NoView | ReadOnly | Locked | ToggleNoView | LockedContents
+   attribute axf:annotation-flags { 'Invisible' | 'Hidden' | 'Print' | 'NoZoom' | 'NoRotate' | 'NoView' | 'ReadOnly' | 'Locked' | 'ToggleNoView' | 'LockedContents' }?
+
+# @axf:annotation-font-family
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-family
+axf_annotation-font-family =
+   ## Font family of the free text annotation: <string>
+   attribute axf:annotation-font-family { text }?
+
+# @axf:annotation-font-size
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-size
+axf_annotation-font-size =
+   ## Font size of the free text annotation: <string>
+   attribute axf:annotation-font-size { text }?
+
+# @axf:annotation-font-style
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-style
+axf_annotation-font-style =
+   ## Font style of the free text annotation: <string>
+   attribute axf:annotation-font-style { text }?
+
+# @axf:annotation-font-weight
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-weight
+axf_annotation-font-weight =
+   ## Font weight of the free text annotation: <string>
+   attribute axf:annotation-font-weight { text }?
+
 # @axf:annotation-height
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-height
 axf_annotation-height =
    ## Height of the annotation: <length>
    attribute axf:annotation-height { text }?
+
+# @axf:annotation-icon-name
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-icon-name
+axf_annotation-icon-name =
+   ## Name of the icon used for displaying the annotation: <string>
+   attribute axf:annotation-icon-name { text }?
 
 # @axf:annotation-open
 #
@@ -813,6 +879,20 @@ axf_annotation-position-horizontal =
 axf_annotation-position-vertical =
    ## Vertical position of the annotation: <length>
    attribute axf:annotation-position-vertical { text }?
+
+# @axf:annotation-text-align
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-text-align
+axf_annotation-text-align =
+   ## Alignment of the free text annotation: <string>
+   attribute axf:annotation-text-align { 'left' | 'center' | 'right' }?
+
+# @axf:annotation-text-color
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-text-color
+axf_annotation-text-color =
+   ## Color of the free text annotation: <string>
+   attribute axf:annotation-text-color { text }?
 
 # @axf:annotation-title
 #
