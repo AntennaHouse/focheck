@@ -52,30 +52,12 @@
 
 (defcustom fo-format-command
   (list
-   ;; AH Formatter GUI on Windows
-   "AHFormatter -d %f -o %o"
+   ;; AH Formatter GUI on Windows (opens in already-running AHFormatter)
+   "AHFormatter -s -d %f -o %o"
    ;; AH Formatter on Windows
    "AHFCmd -x 4 -d %f -o %o"
    ;; AH Formatter GUI on Windows
    "run.sh -x 4 -d %f -o %o"
-   ;; XT Java
-   "java com.jclark.xsl.Driver %i %s %o"
-   ;; Xalan-Java 2
-   "java org.apache.xalan.xslt.Process -IN %i -XSL %s -OUT %o"
-   ;; Instant Saxon
-   "saxon -o %o %i %s"
-   ;; Instant Saxon using xml-stylesheet PI
-   "saxon -o %o %i"
-   ;; Saxon
-   "java com.icl.saxon.StyleSheet -o %o %i %s"
-   ;; Saxon using xml-stylesheet PI
-   "java com.icl.saxon.StyleSheet -o %o %i"
-   ;; xsltproc
-   "xsltproc -o %o %s %i"
-   ;; jd.xslt
-   "java jd.xml.xslt.Stylesheet -out %o %i %s"
-   ;; Oracle XDK for Java
-   "java oracle.xml.parser.v2.oraxsl %i %s %o"
    )
   "*The shell command to format an XSL document.
 
