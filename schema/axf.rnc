@@ -957,7 +957,7 @@ axf_background-scaling =
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-image-resolution
 axf_background-image-resolution =
     ## Resolution of a background image: [ normal | [ from-image || <dpi> ] ]#
-    attribute axf:background-image-resolution { text }
+    attribute axf:background-image-resolution { text }?
 
 # @axf:baseline-block-snap
 #
