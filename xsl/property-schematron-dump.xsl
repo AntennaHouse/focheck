@@ -138,6 +138,41 @@ text-align
     name="skipped-properties-list" as="xs:string+"
     select="tokenize(normalize-space($skipped-properties), '\s')" />
 
+<xsl:variable
+    name="extending-properties"
+    as="element(property)+">
+  <property name="border-top-color" extends="color-transparent" />
+  <property name="border-bottom-color" extends="color-transparent" />
+  <property name="border-left-color" extends="color-transparent" />
+  <property name="border-right-color" extends="color-transparent" />
+  <property name="border-before-color" extends="color-transparent" />
+  <property name="border-after-color" extends="color-transparent" />
+  <property name="border-start-color" extends="color-transparent" />
+  <property name="border-end-color" extends="color-transparent" />
+
+  <property name="border-top-style" extends="border-style" />
+  <property name="border-bottom-style" extends="border-style" />
+  <property name="border-left-style" extends="border-style" />
+  <property name="border-right-style" extends="border-style" />
+  <property name="border-before-style" extends="border-style" />
+  <property name="border-after-style" extends="border-style" />
+  <property name="border-start-style" extends="border-style" />
+  <property name="border-end-style" extends="border-style" />
+
+  <property name="border-top-width" extends="border-width" />
+  <property name="border-bottom-width" extends="border-width" />
+  <property name="border-left-width" extends="border-width" />
+  <property name="border-right-width" extends="border-width" />
+  <property name="border-before-width" extends="border-width" />
+  <property name="border-after-width" extends="border-width" />
+  <property name="border-start-width" extends="border-width" />
+  <property name="border-end-width" extends="border-width" />
+</xsl:variable>
+
+<xsl:variable
+    name="extending-properties-list" as="xs:string+"
+    select="$extending-properties/@name" />
+
 <xsl:namespace-alias stylesheet-prefix="not-yet-xsl"
                      result-prefix="xsl" />
 
@@ -238,6 +273,9 @@ text-align
               </report>
             </xsl:if>
           </xsl:when>
+          <xsl:when test="$property = $extending-properties-list">
+            <extends rule="{$extending-properties[@name = $property]/@extends}" />
+          </xsl:when>
           <xsl:otherwise>
             <let name="expression" value="ahf:parser-runner(.)"/>
 
@@ -300,14 +338,14 @@ text-align
                 <xsl:value-of select="$property" />
                 <xsl:text>="</xsl:text>
                 <value-of select="." />
-                <xsl:text>" token should be </xsl:text>
+                <xsl:text>". Allowed keywords are </xsl:text>
                 <xsl:for-each select="$enum-tokens">
                   <xsl:value-of select="if (position() > 1)
                                           then (if (last() > 2)
                                                   then ','
                                                 else (),
                                                 if (position() = last())
-                                                  then ' or '
+                                                  then ' and '
                                                 else ' ')
                                          else ()"
                                 separator="" />
@@ -315,7 +353,7 @@ text-align
                   <xsl:value-of select="." />
                   <xsl:text>'</xsl:text>
                 </xsl:for-each>
-                <xsl:text>. Enumeration token is '</xsl:text>
+                <xsl:text>. Token is '</xsl:text>
                 <value-of select="$expression/@token"/>
                 <xsl:text>'.</xsl:text>
               </report>
@@ -343,6 +381,12 @@ text-align
       </rule>
     </xsl:for-each>
   </pattern>
+  <xsl:text>&#xA;&#xA;</xsl:text>
+  <xsl:comment> Local Variables:  </xsl:comment>
+  <xsl:text>&#xA;</xsl:text>
+  <xsl:comment> mode: nxml        </xsl:comment>
+  <xsl:text>&#xA;</xsl:text>
+  <xsl:comment> End:              </xsl:comment>
 
 </xsl:template>
 
