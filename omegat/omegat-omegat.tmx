@@ -14,14 +14,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>" cannot be used when axf:custom-property with name="xmp" is present.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171117T150755Z" creationid="mtan" creationdate="20171117T150755Z">
-        <seg>"name="xmp"との axf:custom-property が存在している場合、利用することができません.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg># &lt;a name="en"&gt;&lt;/a&gt;focheck – Validate XSL-FO and Antenna House extensions in oXygen or standalone</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171020T133807Z" creationid="mtan" creationdate="20160303T145853Z">
@@ -887,14 +879,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>="" should be EnumerationToken or Color.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T114802Z" creationid="mtan" creationdate="20171010T150805Z">
-        <seg>="" は EnumerationToken 又は Color でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>="" should be EnumerationToken or Length.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T115132Z" creationid="mtan" creationdate="20171010T114215Z">
@@ -951,14 +935,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>="&lt;v0/&gt;" should be a Color, a color name, or 'transparent'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T114748Z" creationid="mtan" creationdate="20171010T150711Z">
-        <seg>="&lt;v0/&gt;" は Color、色名、又は transparent でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>="&lt;v0/&gt;" should be a positive integer.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151104T152752Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -1003,14 +979,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151105T121157Z" creationid="mtan" creationdate="20151105T114149Z">
         <seg>非正又は非整数値は一番近い整数値に丸められます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>A two-page spread.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160310T103648Z" creationid="mtan" creationdate="20160310T103648Z">
-        <seg>見開きページマスタ</seg>
       </tuv>
     </tu>
     <tu>
@@ -1295,14 +1263,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Base character of ruby.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T152131Z" creationid="mtan" creationdate="20171005T152131Z">
-        <seg>ルビの親文字。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Behavior when tab alignment makes letters overlap</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160309T144743Z" creationid="mtan" creationdate="20160309T130101Z">
@@ -1331,14 +1291,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171010T105556Z" creationid="mtan" creationdate="20171010T105556Z">
         <seg>@axf:page-number-prefix into fo:folio-prefixを変更する。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Change the 'title' axf:document-info into 'document-title'</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T113208Z" creationid="mtan" creationdate="20160112T135642Z">
-        <seg>axf:document-info の title は document-title に変更します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -1651,14 +1603,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T115552Z" creationid="mtan" creationdate="20160121T144548Z">
         <seg>それぞれの fo:page-sequence は fo:page-sequence の内容の子の組版からのページシーケンスを表します。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Effective with PDF 1.4 or later.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171117T132051Z" creationid="mtan" creationdate="20171117T132051Z">
-        <seg>PDF1.4以降のとき有効です。</seg>
       </tuv>
     </tu>
     <tu>
@@ -2693,14 +2637,6 @@ you may not use this file except in compliance with the License.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Ruby.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T152147Z" creationid="mtan" creationdate="20171005T152147Z">
-        <seg>ルビ。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Run Ant.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160303T172031Z" creationid="mtan" creationdate="20160303T172031Z">
@@ -3217,42 +3153,10 @@ limitations under the License.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Syntax error: border-after-color="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T150420Z" creationid="mtan" creationdate="20151029T123525Z">
-        <seg>シンタックスエラー：border-after-color="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Syntax error: border-after-precedence="&lt;v0/&gt;"</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T150540Z" creationid="mtan" creationdate="20151029T123804Z">
         <seg>シンタックスエラー：border-after-precedence="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-after-style="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T150855Z" creationid="mtan" creationdate="20151029T124110Z">
-        <seg>シンタックスエラー：border-after-style="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-after-width="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T124441Z">
-        <seg>シンタックスエラー：border-after-width="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-before-color="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T124542Z">
-        <seg>シンタックスエラー：border-before-color="&lt;v0/&gt;"</seg>
       </tuv>
     </tu>
     <tu>
@@ -3265,58 +3169,10 @@ limitations under the License.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Syntax error: border-before-style="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T125004Z">
-        <seg>シンタックスエラー：border-before-style="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-before-width="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T125250Z">
-        <seg>シンタックスエラー：border-before-width="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-bottom-color="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T125412Z">
-        <seg>シンタックスエラー：border-bottom-color="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-bottom-style="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T125556Z">
-        <seg>シンタックスエラー：border-bottom-style="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-bottom-width="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T125739Z">
-        <seg>シンタックスエラー：border-bottom-width="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Syntax error: border-collapse="&lt;v0/&gt;"</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130042Z">
         <seg>シンタックスエラー：border-collapse="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-end-color="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130206Z">
-        <seg>シンタックスエラー：border-end-color="&lt;v0/&gt;"</seg>
       </tuv>
     </tu>
     <tu>
@@ -3329,70 +3185,6 @@ limitations under the License.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Syntax error: border-end-style="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-end-style="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-end-width="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-end-width="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-left-color="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-left-color="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-left-style="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-left-style="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-left-width="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-left-width="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-right-color="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-right-color="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-right-style="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-right-style="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-right-width="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-right-width="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Syntax error: border-separation="&lt;v0/&gt;"</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
@@ -3401,58 +3193,10 @@ limitations under the License.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Syntax error: border-start-color="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-start-color="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Syntax error: border-start-precedence="&lt;v0/&gt;"</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160112T155109Z" creationid="mtan" creationdate="20151029T130611Z">
         <seg>シンタックスエラー：border-start-precedence="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-start-style="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-start-style="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-start-width="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-start-width="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-top-color="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-top-color="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-top-style="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-top-style="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: border-top-width="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T151041Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：border-top-width="&lt;v0/&gt;"</seg>
       </tuv>
     </tu>
     <tu>
@@ -3781,14 +3525,6 @@ limitations under the License.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20151103T153957Z" creationid="mtan" creationdate="20151029T130611Z">
         <seg>シンタックスエラー：font-style="&lt;v0/&gt;"</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: font-variant="&lt;v0/&gt;"</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T153957Z" creationid="mtan" creationdate="20151029T130611Z">
-        <seg>シンタックスエラー：font-variant="&lt;v0/&gt;"</seg>
       </tuv>
     </tu>
     <tu>
@@ -5567,14 +5303,6 @@ to XSL-FO datatypes.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The ruby structure.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T152113Z" creationid="mtan" creationdate="20171005T152113Z">
-        <seg>ルビ構造</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The sequence of areas returned by each of the flow-object children of the fo:page-sequence are made descendants of the generated pages as described below.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T115937Z" creationid="mtan" creationdate="20160126T144630Z">
@@ -6486,14 +6214,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>absolute-position="&lt;v0/&gt;" token should be 'auto', 'absolute', 'fixed', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T155135Z" creationid="mtan" creationdate="20151029T110726Z">
-        <seg>absolute-position="&lt;v0/&gt;" のトークンは auto、absolute、fixed 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>active-state="" should be 'link', 'visited', 'active', 'hover', or 'focus'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T155451Z" creationid="mtan" creationdate="20151029T114550Z">
@@ -6506,14 +6226,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T155234Z" creationid="mtan" creationdate="20151029T114342Z">
         <seg>active-state="&lt;v0/&gt;" は link、visited、active、hover 又は focus でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>active-state="&lt;v0/&gt;" token should be 'link', 'visited', 'active', 'hover', or 'focus'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T155426Z" creationid="mtan" creationdate="20151029T114509Z">
-        <seg>active-state="&lt;v0/&gt;" のトークンは link、visited、active、hover 又は focus でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -6534,14 +6246,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>alignment-adjust="&lt;v0/&gt;" token should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T155535Z" creationid="mtan" creationdate="20151029T115200Z">
-        <seg>alignment-adjust="&lt;v0/&gt;" のトークンは auto、baseline、before-edge、text-before-edge、middle、central、after-edge、text-after-edge、ideographic、alphabetic、hanging、mathematical 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>alignment-baseline="" should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T155655Z" creationid="mtan" creationdate="20151029T115817Z">
@@ -6554,14 +6258,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T155612Z" creationid="mtan" creationdate="20151029T115520Z">
         <seg>alignment-baseline="&lt;v0/&gt;" は auto、baseline、before-edge、text-before-edge、middle、central、after-edge、text-after-edge、ideographic、alphabetic、hanging、mathematical 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>alignment-baseline="&lt;v0/&gt;" token should be 'auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T155633Z" creationid="mtan" creationdate="20151029T115631Z">
-        <seg>alignment-baseline="&lt;v0/&gt;"のトークンは auto、baseline、before-edge、text-before-edge、middle、central、after-edge、text-after-edge、ideographic、alphabetic、hanging、mathematical 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -6806,14 +6502,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>auto-restore="&lt;v0/&gt;" token should be 'true' or 'false'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T155849Z" creationid="mtan" creationdate="20151029T120514Z">
-        <seg>auto-restore="&lt;v0/&gt;" のトークンは true 又は false でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>avoid | auto | inherit</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171020T095756Z" creationid="tkg" creationdate="20171020T095756Z">
@@ -6936,14 +6624,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>axf:line-number-font-size="&lt;v0/&gt;" token should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', or 'smaller'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T114904Z" creationid="mtan" creationdate="20171010T113636Z">
-        <seg>axf:line-number-font-size="&lt;v0/&gt;" のトークンは xx-small、x-small、small、medium、large、x-large、xx-large、larger 又は smaller でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>axf:line-number-offset="" should be Length.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T115042Z" creationid="mtan" creationdate="20160310T112941Z">
@@ -7032,46 +6712,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>background-attachment="&lt;v0/&gt;" token should be 'scroll', 'fixed', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T155956Z" creationid="mtan" creationdate="20151029T120806Z">
-        <seg>background-attachment="&lt;v0/&gt;" のトークンは scroll、fixed 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>background-color="" should be Color or EnumerationToken.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T113750Z" creationid="mtan" creationdate="20151028T165301Z">
-        <seg>background-color="" は Color 又は EnumerationToken でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>background-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160042Z" creationid="mtan" creationdate="20151029T121318Z">
-        <seg>background-color="" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は　inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>background-color="&lt;v0/&gt;" should be Color or EnumerationToken.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T113735Z" creationid="mtan" creationdate="20151028T164953Z">
-        <seg>background-color="&lt;v0/&gt;" は Color 又は EnumerationToken でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>background-color="&lt;v0/&gt;" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160030Z" creationid="mtan" creationdate="20151029T121132Z">
-        <seg>background-color="&lt;v0/&gt;" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>background-image="" should be '&lt;uri-specification&gt; | none | inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T160051Z" creationid="mtan" creationdate="20171011T115152Z">
@@ -7144,14 +6784,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>background-position-horizontal="&lt;v0/&gt;" token should be 'left', 'center', 'right', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160143Z" creationid="mtan" creationdate="20151029T121758Z">
-        <seg>background-position-horizontal="&lt;v0/&gt;" のトークンは left、center、right 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>background-position-vertical="" should be Percent, Length, 'top', 'center', 'bottom', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T160257Z" creationid="mtan" creationdate="20151029T122122Z">
@@ -7192,26 +6824,10 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>background-position-vertical="&lt;v0/&gt;" token should be 'top', 'center', 'bottom', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160239Z" creationid="mtan" creationdate="20151029T122033Z">
-        <seg>background-position-vertical="&lt;v0/&gt;" のトークンは top、center、bottom 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>background-position="" should be '[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T160113Z" creationid="mtan" creationdate="20151028T172417Z">
         <seg>background-position="" は [ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>background-repeat="" should be 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160348Z" creationid="mtan" creationdate="20151029T122352Z">
-        <seg>background-repeat="" は repeat、repeat-x、repeat-y、no-repeat 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -7232,26 +6848,10 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>background-repeat="&lt;v0/&gt;" should be 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160314Z" creationid="mtan" creationdate="20151029T122159Z">
-        <seg>background-repeat="&lt;v0/&gt;" は repeat、repeat-x、repeat-y、no-repeat 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>background-repeat="&lt;v0/&gt;" should be EnumerationToken.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T114129Z" creationid="mtan" creationdate="20151028T173332Z">
         <seg>background-repeat="&lt;v0/&gt;" は EnumerationToken でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>background-repeat="&lt;v0/&gt;" token should be 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160330Z" creationid="mtan" creationdate="20151029T122331Z">
-        <seg>background-repeat="&lt;v0/&gt;" のトークンは repeat、repeat-x、repeat-y、no-repeat 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -7292,14 +6892,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T160404Z" creationid="mtan" creationdate="20151029T122519Z">
         <seg>baseline-shift="&lt;v0/&gt;" は baseline、sub、super、inherit、Percent 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>baseline-shift="&lt;v0/&gt;" token should be 'baseline', 'sub', 'super', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160422Z" creationid="mtan" creationdate="20151029T122639Z">
-        <seg>baseline-shift="&lt;v0/&gt;" のトークンは baseline、sub、super 又は inherit でなければなりません。.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7352,14 +6944,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>blank-or-not-blank="&lt;v0/&gt;" token should be 'blank', 'not-blank', 'any', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160515Z" creationid="mtan" creationdate="20151029T122918Z">
-        <seg>blank-or-not-blank="&lt;v0/&gt;" のトークンは blank、not-blank、any 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>block-progression-dimension="" should be 'auto', 'inherit', Length, or Percent.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T160611Z" creationid="mtan" creationdate="20151029T123304Z">
@@ -7372,30 +6956,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T160544Z" creationid="mtan" creationdate="20151029T123123Z">
         <seg>block-progression-dimension="&lt;v0/&gt;" は auto、inherit、Length 又は Percent でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>block-progression-dimension="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160558Z" creationid="mtan" creationdate="20151029T123222Z">
-        <seg>block-progression-dimension="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-after-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160651Z" creationid="mtan" creationdate="20151029T123516Z">
-        <seg>border-after-color="" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又はinherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-after-color="&lt;v0/&gt;" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160641Z" creationid="mtan" creationdate="20151029T123450Z">
-        <seg>border-after-color="&lt;v0/&gt;" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -7416,78 +6976,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>border-after-precedence="&lt;v0/&gt;" token should be 'force' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160718Z" creationid="mtan" creationdate="20151029T123714Z">
-        <seg>border-after-precedence="&lt;v0/&gt;" のトークンは force 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-after-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160828Z" creationid="mtan" creationdate="20151029T124059Z">
-        <seg>border-after-style="" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-after-style="&lt;v0/&gt;" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160745Z" creationid="mtan" creationdate="20151029T123949Z">
-        <seg>border-after-style="&lt;v0/&gt;" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-after-style="&lt;v0/&gt;" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160811Z" creationid="mtan" creationdate="20151029T124039Z">
-        <seg>border-after-style="&lt;v0/&gt;" のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は　inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-after-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160928Z" creationid="mtan" creationdate="20151029T124429Z">
-        <seg>border-after-width="" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-after-width="&lt;v0/&gt;" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160843Z" creationid="mtan" creationdate="20151029T124143Z">
-        <seg>border-after-width="&lt;v0/&gt;" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-after-width="&lt;v0/&gt;" token should be 'thin', 'medium', 'thick', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160858Z" creationid="mtan" creationdate="20151029T124350Z">
-        <seg>border-after-width="&lt;v0/&gt;"のトークンは thin、medium、thick 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-before-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T154755Z" creationid="mtan" creationdate="20151029T124532Z">
-        <seg>border-before-color="" は Color、 aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-before-color="&lt;v0/&gt;" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T160920Z" creationid="mtan" creationdate="20151029T124518Z">
-        <seg>border-before-color="&lt;v0/&gt;" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>border-before-precedence="" should be 'force', 'inherit', or Number.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T154917Z" creationid="mtan" creationdate="20151029T124743Z">
@@ -7500,126 +6988,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T154821Z" creationid="mtan" creationdate="20151029T124618Z">
         <seg>border-before-precedence="&lt;v0/&gt;" は force、inherit 又は Number でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-before-precedence="&lt;v0/&gt;" token should be 'force' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T154846Z" creationid="mtan" creationdate="20151029T124716Z">
-        <seg>border-before-precedence="&lt;v0/&gt;" のトークンはforce 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-before-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161140Z" creationid="mtan" creationdate="20151029T124954Z">
-        <seg>border-before-style="" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-before-style="&lt;v0/&gt;" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T155012Z" creationid="mtan" creationdate="20151029T124852Z">
-        <seg>border-before-style="&lt;v0/&gt;" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-before-style="&lt;v0/&gt;" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161050Z" creationid="mtan" creationdate="20151029T124928Z">
-        <seg>border-before-style="&lt;v0/&gt;" のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-before-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161314Z" creationid="mtan" creationdate="20151029T125238Z">
-        <seg>border-before-width="" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-before-width="&lt;v0/&gt;" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161221Z" creationid="mtan" creationdate="20151029T125126Z">
-        <seg>border-before-width="&lt;v0/&gt;" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-before-width="&lt;v0/&gt;" token should be 'thin', 'medium', 'thick', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161245Z" creationid="mtan" creationdate="20151029T125200Z">
-        <seg>3border-before-width="&lt;v0/&gt;" のトークンは thin、medium、thick 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-bottom-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161606Z" creationid="mtan" creationdate="20151029T125359Z">
-        <seg>border-bottom-color="" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-bottom-color="&lt;v0/&gt;" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161449Z" creationid="mtan" creationdate="20151029T125348Z">
-        <seg>border-bottom-color="&lt;v0/&gt;" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-bottom-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161820Z" creationid="mtan" creationdate="20151029T125545Z">
-        <seg>border-bottom-style="" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-bottom-style="&lt;v0/&gt;" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161652Z" creationid="mtan" creationdate="20151029T125455Z">
-        <seg>border-bottom-style="&lt;v0/&gt;" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-bottom-style="&lt;v0/&gt;" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161736Z" creationid="mtan" creationdate="20151029T125519Z">
-        <seg>border-bottom-style="&lt;v0/&gt;" のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-bottom-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161951Z" creationid="mtan" creationdate="20151029T125722Z">
-        <seg>border-bottom-width="" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-bottom-width="&lt;v0/&gt;" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161852Z" creationid="mtan" creationdate="20151029T125623Z">
-        <seg>border-bottom-width="&lt;v0/&gt;" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-bottom-width="&lt;v0/&gt;" token should be 'thin', 'medium', 'thick', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T161916Z" creationid="mtan" creationdate="20151029T125655Z">
-        <seg>border-bottom-width="&lt;v0/&gt;" のトークンは thin、medium、thick 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -7648,34 +7016,10 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>border-collapse="&lt;v0/&gt;" token should be 'collapse', 'collapse-with-precedence', 'separate', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T162036Z" creationid="mtan" creationdate="20151029T130003Z">
-        <seg>border-collapse="&lt;v0/&gt;" のトークンは collapse、collapse-with-precedence、separate 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>border-color="" should be '[ &lt;color&gt; | transparent ]{1,4} | inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T162114Z" creationid="mtan" creationdate="20151029T130117Z">
         <seg>border-color="" は [ &lt;color&gt; | transparent ]{1,4} | inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-end-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T162330Z" creationid="mtan" creationdate="20151029T130154Z">
-        <seg>border-end-color="" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-end-color="&lt;v0/&gt;" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T162221Z" creationid="mtan" creationdate="20151029T130141Z">
-        <seg>border-end-color="&lt;v0/&gt;" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -7696,194 +7040,10 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>border-end-precedence="&lt;v0/&gt;" token should be 'force' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T162422Z" creationid="mtan" creationdate="20151029T130321Z">
-        <seg>border-end-precedence="&lt;v0/&gt;"のトークンは force 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-end-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T164148Z" creationid="mtan" creationdate="20151029T130450Z">
-        <seg>border-end-style="" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-end-style="&lt;v0/&gt;" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T162530Z" creationid="mtan" creationdate="20151029T130411Z">
-        <seg>border-end-style="&lt;v0/&gt;" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-end-style="&lt;v0/&gt;" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T162611Z" creationid="mtan" creationdate="20151029T130435Z">
-        <seg>border-end-style="&lt;v0/&gt;" のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-end-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T164318Z" creationid="mtan" creationdate="20151029T130753Z">
-        <seg>border-end-width="" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-end-width="&lt;v0/&gt;" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T164217Z" creationid="mtan" creationdate="20151029T130704Z">
-        <seg>border-end-width="&lt;v0/&gt;" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-end-width="&lt;v0/&gt;" token should be 'thin', 'medium', 'thick', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T164249Z" creationid="mtan" creationdate="20151029T130731Z">
-        <seg>border-end-width="&lt;v0/&gt;" のトークンは thin、medium、thick 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-left-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T164646Z" creationid="mtan" creationdate="20151029T130907Z">
-        <seg>border-left-color="" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-left-color="&lt;v0/&gt;" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T164527Z" creationid="mtan" creationdate="20151029T130856Z">
-        <seg>border-left-color="&lt;v0/&gt;" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-left-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T164906Z" creationid="mtan" creationdate="20151029T131027Z">
-        <seg>border-left-style="" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-left-style="&lt;v0/&gt;" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T164724Z" creationid="mtan" creationdate="20151029T130929Z">
-        <seg>border-left-style="&lt;v0/&gt;"は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-left-style="&lt;v0/&gt;" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T164824Z" creationid="mtan" creationdate="20151029T131001Z">
-        <seg>border-left-style="&lt;v0/&gt;" のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-left-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T165028Z" creationid="mtan" creationdate="20151029T131139Z">
-        <seg>border-left-width="" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-left-width="&lt;v0/&gt;" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T164934Z" creationid="mtan" creationdate="20151029T131051Z">
-        <seg>border-left-width="&lt;v0/&gt;" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-left-width="&lt;v0/&gt;" token should be 'thin', 'medium', 'thick', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T164954Z" creationid="mtan" creationdate="20151029T131114Z">
-        <seg>border-left-width="&lt;v0/&gt;" のトークンは thin、medium、thick 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>border-left="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171011T164330Z" creationid="mtan" creationdate="20151029T130839Z">
         <seg>border-left="" は [ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-right-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T094551Z" creationid="mtan" creationdate="20151029T131240Z">
-        <seg>border-right-color="" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-right-color="&lt;v0/&gt;" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T094421Z" creationid="mtan" creationdate="20151029T131222Z">
-        <seg>border-right-color="&lt;v0/&gt;" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-right-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T094851Z" creationid="mtan" creationdate="20151029T131339Z">
-        <seg>border-right-style="" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-right-style="&lt;v0/&gt;" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T094632Z" creationid="mtan" creationdate="20151029T131303Z">
-        <seg>border-right-style="&lt;v0/&gt;" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-right-style="&lt;v0/&gt;" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T094711Z" creationid="mtan" creationdate="20151029T131320Z">
-        <seg>border-right-style="&lt;v0/&gt;" のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-right-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T095024Z" creationid="mtan" creationdate="20151029T131447Z">
-        <seg>border-right-width="" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-right-width="&lt;v0/&gt;" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T094922Z" creationid="mtan" creationdate="20151029T131404Z">
-        <seg>border-right-width="&lt;v0/&gt;" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-right-width="&lt;v0/&gt;" token should be 'thin', 'medium', 'thick', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T094947Z" creationid="mtan" creationdate="20151029T131428Z">
-        <seg>border-right-width="&lt;v0/&gt;" のトークンは thin、medium、thick 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -7912,34 +7072,10 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>border-separation="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T095104Z" creationid="mtan" creationdate="20151029T131639Z">
-        <seg>border-separation="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>border-spacing="" should be '&lt;length&gt; &lt;length&gt;?</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T095139Z" creationid="mtan" creationdate="20151029T131838Z">
         <seg>border-spacing="" は &lt;length&gt; &lt;length&gt;?</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-start-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T095426Z" creationid="mtan" creationdate="20151029T132006Z">
-        <seg>border-start-color="" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-start-color="&lt;v0/&gt;" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T095309Z" creationid="mtan" creationdate="20151029T131955Z">
-        <seg>border-start-color="&lt;v0/&gt;" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -7960,130 +7096,10 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>border-start-precedence="&lt;v0/&gt;" token should be 'force' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T095505Z" creationid="mtan" creationdate="20151029T132054Z">
-        <seg>border-start-precedence="&lt;v0/&gt;" のトークンは force 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-start-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T095739Z" creationid="mtan" creationdate="20151029T132230Z">
-        <seg>border-start-style="" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-start-style="&lt;v0/&gt;" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T095609Z" creationid="mtan" creationdate="20151029T132151Z">
-        <seg>border-start-style="&lt;v0/&gt;" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-start-style="&lt;v0/&gt;" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T095651Z" creationid="mtan" creationdate="20151029T132212Z">
-        <seg>border-start-style="&lt;v0/&gt;" のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-start-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T095909Z" creationid="mtan" creationdate="20151029T132332Z">
-        <seg>border-start-width="" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-start-width="&lt;v0/&gt;" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T095814Z" creationid="mtan" creationdate="20151029T132253Z">
-        <seg>border-start-width="&lt;v0/&gt;" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-start-width="&lt;v0/&gt;" token should be 'thin', 'medium', 'thick', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T095841Z" creationid="mtan" creationdate="20151029T132312Z">
-        <seg>border-start-width="&lt;v0/&gt;" のトークンは thin、medium、thick 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>border-style="" should be '&lt;border-style&gt;{1,4} | inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T095927Z" creationid="mtan" creationdate="20151029T132405Z">
         <seg>border-style="" は &lt;border-style&gt;{1,4} | inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-top-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100205Z" creationid="mtan" creationdate="20151029T132502Z">
-        <seg>border-top-color="" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-top-color="&lt;v0/&gt;" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'transparent', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100046Z" creationid="mtan" creationdate="20151029T132452Z">
-        <seg>border-top-color="&lt;v0/&gt;" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、transparent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-top-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100424Z" creationid="mtan" creationdate="20151029T132607Z">
-        <seg>border-top-style="" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-top-style="&lt;v0/&gt;" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100245Z" creationid="mtan" creationdate="20151029T132526Z">
-        <seg>border-top-style="&lt;v0/&gt;" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-top-style="&lt;v0/&gt;" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100340Z" creationid="mtan" creationdate="20151029T132548Z">
-        <seg>border-top-style="&lt;v0/&gt;" のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-top-width="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100541Z" creationid="mtan" creationdate="20151029T132721Z">
-        <seg>border-top-width="" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-top-width="&lt;v0/&gt;" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100451Z" creationid="mtan" creationdate="20151029T132633Z">
-        <seg>border-top-width="&lt;v0/&gt;" は thin、medium、thick、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>border-top-width="&lt;v0/&gt;" token should be 'thin', 'medium', 'thick', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100512Z" creationid="mtan" creationdate="20151029T132701Z">
-        <seg>border-top-width="&lt;v0/&gt;" のトークンは thin、medium、thick 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8128,14 +7144,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>bottom="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100706Z" creationid="mtan" creationdate="20151029T151332Z">
-        <seg>bottom="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>break-after="" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T100913Z" creationid="mtan" creationdate="20151029T151656Z">
@@ -8152,14 +7160,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>break-after="&lt;v0/&gt;" token should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100832Z" creationid="mtan" creationdate="20151029T151635Z">
-        <seg>break-after="&lt;v0/&gt;" のトークンは auto、column、page、even-page、odd-page 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>break-before="" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T101044Z" creationid="mtan" creationdate="20151029T151754Z">
@@ -8172,14 +7172,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T100943Z" creationid="mtan" creationdate="20151029T151712Z">
         <seg>break-before="&lt;v0/&gt;" は auto、column、page、even-page、odd-page 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>break-before="&lt;v0/&gt;" token should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T101017Z" creationid="mtan" creationdate="20151029T151743Z">
-        <seg>break-before="&lt;v0/&gt;" のトークンは auto、column、page、even-page、odd-page 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8204,14 +7196,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T101124Z" creationid="mtan" creationdate="20151029T151935Z">
         <seg>caption-side="&lt;v0/&gt;" は before、after、start、end、top、bottom、left、right 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>caption-side="&lt;v0/&gt;" token should be 'before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T101200Z" creationid="mtan" creationdate="20151029T152018Z">
-        <seg>caption-side="&lt;v0/&gt;" のトークンは before、after、start、end、top、bottom、left、right 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8264,22 +7248,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>change-bar-color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', or 'yellow'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T101631Z" creationid="mtan" creationdate="20151029T152349Z">
-        <seg>change-bar-color="" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white 又は yellow でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>change-bar-color="&lt;v0/&gt;" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', or 'yellow'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T101523Z" creationid="mtan" creationdate="20151029T152319Z">
-        <seg>change-bar-color="&lt;v0/&gt;"は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white 又は yellow でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>change-bar-offset="" should be Length.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T101655Z" creationid="mtan" creationdate="20151029T152438Z">
@@ -8312,14 +7280,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>change-bar-placement="&lt;v0/&gt;" token should be 'start', 'end', 'left', 'right', 'inside', 'outside', or 'alternate'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T101800Z" creationid="mtan" creationdate="20151029T152655Z">
-        <seg>change-bar-placement="&lt;v0/&gt;" のトークンは start、end、left、right、inside、outside 又は alternate でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>change-bar-style="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', or 'outset'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T102038Z" creationid="mtan" creationdate="20151029T152854Z">
@@ -8336,14 +7296,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>change-bar-style="&lt;v0/&gt;" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', or 'outset'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T101952Z" creationid="mtan" creationdate="20151029T152840Z">
-        <seg>change-bar-style="&lt;v0/&gt;" のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset 又は outset でなければなりません。 </seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>change-bar-width="" should be 'thin', 'medium', 'thick', or Length.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T102146Z" creationid="mtan" creationdate="20151029T153103Z">
@@ -8356,14 +7308,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T102103Z" creationid="mtan" creationdate="20151029T152934Z">
         <seg>change-bar-width="&lt;v0/&gt;" は thin、medium、thick 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>change-bar-width="&lt;v0/&gt;" token should be 'thin', 'medium', or 'thick'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T102121Z" creationid="mtan" creationdate="20151029T153031Z">
-        <seg>change-bar-width="&lt;v0/&gt;" のトークンは thin、medium 又は thick でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8392,14 +7336,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>clear="&lt;v0/&gt;" token should be 'start', 'end', 'left', 'right', 'inside', 'outside', 'both', 'none', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T102318Z" creationid="mtan" creationdate="20151029T153440Z">
-        <seg>clear="&lt;v0/&gt;" のトークンは start、end、left、right、inside、outside、both、none 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>clip="" should be Function, 'auto', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T102455Z" creationid="mtan" creationdate="20151029T153653Z">
@@ -8412,14 +7348,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T102418Z" creationid="mtan" creationdate="20151029T153612Z">
         <seg>clip="&lt;v0/&gt;" は Function、auto 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>clip="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T102433Z" creationid="mtan" creationdate="20151029T153632Z">
-        <seg>clip="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8448,22 +7376,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>color="" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T102702Z" creationid="mtan" creationdate="20151029T153808Z">
-        <seg>color="" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>color="&lt;v0/&gt;" should be Color, 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T102603Z" creationid="mtan" creationdate="20151029T153740Z">
-        <seg>color="&lt;v0/&gt;" は Color、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>column-count="" should be Number or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T111331Z" creationid="mtan" creationdate="20151029T154013Z">
@@ -8480,14 +7392,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>column-count="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T111309Z" creationid="mtan" creationdate="20151029T153947Z">
-        <seg>column-count="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>column-gap="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T111436Z" creationid="mtan" creationdate="20151029T154133Z">
@@ -8500,14 +7404,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T111359Z" creationid="mtan" creationdate="20151029T154048Z">
         <seg>column-gap="&lt;v0/&gt;" は Length、Percent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>column-gap="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T111412Z" creationid="mtan" creationdate="20151029T154109Z">
-        <seg>column-gap="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8592,14 +7488,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>content-height="&lt;v0/&gt;" token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T111701Z" creationid="mtan" creationdate="20151029T154532Z">
-        <seg>content-height="&lt;v0/&gt;" のトークンは auto、scale-to-fit、scale-down-to-fit、scale-up-to-fit 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>content-type="" should be '&lt;string&gt; | auto'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T111831Z" creationid="mtan" creationdate="20171012T111831Z">
@@ -8672,14 +7560,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>content-width="&lt;v0/&gt;" token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T111945Z" creationid="mtan" creationdate="20151029T154839Z">
-        <seg>content-width="&lt;v0/&gt;" のトークンは auto、scale-to-fit、scale-down-to-fit、scale-up-to-fit 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>country="" should be 'none | &lt;country&gt; | inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T112125Z" creationid="mtan" creationdate="20171012T112125Z">
@@ -8692,14 +7572,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T112146Z" creationid="mtan" creationdate="20151029T155132Z">
         <seg>cue="" は &lt;cue-before&gt; || &lt;cue-after&gt; | inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>custom property in PDF.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171117T131950Z" creationid="mtan" creationdate="20171117T131950Z">
-        <seg>PDFにカスタムプロパティを設定します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8736,38 +7608,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>direction="&lt;v0/&gt;" token should be 'ltr', 'rtl', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T112327Z" creationid="mtan" creationdate="20151029T155328Z">
-        <seg>direction="&lt;v0/&gt;" のトークンは ltr、rtl 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>display-align="" should be 'auto', 'before', 'center', 'after', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T112909Z" creationid="mtan" creationdate="20151029T155553Z">
-        <seg>display-align="" は auto、before、center、after 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>display-align="&lt;v0/&gt;" should be 'auto', 'before', 'center', 'after', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T112821Z" creationid="mtan" creationdate="20151029T155458Z">
-        <seg>display-align="&lt;v0/&gt;" は auto、before、center、after 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>display-align="&lt;v0/&gt;" token should be 'auto', 'before', 'center', 'after', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T112844Z" creationid="mtan" creationdate="20151029T155537Z">
-        <seg>display-align="&lt;v0/&gt;" のトークンは auto、before、center、after 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>document-root | &lt;uri-specification&gt;</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171020T095930Z" creationid="tkg" creationdate="20171020T095930Z">
@@ -8788,14 +7628,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T112957Z" creationid="mtan" creationdate="20151029T155842Z">
         <seg>dominant-baseline="&lt;v0/&gt;" は auto、use-script、no-change、reset-size、ideographic、alphabetic、hanging、mathematical、central、middle、text-after-edge、text-before-edge 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>dominant-baseline="&lt;v0/&gt;" token should be 'auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T113055Z" creationid="mtan" creationdate="20151029T155919Z">
-        <seg>dominant-baseline="&lt;v0/&gt;" のトークンは auto、use-script、no-change、reset-size、ideographic、alphabetic、hanging、mathematical、central、middle、text-after-edge、text-before-edge 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8832,14 +7664,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>empty-cells="&lt;v0/&gt;" token should be 'show', 'hide', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T113234Z" creationid="mtan" creationdate="20151029T160101Z">
-        <seg>empty-cells="&lt;v0/&gt;" のトークンは show、hide 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>end-indent="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T113429Z" creationid="mtan" creationdate="20151029T160218Z">
@@ -8852,14 +7676,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T113320Z" creationid="mtan" creationdate="20151029T160136Z">
         <seg>end-indent="&lt;v0/&gt;" は Length、Percent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>end-indent="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T113408Z" creationid="mtan" creationdate="20151029T160156Z">
-        <seg>end-indent="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8880,14 +7696,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>ends-row="&lt;v0/&gt;" token should be 'true' or 'false'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T113518Z" creationid="mtan" creationdate="20151029T160255Z">
-        <seg>ends-row="&lt;v0/&gt;" のトークンは true 又は false でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>extent="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T113709Z" creationid="mtan" creationdate="20151029T160424Z">
@@ -8900,14 +7708,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T113617Z" creationid="mtan" creationdate="20151029T160339Z">
         <seg>extent="&lt;v0/&gt;" は Length、Percent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>extent="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T113630Z" creationid="mtan" creationdate="20151029T160407Z">
-        <seg>extent="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8948,14 +7748,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T113738Z" creationid="mtan" creationdate="20151029T160614Z">
         <seg>float="&lt;v0/&gt;" は before、start、end、left、right、inside、outside、none 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>float="&lt;v0/&gt;" token should be 'before', 'start', 'end', 'left', 'right', 'inside', 'outside', 'none', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T113811Z" creationid="mtan" creationdate="20151029T160647Z">
-        <seg>float="&lt;v0/&gt;" のトークンは before、start、end、left、right、inside、outside、none 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9120,14 +7912,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>font-selection-strategy="&lt;v0/&gt;" token should be 'auto', 'character-by-character', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T114144Z" creationid="mtan" creationdate="20151029T161144Z">
-        <seg>font-selection-strategy="&lt;v0/&gt;" のトークンは auto、character-by-character 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>font-size-adjust="" should be Number, 'none', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T114547Z" creationid="mtan" creationdate="20151029T161715Z">
@@ -9140,14 +7924,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T114513Z" creationid="mtan" creationdate="20151029T161624Z">
         <seg>font-size-adjust="&lt;v0/&gt;" は Number、none 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>font-size-adjust="&lt;v0/&gt;" token should be 'none' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T114529Z" creationid="mtan" creationdate="20151029T161658Z">
-        <seg>font-size-adjust="&lt;v0/&gt;"のトークンは none 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9168,14 +7944,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>font-size="&lt;v0/&gt;" token should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T114352Z" creationid="mtan" creationdate="20151029T161514Z">
-        <seg>font-size="&lt;v0/&gt;"のトークンは xx-small、x-small、small、medium、large、x-large、xx-large、larger、smaller 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>font-stretch="" should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit', Percent, or Number.</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171120T171325Z" creationid="tkg" creationdate="20171120T171325Z">
@@ -9188,14 +7956,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171120T171235Z" creationid="tkg" creationdate="20171120T171235Z">
         <seg>font-stretch="&lt;v0/&gt;" は normal、wider、narrower、ultra-condensed、extra-condensed、condensed、semi-condensed、semi-expanded、expanded、extra-expanded、ultra-expanded、inherit、Percent 又は Number でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>font-stretch="&lt;v0/&gt;" token should be 'normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T114746Z" creationid="mtan" creationdate="20151029T162045Z">
-        <seg>font-stretch="&lt;v0/&gt;" のトークンは normal、wider、narrower、ultra-condensed、extra-condensed、condensed、semi-condensed、semi-expanded、expanded、extra-expanded、ultra-expanded 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9216,38 +7976,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>font-style="&lt;v0/&gt;" token should be 'normal', 'italic', 'oblique', 'backslant', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T115007Z" creationid="mtan" creationdate="20151102T151652Z">
-        <seg>font-style="&lt;v0/&gt;" のトークンは normal、italic、oblique、backslant 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>font-variant="" should be 'normal', 'small-caps', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T115205Z" creationid="mtan" creationdate="20151102T151933Z">
-        <seg>font-variant="" は normal、small-caps 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>font-variant="&lt;v0/&gt;" should be 'normal', 'small-caps', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T115115Z" creationid="mtan" creationdate="20151102T151833Z">
-        <seg>font-variant="&lt;v0/&gt;" は normal、small-caps 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>font-variant="&lt;v0/&gt;" token should be 'normal', 'small-caps', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T115141Z" creationid="mtan" creationdate="20151102T151912Z">
-        <seg>font-variant="&lt;v0/&gt;" のトークンは normal、small-caps 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>font-weight="" should be 'normal', 'bold', 'bolder', 'lighter', 'inherit', or Number.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T115340Z" creationid="mtan" creationdate="20151102T152250Z">
@@ -9260,14 +7988,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T115242Z" creationid="mtan" creationdate="20151102T152118Z">
         <seg>font-weight="&lt;v0/&gt;" は normal、bold、bolder、lighter、inherit 又は Number でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>font-weight="&lt;v0/&gt;" token should be 'normal', 'bold', 'bolder', 'lighter', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T115308Z" creationid="mtan" creationdate="20151102T152229Z">
-        <seg>font-weight="&lt;v0/&gt;" のトークンは normal、bold、bolder、lighter 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9328,14 +8048,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>glyph-orientation-horizontal="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T115531Z" creationid="mtan" creationdate="20151102T152505Z">
-        <seg>glyph-orientation-horizontal="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>glyph-orientation-vertical="" should be 'auto', 'inherit', or Literal.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T115701Z" creationid="mtan" creationdate="20151102T152753Z">
@@ -9348,14 +8060,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T115622Z" creationid="mtan" creationdate="20151102T152630Z">
         <seg>glyph-orientation-vertical="&lt;v0/&gt;" は auto、 inherit 又は Literal でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>glyph-orientation-vertical="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T115637Z" creationid="mtan" creationdate="20151102T152734Z">
-        <seg>glyph-orientation-vertical="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9400,14 +8104,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>height="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T120000Z" creationid="mtan" creationdate="20151102T153114Z">
-        <seg>height="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>http://www.apache.org/licenses/LICENSE-2.0</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171020T100154Z" creationid="tkg" creationdate="20171020T100154Z">
@@ -9428,14 +8124,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T120107Z" creationid="mtan" creationdate="20151102T153235Z">
         <seg>hyphenate="&lt;v0/&gt;" は false、true 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>hyphenate="&lt;v0/&gt;" token should be 'false', 'true', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T120128Z" creationid="mtan" creationdate="20151102T153305Z">
-        <seg>hyphenate="&lt;v0/&gt;" のトークンは false、true 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9464,14 +8152,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>hyphenation-keep="&lt;v0/&gt;" token should be 'auto', 'column', 'page', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T120237Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>hyphenation-keep="&lt;v0/&gt;" のトークンは auto、column、page 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>hyphenation-ladder-count="" should be 'no-limit', 'inherit', or Number.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T120410Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9484,14 +8164,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T120316Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>hyphenation-ladder-count="&lt;v0/&gt;" は no-limit、inherit 又は Number でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>hyphenation-ladder-count="&lt;v0/&gt;" token should be 'no-limit' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T120330Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>hyphenation-ladder-count="&lt;v0/&gt;" のトークンは no-limit 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9512,14 +8184,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>hyphenation-push-character-count="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T120442Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>hyphenation-push-character-count="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>hyphenation-remain-character-count="" should be Number or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T120548Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9532,14 +8196,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T120518Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>hyphenation-remain-character-count="&lt;v0/&gt;" は Number 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>hyphenation-remain-character-count="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T120528Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>hyphenation-remain-character-count="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9600,14 +8256,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>indicate-destination="&lt;v0/&gt;" token should be 'true' or 'false'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T120706Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>indicate-destination="&lt;v0/&gt;" のトークンは true 又は false でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>initial-page-number="" should be 'auto', 'auto-odd', 'auto-even', 'inherit', or Number.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T120842Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9620,14 +8268,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T120752Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>initial-page-number="&lt;v0/&gt;" は auto、auto-odd、auto-even、inherit 又は Number でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>initial-page-number="&lt;v0/&gt;" token should be 'auto', 'auto-odd', 'auto-even', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T120816Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>initial-page-number="&lt;v0/&gt;" のトークンは auto、auto-odd、auto-even 又は inherit でなければなりません</seg>
       </tuv>
     </tu>
     <tu>
@@ -9648,14 +8288,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>inline-progression-dimension="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T121115Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>inline-progression-dimension="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>intrinsic-scale-value="" should be Percent or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T121233Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9672,14 +8304,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>intrinsic-scale-value="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T121218Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>intrinsic-scale-value="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>intrusion-displace="" should be 'auto', 'none', 'line', 'indent', 'block', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T121358Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9692,14 +8316,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T121301Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>intrusion-displace="&lt;v0/&gt;" は auto、none、line、indent、block 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>intrusion-displace="&lt;v0/&gt;" token should be 'auto', 'none', 'line', 'indent', 'block', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T121331Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>intrusion-displace="&lt;v0/&gt;" のトークンは auto、none、line、indent、block 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9728,14 +8344,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>keep-together="&lt;v0/&gt;" token should be 'auto', 'always', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T121441Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>keep-together="&lt;v0/&gt;" のトークンは auto、always 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>keep-with-next="" should be 'auto', 'always', 'inherit', or Number.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T121605Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9752,14 +8360,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>keep-with-next="&lt;v0/&gt;" token should be 'auto', 'always', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T121545Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>keep-with-next="&lt;v0/&gt;" のトークンは auto、always 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>keep-with-previous="" should be 'auto', 'always', 'inherit', or Number.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T121711Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9772,14 +8372,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T121629Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>keep-with-previous="&lt;v0/&gt;" は auto、always、inherit 又は Number でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>keep-with-previous="&lt;v0/&gt;" token should be 'auto', 'always', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T121647Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>keep-with-previous="&lt;v0/&gt;" のトークンは auto、always 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9824,38 +8416,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>last-line-end-indent="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T121800Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>last-line-end-indent="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>leader-alignment="" should be 'none', 'reference-area', 'page', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T122012Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>leader-alignment="" は none、reference-area、page 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>leader-alignment="&lt;v0/&gt;" should be 'none', 'reference-area', 'page', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T121905Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>leader-alignment="&lt;v0/&gt;" は none、reference-area、page 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>leader-alignment="&lt;v0/&gt;" token should be 'none', 'reference-area', 'page', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T121941Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>leader-alignment="&lt;v0/&gt;" のトークンは none、reference-area、page 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>leader-length="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T135730Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9868,14 +8428,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T135659Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>leader-length="&lt;v0/&gt;" は Length、Percent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>leader-length="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T135708Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>leader-length="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9896,14 +8448,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>leader-pattern-width="&lt;v0/&gt;" token should be 'use-font-metrics' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T135936Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>leader-pattern-width="&lt;v0/&gt;" のトークンは use-font-metrics 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>leader-pattern="" should be 'space', 'rule', 'dots', 'use-content', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T135847Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9916,14 +8460,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T135756Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>leader-pattern="&lt;v0/&gt;" は space、rule、dots、use-content 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>leader-pattern="&lt;v0/&gt;" token should be 'space', 'rule', 'dots', 'use-content', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T135820Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>leader-pattern="&lt;v0/&gt;" のトークンは space、rule、dots、use-content 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9944,14 +8480,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>left="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T140049Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>left="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>letter-spacing="" should be 'normal', 'inherit', or Length.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T140309Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9968,14 +8496,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>letter-spacing="&lt;v0/&gt;" token should be 'normal' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T140244Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>letter-spacing="&lt;v0/&gt;" のトークンは normal 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>letter-value="" should be 'auto', 'alphabetic', or 'traditional'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T140409Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -9988,14 +8508,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T140329Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>letter-value="&lt;v0/&gt;" は auto、alphabetic 又は traditional でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>letter-value="&lt;v0/&gt;" token should be 'auto', 'alphabetic', or 'traditional'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T140349Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>letter-value="&lt;v0/&gt;" のトークンは auto、alphabetic 又は traditional でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -10024,14 +8536,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>line-height-shift-adjustment="&lt;v0/&gt;" token should be 'consider-shifts', 'disregard-shifts', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T140637Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>line-height-shift-adjustment="&lt;v0/&gt;" のトークンは consider-shifts、disregard-shifts 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>line-height="" should be 'normal', 'inherit', Length, Number, or Percent.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T140552Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10044,14 +8548,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T140447Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>line-height="&lt;v0/&gt;" は normal、inherit、Length、Number、又は Percent でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>line-height="&lt;v0/&gt;" token should be 'normal' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T140504Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>line-height="&lt;v0/&gt;" のトークンは normal 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -10072,14 +8568,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>line-stacking-strategy="&lt;v0/&gt;" token should be 'line-height', 'font-height', 'max-height', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T140738Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>line-stacking-strategy="&lt;v0/&gt;" のトークンは line-height、font-height、max-height 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>linefeed-treatment="" should be 'ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T140915Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10092,14 +8580,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T140828Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>linefeed-treatment="&lt;v0/&gt;" は ignore、preserve、treat-as-space、treat-as-zero-width-space 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>linefeed-treatment="&lt;v0/&gt;" token should be 'ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T140851Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>linefeed-treatment="&lt;v0/&gt;" のトークンは ignore、preserve、treat-as-space、treat-as-zero-width-space 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -10152,14 +8632,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>margin-bottom="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T141018Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>margin-bottom="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>margin-left="" should be 'auto', 'inherit', Length, or Percent.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T141243Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10172,14 +8644,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T141153Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>margin-left="&lt;v0/&gt;" は auto、inherit、Length 又は Percent でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>margin-left="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T141207Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>margin-left="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -10200,14 +8664,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>margin-right="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T141416Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>margin-right="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>margin-top="" should be 'auto', 'inherit', Length, or Percent.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T141556Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10220,14 +8676,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T141516Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>margin-top="&lt;v0/&gt;" は auto、inherit、Length 又は Percent でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>margin-top="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T141532Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>margin-top="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -10360,14 +8808,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>maximum-repeats="&lt;v0/&gt;" token should be 'no-limit' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T141750Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>maximum-repeats="&lt;v0/&gt;" のトークンは no-limit 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>media-usage="" should be 'auto', 'paginate', 'bounded-in-one-dimension', or 'unbounded'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T141918Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10380,14 +8820,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T141831Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>media-usage="&lt;v0/&gt;" は auto、paginate、bounded-in-one-dimension 又は unbounded でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>media-usage="&lt;v0/&gt;" token should be 'auto', 'paginate', 'bounded-in-one-dimension', or 'unbounded'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T141858Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>media-usage="&lt;v0/&gt;" のトークンは auto、paginate、bounded-in-one-dimension 又は unbounded でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -10416,14 +8848,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>merge-pages-across-index-key-references="&lt;v0/&gt;" token should be 'merge' or 'leave-separate'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T141950Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>merge-pages-across-index-key-references="&lt;v0/&gt;" のトークンは merge 又は leave-separate でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>merge-ranges-across-index-key-references="" should be 'merge' or 'leave-separate'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142105Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10440,14 +8864,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>merge-ranges-across-index-key-references="&lt;v0/&gt;" token should be 'merge' or 'leave-separate'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20151103T155852Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>merge-ranges-across-index-key-references="&lt;v0/&gt;" のトークンは「merge」又は「leave-separate」でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>merge-sequential-page-numbers="" should be 'merge' or 'leave-separate'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142150Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10460,14 +8876,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142120Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>merge-sequential-page-numbers="&lt;v0/&gt;" は merge 又は leave-separate でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>merge-sequential-page-numbers="&lt;v0/&gt;" token should be 'merge' or 'leave-separate'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T142136Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>merge-sequential-page-numbers="&lt;v0/&gt;" のトークンは merge 又は leave-separate でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -10492,14 +8900,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171117T150840Z" creationid="mtan" creationdate="20171117T150840Z">
         <seg>name="" は空ではいけません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>name="&lt;v0/&gt;" cannot be used when axf:document-info with name="xmp" is present.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T113143Z" creationid="mtan" creationdate="20151028T164141Z">
-        <seg>name="&lt;v0/&gt;" は name="xmp" との axf:document-infoが存在している場合、利用することができません.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10720,30 +9120,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>odd-or-even="" should be 'odd', 'even', 'any', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T142409Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>odd-or-even="" は odd、even、any 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>odd-or-even="&lt;v0/&gt;" should be 'odd', 'even', 'any', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T142328Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>odd-or-even="&lt;v0/&gt;" は odd、even、any 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>odd-or-even="&lt;v0/&gt;" token should be 'odd', 'even', 'any', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T142349Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>odd-or-even="&lt;v0/&gt;" のトークンは odd、even、any 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>only | first | last | rest | any | inherit</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171020T095806Z" creationid="tkg" creationdate="20171020T095806Z">
@@ -10764,14 +9140,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142426Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>orphans="&lt;v0/&gt;" は Number 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>orphans="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T142436Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>orphans="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -10808,14 +9176,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>overflow="&lt;v0/&gt;" token should be 'visible', 'hidden', 'scroll', 'error-if-overflow', 'repeat', 'replace', 'condense', or 'auto'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T142602Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>overflow="&lt;v0/&gt;" のトークンは visible、hidden、scroll、error-if-overflow、repeat、replace、condense 又は auto でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>padding-after="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142740Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10828,14 +9188,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142708Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>padding-after="&lt;v0/&gt;" は Length、Percent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>padding-after="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T142716Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>padding-after="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -10856,14 +9208,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>padding-before="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T142813Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>padding-before="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>padding-bottom="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142946Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10876,14 +9220,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T142912Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>padding-bottom="&lt;v0/&gt;" は Length、Percent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>padding-bottom="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T142922Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>padding-bottom="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -10904,14 +9240,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>padding-end="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T143031Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>padding-end="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>padding-left="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T143152Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10924,14 +9252,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T143119Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>padding-left="&lt;v0/&gt;" は Length、Percent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>padding-left="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T143129Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>padding-left="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -10952,14 +9272,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>padding-right="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T143221Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>padding-right="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>padding-start="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T143358Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10976,14 +9288,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>padding-start="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T143334Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>padding-start="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>padding-top="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T143454Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -10996,14 +9300,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T143420Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>padding-top="&lt;v0/&gt;" は Length、Percent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>padding-top="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T143431Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>padding-top="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11064,14 +9360,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>page-citation-strategy="&lt;v0/&gt;" token should be 'all', 'normal', 'non-blank', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T143604Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>page-citation-strategy="&lt;v0/&gt;" のトークンは all、normal、non-blank 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>page-height="" should be 'auto', 'indefinite', 'inherit', or Length.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T143721Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11084,14 +9372,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T143644Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>page-height="&lt;v0/&gt;" は auto、indefinite、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>page-height="&lt;v0/&gt;" token should be 'auto', 'indefinite', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T143702Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>page-height="&lt;v0/&gt;" のトークンは auto、indefinite 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11112,14 +9392,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>page-number-treatment="&lt;v0/&gt;" token should be 'link' or 'no-link'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T143754Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>page-number-treatment="&lt;v0/&gt;" のトークンは link 又は no-link でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>page-position="" should be 'only', 'first', 'last', 'rest', 'any', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T143949Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11136,14 +9408,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>page-position="&lt;v0/&gt;" token should be 'only', 'first', 'last', 'rest', 'any', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T143918Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>page-position="&lt;v0/&gt;" のトークンは only、first、last、rest、any 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>page-width="" should be 'auto', 'indefinite', 'inherit', or Length.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T144116Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11156,14 +9420,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T144013Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>page-width="&lt;v0/&gt;" は auto、indefinite、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>page-width="&lt;v0/&gt;" token should be 'auto', 'indefinite', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T144030Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>page-width="&lt;v0/&gt;" のトークンは auto、indefinite 又はinherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11200,14 +9456,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>precedence="&lt;v0/&gt;" token should be 'true', 'false', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T144217Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>precedence="&lt;v0/&gt;" のトークンは true、false 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>provisional-distance-between-starts="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T144333Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11224,14 +9472,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>provisional-distance-between-starts="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T144313Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>provisional-distance-between-starts="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>provisional-label-separation="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T144432Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11244,14 +9484,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T144356Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>provisional-label-separation="&lt;v0/&gt;" は Length、Percent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>provisional-label-separation="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T144408Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>provisional-label-separation="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11408,14 +9640,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>relative-align="&lt;v0/&gt;" token should be 'before', 'baseline', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T144704Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>relative-align="&lt;v0/&gt;" のトークンは before、baseline 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>relative-position="" should be 'static', 'relative', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T144820Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11432,14 +9656,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>relative-position="&lt;v0/&gt;" token should be 'static', 'relative', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T144803Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>relative-position="&lt;v0/&gt;" のトークンは static、relative 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>rendering-intent="" should be 'auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T145015Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11452,14 +9668,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T144904Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>rendering-intent="&lt;v0/&gt;" は auto、perceptual、relative-colorimetric、saturation、absolute-colorimetric 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>rendering-intent="&lt;v0/&gt;" token should be 'auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T144939Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>rendering-intent="&lt;v0/&gt;" のトークンは auto、perceptual、relative-colorimetric、saturation、absolute-colorimetric 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11504,14 +9712,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>retrieve-boundary-within-table="&lt;v0/&gt;" token should be 'table', 'table-fragment', or 'page'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T145149Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>retrieve-boundary-within-table="&lt;v0/&gt;" のトークンは table、table-fragment 又は page でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>retrieve-boundary="" should be 'page', 'page-sequence', or 'document'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T145114Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11524,14 +9724,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T145036Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>retrieve-boundary="&lt;v0/&gt;" は page、page-sequence 又は document でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>retrieve-boundary="&lt;v0/&gt;" token should be 'page', 'page-sequence', or 'document'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T145055Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>retrieve-boundary="&lt;v0/&gt;" のトークンは page、page-sequence 又は document でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11568,14 +9760,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>retrieve-position-within-table="&lt;v0/&gt;" token should be 'first-starting', 'first-including-carryover', 'last-starting', or 'last-ending'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T145438Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>retrieve-position-within-table="&lt;v0/&gt;" のトークンは first-starting、first-including-carryover、last-starting 又は last-ending でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>retrieve-position="" should be 'first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', or 'last-ending-within-page'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T145356Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11592,14 +9776,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>retrieve-position="&lt;v0/&gt;" token should be 'first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', or 'last-ending-within-page'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T145331Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>retrieve-position="&lt;v0/&gt;" のトークンは first-starting-within-page、first-including-carryover、last-starting-within-page 又は last-ending-within-page でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>right="" should be Length, Percent, 'auto', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T145646Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11612,14 +9788,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T145544Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>right="&lt;v0/&gt;" は Length、Percent、auto 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>right="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T145559Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>right="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11644,14 +9812,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T145724Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>rule-style="&lt;v0/&gt;" は none、dotted、dashed、solid、double、groove、ridge 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>rule-style="&lt;v0/&gt;" token should be 'none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T145759Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>rule-style="&lt;v0/&gt;" のトークンは none、dotted、dashed、solid、double、groove、ridge 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11688,14 +9848,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>scale-option="&lt;v0/&gt;" token should be 'width', 'height', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T145939Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>scale-option="&lt;v0/&gt;" のトークンは width、height 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>scaling-method="" should be 'auto', 'integer-pixels', 'resample-any-method', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150208Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11708,14 +9860,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150119Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>scaling-method="&lt;v0/&gt;" は auto、integer-pixels、resample-any-method 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>scaling-method="&lt;v0/&gt;" token should be 'auto', 'integer-pixels', 'resample-any-method', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T150144Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>scaling-method="&lt;v0/&gt;" のトークンは auto、integer-pixels、resample-any-method 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11760,14 +9904,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>scaling="&lt;v0/&gt;" token should be 'uniform', 'non-uniform', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T150034Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>scaling="&lt;v0/&gt;" のトークンは uniform、non-uniform 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>score-spaces="" should be 'true', 'false', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150310Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11784,14 +9920,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>score-spaces="&lt;v0/&gt;" token should be 'true', 'false', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T150254Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>score-spaces="&lt;v0/&gt;" のトークンは true、false 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>script="" should be 'none', 'auto', 'inherit', or Literal.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150414Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11804,14 +9932,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150333Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>script="&lt;v0/&gt;" は none、auto、inherit 又は Literal でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>script="&lt;v0/&gt;" token should be 'none', 'auto', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T150351Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>script="&lt;v0/&gt;" のトークンは none、auto 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11864,14 +9984,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>show-destination="&lt;v0/&gt;" token should be 'replace' or 'new'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T150445Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>show-destination="&lt;v0/&gt;" のトークンは replace 又は new でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>size="" should be '&lt;length&gt;{1,2} | auto | landscape | portrait | inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150511Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11920,14 +10032,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>space-after="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T150621Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>space-after="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>space-before="" should be Length or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150711Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11940,14 +10044,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150648Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>space-before="&lt;v0/&gt;" は Length 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>space-before="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T150657Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>space-before="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11968,14 +10064,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>space-end="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T150742Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>space-end="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>space-start="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150902Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -11992,14 +10080,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>space-start="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T150838Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>space-start="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>span="" should be 'none', 'all', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150954Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12012,14 +10092,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T150921Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>span="&lt;v0/&gt;" は none、all 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>span="&lt;v0/&gt;" token should be 'none', 'all', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T150939Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>span="&lt;v0/&gt;" のトークンは none、all 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -12072,14 +10144,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>start-indent="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T151039Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>start-indent="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>starting-state="" should be 'show' or 'hide'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T104930Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12096,14 +10160,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>starting-state="&lt;v0/&gt;" token should be 'show' or 'hide'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T151142Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>starting-state="&lt;v0/&gt;" のトークンは show 又は hide でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>starts-row="" should be 'true' or 'false'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T105024Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12116,14 +10172,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T104947Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>starts-row="&lt;v0/&gt;" は true 又は false でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>starts-row="&lt;v0/&gt;" token should be 'true' or 'false'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T105007Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>starts-row="&lt;v0/&gt;" のトークンは true 又は false でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -12156,14 +10204,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T105052Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>suppress-at-line-break="&lt;v0/&gt;" は auto、suppress、retain 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>suppress-at-line-break="&lt;v0/&gt;" token should be 'auto', 'suppress', 'retain', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T105114Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>suppress-at-line-break="&lt;v0/&gt;" のトークンは auto、suppress、retain 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -12208,14 +10248,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>table-layout="&lt;v0/&gt;" token should be 'auto', 'fixed', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T105257Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>table-layout="&lt;v0/&gt;" のトークンは auto、fixed 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>table-omit-footer-at-break="" should be 'true' or 'false'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T105405Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12232,14 +10264,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>table-omit-footer-at-break="&lt;v0/&gt;" token should be 'true' or 'false'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T105350Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>table-omit-footer-at-break="&lt;v0/&gt;" のトークンは true 又は false でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>table-omit-header-at-break="" should be 'true' or 'false'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T105503Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12252,14 +10276,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T105420Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>table-omit-header-at-break="&lt;v0/&gt;" は true 又は false でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>table-omit-header-at-break="&lt;v0/&gt;" token should be 'true' or 'false'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T105449Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>table-omit-header-at-break="&lt;v0/&gt;" のトークンは true 又は false でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -12328,14 +10344,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>text-align-last="&lt;v0/&gt;" token should be 'relative', 'start', 'center', 'end', 'justify', 'inside', 'outside', 'left', 'right', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T105828Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>text-align-last="&lt;v0/&gt;" のトークンは relative、start、center、end、justify、inside、outside、left、right 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>text-align="" should be 'start | center | end | justify | inside | outside | left | right | &lt;string&gt; | inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T105714Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12360,14 +10368,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>text-altitude="&lt;v0/&gt;" token should be 'use-font-metrics' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T105954Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>text-altitude="&lt;v0/&gt;" のトークンは use-font-metrics 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>text-decoration="" should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T110129Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12380,14 +10380,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T110054Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>text-decoration="&lt;v0/&gt;" は none、underline、no-underline]、overline、no-overline、line-through、no-line-through、blink、no-blink 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>text-decoration="&lt;v0/&gt;" token should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T110109Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>text-decoration="&lt;v0/&gt;" のトークンは none、underline、no-underline]、overline、no-overline、line-through、no-line-through、blink、no-blink 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -12408,14 +10400,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>text-depth="&lt;v0/&gt;" token should be 'use-font-metrics' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T110210Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>text-depth="&lt;v0/&gt;" のトークンは use-font-metrics 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>text-indent="" should be Length, Percent, or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T110355Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12428,30 +10412,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T110315Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>text-indent="&lt;v0/&gt;" は Length、Percent 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>text-indent="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T110326Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>text-indent="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>text-shadow="" should be 'none', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'inherit', Color, or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T110803Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>text-shadow="" は none、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、inherit、Color 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>text-shadow="&lt;v0/&gt;" should be 'none', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'aqua', 'black', 'blue', 'fuchsia', 'gray', 'green', 'lime', 'maroon', 'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'white', 'yellow', 'inherit', Color, or Length.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T110604Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>text-shadow="&lt;v0/&gt;" は none、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow、inherit、Color 又は Length でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -12472,14 +10432,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>text-transform="&lt;v0/&gt;" token should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T110851Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>text-transform="&lt;v0/&gt;" のトークンは capitalize、uppercase、lowercase、none 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>top="" should be Length, Percent, 'auto', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T111047Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12496,14 +10448,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>top="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T111019Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>top="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>treat-as-word-space="" should be 'auto', 'true', 'false', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T111149Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12516,14 +10460,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T111112Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>treat-as-word-space="&lt;v0/&gt;" は auto、true、false 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>treat-as-word-space="&lt;v0/&gt;" token should be 'auto', 'true', 'false', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T111131Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>treat-as-word-space="&lt;v0/&gt;" のトークンは auto、true、false 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -12556,14 +10492,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T111208Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>unicode-bidi="&lt;v0/&gt;" は normal、embed、bidi-override 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>unicode-bidi="&lt;v0/&gt;" token should be 'normal', 'embed', 'bidi-override', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T111228Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>unicode-bidi="&lt;v0/&gt;" のトークンは normal、embed、bidi-override 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -12632,14 +10560,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>visibility="&lt;v0/&gt;" token should be 'visible', 'hidden', 'collapse', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T111432Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>visibility="&lt;v0/&gt;" のトークンは visible、hidden、collapse 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>visible | hidden | collapse | inherit</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171020T095953Z" creationid="tkg" creationdate="20171020T095953Z">
@@ -12672,14 +10592,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>white-space-collapse="&lt;v0/&gt;" token should be 'false', 'true', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T111540Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>white-space-collapse="&lt;v0/&gt;" のトークンは false、true 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>white-space-treatment="" should be 'ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T111812Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12692,14 +10604,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T111719Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>white-space-treatment="&lt;v0/&gt;" は ignore、preserve、ignore-if-before-linefeed、ignore-if-after-linefeed、ignore-if-surrounding-linefeed 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>white-space-treatment="&lt;v0/&gt;" token should be 'ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T111745Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>white-space-treatment="&lt;v0/&gt;" のトークンは ignore、preserve、ignore-if-before-linefeed、ignore-if-after-linefeed、ignore-if-surrounding-linefeed 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -12728,14 +10632,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>widows="&lt;v0/&gt;" token should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T111835Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>widows="&lt;v0/&gt;" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>width | height | inherit</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171020T095851Z" creationid="tkg" creationdate="20171020T095851Z">
@@ -12760,14 +10656,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>width="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T111933Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>width="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>word-spacing="" should be 'normal', 'inherit', or Length.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T112109Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12780,14 +10668,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T112035Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>word-spacing="&lt;v0/&gt;" は normal、inherit 又は Length でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>word-spacing="&lt;v0/&gt;" token should be 'normal' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T112050Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>word-spacing="&lt;v0/&gt;" のトークンは normal 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -12808,14 +10688,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>wrap-option="&lt;v0/&gt;" token should be 'no-wrap', 'wrap', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T112144Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>wrap-option="&lt;v0/&gt;" のトークンは no-wrap、wrap 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>writing-mode="" should be 'lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', or 'inherit'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T112458Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12828,14 +10700,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T112304Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>writing-mode="&lt;v0/&gt;" は lr-tb、rl-tb、tb-rl、tb-lr、bt-lr、bt-rl、lr-bt、rl-bt、lr-alternating-rl-bt、lr-alternating-rl-tb、lr-inverting-rl-bt、lr-inverting-rl-tb、tb-lr-in-lr-pairs、lr、rl、tb 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>writing-mode="&lt;v0/&gt;" token should be 'lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T112403Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>writing-mode="&lt;v0/&gt;" のトークンは lr-tb、rl-tb、tb-rl、tb-lr、bt-lr、bt-rl、lr-bt、rl-bt、lr-alternating-rl-bt、lr-alternating-rl-tb、lr-inverting-rl-bt、lr-inverting-rl-tb、tb-lr-in-lr-pairs、lr、rl、tb 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -12876,14 +10740,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T112530Z" creationid="mtan" creationdate="20151102T153431Z">
         <seg>z-index="&lt;v0/&gt;" は auto、inherit 又は Number でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>z-index="&lt;v0/&gt;" token should be 'auto' or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T112548Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>z-index="&lt;v0/&gt;" のトークンは auto 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>

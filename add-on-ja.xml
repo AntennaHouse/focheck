@@ -3,14 +3,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
     <xt:extension id="focheck">
-        <xt:location href="https://github.com/AntennaHouse/focheck/releases/download/v0.6.1/focheck-framework-ja-0.6.1.zip"/>
-        <xt:version>0.6.1</xt:version>
+        <xt:location href="https://github.com/AntennaHouse/focheck/releases/download/v0.7.0/focheck-framework-ja-0.7.0.zip"/>
+        <xt:version>0.7.0</xt:version>
         <xt:oxy_version>14.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Antenna House, Inc.</xt:author>
         <xt:name>focheck</xt:name>
         <xt:description xmlns="http://www.w3.org/1999/xhtml">XSL-FOとアンテナハウスの拡張要素</xt:description>
-        <xt:license><![CDATA[   Copyright 2015-2018 Antenna House, Inc.
+        <xt:license><![CDATA[   Copyright 2015-2019 Antenna House, Inc.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

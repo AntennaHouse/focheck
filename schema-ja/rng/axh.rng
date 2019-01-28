@@ -15,8 +15,7 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
--->
-<grammar ns="http://www.antennahouse.com/names/XSL/Hyphenations" xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations" xmlns="http://relaxng.org/ns/structure/1.0">
+--><grammar ns="http://www.antennahouse.com/names/XSL/Hyphenations" xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations" xmlns="http://relaxng.org/ns/structure/1.0">
   <define name="hyphenation-info">
     <element name="axh_hyphenation-info">
       <ref name="axh_hyphenation-info.attlist"/>

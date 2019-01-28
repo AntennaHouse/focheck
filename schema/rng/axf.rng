@@ -3,7 +3,7 @@
   Schema for Antenna House extension elements and non-inherited
   extension attributes.
   
-  Copyright 2015-2018 Antenna House, Inc.
+  Copyright 2015-2019 Antenna House, Inc.
   
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -278,7 +278,7 @@
   -->
   <define name="axf_custom-property">
     <element name="axf:custom-property">
-      <a:documentation>custom property in PDF. Effective with PDF 1.4 or later. Invalid with PDF/A</a:documentation>
+      <a:documentation>Custom PDF property Effective with PDF 1.4 or later. Invalid with PDF/A</a:documentation>
       <attribute name="name">
         <a:documentation>Name of the custom property.  Should not be empty.</a:documentation>
       </attribute>
@@ -674,10 +674,12 @@
     <ref name="text-decoration"/>
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
+    <ref name="axf.text-decoration.attlist"/>
   </define>
   <define name="fo_bidi-override.attlist" combine="interleave">
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
+    <ref name="axf.text-decoration.attlist"/>
   </define>
   <define name="fo_block.attlist" combine="interleave">
     <ref name="axf_destination-type"/>
@@ -692,6 +694,7 @@
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
     <ref name="axf.block.attlist"/>
+    <ref name="axf.text-decoration.attlist"/>
   </define>
   <define name="fo_block-container.attlist" combine="interleave">
     <ref name="axf_column-count"/>
@@ -715,9 +718,11 @@
   <define name="fo_character.attlist" combine="interleave">
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
+    <ref name="axf.text-decoration.attlist"/>
   </define>
   <define name="fo_external-graphic.attlist" combine="interleave">
     <ref name="axf_alttext"/>
+    <ref name="axf_background-image-resolution"/>
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
   </define>
@@ -761,6 +766,7 @@
   <define name="fo_inline.attlist" combine="interleave">
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
+    <ref name="axf.text-decoration.attlist"/>
     <ref name="axf_indent-here"/>
   </define>
   <define name="fo_inline-container.attlist" combine="interleave">
@@ -769,12 +775,14 @@
   </define>
   <define name="fo_instream-foreign-object.attlist" combine="interleave">
     <ref name="axf_alttext"/>
+    <ref name="axf_background-image-resolution"/>
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
   </define>
   <define name="fo_leader.attlist" combine="interleave">
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
+    <ref name="axf.text-decoration.attlist"/>
   </define>
   <define name="fo_list-block.attlist" combine="interleave">
     <ref name="axf.block.attlist"/>
@@ -813,21 +821,22 @@
   <define name="fo_page-number.attlist" combine="interleave">
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
-    <ref name="axf-page-number-properties"/>
+    <ref name="axf.page-number.attlist"/>
   </define>
   <define name="fo_page-number-citation.attlist" combine="interleave">
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
-    <ref name="axf-page-number-properties"/>
+    <ref name="axf.page-number.attlist"/>
   </define>
   <define name="fo_page-number-citation-last.attlist" combine="interleave">
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
-    <ref name="axf-page-number-properties"/>
+    <ref name="axf.page-number.attlist"/>
   </define>
   <define name="fo_scaling-value-citation.attlist" combine="interleave">
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
+    <ref name="axf.text-decoration.attlist"/>
   </define>
   <define name="fo_table.attlist" combine="interleave">
     <ref name="axf_table-summary"/>
@@ -875,6 +884,7 @@
     <ref name="text-decoration"/>
     <ref name="xml_id"/>
     <ref name="axf.annotation.attlist"/>
+    <ref name="axf.text-decoration.attlist"/>
   </define>
   <!--
     
@@ -908,14 +918,24 @@
   -->
   <define name="axf.annotation.attlist">
     <ref name="axf_annotation-author"/>
+    <ref name="axf_annotation-border-color"/>
+    <ref name="axf_annotation-border-style"/>
+    <ref name="axf_annotation-border-width"/>
     <ref name="axf_annotation-color"/>
     <ref name="axf_annotation-contents"/>
     <ref name="axf_annotation-file-attachment"/>
+    <ref name="axf_annotation-flags"/>
+    <ref name="axf_annotation-font-family"/>
+    <ref name="axf_annotation-font-size"/>
+    <ref name="axf_annotation-font-style"/>
+    <ref name="axf_annotation-font-weight"/>
     <ref name="axf_annotation-height"/>
     <ref name="axf_annotation-icon-name"/>
     <ref name="axf_annotation-open"/>
     <ref name="axf_annotation-position-horizontal"/>
     <ref name="axf_annotation-position-vertical"/>
+    <ref name="axf_annotation-text-align"/>
+    <ref name="axf_annotation-text-color"/>
     <ref name="axf_annotation-title"/>
     <ref name="axf_annotation-type"/>
     <ref name="axf_annotation-width"/>
@@ -945,7 +965,7 @@
     List of extension properties to control page and column numbers.
     See https://www.antennahouse.com/product/ahf65/ahf-ext.html#page-number
   -->
-  <define name="axf-page-number-properties">
+  <define name="axf.page-number.attlist">
     <!-- axf:assumed-page-number is inherited. -->
     <ref name="axf_column-number-format"/>
     <ref name="axf_number-type"/>
@@ -956,6 +976,16 @@
     <!-- axf:suppress-duplicate-page-number is deprecated. -->
     <ref name="axf_suppress-folio-prefix"/>
     <ref name="axf_suppress-folio-suffix"/>
+  </define>
+  <!--
+    List of text decoration extension properties
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#text-decoration
+  -->
+  <define name="axf.text-decoration.attlist">
+    <ref name="axf_text-line-color"/>
+    <ref name="axf_text-line-style"/>
+    <ref name="axf_text-line-width"/>
+    <ref name="axf_text-underline-position"/>
   </define>
   <!--
     List of extension properties common to all block-level formatting
@@ -1072,6 +1102,49 @@
     </optional>
   </define>
   <!--
+    @axf:annotation-border-color
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-border-color
+  -->
+  <define name="axf_annotation-border-color">
+    <optional>
+      <attribute name="axf:annotation-border-color">
+        <a:documentation>Border color of the free text annotation: &lt;color&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-border-style
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-border-style
+  -->
+  <define name="axf_annotation-border-style">
+    <optional>
+      <attribute name="axf:annotation-border-style">
+        <a:documentation>Border style of the free text annotation: solid | dotted | dashed | dot-dash | dot-dot-dash</a:documentation>
+        <choice>
+          <value>solid</value>
+          <value>dotted</value>
+          <value>dashed</value>
+          <value>dot-dash</value>
+          <value>dot-dot-dash</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-border-width
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-border-width
+  -->
+  <define name="axf_annotation-border-width">
+    <optional>
+      <attribute name="axf:annotation-border-width">
+        <a:documentation>Border width of the free text annotation: &lt;border-width&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:annotation-color
     
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-color
@@ -1096,18 +1169,6 @@
     </optional>
   </define>
   <!--
-    @axf:annotation-icon-name
-    
-    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-icon-name
-  -->
-  <define name="axf_annotation-icon-name">
-    <optional>
-      <attribute name="axf:annotation-icon-name">
-        <a:documentation>Name of the icon used for displaying the annotation: &lt;string&gt;</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <!--
     @axf:annotation-file-attachment
     
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-file-attachment
@@ -1121,6 +1182,78 @@
     </optional>
   </define>
   <!--
+    @axf:annotation-flags
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-flags
+  -->
+  <define name="axf_annotation-flags">
+    <optional>
+      <attribute name="axf:annotation-flags">
+        <a:documentation>Characteristics of the annotation: Invisible | Hidden | Print | NoZoom | NoRotate | NoView | ReadOnly | Locked | ToggleNoView | LockedContents</a:documentation>
+        <choice>
+          <value>Invisible</value>
+          <value>Hidden</value>
+          <value>Print</value>
+          <value>NoZoom</value>
+          <value>NoRotate</value>
+          <value>NoView</value>
+          <value>ReadOnly</value>
+          <value>Locked</value>
+          <value>ToggleNoView</value>
+          <value>LockedContents</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-font-family
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-family
+  -->
+  <define name="axf_annotation-font-family">
+    <optional>
+      <attribute name="axf:annotation-font-family">
+        <a:documentation>Font family of the free text annotation: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-font-size
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-size
+  -->
+  <define name="axf_annotation-font-size">
+    <optional>
+      <attribute name="axf:annotation-font-size">
+        <a:documentation>Font size of the free text annotation: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-font-style
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-style
+  -->
+  <define name="axf_annotation-font-style">
+    <optional>
+      <attribute name="axf:annotation-font-style">
+        <a:documentation>Font style of the free text annotation: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-font-weight
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-weight
+  -->
+  <define name="axf_annotation-font-weight">
+    <optional>
+      <attribute name="axf:annotation-font-weight">
+        <a:documentation>Font weight of the free text annotation: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:annotation-height
     
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-height
@@ -1129,6 +1262,18 @@
     <optional>
       <attribute name="axf:annotation-height">
         <a:documentation>Height of the annotation: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-icon-name
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-icon-name
+  -->
+  <define name="axf_annotation-icon-name">
+    <optional>
+      <attribute name="axf:annotation-icon-name">
+        <a:documentation>Name of the icon used for displaying the annotation: &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1169,6 +1314,35 @@
     <optional>
       <attribute name="axf:annotation-position-vertical">
         <a:documentation>Vertical position of the annotation: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-text-align
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-text-align
+  -->
+  <define name="axf_annotation-text-align">
+    <optional>
+      <attribute name="axf:annotation-text-align">
+        <a:documentation>Alignment of the free text annotation: &lt;string&gt;</a:documentation>
+        <choice>
+          <value>left</value>
+          <value>center</value>
+          <value>right</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-text-color
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-text-color
+  -->
+  <define name="axf_annotation-text-color">
+    <optional>
+      <attribute name="axf:annotation-text-color">
+        <a:documentation>Color of the free text annotation: &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1256,6 +1430,16 @@
         </choice>
       </attribute>
     </optional>
+  </define>
+  <!--
+    @axf:background-image-resolution
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-image-resolution
+  -->
+  <define name="axf_background-image-resolution">
+    <attribute name="axf:background-image-resolution">
+      <a:documentation>Resolution of a background image: [ normal | [ from-image || &lt;dpi&gt; ] ]#</a:documentation>
+    </attribute>
   </define>
   <!--
     @axf:baseline-block-snap
@@ -2435,6 +2619,54 @@
     <optional>
       <attribute name="axf:table-summary">
         <a:documentation>Summary describing the table.  Included in Tagged PDF output.</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:text-line-color
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-line-color
+  -->
+  <define name="axf_text-line-color">
+    <optional>
+      <attribute name="axf:text-line-color">
+        <a:documentation>Color of underline, strike-through, and overline: auto | &lt;color&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:text-line-style
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-line-style
+  -->
+  <define name="axf_text-line-style">
+    <optional>
+      <attribute name="axf:text-line-style">
+        <a:documentation>Style of underline, strike-through, and overline: &lt;border-style&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:text-line-width
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-line-width
+  -->
+  <define name="axf_text-line-width">
+    <optional>
+      <attribute name="axf:text-line-width">
+        <a:documentation>Width of underline, strike-through, and overline: auto | &lt;border-width&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:text-underline-position
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-underline-position
+  -->
+  <define name="axf_text-underline-position">
+    <optional>
+      <attribute name="axf:text-underline-position">
+        <a:documentation>Position of underline: auto | [ [ before-edge | alphabetic | after-edge ] || [ &lt;percentage&gt; | &lt;length&gt; ] ]</a:documentation>
       </attribute>
     </optional>
   </define>

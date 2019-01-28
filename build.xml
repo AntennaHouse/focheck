@@ -5,7 +5,7 @@
 <description>Additional properties and targets used when developing
 'focheck' and making a release.</description>
 <!--
-     Copyright 2015-2018 Antenna House, Inc.
+     Copyright 2015-2019 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -393,12 +393,18 @@ AFTER making a release on GitHub:
     <fileset dir="${focheck.basedir.converted}/omegat/target"
 	     includes="*.sch" />
   </copy>
+  <chmod dir="${focheck.basedir.converted}/schematron-ja"
+	 includes="**/*.sch"
+	 perm="644" />
   <copy todir="${focheck.basedir.converted}/schema-ja/rng"
 	preservelastmodified="true"
 	force="${force}">
     <fileset dir="${focheck.basedir.converted}/omegat/target"
 	     includes="*.rng" />
   </copy>
+  <chmod dir="${focheck.basedir.converted}/schema-ja/rng"
+	 includes="**/*.rng"
+	 perm="644" />
 </target>
 
 <target name="rnc-ja" depends="trang"
@@ -407,6 +413,9 @@ AFTER making a release on GitHub:
     <arg value="${focheck.basedir.converted}/schema-ja/rng/${schema.basename}.rng" />
     <arg value="${focheck.basedir.converted}/schema-ja/${schema.basename}.rnc" />
   </java>
+  <chmod dir="${focheck.basedir.converted}/schema-ja"
+	 includes="**/*.rnc"
+	 perm="644" />
 </target>
 
 <target name="xsd-ja" depends="trang">
