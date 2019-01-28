@@ -81,6 +81,8 @@
 <xsl:variable name="property-value-overrides" as="element(item)+">
   <!-- AH Formatter adds 'paginate'. -->
   <item property="background-repeat">repeat | repeat-x | repeat-y | no-repeat | paginate</item>
+  <!-- AH Formatter adds 'transparent'. -->
+  <item property="color">&lt;color> | transparent | inherit</item>
   <!-- AH Formatter adds 'justify'. -->
   <item property="display-align">auto | before | center | after | justify</item>
   <!-- AH Formatter allows <percentage>. -->
