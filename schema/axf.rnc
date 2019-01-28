@@ -1,7 +1,7 @@
 # Schema for Antenna House extension elements and non-inherited
 # extension attributes.
 #
-# Copyright 2015-2018 Antenna House, Inc.
+# Copyright 2015-2019 Antenna House, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -118,7 +118,7 @@ non-xsl =
 # <axf:custom-property/>
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property
 axf_custom-property =
-  ## custom property in PDF. Effective with PDF 1.4 or later. Invalid with PDF/A
+  ## Custom PDF property Effective with PDF 1.4 or later. Invalid with PDF/A
   element axf:custom-property {
     ## Name of the custom property.  Should not be empty.
     attribute name { text },
@@ -416,11 +416,13 @@ fo_basic-link.attlist &=
     axf_alttext,
     text-decoration,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf.text-decoration.attlist
 
 fo_bidi-override.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf.text-decoration.attlist
 
 fo_block.attlist &=
     axf_destination-type,
@@ -434,7 +436,8 @@ fo_block.attlist &=
     width,
     xml_id,
     axf.annotation.attlist,
-    axf.block.attlist
+    axf.block.attlist,
+    axf.text-decoration.attlist
 
 fo_block-container.attlist &=
     axf_column-count,
@@ -457,10 +460,12 @@ fo_block-container.attlist &=
 
 fo_character.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf.text-decoration.attlist
 
 fo_external-graphic.attlist &=
     axf_alttext,
+    axf_background-image-resolution,
     xml_id,
     axf.annotation.attlist
 
@@ -504,6 +509,7 @@ fo_index-range-begin.attlist &=
 fo_inline.attlist &=
     xml_id,
     axf.annotation.attlist,
+    axf.text-decoration.attlist,
     axf_indent-here
 
 fo_inline-container.attlist &=
@@ -512,12 +518,14 @@ fo_inline-container.attlist &=
 
 fo_instream-foreign-object.attlist &=
     axf_alttext,
+    axf_background-image-resolution,
     xml_id,
     axf.annotation.attlist
 
 fo_leader.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf.text-decoration.attlist
 
 fo_list-block.attlist &=
     axf.block.attlist,
@@ -556,21 +564,22 @@ fo_multi-toggle.attlist &=
 fo_page-number.attlist &=
     xml_id,
     axf.annotation.attlist,
-    axf-page-number-properties
+    axf.page-number.attlist
 
 fo_page-number-citation.attlist &=
     xml_id,
     axf.annotation.attlist,
-    axf-page-number-properties
+    axf.page-number.attlist
 
 fo_page-number-citation-last.attlist &=
     xml_id,
     axf.annotation.attlist,
-    axf-page-number-properties
+    axf.page-number.attlist
 
 fo_scaling-value-citation.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf.text-decoration.attlist
 
 fo_table.attlist &=
     axf_table-summary,
@@ -617,7 +626,8 @@ fo_table-row.attlist &=
 fo_wrapper.attlist &=
     text-decoration,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.attlist,
+    axf.text-decoration.attlist
 
 #
 # Extensions to property groups
@@ -688,7 +698,7 @@ axf-outline-properties =
 
 # List of extension properties to control page and column numbers.
 # See https://www.antennahouse.com/product/ahf65/ahf-ext.html#page-number
-axf-page-number-properties =
+axf.page-number.attlist =
     # axf:assumed-page-number is inherited.
     axf_column-number-format,
     axf_number-type,
@@ -699,6 +709,14 @@ axf-page-number-properties =
     # axf:suppress-duplicate-page-number is deprecated.
     axf_suppress-folio-prefix,
     axf_suppress-folio-suffix
+
+# List of text decoration extension properties
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#text-decoration
+axf.text-decoration.attlist =
+    axf_text-line-color,
+    axf_text-line-style,
+    axf_text-line-width,
+    axf_text-underline-position
 
 # List of extension properties common to all block-level formatting
 # objects
@@ -933,6 +951,13 @@ axf_background-content-width =
 axf_background-scaling =
     ## uniform | non-uniform | inherit
     attribute axf:background-scaling { 'uniform' | 'non-uniform' | 'inherit' }?
+
+# @axf:background-image-resolution
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-image-resolution
+axf_background-image-resolution =
+    ## Resolution of a background image: [ normal | [ from-image || <dpi> ] ]#
+    attribute axf:background-image-resolution { text }
 
 # @axf:baseline-block-snap
 #
@@ -1514,6 +1539,34 @@ axf_tab-align =
 axf_table-summary =
     ## Summary describing the table.  Included in Tagged PDF output.
     attribute axf:table-summary { text }?
+
+# @axf:text-line-color
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-line-color
+axf_text-line-color =
+    ## Color of underline, strike-through, and overline: auto | <color>
+    attribute axf:text-line-color { text }?
+
+# @axf:text-line-style
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-line-style
+axf_text-line-style =
+    ## Style of underline, strike-through, and overline: <border-style>
+    attribute axf:text-line-style { text }?
+
+# @axf:text-line-width
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-line-width
+axf_text-line-width =
+    ## Width of underline, strike-through, and overline: auto | <border-width>
+    attribute axf:text-line-width { text }?
+
+# @axf:text-underline-position
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-underline-position
+axf_text-underline-position =
+    ## Position of underline: auto | [ [ before-edge | alphabetic | after-edge ] || [ <percentage> | <length> ] ]
+    attribute axf:text-underline-position { text }?
 
 # @axf:text-overflow
 #

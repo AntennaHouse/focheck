@@ -1,7 +1,7 @@
-# Antenna House extension elements and non-inherited extension
-# attributes.
+# Schema for Antenna House extension elements and non-inherited
+# extension attributes.
 # 
-# Copyright 2015-2016 Antenna House, Inc.
+# Copyright 2015-2019 Antenna House, Inc.
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,12 +17,14 @@
 
 namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
+namespace axh = "http://www.antennahouse.com/names/XSL/Hyphenations"
 namespace fo = "http://www.w3.org/1999/XSL/Format"
 namespace local = ""
 
+include "axh.rnc" inherit = axf
 include "axf-inherited.rnc" inherit = axf {
   # 
-  # Overrides to patterns in 'fo-inherited.rnc' (and patterns in
+  # Overrides to patterns in 'axf-inherited.rnc' (and patterns in
   # modules that it includes).
   #
   
@@ -58,7 +60,8 @@ include "axf-inherited.rnc" inherit = axf {
     & fo_region-end?
   # AH Formatter uses axf:custom-property and axf:document-info within
   # fo:declarations.
-  fo_declarations.model |= (axf_custom-property | axf_document-info)*
+  fo_declarations.model |=
+    (axf_custom-property | axf_document-info | axf_hyphenation-info)*
   # AH Formatter allows empty fo:static-content.
   fo_static-content.model =
     (block.fo.list | neutral.fo.list)* & point.fo.list*
@@ -105,7 +108,7 @@ include "axf-inherited.rnc" inherit = axf {
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property
 axf_custom-property =
   
-  ## PDFにカスタムプロパティを設定します。PDF1.4以降のとき有効です。PDF/Aでは無効です。
+  ## Custom PDF property Effective with PDF 1.4 or later. PDF/Aでは無効です。
   element axf:custom-property {
     
     ## カスタムプロパティ名どちらも空ではいけません。
@@ -198,29 +201,40 @@ axf_form-field-option =
   
   ## リストボックス、コンボボックスの構成要素を指定します。 
   element axf:form-field-option { text }
+# <axf:hyphenation-info>
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.hyphenation-info
+axf_hyphenation-info =
+  
+  ## Additional hyphenation information
+  element axf:hyphenation-info {
+    axf_hyphenation-info.attlist, axh_exceptions?
+  }
+axf_hyphenation-info.attlist =
+  attribute language { text }?,
+  attribute src { text }?
 # <axf:ruby>
 # https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby
 axf_ruby =
   
-  ## ルビ構造
+  ## The ruby structure
   element axf:ruby { axf.ruby.attlist, (axf_ruby-base, axf_ruby-text)+ }
 # <axf:ruby-base>
 # https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby-base
 axf_ruby-base =
   
-  ## ルビの親文字。
+  ## Base character of ruby
   element axf:ruby-base { text | axf_ruby }
 # <axf:ruby-text>
 # https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby-text
 axf_ruby-text =
   
-  ## ルビ。
+  ## Ruby
   element axf:ruby-text { text }
 # <axf:spread-page-master>
 # https://www.antennahouse.com/product/ahf65/ahf-spread.html#axf.spread-page-master
 axf_spread-page-master =
   
-  ## 見開きページマスタ
+  ## A two-page spread
   element axf:spread-page-master {
     axf_background-color,
     axf_background-content-height,
@@ -371,8 +385,10 @@ fo_basic-link.attlist &=
   axf_alttext,
   text-decoration,
   xml_id,
-  axf.annotation.attlist
-fo_bidi-override.attlist &= xml_id, axf.annotation.attlist
+  axf.annotation.attlist,
+  axf.text-decoration.attlist
+fo_bidi-override.attlist &=
+  xml_id, axf.annotation.attlist, axf.text-decoration.attlist
 fo_block.attlist &=
   axf_destination-type,
   axf_suppress-if-first-on-page,
@@ -385,7 +401,8 @@ fo_block.attlist &=
   width,
   xml_id,
   axf.annotation.attlist,
-  axf.block.attlist
+  axf.block.attlist,
+  axf.text-decoration.attlist
 fo_block-container.attlist &=
   axf_column-count,
   axf_column-fill,
@@ -404,9 +421,13 @@ fo_block-container.attlist &=
   role,
   xml_id,
   axf.annotation.attlist
-fo_character.attlist &= xml_id, axf.annotation.attlist
+fo_character.attlist &=
+  xml_id, axf.annotation.attlist, axf.text-decoration.attlist
 fo_external-graphic.attlist &=
-  axf_alttext, xml_id, axf.annotation.attlist
+  axf_alttext,
+  axf_background-image-resolution,
+  xml_id,
+  axf.annotation.attlist
 fo_float.attlist &=
   axf_float,
   axf_float-x,
@@ -436,11 +457,19 @@ fo_footnote.attlist &=
   axf.annotation.attlist
 fo_footnote-body.attlist &= xml_id, axf.annotation.attlist
 fo_index-range-begin.attlist &= xml_id, axf.annotation.attlist
-fo_inline.attlist &= xml_id, axf.annotation.attlist, axf_indent-here
+fo_inline.attlist &=
+  xml_id,
+  axf.annotation.attlist,
+  axf.text-decoration.attlist,
+  axf_indent-here
 fo_inline-container.attlist &= xml_id, axf.annotation.attlist
 fo_instream-foreign-object.attlist &=
-  axf_alttext, xml_id, axf.annotation.attlist
-fo_leader.attlist &= xml_id, axf.annotation.attlist
+  axf_alttext,
+  axf_background-image-resolution,
+  xml_id,
+  axf.annotation.attlist
+fo_leader.attlist &=
+  xml_id, axf.annotation.attlist, axf.text-decoration.attlist
 fo_list-block.attlist &=
   axf.block.attlist, xml_id, axf.annotation.attlist
 fo_list-item.attlist &=
@@ -452,12 +481,13 @@ fo_multi-property-set.attlist &= xml_id, axf.annotation.attlist
 fo_multi-switch.attlist &= xml_id, axf.annotation.attlist
 fo_multi-toggle.attlist &= xml_id, axf.annotation.attlist
 fo_page-number.attlist &=
-  xml_id, axf.annotation.attlist, axf-page-number-properties
+  xml_id, axf.annotation.attlist, axf.page-number.attlist
 fo_page-number-citation.attlist &=
-  xml_id, axf.annotation.attlist, axf-page-number-properties
+  xml_id, axf.annotation.attlist, axf.page-number.attlist
 fo_page-number-citation-last.attlist &=
-  xml_id, axf.annotation.attlist, axf-page-number-properties
-fo_scaling-value-citation.attlist &= xml_id, axf.annotation.attlist
+  xml_id, axf.annotation.attlist, axf.page-number.attlist
+fo_scaling-value-citation.attlist &=
+  xml_id, axf.annotation.attlist, axf.text-decoration.attlist
 fo_table.attlist &=
   axf_table-summary, xml_id, axf.annotation.attlist, axf.block.attlist
 fo_table-and-caption.attlist &= xml_id, axf.block.attlist
@@ -473,7 +503,11 @@ fo_table-body.attlist &= xml_id, axf.annotation.attlist
 fo_table-footer.attlist &= xml_id, axf.annotation.attlist
 fo_table-header.attlist &= xml_id, axf.annotation.attlist
 fo_table-row.attlist &= xml_id, axf.annotation.attlist
-fo_wrapper.attlist &= text-decoration, xml_id, axf.annotation.attlist
+fo_wrapper.attlist &=
+  text-decoration,
+  xml_id,
+  axf.annotation.attlist,
+  axf.text-decoration.attlist
 # 
 # Extensions to property groups
 #
@@ -498,14 +532,24 @@ common-border-padding-and-background-properties &=
 # inline-level formatting objects
 axf.annotation.attlist =
   axf_annotation-author,
+  axf_annotation-border-color,
+  axf_annotation-border-style,
+  axf_annotation-border-width,
   axf_annotation-color,
   axf_annotation-contents,
   axf_annotation-file-attachment,
+  axf_annotation-flags,
+  axf_annotation-font-family,
+  axf_annotation-font-size,
+  axf_annotation-font-style,
+  axf_annotation-font-weight,
   axf_annotation-height,
   axf_annotation-icon-name,
   axf_annotation-open,
   axf_annotation-position-horizontal,
   axf_annotation-position-vertical,
+  axf_annotation-text-align,
+  axf_annotation-text-color,
   axf_annotation-title,
   axf_annotation-type,
   axf_annotation-width
@@ -525,7 +569,7 @@ axf-outline-properties =
   axf_outline-font-weight
 # List of extension properties to control page and column numbers.
 # See https://www.antennahouse.com/product/ahf65/ahf-ext.html#page-number
-axf-page-number-properties =
+axf.page-number.attlist =
   # axf:assumed-page-number is inherited.
   axf_column-number-format,
   axf_number-type,
@@ -536,9 +580,19 @@ axf-page-number-properties =
   # axf:suppress-duplicate-page-number is deprecated.
   axf_suppress-folio-prefix,
   axf_suppress-folio-suffix
+# List of text decoration extension properties
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#text-decoration
+axf.text-decoration.attlist =
+  axf_text-line-color,
+  axf_text-line-style,
+  axf_text-line-width,
+  axf_text-underline-position
 # List of extension properties common to all block-level formatting
 # objects
-axf.block.attlist = axf-baseline-grid-properties, axf-outline-properties
+axf.block.attlist =
+  axf-baseline-grid-properties,
+  axf-outline-properties,
+  axf_text-overflow
 axf.ruby.attlist =
   axf_ruby-align,
   axf_ruby-position,
@@ -605,6 +659,29 @@ axf_annotation-author =
   
   ## 注釈の作成者： <string>
   attribute axf:annotation-author { text }?
+# @axf:annotation-border-color
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-border-color
+axf_annotation-border-color =
+  
+  ## Border color of the free text annotation: <color>
+  attribute axf:annotation-border-color { text }?
+# @axf:annotation-border-style
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-border-style
+axf_annotation-border-style =
+  
+  ## Border style of the free text annotation: solid | dotted | dashed | dot-dash | dot-dot-dash
+  attribute axf:annotation-border-style {
+    "solid" | "dotted" | "dashed" | "dot-dash" | "dot-dot-dash"
+  }?
+# @axf:annotation-border-width
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-border-width
+axf_annotation-border-width =
+  
+  ## Border width of the free text annotation: <border-width>
+  attribute axf:annotation-border-width { text }?
 # @axf:annotation-color
 # 
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-color
@@ -619,13 +696,6 @@ axf_annotation-contents =
   
   ## 注釈の内容：<string>
   attribute axf:annotation-contents { text }?
-# @axf:annotation-icon-name
-# 
-# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-icon-name
-axf_annotation-icon-name =
-  
-  ## 注釈の表示に用いるアイコンの名前： <string>
-  attribute axf:annotation-icon-name { text }?
 # @axf:annotation-file-attachment
 # 
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-file-attachment
@@ -633,6 +703,52 @@ axf_annotation-file-attachment =
   
   ## ファイル添付注釈の関連付けられるファイル： <uri-specification>
   attribute axf:annotation-file-attachment { xsd:anyURI }?
+# @axf:annotation-flags
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-flags
+axf_annotation-flags =
+  
+  ## Characteristics of the annotation: Invisible | Hidden | Print | NoZoom | NoRotate | NoView | ReadOnly | Locked | ToggleNoView | LockedContents
+  attribute axf:annotation-flags {
+    "Invisible"
+    | "Hidden"
+    | "Print"
+    | "NoZoom"
+    | "NoRotate"
+    | "NoView"
+    | "ReadOnly"
+    | "Locked"
+    | "ToggleNoView"
+    | "LockedContents"
+  }?
+# @axf:annotation-font-family
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-family
+axf_annotation-font-family =
+  
+  ## Font family of the free text annotation: <string>
+  attribute axf:annotation-font-family { text }?
+# @axf:annotation-font-size
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-size
+axf_annotation-font-size =
+  
+  ## Font size of the free text annotation: <string>
+  attribute axf:annotation-font-size { text }?
+# @axf:annotation-font-style
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-style
+axf_annotation-font-style =
+  
+  ## Font style of the free text annotation: <string>
+  attribute axf:annotation-font-style { text }?
+# @axf:annotation-font-weight
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-font-weight
+axf_annotation-font-weight =
+  
+  ## Font weight of the free text annotation: <string>
+  attribute axf:annotation-font-weight { text }?
 # @axf:annotation-height
 # 
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-height
@@ -640,6 +756,13 @@ axf_annotation-height =
   
   ## 注釈の高さ： <length>
   attribute axf:annotation-height { text }?
+# @axf:annotation-icon-name
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-icon-name
+axf_annotation-icon-name =
+  
+  ## 注釈の表示に用いるアイコンの名前： <string>
+  attribute axf:annotation-icon-name { text }?
 # @axf:annotation-open
 # 
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-open
@@ -661,6 +784,20 @@ axf_annotation-position-vertical =
   
   ## 注釈の垂直位置： <length>
   attribute axf:annotation-position-vertical { text }?
+# @axf:annotation-text-align
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-text-align
+axf_annotation-text-align =
+  
+  ## Alignment of the free text annotation: <string>
+  attribute axf:annotation-text-align { "left" | "center" | "right" }?
+# @axf:annotation-text-color
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-text-color
+axf_annotation-text-color =
+  
+  ## Color of the free text annotation: <string>
+  attribute axf:annotation-text-color { text }?
 # @axf:annotation-title
 # 
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.annotation-title
@@ -708,6 +845,13 @@ axf_background-scaling =
   attribute axf:background-scaling {
     "uniform" | "non-uniform" | "inherit"
   }?
+# @axf:background-image-resolution
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-image-resolution
+axf_background-image-resolution =
+  
+  ## Resolution of a background image: [ normal | [ from-image || <dpi> ] ]#
+  attribute axf:background-image-resolution { text }
 # @axf:baseline-block-snap
 # 
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.baseline-block-snap
@@ -1352,6 +1496,41 @@ axf_table-summary =
   
   ## テーブルの要約を記述します。 タグ付きPDFに含まれます。
   attribute axf:table-summary { text }?
+# @axf:text-line-color
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-line-color
+axf_text-line-color =
+  
+  ## Color of underline, strike-through, and overline: auto | <color>
+  attribute axf:text-line-color { text }?
+# @axf:text-line-style
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-line-style
+axf_text-line-style =
+  
+  ## Style of underline, strike-through, and overline: <border-style>
+  attribute axf:text-line-style { text }?
+# @axf:text-line-width
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-line-width
+axf_text-line-width =
+  
+  ## Width of underline, strike-through, and overline: auto | <border-width>
+  attribute axf:text-line-width { text }?
+# @axf:text-underline-position
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-underline-position
+axf_text-underline-position =
+  
+  ## Position of underline: auto | [ [ before-edge | alphabetic | after-edge ] || [ <percentage> | <length> ] ]
+  attribute axf:text-underline-position { text }?
+# @axf:text-overflow
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-overflow
+axf_text-overflow =
+  
+  ## What to display when text overflows in the inline progression direction: clip | ellipsis | <string>
+  attribute axf:text-overflow { text }?
 # @xml:id
 # 
 # https://www.w3.org/TR/xml-id/
