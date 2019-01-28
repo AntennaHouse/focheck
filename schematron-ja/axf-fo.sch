@@ -38,4 +38,4 @@
             <sqf:replace match="@name" node-type="attribute" target="name" select="'document-title'"/>
           </sqf:fix>
         </rule>
-</pattern>
+</pattern><!-- Local Variables:  --><!-- mode: nxml        --><!-- End:              -->

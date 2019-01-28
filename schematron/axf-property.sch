@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2015-2018 Antenna House, Inc.
+     Copyright 2015-2019 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,63 +14,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<schema xmlns="http://purl.oclc.org/dsdl/schematron"
-	xmlns:sqf="http://www.schematron-quickfix.com/validator/process"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	queryBinding="xslt2">
-    <xsl:key name="flow-name"
-	     match="fo:flow | fo:static-content"
-	     use="@flow-name" />
-    <xsl:key name="index-key"
-	     match="*[exists(@index-key)]"
-	     use="@index-key" />
-    <xsl:key name="master-name"
-	     match="fo:simple-page-master | fo:page-sequence-master |
-		    axf:spread-page-master"
-	     use="@master-name" />
-    <xsl:key name="region-name"
-	     match="fo:region-before | fo:region-after |
-		    fo:region-start | fo:region-end |
-		    fo:region-body | axf:spread-region"
-	     use="@region-name" />
-
-    <include href="fo.sch"/>
-    <include href="fo-property.sch" />
-    <ns uri="http://www.w3.org/1999/XSL/Format" prefix="fo" />
-    <ns uri="http://www.antennahouse.com/names/XSLT/Functions/Document" prefix="ahf" />
-    <ns uri="http://www.antennahouse.com/names/XSL/Extensions" prefix="axf" />
-    
-    <phase id="fo">
-        <active pattern="fo-fo" /></phase>
-    <phase id="property">
-        <active pattern="fo-property"></active>
-    </phase>
-
-    <pattern id="axf">
-
-	<!-- axf:custom-property -->
-	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property -->
-        <rule context="axf:custom-property">
-	  <assert test="empty((../../axf:document-info, ../axf:document-info)[@name eq 'xmp'])" role="Warning"><value-of select="name()"/>" is ignored when axf:document-info with name="xmp" is present.</assert>
-          <assert test="normalize-space(@name) ne ''" role="Warning">name="" should not be empty.</assert>
-          <assert test="not(normalize-space(@name) = ('Title', 'Author', 'Subject', 'Keywords', 'Creator', 'Producer', 'CreationDate', 'ModDate', 'Trapped'))">name="<value-of select="@name"/>" cannot be used with <value-of select="name()"/>.</assert>
-          <assert test="normalize-space(@value) ne ''" role="Warning">value="" should not be empty.</assert>
-        </rule>
-
-	<!-- axf:document-info -->
-	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
-        <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1">
-	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="Warning">name="<value-of select="@name"/>" is ignored when axf:document-info with name="xmp" is present.</assert>
-        </rule>
-        <rule context="axf:document-info[@name = 'title']">
-	  <assert test="false()" id="axf-3f" sqf:fix="axf-3fix" role="Warning">name="<value-of select="@name"/>" is deprecated.  Please use name="document-title".</assert>
-          <sqf:fix id="axf-3fix">
-	    <sqf:description>
-              <sqf:title>Change the 'title' axf:document-info into 'document-title'</sqf:title>
-            </sqf:description>
-            <sqf:replace match="@name" node-type="attribute" target="name" select="'document-title'"/>
-          </sqf:fix>
-        </rule>
+<pattern id="axf-property"
+	 xmlns="http://purl.oclc.org/dsdl/schematron"
+	 xmlns:sqf="http://www.schematron-quickfix.com/validator/process"
+	 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<!-- axf:annotation-color -->
 	<!-- <color> | none -->
@@ -149,18 +96,6 @@
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">content-width="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">content-width="" should be EnumerationToken, Length, or Percent.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: content-width="<value-of select="."/>"</report>
-	</rule>
-
-	<!-- axf:background-color -->
-	<!-- <color> | transparent | inherit -->
-	<!-- Inherited: no -->
-	<!-- Shorthand: no -->
-	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-color -->
-	<rule context="fo:*/@axf:background-color">
-	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-color="<value-of select="."/>" should be Color or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-	  <report test="local-name($expression) = 'EMPTY'" role="Warning">background-color="" should be Color or EnumerationToken.</report>
-	  <report test="local-name($expression) = 'ERROR'">Syntax error: background-color="<value-of select="."/>"</report>
 	</rule>
 
 	<!-- axf:background-image -->
@@ -333,10 +268,7 @@
 	<!-- Shorthand: no -->
 	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.line-number-background-color -->
 	<rule context="fo:*/@axf:line-number-background-color">
-	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Color', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be a Color, a color name, or 'transparent'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name(.)"/>="" should be EnumerationToken or Color.</report>
-	  <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="name(.)"/>="<value-of select="."/>"</report>
+	  <extends rule="color-transparent" />
 	</rule>
 
 	<!-- axf:line-number-color -->
@@ -359,7 +291,7 @@
 	<rule context="fo:*/@axf:line-number-font-size">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">axf:line-number-font-size="<value-of select="."/>" should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller'))">axf:line-number-font-size="<value-of select="."/>" token should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', or 'smaller'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller'))">axf:line-number-font-size="<value-of select="."/>". Allowed keywords are 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', and 'smaller'. Token is '<value-of select="$expression/@token"/>'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:line-number-font-size="" should be 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', Length, or Percent.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:line-number-font-size="<value-of select="."/>"</report>
 	</rule>
@@ -423,7 +355,7 @@
 	<rule context="fo:*/@text-decoration">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
 	  <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">text-decoration="<value-of select="."/>" should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', 'inherit'))">text-decoration="<value-of select="."/>" token should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', 'inherit'))">text-decoration="<value-of select="."/>". Allowed keywords are 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', and 'inherit'. Token is '<value-of select="$expression/@token"/>'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">text-decoration="" should be 'none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', or 'inherit'.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: text-decoration="<value-of select="."/>"</report>
 	</rule>
@@ -542,6 +474,40 @@
           </sqf:fix>
 	</rule>
 
+	<!-- axf:text-line-color -->
+	<!-- auto | <color> -->
+	<!-- Inherited: no -->
+	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-line-color -->
+	<rule context="fo:*/@axf:text-line-color">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">axf:text-line-color="<value-of select="."/>" should be Color or 'auto'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))"><value-of select="name(.)"/>="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">text-line-color="" should be Color or 'auto'.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: text-line-color="<value-of select="."/>"</report>
+	</rule>
+
+	<!-- axf:text-line-style -->
+	<!-- <border-style> | inherit -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- http://www.w3.org/TR/xsl11/#axf:text-line-style -->
+	<rule context="fo:*/@axf:text-line-style">
+	  <extends rule="border-style" />
+	</rule>
+
+	<!-- axf:text-line-width -->
+	<!-- auto | <border-width> -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.text-line-width -->
+	<rule context="fo:*/@axf:text-line-width">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">axf:text-line-width="<value-of select="."/>" should be 'auto', 'thin', 'medium', 'thick', 'inherit', or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'thin', 'medium', 'thick', 'inherit'))">axf:text-line-width="<value-of select="."/>". Allowed keywords are 'auto', 'thin', 'medium', 'thick', and 'inherit'. Token is '<value-of select="$expression/@token"/>'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:text-line-width="" should be 'auto', 'thin', 'medium', 'thick', 'inherit', or Length.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:text-line-width="<value-of select="."/>"</report>
+	</rule>
+
 	<!-- overflow -->
 	<!-- visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto -->
 	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.overflow -->
@@ -549,5 +515,8 @@
 	  <report test=". = ('replace', 'condense') and not(local-name(..) = ('block-container', 'inline-container'))">overflow="<value-of select="."/>" applies only on fo:block-container or fo:inline-container.</report>
 	</rule>
 
-    </pattern>
-</schema>
+</pattern>
+
+<!-- Local Variables:  -->
+<!-- mode: nxml        -->
+<!-- End:              -->

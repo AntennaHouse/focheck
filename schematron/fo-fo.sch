@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2015-2018 Antenna House, Inc.
+     Copyright 2015-2019 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+<pattern id="fo-fo"
+	 xmlns="http://purl.oclc.org/dsdl/schematron"
 	 xmlns:sqf="http://www.schematron-quickfix.com/validator/process"
 	 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	 xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document"
-	 id="fo-fo">
+	 xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document">
 
   <!-- FOs -->
 
@@ -270,3 +270,7 @@
   </rule>
 
 </pattern>
+
+<!-- Local Variables:  -->
+<!-- mode: nxml        -->
+<!-- End:              -->
