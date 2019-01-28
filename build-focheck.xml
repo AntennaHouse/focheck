@@ -4,7 +4,7 @@
 checking FO documents that include Antenna House
 extensions.</description>
 <!--
-     Copyright 2015-2018 Antenna House, Inc.
+     Copyright 2015-2019 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -74,7 +74,7 @@ extensions.</description>
      supported' errors from 'trang'. -->
 <property name="xsd.schema.basename" value="axf" />
 <!-- Main Schematron file. -->
-<property name="schematron" value="${schematron.dir}/axf.sch" />
+<property name="schematron" value="${schematron.dir}/focheck.sch" />
 <!-- Where to find built files such as compiled Schematron. -->
 <property name="build.dir" value="${focheck.basedir.converted}/build" />
 

@@ -429,7 +429,7 @@
 														<Integer>7</Integer>
 													</field>
 													<field name="uri">
-														<String>${framework}/schematron/axf.sch</String>
+														<String>${framework}/schematron/focheck.sch</String>
 													</field>
 												</validationUnitSchema>
 											</field>
@@ -529,7 +529,7 @@
 														<Integer>7</Integer>
 													</field>
 													<field name="uri">
-														<String>${framework}/schematron/axf.sch</String>
+														<String>${framework}/schematron/focheck.sch</String>
 													</field>
 												</validationUnitSchema>
 											</field>
