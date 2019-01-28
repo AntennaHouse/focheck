@@ -1063,7 +1063,7 @@
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-image-resolution
   -->
   <xs:attributeGroup name="axf_background-image-resolution">
-    <xs:attribute name="background-image-resolution" use="required" form="qualified">
+    <xs:attribute name="background-image-resolution" form="qualified">
       <xs:annotation>
         <xs:documentation>Resolution of a background image: [ normal | [ from-image || &lt;dpi&gt; ] ]#</xs:documentation>
       </xs:annotation>

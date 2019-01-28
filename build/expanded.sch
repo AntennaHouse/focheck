@@ -1068,9 +1068,9 @@
    <!-- http://www.w3.org/TR/xsl11/#color -->
    <rule context="fo:*/@color">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">color="<value-of select="."/>" should be Color or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">color="<value-of select="."/>". Allowed keywords are 'inherit'. Token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">color="" should be Color or 'inherit'.</report>
+      <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">color="<value-of select="."/>" should be Color, 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">color="<value-of select="."/>". Allowed keywords are 'transparent' and 'inherit'. Token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">color="" should be Color, 'transparent', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: color="<value-of select="."/>"</report>
    </rule>
 

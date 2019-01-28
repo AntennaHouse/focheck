@@ -1436,9 +1436,11 @@
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-image-resolution
   -->
   <define name="axf_background-image-resolution">
-    <attribute name="axf:background-image-resolution">
-      <a:documentation>Resolution of a background image: [ normal | [ from-image || &lt;dpi&gt; ] ]#</a:documentation>
-    </attribute>
+    <optional>
+      <attribute name="axf:background-image-resolution">
+        <a:documentation>Resolution of a background image: [ normal | [ from-image || &lt;dpi&gt; ] ]#</a:documentation>
+      </attribute>
+    </optional>
   </define>
   <!--
     @axf:baseline-block-snap

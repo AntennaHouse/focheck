@@ -5967,7 +5967,7 @@
                <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>color="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be Color or 'inherit'.  '<xsl:text/>
+                  <xsl:text/>" should be Color, 'transparent', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -5977,9 +5977,9 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
@@ -5987,7 +5987,7 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>color="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>". Allowed keywords are 'inherit'. Token is '<xsl:text/>
+               <xsl:text/>". Allowed keywords are 'transparent' and 'inherit'. Token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
                <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
@@ -6003,7 +6003,7 @@
             </xsl:attribute>
             <xsl:attribute name="line-number" select="saxon:line-number()"/>
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>color="" should be Color or 'inherit'.</svrl:text>
+            <svrl:text>color="" should be Color, 'transparent', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
