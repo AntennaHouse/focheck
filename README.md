@@ -136,6 +136,60 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
+Additional components:
+ 
+The HTML MathML entity set is bundled with the focheck oXygen framework but is not included in the focheck schema.
+The entity set was downloaded from http://www.w3.org/TR/xml-entity-names/
+
+     Copyright 1998 - 2011 W3C.
+
+     Use and distribution of this code are permitted under the terms of
+     either of the following two licences:
+
+     1) W3C Software Notice and License.
+        http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231.html
+
+     2) The license used for the WHATWG HTML specification,
+        which states, in full:
+            You are granted a license to use, reproduce and create derivative
+            works of this document.
+
+
+
+The schema for MathML3 is included in the Relax NG and Relax NG compact syntax versions of focheck.
+The MathML3 schema was downloaded from http://www.w3.org/Math/RelaxNG/
+
+````
+#     This is the Mathematical Markup Language (MathML) 3.0, an XML
+#     application for describing mathematical notation and capturing
+#     both its structure and content.
+#
+#     Copyright 1998-2010 W3C (MIT, ERCIM, Keio)
+# 
+#     Use and distribution of this code are permitted under the terms
+#     W3C Software Notice and License
+#     http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+````
+
+
+The schema for SVG 1.1 is included in the Relax NG and Relax NG compact syntax versions of focheck.
+The SVG 1.1 DTD was downloaded from http://www.w3.org/TR/SVG/svgdtd.html
+
+````
+     The Scalable Vector Graphics (SVG)
+     Copyright 2001, 2002, 2011 World Wide Web Consortium
+        (Massachusetts Institute of Technology, Institut National de
+         Recherche en Informatique et en Automatique, Keio University).
+         All Rights Reserved.
+
+     Permission to use, copy, modify and distribute the SVG DTD and its
+     accompanying documentation for any purpose and without fee is hereby
+     granted in perpetuity, provided that the above copyright notice and
+     this paragraph appear in all copies.  The copyright holders make no
+     representation about the suitability of the DTD for any purpose.
+
+     It is provided "as is" without expressed or implied warranty.
+````
 ----
 
 # <a name="ja"></a>focheck – oXygenまたはスタンドアロンでの XSL-FO とアンテナハウスの拡張を有効にします。
@@ -274,3 +328,58 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+Additional components:
+ 
+The HTML MathML entity set is bundled with the focheck oXygen framework but is not included in the focheck schema.
+The entity set was downloaded from http://www.w3.org/TR/xml-entity-names/
+
+     Copyright 1998 - 2011 W3C.
+
+     Use and distribution of this code are permitted under the terms of
+     either of the following two licences:
+
+     1) W3C Software Notice and License.
+        http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231.html
+
+     2) The license used for the WHATWG HTML specification,
+        which states, in full:
+            You are granted a license to use, reproduce and create derivative
+            works of this document.
+
+
+
+The schema for MathML3 is included in the Relax NG and Relax NG compact syntax versions of focheck.
+The MathML3 schema was downloaded from http://www.w3.org/Math/RelaxNG/
+
+````
+#     This is the Mathematical Markup Language (MathML) 3.0, an XML
+#     application for describing mathematical notation and capturing
+#     both its structure and content.
+#
+#     Copyright 1998-2010 W3C (MIT, ERCIM, Keio)
+# 
+#     Use and distribution of this code are permitted under the terms
+#     W3C Software Notice and License
+#     http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+````
+
+
+The schema for SVG 1.1 is included in the Relax NG and Relax NG compact syntax versions of focheck.
+The SVG 1.1 DTD was downloaded from http://www.w3.org/TR/SVG/svgdtd.html
+
+````
+     The Scalable Vector Graphics (SVG)
+     Copyright 2001, 2002, 2011 World Wide Web Consortium
+        (Massachusetts Institute of Technology, Institut National de
+         Recherche en Informatique et en Automatique, Keio University).
+         All Rights Reserved.
+
+     Permission to use, copy, modify and distribute the SVG DTD and its
+     accompanying documentation for any purpose and without fee is hereby
+     granted in perpetuity, provided that the above copyright notice and
+     this paragraph appear in all copies.  The copyright holders make no
+     representation about the suitability of the DTD for any purpose.
+
+     It is provided "as is" without expressed or implied warranty.
+````
