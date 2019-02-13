@@ -25956,7 +25956,7 @@ to.
 <div3 id="page-citation-strategy"><head><quote>page-citation-strategy</quote></head>
 <p>XSL Definition:</p>
 <table border="0" class="prop-summary"><tbody align="left" valign="top">
-<tr align="left" valign="top"><td rowspan="1" colspan="1" align="left" valign="top"><emph>Value:  </emph></td><td rowspan="1" colspan="1" align="left" valign="top">[ all | normal | non-blank | inherit</td></tr>
+<tr align="left" valign="top"><td rowspan="1" colspan="1" align="left" valign="top"><emph>Value:  </emph></td><td rowspan="1" colspan="1" align="left" valign="top">all | normal | non-blank | inherit</td></tr>
 <tr align="left" valign="top"><td rowspan="1" colspan="1" align="left" valign="top"><emph>Initial:  </emph></td><td rowspan="1" colspan="1" align="left" valign="top">all</td></tr>
 
 <tr align="left" valign="top"><td rowspan="1" colspan="1" align="left" valign="top"><emph>Inherited:  </emph></td><td rowspan="1" colspan="1" align="left" valign="top">no</td></tr>
