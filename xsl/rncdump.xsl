@@ -28,7 +28,7 @@
 <!--                                                               -->
 <!-- ============================================================= -->
 <!--
-     Copyright 2015 Antenna House, Inc.
+     Copyright 2015-2019 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -437,6 +437,12 @@ fo_</xsl:text>
                   then 'xsd:IDREF'
                 else if ($att-name eq 'xml:lang')
                   then 'xsd:language'
+                (: No point listing enumerated values since
+                   property value could be an expression anyway. :)
+                (:else if (not(matches($values, '[\[&lt;]')))
+                  then concat('''',
+                              replace($values, ' \| ', ''' | '''),
+                              ''''):)
                 else 'text'" />
     <xsl:text> }</xsl:text>
     <xsl:value-of select="if ($required) then '' else '?'" />
