@@ -27,9 +27,9 @@ Pull requests and new issues are welcome.
 ## Installing
 
 * If you want to keep up-to-date with **focheck** releases, then you can install **focheck** as an add-on oXygen framework.
-* **focheck** 0.3.1 (from 2015) is bundled with oXgen 17.1 through 19.1.
-* If you want to use **focheck** with an older oXygen version, then you can install **focheck** as an add-on oXygen framework.
-* Alternatively, you can download a static copy of the oXygen framework from here.
+* **focheck** 0.7.1 (from 2019) is bundled with oXygen 21. (Earlier oXygen versions, starting with oXygen 17.1, bundled earlier **focheck** versions.)
+* If you want to use the current **focheck** version with an older oXygen version, then you can install **focheck** as an add-on oXygen framework.
+* Alternatively, you can download a static copy of the oXygen framework from GitHub.
 * If you want to easily keep up-to-date with changes, then you can clone this repository and 'pull' the latest version whenever you want.
 * If you want to hack on **focheck** or submit pull requests, then you can fork this repository and clone that onto your local machine.
 
