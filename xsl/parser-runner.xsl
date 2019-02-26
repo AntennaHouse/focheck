@@ -84,8 +84,6 @@
   <function name="abs" returns="Number" />
   <function name="body-start" returns="Length" />
   <function name="ceiling" returns="Number" />
-  <function name="cmyk" returns="Color" />
-  <function name="cmyka" returns="Color" />
   <function name="floor" returns="Number" />
   <function name="from-nearest-specified-value" returns="Object" />
   <function name="from-page-master-region" returns="Object" />
@@ -98,17 +96,27 @@
   <function name="min" returns="Number" />
   <function name="proportional-column-width" returns="Length" />
   <function name="rgb" returns="Color" />
-  <function name="rgba" returns="Color" />
   <function name="rgb-icc" returns="Color" />
   <function name="round" returns="Number" />
   <function name="system-color" returns="Color" />
   <function name="system-font" returns="Object" />
 
+  <!-- V6.1 -->
   <function name="linear-gradient" returns="Color" />
   <function name="radial-gradient" returns="Color" />
   <function name="repeating-linear-gradient" returns="Color" />
   <function name="repeating-radial-gradient" returns="Color" />
+
+  <!-- V6.2 -->
   <function name="rgba" returns="Color" />
+
+  <!-- V6.3 -->
+  <function name="cmyk" returns="Color" />
+  <function name="cmyka" returns="Color" />
+
+  <!-- V6.6 -->
+  <function name="hsl" returns="Color" />
+  <function name="hsla" returns="Color" />
 </xsl:variable>
 
 <xsl:variable
@@ -328,7 +336,7 @@ else for $node in $parse-tree/* return ahf:reduce-tree($node)" />
         </Number>
       </xsl:when>
       <xsl:otherwise>
-        <ERROR>Not coping.</ERROR>
+        <ERROR>Terms cannot be added.</ERROR>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
@@ -428,7 +436,7 @@ else for $node in $parse-tree/* return ahf:reduce-tree($node)" />
         </Number>
       </xsl:when>
       <xsl:otherwise>
-        <ERROR>Not coping.</ERROR>
+        <ERROR>Terms cannot be multiplied.</ERROR>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
