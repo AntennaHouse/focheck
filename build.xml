@@ -28,6 +28,8 @@ BEFORE making a release on GitHub:
  - Commit build.properties and the generated files with a
    'Releasing focheck x.y.z.' commit message
  - Push the commits to GitHub.
+ - Update 'ChangeLog.md' on GitHub.
+ - Pull 'ChangeLog.md' from GitHub.
 
 AFTER making a release on GitHub:
  - Increment ${version} in build.properties so it's not possible
@@ -159,7 +161,12 @@ AFTER making a release on GitHub:
   </xslt>
 </target>
 
-<target name="rnc" depends="rncdump, rncinherited, axf-inherited" />
+<target name="ahfsettings.rnc">
+  <copy file="${ahfsettings.rnc}"
+	todir="${schema.dir}" />
+</target>
+
+<target name="rnc" depends="rncdump, rncinherited, axf-inherited, ahfsettings.rnc" />
 
 <target name="trang">
   <fail message="Could not locate 'trang.jar'.">
@@ -461,7 +468,7 @@ AFTER making a release on GitHub:
        excludes="**"
        update="true">
     <zipfileset dir="."
-		includes="README.md, LICENSE*.md, AHFormatter.framework"
+		includes="README.md, LICENSE*.md, ChangeLog.md, AHFormatter.framework"
 		prefix="${ant.project.name}" />
     <!--<zipfileset dir="css" includes="*.css" prefix="${ant.project.name}/css" />-->
     <zipfileset dir="schema" includes="catalog.xml, *.ent"
@@ -514,7 +521,7 @@ AFTER making a release on GitHub:
        excludes="**"
        update="true">
     <zipfileset dir="."
-		includes="README.md, LICENSE*.md, focheck-ja.framework"
+		includes="README.md, LICENSE*.md, ChangeLog.md, focheck-ja.framework"
 		prefix="${ant.project.name}-ja" />
     <!--<zipfileset dir="css" includes="*.css" prefix="${ant.project.name}/css" />-->
     <zipfileset dir="schema-ja" includes="catalog.xml, *.ent"
