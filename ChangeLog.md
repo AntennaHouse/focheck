@@ -1,3 +1,14 @@
+# focheck 0.7.2
+
+- Licenses for additional components added to `ReadMe.md` (#38).
+- Added Schematron for optionally checking Matterhorn Protocol PDF/UA accessibility rules.
+- Added `axf:formatter-config` and `axf:output-volume-info`.
+- Started validating `axf:formatter-config` using formatter settings schema from 'ahfsettings' framework.
+- Added `hsl()` and `hsla()` functions from AH Formatter V6.6.
+- Echoing specific error message when expression language syntax error.
+- Corrected type in `page-citation-strategy` value list.
+- Added this ChangeLog for **focheck** releases
+
 # focheck 0.7.1
 
 - `axf:background-image-resolution` should be optional.
