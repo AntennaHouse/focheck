@@ -25,7 +25,7 @@ namespace local = ""
 include "axh.rnc"
 
 ## Option settings
-include "axs.rnc"
+include "ahfsettings.rnc" inherit = axs
 
 include "axf-inherited.rnc" {
 #
@@ -75,7 +75,8 @@ fo_declarations.model |=
    (axf_custom-property |
       axf_document-info |
       axf_hyphenation-info |
-      axf_formatter-config)*
+      axf_formatter-config |
+      axf_output-volume-info)*
 
 # AH Formatter allows empty fo:static-content.
 fo_static-content.model =
@@ -217,19 +218,18 @@ axf_form-field-option =
 # <axf:formatter-config>
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.formatter-config
 axf_formatter-config =
-  ## Additional option setting information
+  ### Additional option setting information
   element axf:formatter-config {
      axf_formatter-config.attlist,
-     axf_formatter-config.model
+     formatter-config.model
 }
 
-axf_formatter-config.model =
-   axs_pdf-settings?
+#axf_formatter-config.model =
+#   axs_pdf-settings?
 
 axf_formatter-config.attlist =
    ## External Option Setting File
    attribute src { text }?
-
 
 # <axf:hyphenation-info>
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.hyphenation-info
@@ -243,6 +243,23 @@ axf_hyphenation-info =
 axf_hyphenation-info.attlist =
    attribute language { text }?,
    attribute src { text }?
+
+# <axf:output-volume-info>
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.output-volume-info
+axf_output-volume-info =
+  ## Output volume specification
+  element axf:output-volume-info {
+     axf_output-volume-info.attlist,
+     empty
+}
+
+axf_output-volume-info.attlist =
+   ## Initial volume number: <positive-integer>
+attribute initial-volume-number { xsd:positiveInteger }?,
+   ## Format specification: <string>
+   attribute format { text }?,
+   ## How to include bookmarks in multiple separate volumes: first | all | separate
+   attribute bookmark-include { 'first' | 'all' | 'separate' }?
 
 # <axf:ruby>
 # https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby
