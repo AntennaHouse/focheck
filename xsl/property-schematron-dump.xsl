@@ -374,7 +374,8 @@ text-align
               <xsl:value-of select="$property" />
               <xsl:text>="</xsl:text>
               <value-of select="." />
-              <xsl:text>"</xsl:text>
+              <xsl:text>":: </xsl:text>
+              <value-of select="$expression" />
             </report>
           </xsl:otherwise>
         </xsl:choose>
