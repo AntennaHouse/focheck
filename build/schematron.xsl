@@ -1299,7 +1299,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: absolute-position="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -1373,7 +1376,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: active-state="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -1448,7 +1454,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: alignment-adjust="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -1523,7 +1532,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: alignment-baseline="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -1635,7 +1647,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: auto-restore="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -1728,7 +1743,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-attachment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -1803,7 +1821,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-color="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -1918,7 +1939,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-position-horizontal="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -1995,7 +2019,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-position-vertical="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -2070,7 +2097,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: background-repeat="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -2144,7 +2174,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: baseline-shift="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -2219,7 +2252,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: blank-or-not-blank="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -2294,7 +2330,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: block-progression-dimension="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -2473,7 +2512,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-after-precedence="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -2806,7 +2848,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-before-precedence="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -3328,7 +3373,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-collapse="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -3507,7 +3555,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-end-precedence="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -4306,7 +4357,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-separation="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -4485,7 +4539,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: border-start-precedence="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5043,7 +5100,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: bottom="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5117,7 +5177,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: break-after="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5191,7 +5254,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: break-before="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5265,7 +5331,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: caption-side="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5322,7 +5391,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: case-name="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5379,7 +5451,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: case-title="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5437,7 +5512,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-class="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5495,7 +5573,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-color="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5553,7 +5634,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-offset="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5628,7 +5712,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-placement="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5703,7 +5790,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5778,7 +5868,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: change-bar-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5870,7 +5963,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: clear="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -5944,7 +6040,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: clip="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6018,7 +6117,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: color="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6076,7 +6178,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: color-profile-name="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6150,7 +6255,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: column-count="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6224,7 +6332,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: column-gap="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6281,7 +6392,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: column-number="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6338,7 +6452,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: column-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6412,7 +6529,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: content-height="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6504,7 +6624,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: content-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6600,7 +6723,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: destination-placement-offset="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6674,7 +6800,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: direction="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6748,7 +6877,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: display-align="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6823,7 +6955,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: dominant-baseline="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6897,7 +7032,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: empty-cells="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -6971,7 +7109,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: end-indent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7045,7 +7186,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: ends-row="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7119,7 +7263,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: extent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7199,7 +7346,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: float="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7256,7 +7406,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: flow-map-name="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7314,7 +7467,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: flow-map-reference="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7371,7 +7527,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: flow-name="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7429,7 +7588,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: flow-name-reference="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7540,7 +7702,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-selection-strategy="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7614,7 +7779,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-size="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7689,7 +7857,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-size-adjust="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7763,7 +7934,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-stretch="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7837,7 +8011,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -7929,7 +8106,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: font-weight="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8043,7 +8223,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: glyph-orientation-horizontal="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8118,7 +8301,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: glyph-orientation-vertical="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8194,7 +8380,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: grouping-size="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8268,7 +8457,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: height="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8342,7 +8534,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: hyphenate="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8436,7 +8631,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: hyphenation-keep="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8511,7 +8709,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: hyphenation-ladder-count="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8588,7 +8789,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: hyphenation-push-character-count="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8665,7 +8869,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: hyphenation-remain-character-count="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8726,7 +8933,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: index-class="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8819,7 +9029,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: indicate-destination="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8894,7 +9107,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: initial-page-number="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -8971,7 +9187,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: inline-progression-dimension="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9052,7 +9271,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: intrinsic-scale-value="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9127,7 +9349,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: intrusion-displace="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9201,7 +9426,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: keep-together="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9275,7 +9503,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: keep-with-next="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9350,7 +9581,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: keep-with-previous="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9443,7 +9677,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: last-line-end-indent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9518,7 +9755,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: leader-alignment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9592,7 +9832,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: leader-length="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9666,7 +9909,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: leader-pattern="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9741,7 +9987,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: leader-pattern-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9815,7 +10064,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: left="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9889,7 +10141,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: letter-spacing="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -9963,7 +10218,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: letter-value="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10037,7 +10295,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: line-height="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10114,7 +10375,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: line-height-shift-adjustment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10189,7 +10453,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: line-stacking-strategy="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10264,7 +10531,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: linefeed-treatment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10356,7 +10626,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: margin-bottom="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10430,7 +10703,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: margin-left="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10504,7 +10780,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: margin-right="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10578,7 +10857,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: margin-top="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10636,7 +10918,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: marker-class-name="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10693,7 +10978,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: master-name="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10751,7 +11039,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: master-reference="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10861,7 +11152,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: maximum-repeats="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -10935,7 +11229,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: media-usage="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11012,7 +11309,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: merge-pages-across-index-key-references="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11089,7 +11389,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: merge-ranges-across-index-key-references="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11166,7 +11469,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: merge-sequential-page-numbers="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11260,7 +11566,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: number-columns-repeated="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11318,7 +11627,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: number-columns-spanned="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11376,7 +11688,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: number-rows-spanned="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11450,7 +11765,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: odd-or-even="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11524,7 +11842,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: orphans="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11598,7 +11919,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: overflow="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11690,7 +12014,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-after="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11764,7 +12091,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-before="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11838,7 +12168,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-bottom="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11912,7 +12245,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-end="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -11986,7 +12322,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-left="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -12060,7 +12399,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-right="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -12134,7 +12476,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-start="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -12208,7 +12553,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: padding-top="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -12340,7 +12688,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: page-citation-strategy="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -12414,7 +12765,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: page-height="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -12489,7 +12843,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: page-number-treatment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -12563,7 +12920,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: page-position="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -12637,7 +12997,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: page-width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -12747,7 +13110,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: precedence="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -12824,7 +13190,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: provisional-distance-between-starts="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -12901,7 +13270,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: provisional-label-separation="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13013,7 +13385,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: region-name="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13071,7 +13446,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: region-name-reference="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13145,7 +13523,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: relative-align="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13220,7 +13601,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: relative-position="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13295,7 +13679,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: rendering-intent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13370,7 +13757,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: retrieve-boundary="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13447,7 +13837,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: retrieve-boundary-within-table="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13505,7 +13898,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: retrieve-class-name="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13580,7 +13976,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: retrieve-position="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13657,7 +14056,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: retrieve-position-within-table="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13731,7 +14133,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: right="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13823,7 +14228,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: rule-style="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13880,7 +14288,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: rule-thickness="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -13954,7 +14365,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: scale-option="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14028,7 +14442,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: scaling="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14102,7 +14519,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: scaling-method="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14176,7 +14596,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: score-spaces="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14250,7 +14673,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: script="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14325,7 +14751,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: show-destination="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14400,7 +14829,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: source-document="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14474,7 +14906,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: space-after="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14548,7 +14983,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: space-before="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14622,7 +15060,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: space-end="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14696,7 +15137,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: space-start="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14770,7 +15214,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: span="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14862,7 +15309,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: start-indent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -14936,7 +15386,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: starting-state="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15010,7 +15463,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: starts-row="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15085,7 +15541,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: suppress-at-line-break="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15142,7 +15601,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: switch-to="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15216,7 +15678,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: table-layout="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15291,7 +15756,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: table-omit-footer-at-break="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15366,7 +15834,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: table-omit-header-at-break="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15424,7 +15895,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: target-presentation-context="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15482,7 +15956,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: target-processing-context="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15540,7 +16017,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: target-stylesheet="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15632,7 +16112,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-align-last="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15706,7 +16189,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-altitude="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15780,7 +16266,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-decoration="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15854,7 +16343,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-depth="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -15928,7 +16420,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-indent="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16002,7 +16497,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-shadow="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16076,7 +16574,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: text-transform="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16150,7 +16651,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: top="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16225,7 +16729,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: treat-as-word-space="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16299,7 +16806,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: unicode-bidi="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16391,7 +16901,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: visibility="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16484,7 +16997,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: white-space-collapse="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16559,7 +17075,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: white-space-treatment="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16633,7 +17152,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: widows="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16707,7 +17229,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: width="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16781,7 +17306,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: word-spacing="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16855,7 +17383,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: wrap-option="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -16929,7 +17460,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: writing-mode="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
@@ -17021,7 +17555,10 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: z-index="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>"</svrl:text>
+               <xsl:text/>":: <xsl:text/>
+               <xsl:value-of select="$expression"/>
+               <xsl:text/>
+            </svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>

@@ -1,0 +1,1813 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <!--
+    Antenna House Option Setting File.
+    
+    Copyright 2015-2019 Antenna House, Inc.
+  -->
+  <!-- default namespace = "" -->
+  <define name="ah.boolean">
+    <choice>
+      <value>false</value>
+      <value>true</value>
+    </choice>
+  </define>
+  <define name="compression.list">
+    <choice>
+      <value>auto</value>
+      <value>zlib</value>
+      <value>jpeg</value>
+      <value>jpeg2000</value>
+      <value>keeplzw</value>
+      <value>auto2k</value>
+      <value>keeplzw2k</value>
+    </choice>
+  </define>
+  <define name="downsampling.list">
+    <choice>
+      <value>none</value>
+      <value>average</value>
+      <value>bicubic</value>
+      <value>subsampling</value>
+    </choice>
+  </define>
+  <define name="dpi.model">
+    <data type="positiveInteger"/>
+  </define>
+  <define name="jpeg-quality.model">
+    <data type="positiveInteger">
+      <param name="minInclusive">1</param>
+      <param name="maxInclusive">100</param>
+    </data>
+  </define>
+  <define name="pass-through.model">
+    <choice>
+      <list>
+        <oneOrMore>
+          <choice>
+            <value>all</value>
+            <value>gif</value>
+            <value>-gif</value>
+            <value>tiff</value>
+            <value>-tiff</value>
+            <value>png</value>
+            <value>-png</value>
+            <value>jpeg</value>
+            <value>-jpeg</value>
+            <value>jpeg2000</value>
+            <value>-jpeg2000</value>
+            <value>jbig2</value>
+            <value>-jbig2</value>
+          </choice>
+        </oneOrMore>
+      </list>
+      <value>none</value>
+    </choice>
+  </define>
+  <define name="pdf-version.list">
+    <choice>
+      <value>PDF1.3</value>
+      <value>PDF1.4</value>
+      <value>PDF1.5</value>
+      <value>PDF1.6</value>
+      <value>PDF1.7</value>
+      <value>PDF/X-1a:2001</value>
+      <value>PDF/X-3:2002</value>
+      <value>PDF/X-1a:2003</value>
+      <value>PDF/X-2:2003</value>
+      <value>PDF/X-3:2003</value>
+      <value>PDF/X-4:2010</value>
+      <value>PDF/A-1a:2005</value>
+      <value>PDF/A-1b:2005</value>
+      <value>PDF1.4/A-2a:2011</value>
+      <value>PDF1.5/A-2a:2011</value>
+      <value>PDF1.6/A-2a:2011</value>
+      <value>PDF1.7/A-2a:2011</value>
+      <value>PDF1.4/A-2b:2011</value>
+      <value>PDF1.5/A-2b:2011</value>
+      <value>PDF1.6/A-2b:2011</value>
+      <value>PDF1.7/A-2b:2011</value>
+      <value>PDF1.4/A-2u:2011</value>
+      <value>PDF1.5/A-2u:2011</value>
+      <value>PDF1.6/A-2u:2011</value>
+      <value>PDF1.7/A-2u:2011</value>
+      <value>PDF1.4/A-3a:2012</value>
+      <value>PDF1.5/A-3a:2012</value>
+      <value>PDF1.6/A-3a:2012</value>
+      <value>PDF1.7/A-3a:2012</value>
+      <value>PDF1.4/A-3b:2012</value>
+      <value>PDF1.5/A-3b:2012</value>
+      <value>PDF1.6/A-3b:2012</value>
+      <value>PDF1.7/A-3b:2012</value>
+      <value>PDF1.4/A-3u:2012</value>
+      <value>PDF1.5/A-3u:2012</value>
+      <value>PDF1.6/A-3u:2012</value>
+      <value>PDF1.7/A-3u:2012</value>
+      <value>PDF1.5/UA-1:2014</value>
+      <value>PDF1.6/UA-1:2014</value>
+      <value>PDF1.7/UA-1:2014</value>
+    </choice>
+  </define>
+  <define name="script.list">
+    <choice>
+      <value>Latn</value>
+      <value>Grek</value>
+      <value>Cyrl</value>
+      <value>Arab</value>
+      <value>Hebr</value>
+      <value>Deva</value>
+      <value>Beng</value>
+      <value>Ethi</value>
+      <value>Guru</value>
+      <value>Gujr</value>
+      <value>Orya</value>
+      <value>Taml</value>
+      <value>Telu</value>
+      <value>Knda</value>
+      <value>Mlym</value>
+      <value>Sinh</value>
+      <value>Syrc</value>
+      <value>Thai</value>
+      <value>Khmr</value>
+      <value>Laoo</value>
+      <value>Myanmar</value>
+      <value>Hang</value>
+      <value>Hans</value>
+      <value>Hant</value>
+      <value>Jpan</value>
+      <value>Hrkt</value>
+      <value>.</value>
+      <value/>
+    </choice>
+  </define>
+  <!-- start = formatter-config -->
+  <define name="formatter-config">
+    <element name="formatter-config">
+      <ref name="formatter-config.model"/>
+    </element>
+  </define>
+  <define name="formatter-config.model">
+    <optional>
+      <ref name="formatter-settings"/>
+    </optional>
+    <optional>
+      <ref name="font-settings"/>
+    </optional>
+    <optional>
+      <ref name="pdf-settings"/>
+    </optional>
+    <optional>
+      <ref name="ps-settings"/>
+    </optional>
+    <optional>
+      <ref name="mathml-settings"/>
+    </optional>
+    <optional>
+      <ref name="rxe-settings"/>
+    </optional>
+    <optional>
+      <ref name="svg-settings"/>
+    </optional>
+    <optional>
+      <ref name="inx-settings"/>
+    </optional>
+    <optional>
+      <ref name="mif-settings"/>
+    </optional>
+    <optional>
+      <ref name="cgm-settings"/>
+    </optional>
+    <optional>
+      <ref name="text-settings"/>
+    </optional>
+    <optional>
+      <ref name="xslt-settings"/>
+    </optional>
+  </define>
+  <define name="formatter-settings">
+    <element name="formatter-settings">
+      <optional>
+        <attribute name="abbreviation-character-count">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="auto-break-footnote">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="auto-formatter-type">
+          <choice>
+            <value>html</value>
+            <value>xhtml</value>
+          </choice>
+        </attribute>
+      </optional>
+      <attribute name="avoid-widow-words-CJK-punctuation">
+        <ref name="ah.boolean"/>
+      </attribute>
+      <optional>
+        <attribute name="axf-formatter-config">
+          <a:documentation>Whether &lt;axf:formatter-config&gt; is allowed</a:documentation>
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="baseline-mode">
+          <a:documentation>Mode for handling baselines of mixed scripts: 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6</a:documentation>
+          <choice>
+            <value>4</value>
+            <value>5</value>
+            <value>6</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="bidi-override-mode">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="bold-ratio">
+          <data type="decimal"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="border-medium-width">
+          <data type="NMTOKEN"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="border-thick-width">
+          <data type="NMTOKEN"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="border-thin-width">
+          <data type="NMTOKEN"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="css-media-type">
+          <data type="NCName"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="default-CJK">
+          <data type="NCName"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="default-color"/>
+      </optional>
+      <optional>
+        <attribute name="default-font-size">
+          <data type="NMTOKEN"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="default-from-page-master-region">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="default-html-charset">
+          <data type="NCName"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="default-lang"/>
+      </optional>
+      <optional>
+        <attribute name="default-lang2">
+          <data type="NCName"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="default-page-height">
+          <data type="NMTOKEN"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="default-page-margin-bottom"/>
+      </optional>
+      <optional>
+        <attribute name="default-page-margin-left"/>
+      </optional>
+      <optional>
+        <attribute name="default-page-margin-right"/>
+      </optional>
+      <optional>
+        <attribute name="default-page-margin-top"/>
+      </optional>
+      <optional>
+        <attribute name="default-page-width">
+          <data type="NMTOKEN"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="descendant-or-self-files">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="external-entity">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="family-name-syntax">
+          <a:documentation>How strictly to check 'font-family' syntax: auto | loose | strict</a:documentation>
+          <choice>
+            <value>auto</value>
+            <value>loose</value>
+            <value>strict</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="fixed-width-space-treatment">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="hair-space-width"/>
+      </optional>
+      <optional>
+        <attribute name="hyphenation-min">
+          <a:documentation>Whether to enable &lt;hyphen-min&gt; in the Hyphenation Exception Dictionary: false | true | without-exceptions</a:documentation>
+          <choice>
+            <ref name="ah.boolean"/>
+            <value>without-exceptions</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="HyphenationOption">
+          <a:documentation>Whether to use custom hyphenation processing or TeX hyphenation dictionaries: 'true' | 'false'</a:documentation>
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="hyphenation-TeX">
+          <a:documentation>Comma-delimited list of languages to hyphenate when HyphenationOption="true"</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="hyphen-min">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="intrusion-displace-mode">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="img-alt">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="issue-scale-to-fit">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="justify-leader">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="justify-rowspan-height">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="keep-footnote-anchor">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="latin-ligature">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="non-starter-ideographic-space">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="normal-line-height"/>
+      </optional>
+      <optional>
+        <attribute name="normalize">
+          <data type="NCName"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="oblique-skew">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="omit-uppercase-word-accents"/>
+      </optional>
+      <optional>
+        <attribute name="output-fo-tree">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="overflow-limit-block">
+          <data type="NMTOKEN"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="overflow-limit-inline">
+          <data type="NMTOKEN"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="pair-kerning">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="printer-marks-line-length"/>
+      </optional>
+      <optional>
+        <attribute name="printer-marks-line-width"/>
+      </optional>
+      <optional>
+        <attribute name="printer-marks-zero-margin"/>
+      </optional>
+      <optional>
+        <attribute name="PrinterOrientation">
+          <data type="NCName"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="PscriptPassThrough">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="punctuation-spacing"/>
+      </optional>
+      <optional>
+        <attribute name="punctuation-trim">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="pxpi">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="ruby-align"/>
+      </optional>
+      <optional>
+        <attribute name="small-caps-emulation-size"/>
+      </optional>
+      <optional>
+        <attribute name="SeparatePrinterDuplexJob">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="splitting-blocks-space">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="SVGViewer">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="table-auto-layout-limit">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="table-is-reference-area">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="text-autospace">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="text-autospace-width"/>
+      </optional>
+      <optional>
+        <attribute name="text-decoration-baseline-mode">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="text-decoration-mode">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="text-justify-mode">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="text-kashida-space"/>
+      </optional>
+      <optional>
+        <attribute name="text-orientation-mode">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="text-underline-mode">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="thin-space-width"/>
+      </optional>
+      <optional>
+        <attribute name="two-pass-formatting">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="use-default-page-margin-CSS">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="use-default-page-margin-XSL">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="vertical-block-width-mode">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="vertical-underline-side">
+          <data type="NCName"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="viewport-length-units-mode">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="WindowsFontAPI"/>
+      </optional>
+      <optional>
+        <attribute name="zwsp-mode">
+          <a:documentation>ZERO WIDTH SPACE (U+200B) compatibility mode: 5 | 6</a:documentation>
+          <choice>
+            <value>5</value>
+            <value>6</value>
+          </choice>
+        </attribute>
+      </optional>
+    </element>
+  </define>
+  <define name="font-settings">
+    <element name="font-settings">
+      <a:documentation>Settings for fonts</a:documentation>
+      <optional>
+        <attribute name="auto-fallback-font">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="barcode-text-font">
+          <a:documentation>Font for a linear barcode</a:documentation>
+          <choice>
+            <value>OCRB</value>
+            <value>monospace</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="default-font-family">
+          <a:documentation>Default font family</a:documentation>
+          <data type="NCName"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="fallback-glyph">
+          <a:documentation>Whether, and at what level, to report when a glyph is not found in a fallback font</a:documentation>
+          <choice>
+            <value>0</value>
+            <value>1</value>
+            <value>2</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="font-selection-mode">
+          <a:documentation>Font selection method: 5 = disregard 'font-selection-strategy'; 6 = act on 'font-selection-strategy="character-by-character"'</a:documentation>
+          <choice>
+            <value>5</value>
+            <value>6</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="font-selection-strategy">
+          <data type="NCName"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="font-stretch-mode">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="missing-font">
+          <data type="integer"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="missing-glyph">
+          <a:documentation>Whether to warn when glyph not found: [ = no message; 1 = level 1 error message; 2 = level 2 error message</a:documentation>
+          <choice>
+            <value>0</value>
+            <value>1</value>
+            <value>2</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="missing-glyph-all">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="use-windows-api">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <zeroOrMore>
+        <ref name="script-font">
+          <a:documentation>Generic font mapping for a script</a:documentation>
+        </ref>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="font-alias"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="script-font">
+    <element name="script-font">
+      <ref name="script-font.attlist"/>
+      <ref name="script-font.model"/>
+    </element>
+  </define>
+  <define name="script-font.model">
+    <empty/>
+  </define>
+  <define name="script-font.attlist">
+    <optional>
+      <attribute name="cursive">
+        <a:documentation>Generic cursive font for script</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="fallback">
+        <a:documentation>Generic fallback font for script</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="fantasy">
+        <a:documentation>Generic fantasy font for script</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monospace">
+        <a:documentation>Generic monospace font for script</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="sans-serif">
+        <a:documentation>Generic sans-serif font for script</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="script">
+        <a:documentation>Script code</a:documentation>
+        <ref name="script.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="serif">
+        <a:documentation>Generic serif font for script</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="font-alias">
+    <element name="font-alias">
+      <ref name="font-alias.attlist"/>
+      <ref name="font-alias.model"/>
+    </element>
+  </define>
+  <define name="font-alias.model">
+    <empty/>
+  </define>
+  <define name="font-alias.attlist">
+    <attribute name="src">
+      <a:documentation>Name of font to alias</a:documentation>
+    </attribute>
+    <attribute name="dst">
+      <a:documentation>Name of font to use in place of source font</a:documentation>
+    </attribute>
+  </define>
+  <define name="pdf-settings">
+    <element name="pdf-settings">
+      <ref name="pdf-settings.attlist"/>
+      <ref name="pdf-settings.model"/>
+    </element>
+  </define>
+  <define name="pdf-settings.attlist">
+    <optional>
+      <attribute name="allow-javascript">
+        <a:documentation>Whether JavaScript specified by openaction or axf:action-type is enabled: true | false</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="certificate-name">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-compression">
+        <a:documentation>Compression method of the data stored in a PDF file</a:documentation>
+        <ref name="compression.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-compression-default">
+        <ref name="compression.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-compression-minimum">
+        <ref name="compression.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-conversion">
+        <a:documentation>How to convert the RGB or CMYK color space to DeviceGray or DeviceCMYK: none | black | gray | all-gray | all-cmyk</a:documentation>
+        <choice>
+          <value>none</value>
+          <value>black</value>
+          <value>gray</value>
+          <value>all-gray</value>
+          <value>all-cmyk</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-downsampling">
+        <ref name="downsampling.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-downsampling-above-dpi">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-downsampling-target-dpi">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-downsampling-default">
+        <ref name="downsampling.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-downsampling-above-dpi-default">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-downsampling-target-dpi-default">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-downsampling-minimum">
+        <ref name="downsampling.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-downsampling-above-dpi-minimum">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-downsampling-target-dpi-minimum">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-jpeg-quality">
+        <ref name="jpeg-quality.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-jpeg-quality-default">
+        <ref name="jpeg-quality.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-jpeg-quality-minimum">
+        <ref name="jpeg-quality.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-profile"/>
+    </optional>
+    <optional>
+      <attribute name="convert-colorspace">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="decimal-part-digits">
+        <a:documentation>Number of digits after the decimal point of real numbers to be output in PDF: 1 to 6</a:documentation>
+        <data type="positiveInteger">
+          <param name="minInclusive">1</param>
+          <param name="maxInclusive">6</param>
+        </data>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="decimal-part-digits-default">
+        <data type="positiveInteger">
+          <param name="minInclusive">1</param>
+          <param name="maxInclusive">6</param>
+        </data>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="decimal-part-digits-minimum">
+        <data type="positiveInteger">
+          <param name="minInclusive">1</param>
+          <param name="maxInclusive">6</param>
+        </data>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="default-output-intent"/>
+    </optional>
+    <optional>
+      <attribute name="embed-all-fonts">
+        <a:documentation>Whether to embed all embeddable fonts in PDF: false | true | base14</a:documentation>
+        <choice>
+          <ref name="ah.boolean"/>
+          <value>base14</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="embed-font-encoding"/>
+    </optional>
+    <optional>
+      <attribute name="embed-std-output-intent">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="embed-subset-font-percentage">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="encrypt-metadata">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="encryption-level">
+        <a:documentation>Key length when encrypting the PDF file: 40rc4 | 128rc4 | 128aes | 256aes</a:documentation>
+        <choice>
+          <value>40rc4</value>
+          <value>128rc4</value>
+          <value>128aes</value>
+          <value>256aes</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="EPS-processor">
+        <choice>
+          <value>none</value>
+          <value>distiller</value>
+          <value>ghostscript</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="error-on-embed-fault">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="error-on-missing-glyph">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="error-on-pdfx-fault">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="error-on-tagged-pdf-fault">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="ghostscript"/>
+    </optional>
+    <optional>
+      <attribute name="gif-pass-through">
+        <a:documentation>Available up to V6.2. Use 'pass-through' instead.</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-compression">
+        <ref name="compression.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-compression-default">
+        <ref name="compression.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-compression-minimum">
+        <ref name="compression.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-downsampling">
+        <ref name="downsampling.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-downsampling-above-dpi">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-downsampling-target-dpi">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-downsampling-default">
+        <ref name="downsampling.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-downsampling-above-dpi-default">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-downsampling-target-dpi-default">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-downsampling-minimum">
+        <ref name="downsampling.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-downsampling-above-dpi-minimum">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-downsampling-target-dpi-minimum">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-jpeg-quality">
+        <ref name="jpeg-quality.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-jpeg-quality-default">
+        <ref name="jpeg-quality.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="grayscale-jpeg-quality-minimum">
+        <ref name="jpeg-quality.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="gs-add-options"/>
+    </optional>
+    <optional>
+      <attribute name="image-color-profile">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="image-compression">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="image-downsampling">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="image-downsampling-above-dpi">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="image-downsampling-target-dpi">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="import-3D-annotation">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="import-3Dannotation">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="import-annotation-types"/>
+    </optional>
+    <optional>
+      <attribute name="import-tagged-pdf">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="import-textmarkup-annotation">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="joboptions"/>
+    </optional>
+    <optional>
+      <attribute name="jpeg-quality">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="linearized">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-compression">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-downsampling">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-downsampling-above-dpi">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-downsampling-target-dpi">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="multimedia-treatment">
+        <a:documentation>Whether to embed multimedia in PDF when axf:multimedia-treatment="auto": embed | absolute-link | relative-link | richmedia | richmedia-windowed</a:documentation>
+        <choice>
+          <value>embed</value>
+          <value>absolute-link</value>
+          <value>relative-link</value>
+          <value>richmedia</value>
+          <value>richmedia-windowed</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="new-tagging-mode">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="no-accessibility">
+        <a:documentation>Whether to permit text access for screen reader devices of PDF files: false | true</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="no-adding-or-changing-comments">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="no-assemble-doc">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="no-changing">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="no-content-copying">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="no-fill-form">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="object-compression">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="object-compression-default">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="object-compression-minimum">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="overprint">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="page-labels">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="pass-through">
+        <ref name="pass-through.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="pass-through-default">
+        <ref name="pass-through.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="pass-through-minimum">
+        <ref name="pass-through.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="pdf-version">
+        <ref name="pdf-version.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="printing-allowed">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rasterize-resolution">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="reverse-page">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rgb-conversion">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="signature">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="signature-name">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="tagged-pdf">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="text-and-lineart-compression">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="transparency-color-space">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="use-launch-for-relative-uri">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="pdf-settings.model">
+    <zeroOrMore>
+      <ref name="embed-font"/>
+    </zeroOrMore>
+    <optional>
+      <ref name="tag-role-map"/>
+      <zeroOrMore>
+        <ref name="embed-font"/>
+      </zeroOrMore>
+    </optional>
+  </define>
+  <define name="embed-font">
+    <element name="embed-font">
+      <attribute name="font"/>
+    </element>
+  </define>
+  <define name="tag-role-map">
+    <element name="tag-role-map">
+      <oneOrMore>
+        <ref name="tag-element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="tag-element">
+    <element name="tag-element">
+      <attribute name="tag-base-name">
+        <data type="token" datatypeLibrary=""/>
+      </attribute>
+      <attribute name="tag-derived-name">
+        <data type="token" datatypeLibrary=""/>
+      </attribute>
+      <empty/>
+    </element>
+  </define>
+  <define name="cgm-settings">
+    <element name="cgm-settings">
+      <optional>
+        <attribute name="output-text">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <empty/>
+    </element>
+  </define>
+  <define name="ps-settings">
+    <element name="ps-settings">
+      <attribute name="noembed-font">
+        <ref name="ah.boolean"/>
+      </attribute>
+      <attribute name="transparency">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </element>
+  </define>
+  <define name="inx-settings">
+    <element name="inx-settings">
+      <optional>
+        <attribute name="block-newline">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <attribute name="output-mode">
+        <data type="NCName"/>
+      </attribute>
+    </element>
+  </define>
+  <define name="mathml-settings">
+    <element name="mathml-settings">
+      <ref name="mathml-settings.attlist"/>
+      <optional>
+        <choice>
+          <element name="variant-font">
+            <attribute name="fontfamily"/>
+            <attribute name="mathvariant">
+              <data type="NCName"/>
+            </attribute>
+          </element>
+          <group>
+            <element name="math">
+              <attribute name="axis-shift">
+                <data type="integer"/>
+              </attribute>
+              <attribute name="big"/>
+              <attribute name="normal">
+                <data type="integer"/>
+              </attribute>
+              <attribute name="small"/>
+            </element>
+            <element name="mfenced">
+              <attribute name="center-shift">
+                <data type="integer"/>
+              </attribute>
+            </element>
+            <element name="mfrac">
+              <attribute name="bar-lspace"/>
+              <attribute name="bar-padding"/>
+              <attribute name="bar-rspace"/>
+              <attribute name="bar-width"/>
+              <attribute name="denominator-space"/>
+              <optional>
+                <attribute name="italic-lspace">
+                  <data type="integer"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="italic-rspace">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <attribute name="medium">
+                <data type="integer"/>
+              </attribute>
+              <optional>
+                <attribute name="neumerator-space"/>
+              </optional>
+              <optional>
+                <attribute name="numerator-space">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <attribute name="thick"/>
+              <attribute name="thin"/>
+            </element>
+            <element name="mi">
+              <attribute name="italic-lspace">
+                <data type="decimal"/>
+              </attribute>
+              <attribute name="italic-rspace"/>
+            </element>
+            <element name="mo">
+              <optional>
+                <attribute name="adjust-largeop-space">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="default-space">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="integral-bottom-width">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="integral-italic">
+                  <ref name="ah.boolean"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="integral-largeop">
+                  <data type="integer"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="integral-largeop-bottom-width">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="integral-largeop-subscript-shift">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="integral-largeop-superscript-shift">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="integral-largeop-top-width">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="integral-subscript-shift">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="integral-superscript-shift">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="integral-top-width">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <attribute name="largeop"/>
+              <optional>
+                <attribute name="largeop-integral">
+                  <data type="integer"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="largeop-subscript-shift">
+                  <data type="integer"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="largeop-superscript-shift">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="paren-bottom">
+                  <data type="NCName"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="paren-top">
+                  <data type="NCName"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="paren-width-max">
+                  <data type="integer"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="paren-width-min">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="paren-width-scale">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="paren-width-step">
+                  <ref name="ah.boolean"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="subscript-shift">
+                  <data type="integer"/>
+                </attribute>
+              </optional>
+              <optional>
+                <attribute name="superscript-shift">
+                  <data type="decimal"/>
+                </attribute>
+              </optional>
+            </element>
+            <element name="mroot">
+              <attribute name="index-rspace"/>
+              <attribute name="index-shift"/>
+              <attribute name="padding-bottom">
+                <data type="integer"/>
+              </attribute>
+              <attribute name="padding-left">
+                <data type="integer"/>
+              </attribute>
+              <attribute name="padding-right">
+                <data type="integer"/>
+              </attribute>
+              <attribute name="padding-top"/>
+              <attribute name="root-pos1.x">
+                <data type="integer"/>
+              </attribute>
+              <attribute name="root-pos1.y"/>
+              <attribute name="root-pos2.x"/>
+              <attribute name="root-pos2.y"/>
+              <attribute name="root-pos3.x"/>
+              <attribute name="root-pos3.y"/>
+              <attribute name="root-pos4.x"/>
+              <attribute name="root-pos4.y"/>
+              <attribute name="root-width1"/>
+              <attribute name="root-width2"/>
+              <attribute name="root-width3"/>
+              <attribute name="root-width4"/>
+            </element>
+            <element name="mscript">
+              <attribute name="presubscript-italic-shift"/>
+              <attribute name="presuperscript-italic-shift"/>
+              <attribute name="script-lspace"/>
+              <attribute name="script-lspace2"/>
+              <attribute name="script-rspace"/>
+              <attribute name="script-rspace2"/>
+              <attribute name="subscript-italic-shift"/>
+              <attribute name="subscript-shift">
+                <data type="integer"/>
+              </attribute>
+              <attribute name="superscript-italic-shift"/>
+              <attribute name="superscript-shift">
+                <data type="integer"/>
+              </attribute>
+            </element>
+            <element name="mstyle">
+              <attribute name="background">
+                <data type="NCName"/>
+              </attribute>
+              <attribute name="displaystyle">
+                <ref name="ah.boolean"/>
+              </attribute>
+              <attribute name="mediummathspace"/>
+              <attribute name="scriptlevel">
+                <data type="integer"/>
+              </attribute>
+              <attribute name="scriptminsize">
+                <data type="NMTOKEN"/>
+              </attribute>
+              <attribute name="scriptsizemultiplier"/>
+              <attribute name="thickmathspace"/>
+              <attribute name="thinmathspace"/>
+              <attribute name="verythickmathspace"/>
+              <attribute name="verythinmathspace"/>
+              <attribute name="veryverythickmathspace"/>
+              <attribute name="veryverythinmathspace"/>
+            </element>
+            <element name="mtable">
+              <attribute name="border-width"/>
+            </element>
+            <ref name="munderover"/>
+          </group>
+        </choice>
+      </optional>
+    </element>
+  </define>
+  <define name="mathml-settings.attlist">
+    <optional>
+      <attribute name="double_struck">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="error-display">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="fraktur">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="mode">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monospace">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="opspace-multiplier">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="sans-serif">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="script">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="script-maxnest">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="scriptminsize">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="scriptsizemultiplier">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="munderover">
+    <element name="munderover">
+      <ref name="munderover.attlist"/>
+      <ref name="munderover.model"/>
+    </element>
+  </define>
+  <define name="munderover.model">
+    <empty/>
+  </define>
+  <define name="munderover.attlist">
+    <attribute name="bar-padding"/>
+    <attribute name="bar-width"/>
+    <optional>
+      <attribute name="integral-largeop-overscript-space">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="integral-largeop-underscript-space">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="integral-overscript-space">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="integral-underscript-space">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+    <attribute name="limit-size"/>
+    <attribute name="overaccent-shift"/>
+    <attribute name="overbar-space"/>
+    <attribute name="overscript-space"/>
+    <optional>
+      <attribute name="tendsto-arror-variable">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <attribute name="underaccent-shift"/>
+    <attribute name="underbar-space"/>
+    <attribute name="underscript-space"/>
+  </define>
+  <define name="mif-settings">
+    <element name="mif-settings">
+      <attribute name="char-units">
+        <data type="NCName"/>
+      </attribute>
+      <optional>
+        <attribute name="image-processing">
+          <data type="NCName"/>
+        </attribute>
+      </optional>
+      <attribute name="output-mode">
+        <data type="NCName"/>
+      </attribute>
+      <attribute name="units">
+        <data type="NCName"/>
+      </attribute>
+    </element>
+  </define>
+  <define name="rxe-settings">
+    <element name="rxe-settings">
+      <empty/>
+    </element>
+  </define>
+  <define name="svg-settings">
+    <element name="svg-settings">
+      <ref name="svg-settings.attlist"/>
+      <ref name="svg-settings.model"/>
+    </element>
+  </define>
+  <define name="svg-settings.attlist">
+    <optional>
+      <attribute name="base-uri"/>
+    </optional>
+    <attribute name="copy-image-path"/>
+    <attribute name="copy-image-prefix"/>
+    <attribute name="embed-all-fonts">
+      <ref name="ah.boolean"/>
+    </attribute>
+    <optional>
+      <attribute name="encoding"/>
+    </optional>
+    <attribute name="error-on-embed-fault">
+      <ref name="ah.boolean"/>
+    </attribute>
+    <attribute name="format"/>
+    <attribute name="gzip-compression">
+      <ref name="ah.boolean"/>
+    </attribute>
+    <attribute name="image-conversion">
+      <data type="NCName"/>
+    </attribute>
+    <optional>
+      <attribute name="image-downsampling-dpi">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="image-downsampling-method">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <attribute name="image-processing">
+      <data type="NCName"/>
+    </attribute>
+    <attribute name="jpeg-quality">
+      <data type="integer"/>
+    </attribute>
+    <attribute name="rasterize-resolution">
+      <data type="integer"/>
+    </attribute>
+    <attribute name="rename-copy-image">
+      <ref name="ah.boolean"/>
+    </attribute>
+    <optional>
+      <attribute name="single-file-max-height"/>
+    </optional>
+    <optional>
+      <attribute name="single-file-max-pages">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="single-page-number">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <attribute name="singlefile">
+      <ref name="ah.boolean"/>
+    </attribute>
+    <attribute name="svg-version">
+      <data type="decimal"/>
+    </attribute>
+  </define>
+  <define name="svg-settings.model">
+    <empty/>
+  </define>
+  <define name="text-settings">
+    <element name="text-settings">
+      <empty/>
+    </element>
+  </define>
+  <define name="xslt-settings">
+    <element name="xslt-settings">
+      <ref name="xslt-settings.attlist"/>
+      <ref name="xslt-settings.model"/>
+    </element>
+  </define>
+  <define name="xslt-settings.attlist">
+    <optional>
+      <attribute name="command"/>
+    </optional>
+    <attribute name="msxml">
+      <ref name="ah.boolean"/>
+    </attribute>
+    <optional>
+      <attribute name="param-option"/>
+    </optional>
+  </define>
+  <define name="xslt-settings.model">
+    <zeroOrMore>
+      <ref name="param"/>
+    </zeroOrMore>
+  </define>
+  <define name="param">
+    <element name="param">
+      <attribute name="name">
+        <data type="NCName"/>
+      </attribute>
+      <attribute name="value">
+        <data type="anyURI"/>
+      </attribute>
+    </element>
+  </define>
+</grammar>

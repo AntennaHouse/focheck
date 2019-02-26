@@ -18,10 +18,16 @@
 namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
 namespace axh = "http://www.antennahouse.com/names/XSL/Hyphenations"
+namespace axs = "http://www.antennahouse.com/names/XSL/Settings"
 namespace fo = "http://www.w3.org/1999/XSL/Format"
 namespace local = ""
 
+
+## Hyphenation settings
 include "axh.rnc" inherit = axf
+
+## Option settings
+include "ahfsettings.rnc" inherit = axs
 include "axf-inherited.rnc" inherit = axf {
   # 
   # Overrides to patterns in 'axf-inherited.rnc' (and patterns in
@@ -61,7 +67,11 @@ include "axf-inherited.rnc" inherit = axf {
   # AH Formatter uses axf:custom-property and axf:document-info within
   # fo:declarations.
   fo_declarations.model |=
-    (axf_custom-property | axf_document-info | axf_hyphenation-info)*
+    (axf_custom-property
+     | axf_document-info
+     | axf_hyphenation-info
+     | axf_formatter-config
+     | axf_output-volume-info)*
   # AH Formatter allows empty fo:static-content.
   fo_static-content.model =
     (block.fo.list | neutral.fo.list)* & point.fo.list*
@@ -201,6 +211,20 @@ axf_form-field-option =
   
   ## リストボックス、コンボボックスの構成要素を指定します。 
   element axf:form-field-option { text }
+# <axf:formatter-config>
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.formatter-config
+axf_formatter-config =
+  
+  ## Additional option setting information
+  element axf:formatter-config {
+    axf_formatter-config.attlist, formatter-config.model
+  }
+# axf_formatter-config.model =
+#   axs_pdf-settings?
+axf_formatter-config.attlist =
+  
+  ## External Option Setting File
+  attribute src { text }?
 # <axf:hyphenation-info>
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.hyphenation-info
 axf_hyphenation-info =
@@ -212,6 +236,24 @@ axf_hyphenation-info =
 axf_hyphenation-info.attlist =
   attribute language { text }?,
   attribute src { text }?
+# <axf:output-volume-info>
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.output-volume-info
+axf_output-volume-info =
+  
+  ## Output volume specification
+  element axf:output-volume-info {
+    axf_output-volume-info.attlist, empty
+  }
+axf_output-volume-info.attlist =
+  
+  ## Initial volume number: <positive-integer>
+  attribute initial-volume-number { xsd:positiveInteger }?,
+  
+  ## Format specification: <string>
+  attribute format { text }?,
+  
+  ## How to include bookmarks in multiple separate volumes: first | all | separate
+  attribute bookmark-include { "first" | "all" | "separate" }?
 # <axf:ruby>
 # https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby
 axf_ruby =

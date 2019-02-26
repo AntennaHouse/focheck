@@ -16,8 +16,13 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
---><grammar xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations" ns="http://www.antennahouse.com/names/XSL/Extensions" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <include href="axh.rng"/>
+--><grammar xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations" ns="http://www.antennahouse.com/names/XSL/Extensions" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axs="http://www.antennahouse.com/names/XSL/Settings" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="axh.rng">
+    <a:documentation>Hyphenation settings</a:documentation>
+  </include>
+  <include href="ahfsettings.rng" ns="http://www.antennahouse.com/names/XSL/Settings">
+    <a:documentation>Option settings</a:documentation>
+  </include>
   <include href="axf-inherited.rng">
     <!--
       
@@ -120,6 +125,8 @@
           <ref name="axf_custom-property"/>
           <ref name="axf_document-info"/>
           <ref name="axf_hyphenation-info"/>
+          <ref name="axf_formatter-config"/>
+          <ref name="axf_output-volume-info"/>
         </choice>
       </zeroOrMore>
     </define>
@@ -416,6 +423,28 @@
     </element>
   </define>
   <!--
+    <axf:formatter-config>
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.formatter-config
+  -->
+  <define name="axf_formatter-config">
+    <element name="axf:formatter-config">
+      <a:documentation>Additional option setting information</a:documentation>
+      <ref name="axf_formatter-config.attlist"/>
+      <ref name="formatter-config.model"/>
+    </element>
+  </define>
+  <!--
+    axf_formatter-config.model =
+      axs_pdf-settings?
+  -->
+  <define name="axf_formatter-config.attlist">
+    <optional>
+      <attribute name="src">
+        <a:documentation>External Option Setting File</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     <axf:hyphenation-info>
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.hyphenation-info
   -->
@@ -434,6 +463,40 @@
     </optional>
     <optional>
       <attribute name="src"/>
+    </optional>
+  </define>
+  <!--
+    <axf:output-volume-info>
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.output-volume-info
+  -->
+  <define name="axf_output-volume-info">
+    <element name="axf:output-volume-info">
+      <a:documentation>Output volume specification</a:documentation>
+      <ref name="axf_output-volume-info.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="axf_output-volume-info.attlist">
+    <optional>
+      <attribute name="initial-volume-number">
+        <a:documentation>Initial volume number: &lt;positive-integer&gt;</a:documentation>
+        <data type="positiveInteger"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="format">
+        <a:documentation>Format specification: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="bookmark-include">
+        <a:documentation>How to include bookmarks in multiple separate volumes: first | all | separate</a:documentation>
+        <choice>
+          <value>first</value>
+          <value>all</value>
+          <value>separate</value>
+        </choice>
+      </attribute>
     </optional>
   </define>
   <!--

@@ -1,0 +1,631 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+
+# Antenna House Option Setting File.
+# 
+# Copyright 2015-2019 Antenna House, Inc.
+
+# default namespace = ""
+ah.boolean = "false" | "true"
+compression.list =
+  "auto"
+  | "zlib"
+  | "jpeg"
+  | "jpeg2000"
+  | "keeplzw"
+  | "auto2k"
+  | "keeplzw2k"
+downsampling.list = "none" | "average" | "bicubic" | "subsampling"
+dpi.model = xsd:positiveInteger
+jpeg-quality.model =
+  xsd:positiveInteger { minInclusive = "1" maxInclusive = "100" }
+pass-through.model =
+  list {
+    ("all"
+     | "gif"
+     | "-gif"
+     | "tiff"
+     | "-tiff"
+     | "png"
+     | "-png"
+     | "jpeg"
+     | "-jpeg"
+     | "jpeg2000"
+     | "-jpeg2000"
+     | "jbig2"
+     | "-jbig2")+
+  }
+  | "none"
+pdf-version.list =
+  "PDF1.3"
+  | "PDF1.4"
+  | "PDF1.5"
+  | "PDF1.6"
+  | "PDF1.7"
+  | "PDF/X-1a:2001"
+  | "PDF/X-3:2002"
+  | "PDF/X-1a:2003"
+  | "PDF/X-2:2003"
+  | "PDF/X-3:2003"
+  | "PDF/X-4:2010"
+  | "PDF/A-1a:2005"
+  | "PDF/A-1b:2005"
+  | "PDF1.4/A-2a:2011"
+  | "PDF1.5/A-2a:2011"
+  | "PDF1.6/A-2a:2011"
+  | "PDF1.7/A-2a:2011"
+  | "PDF1.4/A-2b:2011"
+  | "PDF1.5/A-2b:2011"
+  | "PDF1.6/A-2b:2011"
+  | "PDF1.7/A-2b:2011"
+  | "PDF1.4/A-2u:2011"
+  | "PDF1.5/A-2u:2011"
+  | "PDF1.6/A-2u:2011"
+  | "PDF1.7/A-2u:2011"
+  | "PDF1.4/A-3a:2012"
+  | "PDF1.5/A-3a:2012"
+  | "PDF1.6/A-3a:2012"
+  | "PDF1.7/A-3a:2012"
+  | "PDF1.4/A-3b:2012"
+  | "PDF1.5/A-3b:2012"
+  | "PDF1.6/A-3b:2012"
+  | "PDF1.7/A-3b:2012"
+  | "PDF1.4/A-3u:2012"
+  | "PDF1.5/A-3u:2012"
+  | "PDF1.6/A-3u:2012"
+  | "PDF1.7/A-3u:2012"
+  | "PDF1.5/UA-1:2014"
+  | "PDF1.6/UA-1:2014"
+  | "PDF1.7/UA-1:2014"
+script.list =
+  "Latn"
+  | "Grek"
+  | "Cyrl"
+  | "Arab"
+  | "Hebr"
+  | "Deva"
+  | "Beng"
+  | "Ethi"
+  | "Guru"
+  | "Gujr"
+  | "Orya"
+  | "Taml"
+  | "Telu"
+  | "Knda"
+  | "Mlym"
+  | "Sinh"
+  | "Syrc"
+  | "Thai"
+  | "Khmr"
+  | "Laoo"
+  | "Myanmar"
+  | "Hang"
+  | "Hans"
+  | "Hant"
+  | "Jpan"
+  | "Hrkt"
+  | "."
+  | ""
+# start = formatter-config
+formatter-config = element formatter-config { formatter-config.model }
+formatter-config.model =
+  formatter-settings?,
+  font-settings?,
+  pdf-settings?,
+  ps-settings?,
+  mathml-settings?,
+  rxe-settings?,
+  svg-settings?,
+  inx-settings?,
+  mif-settings?,
+  cgm-settings?,
+  text-settings?,
+  xslt-settings?
+formatter-settings =
+  element formatter-settings {
+    attribute abbreviation-character-count { xsd:integer }?,
+    attribute auto-break-footnote { ah.boolean }?,
+    attribute auto-formatter-type { "html" | "xhtml" }?,
+    attribute avoid-widow-words-CJK-punctuation { ah.boolean },
+    
+    ## Whether <axf:formatter-config> is allowed
+    attribute axf-formatter-config { ah.boolean }?,
+    
+    ## Mode for handling baselines of mixed scripts: 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6
+    attribute baseline-mode { "4" | "5" | "6" }?,
+    attribute bidi-override-mode { xsd:integer }?,
+    attribute bold-ratio { xsd:decimal }?,
+    attribute border-medium-width { xsd:NMTOKEN }?,
+    attribute border-thick-width { xsd:NMTOKEN }?,
+    attribute border-thin-width { xsd:NMTOKEN }?,
+    attribute css-media-type { xsd:NCName }?,
+    attribute default-CJK { xsd:NCName }?,
+    attribute default-color { text }?,
+    attribute default-font-size { xsd:NMTOKEN }?,
+    attribute default-from-page-master-region { ah.boolean }?,
+    attribute default-html-charset { xsd:NCName }?,
+    attribute default-lang { text }?,
+    attribute default-lang2 { xsd:NCName }?,
+    attribute default-page-height { xsd:NMTOKEN }?,
+    attribute default-page-margin-bottom { text }?,
+    attribute default-page-margin-left { text }?,
+    attribute default-page-margin-right { text }?,
+    attribute default-page-margin-top { text }?,
+    attribute default-page-width { xsd:NMTOKEN }?,
+    attribute descendant-or-self-files { ah.boolean }?,
+    attribute external-entity { ah.boolean }?,
+    
+    ## How strictly to check 'font-family' syntax: auto | loose | strict
+    attribute family-name-syntax { "auto" | "loose" | "strict" }?,
+    attribute fixed-width-space-treatment { ah.boolean }?,
+    attribute hair-space-width { text }?,
+    
+    ## Whether to enable <hyphen-min> in the Hyphenation Exception Dictionary: false | true | without-exceptions
+    attribute hyphenation-min { ah.boolean | "without-exceptions" }?,
+    
+    ## Whether to use custom hyphenation processing or TeX hyphenation dictionaries: 'true' | 'false'
+    attribute HyphenationOption { ah.boolean }?,
+    
+    ## Comma-delimited list of languages to hyphenate when HyphenationOption="true"
+    attribute hyphenation-TeX { text }?,
+    attribute hyphen-min { ah.boolean }?,
+    attribute intrusion-displace-mode { xsd:integer }?,
+    attribute img-alt { ah.boolean }?,
+    attribute issue-scale-to-fit { ah.boolean }?,
+    attribute justify-leader { ah.boolean }?,
+    attribute justify-rowspan-height { ah.boolean }?,
+    attribute keep-footnote-anchor { ah.boolean }?,
+    attribute latin-ligature { ah.boolean }?,
+    attribute non-starter-ideographic-space { ah.boolean }?,
+    attribute normal-line-height { text }?,
+    attribute normalize { xsd:NCName }?,
+    attribute oblique-skew { xsd:integer }?,
+    attribute omit-uppercase-word-accents { text }?,
+    attribute output-fo-tree { ah.boolean }?,
+    attribute overflow-limit-block { xsd:NMTOKEN }?,
+    attribute overflow-limit-inline { xsd:NMTOKEN }?,
+    attribute pair-kerning { ah.boolean }?,
+    attribute printer-marks-line-length { text }?,
+    attribute printer-marks-line-width { text }?,
+    attribute printer-marks-zero-margin { text }?,
+    attribute PrinterOrientation { xsd:NCName }?,
+    attribute PscriptPassThrough { ah.boolean }?,
+    attribute punctuation-spacing { text }?,
+    attribute punctuation-trim { ah.boolean }?,
+    attribute pxpi { xsd:integer }?,
+    attribute ruby-align { text }?,
+    attribute small-caps-emulation-size { text }?,
+    attribute SeparatePrinterDuplexJob { ah.boolean }?,
+    attribute splitting-blocks-space { ah.boolean }?,
+    attribute SVGViewer { ah.boolean }?,
+    attribute table-auto-layout-limit { xsd:integer }?,
+    attribute table-is-reference-area { ah.boolean }?,
+    attribute text-autospace { ah.boolean }?,
+    attribute text-autospace-width { text }?,
+    attribute text-decoration-baseline-mode { xsd:integer }?,
+    attribute text-decoration-mode { xsd:integer }?,
+    attribute text-justify-mode { xsd:integer }?,
+    attribute text-kashida-space { text }?,
+    attribute text-orientation-mode { xsd:integer }?,
+    attribute text-underline-mode { xsd:integer }?,
+    attribute thin-space-width { text }?,
+    attribute two-pass-formatting { ah.boolean }?,
+    attribute use-default-page-margin-CSS { ah.boolean }?,
+    attribute use-default-page-margin-XSL { ah.boolean }?,
+    attribute vertical-block-width-mode { xsd:integer }?,
+    attribute vertical-underline-side { xsd:NCName }?,
+    attribute viewport-length-units-mode { xsd:integer }?,
+    attribute WindowsFontAPI { text }?,
+    
+    ## ZERO WIDTH SPACE (U+200B) compatibility mode: 5 | 6
+    attribute zwsp-mode { "5" | "6" }?
+  }
+font-settings =
+  
+  ## Settings for fonts
+  element font-settings {
+    attribute auto-fallback-font { ah.boolean }?,
+    
+    ## Font for a linear barcode
+    attribute barcode-text-font { "OCRB" | "monospace" }?,
+    
+    ## Default font family
+    attribute default-font-family { xsd:NCName }?,
+    
+    ## Whether, and at what level, to report when a glyph is not found in a fallback font
+    attribute fallback-glyph { "0" | "1" | "2" }?,
+    
+    ## Font selection method: 5 = disregard 'font-selection-strategy'; 6 = act on 'font-selection-strategy="character-by-character"'
+    attribute font-selection-mode { "5" | "6" }?,
+    attribute font-selection-strategy { xsd:NCName }?,
+    attribute font-stretch-mode { xsd:integer }?,
+    attribute missing-font { xsd:integer }?,
+    
+    ## Whether to warn when glyph not found: [ = no message; 1 = level 1 error message; 2 = level 2 error message
+    attribute missing-glyph { "0" | "1" | "2" }?,
+    attribute missing-glyph-all { ah.boolean }?,
+    attribute use-windows-api { ah.boolean }?,
+    
+    ## Generic font mapping for a script
+    script-font*,
+    font-alias*
+  }
+script-font =
+  element script-font { script-font.attlist, script-font.model }
+script-font.model = empty
+script-font.attlist =
+  
+  ## Generic cursive font for script
+  attribute cursive { text }?,
+  
+  ## Generic fallback font for script
+  attribute fallback { text }?,
+  
+  ## Generic fantasy font for script
+  attribute fantasy { text }?,
+  
+  ## Generic monospace font for script
+  attribute monospace { text }?,
+  
+  ## Generic sans-serif font for script
+  attribute sans-serif { text }?,
+  
+  ## Script code
+  attribute script { script.list }?,
+  
+  ## Generic serif font for script
+  attribute serif { text }?
+font-alias = element font-alias { font-alias.attlist, font-alias.model }
+font-alias.model = empty
+font-alias.attlist =
+  
+  ## Name of font to alias
+  attribute src { text },
+  
+  ## Name of font to use in place of source font
+  attribute dst { text }
+pdf-settings =
+  element pdf-settings { pdf-settings.attlist, pdf-settings.model }
+pdf-settings.attlist =
+  
+  ## Whether JavaScript specified by openaction or axf:action-type is enabled: true | false
+  attribute allow-javascript { ah.boolean }?,
+  attribute certificate-name { xsd:NCName }?,
+  
+  ## Compression method of the data stored in a PDF file
+  attribute color-compression { compression.list }?,
+  attribute color-compression-default { compression.list }?,
+  attribute color-compression-minimum { compression.list }?,
+  
+  ## How to convert the RGB or CMYK color space to DeviceGray or DeviceCMYK: none | black | gray | all-gray | all-cmyk
+  attribute color-conversion {
+    "none" | "black" | "gray" | "all-gray" | "all-cmyk"
+  }?,
+  attribute color-downsampling { downsampling.list }?,
+  attribute color-downsampling-above-dpi { dpi.model }?,
+  attribute color-downsampling-target-dpi { dpi.model }?,
+  attribute color-downsampling-default { downsampling.list }?,
+  attribute color-downsampling-above-dpi-default { dpi.model }?,
+  attribute color-downsampling-target-dpi-default { dpi.model }?,
+  attribute color-downsampling-minimum { downsampling.list }?,
+  attribute color-downsampling-above-dpi-minimum { dpi.model }?,
+  attribute color-downsampling-target-dpi-minimum { dpi.model }?,
+  attribute color-jpeg-quality { jpeg-quality.model }?,
+  attribute color-jpeg-quality-default { jpeg-quality.model }?,
+  attribute color-jpeg-quality-minimum { jpeg-quality.model }?,
+  attribute color-profile { text }?,
+  attribute convert-colorspace { ah.boolean }?,
+  
+  ## Number of digits after the decimal point of real numbers to be output in PDF: 1 to 6
+  attribute decimal-part-digits {
+    xsd:positiveInteger { minInclusive = "1" maxInclusive = "6" }
+  }?,
+  attribute decimal-part-digits-default {
+    xsd:positiveInteger { minInclusive = "1" maxInclusive = "6" }
+  }?,
+  attribute decimal-part-digits-minimum {
+    xsd:positiveInteger { minInclusive = "1" maxInclusive = "6" }
+  }?,
+  attribute default-output-intent { text }?,
+  
+  ## Whether to embed all embeddable fonts in PDF: false | true | base14
+  attribute embed-all-fonts { ah.boolean | "base14" }?,
+  attribute embed-font-encoding { text }?,
+  attribute embed-std-output-intent { ah.boolean }?,
+  attribute embed-subset-font-percentage { xsd:integer }?,
+  attribute encrypt-metadata { ah.boolean }?,
+  
+  ## Key length when encrypting the PDF file: 40rc4 | 128rc4 | 128aes | 256aes
+  attribute encryption-level {
+    "40rc4" | "128rc4" | "128aes" | "256aes"
+  }?,
+  attribute EPS-processor { "none" | "distiller" | "ghostscript" }?,
+  attribute error-on-embed-fault { ah.boolean }?,
+  attribute error-on-missing-glyph { ah.boolean }?,
+  attribute error-on-pdfx-fault { ah.boolean }?,
+  attribute error-on-tagged-pdf-fault { ah.boolean }?,
+  attribute ghostscript { text }?,
+  
+  ## Available up to V6.2. Use 'pass-through' instead.
+  attribute gif-pass-through { ah.boolean }?,
+  attribute grayscale-compression { compression.list }?,
+  attribute grayscale-compression-default { compression.list }?,
+  attribute grayscale-compression-minimum { compression.list }?,
+  attribute grayscale-downsampling { downsampling.list }?,
+  attribute grayscale-downsampling-above-dpi { dpi.model }?,
+  attribute grayscale-downsampling-target-dpi { dpi.model }?,
+  attribute grayscale-downsampling-default { downsampling.list }?,
+  attribute grayscale-downsampling-above-dpi-default { dpi.model }?,
+  attribute grayscale-downsampling-target-dpi-default { dpi.model }?,
+  attribute grayscale-downsampling-minimum { downsampling.list }?,
+  attribute grayscale-downsampling-above-dpi-minimum { dpi.model }?,
+  attribute grayscale-downsampling-target-dpi-minimum { dpi.model }?,
+  attribute grayscale-jpeg-quality { jpeg-quality.model }?,
+  attribute grayscale-jpeg-quality-default { jpeg-quality.model }?,
+  attribute grayscale-jpeg-quality-minimum { jpeg-quality.model }?,
+  attribute gs-add-options { text }?,
+  attribute image-color-profile { ah.boolean }?,
+  attribute image-compression { xsd:NCName }?,
+  attribute image-downsampling { xsd:NCName }?,
+  attribute image-downsampling-above-dpi { dpi.model }?,
+  attribute image-downsampling-target-dpi { dpi.model }?,
+  attribute import-3D-annotation { ah.boolean }?,
+  attribute import-3Dannotation { ah.boolean }?,
+  attribute import-annotation-types { text }?,
+  attribute import-tagged-pdf { ah.boolean }?,
+  attribute import-textmarkup-annotation { ah.boolean }?,
+  attribute joboptions { text }?,
+  attribute jpeg-quality { xsd:integer }?,
+  attribute linearized { ah.boolean }?,
+  attribute monochrome-compression { xsd:NCName }?,
+  attribute monochrome-downsampling { xsd:NCName }?,
+  attribute monochrome-downsampling-above-dpi { dpi.model }?,
+  attribute monochrome-downsampling-target-dpi { dpi.model }?,
+  
+  ## Whether to embed multimedia in PDF when axf:multimedia-treatment="auto": embed | absolute-link | relative-link | richmedia | richmedia-windowed
+  attribute multimedia-treatment {
+    "embed"
+    | "absolute-link"
+    | "relative-link"
+    | "richmedia"
+    | "richmedia-windowed"
+  }?,
+  attribute new-tagging-mode { ah.boolean }?,
+  
+  ## Whether to permit text access for screen reader devices of PDF files: false | true
+  attribute no-accessibility { ah.boolean }?,
+  attribute no-adding-or-changing-comments { ah.boolean }?,
+  attribute no-assemble-doc { ah.boolean }?,
+  attribute no-changing { ah.boolean }?,
+  attribute no-content-copying { ah.boolean }?,
+  attribute no-fill-form { ah.boolean }?,
+  attribute object-compression { ah.boolean }?,
+  attribute object-compression-default { ah.boolean }?,
+  attribute object-compression-minimum { ah.boolean }?,
+  attribute overprint { xsd:NCName }?,
+  attribute page-labels { ah.boolean }?,
+  attribute pass-through { pass-through.model }?,
+  attribute pass-through-default { pass-through.model }?,
+  attribute pass-through-minimum { pass-through.model }?,
+  attribute pdf-version { pdf-version.list }?,
+  attribute printing-allowed { xsd:NCName }?,
+  attribute rasterize-resolution { xsd:integer }?,
+  attribute reverse-page { ah.boolean }?,
+  attribute rgb-conversion { xsd:NCName }?,
+  attribute signature { ah.boolean }?,
+  attribute signature-name { xsd:NCName }?,
+  attribute tagged-pdf { ah.boolean }?,
+  attribute text-and-lineart-compression { ah.boolean }?,
+  attribute transparency-color-space { xsd:NCName }?,
+  attribute use-launch-for-relative-uri { ah.boolean }?
+pdf-settings.model = embed-font*, (tag-role-map, embed-font*)?
+embed-font =
+  element embed-font {
+    attribute font { text }
+  }
+tag-role-map = element tag-role-map { tag-element+ }
+tag-element =
+  element tag-element {
+    attribute tag-base-name { token },
+    attribute tag-derived-name { token },
+    empty
+  }
+cgm-settings =
+  element cgm-settings {
+    attribute output-text { ah.boolean }?,
+    empty
+  }
+ps-settings =
+  element ps-settings {
+    attribute noembed-font { ah.boolean },
+    attribute transparency { ah.boolean }
+  }
+inx-settings =
+  element inx-settings {
+    attribute block-newline { ah.boolean }?,
+    attribute output-mode { xsd:NCName }
+  }
+mathml-settings =
+  element mathml-settings {
+    mathml-settings.attlist,
+    (element variant-font {
+       attribute fontfamily { text },
+       attribute mathvariant { xsd:NCName }
+     }
+     | (element math {
+          attribute axis-shift { xsd:integer },
+          attribute big { text },
+          attribute normal { xsd:integer },
+          attribute small { text }
+        },
+        element mfenced {
+          attribute center-shift { xsd:integer }
+        },
+        element mfrac {
+          attribute bar-lspace { text },
+          attribute bar-padding { text },
+          attribute bar-rspace { text },
+          attribute bar-width { text },
+          attribute denominator-space { text },
+          attribute italic-lspace { xsd:integer }?,
+          attribute italic-rspace { xsd:decimal }?,
+          attribute medium { xsd:integer },
+          attribute neumerator-space { text }?,
+          attribute numerator-space { xsd:decimal }?,
+          attribute thick { text },
+          attribute thin { text }
+        },
+        element mi {
+          attribute italic-lspace { xsd:decimal },
+          attribute italic-rspace { text }
+        },
+        element mo {
+          attribute adjust-largeop-space { xsd:decimal }?,
+          attribute default-space { xsd:decimal }?,
+          attribute integral-bottom-width { xsd:decimal }?,
+          attribute integral-italic { ah.boolean }?,
+          attribute integral-largeop { xsd:integer }?,
+          attribute integral-largeop-bottom-width { xsd:decimal }?,
+          attribute integral-largeop-subscript-shift { xsd:decimal }?,
+          attribute integral-largeop-superscript-shift { xsd:decimal }?,
+          attribute integral-largeop-top-width { xsd:decimal }?,
+          attribute integral-subscript-shift { xsd:decimal }?,
+          attribute integral-superscript-shift { xsd:decimal }?,
+          attribute integral-top-width { xsd:decimal }?,
+          attribute largeop { text },
+          attribute largeop-integral { xsd:integer }?,
+          attribute largeop-subscript-shift { xsd:integer }?,
+          attribute largeop-superscript-shift { xsd:decimal }?,
+          attribute paren-bottom { xsd:NCName }?,
+          attribute paren-top { xsd:NCName }?,
+          attribute paren-width-max { xsd:integer }?,
+          attribute paren-width-min { xsd:decimal }?,
+          attribute paren-width-scale { xsd:decimal }?,
+          attribute paren-width-step { ah.boolean }?,
+          attribute subscript-shift { xsd:integer }?,
+          attribute superscript-shift { xsd:decimal }?
+        },
+        element mroot {
+          attribute index-rspace { text },
+          attribute index-shift { text },
+          attribute padding-bottom { xsd:integer },
+          attribute padding-left { xsd:integer },
+          attribute padding-right { xsd:integer },
+          attribute padding-top { text },
+          attribute root-pos1.x { xsd:integer },
+          attribute root-pos1.y { text },
+          attribute root-pos2.x { text },
+          attribute root-pos2.y { text },
+          attribute root-pos3.x { text },
+          attribute root-pos3.y { text },
+          attribute root-pos4.x { text },
+          attribute root-pos4.y { text },
+          attribute root-width1 { text },
+          attribute root-width2 { text },
+          attribute root-width3 { text },
+          attribute root-width4 { text }
+        },
+        element mscript {
+          attribute presubscript-italic-shift { text },
+          attribute presuperscript-italic-shift { text },
+          attribute script-lspace { text },
+          attribute script-lspace2 { text },
+          attribute script-rspace { text },
+          attribute script-rspace2 { text },
+          attribute subscript-italic-shift { text },
+          attribute subscript-shift { xsd:integer },
+          attribute superscript-italic-shift { text },
+          attribute superscript-shift { xsd:integer }
+        },
+        element mstyle {
+          attribute background { xsd:NCName },
+          attribute displaystyle { ah.boolean },
+          attribute mediummathspace { text },
+          attribute scriptlevel { xsd:integer },
+          attribute scriptminsize { xsd:NMTOKEN },
+          attribute scriptsizemultiplier { text },
+          attribute thickmathspace { text },
+          attribute thinmathspace { text },
+          attribute verythickmathspace { text },
+          attribute verythinmathspace { text },
+          attribute veryverythickmathspace { text },
+          attribute veryverythinmathspace { text }
+        },
+        element mtable {
+          attribute border-width { text }
+        },
+        munderover))?
+  }
+mathml-settings.attlist =
+  attribute double_struck { xsd:NCName }?,
+  attribute error-display { xsd:NCName }?,
+  attribute fraktur { xsd:NCName }?,
+  attribute mode { xsd:NCName }?,
+  attribute monospace { xsd:NCName }?,
+  attribute opspace-multiplier { xsd:decimal }?,
+  attribute sans-serif { xsd:NCName }?,
+  attribute script { xsd:NCName }?,
+  attribute script-maxnest { xsd:integer }?,
+  attribute scriptminsize { xsd:NMTOKEN }?,
+  attribute scriptsizemultiplier { xsd:decimal }?
+munderover = element munderover { munderover.attlist, munderover.model }
+munderover.model = empty
+munderover.attlist =
+  attribute bar-padding { text },
+  attribute bar-width { text },
+  attribute integral-largeop-overscript-space { xsd:decimal }?,
+  attribute integral-largeop-underscript-space { xsd:decimal }?,
+  attribute integral-overscript-space { xsd:decimal }?,
+  attribute integral-underscript-space { xsd:decimal }?,
+  attribute limit-size { text },
+  attribute overaccent-shift { text },
+  attribute overbar-space { text },
+  attribute overscript-space { text },
+  attribute tendsto-arror-variable { ah.boolean }?,
+  attribute underaccent-shift { text },
+  attribute underbar-space { text },
+  attribute underscript-space { text }
+mif-settings =
+  element mif-settings {
+    attribute char-units { xsd:NCName },
+    attribute image-processing { xsd:NCName }?,
+    attribute output-mode { xsd:NCName },
+    attribute units { xsd:NCName }
+  }
+rxe-settings = element rxe-settings { empty }
+svg-settings =
+  element svg-settings { svg-settings.attlist, svg-settings.model }
+svg-settings.attlist =
+  attribute base-uri { text }?,
+  attribute copy-image-path { text },
+  attribute copy-image-prefix { text },
+  attribute embed-all-fonts { ah.boolean },
+  attribute encoding { text }?,
+  attribute error-on-embed-fault { ah.boolean },
+  attribute format { text },
+  attribute gzip-compression { ah.boolean },
+  attribute image-conversion { xsd:NCName },
+  attribute image-downsampling-dpi { dpi.model }?,
+  attribute image-downsampling-method { xsd:integer }?,
+  attribute image-processing { xsd:NCName },
+  attribute jpeg-quality { xsd:integer },
+  attribute rasterize-resolution { xsd:integer },
+  attribute rename-copy-image { ah.boolean },
+  attribute single-file-max-height { text }?,
+  attribute single-file-max-pages { xsd:integer }?,
+  attribute single-page-number { ah.boolean }?,
+  attribute singlefile { ah.boolean },
+  attribute svg-version { xsd:decimal }
+svg-settings.model = empty
+text-settings = element text-settings { empty }
+xslt-settings =
+  element xslt-settings { xslt-settings.attlist, xslt-settings.model }
+xslt-settings.attlist =
+  attribute command { text }?,
+  attribute msxml { ah.boolean },
+  attribute param-option { text }?
+xslt-settings.model = param*
+param =
+  element param {
+    attribute name { xsd:NCName },
+    attribute value { xsd:anyURI }
+  }

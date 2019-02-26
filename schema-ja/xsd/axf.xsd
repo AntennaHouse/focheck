@@ -17,9 +17,10 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.antennahouse.com/names/XSL/Extensions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.antennahouse.com/names/XSL/Extensions" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns:axs="http://www.antennahouse.com/names/XSL/Settings" xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations">
   <xs:include schemaLocation="axf-inherited.xsd"/>
   <xs:import namespace="http://www.antennahouse.com/names/XSL/Hyphenations" schemaLocation="axh.xsd"/>
+  <xs:import namespace="http://www.antennahouse.com/names/XSL/Settings" schemaLocation="ahfsettings.xsd"/>
   <xs:import namespace="http://www.w3.org/1999/XSL/Format" schemaLocation="fo.xsd"/>
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <!--
@@ -94,6 +95,8 @@
       <xs:element ref="axf:custom-property"/>
       <xs:element ref="axf:document-info"/>
       <xs:element ref="axf:hyphenation-info"/>
+      <xs:element ref="axf:formatter-config"/>
+      <xs:element ref="axf:output-volume-info"/>
     </xs:choice>
   </xs:complexType>
   <!-- AH Formatter allows empty fo:static-content. -->
@@ -347,6 +350,33 @@
     </xs:annotation>
   </xs:element>
   <!--
+    <axf:formatter-config>
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.formatter-config
+  -->
+  <xs:element name="formatter-config">
+    <xs:annotation>
+      <xs:documentation>Additional option setting information</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="axs:formatter-config.model">
+          <xs:attributeGroup ref="axf:axf_formatter-config.attlist"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <!--
+    axf_formatter-config.model =
+      axs_pdf-settings?
+  -->
+  <xs:attributeGroup name="axf_formatter-config.attlist">
+    <xs:attribute name="src">
+      <xs:annotation>
+        <xs:documentation>External Option Setting File</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     <axf:hyphenation-info>
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.hyphenation-info
   -->
@@ -364,6 +394,42 @@
   <xs:attributeGroup name="axf_hyphenation-info.attlist">
     <xs:attribute name="language"/>
     <xs:attribute name="src"/>
+  </xs:attributeGroup>
+  <!--
+    <axf:output-volume-info>
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.output-volume-info
+  -->
+  <xs:element name="output-volume-info">
+    <xs:annotation>
+      <xs:documentation>Output volume specification</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="axf:axf_output-volume-info.attlist"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="axf_output-volume-info.attlist">
+    <xs:attribute name="initial-volume-number" type="xs:positiveInteger">
+      <xs:annotation>
+        <xs:documentation>Initial volume number: &lt;positive-integer&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="format">
+      <xs:annotation>
+        <xs:documentation>Format specification: &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="bookmark-include">
+      <xs:annotation>
+        <xs:documentation>How to include bookmarks in multiple separate volumes: first | all | separate</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="first"/>
+          <xs:enumeration value="all"/>
+          <xs:enumeration value="separate"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:attributeGroup>
   <!--
     <axf:ruby>
