@@ -163,7 +163,8 @@ AFTER making a release on GitHub:
 
 <target name="ahfsettings.rnc">
   <copy file="${ahfsettings.rnc}"
-	todir="${schema.dir}" />
+	todir="${schema.dir}"
+	overwrite="${force}" />
 </target>
 
 <target name="rnc" depends="rncdump, rncinherited, axf-inherited, ahfsettings.rnc" />
@@ -378,13 +379,13 @@ AFTER making a release on GitHub:
        done. -->
   <copy todir="${focheck.basedir.converted}/omegat/source"
 	preservelastmodified="true"
-	force="${force}">
+	overwrite="${force}">
     <fileset dir="${focheck.basedir.converted}/schematron"
 	     includes="*.sch" />
   </copy>
   <copy todir="${focheck.basedir.converted}/omegat/source"
 	preservelastmodified="true"
-	force="${force}">
+	overwrite="${force}">
     <fileset dir="${focheck.basedir.converted}/schema/rng"
 	     includes="*.rng" />
   </copy>
@@ -396,7 +397,7 @@ AFTER making a release on GitHub:
   </java>
   <copy todir="${focheck.basedir.converted}/schematron-ja"
 	preservelastmodified="true"
-	force="${force}">
+	overwrite="${force}">
     <fileset dir="${focheck.basedir.converted}/omegat/target"
 	     includes="*.sch" />
   </copy>
@@ -405,7 +406,7 @@ AFTER making a release on GitHub:
 	 perm="644" />
   <copy todir="${focheck.basedir.converted}/schema-ja/rng"
 	preservelastmodified="true"
-	force="${force}">
+	overwrite="${force}">
     <fileset dir="${focheck.basedir.converted}/omegat/target"
 	     includes="*.rng" />
   </copy>
