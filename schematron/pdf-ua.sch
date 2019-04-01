@@ -33,6 +33,13 @@
 
 <pattern id="pdf-ua-pattern">
 
+<!-- 11-001 - Natural language for text in page content cannot be
+              determined. -->
+<!-- https://www.antennahouse.com/product/ahf66/ahf-pdf.html#taggedpdf -->
+<rule context="fo:root">
+  <report test="empty(@xml:lang) or @xml:lang = ''" role="Error">'@xml:lang' should be specified on fo:root to indicate the natural language of the text and metadata.</report>
+</rule>
+
 <!-- 13-004 - Figure tag alternative or replacement text missing. -->
 <!-- https://www.antennahouse.com/product/ahf66/ahf-pdf.html#alttext -->
 <rule context="fo:external-graphic | fo:instream-foreign-object">
