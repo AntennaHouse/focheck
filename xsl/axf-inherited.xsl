@@ -160,8 +160,8 @@
 <property name="axf:line-number-text-decoration" model="text" description="Text decoration of line numbers" />
 <property name="axf:line-number-width" model="text" description="Width of line numbers: auto | &lt;length>" />
 <property name="axf:list-style-type" model="text" description="List style: &lt;glyph> | &lt;algorithmic> | &lt;numeric> | &lt;alphabetic> | &lt;symbolic> | &lt;non-repeating> | normal | none" />
-<property name="axf:normalize" model="'auto' | 'none' | 'nfc' | 'nfkc' | 'nfd' | 'nfkd'" description="Unicode normalization to perform on text" />
-<property name="axf:normalize-exclude" model="'full-composition-exclusion' | 'none'" description="Whether Composition Exclusions are excluded or not when the normalization (axf:normalize) is specified" />
+<property name="axf:normalize" model="'auto' | 'none' | 'nfc' | 'nfkc' | 'nfd' | 'nfkd'" description="Unicode normalization to perform on text: auto | none | nfc | nfkc | nfd | nfkd" />
+<property name="axf:normalize-exclude" model="'full-composition-exclusion' | 'none'" description="Whether Composition Exclusions are excluded or not when the normalization (axf:normalize) is specified: full-composition-exclusion | none" />
 <property name="axf:number-transform" model="text" description="Converts the number sequence in the character string: none | kansuji | kansuji-if-vertical | &lt;list-style-type> | &lt;string>" />
 <property name="axf:overflow-align" model="'normal' | 'start' | 'end' | 'center'" description="Alignment of the overflowed block: normal | start | end | center" />
 <property name="axf:overflow-condense" model="'letter-spacing' | 'font-stretch' | 'font-size' | 'line-height' | 'auto' | 'none'" description="How to condense the overflowed text within the region: letter-spacing | font-stretch | font-size | line-height | auto | none" />
@@ -223,9 +223,13 @@
 <property name="axf:text-justify-trim" model="text" description="The way to trim spaces between characters in justified text" />
 <property name="axf:text-kashida-space" model="text" description="Percentage of Kashida in Arabic justification: &lt;percentage> | auto" />
 <property name="axf:text-orientation" model="'mixed' | 'upright' | 'sideways-right' | 'sideways' | 'none'" description="Orientation of text in vertical writing mode" />
+<property name="axf:text-stroke" model="text" description="Stroke of the character: &lt;length> &lt;color>? | &lt;color>" />
+<property name="axf:text-stroke-color" model="text" description="Stroke color: &lt;color>" />
+<property name="axf:text-stroke-width" model="text" description="Stroke width: &lt;length>" />
 <property name="axf:vertical-underline-side" model="'left' | 'right' | 'depend-on-language' | 'auto'" description="Which side of the text to put underline in vertical writing-mode" />
 <property name="axf:word-break" model="'normal' | 'break-all' | 'keep-all'" description="Whether to enable line breaking even inside a word" />
-<property name="axf:word-wrap" model="'normal' | 'break-word'" description="Whether to forcibly break a word when line break cannot be performed" />
+<property name="axf:word-wrap" model="'normal' | 'break-word'" description="Whether to forcibly break a word when line break cannot be performed: normal | break-word" />
+<property name="text-shadow" model="text" description="Shadow to display behind text: none | [ &lt;length>{{2,3}} &amp;&amp; &lt;color>? ]#" exclude="fo:character fo:initial-property-set fo:leader fo:page-number fo:page-number-citation fo:page-number-citation-last fo:scaling-value-citation" combine="yes" />
 </xsl:variable>
 
 
@@ -251,20 +255,25 @@ include "</xsl:text>
     <xsl:message select="$inherited-properties" />
   </xsl:if>
 
+  <xsl:variable
+      name="patterns"
+      select="for $property in $inherited-properties/@name
+                return translate($property, ':', '_')"
+      as="xs:string+"/>
+
   <xsl:for-each select="key('all-fo-divs', true())">
 
-    <xsl:variable name="element"
-                  select="substring-after(head, 'fo:')"/>
+    <xsl:variable name="qname"
+                  select="head"
+                  as="xs:string" />
+    <xsl:variable name="local-name"
+                  select="substring-after(head, 'fo:')"
+                  as="xs:string" />
 
     <!--  -->
-    <xsl:variable
-        name="patterns"
-        select="for $property in $inherited-properties/@name
-                  return translate($property, ':', '_')"
-        as="xs:string+"/>
 
     <xsl:if test="$debug">
-      <xsl:message><xsl:value-of select="$element"/></xsl:message>
+      <xsl:message><xsl:value-of select="$local-name"/></xsl:message>
       <xsl:for-each select="$patterns">
         <xsl:sort/>
         <xsl:message> - <xsl:value-of select="."/></xsl:message>
@@ -272,16 +281,17 @@ include "</xsl:text>
     </xsl:if>
 
     <xsl:text>&#10;fo_</xsl:text>
-    <xsl:value-of select="$element" />
+    <xsl:value-of select="$local-name" />
     <xsl:text>.attlist &amp;=&#10;</xsl:text>
-    <xsl:for-each select="$patterns">
+    <xsl:for-each
+        select="$inherited-properties[not($qname = tokenize(@exclude, '\s+'))]">
       <xsl:sort />
-      <xsl:text>    </xsl:text>
-      <xsl:value-of select="." />
-      <xsl:if test="position() != last()">
-        <xsl:text>,</xsl:text>
-      </xsl:if>
-      <xsl:text>&#10;</xsl:text>
+        <xsl:text>    </xsl:text>
+        <xsl:value-of select="translate(@name, ':', '_')" />
+        <xsl:if test="position() != last()">
+          <xsl:text>,</xsl:text>
+        </xsl:if>
+        <xsl:text>&#10;</xsl:text>
     </xsl:for-each>
   </xsl:for-each>
 
@@ -295,10 +305,19 @@ include "</xsl:text>
   <xsl:for-each select="$inherited-properties">
     <xsl:sort select="@name" />
     <xsl:value-of select="translate(@name, ':', '_')" />
-    <xsl:text> = &#10;</xsl:text>
+    <xsl:text> </xsl:text>
+    <xsl:if test="@combine = 'yes'">
+      <xsl:text>|</xsl:text>
+    </xsl:if>
+    <xsl:text>= &#10;</xsl:text>
     <xsl:if test="exists(@description)">
       <xsl:text>    ## </xsl:text>
       <xsl:value-of select="@description" />
+      <xsl:text>&#10;</xsl:text>
+    </xsl:if>
+    <xsl:if test="exists(@exclude)">
+      <xsl:text>    ## Exclude: </xsl:text>
+      <xsl:value-of select="@exclude" />
       <xsl:text>&#10;</xsl:text>
     </xsl:if>
     <xsl:text>    attribute </xsl:text>
