@@ -20,10 +20,17 @@ downsampling.list =
     'none' | 'average' | 'bicubic' | 'subsampling'
 
 dpi.model =
-    xsd:positiveInteger
+    xsd:positiveInteger { minInclusive = "1" }
 
 jpeg-quality.model =
     xsd:positiveInteger { minInclusive = "1" maxInclusive = "100" }
+
+monochrome.compression.list =
+    'ccitt4'
+    | 'ccitt3'
+    | 'runlength'
+    | 'zlib'
+    | 'none'
 
 pass-through.model =
     list { ( 'all' | 'gif' | '-gif' | 'tiff' | '-tiff' | 'png' | '-png'
@@ -178,6 +185,7 @@ formatter-settings =
       attribute normalize { xsd:NCName }?,
       attribute oblique-skew { xsd:integer }?,
       attribute omit-uppercase-word-accents { text }?,
+      attribute output-area-id { ah.boolean }?,
       attribute output-fo-tree { ah.boolean }?,
       attribute overflow-limit-block { xsd:NMTOKEN }?,
       attribute overflow-limit-inline { xsd:NMTOKEN }?,
@@ -195,6 +203,7 @@ formatter-settings =
       attribute SeparatePrinterDuplexJob { ah.boolean }?,
       attribute splitting-blocks-space { ah.boolean }?,
       attribute SVGViewer { ah.boolean }?,
+      attribute tab-overlap-treatment { '' | 'ignore-tab' | 'next-tab' }?,
       attribute table-auto-layout-limit { xsd:integer }?,
       attribute table-is-reference-area { ah.boolean }?,
       attribute text-autospace { ah.boolean }?,
@@ -204,12 +213,19 @@ formatter-settings =
       attribute text-justify-mode { xsd:integer }?,
       attribute text-kashida-space { text }?,
       attribute text-orientation-mode { xsd:integer }?,
+      ## Whether to apply blur to a font that is not allowed to be embedded: false | true
+      attribute textshadow-blur-cannot-embed-font { ah.boolean }?,
+      ## Minimum resolution of the image when applying blur in text-shadow: <positive-integer>
+      attribute textshadow-resolution-minimum-dpi { dpi.model }?,
+      ## Image resolution when applying blur in text-shadow: <positive-integer>
+      attribute textshadow-resolution-pixel-per-em { dpi.model }?,
       attribute text-underline-mode { xsd:integer }?,
       attribute thin-space-width { text }?,
       attribute two-pass-formatting { ah.boolean }?,
       attribute use-default-page-margin-CSS { ah.boolean }?,
       attribute use-default-page-margin-XSL { ah.boolean }?,
       attribute vertical-block-width-mode { xsd:integer }?,
+      attribute vertical-coloring-text { text }?,
       attribute vertical-underline-side { xsd:NCName }?,
       attribute viewport-length-units-mode { xsd:integer }?,
       attribute WindowsFontAPI { text }?,
@@ -231,13 +247,15 @@ font-settings =
        attribute font-selection-mode { '5' | '6' }?,
        attribute font-selection-strategy { xsd:NCName }?,
        attribute font-stretch-mode { xsd:integer }?,
-       attribute missing-font { xsd:integer }?,
-       ## Whether to warn when glyph not found: [ = no message; 1 = level 1 error message; 2 = level 2 error message
+       ## Whether to warn when font not found: [ 0 = no message; 1 = level 1 error message; 2 = level 2 error message ]
+       attribute missing-font { '0' | '1' | '2' }?,
+       ## Whether to warn when glyph not found: [ 0 = no message; 1 = level 1 error message; 2 = level 2 error message ]
        attribute missing-glyph { '0' | '1' | '2' }?,
        attribute missing-glyph-all { ah.boolean }?,
        attribute use-windows-api { ah.boolean }?,
-       ## Generic font mapping for a script
+       ## Mapping from generic font to actual font for a script
        script-font*,
+       ## Alias one font name to another
        font-alias*
      }
 
@@ -291,9 +309,11 @@ pdf-settings.attlist =
          ## Whether JavaScript specified by openaction or axf:action-type is enabled: true | false
          attribute allow-javascript { ah.boolean }?,
          attribute certificate-name { xsd:NCName }?,
-         ## Compression method of the data stored in a PDF file
+         ## Compression method for color image transformed into bitmap in PDF file: auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k
          attribute color-compression { compression.list }?,
+         ## Compression method for color image transformed into bitmap in PDF file: auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k
          attribute color-compression-default { compression.list }?,
+         ## Compression method for color image transformed into bitmap in PDF file: auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k
          attribute color-compression-minimum { compression.list }?,
          ## How to convert the RGB or CMYK color space to DeviceGray or DeviceCMYK: none | black | gray | all-gray | all-cmyk
          attribute color-conversion { 'none' | 'black' | 'gray' | 'all-gray' | 'all-cmyk' }?,
@@ -323,7 +343,7 @@ pdf-settings.attlist =
          attribute embed-subset-font-percentage { xsd:integer }?,
          attribute encrypt-metadata { ah.boolean }?,
          ## Key length when encrypting the PDF file: 40rc4 | 128rc4 | 128aes | 256aes
-         attribute encryption-level { '40rc4' | '128rc4' | '128aes' | '256aes' }?,
+         attribute encryption-level { '40rc4' | '40RC4' | '128rc4' | '128RC4' | '128aes' | '128AES' | '256aes' | '256AES' }?,
          attribute EPS-processor { 'none' | 'distiller' | 'ghostscript' }?,
          attribute error-on-embed-fault { ah.boolean }?,
          attribute error-on-missing-glyph { ah.boolean }?,
@@ -361,10 +381,18 @@ pdf-settings.attlist =
          attribute joboptions { text }?,
          attribute jpeg-quality { xsd:integer }?,
          attribute linearized { ah.boolean }?,
-         attribute monochrome-compression { xsd:NCName }?,
-         attribute monochrome-downsampling { xsd:NCName }?,
+         attribute monochrome-compression { monochrome.compression.list }?,
+         attribute monochrome-compression-default { monochrome.compression.list }?,
+         attribute monochrome-compression-minimum { monochrome.compression.list }?,
+         attribute monochrome-downsampling { downsampling.list }?,
          attribute monochrome-downsampling-above-dpi { dpi.model }?,
          attribute monochrome-downsampling-target-dpi { dpi.model }?,
+         attribute monochrome-downsampling-default { downsampling.list }?,
+         attribute monochrome-downsampling-above-dpi-default { dpi.model }?,
+         attribute monochrome-downsampling-target-dpi-default { dpi.model }?,
+         attribute monochrome-downsampling-minimum { downsampling.list }?,
+         attribute monochrome-downsampling-above-dpi-minimum { dpi.model }?,
+         attribute monochrome-downsampling-target-dpi-minimum { dpi.model }?,
          ## Whether to embed multimedia in PDF when axf:multimedia-treatment="auto": embed | absolute-link | relative-link | richmedia | richmedia-windowed
          attribute multimedia-treatment { 'embed' | 'absolute-link' | 'relative-link' | 'richmedia' | 'richmedia-windowed' }?,
          attribute new-tagging-mode { ah.boolean }?,
@@ -386,14 +414,20 @@ pdf-settings.attlist =
          attribute pdf-version { pdf-version.list }?,
          attribute printing-allowed { xsd:NCName }?,
          attribute rasterize-resolution { xsd:integer }?,
+         attribute real-value-limit { '0' | '1' | '2' | '3' }?,
+         attribute real-value-limit-modify { ah.boolean }?,
          attribute reverse-page { ah.boolean }?,
          attribute rgb-conversion { xsd:NCName }?,
          attribute signature { ah.boolean }?,
          attribute signature-name { xsd:NCName }?,
          attribute tagged-pdf { ah.boolean }?,
          attribute text-and-lineart-compression { ah.boolean }?,
+         attribute text-and-lineart-compression-default { ah.boolean }?,
+         attribute text-and-lineart-compression-minimum { ah.boolean }?,
+         attribute transparency { ah.boolean }?,
          attribute transparency-color-space { xsd:NCName }?,
-         attribute use-launch-for-relative-uri { ah.boolean }?
+         attribute use-launch-for-local-file { ah.boolean }?,
+         attribute user-password { text }?
 
 pdf-settings.model =
    (embed-font*, (tag-role-map, embed-font*)?)
