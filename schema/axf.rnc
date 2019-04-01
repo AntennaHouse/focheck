@@ -25,7 +25,7 @@ namespace local = ""
 include "axh.rnc"
 
 ## Option settings
-include "ahfsettings.rnc" inherit = axs
+include "axs.rnc" inherit = axs
 
 include "axf-inherited.rnc" {
 #
@@ -74,6 +74,7 @@ fo_simple-page-master.model =
 fo_declarations.model |=
    (axf_custom-property |
       axf_document-info |
+      axf_font-face |
       axf_hyphenation-info |
       axf_formatter-config |
       axf_output-volume-info)*
@@ -153,6 +154,25 @@ axf_document-info =
     attribute value { text },
     empty
 }
+
+
+# <axf:font-face>
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.font-face
+axf_font-face =
+  ## Additional hyphenation information
+  element axf:font-face {
+     axf_font-face.attlist,
+     axf_font-face.model
+}
+
+axf_font-face.model =
+   empty
+
+axf_font-face.attlist =
+   attribute src { text},
+   attribute font-family { text },
+   attribute font-style { 'normal' | 'italic' }?,
+   attribute font-weight { 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' }?
 
 # <axf:footnote-number/>
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-number
@@ -255,7 +275,7 @@ axf_output-volume-info =
 
 axf_output-volume-info.attlist =
    ## Initial volume number: <positive-integer>
-attribute initial-volume-number { xsd:positiveInteger }?,
+   attribute initial-volume-number { xsd:positiveInteger }?,
    ## Format specification: <string>
    attribute format { text }?,
    ## How to include bookmarks in multiple separate volumes: first | all | separate
@@ -458,12 +478,12 @@ fo_basic-link.attlist &=
     axf_alttext,
     text-decoration,
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.text-decoration.attlist
 
 fo_bidi-override.attlist &=
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.text-decoration.attlist
 
 fo_block.attlist &=
@@ -477,7 +497,7 @@ fo_block.attlist &=
     text-decoration,
     width,
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.block.attlist,
     axf.text-decoration.attlist
 
@@ -498,18 +518,19 @@ fo_block-container.attlist &=
     column-gap,
     role,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_character.attlist &=
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.text-decoration.attlist
 
 fo_external-graphic.attlist &=
     axf_alttext,
     axf_background-image-resolution,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties,
+    axf.multimedia.properties
 
 fo_float.attlist &=
     axf_float,
@@ -529,7 +550,7 @@ fo_float.attlist &=
     axf_float-offset-x,
     axf_float-offset-y,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_footnote.attlist &=
     space-before,
@@ -538,95 +559,95 @@ fo_footnote.attlist &=
     axf_footnote-position,
     axf_footnote-keep,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_footnote-body.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_index-range-begin.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_inline.attlist &=
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.text-decoration.attlist,
     axf_indent-here
 
 fo_inline-container.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_instream-foreign-object.attlist &=
     axf_alttext,
     axf_background-image-resolution,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_leader.attlist &=
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.text-decoration.attlist
 
 fo_list-block.attlist &=
     axf.block.attlist,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_list-item.attlist &=
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf-outline-properties
 
 fo_list-item-body.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_list-item-label.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_multi-case.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_multi-property-set.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_multi-switch.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_multi-toggle.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_page-number.attlist &=
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.page-number.attlist
 
 fo_page-number-citation.attlist &=
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.page-number.attlist
 
 fo_page-number-citation-last.attlist &=
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.page-number.attlist
 
 fo_scaling-value-citation.attlist &=
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.text-decoration.attlist
 
 fo_table.attlist &=
     axf_table-summary,
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.block.attlist
 
 fo_table-and-caption.attlist &=
@@ -635,40 +656,40 @@ fo_table-and-caption.attlist &=
 
 fo_table-caption.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_table-cell.attlist &=
     axf_headers,
     axf_repeat-cell-content-at-break,
     axf_scope,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_table-column.attlist &=
     id,
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_table-body.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_table-footer.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_table-header.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_table-row.attlist &=
     xml_id,
-    axf.annotation.attlist
+    axf.annotation.properties
 
 fo_wrapper.attlist &=
     text-decoration,
     xml_id,
-    axf.annotation.attlist,
+    axf.annotation.properties,
     axf.text-decoration.attlist
 
 #
@@ -697,7 +718,7 @@ common-border-padding-and-background-properties &=
 
 # List of annotation-related properties common to block-level and
 # inline-level formatting objects
-axf.annotation.attlist =
+axf.annotation.properties =
     axf_annotation-author,
     axf_annotation-border-color,
     axf_annotation-border-style,
@@ -737,6 +758,27 @@ axf-outline-properties =
     axf_outline-color,
     axf_outline-font-style,
     axf_outline-font-weight
+
+# List of extension properties to control multimedia objects.
+# See https://www.antennahouse.com/product/ahf66/ahf-ext.html#images
+axf.multimedia.properties =
+    axf_media-activation,
+    axf_media-duration,
+    axf_media-extraction-policy,
+    axf_media-flash-context-menu,
+    axf_media-flash-vars,
+    axf_media-play-mode,
+    axf_media-skin-auto-hide,
+    axf_media-skin-color,
+    axf_media-skin-control,
+    axf_media-transparent-background,
+    axf_media-volume,
+    axf_media-window-height,
+    axf_media-window-width,
+    axf_multimedia-treatment,
+    axf_poster-content-type,
+    axf_poster-image,
+    axf_show-controls
 
 # List of extension properties to control page and column numbers.
 # See https://www.antennahouse.com/product/ahf65/ahf-ext.html#page-number
@@ -1365,6 +1407,104 @@ axf_layer-settings =
     ## Layer definitions: none | <layer-setting>#
     attribute axf:layer-settings { text }?
 
+# @axf:media-activation
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-activation
+axf_media-activation =
+    ## When to activate / deactivate the rich media: [ ExplicitlyActivated | PageOpen | PageVisible ]? [ ExplicitlyDeactivated | PageClose | PageInvisible ]? 
+    attribute axf:media-activation { text }?
+
+# @axf:media-duration
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-duration
+axf_media-duration =
+    ## Duration of a time period of the multimedia: intrinsic | infinity | <number>
+    attribute axf:media-duration { text }?
+
+# @axf:media-extraction-policy
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-extraction-policy
+axf_media-extraction-policy =
+    ## Whether the creation of temporary files is allowed when playing the multimedia: tempnever | tempextract | tempaccess | tempalways
+    attribute axf:media-extraction-policy { 'tempnever' | 'tempextract' | 'tempaccess' | 'tempalways' }?
+
+# @axf:media-flash-context-menu
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-flash-context-menu
+axf_media-flash-context-menu =
+    ## Whether to display the Flash context menu when embedding Flash in the rich media: true | false
+    attribute axf:media-flash-context-menu { 'true' | 'false' }?
+
+# @axf:media-flash-vars
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-flash-vars
+axf_media-flash-vars =
+    ## Variables set when embedding Flash in the rich media: <string>
+    attribute axf:media-flash-vars { text }?
+
+# @axf:media-play-mode
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-play-mode
+axf_media-play-mode =
+    ## Number of times to play the multimedia: once | continuously | <number>
+    attribute axf:media-play-mode { text }?
+
+# @axf:media-skin-auto-hide
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-skin-auto-hide
+axf_media-skin-auto-hide =
+    ## Whether to automatically hide rich media skin: true | false
+    attribute axf:media-skin-auto-hide { 'true' | 'false' }?
+
+# @axf:media-skin-color
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-skin-color
+axf_media-skin-color =
+    ## Color of the rich media skin: auto | <color>
+    attribute axf:media-skin-color { text }?
+
+# @axf:media-skin-control
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-skin-control
+axf_media-skin-control =
+    ## Controls to display in the rich media skin: none | all | [ play || stop || forward || rewind || seek || mute || volume ]
+    attribute axf:media-skin-control { text }?
+
+# @axf:media-transparent-background
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-transparent-background
+axf_media-transparent-background =
+    ## Whether to make the background transparent when embedding Flash in the rich media: true | false
+    attribute axf:media-transparent-background { 'true' | 'false' }?
+
+# @axf:media-volume
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-volume
+axf_media-volume =
+    ## Sound volume when playing the multimedia: <percentage> | <number> | auto
+    attribute axf:media-volume { text }?
+
+# @axf:media-window-height
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-window-height
+axf_media-window-height =
+    ## Height of the rich media window: auto | <length>
+    attribute axf:media-window-height { text }?
+
+# @axf:media-window-width
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-window-width
+axf_media-window-width =
+    ## Width of the rich media window: auto | <length>
+    attribute axf:media-window-width { text }?
+
+# @axf:multimedia-treatment
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.multimedia-treatment
+axf_multimedia-treatment =
+    ## Whether to embed Multimedia in PDF: auto | embed | absolute-link | relative-link | richmedia | richmedia-windowed
+    attribute axf:multimedia-treatment { 'auto' | 'embed' | 'absolute-link' | 'relative-link' | 'richmedia' | 'richmedia-windowed' }?
+
 # @axf:number-type
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.number-type
@@ -1463,6 +1603,20 @@ axf_physical-page-number =
     ## Whether to generate physical page number: true | false
     attribute axf:physical-page-number { 'true' | 'false' }?
 
+# @axf:poster-content-type
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.poster-content-type
+axf_poster-content-type =
+    ## Content type of the poster image for embedded multimedia: <string> | auto
+    attribute axf:poster-content-type { text }?
+
+# @axf:poster-image
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.poster-image
+axf_poster-image =
+    ## Poster image for embedded multimedia: <uri-specification> | none | auto
+    attribute axf:poster-image { text }?
+
 # @axf:printer-marks
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.printer-marks
@@ -1546,6 +1700,13 @@ axf_reverse-page-number =
 axf_scope =
     ## Range of cells with which this table header cell is associated: auto | row | col | rowgroup | colgroup | both
     attribute axf:scope { 'auto' | 'row' | 'col' | 'rowgroup' | 'colgroup' | 'both' }?
+
+# @axf:show-controls
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.show-controls
+axf_show-controls =
+    ## Whether to show the player control bar for multimedia: true | false
+    attribute axf:show-controls { 'true' | 'false' }?
 
 # @axf:suppress-folio-prefix
 #
