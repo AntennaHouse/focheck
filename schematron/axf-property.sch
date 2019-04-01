@@ -373,6 +373,74 @@
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="name(.)"/>="<value-of select="."/>"</report>
 	</rule>
 
+	<!-- axf:media-duration -->
+	<!-- intrinsic | infinity | <number> -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-duration -->
+	<rule context="fo:*/@axf:media-duration">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be EnumerationToken or Number.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('intrinsic' | 'infinity'))"><value-of select="name(.)"/>="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'intrinsic' or 'infinity'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name(.)"/>="" should be EnumerationToken or Number.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="name(.)"/>="<value-of select="."/>"</report>
+	  <report test="../@axf:media-play-mode = 'once'" role="Warning"><value-of select="name(.)"/> is invalid when axf:media-play-mode="once" is specified.</report>
+	</rule>
+
+	<!-- axf:media-play-mode -->
+	<!-- once | continuously | <number> -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-play-mode -->
+	<rule context="fo:*/@axf:media-play-mode">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be EnumerationToken or Number.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('once' | 'continuously'))"><value-of select="name(.)"/>="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'once' or 'continuously'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name(.)"/>="" should be EnumerationToken or Number.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="name(.)"/>="<value-of select="."/>"</report>
+	</rule>
+
+	<!-- axf:media-skin-color -->
+	<!-- auto | <color> -->
+	<!-- Inherited: no -->
+	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-skin-color -->
+	<rule context="fo:*/@axf:media-skin-color">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">axf:media-skin-color="<value-of select="."/>" should be Color or 'auto'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))"><value-of select="name(.)"/>="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">media-skin-color="" should be Color or 'auto'.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: media-skin-color="<value-of select="."/>"</report>
+	</rule>
+
+	<!-- axf:media-volume -->
+	<!-- <percentage> | <number> | auto -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-volume -->
+	<rule context="fo:*/@axf:media-volume">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Percent', 'Number', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">media-volume="<value-of select="."/>" should be Percent, Number, or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">media-volume="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name(.)"/>="" should be Percent, Number, or EnumerationToken.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: media-volume="<value-of select="."/>"</report>
+	</rule>
+
+	<!-- axf:media-window-height -->
+	<!-- axf:media-window-width -->
+	<!-- auto | <length> -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-window-height -->
+	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-window-width -->
+	<rule context="fo:*/@axf:media-window-height |
+		       fo:*/@axf:media-window-width">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))"><value-of select="name(.)"/>="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name(.)"/>="" should be EnumerationToken or Length.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="name(.)"/>="<value-of select="."/>"</report>
+	</rule>
+
 	<!-- axf:page-number-prefix -->
 	<!-- <string> -->
 	<!-- Inherited: no -->
@@ -388,6 +456,32 @@
 	    </sqf:add>
 	    <sqf:delete />
           </sqf:fix>
+	</rule>
+
+	<!-- axf:poster-content-type -->
+	<!-- <string> | auto -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.poster-content -->
+	<rule context="fo:*/@axf:poster-content-type">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">content-type="<value-of select="."/>" should be Literal or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">content-type="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">content-type="" should be Literal or EnumerationToken.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: content-type="<value-of select="."/>"</report>
+	</rule>
+
+	<!-- axf:poster-image -->
+	<!-- <uri-specification> | none | inherit -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.poster-image -->
+	<rule context="fo:*/@axf:poster-image">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">poster-image="<value-of select="."/>" should be URI or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'auto'))">poster-image="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'none' or 'auto'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">poster-image="" should be URI or EnumerationToken.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: poster-image="<value-of select="."/>"</report>
 	</rule>
 
 	<!-- axf:revision-bar-color -->
