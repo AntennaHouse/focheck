@@ -214,8 +214,31 @@ axf_form.model =
 axf_form-field =
   ## Generates a form field
   element axf:form-field {
-    (axf_form-field-option | axf_form-field-event)*
+     axf_form-field.attlist,
+     axf_form-field.model
 }
+
+axf_form-field.model =
+    (axf_form-field-option | axf_form-field-event)*
+
+axf_form-field.attlist =
+    axf_field-checked,
+    axf_field-checked-style,
+    axf_field-default-text,
+    axf_field-description,
+    axf_field-editable,
+    axf_field-flags,
+    axf_field-maxlen,
+    axf_field-multiline,
+    axf_field-multiple,
+    axf_field-name,
+    axf_field-scroll,
+    axf_field-top-index,
+    axf_field-type,
+    axf_field-value,
+    common-border-padding-and-background-properties,
+    height,
+    width
 
 # <axf:form-field-event>
 #
@@ -232,8 +255,12 @@ axf_form-field-event =
 axf_form-field-option =
   ## Specifies the component elements of the list box, combo box
   element axf:form-field-option {
+    axf_form-field-option.attlist,
     text
 }
+
+axf_form-field-option.attlist =
+    axf_field-value
 
 # <axf:formatter-config>
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.formatter-config
@@ -1066,19 +1093,19 @@ axf_baseline-grid =
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.border-radius
 axf_border-radius =
     ## Radii of the rounded corners: [<length>|<percentage>] [<length>|<percentage>]?
-    attribute axf:border-radius { text }?
+    attribute axf:border-radius | border-radius { text }?
 axf_border-top-left-radius =
     ## Radii of the top-left corner: [<length>|<percentage>] [<length>|<percentage>]?
-    attribute axf:border-top-left-radius { text }?
+    attribute axf:border-top-left-radius | border-top-left-radius { text }?
 axf_border-top-right-radius =
     ## Radii of the top-right corner: [<length>|<percentage>] [<length>|<percentage>]?
-    attribute axf:border-top-right-radius { text }?
+    attribute axf:border-top-right-radius | border-top-right-radius { text }?
 axf_border-bottom-left-radius =
     ## Radii of the bottom-left corner: [<length>|<percentage>] [<length>|<percentage>]?
-    attribute axf:border-bottom-left-radius { text }?
+    attribute axf:border-bottom-left-radius | border-bottom-left-radius { text }?
 axf_border-bottom-right-radius =
     ## Radii of the bottom-right corner: [<length>|<percentage>] [<length>|<percentage>]?
-    attribute axf:border-bottom-right-radius { text }?
+    attribute axf:border-bottom-right-radius | border-bottom-right-radius { text }?
 
 # @axf:bleed
 # @axf:bleed-top
@@ -1217,27 +1244,133 @@ axf_diagonal-border-style =
     ## Style of the reverse diagonal border: <border-style>
     attribute axf:diagonal-border-style { text }?
 
+# @axf:field-checked
+# @field-checked
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-checked
+axf_field-checked =
+  ## Initial state of the check box or radio button: true | false
+  attribute axf:field-checked | field-checked { 'true' | 'false' }?
+
+# @axf:field-checked-style
+# @field-checked-style
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-checked-style
+axf_field-checked-style =
+  ## Style of the check box or radio button: checkmark | circle | square | cross | star
+  attribute axf:field-checked-style | field-checked-style { 'checkmark' | 'circle' | 'square' | 'cross' | 'star' }?
+
+# @axf:field-default-text
+# @field-default-text
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-default-text
+axf_field-default-text =
+  ## Initial text of the form field: <string>
+  attribute axf:field-default-text | field-default-text { text }?
+
+# @axf:field-description
+# @field-description
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-description
+axf_field-description =
+  ## Descriptive text of the form field: <string>
+  attribute axf:field-description | field-description { text }?
+
+# @axf:field-editable
+# @field-editable
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-editable
+axf_field-editable =
+  ## Whether the combo box value can be edited: true | false
+  attribute axf:field-editable | field-editable { 'true' | 'false' }?
+
+# @axf:field-flags
+# @field-flags
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-flags
+axf_field-flags =
+  ## Flags that apply to the form field: <string>
+  attribute axf:field-flags | field-flags { text }?
+
+# @axf:field-maxlen
+# @field-maxlen
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-maxlen
+axf_field-maxlen =
+  ## Maximum number of characters for the text field: <number>
+  attribute axf:field-maxlen | field-maxlen { xsd:positiveInteger }?
+
+# @axf:field-multiline
+# @field-multiline
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-multiline
+axf_field-multiline =
+  ## Whether the text field is a single line or multi-line field: true | false
+  attribute axf:field-multiline | field-multiline { 'true' | 'false' }?
+
+# @axf:field-multiple
+# @field-multiple
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-multiple
+axf_field-multiple =
+  ## Whether multiple items in the list box can be chosen: true | false
+  attribute axf:field-multiple | field-multiple { 'true' | 'false' }?
+
+# @axf:field-name
+# @field-name
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-name
+axf_field-name =
+  ## Field name: <string>
+  attribute axf:field-name | field-name { text }?
+
+# @axf:field-scroll
+# @field-scroll
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-scroll
+axf_field-scroll =
+  ## Whether the text field is scrollable: true | false
+  attribute axf:field-scroll | field-scroll { 'true' | 'false' }?
+
 # @axf:field-submit-coordinates
 # @field-submit-coordinates
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-submit-coordinates
 axf_field-submit-coordinates =
-  (
-  ## Whether to send out the coordinates of the mouse when submitting a form field: false | true
-  attribute axf:field-submit-coordinates { 'false' | 'true' } |
-  ## Whether to send out the coordinates of the mouse when submitting a form field: false | true
-  attribute field-submit-coordinates { 'false' | 'true' } )
+  ## Whether to send out the coordinates of the mouse when submitting a form field: true | false
+  attribute axf:field-submit-coordinates | field-submit-coordinates { 'true' | 'false' }
 
 # @axf:field-submit-method
 # @field-submit-method
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-submit-method
 axf_field-submit-method =
-  (
   ## The way to send the information when submitting a form field: get | post
-  attribute axf:field-submit-method { 'get' | 'post' } |
-  ## The way to send the information when submitting a form field: get | post
-  attribute field-submit-method { 'get' | 'post' } )
+  attribute axf:field-submit-method | field-submit-method { 'get' | 'post' }
+
+# @axf:field-top-index
+# @field-top-index
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-top-index
+axf_field-top-index =
+  ## First selected item in the list box or combo box: <number>
+  attribute axf:field-top-index | field-top-index { xsd:positiveInteger { minInclusive = "1" } }?
+
+# @axf:field-type
+# @field-type
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-type
+axf_field-type =
+  ## Field type: text | button | checkbox | radio | listbox | combobox | signature
+  attribute axf:field-type | field-type { 'text' | 'button' | 'checkbox' | 'radio' | 'listbox' | 'combobox' | 'signature' }
+
+# @axf:field-value
+# @field-value
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-value
+axf_field-value =
+  ## Value used when submitting a form field: <string>
+  attribute axf:field-value | field-value { text }?
 
 # @axf:float
 #
