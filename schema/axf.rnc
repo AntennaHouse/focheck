@@ -222,21 +222,33 @@ axf_form-field.model =
     (axf_form-field-option | axf_form-field-event)*
 
 axf_form-field.attlist =
+    axf_action-type,
+    axf_field-button-face,
+    axf_field-button-face-down,
+    axf_field-button-face-rollover,
+    axf_field-button-icon,
+    axf_field-button-icon-down,
+    axf_field-button-icon-rollover,
+    axf_field-button-layout,
     axf_field-checked,
     axf_field-checked-style,
     axf_field-default-text,
     axf_field-description,
     axf_field-editable,
     axf_field-flags,
+    axf_field-font-size,
     axf_field-maxlen,
     axf_field-multiline,
     axf_field-multiple,
     axf_field-name,
+    axf_field-name-suffix-page-number,
     axf_field-scroll,
+    axf_field-text-align,
     axf_field-top-index,
     axf_field-type,
     axf_field-value,
     common-border-padding-and-background-properties,
+    external-destination,
     height,
     width
 
@@ -881,14 +893,14 @@ axf_background-repeat =
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.action-type
 axf_action-type =
     ## Specifies the action of external link or form action
-    attribute axf:action-type { 'gotor' | 'launch' | 'uri' | 'reset' | 'submit' | 'auto' }?
+    attribute axf:action-type | action-type { 'gotor' | 'launch' | 'uri' | 'reset' | 'submit' | 'auto' }?
 
 # @axf:alt-text
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.alttext
 axf_alttext =
     ## alternate text of the image
-    attribute axf:alttext { text }?
+    attribute axf:alttext | alttext { text }?
 
 # @axf:annotation-author
 #
@@ -1252,6 +1264,62 @@ axf_field-checked =
   ## Initial state of the check box or radio button: true | false
   attribute axf:field-checked | field-checked { 'true' | 'false' }?
 
+# @axf:field-button-face
+# @field-button-face
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-face
+axf_field-button-face =
+  ## Caption displayed in the push button field: <string>
+  attribute axf:field-button-face | field-button-face { text }?
+
+# @axf:field-button-icon
+# @field-button-icon
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-icon
+axf_field-button-icon =
+  ## Icon displayed in the push button field: <uri-specification>
+  attribute axf:field-button-icon | field-button-icon { text }?
+
+# @axf:field-button-face-down
+# @field-button-face-down
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-face-down
+axf_field-button-face-down =
+  ## Caption displayed when pressing the push button: <string>
+  attribute axf:field-button-face-down | field-button-face-down { text }?
+
+# @axf:field-button-icon-down
+# @field-button-icon-down
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-icon-down
+axf_field-button-icon-down =
+  ## Icon displayed when pressing the push button: <uri-specification>
+  attribute axf:field-button-icon-down | field-button-icon-down { text }?
+
+# @axf:field-button-face-rollover
+# @field-button-face-rollover
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-face-rollover
+axf_field-button-face-rollover =
+  ## Caption displayed when rolling over the push button: <string>
+  attribute axf:field-button-face-rollover | field-button-face-rollover { text }?
+
+# @axf:field-button-icon-rollover
+# @field-button-icon-rollover
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-icon-rollover
+axf_field-button-icon-rollover =
+  ## Icon displayed when rolling over the push button: <uri-specification>
+  attribute axf:field-button-icon-rollover | field-button-icon-rollover { text }?
+
+# @axf:field-button-layout
+# @field-button-layout
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-layout
+axf_field-button-layout =
+  ## Relative positions of the caption and icon in the push button field: caption | icon | caption-below-icon | caption-above-icon | icon-caption | caption-icon | caption-over-icon
+  attribute axf:field-button-layout | field-button-layout { 'caption' | 'icon' | 'caption-below-icon' | 'caption-above-icon' | 'icon-caption' | 'caption-icon' | 'caption-over-icon' }?
+
 # @axf:field-checked-style
 # @field-checked-style
 #
@@ -1292,6 +1360,14 @@ axf_field-flags =
   ## Flags that apply to the form field: <string>
   attribute axf:field-flags | field-flags { text }?
 
+# @axf:field-font-size
+# @field-font-size
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-font-size
+axf_field-font-size =
+  ## Ffont size of the character string displayed in the form field: font-size | auto | <length>
+  attribute axf:field-font-size | field-font-size { text }?
+
 # @axf:field-maxlen
 # @field-maxlen
 #
@@ -1324,6 +1400,14 @@ axf_field-name =
   ## Field name: <string>
   attribute axf:field-name | field-name { text }?
 
+# @axf:field-name-suffix-page-number
+# @field-name-suffix-page-number
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-name-suffix-page-number
+axf_field-name-suffix-page-number =
+  ## Add page number to the field name: <string>
+  attribute axf:field-name-suffix-page-number | field-name-suffix-page-number { text }?
+
 # @axf:field-scroll
 # @field-scroll
 #
@@ -1331,6 +1415,14 @@ axf_field-name =
 axf_field-scroll =
   ## Whether the text field is scrollable: true | false
   attribute axf:field-scroll | field-scroll { 'true' | 'false' }?
+
+# @axf:field-text-align
+# @field-text-align
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-text-align
+axf_field-text-align =
+  ## Alignment of the text field: left | center | right
+  attribute axf:field-text-align | field-text-align { 'left' | 'center' | 'right' }?
 
 # @axf:field-submit-coordinates
 # @field-submit-coordinates
