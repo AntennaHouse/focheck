@@ -75,8 +75,12 @@ fo_declarations.model |=
    (axf_custom-property |
       axf_document-info |
       axf_font-face |
-      axf_hyphenation-info |
       axf_formatter-config |
+      axf_hyphenation-info |
+      axf_space-between-digit-and-punctuation |
+      axf_space-between-punctuation-and-digit |
+      axf_space-end-punctuation |
+      axf_space-start-punctuation |
       axf_output-volume-info)*
 
 # AH Formatter allows empty fo:static-content.
@@ -341,20 +345,63 @@ axf_ruby-text =
   ## Ruby
   element axf:ruby-text { text }
 
+# <axf:space-end-punctuation>
+# https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.space-end-punctuation
+axf_space-end-punctuation =
+  ## Amount of space after punctuation
+  element axf:space-end-punctuation {
+     axf.european-typography.attlist
+}
+
+# <axf:space-start-punctuation>
+# https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.space-start-punctuation
+axf_space-start-punctuation =
+  ## Amount of space before punctuation
+  element axf:space-start-punctuation {
+     axf.european-typography.attlist
+}
+
+# <axf:space-between-digit-and-punctuation>
+# https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.space-between-digit-and-punctuation
+axf_space-between-digit-and-punctuation =
+  ## Amount of space before punctuation
+  element axf:space-between-digit-and-punctuation {
+     axf.european-typography.attlist
+}
+
+# <axf:space-between-punctuation-and-digit>
+# https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.space-between-punctuation-and-digit
+axf_space-between-punctuation-and-digit =
+  ## Amount of space before punctuation
+  element axf:space-between-punctuation-and-digit {
+     axf.european-typography.attlist
+}
+
+axf.european-typography.attlist =
+   ## Language code
+   attribute language { text },
+   ## Amount of space: <number> | <length> | <percentage> | figure | punctuation | thin | hair
+   attribute space { text }?,
+   ## Code point
+   attribute code { text }
+
 # <axf:spread-page-master>
 # https://www.antennahouse.com/product/ahf65/ahf-spread.html#axf.spread-page-master
 axf_spread-page-master =
   ## A two-page spread
   element axf:spread-page-master {
     axf_background-color,
+    axf_background-clip,
     axf_background-content-height,
     axf_background-content-type,
     axf_background-content-width,
     axf_background-image,
+    axf_background-origin,
     axf_background-position-horizontal,
     axf_background-position-vertical,
     axf_background-repeat,
     axf_background-scaling,
+    axf_background-size,
     axf_bleed,
     common-margin-properties-block,
     ## Master name of the page master for the left page of a two-page spread.
@@ -435,11 +482,14 @@ fo_root.attlist &=
     xml_id
 
 fo_page-sequence.attlist &=
+    axf_background-clip,
     axf_background-color,
     axf_background-image,
+    axf_background-origin,
     axf_background-position-horizontal,
     axf_background-position-vertical,
     axf_background-repeat,
+    axf_background-size,
     axf_output-volume-break,
     axf_output-volume-filename,
     axf_page-number-prefix,
@@ -456,15 +506,18 @@ fo_page-sequence-wrapper.attlist &=
     xml_id
 
 fo_simple-page-master.attlist &=
+    axf_background-clip,
     axf_background-color,
     axf_background-content-height,
     axf_background-content-type,
     axf_background-content-width,
     axf_background-image,
+    axf_background-origin,
     axf_background-position-horizontal,
     axf_background-position-vertical,
     axf_background-repeat,
     axf_background-scaling,
+    axf_background-size,
     axf_bleed,
     axf_bleed-top,
     axf_bleed-bottom,
@@ -739,15 +792,19 @@ common-accessibility-properties &=
     axf_pdftag
 
 common-border-padding-and-background-properties &=
+    axf_background-clip,
     axf_background-content-width,
     axf_background-content-height,
     axf_background-content-type,
+    axf_background-origin,
     axf_background-scaling,
+    axf_background-size,
     axf_border-radius,
     axf_border-top-left-radius,
     axf_border-top-right-radius,
     axf_border-bottom-left-radius,
     axf_border-bottom-right-radius,
+    axf_box-shadow,
     axf_diagonal-border-style,
     axf_reverse-diagonal-border-style
 
@@ -864,29 +921,6 @@ axf.ruby.attlist =
     axf_ruby-font-stretch,
     axf_ruby-condense,
     axf_ruby-color
-
-# @axf:background-color
-# @axf:background-image
-# @axf:background-position-horizontal
-# @axf:background-position-vertical
-# @axf:background-repeat
-#
-# https://www.antennahouse.com/product/ahf65/ahf-ext.html#IDAAOLV
-axf_background-color =
-    ## <color> | transparent
-    attribute axf:background-color { text }?
-axf_background-image =
-    ## <uri-specification> | none
-    attribute axf:background-image { text }?
-axf_background-position-horizontal =
-    ## <percentage> | <length> | left | center | right
-    attribute axf:background-position-horizontal { text }?
-axf_background-position-vertical =
-    ## <percentage> | <length> | top | center | bottom
-    attribute axf:background-position-vertical { text }?
-axf_background-repeat =
-    ## repeat | repeat-x | repeat-y | no-repeat | paginate
-    attribute axf:background-repeat { text }?
 
 # @axf:action-type
 #
@@ -1056,6 +1090,29 @@ axf_annotation-width =
    ## Width of the annotation: <length>
    attribute axf:annotation-width { text }?
 
+# @axf:background-color
+# @axf:background-image
+# @axf:background-position-horizontal
+# @axf:background-position-vertical
+# @axf:background-repeat
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#IDAAOLV
+axf_background-color =
+    ## <color> | transparent
+    attribute axf:background-color { text }?
+axf_background-image =
+    ## <uri-specification> | none
+    attribute axf:background-image { text }?
+axf_background-position-horizontal =
+    ## <percentage> | <length> | left | center | right
+    attribute axf:background-position-horizontal { text }?
+axf_background-position-vertical =
+    ## <percentage> | <length> | top | center | bottom
+    attribute axf:background-position-vertical { text }?
+axf_background-repeat =
+    ## repeat | repeat-x | repeat-y | no-repeat | paginate
+    attribute axf:background-repeat { text }?
+
 # @axf:background-content-height
 # @axf:background-content-type
 # @axf:background-content-width
@@ -1075,12 +1132,33 @@ axf_background-scaling =
     ## uniform | non-uniform | inherit
     attribute axf:background-scaling { 'uniform' | 'non-uniform' | 'inherit' }?
 
+# @axf:background-clip
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-clip
+axf_background-clip =
+    ## Area within which the background is painted: [ border-box | padding-box | content-box ]#
+    attribute axf:background-clip { text }?
+
+# @axf:background-origin
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-origin
+axf_background-origin =
+    ## Position of the origin of the background image: [ border-box | padding-box | content-box ]#
+    attribute axf:background-origin { text }?
+
 # @axf:background-image-resolution
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-image-resolution
 axf_background-image-resolution =
     ## Resolution of a background image: [ normal | [ from-image || <dpi> ] ]#
     attribute axf:background-image-resolution { text }?
+
+# @axf:background-size
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-size
+axf_background-size =
+    ## Size of the background images: [ [ <length> | <percentage> | auto ]{1,2} | cover | contain ]#
+    attribute axf:background-size { text }?
 
 # @axf:baseline-block-snap
 #
@@ -1095,6 +1173,29 @@ axf_baseline-block-snap =
 axf_baseline-grid =
     ## Sets or clears the baseline grid: normal | none | root | new
     attribute axf:baseline-grid { 'normal' | 'none' | 'root' | 'new' }?
+
+# @axf:bleed
+# @axf:bleed-top
+# @axf:bleed-bottom
+# @axf:bleed-left
+# @axf:bleed-right
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.bleed
+axf_bleed =
+    ## Wdth of the bleed region: <length>
+    attribute axf:bleed { text }?
+axf_bleed-top =
+    ## Wdth of the top bleed region: <length>
+    attribute axf:bleed-top { text }?
+axf_bleed-bottom =
+    ## Wdth of the bottom bleed region: <length>
+    attribute axf:bleed-bottom { text }?
+axf_bleed-left =
+    ## Wdth of the left bleed region: <length>
+    attribute axf:bleed-left { text }?
+axf_bleed-right =
+    ## Wdth of the right bleed region: <length>
+    attribute axf:bleed-right { text }?
 
 # @axf:border-radius
 # @axf:border-top-left-radius
@@ -1119,28 +1220,12 @@ axf_border-bottom-right-radius =
     ## Radii of the bottom-right corner: [<length>|<percentage>] [<length>|<percentage>]?
     attribute axf:border-bottom-right-radius | border-bottom-right-radius { text }?
 
-# @axf:bleed
-# @axf:bleed-top
-# @axf:bleed-bottom
-# @axf:bleed-left
-# @axf:bleed-right
+# @axf:box-shadow
 #
-# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.bleed
-axf_bleed =
-    ## Wdth of the bleed region: <length>
-    attribute axf:bleed { text }?
-axf_bleed-top =
-    ## Wdth of the top bleed region: <length>
-    attribute axf:bleed-top { text }?
-axf_bleed-bottom =
-    ## Wdth of the bottom bleed region: <length>
-    attribute axf:bleed-bottom { text }?
-axf_bleed-left =
-    ## Wdth of the left bleed region: <length>
-    attribute axf:bleed-left { text }?
-axf_bleed-right =
-    ## Wdth of the right bleed region: <length>
-    attribute axf:bleed-right { text }?
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.box-shadow
+axf_box-shadow =
+    ## Box shadow: none | [ inset? && [ <length>{2,4} && <color>? ] ]#
+    attribute axf:box-shadow { text }?
 
 # @axf:column-count
 #
