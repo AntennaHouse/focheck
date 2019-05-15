@@ -226,7 +226,8 @@ axf_form-field.model =
     (axf_form-field-option | axf_form-field-event)*
 
 axf_form-field.attlist =
-    axf_action-type,
+    # 'action-type' is required for <axf:form-field-event>.
+    axf_action-type.form,
     axf_field-button-face,
     axf_field-button-face-down,
     axf_field-button-face-rollover,
@@ -241,6 +242,8 @@ axf_form-field.attlist =
     axf_field-editable,
     axf_field-flags,
     axf_field-font-size,
+    axf_field-format,
+    axf_field-format-category,
     axf_field-maxlen,
     axf_field-multiline,
     axf_field-multiple,
@@ -262,8 +265,15 @@ axf_form-field.attlist =
 axf_form-field-event =
   ## Defines the form action corresponding to an event
   element axf:form-field-event {
+    axf_form-field-event.attlist,
     text
 }
+
+axf_form-field-event.attlist =
+   ## Event type: MouseUp | MouseDown | MouseEnter | MouseExit | OnFocus | OnBlur
+   attribute axf:name | name { 'MouseUp' | 'MouseDown' | 'MouseEnter' | 'MouseExit' | 'OnFocus' | 'OnBlur' },
+   ## Form action: auto | gotor | gotor | launch | uri | reset | submit | javascript
+   attribute axf:action-type | action-type { axf_action-type.form.model | 'javascript' }
 
 # <axf:form-field-option>
 #
@@ -604,6 +614,7 @@ fo_block-container.attlist &=
     axf_column-rule-style,
     axf_column-rule-width,
     axf_destination-type,
+    axf_pdftag,
     axf_suppress-if-first-on-page,
     axf.block.attlist,
     column-count,
@@ -928,6 +939,16 @@ axf.ruby.attlist =
 axf_action-type =
     ## Specifies the action of external link or form action
     attribute axf:action-type | action-type { 'gotor' | 'launch' | 'uri' | 'reset' | 'submit' | 'auto' }?
+
+axf_action-type.form.model =
+     'auto' | 'gotor' | 'gotor' | 'launch' | 'uri' | 'reset' | 'submit'
+
+# @axf:action-type
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.action-type2
+axf_action-type.form =
+    ## Specifies the action of form action
+    attribute axf:action-type | action-type { axf_action-type.form.model }?
 
 # @axf:alt-text
 #
@@ -1450,8 +1471,24 @@ axf_field-flags =
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-font-size
 axf_field-font-size =
-  ## Ffont size of the character string displayed in the form field: font-size | auto | <length>
+  ## Font size of the character string displayed in the form field: font-size | auto | <length>
   attribute axf:field-font-size | field-font-size { text }?
+
+# @axf:field-format
+# @field-format
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-format
+axf_field-format =
+  ## Text field format: none | number | percentage | date | time
+attribute axf:field-format | field-format { text }?
+
+# @axf:field-format-category
+# @field-format-category
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-format-category
+axf_field-format-category =
+  ## Text field format: none | number | percentage | date | time
+  attribute axf:field-format-category | field-format-category { 'none' | 'number' | 'percentage' | 'date' | 'time' }?
 
 # @axf:field-maxlen
 # @field-maxlen
