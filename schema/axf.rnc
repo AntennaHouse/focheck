@@ -503,6 +503,7 @@ fo_page-sequence.attlist &=
     axf_output-volume-break,
     axf_output-volume-filename,
     axf_page-number-prefix,
+    axf_pdftag,
     axf_printer-bin-selection,
     axf_printer-duplex,
     background-color,
@@ -567,10 +568,12 @@ fo_region-body.attlist &=
 
 fo_flow.attlist &=
     axf_baseline-grid,
+    axf_pdftag,
     xml_id
 
 fo_static-content.attlist &=
     axf_baseline-grid,
+    axf_pdftag,
     xml_id
 
 # FOs in flow listed in alphabetic order
@@ -652,6 +655,7 @@ fo_float.attlist &=
     axf_float-float-margin-y,
     axf_float-offset-x,
     axf_float-offset-y,
+    axf_pdftag,
     xml_id,
     axf.annotation.properties
 
