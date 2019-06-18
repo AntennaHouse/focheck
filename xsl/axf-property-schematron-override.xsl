@@ -90,7 +90,7 @@
   <item property="font-weight">normal | bold | bolder | lighter | &lt;integer> | inherit</item>
   <item property="leader-alignment">none | reference-area | page | start | center | end</item>
   <item property="odd-or-even">odd | even | odd-document | even-document | any</item>
-  <!-- AH Formatter adds 'replace' and 'condense'. -->
+  <!-- AH Formatter adds 'replace' and 'condense' and does not support 'scroll'. -->
   <item property="overflow">visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto</item>
 </xsl:variable>
 
