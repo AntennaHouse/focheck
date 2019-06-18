@@ -288,7 +288,7 @@
 
 	<!-- axf:indent-here -->
 	<!-- none | <length> -->
-	<!-- Inherited: yes -->
+	<!-- Inherited: no -->
 	<!-- Shorthand: no -->
 	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.indent-here -->
 	<rule context="fo:*/@axf:indent-here">
@@ -297,6 +297,19 @@
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">axf:indent-here="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'none'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:indent-here="" should be EnumerationToken or Length.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:indent-here="<value-of select="."/>"</report>
+	</rule>
+
+	<!-- axf:keep-together-within-dimension -->
+	<!-- auto | <length> -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.keep-together-within-dimension -->
+	<rule context="fo:*/@axf:keep-together-within-dimension">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:keep-together-within-dimension="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">axf:keep-together-within-dimension="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:keep-together-within-dimension="" should be EnumerationToken or Length.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:keep-together-within-dimension="<value-of select="."/>"</report>
 	</rule>
 
 	<!-- axf:line-number-background-color -->

@@ -151,9 +151,9 @@ axf_document-info =
     ## Name of the document information
     attribute name { ('document-title' | 'title' | 'subject' | 'author' | 'author-title' |
                        'description-writer' | 'keywords' | 'copyright-status' |
-		       'copyright-notice' | 'copyright-info-url' | 'xmp' | 'pagemode' |
-		       'pagelayout' | 'hidetoolbar' | 'hidemenubar' | 'hidewindowui' |
-		       'fitwindow' | 'centerwindow' | 'displaydoctitle' | 'openaction' )},
+                       'copyright-notice' | 'copyright-info-url' | 'xmp' | 'pagemode' |
+                       'pagelayout' | 'hidetoolbar' | 'hidemenubar' | 'hidewindowui' |
+                       'fitwindow' | 'centerwindow' | 'displaydoctitle' | 'openaction' )},
     ## Value of the document information.  Some information has constraints on the allowed values.
     attribute value { text },
     empty
@@ -492,6 +492,9 @@ fo_root.attlist &=
     xml_id
 
 fo_page-sequence.attlist &=
+    axf_repeat-page-sequence-master
+
+fo_page-sequence.attlist &=
     axf_background-clip,
     axf_background-color,
     axf_background-image,
@@ -506,6 +509,7 @@ fo_page-sequence.attlist &=
     axf_pdftag,
     axf_printer-bin-selection,
     axf_printer-duplex,
+    axf_reverse-page,
     background-color,
     background-image,
     background-position-horizontal,
@@ -918,6 +922,7 @@ axf.text-decoration.attlist =
 axf.block.attlist =
     axf-baseline-grid-properties,
     axf-outline-properties,
+    axf_keep-together-within-dimension,
     axf_text-overflow
 
 axf.ruby.attlist =
@@ -1751,6 +1756,13 @@ axf_indent-here =
     ## Aligns the indent position to the region position when a line break occurs: none | <length>
     attribute axf:indent-here { text }?
 
+# @axf:keep-together-within-dimension
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.keep-together-within-dimension
+axf_keep-together-within-dimension =
+    ## Upper height limit of 'keep-together': auto | <length>
+    attribute axf:keep-together-within-dimension { text }?
+
 # @axf:layer-settings
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.layer-settings
@@ -2031,6 +2043,13 @@ axf_repeat-cell-content-at-break =
     ## Whether to copy the contents of a cell when a cell breaks: true | false
     attribute axf:repeat-cell-content-at-break { 'true' | 'false' }?
 
+# @axf:repeat-page-sequence-master
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.repeat-page-sequence-master
+axf_repeat-page-sequence-master =
+    ## Whether to restart fo:page-sequence-master for more pages: true | false
+    attribute axf:repeat-page-sequence-master { 'true' | 'false' }?
+
 # @axf:reverse-diagonal-border-style
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.reverse-diagonal-border-style
@@ -2038,11 +2057,18 @@ axf_reverse-diagonal-border-style =
     ## Style of the reverse diagonal border: <border-style>
     attribute axf:reverse-diagonal-border-style { text }?
 
+# @axf:reverse-page
+#
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.reverse-page
+axf_reverse-page =
+    ## Whether to generate pages in reverse order: true | false
+    attribute axf:reverse-page { 'true' | 'false' }?
+
 # @axf:reverse-page-number
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.reverse-page-number
 axf_reverse-page-number =
-    ## Whether to generate pages in reverse order: true | false
+    ## Whether to count page numbers in reverse order: true | false
     attribute axf:reverse-page-number { 'true' | 'false' }?
 
 # @axf:scope
