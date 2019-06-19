@@ -32,13 +32,24 @@
     </choice>
   </define>
   <define name="dpi.model">
-    <data type="positiveInteger"/>
+    <data type="positiveInteger">
+      <param name="minInclusive">1</param>
+    </data>
   </define>
   <define name="jpeg-quality.model">
     <data type="positiveInteger">
       <param name="minInclusive">1</param>
       <param name="maxInclusive">100</param>
     </data>
+  </define>
+  <define name="monochrome.compression.list">
+    <choice>
+      <value>ccitt4</value>
+      <value>ccitt3</value>
+      <value>runlength</value>
+      <value>zlib</value>
+      <value>none</value>
+    </choice>
   </define>
   <define name="pass-through.model">
     <choice>
@@ -416,6 +427,11 @@
         <attribute name="omit-uppercase-word-accents"/>
       </optional>
       <optional>
+        <attribute name="output-area-id">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="output-fo-tree">
           <ref name="ah.boolean"/>
         </attribute>
@@ -489,6 +505,15 @@
         </attribute>
       </optional>
       <optional>
+        <attribute name="tab-overlap-treatment">
+          <choice>
+            <value/>
+            <value>ignore-tab</value>
+            <value>next-tab</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="table-auto-layout-limit">
           <data type="integer"/>
         </attribute>
@@ -530,6 +555,24 @@
         </attribute>
       </optional>
       <optional>
+        <attribute name="textshadow-blur-cannot-embed-font">
+          <a:documentation>Whether to apply blur to a font that is not allowed to be embedded: false | true</a:documentation>
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="textshadow-resolution-minimum-dpi">
+          <a:documentation>Minimum resolution of the image when applying blur in text-shadow: &lt;positive-integer&gt;</a:documentation>
+          <ref name="dpi.model"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="textshadow-resolution-pixel-per-em">
+          <a:documentation>Image resolution when applying blur in text-shadow: &lt;positive-integer&gt;</a:documentation>
+          <ref name="dpi.model"/>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="text-underline-mode">
           <data type="integer"/>
         </attribute>
@@ -556,6 +599,9 @@
         <attribute name="vertical-block-width-mode">
           <data type="integer"/>
         </attribute>
+      </optional>
+      <optional>
+        <attribute name="vertical-coloring-text"/>
       </optional>
       <optional>
         <attribute name="vertical-underline-side">
@@ -635,12 +681,17 @@
       </optional>
       <optional>
         <attribute name="missing-font">
-          <data type="integer"/>
+          <a:documentation>Whether to warn when font not found: [ 0 = no message; 1 = level 1 error message; 2 = level 2 error message ]</a:documentation>
+          <choice>
+            <value>0</value>
+            <value>1</value>
+            <value>2</value>
+          </choice>
         </attribute>
       </optional>
       <optional>
         <attribute name="missing-glyph">
-          <a:documentation>Whether to warn when glyph not found: [ = no message; 1 = level 1 error message; 2 = level 2 error message</a:documentation>
+          <a:documentation>Whether to warn when glyph not found: [ 0 = no message; 1 = level 1 error message; 2 = level 2 error message ]</a:documentation>
           <choice>
             <value>0</value>
             <value>1</value>
@@ -660,11 +711,13 @@
       </optional>
       <zeroOrMore>
         <ref name="script-font">
-          <a:documentation>Generic font mapping for a script</a:documentation>
+          <a:documentation>Mapping from generic font to actual font for a script</a:documentation>
         </ref>
       </zeroOrMore>
       <zeroOrMore>
-        <ref name="font-alias"/>
+        <ref name="font-alias">
+          <a:documentation>Alias one font name to another</a:documentation>
+        </ref>
       </zeroOrMore>
     </element>
   </define>
@@ -752,17 +805,19 @@
     </optional>
     <optional>
       <attribute name="color-compression">
-        <a:documentation>Compression method of the data stored in a PDF file</a:documentation>
+        <a:documentation>Compression method for color image transformed into bitmap in PDF file: auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k</a:documentation>
         <ref name="compression.list"/>
       </attribute>
     </optional>
     <optional>
       <attribute name="color-compression-default">
+        <a:documentation>Compression method for color image transformed into bitmap in PDF file: auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k</a:documentation>
         <ref name="compression.list"/>
       </attribute>
     </optional>
     <optional>
       <attribute name="color-compression-minimum">
+        <a:documentation>Compression method for color image transformed into bitmap in PDF file: auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k</a:documentation>
         <ref name="compression.list"/>
       </attribute>
     </optional>
@@ -906,9 +961,13 @@
         <a:documentation>Key length when encrypting the PDF file: 40rc4 | 128rc4 | 128aes | 256aes</a:documentation>
         <choice>
           <value>40rc4</value>
+          <value>40RC4</value>
           <value>128rc4</value>
+          <value>128RC4</value>
           <value>128aes</value>
+          <value>128AES</value>
           <value>256aes</value>
+          <value>256AES</value>
         </choice>
       </attribute>
     </optional>
@@ -1091,12 +1150,22 @@
     </optional>
     <optional>
       <attribute name="monochrome-compression">
-        <data type="NCName"/>
+        <ref name="monochrome.compression.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-compression-default">
+        <ref name="monochrome.compression.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-compression-minimum">
+        <ref name="monochrome.compression.list"/>
       </attribute>
     </optional>
     <optional>
       <attribute name="monochrome-downsampling">
-        <data type="NCName"/>
+        <ref name="downsampling.list"/>
       </attribute>
     </optional>
     <optional>
@@ -1106,6 +1175,36 @@
     </optional>
     <optional>
       <attribute name="monochrome-downsampling-target-dpi">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-downsampling-default">
+        <ref name="downsampling.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-downsampling-above-dpi-default">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-downsampling-target-dpi-default">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-downsampling-minimum">
+        <ref name="downsampling.list"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-downsampling-above-dpi-minimum">
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="monochrome-downsampling-target-dpi-minimum">
         <ref name="dpi.model"/>
       </attribute>
     </optional>
@@ -1213,6 +1312,21 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="real-value-limit">
+        <choice>
+          <value>0</value>
+          <value>1</value>
+          <value>2</value>
+          <value>3</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="real-value-limit-modify">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="reverse-page">
         <ref name="ah.boolean"/>
       </attribute>
@@ -1243,14 +1357,32 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="text-and-lineart-compression-default">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="text-and-lineart-compression-minimum">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="transparency">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="transparency-color-space">
         <data type="NCName"/>
       </attribute>
     </optional>
     <optional>
-      <attribute name="use-launch-for-relative-uri">
+      <attribute name="use-launch-for-local-file">
         <ref name="ah.boolean"/>
       </attribute>
+    </optional>
+    <optional>
+      <attribute name="user-password"/>
     </optional>
   </define>
   <define name="pdf-settings.model">

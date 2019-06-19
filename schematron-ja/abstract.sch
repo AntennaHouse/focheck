@@ -18,9 +18,9 @@
   <!-- <color> | transparent | inherit -->
   <rule abstract="true" id="color-transparent">
     <let name="expression" value="ahf:parser-runner(.)"></let>
-    <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; should be Color, 'transparent', or 'inherit'. <value-of select="."/> は <value-of select="local-name($expression)"/> です。</assert>
-    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; token should be 'transparent' or 'inherit'. EnumerationToken は <value-of select="$expression/@token"/> です。</report>
-    <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()"/>=&quot;&quot; should be Color, 'transparent', or 'inherit'.</report>
+    <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; は Color、transparent 又は inherit でなければなりません。<value-of select="."/> は <value-of select="local-name($expression)"/> です。</assert>
+    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; のトークンは transparent 又は inherit でなければなりません。EnumerationToken は <value-of select="$expression/@token"/> です。</report>
+    <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()"/>=&quot;&quot;は Color、transparent、inherit でなければなりません。</report>
     <report test="local-name($expression) = 'ERROR'">シンタックスエラー： <value-of select="name()"/>=&quot;<value-of select="."/>&quot;</report>
   </rule>
 
@@ -29,9 +29,9 @@
   <!-- http://www.w3.org/TR/xsl11/#border-top-style -->
   <rule abstract="true" id="border-style">
     <let name="expression" value="ahf:parser-runner(.)"></let>
-    <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. <value-of select="."/> は <value-of select="local-name($expression)"/> です。</assert>
-    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'inherit'))"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'. Token is '<value-of select="$expression/@token"/>'.</report>
-    <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()"/>=&quot;&quot; should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', or 'inherit'.</report>
+    <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset、dot-dash、dot-dot-dash、wave 又は inherit でなければなりま せん。<value-of select="."/> は <value-of select="local-name($expression)"/> です。</assert>
+    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset、dot-dash、dot-dot-dash、wave 又は inherit でなければなりま せん。トークンは '<value-of select="$expression/@token"/>' です。</report>
+    <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()"/>=&quot;&quot; は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset、dot-dash、dot-dot-dash、wave 又は inherit でなければなりま せん。</report>
     <report test="local-name($expression) = 'ERROR'">シンタックスエラー： <value-of select="name()"/>=&quot;<value-of select="."/>&quot;</report>
   </rule>
 
@@ -40,9 +40,9 @@
    <!-- http://www.w3.org/TR/xsl11/#border-top-width" /> -->
    <rule abstract="true" id="border-width">
       <let name="expression" value="ahf:parser-runner(.)"></let>
-      <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; should be 'thin', 'medium', 'thick', 'inherit', or Length. <value-of select="."/> は <value-of select="local-name($expression)"/> です。</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; token should be 'thin', 'medium', 'thick', or 'inherit'. EnumerationToken は <value-of select="$expression/@token"/> です。</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()"/>=&quot;&quot; should be 'thin', 'medium', 'thick', 'inherit', or Length.</report>
+      <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; は thin、medium、thick、inherit 又は Length でなければなりません。<value-of select="."/> は <value-of select="local-name($expression)"/> です。</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))"><value-of select="name()"/>=&quot;<value-of select="."/>&quot;のトークンは thin、medium、thick 又は inherit でなければなりません。EnumerationToken は <value-of select="$expression/@token"/> です。</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()"/>=&quot;&quot; は thin、medium、thick、inherit 又は Length でなければなりません。</report>
       <report test="local-name($expression) = 'ERROR'">シンタックスエラー： <value-of select="name()"/>=&quot;<value-of select="."/>&quot;</report>
    </rule>
 

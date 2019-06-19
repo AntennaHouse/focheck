@@ -1,3 +1,25 @@
+# focheck 0.7.3
+
+- `axf:background-content-height` and `axf:background-content-width` should not be used with AH Formatter V6.6 or later.
+- AH Formatter supports `dot-dash`, `dot-dot-dash` and `wave` border styles.
+- AH Formatter does not support `overflow="scroll"`.
+- Added `axf:keep-together-within-dimension`, `axf:repeat-page-sequence-master`, and `axf:reverse-page`.
+- Added `axf:field-button-icon`, `axf:field-button-icon-down`, `axf:field-button-icon-rollover`, and `axf:field-font-size` rules.
+- Fixed typo in `axf:media-duration` and `axf:media-play-mode` rules.
+- Added `axf:action-type` pattern for forms, `axf:field-format`, `axf:field-format-category`, `axf:name`, and `axf:action-type`.
+- Added `axf:pdftag` to `fo:block-container`, `fo:page-sequence`, `fo:flow`, and `fo:float`.
+- Added elements and attributes: `<axf:space-between-digit-and-punctuation>`, `<axf:space-between-punctuation-and-digit>`, `<axf:space-end-punctuation>`, `<axf:space-start-punctuation>`, `axf:box-shadow`, `axf:box-shadow`, `axf:background-color`, `axf:background-image`, `axf:background-position-horizontal`, `axf:background-position-vertical`, `axf:background-repeat`.
+- Schematron rules for `axf:media-duration`, `axf:media-play-mode`, `axf:media-skin-color`, `axf:media-volume`, `axf:media-window-height`, `axf:media-window-width`, `axf:poster-content-type`, and `axf:poster-image`.
+- Added `<axf:font-face>`.
+- Added more properties for forms in PDF: `axf:field-checked`, `axf:field-checked-style`, `axf:field-default-text`, `axf:field-description`, `axf:field-editable`, `axf:field-flags`, `axf:field-maxlen`, `axf:field-multiline`, `axf:field-multiple`, `axf:field-name`, `axf:field-scroll`, `axf:field-top-index`, `axf:field-type`, and `axf:field-value`, `axf_field-button-face-down`, `axf_field-button-face-rollover`, `axf_field-button-icon`, `axf_field-button-icon-down`, `axf_field-button-icon-rollover`, `axf_field-button-layout`, `axf_field-font-size`, `axf_field-name-suffix-page-number`, and `axf_field-text-align`.
+- Added multimedia properties: `axf_media-activation`, `axf_media-duration`, `axf_media-extraction-policy`, `axf_media-flash-context-menu`, `axf_media-flash-vars`, `axf_media-play-mode`, `axf_media-skin-auto-hide`, `axf_media-skin-color`, `axf_media-skin-control`, `axf_media-transparent-background`, `axf_media-volume`, `axf_media-window-height`, `axf_media-window-width`, `axf_multimedia-treatment`, `axf_poster-content-type`, `axf_poster-image`, `axf_show-controls`.
+- Added `axf:text-stroke`, `axf:text-stroke-color`, `axf:text-stroke-width`. `text-shadow` is an inherited property in AH Formatter.
+- Link to GitHub in add-on files.
+- 'ahfsettings' project renamed its `ahfsettings.rnc` as `axs.rnc`.
+- Updated from 'ahfsettings' project.
+- Was using wrong attribute to force 'copy' task to run.
+- Updated translation memory
+
 # focheck 0.7.2
 
 - Licenses for additional components added to `ReadMe.md` (#38).

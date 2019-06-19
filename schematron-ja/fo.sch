@@ -114,11 +114,11 @@
   </rule>
 
   <rule context="fo:table-cell">
-    <report test="empty(*) and normalize-space() ne ''" role="Warning" sqf:fix="table-cell-empty-fix">fo:table-cell should contain block-level FOs.</report>
+    <report test="empty(*) and normalize-space() ne ''" role="Warning" sqf:fix="table-cell-empty-fix">fo:table-cell は block-level FO を含むべきです。</report>
     <sqf:fix id="table-cell-empty-fix">
       <let name="text" value="."></let>
       <sqf:description>
-        <sqf:title>Add 'fo:block' around text</sqf:title>
+        <sqf:title>テクストの周りに fo:block を追加する。</sqf:title>
       </sqf:description>
       <sqf:delete match="node()"/>
       <sqf:add node-type="element" target="fo:block">
@@ -178,7 +178,7 @@
     <!-- What would be generated if we could... -->
     <!-- https://www.w3.org/TR/xsl11/#language -->
     <assert test="local-name($expression) = ('EnumerationToken', 'ERROR', 'Object')">language=&quot;<value-of select="."/>&quot; は EnumerationToken でなければなりません。<value-of select="."/> は <value-of select="local-name($expression)"/> です。</assert>
-    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit') or string-length($expression/@token) = 2 or string-length($expression/@token) = 3)">language=&quot;<value-of select="."/>&quot; は ISO639-2 用語又は書誌に対応している ３文字コード、ISO639 ２文字コード に対応している２文字コード、none 又は inherit でなければなりません。</report>
+    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit') or string-length($expression/@token) = 2 or string-length($expression/@token) = 3)">language=&quot;<value-of select="."/>&quot; は ISO639-2 用語又は書誌に対応している 3 文字コード、ISO639 2 文字コード に対応している 2 文字コード、none 又は inherit でなければなりません。</report>
     <report test="local-name($expression) = 'ERROR'">シンタックスエラー： 'language=&quot;<value-of select="."/>&quot;'</report>
     <!-- https://www.w3.org/TR/xsl11/#d0e4626 -->
     <!-- Warnings aren't needed (#21) -->
@@ -234,7 +234,7 @@
 
   <rule context="fo:*/@span">
     <!-- https://www.w3.org/TR/xsl11/#span -->
-    <report test="exists(ancestor::fo:static-content)" sqf:fix="span_fix" role="warning">@span は、fo:flowによって返された領域のみに効果があります。</report>
+    <report test="exists(ancestor::fo:static-content)" sqf:fix="span_fix" role="warning">@span は、fo:flow によって返された領域のみに効果があります。</report>
     <sqf:fix id="span_fix">
       <sqf:description>
         <sqf:title>Delete @span</sqf:title>

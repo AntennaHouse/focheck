@@ -25,11 +25,18 @@
 
 <pattern id="pdf-ua-pattern">
 
+<!-- 11-001 - Natural language for text in page content cannot be
+              determined. -->
+<!-- https://www.antennahouse.com/product/ahf66/ahf-pdf.html#taggedpdf -->
+<rule context="fo:root">
+  <report test="empty(@xml:lang) or @xml:lang = ''" role="Error">@xml:lang は テクストとメタデータの自然言語を表示するために fo:root で指定されてはいけません。</report>
+</rule>
+
 <!-- 13-004 - Figure tag alternative or replacement text missing. -->
 <!-- https://www.antennahouse.com/product/ahf66/ahf-pdf.html#alttext -->
 <rule context="fo:external-graphic | fo:instream-foreign-object">
-  <report test="(empty(@axf:alttext) or @axf:alttext = '') and @role != ''" role="Warning">An '<name/>' with missing or empty '@axf:alttext' and non-empty '@role' will use the '@role' value as alternate text. '@role' is not designed for this purpose.</report>
-  <report test="(empty(@axf:alttext) or @axf:alttext = '') and (empty(@role) or @role = '')" role="Error">An '<name/>' with missing or empty '@axf:alttext' and missing or empty '@role' will have ' ' as alternate text.</report>
+  <report test="(empty(@axf:alttext) or @axf:alttext = '') and @role != ''" role="Warning">空や持っていない @axf:alttext の'<name/>' と空でな @role は、代替テキストとて @role 値を使用します。@role はこのように設計されてはいません。</report>
+  <report test="(empty(@axf:alttext) or @axf:alttext = '') and (empty(@role) or @role = '')" role="Error">空や持っていない @axf:alttext の'<name/>' と空でな @role は、代替テキストとて ' ' を持つ。</report>
 </rule>
 
 </pattern>

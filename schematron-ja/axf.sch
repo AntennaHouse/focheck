@@ -18,16 +18,16 @@
 	<!-- axf:custom-property -->
 	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property -->
         <rule context="axf:custom-property">
-	  <assert test="empty((../../axf:document-info, ../axf:document-info)[@name eq 'xmp'])" role="Warning"><value-of select="name()"/>&quot; is ignored when axf:document-info with name=&quot;xmp&quot; is present.</assert>
+	  <assert test="empty((../../axf:document-info, ../axf:document-info)[@name eq 'xmp'])" role="Warning"><value-of select="name()"/>name=&quot;xmp&quot; というの axf:document-info が存在場合は &quot; が無効にする</assert>
           <assert test="normalize-space(@name) ne ''" role="Warning">name=&quot;&quot; は空ではいけません。</assert>
-          <assert test="not(normalize-space(@name) = ('Title', 'Author', 'Subject', 'Keywords', 'Creator', 'Producer', 'CreationDate', 'ModDate', 'Trapped'))">name=&quot;<value-of select="@name"/>&quot; は <value-of select="name()"/>と利用することができません。</assert>
+          <assert test="not(normalize-space(@name) = ('Title', 'Author', 'Subject', 'Keywords', 'Creator', 'Producer', 'CreationDate', 'ModDate', 'Trapped'))">name=&quot;<value-of select="@name"/>&quot; は <value-of select="name()"/> と利用することができません。</assert>
           <assert test="normalize-space(@value) ne ''" role="Warning">value=&quot;&quot; は空ではいけません。</assert>
         </rule>
 
 	<!-- axf:document-info -->
 	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
         <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1">
-	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="Warning">name=&quot;<value-of select="@name"/>&quot; is ignored when axf:document-info with name=&quot;xmp&quot; is present.</assert>
+	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="Warning">name=&quot;<value-of select="@name"/>&quot; name=&quot;xmp&quot; というの axf:document-info が存在場合は無効にする。</assert>
         </rule>
         <rule context="axf:document-info[@name = 'title']">
 	  <assert test="false()" id="axf-3f" sqf:fix="axf-3fix" role="Warning">name=&quot;<value-of select="@name"/>&quot; は勧められません。name=&quot;document-title&quot; を利用してください。</assert>

@@ -15,9 +15,11 @@ compression.list =
   | "auto2k"
   | "keeplzw2k"
 downsampling.list = "none" | "average" | "bicubic" | "subsampling"
-dpi.model = xsd:positiveInteger
+dpi.model = xsd:positiveInteger { minInclusive = "1" }
 jpeg-quality.model =
   xsd:positiveInteger { minInclusive = "1" maxInclusive = "100" }
+monochrome.compression.list =
+  "ccitt4" | "ccitt3" | "runlength" | "zlib" | "none"
 pass-through.model =
   list {
     ("all"
@@ -127,10 +129,10 @@ formatter-settings =
     attribute auto-formatter-type { "html" | "xhtml" }?,
     attribute avoid-widow-words-CJK-punctuation { ah.boolean },
     
-    ## Whether <axf:formatter-config> is allowed
+    ## <axf:formatter-config> は許可するかどうか
     attribute axf-formatter-config { ah.boolean }?,
     
-    ## Mode for handling baselines of mixed scripts: 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6
+    ## 混合スクリプトを扱い方法： 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6
     attribute baseline-mode { "4" | "5" | "6" }?,
     attribute bidi-override-mode { xsd:integer }?,
     attribute bold-ratio { xsd:decimal }?,
@@ -154,18 +156,18 @@ formatter-settings =
     attribute descendant-or-self-files { ah.boolean }?,
     attribute external-entity { ah.boolean }?,
     
-    ## How strictly to check 'font-family' syntax: auto | loose | strict
+    ## font-family の構文を厳密にチックする方法： auto | loose | strict
     attribute family-name-syntax { "auto" | "loose" | "strict" }?,
     attribute fixed-width-space-treatment { ah.boolean }?,
     attribute hair-space-width { text }?,
     
-    ## Whether to enable <hyphen-min> in the Hyphenation Exception Dictionary: false | true | without-exceptions
+    ## ハイフネーション例外辞書に <hyphen-min> ができるかどうか： false | true | without-exceptions
     attribute hyphenation-min { ah.boolean | "without-exceptions" }?,
     
-    ## Whether to use custom hyphenation processing or TeX hyphenation dictionaries: 'true' | 'false'
+    ## カスタムハイフネーションか TeX ハイフネーションの辞書を利用するかどうか： 'true' | 'false'
     attribute HyphenationOption { ah.boolean }?,
     
-    ## Comma-delimited list of languages to hyphenate when HyphenationOption="true"
+    ## HyphenationOption をハイフネーション処理をする言語のカンマ区切りリスト ="true"
     attribute hyphenation-TeX { text }?,
     attribute hyphen-min { ah.boolean }?,
     attribute intrusion-displace-mode { xsd:integer }?,
@@ -180,6 +182,7 @@ formatter-settings =
     attribute normalize { xsd:NCName }?,
     attribute oblique-skew { xsd:integer }?,
     attribute omit-uppercase-word-accents { text }?,
+    attribute output-area-id { ah.boolean }?,
     attribute output-fo-tree { ah.boolean }?,
     attribute overflow-limit-block { xsd:NMTOKEN }?,
     attribute overflow-limit-inline { xsd:NMTOKEN }?,
@@ -197,6 +200,7 @@ formatter-settings =
     attribute SeparatePrinterDuplexJob { ah.boolean }?,
     attribute splitting-blocks-space { ah.boolean }?,
     attribute SVGViewer { ah.boolean }?,
+    attribute tab-overlap-treatment { "" | "ignore-tab" | "next-tab" }?,
     attribute table-auto-layout-limit { xsd:integer }?,
     attribute table-is-reference-area { ah.boolean }?,
     attribute text-autospace { ah.boolean }?,
@@ -206,47 +210,61 @@ formatter-settings =
     attribute text-justify-mode { xsd:integer }?,
     attribute text-kashida-space { text }?,
     attribute text-orientation-mode { xsd:integer }?,
+    
+    ## 埋め込むことが許可されていないフォントにぼかしを適用するかどうか： false | true
+    attribute textshadow-blur-cannot-embed-font { ah.boolean }?,
+    
+    ## テキストシャドウにぼかしを適用するときの画像の最小解像度： <positive-integer>
+    attribute textshadow-resolution-minimum-dpi { dpi.model }?,
+    
+    ## テキストシャドウにぼかしを適用するときの画像の解像度： <positive-integer>
+    attribute textshadow-resolution-pixel-per-em { dpi.model }?,
     attribute text-underline-mode { xsd:integer }?,
     attribute thin-space-width { text }?,
     attribute two-pass-formatting { ah.boolean }?,
     attribute use-default-page-margin-CSS { ah.boolean }?,
     attribute use-default-page-margin-XSL { ah.boolean }?,
     attribute vertical-block-width-mode { xsd:integer }?,
+    attribute vertical-coloring-text { text }?,
     attribute vertical-underline-side { xsd:NCName }?,
     attribute viewport-length-units-mode { xsd:integer }?,
     attribute WindowsFontAPI { text }?,
     
-    ## ZERO WIDTH SPACE (U+200B) compatibility mode: 5 | 6
+    ## ZERO WIDTH SPACE (U+200B) 互換性： 5 | 6
     attribute zwsp-mode { "5" | "6" }?
   }
 font-settings =
   
-  ## Settings for fonts
+  ## フォントの設定
   element font-settings {
     attribute auto-fallback-font { ah.boolean }?,
     
-    ## Font for a linear barcode
+    ## 線形バーコードのフォン
     attribute barcode-text-font { "OCRB" | "monospace" }?,
     
-    ## Default font family
+    ## 標準フォントファミリ
     attribute default-font-family { xsd:NCName }?,
     
-    ## Whether, and at what level, to report when a glyph is not found in a fallback font
+    ## どのレベルでフォールバックフォントにグリフを持つものが見つからなかったときに報告するかどうか
     attribute fallback-glyph { "0" | "1" | "2" }?,
     
-    ## Font selection method: 5 = disregard 'font-selection-strategy'; 6 = act on 'font-selection-strategy="character-by-character"'
+    ## フォントの選択 方法： 5 = disregard 'font-selection-strategy'; 6 = act on 'font-selection-strategy="character-by-character"'
     attribute font-selection-mode { "5" | "6" }?,
     attribute font-selection-strategy { xsd:NCName }?,
     attribute font-stretch-mode { xsd:integer }?,
-    attribute missing-font { xsd:integer }?,
     
-    ## Whether to warn when glyph not found: [ = no message; 1 = level 1 error message; 2 = level 2 error message
+    ## フォントが見つからなかったときに警告するかどうか： [ 0 = no message; 1 = level 1 error message; 2 = level 2 error message ]
+    attribute missing-font { "0" | "1" | "2" }?,
+    
+    ## グリフが見つからなかったときに警告するかどうか： [ 0 = no message; 1 = level 1 error message; 2 = level 2 error message ]
     attribute missing-glyph { "0" | "1" | "2" }?,
     attribute missing-glyph-all { ah.boolean }?,
     attribute use-windows-api { ah.boolean }?,
     
-    ## Generic font mapping for a script
+    ## スクリプトのためのゼネリックフォントから実際フォントにマッピング
     script-font*,
+    
+    ## ひとつのフォント名から別名
     font-alias*
   }
 script-font =
@@ -254,49 +272,53 @@ script-font =
 script-font.model = empty
 script-font.attlist =
   
-  ## Generic cursive font for script
+  ## cursive に対するゼネリックフォント
   attribute cursive { text }?,
   
-  ## Generic fallback font for script
+  ## スクリプトのゼネリックフォールバックフォント
   attribute fallback { text }?,
   
-  ## Generic fantasy font for script
+  ## fantasy に対するゼネリックフォント
   attribute fantasy { text }?,
   
-  ## Generic monospace font for script
+  ## monospace に対するゼネリックフォント
   attribute monospace { text }?,
   
-  ## Generic sans-serif font for script
+  ## sans-serif に対するゼネリックフォント
   attribute sans-serif { text }?,
   
-  ## Script code
+  ## スクリプトコード
   attribute script { script.list }?,
   
-  ## Generic serif font for script
+  ## スクリプトの serif に対するゼネリックフォント
   attribute serif { text }?
 font-alias = element font-alias { font-alias.attlist, font-alias.model }
 font-alias.model = empty
 font-alias.attlist =
   
-  ## Name of font to alias
+  ## 別名に対するフォント名
   attribute src { text },
   
-  ## Name of font to use in place of source font
+  ## 対象となるフォントの代わりに使用するフォンと名
   attribute dst { text }
 pdf-settings =
   element pdf-settings { pdf-settings.attlist, pdf-settings.model }
 pdf-settings.attlist =
   
-  ## Whether JavaScript specified by openaction or axf:action-type is enabled: true | false
+  ## openaction や axf:action-type で JavaScript を指定しても有効にするかどうか： true | false
   attribute allow-javascript { ah.boolean }?,
   attribute certificate-name { xsd:NCName }?,
   
-  ## Compression method of the data stored in a PDF file
+  ## PDF ファイル内でビットマップに変換されたカラー画像の圧縮方法： auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k
   attribute color-compression { compression.list }?,
+  
+  ## PDF ファイル内でビットマップに変換されたカラー画像の圧縮方法： auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k
   attribute color-compression-default { compression.list }?,
+  
+  ## PDF ファイル内でビットマップに変換されたカラー画像の圧縮方法： auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k
   attribute color-compression-minimum { compression.list }?,
   
-  ## How to convert the RGB or CMYK color space to DeviceGray or DeviceCMYK: none | black | gray | all-gray | all-cmyk
+  ## RGB または CMYK のカラースペースを DeviceGray または DeviceCMYK に変換する方法： none | black | gray | all-gray | all-cmyk
   attribute color-conversion {
     "none" | "black" | "gray" | "all-gray" | "all-cmyk"
   }?,
@@ -315,7 +337,7 @@ pdf-settings.attlist =
   attribute color-profile { text }?,
   attribute convert-colorspace { ah.boolean }?,
   
-  ## Number of digits after the decimal point of real numbers to be output in PDF: 1 to 6
+  ## PDF 中に出力する実数値の小数点以下桁数： 1～6S
   attribute decimal-part-digits {
     xsd:positiveInteger { minInclusive = "1" maxInclusive = "6" }
   }?,
@@ -327,16 +349,23 @@ pdf-settings.attlist =
   }?,
   attribute default-output-intent { text }?,
   
-  ## Whether to embed all embeddable fonts in PDF: false | true | base14
+  ## フォントの埋め込みが制限されていないフォントをすべて PDF に埋め込むか否か： false | true | base14
   attribute embed-all-fonts { ah.boolean | "base14" }?,
   attribute embed-font-encoding { text }?,
   attribute embed-std-output-intent { ah.boolean }?,
   attribute embed-subset-font-percentage { xsd:integer }?,
   attribute encrypt-metadata { ah.boolean }?,
   
-  ## Key length when encrypting the PDF file: 40rc4 | 128rc4 | 128aes | 256aes
+  ## 作成する PDF の暗号化時のキー長： 40rc4 | 128rc4 | 128aes | 256aes
   attribute encryption-level {
-    "40rc4" | "128rc4" | "128aes" | "256aes"
+    "40rc4"
+    | "40RC4"
+    | "128rc4"
+    | "128RC4"
+    | "128aes"
+    | "128AES"
+    | "256aes"
+    | "256AES"
   }?,
   attribute EPS-processor { "none" | "distiller" | "ghostscript" }?,
   attribute error-on-embed-fault { ah.boolean }?,
@@ -345,7 +374,7 @@ pdf-settings.attlist =
   attribute error-on-tagged-pdf-fault { ah.boolean }?,
   attribute ghostscript { text }?,
   
-  ## Available up to V6.2. Use 'pass-through' instead.
+  ## V6.2 まで利用できる。代わりに pass-through を使用してください。
   attribute gif-pass-through { ah.boolean }?,
   attribute grayscale-compression { compression.list }?,
   attribute grayscale-compression-default { compression.list }?,
@@ -376,12 +405,24 @@ pdf-settings.attlist =
   attribute joboptions { text }?,
   attribute jpeg-quality { xsd:integer }?,
   attribute linearized { ah.boolean }?,
-  attribute monochrome-compression { xsd:NCName }?,
-  attribute monochrome-downsampling { xsd:NCName }?,
+  attribute monochrome-compression { monochrome.compression.list }?,
+  attribute monochrome-compression-default {
+    monochrome.compression.list
+  }?,
+  attribute monochrome-compression-minimum {
+    monochrome.compression.list
+  }?,
+  attribute monochrome-downsampling { downsampling.list }?,
   attribute monochrome-downsampling-above-dpi { dpi.model }?,
   attribute monochrome-downsampling-target-dpi { dpi.model }?,
+  attribute monochrome-downsampling-default { downsampling.list }?,
+  attribute monochrome-downsampling-above-dpi-default { dpi.model }?,
+  attribute monochrome-downsampling-target-dpi-default { dpi.model }?,
+  attribute monochrome-downsampling-minimum { downsampling.list }?,
+  attribute monochrome-downsampling-above-dpi-minimum { dpi.model }?,
+  attribute monochrome-downsampling-target-dpi-minimum { dpi.model }?,
   
-  ## Whether to embed multimedia in PDF when axf:multimedia-treatment="auto": embed | absolute-link | relative-link | richmedia | richmedia-windowed
+  ## axf:multimedia-treatment="auto" のとき、マルチメディアを PDF に埋め込むかどうか： embed | absolute-link | relative-link | richmedia | richmedia-windowed
   attribute multimedia-treatment {
     "embed"
     | "absolute-link"
@@ -391,7 +432,7 @@ pdf-settings.attlist =
   }?,
   attribute new-tagging-mode { ah.boolean }?,
   
-  ## Whether to permit text access for screen reader devices of PDF files: false | true
+  ## 作成する PDF ファイルのスクリーンリーダデバイスのテキストアクセスを許可するか否か： false | true
   attribute no-accessibility { ah.boolean }?,
   attribute no-adding-or-changing-comments { ah.boolean }?,
   attribute no-assemble-doc { ah.boolean }?,
@@ -409,14 +450,20 @@ pdf-settings.attlist =
   attribute pdf-version { pdf-version.list }?,
   attribute printing-allowed { xsd:NCName }?,
   attribute rasterize-resolution { xsd:integer }?,
+  attribute real-value-limit { "0" | "1" | "2" | "3" }?,
+  attribute real-value-limit-modify { ah.boolean }?,
   attribute reverse-page { ah.boolean }?,
   attribute rgb-conversion { xsd:NCName }?,
   attribute signature { ah.boolean }?,
   attribute signature-name { xsd:NCName }?,
   attribute tagged-pdf { ah.boolean }?,
   attribute text-and-lineart-compression { ah.boolean }?,
+  attribute text-and-lineart-compression-default { ah.boolean }?,
+  attribute text-and-lineart-compression-minimum { ah.boolean }?,
+  attribute transparency { ah.boolean }?,
   attribute transparency-color-space { xsd:NCName }?,
-  attribute use-launch-for-relative-uri { ah.boolean }?
+  attribute use-launch-for-local-file { ah.boolean }?,
+  attribute user-password { text }?
 pdf-settings.model = embed-font*, (tag-role-map, embed-font*)?
 embed-font =
   element embed-font {

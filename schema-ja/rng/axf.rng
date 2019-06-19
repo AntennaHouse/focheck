@@ -16,14 +16,14 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
---><grammar xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations" ns="http://www.antennahouse.com/names/XSL/Extensions" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axs="http://www.antennahouse.com/names/XSL/Settings" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <include href="axh.rng">
-    <a:documentation>Hyphenation settings</a:documentation>
+--><grammar xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations" ns="" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axs="http://www.antennahouse.com/names/XSL/Settings" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="axh.rng" ns="http://www.antennahouse.com/names/XSL/Extensions">
+    <a:documentation>ハイフネーション 指定</a:documentation>
   </include>
-  <include href="ahfsettings.rng" ns="http://www.antennahouse.com/names/XSL/Settings">
-    <a:documentation>Option settings</a:documentation>
+  <include href="axs.rng" ns="http://www.antennahouse.com/names/XSL/Settings">
+    <a:documentation>オプション指定</a:documentation>
   </include>
-  <include href="axf-inherited.rng">
+  <include href="axf-inherited.rng" ns="http://www.antennahouse.com/names/XSL/Extensions">
     <!--
       
       Overrides to patterns in 'axf-inherited.rnc' (and patterns in
@@ -124,8 +124,13 @@
         <choice>
           <ref name="axf_custom-property"/>
           <ref name="axf_document-info"/>
-          <ref name="axf_hyphenation-info"/>
+          <ref name="axf_font-face"/>
           <ref name="axf_formatter-config"/>
+          <ref name="axf_hyphenation-info"/>
+          <ref name="axf_space-between-digit-and-punctuation"/>
+          <ref name="axf_space-between-punctuation-and-digit"/>
+          <ref name="axf_space-end-punctuation"/>
+          <ref name="axf_space-start-punctuation"/>
           <ref name="axf_output-volume-info"/>
         </choice>
       </zeroOrMore>
@@ -284,7 +289,7 @@
   -->
   <define name="axf_custom-property">
     <element name="axf:custom-property">
-      <a:documentation>Custom PDF property Effective with PDF 1.4 or later. PDF/Aでは無効です。</a:documentation>
+      <a:documentation>PDF 1.4 以降のとき Custom PDF は有効です。PDF/A では無効です。</a:documentation>
       <attribute name="name">
         <a:documentation>カスタムプロパティ名どちらも空ではいけません。</a:documentation>
       </attribute>
@@ -300,7 +305,7 @@
   -->
   <define name="axf_document-info">
     <element name="axf:document-info">
-      <a:documentation>PDFには、著者やタイトルなどの文書情報を埋め込んでおくことができます </a:documentation>
+      <a:documentation>PDF には、著者やタイトルなどの文書情報を埋め込んでおくことができます </a:documentation>
       <!--
         'name="title"' was used in V5.1 and still works but is
         undocumented in V6.2+.
@@ -335,6 +340,49 @@
       </attribute>
       <empty/>
     </element>
+  </define>
+  <!--
+    <axf:font-face>
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.font-face
+  -->
+  <define name="axf_font-face">
+    <element name="axf:font-face">
+      <a:documentation>追加のハイフネーション情報</a:documentation>
+      <ref name="axf_font-face.attlist"/>
+      <ref name="axf_font-face.model"/>
+    </element>
+  </define>
+  <define name="axf_font-face.model">
+    <empty/>
+  </define>
+  <define name="axf_font-face.attlist">
+    <attribute name="src"/>
+    <attribute name="font-family"/>
+    <optional>
+      <attribute name="font-style">
+        <choice>
+          <value>normal</value>
+          <value>italic</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="font-weight">
+        <choice>
+          <value>normal</value>
+          <value>bold</value>
+          <value>100</value>
+          <value>200</value>
+          <value>300</value>
+          <value>400</value>
+          <value>500</value>
+          <value>600</value>
+          <value>700</value>
+          <value>800</value>
+          <value>900</value>
+        </choice>
+      </attribute>
+    </optional>
   </define>
   <!--
     <axf:footnote-number/>
@@ -392,13 +440,51 @@
   <define name="axf_form-field">
     <element name="axf:form-field">
       <a:documentation>フォームフィールドを生成します。</a:documentation>
-      <zeroOrMore>
-        <choice>
-          <ref name="axf_form-field-option"/>
-          <ref name="axf_form-field-event"/>
-        </choice>
-      </zeroOrMore>
+      <ref name="axf_form-field.attlist"/>
+      <ref name="axf_form-field.model"/>
     </element>
+  </define>
+  <define name="axf_form-field.model">
+    <zeroOrMore>
+      <choice>
+        <ref name="axf_form-field-option"/>
+        <ref name="axf_form-field-event"/>
+      </choice>
+    </zeroOrMore>
+  </define>
+  <define name="axf_form-field.attlist">
+    <!-- 'action-type' is required for <axf:form-field-event>. -->
+    <ref name="axf_action-type.form"/>
+    <ref name="axf_field-button-face"/>
+    <ref name="axf_field-button-face-down"/>
+    <ref name="axf_field-button-face-rollover"/>
+    <ref name="axf_field-button-icon"/>
+    <ref name="axf_field-button-icon-down"/>
+    <ref name="axf_field-button-icon-rollover"/>
+    <ref name="axf_field-button-layout"/>
+    <ref name="axf_field-checked"/>
+    <ref name="axf_field-checked-style"/>
+    <ref name="axf_field-default-text"/>
+    <ref name="axf_field-description"/>
+    <ref name="axf_field-editable"/>
+    <ref name="axf_field-flags"/>
+    <ref name="axf_field-font-size"/>
+    <ref name="axf_field-format"/>
+    <ref name="axf_field-format-category"/>
+    <ref name="axf_field-maxlen"/>
+    <ref name="axf_field-multiline"/>
+    <ref name="axf_field-multiple"/>
+    <ref name="axf_field-name"/>
+    <ref name="axf_field-name-suffix-page-number"/>
+    <ref name="axf_field-scroll"/>
+    <ref name="axf_field-text-align"/>
+    <ref name="axf_field-top-index"/>
+    <ref name="axf_field-type"/>
+    <ref name="axf_field-value"/>
+    <ref name="common-border-padding-and-background-properties"/>
+    <ref name="external-destination"/>
+    <ref name="height"/>
+    <ref name="width"/>
   </define>
   <!--
     <axf:form-field-event>
@@ -408,8 +494,37 @@
   <define name="axf_form-field-event">
     <element name="axf:form-field-event">
       <a:documentation>イベントに対応したフォームアクションを定義します。</a:documentation>
+      <ref name="axf_form-field-event.attlist"/>
       <text/>
     </element>
+  </define>
+  <define name="axf_form-field-event.attlist">
+    <attribute>
+      <a:documentation>イベントの種類： MouseUp | MouseDown | MouseEnter | MouseExit | OnFocus | OnBlur</a:documentation>
+      <choice>
+        <name>axf:name</name>
+        <name>name</name>
+      </choice>
+      <choice>
+        <value>MouseUp</value>
+        <value>MouseDown</value>
+        <value>MouseEnter</value>
+        <value>MouseExit</value>
+        <value>OnFocus</value>
+        <value>OnBlur</value>
+      </choice>
+    </attribute>
+    <attribute>
+      <a:documentation>フォームアクション： auto | gotor | gotor | launch | uri | reset | submit | javascript</a:documentation>
+      <choice>
+        <name>axf:action-type</name>
+        <name>action-type</name>
+      </choice>
+      <choice>
+        <ref name="axf_action-type.form.model"/>
+        <value>javascript</value>
+      </choice>
+    </attribute>
   </define>
   <!--
     <axf:form-field-option>
@@ -419,8 +534,12 @@
   <define name="axf_form-field-option">
     <element name="axf:form-field-option">
       <a:documentation>リストボックス、コンボボックスの構成要素を指定します。 </a:documentation>
+      <ref name="axf_form-field-option.attlist"/>
       <text/>
     </element>
+  </define>
+  <define name="axf_form-field-option.attlist">
+    <ref name="axf_field-value"/>
   </define>
   <!--
     <axf:formatter-config>
@@ -428,7 +547,7 @@
   -->
   <define name="axf_formatter-config">
     <element name="axf:formatter-config">
-      <a:documentation>Additional option setting information</a:documentation>
+      <a:documentation>追加のハイフネーション情報</a:documentation>
       <ref name="axf_formatter-config.attlist"/>
       <ref name="formatter-config.model"/>
     </element>
@@ -440,7 +559,7 @@
   <define name="axf_formatter-config.attlist">
     <optional>
       <attribute name="src">
-        <a:documentation>External Option Setting File</a:documentation>
+        <a:documentation>外部にあるオプション設定ファイル</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -450,7 +569,7 @@
   -->
   <define name="axf_hyphenation-info">
     <element name="axf:hyphenation-info">
-      <a:documentation>Additional hyphenation information</a:documentation>
+      <a:documentation>追加のハイフネーション情報</a:documentation>
       <ref name="axf_hyphenation-info.attlist"/>
       <optional>
         <ref name="axh_exceptions"/>
@@ -471,7 +590,7 @@
   -->
   <define name="axf_output-volume-info">
     <element name="axf:output-volume-info">
-      <a:documentation>Output volume specification</a:documentation>
+      <a:documentation>多分冊出力指定</a:documentation>
       <ref name="axf_output-volume-info.attlist"/>
       <empty/>
     </element>
@@ -479,18 +598,18 @@
   <define name="axf_output-volume-info.attlist">
     <optional>
       <attribute name="initial-volume-number">
-        <a:documentation>Initial volume number: &lt;positive-integer&gt;</a:documentation>
+        <a:documentation>初期文書番号： &lt;positive-integer&gt;</a:documentation>
         <data type="positiveInteger"/>
       </attribute>
     </optional>
     <optional>
       <attribute name="format">
-        <a:documentation>Format specification: &lt;string&gt;</a:documentation>
+        <a:documentation>書式指定： &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
     <optional>
       <attribute name="bookmark-include">
-        <a:documentation>How to include bookmarks in multiple separate volumes: first | all | separate</a:documentation>
+        <a:documentation>多分冊にしおりを付ける方法： first | all | separate</a:documentation>
         <choice>
           <value>first</value>
           <value>all</value>
@@ -505,7 +624,7 @@
   -->
   <define name="axf_ruby">
     <element name="axf:ruby">
-      <a:documentation>The ruby structure</a:documentation>
+      <a:documentation>ルビ構造</a:documentation>
       <ref name="axf.ruby.attlist"/>
       <oneOrMore>
         <ref name="axf_ruby-base"/>
@@ -519,7 +638,7 @@
   -->
   <define name="axf_ruby-base">
     <element name="axf:ruby-base">
-      <a:documentation>Base character of ruby</a:documentation>
+      <a:documentation>ルビの親文字</a:documentation>
       <choice>
         <text/>
         <ref name="axf_ruby"/>
@@ -532,9 +651,62 @@
   -->
   <define name="axf_ruby-text">
     <element name="axf:ruby-text">
-      <a:documentation>Ruby</a:documentation>
+      <a:documentation>ルビ</a:documentation>
       <text/>
     </element>
+  </define>
+  <!--
+    <axf:space-end-punctuation>
+    https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.space-end-punctuation
+  -->
+  <define name="axf_space-end-punctuation">
+    <element name="axf:space-end-punctuation">
+      <a:documentation>約物の後の空白量</a:documentation>
+      <ref name="axf.european-typography.attlist"/>
+    </element>
+  </define>
+  <!--
+    <axf:space-start-punctuation>
+    https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.space-start-punctuation
+  -->
+  <define name="axf_space-start-punctuation">
+    <element name="axf:space-start-punctuation">
+      <a:documentation>約物の前の空白量</a:documentation>
+      <ref name="axf.european-typography.attlist"/>
+    </element>
+  </define>
+  <!--
+    <axf:space-between-digit-and-punctuation>
+    https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.space-between-digit-and-punctuation
+  -->
+  <define name="axf_space-between-digit-and-punctuation">
+    <element name="axf:space-between-digit-and-punctuation">
+      <a:documentation>約物の前の空白量</a:documentation>
+      <ref name="axf.european-typography.attlist"/>
+    </element>
+  </define>
+  <!--
+    <axf:space-between-punctuation-and-digit>
+    https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.space-between-punctuation-and-digit
+  -->
+  <define name="axf_space-between-punctuation-and-digit">
+    <element name="axf:space-between-punctuation-and-digit">
+      <a:documentation>約物の前の空白量</a:documentation>
+      <ref name="axf.european-typography.attlist"/>
+    </element>
+  </define>
+  <define name="axf.european-typography.attlist">
+    <attribute name="language">
+      <a:documentation>言語コード</a:documentation>
+    </attribute>
+    <optional>
+      <attribute name="space">
+        <a:documentation>空白量： &lt;number&gt; | &lt;length&gt; | &lt;percentage&gt; | figure | punctuation | thin | hair</a:documentation>
+      </attribute>
+    </optional>
+    <attribute name="code">
+      <a:documentation>コードポイント</a:documentation>
+    </attribute>
   </define>
   <!--
     <axf:spread-page-master>
@@ -542,16 +714,19 @@
   -->
   <define name="axf_spread-page-master">
     <element name="axf:spread-page-master">
-      <a:documentation>A two-page spread</a:documentation>
+      <a:documentation>見開きページマスタ</a:documentation>
       <ref name="axf_background-color"/>
+      <ref name="axf_background-clip"/>
       <ref name="axf_background-content-height"/>
       <ref name="axf_background-content-type"/>
       <ref name="axf_background-content-width"/>
       <ref name="axf_background-image"/>
+      <ref name="axf_background-origin"/>
       <ref name="axf_background-position-horizontal"/>
       <ref name="axf_background-position-vertical"/>
       <ref name="axf_background-repeat"/>
       <ref name="axf_background-scaling"/>
+      <ref name="axf_background-size"/>
       <ref name="axf_bleed"/>
       <ref name="common-margin-properties-block"/>
       <attribute name="left-page-master-reference">
@@ -611,7 +786,7 @@
   -->
   <define name="axf_table-cell-repeated-marker">
     <element name="axf:table-cell-repeated-marker">
-      <a:documentation>内容がaxf:repeat-cell-content-at-break=&quot;true&quot;の場合に使われます</a:documentation>
+      <a:documentation>内容が axf:repeat-cell-content-at-break=&quot;true&quot; の場合に使われます</a:documentation>
       <zeroOrMore>
         <choice>
           <text/>
@@ -654,16 +829,24 @@
     <ref name="xml_id"/>
   </define>
   <define name="fo_page-sequence.attlist" combine="interleave">
+    <ref name="axf_repeat-page-sequence-master"/>
+  </define>
+  <define name="fo_page-sequence.attlist" combine="interleave">
+    <ref name="axf_background-clip"/>
     <ref name="axf_background-color"/>
     <ref name="axf_background-image"/>
+    <ref name="axf_background-origin"/>
     <ref name="axf_background-position-horizontal"/>
     <ref name="axf_background-position-vertical"/>
     <ref name="axf_background-repeat"/>
+    <ref name="axf_background-size"/>
     <ref name="axf_output-volume-break"/>
     <ref name="axf_output-volume-filename"/>
     <ref name="axf_page-number-prefix"/>
+    <ref name="axf_pdftag"/>
     <ref name="axf_printer-bin-selection"/>
     <ref name="axf_printer-duplex"/>
+    <ref name="axf_reverse-page"/>
     <ref name="background-color"/>
     <ref name="background-image"/>
     <ref name="background-position-horizontal"/>
@@ -675,15 +858,18 @@
     <ref name="xml_id"/>
   </define>
   <define name="fo_simple-page-master.attlist" combine="interleave">
+    <ref name="axf_background-clip"/>
     <ref name="axf_background-color"/>
     <ref name="axf_background-content-height"/>
     <ref name="axf_background-content-type"/>
     <ref name="axf_background-content-width"/>
     <ref name="axf_background-image"/>
+    <ref name="axf_background-origin"/>
     <ref name="axf_background-position-horizontal"/>
     <ref name="axf_background-position-vertical"/>
     <ref name="axf_background-repeat"/>
     <ref name="axf_background-scaling"/>
+    <ref name="axf_background-size"/>
     <ref name="axf_bleed"/>
     <ref name="axf_bleed-top"/>
     <ref name="axf_bleed-bottom"/>
@@ -723,10 +909,12 @@
   </define>
   <define name="fo_flow.attlist" combine="interleave">
     <ref name="axf_baseline-grid"/>
+    <ref name="axf_pdftag"/>
     <ref name="xml_id"/>
   </define>
   <define name="fo_static-content.attlist" combine="interleave">
     <ref name="axf_baseline-grid"/>
+    <ref name="axf_pdftag"/>
     <ref name="xml_id"/>
   </define>
   <!-- FOs in flow listed in alphabetic order -->
@@ -735,12 +923,12 @@
     <ref name="axf_alttext"/>
     <ref name="text-decoration"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.text-decoration.attlist"/>
   </define>
   <define name="fo_bidi-override.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.text-decoration.attlist"/>
   </define>
   <define name="fo_block.attlist" combine="interleave">
@@ -754,7 +942,7 @@
     <ref name="text-decoration"/>
     <ref name="width"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.block.attlist"/>
     <ref name="axf.text-decoration.attlist"/>
   </define>
@@ -769,24 +957,26 @@
     <ref name="axf_column-rule-style"/>
     <ref name="axf_column-rule-width"/>
     <ref name="axf_destination-type"/>
+    <ref name="axf_pdftag"/>
     <ref name="axf_suppress-if-first-on-page"/>
     <ref name="axf.block.attlist"/>
     <ref name="column-count"/>
     <ref name="column-gap"/>
     <ref name="role"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_character.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.text-decoration.attlist"/>
   </define>
   <define name="fo_external-graphic.attlist" combine="interleave">
     <ref name="axf_alttext"/>
     <ref name="axf_background-image-resolution"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
+    <ref name="axf.multimedia.properties"/>
   </define>
   <define name="fo_float.attlist" combine="interleave">
     <ref name="axf_float"/>
@@ -805,8 +995,9 @@
     <ref name="axf_float-float-margin-y"/>
     <ref name="axf_float-offset-x"/>
     <ref name="axf_float-offset-y"/>
+    <ref name="axf_pdftag"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_footnote.attlist" combine="interleave">
     <ref name="space-before"/>
@@ -815,95 +1006,95 @@
     <ref name="axf_footnote-position"/>
     <ref name="axf_footnote-keep"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_footnote-body.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_index-range-begin.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_inline.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.text-decoration.attlist"/>
     <ref name="axf_indent-here"/>
   </define>
   <define name="fo_inline-container.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_instream-foreign-object.attlist" combine="interleave">
     <ref name="axf_alttext"/>
     <ref name="axf_background-image-resolution"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_leader.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.text-decoration.attlist"/>
   </define>
   <define name="fo_list-block.attlist" combine="interleave">
     <ref name="axf.block.attlist"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_list-item.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf-outline-properties"/>
   </define>
   <define name="fo_list-item-body.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_list-item-label.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_multi-case.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_multi-property-set.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_multi-switch.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_multi-toggle.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_page-number.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.page-number.attlist"/>
   </define>
   <define name="fo_page-number-citation.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.page-number.attlist"/>
   </define>
   <define name="fo_page-number-citation-last.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.page-number.attlist"/>
   </define>
   <define name="fo_scaling-value-citation.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.text-decoration.attlist"/>
   </define>
   <define name="fo_table.attlist" combine="interleave">
     <ref name="axf_table-summary"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.block.attlist"/>
   </define>
   <define name="fo_table-and-caption.attlist" combine="interleave">
@@ -912,40 +1103,40 @@
   </define>
   <define name="fo_table-caption.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_table-cell.attlist" combine="interleave">
     <ref name="axf_headers"/>
     <ref name="axf_repeat-cell-content-at-break"/>
     <ref name="axf_scope"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_table-column.attlist" combine="interleave">
     <ref name="id"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_table-body.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_table-footer.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_table-header.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_table-row.attlist" combine="interleave">
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
   </define>
   <define name="fo_wrapper.attlist" combine="interleave">
     <ref name="text-decoration"/>
     <ref name="xml_id"/>
-    <ref name="axf.annotation.attlist"/>
+    <ref name="axf.annotation.properties"/>
     <ref name="axf.text-decoration.attlist"/>
   </define>
   <!--
@@ -957,15 +1148,19 @@
     <ref name="axf_pdftag"/>
   </define>
   <define name="common-border-padding-and-background-properties" combine="interleave">
+    <ref name="axf_background-clip"/>
     <ref name="axf_background-content-width"/>
     <ref name="axf_background-content-height"/>
     <ref name="axf_background-content-type"/>
+    <ref name="axf_background-origin"/>
     <ref name="axf_background-scaling"/>
+    <ref name="axf_background-size"/>
     <ref name="axf_border-radius"/>
     <ref name="axf_border-top-left-radius"/>
     <ref name="axf_border-top-right-radius"/>
     <ref name="axf_border-bottom-left-radius"/>
     <ref name="axf_border-bottom-right-radius"/>
+    <ref name="axf_box-shadow"/>
     <ref name="axf_diagonal-border-style"/>
     <ref name="axf_reverse-diagonal-border-style"/>
   </define>
@@ -978,7 +1173,7 @@
     List of annotation-related properties common to block-level and
     inline-level formatting objects
   -->
-  <define name="axf.annotation.attlist">
+  <define name="axf.annotation.properties">
     <ref name="axf_annotation-author"/>
     <ref name="axf_annotation-border-color"/>
     <ref name="axf_annotation-border-style"/>
@@ -1024,6 +1219,29 @@
     <ref name="axf_outline-font-weight"/>
   </define>
   <!--
+    List of extension properties to control multimedia objects.
+    See https://www.antennahouse.com/product/ahf66/ahf-ext.html#images
+  -->
+  <define name="axf.multimedia.properties">
+    <ref name="axf_media-activation"/>
+    <ref name="axf_media-duration"/>
+    <ref name="axf_media-extraction-policy"/>
+    <ref name="axf_media-flash-context-menu"/>
+    <ref name="axf_media-flash-vars"/>
+    <ref name="axf_media-play-mode"/>
+    <ref name="axf_media-skin-auto-hide"/>
+    <ref name="axf_media-skin-color"/>
+    <ref name="axf_media-skin-control"/>
+    <ref name="axf_media-transparent-background"/>
+    <ref name="axf_media-volume"/>
+    <ref name="axf_media-window-height"/>
+    <ref name="axf_media-window-width"/>
+    <ref name="axf_multimedia-treatment"/>
+    <ref name="axf_poster-content-type"/>
+    <ref name="axf_poster-image"/>
+    <ref name="axf_show-controls"/>
+  </define>
+  <!--
     List of extension properties to control page and column numbers.
     See https://www.antennahouse.com/product/ahf65/ahf-ext.html#page-number
   -->
@@ -1056,6 +1274,7 @@
   <define name="axf.block.attlist">
     <ref name="axf-baseline-grid-properties"/>
     <ref name="axf-outline-properties"/>
+    <ref name="axf_keep-together-within-dimension"/>
     <ref name="axf_text-overflow"/>
   </define>
   <define name="axf.ruby.attlist">
@@ -1076,58 +1295,18 @@
     <ref name="axf_ruby-color"/>
   </define>
   <!--
-    @axf:background-color
-    @axf:background-image
-    @axf:background-position-horizontal
-    @axf:background-position-vertical
-    @axf:background-repeat
-    
-    https://www.antennahouse.com/product/ahf65/ahf-ext.html#IDAAOLV
-  -->
-  <define name="axf_background-color">
-    <optional>
-      <attribute name="axf:background-color">
-        <a:documentation>&lt;color&gt; | transparent</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <define name="axf_background-image">
-    <optional>
-      <attribute name="axf:background-image">
-        <a:documentation>&lt;uri-specification&gt; | none</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <define name="axf_background-position-horizontal">
-    <optional>
-      <attribute name="axf:background-position-horizontal">
-        <a:documentation>&lt;percentage&gt; | &lt;length&gt; | left | center | right</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <define name="axf_background-position-vertical">
-    <optional>
-      <attribute name="axf:background-position-vertical">
-        <a:documentation>&lt;percentage&gt; | &lt;length&gt; | top | center | bottom</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <define name="axf_background-repeat">
-    <optional>
-      <attribute name="axf:background-repeat">
-        <a:documentation>repeat | repeat-x | repeat-y | no-repeat | paginate</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <!--
     @axf:action-type
     
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.action-type
   -->
   <define name="axf_action-type">
     <optional>
-      <attribute name="axf:action-type">
+      <attribute>
         <a:documentation>外部リンクまたはフォームアクションの動作を指定します</a:documentation>
+        <choice>
+          <name>axf:action-type</name>
+          <name>action-type</name>
+        </choice>
         <choice>
           <value>gotor</value>
           <value>launch</value>
@@ -1139,6 +1318,34 @@
       </attribute>
     </optional>
   </define>
+  <define name="axf_action-type.form.model">
+    <choice>
+      <value>auto</value>
+      <value>gotor</value>
+      <value>gotor</value>
+      <value>launch</value>
+      <value>uri</value>
+      <value>reset</value>
+      <value>submit</value>
+    </choice>
+  </define>
+  <!--
+    @axf:action-type
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.action-type2
+  -->
+  <define name="axf_action-type.form">
+    <optional>
+      <attribute>
+        <a:documentation>フォームアクションの動作を指定します。</a:documentation>
+        <choice>
+          <name>axf:action-type</name>
+          <name>action-type</name>
+        </choice>
+        <ref name="axf_action-type.form.model"/>
+      </attribute>
+    </optional>
+  </define>
   <!--
     @axf:alt-text
     
@@ -1146,8 +1353,12 @@
   -->
   <define name="axf_alttext">
     <optional>
-      <attribute name="axf:alttext">
+      <attribute>
         <a:documentation>画像の代替テキスト</a:documentation>
+        <choice>
+          <name>axf:alttext</name>
+          <name>alttext</name>
+        </choice>
       </attribute>
     </optional>
   </define>
@@ -1171,7 +1382,7 @@
   <define name="axf_annotation-border-color">
     <optional>
       <attribute name="axf:annotation-border-color">
-        <a:documentation>Border color of the free text annotation: &lt;color&gt;</a:documentation>
+        <a:documentation>フリーテキスト注釈のボーダーの色： &lt;color&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1183,7 +1394,7 @@
   <define name="axf_annotation-border-style">
     <optional>
       <attribute name="axf:annotation-border-style">
-        <a:documentation>Border style of the free text annotation: solid | dotted | dashed | dot-dash | dot-dot-dash</a:documentation>
+        <a:documentation>フリーテキスト注釈のボーダーのスタイル： solid | dotted | dashed | dot-dash | dot-dot-dash</a:documentation>
         <choice>
           <value>solid</value>
           <value>dotted</value>
@@ -1202,7 +1413,7 @@
   <define name="axf_annotation-border-width">
     <optional>
       <attribute name="axf:annotation-border-width">
-        <a:documentation>Border width of the free text annotation: &lt;border-width&gt;</a:documentation>
+        <a:documentation>フリーテキスト注釈のボーダーの幅： &lt;border-width&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1251,7 +1462,7 @@
   <define name="axf_annotation-flags">
     <optional>
       <attribute name="axf:annotation-flags">
-        <a:documentation>Characteristics of the annotation: Invisible | Hidden | Print | NoZoom | NoRotate | NoView | ReadOnly | Locked | ToggleNoView | LockedContents</a:documentation>
+        <a:documentation>注釈の特殊： Invisible | Hidden | Print | NoZoom | NoRotate | NoView | ReadOnly | Locked | ToggleNoView | LockedContents</a:documentation>
         <choice>
           <value>Invisible</value>
           <value>Hidden</value>
@@ -1275,7 +1486,7 @@
   <define name="axf_annotation-font-family">
     <optional>
       <attribute name="axf:annotation-font-family">
-        <a:documentation>Font family of the free text annotation: &lt;string&gt;</a:documentation>
+        <a:documentation>フリーテキスト注釈のフォントファミリ： &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1287,7 +1498,7 @@
   <define name="axf_annotation-font-size">
     <optional>
       <attribute name="axf:annotation-font-size">
-        <a:documentation>Font size of the free text annotation: &lt;string&gt;</a:documentation>
+        <a:documentation>フリーテキスト注釈のフォントのサイズ： &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1299,7 +1510,7 @@
   <define name="axf_annotation-font-style">
     <optional>
       <attribute name="axf:annotation-font-style">
-        <a:documentation>Font style of the free text annotation: &lt;string&gt;</a:documentation>
+        <a:documentation>リーテキスト注釈のフォントスタイル： &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1311,7 +1522,7 @@
   <define name="axf_annotation-font-weight">
     <optional>
       <attribute name="axf:annotation-font-weight">
-        <a:documentation>Font weight of the free text annotation: &lt;string&gt;</a:documentation>
+        <a:documentation>フリーテキスト注釈のフォントの太さ： &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1387,7 +1598,7 @@
   <define name="axf_annotation-text-align">
     <optional>
       <attribute name="axf:annotation-text-align">
-        <a:documentation>Alignment of the free text annotation: &lt;string&gt;</a:documentation>
+        <a:documentation>フリーテキスト注釈の配置： &lt;string&gt;</a:documentation>
         <choice>
           <value>left</value>
           <value>center</value>
@@ -1404,7 +1615,7 @@
   <define name="axf_annotation-text-color">
     <optional>
       <attribute name="axf:annotation-text-color">
-        <a:documentation>Color of the free text annotation: &lt;string&gt;</a:documentation>
+        <a:documentation>フリーテキスト注釈の色： &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1453,6 +1664,50 @@
     </optional>
   </define>
   <!--
+    @axf:background-color
+    @axf:background-image
+    @axf:background-position-horizontal
+    @axf:background-position-vertical
+    @axf:background-repeat
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#IDAAOLV
+  -->
+  <define name="axf_background-color">
+    <optional>
+      <attribute name="axf:background-color">
+        <a:documentation>&lt;color&gt; | transparent</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_background-image">
+    <optional>
+      <attribute name="axf:background-image">
+        <a:documentation>&lt;uri-specification&gt; | none</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_background-position-horizontal">
+    <optional>
+      <attribute name="axf:background-position-horizontal">
+        <a:documentation>&lt;percentage&gt; | &lt;length&gt; | left | center | right</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_background-position-vertical">
+    <optional>
+      <attribute name="axf:background-position-vertical">
+        <a:documentation>&lt;percentage&gt; | &lt;length&gt; | top | center | bottom</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_background-repeat">
+    <optional>
+      <attribute name="axf:background-repeat">
+        <a:documentation>repeat | repeat-x | repeat-y | no-repeat | paginate</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:background-content-height
     @axf:background-content-type
     @axf:background-content-width
@@ -1494,6 +1749,30 @@
     </optional>
   </define>
   <!--
+    @axf:background-clip
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-clip
+  -->
+  <define name="axf_background-clip">
+    <optional>
+      <attribute name="axf:background-clip">
+        <a:documentation>背景が描かれている領域： [ border-box | padding-box | content-box ]#</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:background-origin
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-origin
+  -->
+  <define name="axf_background-origin">
+    <optional>
+      <attribute name="axf:background-origin">
+        <a:documentation>背景画像の基点の位置： [ border-box | padding-box | content-box ]#</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:background-image-resolution
     
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-image-resolution
@@ -1501,7 +1780,19 @@
   <define name="axf_background-image-resolution">
     <optional>
       <attribute name="axf:background-image-resolution">
-        <a:documentation>Resolution of a background image: [ normal | [ from-image || &lt;dpi&gt; ] ]#</a:documentation>
+        <a:documentation>背景画像の解像度： [ normal | [ from-image || &lt;dpi&gt; ] ]#</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:background-size
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.background-size
+  -->
+  <define name="axf_background-size">
+    <optional>
+      <attribute name="axf:background-size">
+        <a:documentation>背景画像のサイズ： [ [ &lt;length&gt; | &lt;percentage&gt; | auto ]{1,2} | cover | contain ]#</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1532,50 +1823,6 @@
           <value>root</value>
           <value>new</value>
         </choice>
-      </attribute>
-    </optional>
-  </define>
-  <!--
-    @axf:border-radius
-    @axf:border-top-left-radius
-    @axf:border-top-right-radius
-    @axf:border-bottom-left-radius
-    @axf:border-bottom-right-radius
-    
-    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.border-radius
-  -->
-  <define name="axf_border-radius">
-    <optional>
-      <attribute name="axf:border-radius">
-        <a:documentation>丸め罫の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <define name="axf_border-top-left-radius">
-    <optional>
-      <attribute name="axf:border-top-left-radius">
-        <a:documentation>丸め罫の左上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <define name="axf_border-top-right-radius">
-    <optional>
-      <attribute name="axf:border-top-right-radius">
-        <a:documentation>丸め罫の右上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <define name="axf_border-bottom-left-radius">
-    <optional>
-      <attribute name="axf:border-bottom-left-radius">
-        <a:documentation>丸め罫の左下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
-      </attribute>
-    </optional>
-  </define>
-  <define name="axf_border-bottom-right-radius">
-    <optional>
-      <attribute name="axf:border-bottom-right-radius">
-        <a:documentation>丸め罫の右下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1620,6 +1867,82 @@
     <optional>
       <attribute name="axf:bleed-right">
         <a:documentation>塗り足しの領域の右の幅: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:border-radius
+    @axf:border-top-left-radius
+    @axf:border-top-right-radius
+    @axf:border-bottom-left-radius
+    @axf:border-bottom-right-radius
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.border-radius
+  -->
+  <define name="axf_border-radius">
+    <optional>
+      <attribute>
+        <a:documentation>丸め罫の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+        <choice>
+          <name>axf:border-radius</name>
+          <name>border-radius</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_border-top-left-radius">
+    <optional>
+      <attribute>
+        <a:documentation>丸め罫の左上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+        <choice>
+          <name>axf:border-top-left-radius</name>
+          <name>border-top-left-radius</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_border-top-right-radius">
+    <optional>
+      <attribute>
+        <a:documentation>丸め罫の右上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+        <choice>
+          <name>axf:border-top-right-radius</name>
+          <name>border-top-right-radius</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_border-bottom-left-radius">
+    <optional>
+      <attribute>
+        <a:documentation>丸め罫の左下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+        <choice>
+          <name>axf:border-bottom-left-radius</name>
+          <name>border-bottom-left-radius</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="axf_border-bottom-right-radius">
+    <optional>
+      <attribute>
+        <a:documentation>丸め罫の右下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+        <choice>
+          <name>axf:border-bottom-right-radius</name>
+          <name>border-bottom-right-radius</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:box-shadow
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.box-shadow
+  -->
+  <define name="axf_box-shadow">
+    <optional>
+      <attribute name="axf:box-shadow">
+        <a:documentation>ボックスシャドウ： none | [ inset?&amp;&amp; [ &lt;length&gt;{2,4} &amp;&amp; &lt;color&gt;?] ]#</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -1842,28 +2165,463 @@
     </optional>
   </define>
   <!--
+    @axf:field-checked
+    @field-checked
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-checked
+  -->
+  <define name="axf_field-checked">
+    <optional>
+      <attribute>
+        <a:documentation>チェックボックス又はラジオボタンの初期状態： true | false</a:documentation>
+        <choice>
+          <name>axf:field-checked</name>
+          <name>field-checked</name>
+        </choice>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-button-face
+    @field-button-face
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-face
+  -->
+  <define name="axf_field-button-face">
+    <optional>
+      <attribute>
+        <a:documentation>プッシュボタンフィールドに表示するキャプション： &lt;string&gt;</a:documentation>
+        <choice>
+          <name>axf:field-button-face</name>
+          <name>field-button-face</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-button-icon
+    @field-button-icon
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-icon
+  -->
+  <define name="axf_field-button-icon">
+    <optional>
+      <attribute>
+        <a:documentation>プッシュボタンフィールドに表示するアイコン： &lt;uri-specification&gt;</a:documentation>
+        <choice>
+          <name>axf:field-button-icon</name>
+          <name>field-button-icon</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-button-face-down
+    @field-button-face-down
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-face-down
+  -->
+  <define name="axf_field-button-face-down">
+    <optional>
+      <attribute>
+        <a:documentation>プッシュボタン押下時に表示するキャプション： &lt;string&gt;</a:documentation>
+        <choice>
+          <name>axf:field-button-face-down</name>
+          <name>field-button-face-down</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-button-icon-down
+    @field-button-icon-down
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-icon-down
+  -->
+  <define name="axf_field-button-icon-down">
+    <optional>
+      <attribute>
+        <a:documentation>プッシュボタン押下時に表示するアイコン： &lt;uri-specification&gt;</a:documentation>
+        <choice>
+          <name>axf:field-button-icon-down</name>
+          <name>field-button-icon-down</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-button-face-rollover
+    @field-button-face-rollover
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-face-rollover
+  -->
+  <define name="axf_field-button-face-rollover">
+    <optional>
+      <attribute>
+        <a:documentation>プッシュボタンロールオーバー時に表示するキャプション： &lt;string&gt;</a:documentation>
+        <choice>
+          <name>axf:field-button-face-rollover</name>
+          <name>field-button-face-rollover</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-button-icon-rollover
+    @field-button-icon-rollover
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-icon-rollover
+  -->
+  <define name="axf_field-button-icon-rollover">
+    <optional>
+      <attribute>
+        <a:documentation>プッシュボタンロールオーバー時に表示するアイコン： &lt;uri-specification&gt;</a:documentation>
+        <choice>
+          <name>axf:field-button-icon-rollover</name>
+          <name>field-button-icon-rollover</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-button-layout
+    @field-button-layout
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-button-layout
+  -->
+  <define name="axf_field-button-layout">
+    <optional>
+      <attribute>
+        <a:documentation>プッシュボタンフィールド内のキャプションとアイコンの相対位置： caption | icon | caption-below-icon | caption-above-icon | icon-caption | caption-icon | caption-over-icon</a:documentation>
+        <choice>
+          <name>axf:field-button-layout</name>
+          <name>field-button-layout</name>
+        </choice>
+        <choice>
+          <value>caption</value>
+          <value>icon</value>
+          <value>caption-below-icon</value>
+          <value>caption-above-icon</value>
+          <value>icon-caption</value>
+          <value>caption-icon</value>
+          <value>caption-over-icon</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-checked-style
+    @field-checked-style
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-checked-style
+  -->
+  <define name="axf_field-checked-style">
+    <optional>
+      <attribute>
+        <a:documentation>チェックボックス又はラジオボタンのスタイル： checkmark | circle | square | cross | star</a:documentation>
+        <choice>
+          <name>axf:field-checked-style</name>
+          <name>field-checked-style</name>
+        </choice>
+        <choice>
+          <value>checkmark</value>
+          <value>circle</value>
+          <value>square</value>
+          <value>cross</value>
+          <value>star</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-default-text
+    @field-default-text
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-default-text
+  -->
+  <define name="axf_field-default-text">
+    <optional>
+      <attribute>
+        <a:documentation>フォームフフィールドに最初から入力されるテキスト： &lt;string&gt;</a:documentation>
+        <choice>
+          <name>axf:field-default-text</name>
+          <name>field-default-text</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-description
+    @field-description
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-description
+  -->
+  <define name="axf_field-description">
+    <optional>
+      <attribute>
+        <a:documentation>フォームフィールドの説明文： &lt;string&gt;</a:documentation>
+        <choice>
+          <name>axf:field-description</name>
+          <name>field-description</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-editable
+    @field-editable
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-editable
+  -->
+  <define name="axf_field-editable">
+    <optional>
+      <attribute>
+        <a:documentation>コンボボックスで、値が編集可能かどうか： true | false</a:documentation>
+        <choice>
+          <name>axf:field-editable</name>
+          <name>field-editable</name>
+        </choice>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-flags
+    @field-flags
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-flags
+  -->
+  <define name="axf_field-flags">
+    <optional>
+      <attribute>
+        <a:documentation>フォームフィールドに適用されるフラグ： &lt;string&gt;</a:documentation>
+        <choice>
+          <name>axf:field-flags</name>
+          <name>field-flags</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-font-size
+    @field-font-size
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-font-size
+  -->
+  <define name="axf_field-font-size">
+    <optional>
+      <attribute>
+        <a:documentation>フィールドに表示する文字列のフォントサイズ：: font-size | auto | &lt;length&gt;</a:documentation>
+        <choice>
+          <name>axf:field-font-size</name>
+          <name>field-font-size</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-format
+    @field-format
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-format
+  -->
+  <define name="axf_field-format">
+    <optional>
+      <attribute>
+        <a:documentation>テキストフィールド書式： none | number | percentage | date | time</a:documentation>
+        <choice>
+          <name>axf:field-format</name>
+          <name>field-format</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-format-category
+    @field-format-category
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-format-category
+  -->
+  <define name="axf_field-format-category">
+    <optional>
+      <attribute>
+        <a:documentation>テキストフィールド書式： none | number | percentage | date | time</a:documentation>
+        <choice>
+          <name>axf:field-format-category</name>
+          <name>field-format-category</name>
+        </choice>
+        <choice>
+          <value>none</value>
+          <value>number</value>
+          <value>percentage</value>
+          <value>date</value>
+          <value>time</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-maxlen
+    @field-maxlen
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-maxlen
+  -->
+  <define name="axf_field-maxlen">
+    <optional>
+      <attribute>
+        <a:documentation>テキストフィールドに入力できるテキストの最大文字数： &lt;number&gt;</a:documentation>
+        <choice>
+          <name>axf:field-maxlen</name>
+          <name>field-maxlen</name>
+        </choice>
+        <data type="positiveInteger"/>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-multiline
+    @field-multiline
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-multiline
+  -->
+  <define name="axf_field-multiline">
+    <optional>
+      <attribute>
+        <a:documentation>テキストフィールドが単一行か複数行か： true | false</a:documentation>
+        <choice>
+          <name>axf:field-multiline</name>
+          <name>field-multiline</name>
+        </choice>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-multiple
+    @field-multiple
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-multiple
+  -->
+  <define name="axf_field-multiple">
+    <optional>
+      <attribute>
+        <a:documentation>リストボックスで、複数項目が選択可能かどうか：: true | false</a:documentation>
+        <choice>
+          <name>axf:field-multiple</name>
+          <name>field-multiple</name>
+        </choice>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-name
+    @field-name
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-name
+  -->
+  <define name="axf_field-name">
+    <optional>
+      <attribute>
+        <a:documentation>フィールドの名前： &lt;string&gt;</a:documentation>
+        <choice>
+          <name>axf:field-name</name>
+          <name>field-name</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-name-suffix-page-number
+    @field-name-suffix-page-number
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-name-suffix-page-number
+  -->
+  <define name="axf_field-name-suffix-page-number">
+    <optional>
+      <attribute>
+        <a:documentation>フィールドの名前にページ番号を付加する： &lt;string&gt;</a:documentation>
+        <choice>
+          <name>axf:field-name-suffix-page-number</name>
+          <name>field-name-suffix-page-number</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-scroll
+    @field-scroll
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-scroll
+  -->
+  <define name="axf_field-scroll">
+    <optional>
+      <attribute>
+        <a:documentation>テキストフィールドをスクロール可能にするかどうか： true | false</a:documentation>
+        <choice>
+          <name>axf:field-scroll</name>
+          <name>field-scroll</name>
+        </choice>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-text-align
+    @field-text-align
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-text-align
+  -->
+  <define name="axf_field-text-align">
+    <optional>
+      <attribute>
+        <a:documentation>テキストフィールドの配置： left | center | right</a:documentation>
+        <choice>
+          <name>axf:field-text-align</name>
+          <name>field-text-align</name>
+        </choice>
+        <choice>
+          <value>left</value>
+          <value>center</value>
+          <value>right</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:field-submit-coordinates
     @field-submit-coordinates
     
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-submit-coordinates
   -->
   <define name="axf_field-submit-coordinates">
-    <choice>
-      <attribute name="axf:field-submit-coordinates">
-        <a:documentation>サブミット時にマウスの座標を送出するかどうか： false | true</a:documentation>
-        <choice>
-          <value>false</value>
-          <value>true</value>
-        </choice>
-      </attribute>
-      <attribute name="field-submit-coordinates">
-        <a:documentation>サブミット時にマウスの座標を送出するかどうか： false | true</a:documentation>
-        <choice>
-          <value>false</value>
-          <value>true</value>
-        </choice>
-      </attribute>
-    </choice>
+    <attribute>
+      <a:documentation>サブミット時にマウスの座標を送出するかどうか： true | false</a:documentation>
+      <choice>
+        <name>axf:field-submit-coordinates</name>
+        <name>field-submit-coordinates</name>
+      </choice>
+      <choice>
+        <value>true</value>
+        <value>false</value>
+      </choice>
+    </attribute>
   </define>
   <!--
     @axf:field-submit-method
@@ -1872,22 +2630,78 @@
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-submit-method
   -->
   <define name="axf_field-submit-method">
-    <choice>
-      <attribute name="axf:field-submit-method">
-        <a:documentation>サブミット時の情報の送出方法： get | post</a:documentation>
+    <attribute>
+      <a:documentation>サブミット時の情報の送出方法： get | post</a:documentation>
+      <choice>
+        <name>axf:field-submit-method</name>
+        <name>field-submit-method</name>
+      </choice>
+      <choice>
+        <value>get</value>
+        <value>post</value>
+      </choice>
+    </attribute>
+  </define>
+  <!--
+    @axf:field-top-index
+    @field-top-index
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-top-index
+  -->
+  <define name="axf_field-top-index">
+    <optional>
+      <attribute>
+        <a:documentation>リストボックス、コンボボックスで、最初の選択項目： &lt;number&gt;</a:documentation>
         <choice>
-          <value>get</value>
-          <value>post</value>
+          <name>axf:field-top-index</name>
+          <name>field-top-index</name>
+        </choice>
+        <data type="positiveInteger">
+          <param name="minInclusive">1</param>
+        </data>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-type
+    @field-type
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-type
+  -->
+  <define name="axf_field-type">
+    <attribute>
+      <a:documentation>フィールドの種類： text | button | checkbox | radio | listbox | combobox | signature</a:documentation>
+      <choice>
+        <name>axf:field-type</name>
+        <name>field-type</name>
+      </choice>
+      <choice>
+        <value>text</value>
+        <value>button</value>
+        <value>checkbox</value>
+        <value>radio</value>
+        <value>listbox</value>
+        <value>combobox</value>
+        <value>signature</value>
+      </choice>
+    </attribute>
+  </define>
+  <!--
+    @axf:field-value
+    @field-value
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.field-value
+  -->
+  <define name="axf_field-value">
+    <optional>
+      <attribute>
+        <a:documentation>サブミット時などに使用される値： &lt;string&gt;</a:documentation>
+        <choice>
+          <name>axf:field-value</name>
+          <name>field-value</name>
         </choice>
       </attribute>
-      <attribute name="field-submit-method">
-        <a:documentation>サブミット時の情報の送出方法： get | post</a:documentation>
-        <choice>
-          <value>get</value>
-          <value>post</value>
-        </choice>
-      </attribute>
-    </choice>
+    </optional>
   </define>
   <!--
     @axf:float
@@ -2239,6 +3053,18 @@
     </optional>
   </define>
   <!--
+    @axf:keep-together-within-dimension
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.keep-together-within-dimension
+  -->
+  <define name="axf_keep-together-within-dimension">
+    <optional>
+      <attribute name="axf:keep-together-within-dimension">
+        <a:documentation>keep-together の上限高さ： auto | &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:layer-settings
     
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.layer-settings
@@ -2247,6 +3073,200 @@
     <optional>
       <attribute name="axf:layer-settings">
         <a:documentation>レイヤを定義します: none | &lt;layer-setting&gt;#</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-activation
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-activation
+  -->
+  <define name="axf_media-activation">
+    <optional>
+      <attribute name="axf:media-activation">
+        <a:documentation>リッチメディアを有効無効にするタイミング： [ ExplicitlyActivated | PageOpen | PageVisible ]?[ ExplicitlyDeactivated | PageClose | PageInvisible ]?</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-duration
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-duration
+  -->
+  <define name="axf_media-duration">
+    <optional>
+      <attribute name="axf:media-duration">
+        <a:documentation>マルチメディアの再生時間： intrinsic | infinity | &lt;number&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-extraction-policy
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-extraction-policy
+  -->
+  <define name="axf_media-extraction-policy">
+    <optional>
+      <attribute name="axf:media-extraction-policy">
+        <a:documentation>マルチメディアの再生時に一時ファイルを作成してもよいかどうか： tempnever | tempextract | tempaccess | tempalways</a:documentation>
+        <choice>
+          <value>tempnever</value>
+          <value>tempextract</value>
+          <value>tempaccess</value>
+          <value>tempalways</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-flash-context-menu
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-flash-context-menu
+  -->
+  <define name="axf_media-flash-context-menu">
+    <optional>
+      <attribute name="axf:media-flash-context-menu">
+        <a:documentation>リッチメディアに Flash を埋め込むとき、Flash のコンテキストメニューを表示するのかどうか： true | false</a:documentation>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-flash-vars
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-flash-vars
+  -->
+  <define name="axf_media-flash-vars">
+    <optional>
+      <attribute name="axf:media-flash-vars">
+        <a:documentation>リッチメディアに Flash を埋め込むときの変数： &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-play-mode
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-play-mode
+  -->
+  <define name="axf_media-play-mode">
+    <optional>
+      <attribute name="axf:media-play-mode">
+        <a:documentation>マルチメディアの再生回数： once | continuously | &lt;number&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-skin-auto-hide
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-skin-auto-hide
+  -->
+  <define name="axf_media-skin-auto-hide">
+    <optional>
+      <attribute name="axf:media-skin-auto-hide">
+        <a:documentation>リッチメディアのスキンを自動的に隠すかどうか： true | false</a:documentation>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-skin-color
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-skin-color
+  -->
+  <define name="axf_media-skin-color">
+    <optional>
+      <attribute name="axf:media-skin-color">
+        <a:documentation>リッチメディアのスキンの色： auto | &lt;color&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-skin-control
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-skin-control
+  -->
+  <define name="axf_media-skin-control">
+    <optional>
+      <attribute name="axf:media-skin-control">
+        <a:documentation>リッチメディアのスキンに表示するコントロール： none | all | [ play || stop || forward || rewind || seek || mute || volume ]</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-transparent-background
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-transparent-background
+  -->
+  <define name="axf_media-transparent-background">
+    <optional>
+      <attribute name="axf:media-transparent-background">
+        <a:documentation>リッチメディアに Flash を埋め込むとき、背景を透明にするかどうか： true | false</a:documentation>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-volume
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-volume
+  -->
+  <define name="axf_media-volume">
+    <optional>
+      <attribute name="axf:media-volume">
+        <a:documentation>マルチメディアの再生時の音量： &lt;percentage&gt; | &lt;number&gt; | auto</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-window-height
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-window-height
+  -->
+  <define name="axf_media-window-height">
+    <optional>
+      <attribute name="axf:media-window-height">
+        <a:documentation>リッチメディアのウィンドウの高さ： auto | &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:media-window-width
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.media-window-width
+  -->
+  <define name="axf_media-window-width">
+    <optional>
+      <attribute name="axf:media-window-width">
+        <a:documentation>リッチメディアのウィンドウの幅： auto | &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:multimedia-treatment
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.multimedia-treatment
+  -->
+  <define name="axf_multimedia-treatment">
+    <optional>
+      <attribute name="axf:multimedia-treatment">
+        <a:documentation>マルチメディアを PDF に埋め込むかどうか： auto | embed | absolute-link | relative-link | richmedia | richmedia-windowed</a:documentation>
+        <choice>
+          <value>auto</value>
+          <value>embed</value>
+          <value>absolute-link</value>
+          <value>relative-link</value>
+          <value>richmedia</value>
+          <value>richmedia-windowed</value>
+        </choice>
       </attribute>
     </optional>
   </define>
@@ -2384,7 +3404,7 @@
   <define name="axf_output-volume-break">
     <optional>
       <attribute name="axf:output-volume-break">
-        <a:documentation>このfo:page-sequenceが新しい冊を開始するかどうか： true | false</a:documentation>
+        <a:documentation>この fo:page-sequence が新しい冊を開始するかどうか： true | false</a:documentation>
         <choice>
           <value>true</value>
           <value>false</value>
@@ -2400,7 +3420,7 @@
   <define name="axf_output-volume-filename">
     <optional>
       <attribute name="axf:output-volume-filename">
-        <a:documentation>このfo:page-sequenceが新しい冊を開始するかどうか</a:documentation>
+        <a:documentation>この fo:page-sequence が新しい冊を開始するかどうか</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2412,7 +3432,7 @@
   <define name="axf_page-number-prefix">
     <optional>
       <attribute name="axf:page-number-prefix">
-        <a:documentation>ページ番号の前置を指定します。注：同様の機能がXSL1.1で用意しています。fo:folio-prefixを利用して下さい。</a:documentation>
+        <a:documentation>ページ番号の前置を指定します。注：同様の機能が XSL1.1 で用意しています。fo:folio-prefix を利用して下さい。</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2441,6 +3461,30 @@
           <value>true</value>
           <value>false</value>
         </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:poster-content-type
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.poster-content-type
+  -->
+  <define name="axf_poster-content-type">
+    <optional>
+      <attribute name="axf:poster-content-type">
+        <a:documentation>マルチメディア埋め込みのポスター画像のコンテントタイプ： &lt;string&gt; | auto</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:poster-image
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.poster-image
+  -->
+  <define name="axf_poster-image">
+    <optional>
+      <attribute name="axf:poster-image">
+        <a:documentation>マルチメディア埋め込みのポスター画像： &lt;uri-specification&gt; | none | auto</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2524,7 +3568,7 @@
   <define name="axf_printer-marks-zero-margin">
     <optional>
       <attribute name="axf:printer-marks-zero-margin">
-        <a:documentation>bleedが0のときの、版面とトンボの間のマージン： &lt;length&gt; | auto</a:documentation>
+        <a:documentation>bleed が 0 のときの、版面とトンボの間のマージン： &lt;length&gt; | auto</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2557,6 +3601,22 @@
     </optional>
   </define>
   <!--
+    @axf:repeat-page-sequence-master
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.repeat-page-sequence-master
+  -->
+  <define name="axf_repeat-page-sequence-master">
+    <optional>
+      <attribute name="axf:repeat-page-sequence-master">
+        <a:documentation>さらにページの fo:page-sequence-master を再起動するかどうか： true | false</a:documentation>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:reverse-diagonal-border-style
     
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.reverse-diagonal-border-style
@@ -2569,6 +3629,22 @@
     </optional>
   </define>
   <!--
+    @axf:reverse-page
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.reverse-page
+  -->
+  <define name="axf_reverse-page">
+    <optional>
+      <attribute name="axf:reverse-page">
+        <a:documentation>ページを逆順に出力するかどうか： true | false</a:documentation>
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:reverse-page-number
     
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.reverse-page-number
@@ -2576,7 +3652,7 @@
   <define name="axf_reverse-page-number">
     <optional>
       <attribute name="axf:reverse-page-number">
-        <a:documentation>ページを逆順に出力するかどうか： true | false</a:documentation>
+        <a:documentation>ページ番号を逆順に振るかどうか： true | false</a:documentation>
         <choice>
           <value>true</value>
           <value>false</value>
@@ -2600,6 +3676,22 @@
           <value>rowgroup</value>
           <value>colgroup</value>
           <value>both</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:show-controls
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.show-controls
+  -->
+  <define name="axf_show-controls">
+    <optional>
+      <attribute name="axf:show-controls">
+        <a:documentation>マルチメディアの再生コントロールバーを表示するかどうか： true | false</a:documentation>
+        <choice>
+          <value>true</value>
+          <value>false</value>
         </choice>
       </attribute>
     </optional>
@@ -2682,7 +3774,7 @@
   <define name="axf_table-summary">
     <optional>
       <attribute name="axf:table-summary">
-        <a:documentation>テーブルの要約を記述します。 タグ付きPDFに含まれます。</a:documentation>
+        <a:documentation>テーブルの要約を記述します。タグ付き PDF に含まれます。</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2694,7 +3786,7 @@
   <define name="axf_text-line-color">
     <optional>
       <attribute name="axf:text-line-color">
-        <a:documentation>Color of underline, strike-through, and overline: auto | &lt;color&gt;</a:documentation>
+        <a:documentation>下線、取消し線、上線の色： auto | &lt;color&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2706,7 +3798,7 @@
   <define name="axf_text-line-style">
     <optional>
       <attribute name="axf:text-line-style">
-        <a:documentation>Style of underline, strike-through, and overline: &lt;border-style&gt;</a:documentation>
+        <a:documentation>下線、取消し線、上線のスタイル： &lt;border-style&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2718,7 +3810,7 @@
   <define name="axf_text-line-width">
     <optional>
       <attribute name="axf:text-line-width">
-        <a:documentation>Width of underline, strike-through, and overline: auto | &lt;border-width&gt;</a:documentation>
+        <a:documentation>下線、取消し線、上線の太さ： auto | &lt;border-width&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2730,7 +3822,7 @@
   <define name="axf_text-underline-position">
     <optional>
       <attribute name="axf:text-underline-position">
-        <a:documentation>Position of underline: auto | [ [ before-edge | alphabetic | after-edge ] || [ &lt;percentage&gt; | &lt;length&gt; ] ]</a:documentation>
+        <a:documentation>下線の位置： auto | [ [ before-edge | alphabetic | after-edge ] || [ &lt;percentage&gt; | &lt;length&gt; ] ]</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2742,7 +3834,7 @@
   <define name="axf_text-overflow">
     <optional>
       <attribute name="axf:text-overflow">
-        <a:documentation>What to display when text overflows in the inline progression direction: clip | ellipsis | &lt;string&gt;</a:documentation>
+        <a:documentation>インライン方向にオーバーフローしたときの、内容末尾の表示方法： clip | ellipsis | &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>

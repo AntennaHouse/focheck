@@ -36,12 +36,23 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="dpi.model">
-    <xs:restriction base="xs:positiveInteger"/>
+    <xs:restriction base="xs:positiveInteger">
+      <xs:minInclusive value="1"/>
+    </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="jpeg-quality.model">
     <xs:restriction base="xs:positiveInteger">
       <xs:minInclusive value="1"/>
       <xs:maxInclusive value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="monochrome.compression.list">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="ccitt4"/>
+      <xs:enumeration value="ccitt3"/>
+      <xs:enumeration value="runlength"/>
+      <xs:enumeration value="zlib"/>
+      <xs:enumeration value="none"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="pass-through.model">
@@ -275,6 +286,7 @@
       <xs:attribute name="normalize" type="xs:NCName"/>
       <xs:attribute name="oblique-skew" type="xs:integer"/>
       <xs:attribute name="omit-uppercase-word-accents"/>
+      <xs:attribute name="output-area-id" type="axs:ah.boolean"/>
       <xs:attribute name="output-fo-tree" type="axs:ah.boolean"/>
       <xs:attribute name="overflow-limit-block" type="xs:NMTOKEN"/>
       <xs:attribute name="overflow-limit-inline" type="xs:NMTOKEN"/>
@@ -292,6 +304,15 @@
       <xs:attribute name="SeparatePrinterDuplexJob" type="axs:ah.boolean"/>
       <xs:attribute name="splitting-blocks-space" type="axs:ah.boolean"/>
       <xs:attribute name="SVGViewer" type="axs:ah.boolean"/>
+      <xs:attribute name="tab-overlap-treatment">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value=""/>
+            <xs:enumeration value="ignore-tab"/>
+            <xs:enumeration value="next-tab"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="table-auto-layout-limit" type="xs:integer"/>
       <xs:attribute name="table-is-reference-area" type="axs:ah.boolean"/>
       <xs:attribute name="text-autospace" type="axs:ah.boolean"/>
@@ -301,12 +322,28 @@
       <xs:attribute name="text-justify-mode" type="xs:integer"/>
       <xs:attribute name="text-kashida-space"/>
       <xs:attribute name="text-orientation-mode" type="xs:integer"/>
+      <xs:attribute name="textshadow-blur-cannot-embed-font" type="axs:ah.boolean">
+        <xs:annotation>
+          <xs:documentation>Whether to apply blur to a font that is not allowed to be embedded: false | true</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="textshadow-resolution-minimum-dpi" type="axs:dpi.model">
+        <xs:annotation>
+          <xs:documentation>Minimum resolution of the image when applying blur in text-shadow: &lt;positive-integer&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="textshadow-resolution-pixel-per-em" type="axs:dpi.model">
+        <xs:annotation>
+          <xs:documentation>Image resolution when applying blur in text-shadow: &lt;positive-integer&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="text-underline-mode" type="xs:integer"/>
       <xs:attribute name="thin-space-width"/>
       <xs:attribute name="two-pass-formatting" type="axs:ah.boolean"/>
       <xs:attribute name="use-default-page-margin-CSS" type="axs:ah.boolean"/>
       <xs:attribute name="use-default-page-margin-XSL" type="axs:ah.boolean"/>
       <xs:attribute name="vertical-block-width-mode" type="xs:integer"/>
+      <xs:attribute name="vertical-coloring-text"/>
       <xs:attribute name="vertical-underline-side" type="xs:NCName"/>
       <xs:attribute name="viewport-length-units-mode" type="xs:integer"/>
       <xs:attribute name="WindowsFontAPI"/>
@@ -331,10 +368,14 @@
       <xs:sequence>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="axs:script-font">
           <xs:annotation>
-            <xs:documentation>Generic font mapping for a script</xs:documentation>
+            <xs:documentation>Mapping from generic font to actual font for a script</xs:documentation>
           </xs:annotation>
         </xs:element>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="axs:font-alias"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="axs:font-alias">
+          <xs:annotation>
+            <xs:documentation>Alias one font name to another</xs:documentation>
+          </xs:annotation>
+        </xs:element>
       </xs:sequence>
       <xs:attribute name="auto-fallback-font" type="axs:ah.boolean"/>
       <xs:attribute name="barcode-text-font">
@@ -378,10 +419,21 @@
       </xs:attribute>
       <xs:attribute name="font-selection-strategy" type="xs:NCName"/>
       <xs:attribute name="font-stretch-mode" type="xs:integer"/>
-      <xs:attribute name="missing-font" type="xs:integer"/>
+      <xs:attribute name="missing-font">
+        <xs:annotation>
+          <xs:documentation>Whether to warn when font not found: [ 0 = no message; 1 = level 1 error message; 2 = level 2 error message ]</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="missing-glyph">
         <xs:annotation>
-          <xs:documentation>Whether to warn when glyph not found: [ = no message; 1 = level 1 error message; 2 = level 2 error message</xs:documentation>
+          <xs:documentation>Whether to warn when glyph not found: [ 0 = no message; 1 = level 1 error message; 2 = level 2 error message ]</xs:documentation>
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:token">
@@ -472,11 +524,19 @@
     <xs:attribute name="certificate-name" type="xs:NCName"/>
     <xs:attribute name="color-compression" type="axs:compression.list">
       <xs:annotation>
-        <xs:documentation>Compression method of the data stored in a PDF file</xs:documentation>
+        <xs:documentation>Compression method for color image transformed into bitmap in PDF file: auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="color-compression-default" type="axs:compression.list"/>
-    <xs:attribute name="color-compression-minimum" type="axs:compression.list"/>
+    <xs:attribute name="color-compression-default" type="axs:compression.list">
+      <xs:annotation>
+        <xs:documentation>Compression method for color image transformed into bitmap in PDF file: auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="color-compression-minimum" type="axs:compression.list">
+      <xs:annotation>
+        <xs:documentation>Compression method for color image transformed into bitmap in PDF file: auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="color-conversion">
       <xs:annotation>
         <xs:documentation>How to convert the RGB or CMYK color space to DeviceGray or DeviceCMYK: none | black | gray | all-gray | all-cmyk</xs:documentation>
@@ -558,9 +618,13 @@
       <xs:simpleType>
         <xs:restriction base="xs:token">
           <xs:enumeration value="40rc4"/>
+          <xs:enumeration value="40RC4"/>
           <xs:enumeration value="128rc4"/>
+          <xs:enumeration value="128RC4"/>
           <xs:enumeration value="128aes"/>
+          <xs:enumeration value="128AES"/>
           <xs:enumeration value="256aes"/>
+          <xs:enumeration value="256AES"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -612,10 +676,18 @@
     <xs:attribute name="joboptions"/>
     <xs:attribute name="jpeg-quality" type="xs:integer"/>
     <xs:attribute name="linearized" type="axs:ah.boolean"/>
-    <xs:attribute name="monochrome-compression" type="xs:NCName"/>
-    <xs:attribute name="monochrome-downsampling" type="xs:NCName"/>
+    <xs:attribute name="monochrome-compression" type="axs:monochrome.compression.list"/>
+    <xs:attribute name="monochrome-compression-default" type="axs:monochrome.compression.list"/>
+    <xs:attribute name="monochrome-compression-minimum" type="axs:monochrome.compression.list"/>
+    <xs:attribute name="monochrome-downsampling" type="axs:downsampling.list"/>
     <xs:attribute name="monochrome-downsampling-above-dpi" type="axs:dpi.model"/>
     <xs:attribute name="monochrome-downsampling-target-dpi" type="axs:dpi.model"/>
+    <xs:attribute name="monochrome-downsampling-default" type="axs:downsampling.list"/>
+    <xs:attribute name="monochrome-downsampling-above-dpi-default" type="axs:dpi.model"/>
+    <xs:attribute name="monochrome-downsampling-target-dpi-default" type="axs:dpi.model"/>
+    <xs:attribute name="monochrome-downsampling-minimum" type="axs:downsampling.list"/>
+    <xs:attribute name="monochrome-downsampling-above-dpi-minimum" type="axs:dpi.model"/>
+    <xs:attribute name="monochrome-downsampling-target-dpi-minimum" type="axs:dpi.model"/>
     <xs:attribute name="multimedia-treatment">
       <xs:annotation>
         <xs:documentation>Whether to embed multimedia in PDF when axf:multimedia-treatment="auto": embed | absolute-link | relative-link | richmedia | richmedia-windowed</xs:documentation>
@@ -652,14 +724,29 @@
     <xs:attribute name="pdf-version" type="axs:pdf-version.list"/>
     <xs:attribute name="printing-allowed" type="xs:NCName"/>
     <xs:attribute name="rasterize-resolution" type="xs:integer"/>
+    <xs:attribute name="real-value-limit">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="0"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="2"/>
+          <xs:enumeration value="3"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="real-value-limit-modify" type="axs:ah.boolean"/>
     <xs:attribute name="reverse-page" type="axs:ah.boolean"/>
     <xs:attribute name="rgb-conversion" type="xs:NCName"/>
     <xs:attribute name="signature" type="axs:ah.boolean"/>
     <xs:attribute name="signature-name" type="xs:NCName"/>
     <xs:attribute name="tagged-pdf" type="axs:ah.boolean"/>
     <xs:attribute name="text-and-lineart-compression" type="axs:ah.boolean"/>
+    <xs:attribute name="text-and-lineart-compression-default" type="axs:ah.boolean"/>
+    <xs:attribute name="text-and-lineart-compression-minimum" type="axs:ah.boolean"/>
+    <xs:attribute name="transparency" type="axs:ah.boolean"/>
     <xs:attribute name="transparency-color-space" type="xs:NCName"/>
-    <xs:attribute name="use-launch-for-relative-uri" type="axs:ah.boolean"/>
+    <xs:attribute name="use-launch-for-local-file" type="axs:ah.boolean"/>
+    <xs:attribute name="user-password"/>
   </xs:attributeGroup>
   <xs:complexType name="pdf-settings.model">
     <xs:sequence>
