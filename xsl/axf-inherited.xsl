@@ -111,7 +111,7 @@
 <property name="axf:assumed-page-number" model="text" description="Assumed page number" />
 <property name="axf:avoid-widow-words" model="'true' | 'false'" description="Spacing behavior between words or characters so that the last line of the paragraph does not have only one word left (one character for CJK)" />
 <property name="axf:base-uri" model="text" description="Location which becomes the base of relative URI" />
-<property name="axf:border-double-width" model="text" description="Line thickness of border-style=&quot;double&quot;" />
+<property name="axf:border-double-thickness" model="text" description="Line thickness of border-style=&quot;double&quot;" />
 <property name="axf:border-connection-form" model="'mixed' | 'precedence' | 'wedge'" description="Shape of border connections" />
 <property name="axf:border-wave-form" model="text" description="Wave form for border-style=&quot;wave&quot;" />
 <property name="axf:diagonal-border-color" model="text" description="Color of the diagonal border" />
