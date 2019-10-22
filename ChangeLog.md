@@ -1,3 +1,9 @@
+# focheck 0.7.4
+
+- Able to add percent and length (#39) or percent and percent.
+- Corrected `axf:border-double-width` to `axf:border-double-thickness`.
+- Added `axf:footnote-number-reset`.
+
 # focheck 0.7.3
 
 - `axf:background-content-height` and `axf:background-content-width` should not be used with AH Formatter V6.6 or later.
@@ -11,13 +17,8 @@
 - Added elements and attributes: `<axf:space-between-digit-and-punctuation>`, `<axf:space-between-punctuation-and-digit>`, `<axf:space-end-punctuation>`, `<axf:space-start-punctuation>`, `axf:box-shadow`, `axf:box-shadow`, `axf:background-color`, `axf:background-image`, `axf:background-position-horizontal`, `axf:background-position-vertical`, `axf:background-repeat`.
 - Schematron rules for `axf:media-duration`, `axf:media-play-mode`, `axf:media-skin-color`, `axf:media-volume`, `axf:media-window-height`, `axf:media-window-width`, `axf:poster-content-type`, and `axf:poster-image`.
 - Added `<axf:font-face>`.
-<<<<<<< HEAD
-- Added more properties for forms in PDF: `axf:field-checked`, `axf:field-checked-style`, `axf:field-default-text`, `axf:field-description`, `axf:field-editable`, `axf:field-flags`, `axf:field-maxlen`, `axf:field-multiline`, `axf:field-multiple`, `axf:field-name`, `axf:field-scroll`, `axf:field-top-index`, `axf:field-type`, and `axf:field-value`, `axf_field-button-face-down`, `axf_field-button-face-rollover`, `axf_field-button-icon`, `axf_field-button-icon-down`, `axf_field-button-icon-rollover`, `axf_field-button-layout`, `axf_field-font-size`, `axf_field-name-suffix-page-number`, and `axf_field-text-align`.
-- Added multimedia properties: `axf_media-activation`, `axf_media-duration`, `axf_media-extraction-policy`, `axf_media-flash-context-menu`, `axf_media-flash-vars`, `axf_media-play-mode`, `axf_media-skin-auto-hide`, `axf_media-skin-color`, `axf_media-skin-control`, `axf_media-transparent-background`, `axf_media-volume`, `axf_media-window-height`, `axf_media-window-width`, `axf_multimedia-treatment`, `axf_poster-content-type`, `axf_poster-image`, `axf_show-controls`.
-=======
 - Added more properties for forms in PDF: `axf:field-checked`, `axf:field-checked-style`, `axf:field-default-text`, `axf:field-description`, `axf:field-editable`, `axf:field-flags`, `axf:field-maxlen`, `axf:field-multiline`, `axf:field-multiple`, `axf:field-name`, `axf:field-scroll`, `axf:field-top-index`, `axf:field-type`, and `axf:field-value`, `axf:field-button-face-down`, `axf:field-button-face-rollover`, `axf:field-button-icon`, `axf:field-button-icon-down`, `axf:field-button-icon-rollover`, `axf:field-button-layout`, `axf:field-font-size`, `axf:field-name-suffix-page-number`, and `axf:field-text-align`.
 - Added multimedia properties: `axf:media-activation`, `axf:media-duration`, `axf:media-extraction-policy`, `axf:media-flash-context-menu`, `axf:media-flash-vars`, `axf:media-play-mode`, `axf:media-skin-auto-hide`, `axf:media-skin-color`, `axf:media-skin-control`, `axf:media-transparent-background`, `axf:media-volume`, `axf:media-window-height`, `axf:media-window-width`, `axf:multimedia-treatment`, `axf:poster-content-type`, `axf:poster-image`, `axf:show-controls`.
->>>>>>> Releasing focheck 0.7.3.
 - Added `axf:text-stroke`, `axf:text-stroke-color`, `axf:text-stroke-width`. `text-shadow` is an inherited property in AH Formatter.
 - Link to GitHub in add-on files.
 - 'ahfsettings' project renamed its `ahfsettings.rnc` as `axs.rnc`.

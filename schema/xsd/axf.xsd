@@ -2536,6 +2536,28 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:footnote-number-reset
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-number-reset
+  -->
+  <xs:attributeGroup name="axf_footnote-number-reset">
+    <xs:attribute name="footnote-number-reset" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Boundary at which to reset footnote numbering.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="odd-page"/>
+          <xs:enumeration value="even-page"/>
+          <xs:enumeration value="column"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:footnote-stacking
     
     https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-stacking

@@ -2360,6 +2360,7 @@
    <xsl:template match="fo:*/@border-after-color" priority="1234" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-after-color"/>
+      <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
@@ -2696,6 +2697,7 @@
    <xsl:template match="fo:*/@border-before-color" priority="1230" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-before-color"/>
+      <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
@@ -3050,6 +3052,7 @@
    <xsl:template match="fo:*/@border-bottom-color" priority="1225" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-bottom-color"/>
+      <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
@@ -3403,6 +3406,7 @@
    <xsl:template match="fo:*/@border-end-color" priority="1220" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-end-color"/>
+      <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
@@ -3757,6 +3761,7 @@
    <xsl:template match="fo:*/@border-left-color" priority="1215" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-left-color"/>
+      <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
@@ -4033,6 +4038,7 @@
    <xsl:template match="fo:*/@border-right-color" priority="1211" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-right-color"/>
+      <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
@@ -4387,6 +4393,7 @@
    <xsl:template match="fo:*/@border-start-color" priority="1206" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-start-color"/>
+      <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
@@ -4759,6 +4766,7 @@
    <xsl:template match="fo:*/@border-top-color" priority="1200" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-top-color"/>
+      <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
@@ -19195,6 +19203,7 @@
                  mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:line-number-background-color"/>
+      <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->

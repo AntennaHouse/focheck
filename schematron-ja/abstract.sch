@@ -17,12 +17,38 @@
 
   <!-- <color> | transparent | inherit -->
   <rule abstract="true" id="color-transparent">
+    <let name="context" value="."></let>
     <let name="expression" value="ahf:parser-runner(.)"></let>
     <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; は Color、transparent 又は inherit でなければなりません。<value-of select="."/> は <value-of select="local-name($expression)"/> です。</assert>
     <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; のトークンは transparent 又は inherit でなければなりません。EnumerationToken は <value-of select="$expression/@token"/> です。</report>
     <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()"/>=&quot;&quot;は Color、transparent、inherit でなければなりません。</report>
     <report test="local-name($expression) = 'ERROR'">シンタックスエラー： <value-of select="name()"/>=&quot;<value-of select="."/>&quot;</report>
+    <!-- <report test="$expression instance of element(EnumerationToken) and $expression/@token = ('fuschia', 'fucshia')" sqf:fix="color-fuchsia-fix"><value-of select="name()" />="<value-of select="."/>" should be 'fuchsia'.</report> -->
+    <!-- <sqf:fix id="color-fuchsia-fix"> -->
+    <!--     <sqf:param name="context" abstract="true" /> -->
+    <!--     <sqf:description> -->
+    <!--         <sqf:title>Change @<!-\- <value-of select="name($context)" /> -\-> to 'fuchsia'</sqf:title> -->
+    <!-- 	</sqf:description> -->
+    <!-- 	<sqf:replace node-type="attribute" target="color" select="'fuchsia'"/> -->
+    <!-- </sqf:fix> -->
   </rule>
+
+  <!-- <color> | transparent | inherit -->
+  <!-- <rule abstract="true" id="color-transparent2"> -->
+  <!--   <let name="expression" value="ahf:parser-runner(.)"/> -->
+  <!--   <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()" />="<value-of select="."/>" should be Color, 'transparent', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert> -->
+  <!--   <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))"><value-of select="name()" />="<value-of select="."/>" token should be 'transparent' or 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report> -->
+  <!--   <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()" />="" should be Color, 'transparent', or 'inherit'.</report> -->
+  <!--   <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="name()" />="<value-of select="."/>"</report> -->
+  <!--   <report test="$expression instance of element(EnumerationToken) and $expression/@token = ('fuschia', 'fucshia')" sqf:fix="color-fuchsia-fix"><value-of select="name()" />="<value-of select="."/>" should be 'fuchsia'.</report> -->
+  <!--   <sqf:fix id="color-fuchsia-fix"> -->
+  <!--       <sqf:param name="context" abstract="true" /> -->
+  <!--       <sqf:description> -->
+  <!--           <sqf:title>Change @<!-\- <value-of select="name($context)" /> -\-> to 'fuchsia'</sqf:title> -->
+  <!-- 	</sqf:description> -->
+  <!-- 	<sqf:replace node-type="attribute" target="color" select="'fuchsia'"/> -->
+  <!--   </sqf:fix> -->
+  <!-- </rule> -->
 
   <!-- border-style -->
   <!-- <border-style> | inherit -->

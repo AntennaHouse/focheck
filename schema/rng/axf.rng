@@ -841,6 +841,7 @@
     <ref name="axf_background-position-vertical"/>
     <ref name="axf_background-repeat"/>
     <ref name="axf_background-size"/>
+    <ref name="axf_footnote-number-reset"/>
     <ref name="axf_output-volume-break"/>
     <ref name="axf_output-volume-filename"/>
     <ref name="axf_page-number-prefix"/>
@@ -2954,6 +2955,26 @@
           <value>auto</value>
           <value>before</value>
           <value>after</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:footnote-number-reset
+    
+    https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-number-reset
+  -->
+  <define name="axf_footnote-number-reset">
+    <optional>
+      <attribute name="axf:footnote-number-reset">
+        <a:documentation>Boundary at which to reset footnote numbering.</a:documentation>
+        <choice>
+          <value>auto</value>
+          <value>none</value>
+          <value>page</value>
+          <value>odd-page</value>
+          <value>even-page</value>
+          <value>column</value>
         </choice>
       </attribute>
     </optional>

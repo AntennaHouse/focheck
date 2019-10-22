@@ -489,6 +489,7 @@ fo_page-sequence.attlist &=
   axf_background-position-vertical,
   axf_background-repeat,
   axf_background-size,
+  axf_footnote-number-reset,
   axf_output-volume-break,
   axf_output-volume-filename,
   axf_page-number-prefix,
@@ -1694,6 +1695,15 @@ axf_footnote-align =
   
   ## 脚注の配置を指定します。 
   attribute axf:footnote-align { "auto" | "before" | "after" }?
+# @axf:footnote-number-reset
+# 
+# https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-number-reset
+axf_footnote-number-reset =
+  
+  ## Boundary at which to reset footnote numbering.
+  attribute axf:footnote-number-reset {
+    "auto" | "none" | "page" | "odd-page" | "even-page" | "column"
+  }?
 # @axf:footnote-stacking
 # 
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.footnote-stacking
