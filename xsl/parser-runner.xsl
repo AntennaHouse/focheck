@@ -322,6 +322,13 @@ else for $node in $parse-tree/* return ahf:reduce-tree($node)" />
                       $term2 instance of element(Length)">
         <Length />
       </xsl:when>
+      <xsl:when test="$term1 instance of element(Percent) and
+                      $term2 instance of element(Length)
+                      or
+                      $term1 instance of element(Length) and
+                      $term2 instance of element(Percent)">
+        <Length />
+      </xsl:when>
       <xsl:when test="$term1 instance of element(Number) and
                       $term2 instance of element(Number)">
         <Number>
