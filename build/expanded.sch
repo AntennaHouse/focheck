@@ -15,6 +15,7 @@
 --><schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sqf="http://www.schematron-quickfix.com/validator/process" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
     <xsl:key name="flow-name" match="fo:flow | fo:static-content" use="@flow-name"/>
     <xsl:key name="index-key" match="*[exists(@index-key)]" use="@index-key"/>
+    <xsl:key name="marker-class-name" match="fo:marker" use="@marker-class-name"/>
     <xsl:key name="master-name" match="fo:simple-page-master | fo:page-sequence-master |       axf:spread-page-master" use="@master-name"/>
     <xsl:key name="region-name" match="fo:region-before | fo:region-after |       fo:region-start | fo:region-end |       fo:region-body | axf:spread-region" use="@region-name"/>
 
@@ -209,9 +210,9 @@
     </sqf:fix>
   </rule>
 
-  <rule context="fo:*/@column-width">
+  <rule context="fo:*/@column-width[exists(../@number-columns-spanned)]">
     <let name="number-columns-spanned" value="ahf:parser-runner(../@number-columns-spanned)"/>
-    <report test="exists(../@number-columns-spanned) and     local-name($number-columns-spanned) = 'Number' and                   (exists($number-columns-spanned/@value) and      number($number-columns-spanned/@value) &gt;= 1.5)" id="column-width" role="Warning"><value-of select="name()"/> is ignored with 'number-columns-spanned' is present and has a value greater than 1.</report>
+    <report test="local-name($number-columns-spanned) = 'Number' and                   (exists($number-columns-spanned/@value) and      number($number-columns-spanned/@value) &gt;= 1.5)" id="column-width" role="Warning"><value-of select="name()"/> is ignored with 'number-columns-spanned' is present and has a value greater than 1.</report>
   </rule>
 
   <rule context="fo:*/@flow-map-reference">
@@ -297,6 +298,11 @@
     <assert test="count(ancestor::fo:flow-map//fo:region-name-specifier/@region-name-reference[. eq current()]) = 1">region-name-reference="<value-of select="."/>" must be unique within its fo:flow-map.</assert>
   </rule>
 
+   <!-- retrieve-class-name -->
+   <rule context="fo:*/@retrieve-class-name">
+      <assert test="exists(key('marker-class-name', .))" role="Warning"><value-of select="local-name()"/>="<value-of select="."/>" does not refer to an existing fo:marker.</assert>
+   </rule>
+
   <rule context="fo:*/@span">
     <!-- https://www.w3.org/TR/xsl11/#span -->
     <report test="exists(ancestor::fo:static-content)" sqf:fix="span_fix" role="warning">@span has effect only on areas returned by an fo:flow.</report>
@@ -311,7 +317,6 @@
 </pattern><?DSDL_INCLUDE_END fo-fo.sch?>
     <?DSDL_INCLUDE_START fo-property.sch?><pattern xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" id="fo-property">
    <xsl:include href="file:/E:/Projects/oxygen/focheck-internal/focheck/xsl/parser-runner.xsl"/>
-
    <!-- absolute-position -->
    <!-- auto | absolute | fixed | inherit -->
    <!-- Inherited: no -->
@@ -325,7 +330,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: absolute-position="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- active-state -->
    <!-- link | visited | active | hover | focus -->
    <!-- Inherited: no -->
@@ -339,7 +343,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: active-state="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- alignment-adjust -->
    <!-- auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical | <percentage> | <length> | inherit -->
    <!-- Inherited: no -->
@@ -353,7 +356,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: alignment-adjust="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- alignment-baseline -->
    <!-- auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical | inherit -->
    <!-- Inherited: no -->
@@ -367,7 +369,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: alignment-baseline="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- allowed-height-scale -->
    <!-- [ any | <percentage> ]* | inherit -->
    <!-- Inherited: yes -->
@@ -376,7 +377,6 @@
    <rule context="fo:*/@allowed-height-scale">
       <report test=". eq ''" role="Warning">allowed-height-scale="" should be '[ any | &lt;percentage&gt; ]* | inherit'.</report>
    </rule>
-
    <!-- allowed-width-scale -->
    <!-- [ any | <percentage> ]* | inherit -->
    <!-- Inherited: yes -->
@@ -385,7 +385,6 @@
    <rule context="fo:*/@allowed-width-scale">
       <report test=". eq ''" role="Warning">allowed-width-scale="" should be '[ any | &lt;percentage&gt; ]* | inherit'.</report>
    </rule>
-
    <!-- auto-restore -->
    <!-- true | false -->
    <!-- Inherited: yes -->
@@ -399,7 +398,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: auto-restore="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- background -->
    <!-- [<background-color> || <background-image> || <background-repeat> || <background-attachment> || <background-position> ]] | inherit -->
    <!-- Inherited: no -->
@@ -408,7 +406,6 @@
    <rule context="fo:*/@background">
       <report test=". eq ''" role="Warning">background="" should be '[&lt;background-color&gt; || &lt;background-image&gt; || &lt;background-repeat&gt; || &lt;background-attachment&gt; || &lt;background-position&gt; ]] | inherit'.</report>
    </rule>
-
    <!-- background-attachment -->
    <!-- scroll | fixed | inherit -->
    <!-- Inherited: no -->
@@ -422,7 +419,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-attachment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- background-color -->
    <!-- <color> | transparent | inherit -->
    <!-- Inherited: no -->
@@ -436,7 +432,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-color="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- background-image -->
    <!-- <uri-specification> | none | inherit -->
    <!-- Inherited: no -->
@@ -445,7 +440,6 @@
    <rule context="fo:*/@background-image">
       <report test=". eq ''" role="Warning">background-image="" should be '&lt;uri-specification&gt; | none | inherit'.</report>
    </rule>
-
    <!-- background-position -->
    <!-- [ [<percentage> | <length> ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit -->
    <!-- Inherited: no -->
@@ -454,7 +448,6 @@
    <rule context="fo:*/@background-position">
       <report test=". eq ''" role="Warning">background-position="" should be '[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit'.</report>
    </rule>
-
    <!-- background-position-horizontal -->
    <!-- <percentage> | <length> | left | center | right | inherit -->
    <!-- Inherited: no -->
@@ -468,7 +461,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-position-horizontal="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- background-position-vertical -->
    <!-- <percentage> | <length> | top | center | bottom | inherit -->
    <!-- Inherited: no -->
@@ -482,7 +474,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-position-vertical="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- background-repeat -->
    <!-- repeat | repeat-x | repeat-y | no-repeat | inherit -->
    <!-- Inherited: no -->
@@ -496,7 +487,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-repeat="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- baseline-shift -->
    <!-- baseline | sub | super | <percentage> | <length> | inherit -->
    <!-- Inherited: no -->
@@ -510,7 +500,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: baseline-shift="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- blank-or-not-blank -->
    <!-- blank | not-blank | any | inherit -->
    <!-- Inherited: no -->
@@ -524,7 +513,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: blank-or-not-blank="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- block-progression-dimension -->
    <!-- auto | <length> | <percentage> | <length-range> | inherit -->
    <!-- Inherited: no -->
@@ -538,7 +526,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: block-progression-dimension="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- border -->
    <!-- [ <border-width> || <border-style> || [ <color> | transparent ] ] | inherit -->
    <!-- Inherited: no -->
@@ -547,7 +534,6 @@
    <rule context="fo:*/@border">
       <report test=". eq ''" role="Warning">border="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</report>
    </rule>
-
    <!-- border-after-color -->
    <!-- <color> | transparent | inherit -->
    <!-- Inherited: no -->
@@ -556,7 +542,6 @@
    <rule context="fo:*/@border-after-color">
       <extends rule="color-transparent"/>
    </rule>
-
    <!-- border-after-precedence -->
    <!-- force | <integer> | inherit -->
    <!-- Inherited: no -->
@@ -570,7 +555,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-after-precedence="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- border-after-style -->
    <!-- <border-style> | inherit -->
    <!-- Inherited: no -->
@@ -579,7 +563,6 @@
    <rule context="fo:*/@border-after-style">
       <extends rule="border-style"/>
    </rule>
-
    <!-- border-after-width -->
    <!-- <border-width> | <length-conditional> | inherit -->
    <!-- Inherited: no -->
@@ -588,7 +571,6 @@
    <rule context="fo:*/@border-after-width">
       <extends rule="border-width"/>
    </rule>
-
    <!-- border-before-color -->
    <!-- <color> | transparent | inherit -->
    <!-- Inherited: no -->
@@ -597,7 +579,6 @@
    <rule context="fo:*/@border-before-color">
       <extends rule="color-transparent"/>
    </rule>
-
    <!-- border-before-precedence -->
    <!-- force | <integer> | inherit -->
    <!-- Inherited: no -->
@@ -611,7 +592,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-before-precedence="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- border-before-style -->
    <!-- <border-style> | inherit -->
    <!-- Inherited: no -->
@@ -620,7 +600,6 @@
    <rule context="fo:*/@border-before-style">
       <extends rule="border-style"/>
    </rule>
-
    <!-- border-before-width -->
    <!-- <border-width> | <length-conditional> | inherit -->
    <!-- Inherited: no -->
@@ -629,7 +608,6 @@
    <rule context="fo:*/@border-before-width">
       <extends rule="border-width"/>
    </rule>
-
    <!-- border-bottom -->
    <!-- [ <border-width> || <border-style> || [ <color> | transparent ] ] | inherit -->
    <!-- Inherited: no -->
@@ -638,7 +616,6 @@
    <rule context="fo:*/@border-bottom">
       <report test=". eq ''" role="Warning">border-bottom="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</report>
    </rule>
-
    <!-- border-bottom-color -->
    <!-- <color> | transparent | inherit -->
    <!-- Inherited: no -->
@@ -647,7 +624,6 @@
    <rule context="fo:*/@border-bottom-color">
       <extends rule="color-transparent"/>
    </rule>
-
    <!-- border-bottom-style -->
    <!-- <border-style> | inherit -->
    <!-- Inherited: no -->
@@ -656,7 +632,6 @@
    <rule context="fo:*/@border-bottom-style">
       <extends rule="border-style"/>
    </rule>
-
    <!-- border-bottom-width -->
    <!-- <border-width> | inherit -->
    <!-- Inherited: no -->
@@ -665,7 +640,6 @@
    <rule context="fo:*/@border-bottom-width">
       <extends rule="border-width"/>
    </rule>
-
    <!-- border-collapse -->
    <!-- collapse | collapse-with-precedence | separate | inherit -->
    <!-- Inherited: yes -->
@@ -679,7 +653,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-collapse="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- border-color -->
    <!-- [ <color> | transparent ]{1,4} | inherit -->
    <!-- Inherited: no -->
@@ -688,7 +661,6 @@
    <rule context="fo:*/@border-color">
       <report test=". eq ''" role="Warning">border-color="" should be '[ &lt;color&gt; | transparent ]{1,4} | inherit'.</report>
    </rule>
-
    <!-- border-end-color -->
    <!-- <color> | transparent | inherit -->
    <!-- Inherited: no -->
@@ -697,7 +669,6 @@
    <rule context="fo:*/@border-end-color">
       <extends rule="color-transparent"/>
    </rule>
-
    <!-- border-end-precedence -->
    <!-- force | <integer> | inherit -->
    <!-- Inherited: no -->
@@ -711,7 +682,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-end-precedence="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- border-end-style -->
    <!-- <border-style> | inherit -->
    <!-- Inherited: no -->
@@ -720,7 +690,6 @@
    <rule context="fo:*/@border-end-style">
       <extends rule="border-style"/>
    </rule>
-
    <!-- border-end-width -->
    <!-- <border-width> | <length-conditional> | inherit -->
    <!-- Inherited: no -->
@@ -729,7 +698,6 @@
    <rule context="fo:*/@border-end-width">
       <extends rule="border-width"/>
    </rule>
-
    <!-- border-left -->
    <!-- [ <border-width> || <border-style> || [ <color> | transparent ] ] | inherit -->
    <!-- Inherited: no -->
@@ -738,7 +706,6 @@
    <rule context="fo:*/@border-left">
       <report test=". eq ''" role="Warning">border-left="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</report>
    </rule>
-
    <!-- border-left-color -->
    <!-- <color> | transparent | inherit -->
    <!-- Inherited: no -->
@@ -747,7 +714,6 @@
    <rule context="fo:*/@border-left-color">
       <extends rule="color-transparent"/>
    </rule>
-
    <!-- border-left-style -->
    <!-- <border-style> | inherit -->
    <!-- Inherited: no -->
@@ -756,7 +722,6 @@
    <rule context="fo:*/@border-left-style">
       <extends rule="border-style"/>
    </rule>
-
    <!-- border-left-width -->
    <!-- <border-width> | inherit -->
    <!-- Inherited: no -->
@@ -765,7 +730,6 @@
    <rule context="fo:*/@border-left-width">
       <extends rule="border-width"/>
    </rule>
-
    <!-- border-right -->
    <!-- [ <border-width> || <border-style> || [ <color> | transparent ] ] | inherit -->
    <!-- Inherited: no -->
@@ -774,7 +738,6 @@
    <rule context="fo:*/@border-right">
       <report test=". eq ''" role="Warning">border-right="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</report>
    </rule>
-
    <!-- border-right-color -->
    <!-- <color> | transparent | inherit -->
    <!-- Inherited: no -->
@@ -783,7 +746,6 @@
    <rule context="fo:*/@border-right-color">
       <extends rule="color-transparent"/>
    </rule>
-
    <!-- border-right-style -->
    <!-- <border-style> | inherit -->
    <!-- Inherited: no -->
@@ -792,7 +754,6 @@
    <rule context="fo:*/@border-right-style">
       <extends rule="border-style"/>
    </rule>
-
    <!-- border-right-width -->
    <!-- <border-width> | inherit -->
    <!-- Inherited: no -->
@@ -801,7 +762,6 @@
    <rule context="fo:*/@border-right-width">
       <extends rule="border-width"/>
    </rule>
-
    <!-- border-separation -->
    <!-- <length-bp-ip-direction> | inherit -->
    <!-- Inherited: yes -->
@@ -815,7 +775,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-separation="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- border-spacing -->
    <!-- <length> <length>? | inherit -->
    <!-- Inherited: yes -->
@@ -824,7 +783,6 @@
    <rule context="fo:*/@border-spacing">
       <report test=". eq ''" role="Warning">border-spacing="" should be '&lt;length&gt; &lt;length&gt;? | inherit'.</report>
    </rule>
-
    <!-- border-start-color -->
    <!-- <color> | transparent | inherit -->
    <!-- Inherited: no -->
@@ -833,7 +791,6 @@
    <rule context="fo:*/@border-start-color">
       <extends rule="color-transparent"/>
    </rule>
-
    <!-- border-start-precedence -->
    <!-- force | <integer> | inherit -->
    <!-- Inherited: no -->
@@ -847,7 +804,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-start-precedence="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- border-start-style -->
    <!-- <border-style> | inherit -->
    <!-- Inherited: no -->
@@ -856,7 +812,6 @@
    <rule context="fo:*/@border-start-style">
       <extends rule="border-style"/>
    </rule>
-
    <!-- border-start-width -->
    <!-- <border-width> | <length-conditional> | inherit -->
    <!-- Inherited: no -->
@@ -865,7 +820,6 @@
    <rule context="fo:*/@border-start-width">
       <extends rule="border-width"/>
    </rule>
-
    <!-- border-style -->
    <!-- <border-style>{1,4} | inherit -->
    <!-- Inherited: no -->
@@ -874,7 +828,6 @@
    <rule context="fo:*/@border-style">
       <report test=". eq ''" role="Warning">border-style="" should be '&lt;border-style&gt;{1,4} | inherit'.</report>
    </rule>
-
    <!-- border-top -->
    <!-- [ <border-width> || <border-style> || [ <color> | transparent ] ] | inherit -->
    <!-- Inherited: no -->
@@ -883,7 +836,6 @@
    <rule context="fo:*/@border-top">
       <report test=". eq ''" role="Warning">border-top="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</report>
    </rule>
-
    <!-- border-top-color -->
    <!-- <color> | transparent | inherit -->
    <!-- Inherited: no -->
@@ -892,7 +844,6 @@
    <rule context="fo:*/@border-top-color">
       <extends rule="color-transparent"/>
    </rule>
-
    <!-- border-top-style -->
    <!-- <border-style> | inherit -->
    <!-- Inherited: no -->
@@ -901,7 +852,6 @@
    <rule context="fo:*/@border-top-style">
       <extends rule="border-style"/>
    </rule>
-
    <!-- border-top-width -->
    <!-- <border-width> | inherit -->
    <!-- Inherited: no -->
@@ -910,7 +860,6 @@
    <rule context="fo:*/@border-top-width">
       <extends rule="border-width"/>
    </rule>
-
    <!-- border-width -->
    <!-- <border-width>{1,4} | inherit -->
    <!-- Inherited: no -->
@@ -919,7 +868,6 @@
    <rule context="fo:*/@border-width">
       <report test=". eq ''" role="Warning">border-width="" should be '&lt;border-width&gt;{1,4} | inherit'.</report>
    </rule>
-
    <!-- bottom -->
    <!-- <length> | <percentage> | auto | inherit -->
    <!-- Inherited: no -->
@@ -933,7 +881,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: bottom="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- break-after -->
    <!-- auto | column | page | even-page | odd-page | inherit -->
    <!-- Inherited: no -->
@@ -947,7 +894,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: break-after="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- break-before -->
    <!-- auto | column | page | even-page | odd-page | inherit -->
    <!-- Inherited: no -->
@@ -961,7 +907,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: break-before="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- caption-side -->
    <!-- before | after | start | end | top | bottom | left | right | inherit -->
    <!-- Inherited: yes -->
@@ -975,7 +920,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: caption-side="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- case-name -->
    <!-- <name> -->
    <!-- Inherited: no -->
@@ -988,7 +932,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: case-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- case-title -->
    <!-- <string> -->
    <!-- Inherited: no -->
@@ -1001,7 +944,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: case-title="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- change-bar-class -->
    <!-- <name> -->
    <!-- Inherited: no -->
@@ -1014,7 +956,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-class="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- change-bar-color -->
    <!-- <color> -->
    <!-- Inherited: yes -->
@@ -1027,7 +968,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-color="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- change-bar-offset -->
    <!-- <length> -->
    <!-- Inherited: yes -->
@@ -1040,7 +980,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-offset="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- change-bar-placement -->
    <!-- start | end | left | right | inside | outside | alternate -->
    <!-- Inherited: yes -->
@@ -1054,7 +993,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-placement="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- change-bar-style -->
    <!-- <border-style> -->
    <!-- Inherited: yes -->
@@ -1068,7 +1006,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-style="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- change-bar-width -->
    <!-- <border-width> -->
    <!-- Inherited: yes -->
@@ -1082,7 +1019,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- character -->
    <!-- <character> -->
    <!-- Inherited: no -->
@@ -1091,7 +1027,6 @@
    <rule context="fo:*/@character">
       <report test=". eq ''" role="Warning">character="" should be '&lt;character&gt;'.</report>
    </rule>
-
    <!-- clear -->
    <!-- start | end | left | right | inside | outside | both | none | inherit -->
    <!-- Inherited: no -->
@@ -1105,7 +1040,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: clear="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- clip -->
    <!-- <shape> | auto | inherit -->
    <!-- Inherited: no -->
@@ -1119,7 +1053,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: clip="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- color -->
    <!-- <color> | inherit -->
    <!-- Inherited: yes -->
@@ -1133,7 +1066,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: color="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- color-profile-name -->
    <!-- <name> | inherit -->
    <!-- Inherited: no -->
@@ -1146,7 +1078,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: color-profile-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- column-count -->
    <!-- <number> | inherit -->
    <!-- Inherited: no -->
@@ -1160,7 +1091,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: column-count="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- column-gap -->
    <!-- <length> | <percentage> | inherit -->
    <!-- Inherited: no -->
@@ -1174,7 +1104,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: column-gap="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- column-number -->
    <!-- <number> -->
    <!-- Inherited: no -->
@@ -1187,7 +1116,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: column-number="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- column-width -->
    <!-- <length> | <percentage> -->
    <!-- Inherited: no -->
@@ -1200,7 +1128,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: column-width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- content-height -->
    <!-- auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit -->
    <!-- Inherited: no -->
@@ -1214,7 +1141,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: content-height="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- content-type -->
    <!-- <string> | auto -->
    <!-- Inherited: no -->
@@ -1223,7 +1149,6 @@
    <rule context="fo:*/@content-type">
       <report test=". eq ''" role="Warning">content-type="" should be '&lt;string&gt; | auto'.</report>
    </rule>
-
    <!-- content-width -->
    <!-- auto | scale-to-fit | scale-down-to-fit | scale-up-to-fit | <length> | <percentage> | inherit -->
    <!-- Inherited: no -->
@@ -1237,7 +1162,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: content-width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- country -->
    <!-- none | <country> | inherit -->
    <!-- Inherited: yes -->
@@ -1246,7 +1170,6 @@
    <rule context="fo:*/@country">
       <report test=". eq ''" role="Warning">country="" should be 'none | &lt;country&gt; | inherit'.</report>
    </rule>
-
    <!-- cue -->
    <!-- <cue-before> || <cue-after> | inherit -->
    <!-- Inherited: no -->
@@ -1255,7 +1178,6 @@
    <rule context="fo:*/@cue">
       <report test=". eq ''" role="Warning">cue="" should be '&lt;cue-before&gt; || &lt;cue-after&gt; | inherit'.</report>
    </rule>
-
    <!-- destination-placement-offset -->
    <!-- <length> -->
    <!-- Inherited: no -->
@@ -1268,7 +1190,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: destination-placement-offset="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- direction -->
    <!-- ltr | rtl | inherit -->
    <!-- Inherited: yes -->
@@ -1282,7 +1203,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: direction="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- display-align -->
    <!-- auto | before | center | after | inherit -->
    <!-- Inherited: yes -->
@@ -1296,7 +1216,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: display-align="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- dominant-baseline -->
    <!-- auto | use-script | no-change | reset-size | ideographic | alphabetic | hanging | mathematical | central | middle | text-after-edge | text-before-edge | inherit -->
    <!-- Inherited: no -->
@@ -1310,7 +1229,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: dominant-baseline="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- empty-cells -->
    <!-- show | hide | inherit -->
    <!-- Inherited: yes -->
@@ -1324,7 +1242,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: empty-cells="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- end-indent -->
    <!-- <length> | <percentage> | inherit -->
    <!-- Inherited: yes -->
@@ -1338,7 +1255,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: end-indent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- ends-row -->
    <!-- true | false -->
    <!-- Inherited: no -->
@@ -1352,7 +1268,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: ends-row="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- extent -->
    <!-- <length> | <percentage> | inherit -->
    <!-- Inherited: no -->
@@ -1366,14 +1281,12 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: extent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- external-destination -->
    <!-- empty string | <uri-specification> -->
    <!-- Inherited: no -->
    <!-- Shorthand: no -->
    <!-- http://www.w3.org/TR/xsl11/#external-destination -->
    <rule context="fo:*/@external-destination"/>
-
    <!-- float -->
    <!-- before | start | end | left | right | inside | outside | none | inherit -->
    <!-- Inherited: no -->
@@ -1387,7 +1300,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: float="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- flow-map-name -->
    <!-- <name> -->
    <!-- Inherited: no -->
@@ -1400,7 +1312,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: flow-map-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- flow-map-reference -->
    <!-- <name> -->
    <!-- Inherited: no -->
@@ -1413,7 +1324,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: flow-map-reference="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- flow-name -->
    <!-- <name> -->
    <!-- Inherited: no -->
@@ -1426,7 +1336,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: flow-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- flow-name-reference -->
    <!-- <name> -->
    <!-- Inherited: no -->
@@ -1439,7 +1348,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: flow-name-reference="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- font -->
    <!-- [ [ <font-style> || <font-variant> || <font-weight> ]? <font-size> [ / <line-height>]? <font-family> ] | caption | icon | menu | message-box | small-caption | status-bar | inherit -->
    <!-- Inherited: yes -->
@@ -1448,7 +1356,6 @@
    <rule context="fo:*/@font">
       <report test=". eq ''" role="Warning">font="" should be '[ [ &lt;font-style&gt; || &lt;font-variant&gt; || &lt;font-weight&gt; ]? &lt;font-size&gt; [ / &lt;line-height&gt;]? &lt;font-family&gt; ] | caption | icon | menu | message-box | small-caption | status-bar | inherit'.</report>
    </rule>
-
    <!-- font-family -->
    <!-- [[ <family-name> | <generic-family> ],]* [<family-name> | <generic-family>] | inherit -->
    <!-- Inherited: yes -->
@@ -1457,7 +1364,6 @@
    <rule context="fo:*/@font-family">
       <report test=". eq ''" role="Warning">font-family="" should be '[[ &lt;family-name&gt; | &lt;generic-family&gt; ],]* [&lt;family-name&gt; | &lt;generic-family&gt;] | inherit'.</report>
    </rule>
-
    <!-- font-selection-strategy -->
    <!-- auto | character-by-character | inherit -->
    <!-- Inherited: yes -->
@@ -1471,7 +1377,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-selection-strategy="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- font-size -->
    <!-- <absolute-size> | <relative-size> | <length> | <percentage> | inherit -->
    <!-- Inherited: yes -->
@@ -1485,7 +1390,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-size="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- font-size-adjust -->
    <!-- <number> | none | inherit -->
    <!-- Inherited: yes -->
@@ -1499,7 +1403,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-size-adjust="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- font-stretch -->
    <!-- normal | wider | narrower | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded | inherit -->
    <!-- Inherited: yes -->
@@ -1513,7 +1416,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-stretch="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- font-style -->
    <!-- normal | italic | oblique | backslant | inherit -->
    <!-- Inherited: yes -->
@@ -1527,7 +1429,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-style="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- font-variant -->
    <!-- normal | small-caps | inherit -->
    <!-- Inherited: yes -->
@@ -1536,7 +1437,6 @@
    <rule context="fo:*/@font-variant">
       <report test=". eq ''" role="Warning">font-variant="" should be 'normal | small-caps | inherit'.</report>
    </rule>
-
    <!-- font-weight -->
    <!-- normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | inherit -->
    <!-- Inherited: yes -->
@@ -1550,7 +1450,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-weight="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- force-page-count -->
    <!-- auto | even | odd | end-on-even | end-on-odd | no-force | inherit -->
    <!-- Inherited: no -->
@@ -1559,7 +1458,6 @@
    <rule context="fo:*/@force-page-count">
       <report test=". eq ''" role="Warning">force-page-count="" should be 'auto | even | odd | end-on-even | end-on-odd | no-force | inherit'.</report>
    </rule>
-
    <!-- format -->
    <!-- <string> -->
    <!-- Inherited: no -->
@@ -1568,7 +1466,6 @@
    <rule context="fo:*/@format">
       <report test=". eq ''" role="Warning">format="" should be '&lt;string&gt;'.</report>
    </rule>
-
    <!-- glyph-orientation-horizontal -->
    <!-- <angle> | inherit -->
    <!-- Inherited: yes -->
@@ -1582,7 +1479,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: glyph-orientation-horizontal="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- glyph-orientation-vertical -->
    <!-- auto | <angle> | inherit -->
    <!-- Inherited: yes -->
@@ -1596,7 +1492,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: glyph-orientation-vertical="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- grouping-separator -->
    <!-- <character> -->
    <!-- Inherited: no -->
@@ -1605,7 +1500,6 @@
    <rule context="fo:*/@grouping-separator">
       <report test=". eq ''" role="Warning">grouping-separator="" should be '&lt;character&gt;'.</report>
    </rule>
-
    <!-- grouping-size -->
    <!-- <number> -->
    <!-- Inherited: no -->
@@ -1618,7 +1512,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: grouping-size="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- height -->
    <!-- <length> | <percentage> | auto | inherit -->
    <!-- Inherited: no -->
@@ -1632,7 +1525,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: height="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- hyphenate -->
    <!-- false | true | inherit -->
    <!-- Inherited: yes -->
@@ -1646,7 +1538,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenate="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- hyphenation-character -->
    <!-- <character> | inherit -->
    <!-- Inherited: yes -->
@@ -1655,7 +1546,6 @@
    <rule context="fo:*/@hyphenation-character">
       <report test=". eq ''" role="Warning">hyphenation-character="" should be '&lt;character&gt; | inherit'.</report>
    </rule>
-
    <!-- hyphenation-keep -->
    <!-- auto | column | page | inherit -->
    <!-- Inherited: yes -->
@@ -1669,7 +1559,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenation-keep="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- hyphenation-ladder-count -->
    <!-- no-limit | <number> | inherit -->
    <!-- Inherited: yes -->
@@ -1683,7 +1572,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenation-ladder-count="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- hyphenation-push-character-count -->
    <!-- <number> | inherit -->
    <!-- Inherited: yes -->
@@ -1697,7 +1585,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenation-push-character-count="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- hyphenation-remain-character-count -->
    <!-- <number> | inherit -->
    <!-- Inherited: yes -->
@@ -1711,7 +1598,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenation-remain-character-count="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- id -->
    <!-- <id> -->
    <!-- Inherited: no -->
@@ -1720,7 +1606,6 @@
    <rule context="fo:*/@id">
       <report test=". eq ''" role="Warning">id="" should be '&lt;id&gt;'.</report>
    </rule>
-
    <!-- index-class -->
    <!-- <string> -->
    <!-- Inherited: no -->
@@ -1732,7 +1617,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: index-class="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- index-key -->
    <!-- <string> -->
    <!-- Inherited: no -->
@@ -1741,7 +1625,6 @@
    <rule context="fo:*/@index-key">
       <report test=". eq ''" role="Warning">index-key="" should be '&lt;string&gt;'.</report>
    </rule>
-
    <!-- indicate-destination -->
    <!-- true | false -->
    <!-- Inherited: no -->
@@ -1755,7 +1638,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: indicate-destination="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- initial-page-number -->
    <!-- auto | auto-odd | auto-even | <number> | inherit -->
    <!-- Inherited: no -->
@@ -1769,7 +1651,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: initial-page-number="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- inline-progression-dimension -->
    <!-- auto | <length> | <percentage> | <length-range> | inherit -->
    <!-- Inherited: no -->
@@ -1783,14 +1664,12 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: inline-progression-dimension="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- internal-destination -->
    <!-- empty string | <idref> -->
    <!-- Inherited: no -->
    <!-- Shorthand: no -->
    <!-- http://www.w3.org/TR/xsl11/#internal-destination -->
    <rule context="fo:*/@internal-destination"/>
-
    <!-- intrinsic-scale-value -->
    <!-- <percentage> | inherit -->
    <!-- Inherited: yes -->
@@ -1804,7 +1683,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: intrinsic-scale-value="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- intrusion-displace -->
    <!-- auto | none | line | indent | block | inherit -->
    <!-- Inherited: yes -->
@@ -1818,7 +1696,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: intrusion-displace="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- keep-together -->
    <!-- <keep> | inherit -->
    <!-- Inherited: yes -->
@@ -1832,7 +1709,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: keep-together="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- keep-with-next -->
    <!-- <keep> | inherit -->
    <!-- Inherited: no -->
@@ -1846,7 +1722,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: keep-with-next="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- keep-with-previous -->
    <!-- <keep> | inherit -->
    <!-- Inherited: no -->
@@ -1860,7 +1735,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: keep-with-previous="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- language -->
    <!-- none | <language> | inherit -->
    <!-- Inherited: yes -->
@@ -1869,7 +1743,6 @@
    <rule context="fo:*/@language">
       <report test=". eq ''" role="Warning">language="" should be 'none | &lt;language&gt; | inherit'.</report>
    </rule>
-
    <!-- last-line-end-indent -->
    <!-- <length> | <percentage> | inherit -->
    <!-- Inherited: yes -->
@@ -1883,7 +1756,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: last-line-end-indent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- leader-alignment -->
    <!-- none | reference-area | page | inherit -->
    <!-- Inherited: yes -->
@@ -1897,7 +1769,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: leader-alignment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- leader-length -->
    <!-- <length-range> | <percentage> | inherit -->
    <!-- Inherited: yes -->
@@ -1911,7 +1782,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: leader-length="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- leader-pattern -->
    <!-- space | rule | dots | use-content | inherit -->
    <!-- Inherited: yes -->
@@ -1925,7 +1795,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: leader-pattern="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- leader-pattern-width -->
    <!-- use-font-metrics | <length> | <percentage> | inherit -->
    <!-- Inherited: yes -->
@@ -1939,7 +1808,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: leader-pattern-width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- left -->
    <!-- <length> | <percentage> | auto | inherit -->
    <!-- Inherited: no -->
@@ -1953,7 +1821,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: left="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- letter-spacing -->
    <!-- normal | <length> | <space> | inherit -->
    <!-- Inherited: yes -->
@@ -1967,7 +1834,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: letter-spacing="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- letter-value -->
    <!-- auto | alphabetic | traditional -->
    <!-- Inherited: no -->
@@ -1981,7 +1847,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: letter-value="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- line-height -->
    <!-- normal | <length> | <number> | <percentage> | <space> | inherit -->
    <!-- Inherited: yes -->
@@ -1995,7 +1860,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: line-height="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- line-height-shift-adjustment -->
    <!-- consider-shifts | disregard-shifts | inherit -->
    <!-- Inherited: yes -->
@@ -2009,7 +1873,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: line-height-shift-adjustment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- line-stacking-strategy -->
    <!-- line-height | font-height | max-height | inherit -->
    <!-- Inherited: yes -->
@@ -2023,7 +1886,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: line-stacking-strategy="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- linefeed-treatment -->
    <!-- ignore | preserve | treat-as-space | treat-as-zero-width-space | inherit -->
    <!-- Inherited: yes -->
@@ -2037,7 +1899,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: linefeed-treatment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- margin -->
    <!-- <margin-width>{1,4} | inherit -->
    <!-- Inherited: no -->
@@ -2046,7 +1907,6 @@
    <rule context="fo:*/@margin">
       <report test=". eq ''" role="Warning">margin="" should be '&lt;margin-width&gt;{1,4} | inherit'.</report>
    </rule>
-
    <!-- margin-bottom -->
    <!-- <margin-width> | inherit -->
    <!-- Inherited: no -->
@@ -2060,7 +1920,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: margin-bottom="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- margin-left -->
    <!-- <margin-width> | inherit -->
    <!-- Inherited: no -->
@@ -2074,7 +1933,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: margin-left="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- margin-right -->
    <!-- <margin-width> | inherit -->
    <!-- Inherited: no -->
@@ -2088,7 +1946,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: margin-right="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- margin-top -->
    <!-- <margin-width> | inherit -->
    <!-- Inherited: no -->
@@ -2102,7 +1959,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: margin-top="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- marker-class-name -->
    <!-- <name> -->
    <!-- Inherited: no -->
@@ -2115,7 +1971,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: marker-class-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- master-name -->
    <!-- <name> -->
    <!-- Inherited: no -->
@@ -2128,7 +1983,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: master-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- master-reference -->
    <!-- <name> -->
    <!-- Inherited: no -->
@@ -2141,7 +1995,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: master-reference="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- max-height -->
    <!-- <length> | <percentage> | none | inherit -->
    <!-- Inherited: no -->
@@ -2150,7 +2003,6 @@
    <rule context="fo:*/@max-height">
       <report test=". eq ''" role="Warning">max-height="" should be '&lt;length&gt; | &lt;percentage&gt; | none | inherit'.</report>
    </rule>
-
    <!-- max-width -->
    <!-- <length> | <percentage> | none | inherit -->
    <!-- Inherited: no -->
@@ -2159,7 +2011,6 @@
    <rule context="fo:*/@max-width">
       <report test=". eq ''" role="Warning">max-width="" should be '&lt;length&gt; | &lt;percentage&gt; | none | inherit'.</report>
    </rule>
-
    <!-- maximum-repeats -->
    <!-- <number> | no-limit | inherit -->
    <!-- Inherited: no -->
@@ -2173,7 +2024,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: maximum-repeats="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- media-usage -->
    <!-- auto | paginate | bounded-in-one-dimension | unbounded -->
    <!-- Inherited: no -->
@@ -2187,7 +2037,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: media-usage="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- merge-pages-across-index-key-references -->
    <!-- merge | leave-separate -->
    <!-- Inherited: yes -->
@@ -2201,7 +2050,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: merge-pages-across-index-key-references="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- merge-ranges-across-index-key-references -->
    <!-- merge | leave-separate -->
    <!-- Inherited: yes -->
@@ -2215,7 +2063,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: merge-ranges-across-index-key-references="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- merge-sequential-page-numbers -->
    <!-- merge | leave-separate -->
    <!-- Inherited: yes -->
@@ -2229,7 +2076,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: merge-sequential-page-numbers="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- min-height -->
    <!-- <length> | <percentage> | inherit -->
    <!-- Inherited: no -->
@@ -2238,7 +2084,6 @@
    <rule context="fo:*/@min-height">
       <report test=". eq ''" role="Warning">min-height="" should be '&lt;length&gt; | &lt;percentage&gt; | inherit'.</report>
    </rule>
-
    <!-- min-width -->
    <!-- <length> | <percentage> | inherit -->
    <!-- Inherited: no -->
@@ -2247,7 +2092,6 @@
    <rule context="fo:*/@min-width">
       <report test=". eq ''" role="Warning">min-width="" should be '&lt;length&gt; | &lt;percentage&gt; | inherit'.</report>
    </rule>
-
    <!-- number-columns-repeated -->
    <!-- <number> -->
    <!-- Inherited: no -->
@@ -2260,7 +2104,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: number-columns-repeated="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- number-columns-spanned -->
    <!-- <number> -->
    <!-- Inherited: no -->
@@ -2273,7 +2116,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: number-columns-spanned="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- number-rows-spanned -->
    <!-- <number> -->
    <!-- Inherited: no -->
@@ -2286,7 +2128,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: number-rows-spanned="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- odd-or-even -->
    <!-- odd | even | any | inherit -->
    <!-- Inherited: no -->
@@ -2300,7 +2141,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: odd-or-even="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- orphans -->
    <!-- <integer> | inherit -->
    <!-- Inherited: yes -->
@@ -2314,7 +2154,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: orphans="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- overflow -->
    <!-- visible | hidden | scroll | error-if-overflow | repeat | auto | inherit -->
    <!-- Inherited: no -->
@@ -2328,7 +2167,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: overflow="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- padding -->
    <!-- <padding-width>{1,4} | inherit -->
    <!-- Inherited: no -->
@@ -2337,7 +2175,6 @@
    <rule context="fo:*/@padding">
       <report test=". eq ''" role="Warning">padding="" should be '&lt;padding-width&gt;{1,4} | inherit'.</report>
    </rule>
-
    <!-- padding-after -->
    <!-- <padding-width> | <length-conditional> | inherit -->
    <!-- Inherited: no -->
@@ -2351,7 +2188,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-after="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- padding-before -->
    <!-- <padding-width> | <length-conditional> | inherit -->
    <!-- Inherited: no -->
@@ -2365,7 +2201,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-before="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- padding-bottom -->
    <!-- <padding-width> | inherit -->
    <!-- Inherited: no -->
@@ -2379,7 +2214,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-bottom="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- padding-end -->
    <!-- <padding-width> | <length-conditional> | inherit -->
    <!-- Inherited: no -->
@@ -2393,7 +2227,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-end="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- padding-left -->
    <!-- <padding-width> | inherit -->
    <!-- Inherited: no -->
@@ -2407,7 +2240,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-left="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- padding-right -->
    <!-- <padding-width> | inherit -->
    <!-- Inherited: no -->
@@ -2421,7 +2253,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-right="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- padding-start -->
    <!-- <padding-width> | <length-conditional> | inherit -->
    <!-- Inherited: no -->
@@ -2435,7 +2266,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-start="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- padding-top -->
    <!-- <padding-width> | inherit -->
    <!-- Inherited: no -->
@@ -2449,7 +2279,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-top="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- page-break-after -->
    <!-- auto | always | avoid | left | right | inherit -->
    <!-- Inherited: no -->
@@ -2458,7 +2287,6 @@
    <rule context="fo:*/@page-break-after">
       <report test=". eq ''" role="Warning">page-break-after="" should be 'auto | always | avoid | left | right | inherit'.</report>
    </rule>
-
    <!-- page-break-before -->
    <!-- auto | always | avoid | left | right | inherit -->
    <!-- Inherited: no -->
@@ -2467,7 +2295,6 @@
    <rule context="fo:*/@page-break-before">
       <report test=". eq ''" role="Warning">page-break-before="" should be 'auto | always | avoid | left | right | inherit'.</report>
    </rule>
-
    <!-- page-break-inside -->
    <!-- avoid | auto | inherit -->
    <!-- Inherited: yes -->
@@ -2476,7 +2303,6 @@
    <rule context="fo:*/@page-break-inside">
       <report test=". eq ''" role="Warning">page-break-inside="" should be 'avoid | auto | inherit'.</report>
    </rule>
-
    <!-- page-citation-strategy -->
    <!-- [ all | normal | non-blank | inherit -->
    <!-- Inherited: no -->
@@ -2490,7 +2316,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: page-citation-strategy="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- page-height -->
    <!-- auto | indefinite | <length> | inherit -->
    <!-- Inherited: no -->
@@ -2504,7 +2329,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: page-height="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- page-number-treatment -->
    <!-- link | no-link -->
    <!-- Inherited: yes -->
@@ -2518,7 +2342,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: page-number-treatment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- page-position -->
    <!-- only | first | last | rest | any | inherit -->
    <!-- Inherited: no -->
@@ -2532,7 +2355,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: page-position="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- page-width -->
    <!-- auto | indefinite | <length> | inherit -->
    <!-- Inherited: no -->
@@ -2546,7 +2368,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: page-width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- pause -->
    <!-- [<time> | <percentage>]{1,2} | inherit -->
    <!-- Inherited: no -->
@@ -2555,7 +2376,6 @@
    <rule context="fo:*/@pause">
       <report test=". eq ''" role="Warning">pause="" should be '[&lt;time&gt; | &lt;percentage&gt;]{1,2} | inherit'.</report>
    </rule>
-
    <!-- position -->
    <!-- static | relative | absolute | fixed | inherit -->
    <!-- Inherited: no -->
@@ -2564,7 +2384,6 @@
    <rule context="fo:*/@position">
       <report test=". eq ''" role="Warning">position="" should be 'static | relative | absolute | fixed | inherit'.</report>
    </rule>
-
    <!-- precedence -->
    <!-- true | false | inherit -->
    <!-- Inherited: no -->
@@ -2578,7 +2397,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: precedence="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- provisional-distance-between-starts -->
    <!-- <length> | <percentage> | inherit -->
    <!-- Inherited: yes -->
@@ -2592,7 +2410,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: provisional-distance-between-starts="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- provisional-label-separation -->
    <!-- <length> | <percentage> | inherit -->
    <!-- Inherited: yes -->
@@ -2606,7 +2423,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: provisional-label-separation="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- ref-id -->
    <!-- <idref> | inherit -->
    <!-- Inherited: no -->
@@ -2615,7 +2431,6 @@
    <rule context="fo:*/@ref-id">
       <report test=". eq ''" role="Warning">ref-id="" should be '&lt;idref&gt; | inherit'.</report>
    </rule>
-
    <!-- ref-index-key -->
    <!-- <string> -->
    <!-- Inherited: no -->
@@ -2624,7 +2439,6 @@
    <rule context="fo:*/@ref-index-key">
       <report test=". eq ''" role="Warning">ref-index-key="" should be '&lt;string&gt;'.</report>
    </rule>
-
    <!-- reference-orientation -->
    <!-- 0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit -->
    <!-- Inherited: no -->
@@ -2633,7 +2447,6 @@
    <rule context="fo:*/@reference-orientation">
       <report test=". eq ''" role="Warning">reference-orientation="" should be '0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit'.</report>
    </rule>
-
    <!-- region-name -->
    <!-- xsl-region-body | xsl-region-start | xsl-region-end | xsl-region-before | xsl-region-after | <name> -->
    <!-- Inherited: no -->
@@ -2646,7 +2459,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: region-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- region-name-reference -->
    <!-- <name> -->
    <!-- Inherited: no -->
@@ -2659,7 +2471,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: region-name-reference="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- relative-align -->
    <!-- before | baseline | inherit -->
    <!-- Inherited: yes -->
@@ -2673,7 +2484,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: relative-align="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- relative-position -->
    <!-- static | relative | inherit -->
    <!-- Inherited: no -->
@@ -2687,7 +2497,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: relative-position="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- rendering-intent -->
    <!-- auto | perceptual | relative-colorimetric | saturation | absolute-colorimetric | inherit -->
    <!-- Inherited: no -->
@@ -2701,7 +2510,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: rendering-intent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- retrieve-boundary -->
    <!-- page | page-sequence | document -->
    <!-- Inherited: no -->
@@ -2715,7 +2523,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: retrieve-boundary="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- retrieve-boundary-within-table -->
    <!-- table | table-fragment | page -->
    <!-- Inherited: no -->
@@ -2729,7 +2536,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: retrieve-boundary-within-table="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- retrieve-class-name -->
    <!-- <name> -->
    <!-- Inherited: no -->
@@ -2742,7 +2548,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: retrieve-class-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- retrieve-position -->
    <!-- first-starting-within-page | first-including-carryover | last-starting-within-page | last-ending-within-page -->
    <!-- Inherited: no -->
@@ -2756,7 +2561,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: retrieve-position="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- retrieve-position-within-table -->
    <!-- first-starting | first-including-carryover | last-starting | last-ending -->
    <!-- Inherited: no -->
@@ -2770,7 +2574,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: retrieve-position-within-table="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- right -->
    <!-- <length> | <percentage> | auto | inherit -->
    <!-- Inherited: no -->
@@ -2784,7 +2587,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: right="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- role -->
    <!-- <string> | <uri-specification> | none | inherit -->
    <!-- Inherited: no -->
@@ -2793,7 +2595,6 @@
    <rule context="fo:*/@role">
       <report test=". eq ''" role="Warning">role="" should be '&lt;string&gt; | &lt;uri-specification&gt; | none | inherit'.</report>
    </rule>
-
    <!-- rule-style -->
    <!-- none | dotted | dashed | solid | double | groove | ridge | inherit -->
    <!-- Inherited: yes -->
@@ -2807,7 +2608,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: rule-style="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- rule-thickness -->
    <!-- <length> -->
    <!-- Inherited: yes -->
@@ -2820,7 +2620,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: rule-thickness="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- scale-option -->
    <!-- width | height | inherit -->
    <!-- Inherited: yes -->
@@ -2834,7 +2633,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: scale-option="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- scaling -->
    <!-- uniform | non-uniform | inherit -->
    <!-- Inherited: no -->
@@ -2848,7 +2646,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: scaling="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- scaling-method -->
    <!-- auto | integer-pixels | resample-any-method | inherit -->
    <!-- Inherited: no -->
@@ -2862,7 +2659,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: scaling-method="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- score-spaces -->
    <!-- true | false | inherit -->
    <!-- Inherited: yes -->
@@ -2876,7 +2672,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: score-spaces="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- script -->
    <!-- none | auto | <script> | inherit -->
    <!-- Inherited: yes -->
@@ -2890,7 +2685,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: script="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- show-destination -->
    <!-- replace | new -->
    <!-- Inherited: no -->
@@ -2904,7 +2698,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: show-destination="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- size -->
    <!-- <length>{1,2} | auto | landscape | portrait | inherit -->
    <!-- Inherited: no -->
@@ -2913,7 +2706,6 @@
    <rule context="fo:*/@size">
       <report test=". eq ''" role="Warning">size="" should be '&lt;length&gt;{1,2} | auto | landscape | portrait | inherit'.</report>
    </rule>
-
    <!-- source-document -->
    <!-- <uri-specification> [<uri-specification>]* | none | inherit -->
    <!-- Inherited: no -->
@@ -2926,7 +2718,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: source-document="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- space-after -->
    <!-- <space> | inherit -->
    <!-- Inherited: no -->
@@ -2940,7 +2731,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: space-after="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- space-before -->
    <!-- <space> | inherit -->
    <!-- Inherited: no -->
@@ -2954,7 +2744,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: space-before="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- space-end -->
    <!-- <space> | <percentage> | inherit -->
    <!-- Inherited: no -->
@@ -2968,7 +2757,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: space-end="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- space-start -->
    <!-- <space> | <percentage> | inherit -->
    <!-- Inherited: no -->
@@ -2982,7 +2770,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: space-start="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- span -->
    <!-- none | all | inherit -->
    <!-- Inherited: no -->
@@ -2996,7 +2783,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: span="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- src -->
    <!-- <uri-specification> | inherit -->
    <!-- Inherited: no -->
@@ -3005,7 +2791,6 @@
    <rule context="fo:*/@src">
       <report test=". eq ''" role="Warning">src="" should be '&lt;uri-specification&gt; | inherit'.</report>
    </rule>
-
    <!-- start-indent -->
    <!-- <length> | <percentage> | inherit -->
    <!-- Inherited: yes -->
@@ -3019,7 +2804,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: start-indent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- starting-state -->
    <!-- show | hide -->
    <!-- Inherited: no -->
@@ -3033,7 +2817,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: starting-state="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- starts-row -->
    <!-- true | false -->
    <!-- Inherited: no -->
@@ -3047,7 +2830,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: starts-row="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- suppress-at-line-break -->
    <!-- auto | suppress | retain | inherit -->
    <!-- Inherited: no -->
@@ -3061,7 +2843,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: suppress-at-line-break="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- switch-to -->
    <!-- xsl-preceding | xsl-following | xsl-any | <name>[ <name>]* -->
    <!-- Inherited: no -->
@@ -3074,7 +2855,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: switch-to="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- table-layout -->
    <!-- auto | fixed | inherit -->
    <!-- Inherited: no -->
@@ -3088,7 +2868,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: table-layout="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- table-omit-footer-at-break -->
    <!-- true | false -->
    <!-- Inherited: no -->
@@ -3102,7 +2881,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: table-omit-footer-at-break="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- table-omit-header-at-break -->
    <!-- true | false -->
    <!-- Inherited: no -->
@@ -3116,7 +2894,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: table-omit-header-at-break="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- target-presentation-context -->
    <!-- use-target-processing-context | <uri-specification> -->
    <!-- Inherited: no -->
@@ -3129,7 +2906,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: target-presentation-context="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- target-processing-context -->
    <!-- document-root | <uri-specification> -->
    <!-- Inherited: no -->
@@ -3142,7 +2918,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: target-processing-context="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- target-stylesheet -->
    <!-- use-normal-stylesheet | <uri-specification> -->
    <!-- Inherited: no -->
@@ -3155,7 +2930,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: target-stylesheet="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- text-align -->
    <!-- start | center | end | justify | inside | outside | left | right | <string> | inherit -->
    <!-- Inherited: yes -->
@@ -3164,7 +2938,6 @@
    <rule context="fo:*/@text-align">
       <report test=". eq ''" role="Warning">text-align="" should be 'start | center | end | justify | inside | outside | left | right | &lt;string&gt; | inherit'.</report>
    </rule>
-
    <!-- text-align-last -->
    <!-- relative | start | center | end | justify | inside | outside | left | right | inherit -->
    <!-- Inherited: yes -->
@@ -3178,7 +2951,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-align-last="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- text-altitude -->
    <!-- use-font-metrics | <length> | <percentage> | inherit -->
    <!-- Inherited: no -->
@@ -3192,7 +2964,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-altitude="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- text-decoration -->
    <!-- none | [ [ underline | no-underline] || [ overline | no-overline ] || [ line-through | no-line-through ] || [ blink | no-blink ] ] | inherit -->
    <!-- Inherited: no -->
@@ -3206,7 +2977,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-decoration="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- text-depth -->
    <!-- use-font-metrics | <length> | <percentage> | inherit -->
    <!-- Inherited: no -->
@@ -3220,7 +2990,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-depth="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- text-indent -->
    <!-- <length> | <percentage> | inherit -->
    <!-- Inherited: yes -->
@@ -3234,7 +3003,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-indent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- text-shadow -->
    <!-- none | [<color> || <length> <length> <length>? ,]* [<color> || <length> <length> <length>?] | inherit -->
    <!-- Inherited: no -->
@@ -3248,7 +3016,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-shadow="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- text-transform -->
    <!-- capitalize | uppercase | lowercase | none | inherit -->
    <!-- Inherited: yes -->
@@ -3262,7 +3029,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-transform="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- top -->
    <!-- <length> | <percentage> | auto | inherit -->
    <!-- Inherited: no -->
@@ -3276,7 +3042,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: top="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- treat-as-word-space -->
    <!-- auto | true | false | inherit -->
    <!-- Inherited: no -->
@@ -3290,7 +3055,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: treat-as-word-space="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- unicode-bidi -->
    <!-- normal | embed | bidi-override | inherit -->
    <!-- Inherited: no -->
@@ -3304,7 +3068,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: unicode-bidi="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- vertical-align -->
    <!-- baseline | middle | sub | super | text-top | text-bottom | <percentage> | <length> | top | bottom | inherit -->
    <!-- Inherited: no -->
@@ -3313,7 +3076,6 @@
    <rule context="fo:*/@vertical-align">
       <report test=". eq ''" role="Warning">vertical-align="" should be 'baseline | middle | sub | super | text-top | text-bottom | &lt;percentage&gt; | &lt;length&gt; | top | bottom | inherit'.</report>
    </rule>
-
    <!-- visibility -->
    <!-- visible | hidden | collapse | inherit -->
    <!-- Inherited: yes -->
@@ -3327,7 +3089,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: visibility="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- white-space -->
    <!-- normal | pre | nowrap | inherit -->
    <!-- Inherited: yes -->
@@ -3336,7 +3097,6 @@
    <rule context="fo:*/@white-space">
       <report test=". eq ''" role="Warning">white-space="" should be 'normal | pre | nowrap | inherit'.</report>
    </rule>
-
    <!-- white-space-collapse -->
    <!-- false | true | inherit -->
    <!-- Inherited: yes -->
@@ -3350,7 +3110,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: white-space-collapse="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- white-space-treatment -->
    <!-- ignore | preserve | ignore-if-before-linefeed | ignore-if-after-linefeed | ignore-if-surrounding-linefeed | inherit -->
    <!-- Inherited: yes -->
@@ -3364,7 +3123,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: white-space-treatment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- widows -->
    <!-- <integer> | inherit -->
    <!-- Inherited: yes -->
@@ -3378,7 +3136,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: widows="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- width -->
    <!-- <length> | <percentage> | auto | inherit -->
    <!-- Inherited: no -->
@@ -3392,7 +3149,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- word-spacing -->
    <!-- normal | <length> | <space> | inherit -->
    <!-- Inherited: yes -->
@@ -3406,7 +3162,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: word-spacing="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- wrap-option -->
    <!-- no-wrap | wrap | inherit -->
    <!-- Inherited: yes -->
@@ -3420,7 +3175,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: wrap-option="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- writing-mode -->
    <!-- lr-tb | rl-tb | tb-rl | tb-lr | bt-lr | bt-rl | lr-bt | rl-bt | lr-alternating-rl-bt | lr-alternating-rl-tb | lr-inverting-rl-bt | lr-inverting-rl-tb | tb-lr-in-lr-pairs | lr | rl | tb | inherit -->
    <!-- Inherited: yes -->
@@ -3434,7 +3188,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: writing-mode="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    <!-- xml.lang -->
    <!-- <language-country> | inherit -->
    <!-- Inherited: yes -->
@@ -3443,7 +3196,6 @@
    <rule context="fo:*/@xml.lang">
       <report test=". eq ''" role="Warning">xml.lang="" should be '&lt;language-country&gt; | inherit'.</report>
    </rule>
-
    <!-- z-index -->
    <!-- auto | <integer> | inherit -->
    <!-- Inherited: no -->

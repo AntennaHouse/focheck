@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sqf="http://www.schematron-quickfix.com/validator/process" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt2">
     <xsl:key name="flow-name" match="fo:flow | fo:static-content" use="@flow-name"/>
     <xsl:key name="index-key" match="*[exists(@index-key)]" use="@index-key"/>
+    <xsl:key name="marker-class-name" match="fo:marker" use="@marker-class-name"/>
     <xsl:key name="master-name" match="fo:simple-page-master | fo:page-sequence-master |       axf:spread-page-master" use="@master-name"/>
     <xsl:key name="region-name" match="fo:region-before | fo:region-after |       fo:region-start | fo:region-end |       fo:region-body | axf:spread-region" use="@region-name"/>
 
@@ -190,9 +191,9 @@
     </sqf:fix>
   </rule>
 
-  <rule context="fo:*/@column-width">
+  <rule context="fo:*/@column-width[exists(../@number-columns-spanned)]">
     <let name="number-columns-spanned" value="ahf:parser-runner(../@number-columns-spanned)"/>
-    <report test="exists(../@number-columns-spanned) and     local-name($number-columns-spanned) = 'Number' and                   (exists($number-columns-spanned/@value) and      number($number-columns-spanned/@value) &gt;= 1.5)" id="column-width" role="Warning"><value-of select="name()"/> is ignored with 'number-columns-spanned' is present and has a value greater than 1.</report>
+    <report test="local-name($number-columns-spanned) = 'Number' and                   (exists($number-columns-spanned/@value) and      number($number-columns-spanned/@value) &gt;= 1.5)" id="column-width" role="Warning"><value-of select="name()"/> is ignored with 'number-columns-spanned' is present and has a value greater than 1.</report>
   </rule>
 
   <rule context="fo:*/@flow-map-reference">
@@ -274,6 +275,11 @@
     <assert test="count(ancestor::fo:flow-map//fo:region-name-specifier/@region-name-reference[. eq current()]) = 1">region-name-reference="<value-of select="."/>" must be unique within its fo:flow-map.</assert>
   </rule>
 
+   
+   <rule context="fo:*/@retrieve-class-name">
+      <assert test="exists(key('marker-class-name', .))" role="Warning"><value-of select="local-name()"/>="<value-of select="."/>" does not refer to an existing fo:marker.</assert>
+   </rule>
+
   <rule context="fo:*/@span">
     
     <report test="exists(ancestor::fo:static-content)" sqf:fix="span_fix" role="warning">@span has effect only on areas returned by an fo:flow.</report>
@@ -288,7 +294,6 @@
 </pattern>
     <pattern xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" id="fo-property">
    <xsl:include href="file:/E:/Projects/oxygen/focheck-internal/focheck/xsl/parser-runner.xsl"/>
-
    
    
    
@@ -302,7 +307,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: absolute-position="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -316,7 +320,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: active-state="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -330,7 +333,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: alignment-adjust="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -344,7 +346,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: alignment-baseline="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -353,7 +354,6 @@
    <rule context="fo:*/@allowed-height-scale">
       <report test=". eq ''" role="Warning">allowed-height-scale="" should be '[ any | &lt;percentage&gt; ]* | inherit'.</report>
    </rule>
-
    
    
    
@@ -362,7 +362,6 @@
    <rule context="fo:*/@allowed-width-scale">
       <report test=". eq ''" role="Warning">allowed-width-scale="" should be '[ any | &lt;percentage&gt; ]* | inherit'.</report>
    </rule>
-
    
    
    
@@ -376,7 +375,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: auto-restore="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -385,7 +383,6 @@
    <rule context="fo:*/@background">
       <report test=". eq ''" role="Warning">background="" should be '[&lt;background-color&gt; || &lt;background-image&gt; || &lt;background-repeat&gt; || &lt;background-attachment&gt; || &lt;background-position&gt; ]] | inherit'.</report>
    </rule>
-
    
    
    
@@ -399,7 +396,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-attachment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -413,7 +409,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-color="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -422,7 +417,6 @@
    <rule context="fo:*/@background-image">
       <report test=". eq ''" role="Warning">background-image="" should be '&lt;uri-specification&gt; | none | inherit'.</report>
    </rule>
-
    
    
    
@@ -431,7 +425,6 @@
    <rule context="fo:*/@background-position">
       <report test=". eq ''" role="Warning">background-position="" should be '[ [&lt;percentage&gt; | &lt;length&gt; ]{1,2} | [ [top | center | bottom] || [left | center | right] ] ] | inherit'.</report>
    </rule>
-
    
    
    
@@ -445,7 +438,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-position-horizontal="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -459,7 +451,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-position-vertical="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -473,7 +464,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: background-repeat="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -487,7 +477,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: baseline-shift="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -501,7 +490,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: blank-or-not-blank="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -515,7 +503,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: block-progression-dimension="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -524,7 +511,6 @@
    <rule context="fo:*/@border">
       <report test=". eq ''" role="Warning">border="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</report>
    </rule>
-
    
    
    
@@ -533,7 +519,6 @@
    <rule context="fo:*/@border-after-color">
       <extends rule="color-transparent"/>
    </rule>
-
    
    
    
@@ -547,7 +532,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-after-precedence="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -556,7 +540,6 @@
    <rule context="fo:*/@border-after-style">
       <extends rule="border-style"/>
    </rule>
-
    
    
    
@@ -565,7 +548,6 @@
    <rule context="fo:*/@border-after-width">
       <extends rule="border-width"/>
    </rule>
-
    
    
    
@@ -574,7 +556,6 @@
    <rule context="fo:*/@border-before-color">
       <extends rule="color-transparent"/>
    </rule>
-
    
    
    
@@ -588,7 +569,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-before-precedence="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -597,7 +577,6 @@
    <rule context="fo:*/@border-before-style">
       <extends rule="border-style"/>
    </rule>
-
    
    
    
@@ -606,7 +585,6 @@
    <rule context="fo:*/@border-before-width">
       <extends rule="border-width"/>
    </rule>
-
    
    
    
@@ -615,7 +593,6 @@
    <rule context="fo:*/@border-bottom">
       <report test=". eq ''" role="Warning">border-bottom="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</report>
    </rule>
-
    
    
    
@@ -624,7 +601,6 @@
    <rule context="fo:*/@border-bottom-color">
       <extends rule="color-transparent"/>
    </rule>
-
    
    
    
@@ -633,7 +609,6 @@
    <rule context="fo:*/@border-bottom-style">
       <extends rule="border-style"/>
    </rule>
-
    
    
    
@@ -642,7 +617,6 @@
    <rule context="fo:*/@border-bottom-width">
       <extends rule="border-width"/>
    </rule>
-
    
    
    
@@ -656,7 +630,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-collapse="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -665,7 +638,6 @@
    <rule context="fo:*/@border-color">
       <report test=". eq ''" role="Warning">border-color="" should be '[ &lt;color&gt; | transparent ]{1,4} | inherit'.</report>
    </rule>
-
    
    
    
@@ -674,7 +646,6 @@
    <rule context="fo:*/@border-end-color">
       <extends rule="color-transparent"/>
    </rule>
-
    
    
    
@@ -688,7 +659,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-end-precedence="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -697,7 +667,6 @@
    <rule context="fo:*/@border-end-style">
       <extends rule="border-style"/>
    </rule>
-
    
    
    
@@ -706,7 +675,6 @@
    <rule context="fo:*/@border-end-width">
       <extends rule="border-width"/>
    </rule>
-
    
    
    
@@ -715,7 +683,6 @@
    <rule context="fo:*/@border-left">
       <report test=". eq ''" role="Warning">border-left="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</report>
    </rule>
-
    
    
    
@@ -724,7 +691,6 @@
    <rule context="fo:*/@border-left-color">
       <extends rule="color-transparent"/>
    </rule>
-
    
    
    
@@ -733,7 +699,6 @@
    <rule context="fo:*/@border-left-style">
       <extends rule="border-style"/>
    </rule>
-
    
    
    
@@ -742,7 +707,6 @@
    <rule context="fo:*/@border-left-width">
       <extends rule="border-width"/>
    </rule>
-
    
    
    
@@ -751,7 +715,6 @@
    <rule context="fo:*/@border-right">
       <report test=". eq ''" role="Warning">border-right="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</report>
    </rule>
-
    
    
    
@@ -760,7 +723,6 @@
    <rule context="fo:*/@border-right-color">
       <extends rule="color-transparent"/>
    </rule>
-
    
    
    
@@ -769,7 +731,6 @@
    <rule context="fo:*/@border-right-style">
       <extends rule="border-style"/>
    </rule>
-
    
    
    
@@ -778,7 +739,6 @@
    <rule context="fo:*/@border-right-width">
       <extends rule="border-width"/>
    </rule>
-
    
    
    
@@ -792,7 +752,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-separation="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -801,7 +760,6 @@
    <rule context="fo:*/@border-spacing">
       <report test=". eq ''" role="Warning">border-spacing="" should be '&lt;length&gt; &lt;length&gt;? | inherit'.</report>
    </rule>
-
    
    
    
@@ -810,7 +768,6 @@
    <rule context="fo:*/@border-start-color">
       <extends rule="color-transparent"/>
    </rule>
-
    
    
    
@@ -824,7 +781,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: border-start-precedence="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -833,7 +789,6 @@
    <rule context="fo:*/@border-start-style">
       <extends rule="border-style"/>
    </rule>
-
    
    
    
@@ -842,7 +797,6 @@
    <rule context="fo:*/@border-start-width">
       <extends rule="border-width"/>
    </rule>
-
    
    
    
@@ -851,7 +805,6 @@
    <rule context="fo:*/@border-style">
       <report test=". eq ''" role="Warning">border-style="" should be '&lt;border-style&gt;{1,4} | inherit'.</report>
    </rule>
-
    
    
    
@@ -860,7 +813,6 @@
    <rule context="fo:*/@border-top">
       <report test=". eq ''" role="Warning">border-top="" should be '[ &lt;border-width&gt; || &lt;border-style&gt; || [ &lt;color&gt; | transparent ] ] | inherit'.</report>
    </rule>
-
    
    
    
@@ -869,7 +821,6 @@
    <rule context="fo:*/@border-top-color">
       <extends rule="color-transparent"/>
    </rule>
-
    
    
    
@@ -878,7 +829,6 @@
    <rule context="fo:*/@border-top-style">
       <extends rule="border-style"/>
    </rule>
-
    
    
    
@@ -887,7 +837,6 @@
    <rule context="fo:*/@border-top-width">
       <extends rule="border-width"/>
    </rule>
-
    
    
    
@@ -896,7 +845,6 @@
    <rule context="fo:*/@border-width">
       <report test=". eq ''" role="Warning">border-width="" should be '&lt;border-width&gt;{1,4} | inherit'.</report>
    </rule>
-
    
    
    
@@ -910,7 +858,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: bottom="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -924,7 +871,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: break-after="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -938,7 +884,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: break-before="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -952,7 +897,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: caption-side="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -965,7 +909,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: case-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -978,7 +921,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: case-title="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -991,7 +933,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-class="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1004,7 +945,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-color="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1017,7 +957,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-offset="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1031,7 +970,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-placement="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1045,7 +983,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-style="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1059,7 +996,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: change-bar-width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1068,7 +1004,6 @@
    <rule context="fo:*/@character">
       <report test=". eq ''" role="Warning">character="" should be '&lt;character&gt;'.</report>
    </rule>
-
    
    
    
@@ -1082,7 +1017,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: clear="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1096,7 +1030,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: clip="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1110,7 +1043,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: color="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1123,7 +1055,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: color-profile-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1137,7 +1068,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: column-count="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1151,7 +1081,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: column-gap="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1164,7 +1093,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: column-number="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1177,7 +1105,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: column-width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1191,7 +1118,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: content-height="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1200,7 +1126,6 @@
    <rule context="fo:*/@content-type">
       <report test=". eq ''" role="Warning">content-type="" should be '&lt;string&gt; | auto'.</report>
    </rule>
-
    
    
    
@@ -1214,7 +1139,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: content-width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1223,7 +1147,6 @@
    <rule context="fo:*/@country">
       <report test=". eq ''" role="Warning">country="" should be 'none | &lt;country&gt; | inherit'.</report>
    </rule>
-
    
    
    
@@ -1232,7 +1155,6 @@
    <rule context="fo:*/@cue">
       <report test=". eq ''" role="Warning">cue="" should be '&lt;cue-before&gt; || &lt;cue-after&gt; | inherit'.</report>
    </rule>
-
    
    
    
@@ -1245,7 +1167,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: destination-placement-offset="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1259,7 +1180,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: direction="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1273,7 +1193,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: display-align="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1287,7 +1206,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: dominant-baseline="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1301,7 +1219,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: empty-cells="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1315,7 +1232,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: end-indent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1329,7 +1245,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: ends-row="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1343,14 +1258,12 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: extent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
    
    
    <rule context="fo:*/@external-destination"/>
-
    
    
    
@@ -1364,7 +1277,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: float="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1377,7 +1289,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: flow-map-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1390,7 +1301,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: flow-map-reference="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1403,7 +1313,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: flow-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1416,7 +1325,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: flow-name-reference="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1425,7 +1333,6 @@
    <rule context="fo:*/@font">
       <report test=". eq ''" role="Warning">font="" should be '[ [ &lt;font-style&gt; || &lt;font-variant&gt; || &lt;font-weight&gt; ]? &lt;font-size&gt; [ / &lt;line-height&gt;]? &lt;font-family&gt; ] | caption | icon | menu | message-box | small-caption | status-bar | inherit'.</report>
    </rule>
-
    
    
    
@@ -1434,7 +1341,6 @@
    <rule context="fo:*/@font-family">
       <report test=". eq ''" role="Warning">font-family="" should be '[[ &lt;family-name&gt; | &lt;generic-family&gt; ],]* [&lt;family-name&gt; | &lt;generic-family&gt;] | inherit'.</report>
    </rule>
-
    
    
    
@@ -1448,7 +1354,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-selection-strategy="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1462,7 +1367,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-size="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1476,7 +1380,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-size-adjust="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1490,7 +1393,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-stretch="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1504,7 +1406,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-style="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1513,7 +1414,6 @@
    <rule context="fo:*/@font-variant">
       <report test=". eq ''" role="Warning">font-variant="" should be 'normal | small-caps | inherit'.</report>
    </rule>
-
    
    
    
@@ -1527,7 +1427,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: font-weight="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1536,7 +1435,6 @@
    <rule context="fo:*/@force-page-count">
       <report test=". eq ''" role="Warning">force-page-count="" should be 'auto | even | odd | end-on-even | end-on-odd | no-force | inherit'.</report>
    </rule>
-
    
    
    
@@ -1545,7 +1443,6 @@
    <rule context="fo:*/@format">
       <report test=". eq ''" role="Warning">format="" should be '&lt;string&gt;'.</report>
    </rule>
-
    
    
    
@@ -1559,7 +1456,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: glyph-orientation-horizontal="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1573,7 +1469,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: glyph-orientation-vertical="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1582,7 +1477,6 @@
    <rule context="fo:*/@grouping-separator">
       <report test=". eq ''" role="Warning">grouping-separator="" should be '&lt;character&gt;'.</report>
    </rule>
-
    
    
    
@@ -1595,7 +1489,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: grouping-size="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1609,7 +1502,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: height="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1623,7 +1515,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenate="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1632,7 +1523,6 @@
    <rule context="fo:*/@hyphenation-character">
       <report test=". eq ''" role="Warning">hyphenation-character="" should be '&lt;character&gt; | inherit'.</report>
    </rule>
-
    
    
    
@@ -1646,7 +1536,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenation-keep="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1660,7 +1549,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenation-ladder-count="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1674,7 +1562,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenation-push-character-count="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1688,7 +1575,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenation-remain-character-count="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1697,7 +1583,6 @@
    <rule context="fo:*/@id">
       <report test=". eq ''" role="Warning">id="" should be '&lt;id&gt;'.</report>
    </rule>
-
    
    
    
@@ -1709,7 +1594,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: index-class="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1718,7 +1602,6 @@
    <rule context="fo:*/@index-key">
       <report test=". eq ''" role="Warning">index-key="" should be '&lt;string&gt;'.</report>
    </rule>
-
    
    
    
@@ -1732,7 +1615,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: indicate-destination="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1746,7 +1628,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: initial-page-number="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1760,14 +1641,12 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: inline-progression-dimension="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
    
    
    <rule context="fo:*/@internal-destination"/>
-
    
    
    
@@ -1781,7 +1660,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: intrinsic-scale-value="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1795,7 +1673,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: intrusion-displace="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1809,7 +1686,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: keep-together="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1823,7 +1699,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: keep-with-next="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1837,7 +1712,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: keep-with-previous="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1846,7 +1720,6 @@
    <rule context="fo:*/@language">
       <report test=". eq ''" role="Warning">language="" should be 'none | &lt;language&gt; | inherit'.</report>
    </rule>
-
    
    
    
@@ -1860,7 +1733,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: last-line-end-indent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1874,7 +1746,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: leader-alignment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1888,7 +1759,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: leader-length="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1902,7 +1772,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: leader-pattern="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1916,7 +1785,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: leader-pattern-width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1930,7 +1798,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: left="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1944,7 +1811,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: letter-spacing="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1958,7 +1824,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: letter-value="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1972,7 +1837,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: line-height="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -1986,7 +1850,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: line-height-shift-adjustment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2000,7 +1863,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: line-stacking-strategy="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2014,7 +1876,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: linefeed-treatment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2023,7 +1884,6 @@
    <rule context="fo:*/@margin">
       <report test=". eq ''" role="Warning">margin="" should be '&lt;margin-width&gt;{1,4} | inherit'.</report>
    </rule>
-
    
    
    
@@ -2037,7 +1897,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: margin-bottom="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2051,7 +1910,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: margin-left="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2065,7 +1923,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: margin-right="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2079,7 +1936,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: margin-top="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2092,7 +1948,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: marker-class-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2105,7 +1960,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: master-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2118,7 +1972,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: master-reference="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2127,7 +1980,6 @@
    <rule context="fo:*/@max-height">
       <report test=". eq ''" role="Warning">max-height="" should be '&lt;length&gt; | &lt;percentage&gt; | none | inherit'.</report>
    </rule>
-
    
    
    
@@ -2136,7 +1988,6 @@
    <rule context="fo:*/@max-width">
       <report test=". eq ''" role="Warning">max-width="" should be '&lt;length&gt; | &lt;percentage&gt; | none | inherit'.</report>
    </rule>
-
    
    
    
@@ -2150,7 +2001,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: maximum-repeats="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2164,7 +2014,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: media-usage="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2178,7 +2027,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: merge-pages-across-index-key-references="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2192,7 +2040,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: merge-ranges-across-index-key-references="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2206,7 +2053,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: merge-sequential-page-numbers="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2215,7 +2061,6 @@
    <rule context="fo:*/@min-height">
       <report test=". eq ''" role="Warning">min-height="" should be '&lt;length&gt; | &lt;percentage&gt; | inherit'.</report>
    </rule>
-
    
    
    
@@ -2224,7 +2069,6 @@
    <rule context="fo:*/@min-width">
       <report test=". eq ''" role="Warning">min-width="" should be '&lt;length&gt; | &lt;percentage&gt; | inherit'.</report>
    </rule>
-
    
    
    
@@ -2237,7 +2081,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: number-columns-repeated="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2250,7 +2093,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: number-columns-spanned="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2263,7 +2105,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: number-rows-spanned="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2277,7 +2118,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: odd-or-even="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2291,7 +2131,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: orphans="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2305,7 +2144,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: overflow="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2314,7 +2152,6 @@
    <rule context="fo:*/@padding">
       <report test=". eq ''" role="Warning">padding="" should be '&lt;padding-width&gt;{1,4} | inherit'.</report>
    </rule>
-
    
    
    
@@ -2328,7 +2165,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-after="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2342,7 +2178,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-before="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2356,7 +2191,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-bottom="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2370,7 +2204,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-end="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2384,7 +2217,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-left="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2398,7 +2230,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-right="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2412,7 +2243,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-start="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2426,7 +2256,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: padding-top="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2435,7 +2264,6 @@
    <rule context="fo:*/@page-break-after">
       <report test=". eq ''" role="Warning">page-break-after="" should be 'auto | always | avoid | left | right | inherit'.</report>
    </rule>
-
    
    
    
@@ -2444,7 +2272,6 @@
    <rule context="fo:*/@page-break-before">
       <report test=". eq ''" role="Warning">page-break-before="" should be 'auto | always | avoid | left | right | inherit'.</report>
    </rule>
-
    
    
    
@@ -2453,7 +2280,6 @@
    <rule context="fo:*/@page-break-inside">
       <report test=". eq ''" role="Warning">page-break-inside="" should be 'avoid | auto | inherit'.</report>
    </rule>
-
    
    
    
@@ -2467,7 +2293,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: page-citation-strategy="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2481,7 +2306,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: page-height="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2495,7 +2319,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: page-number-treatment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2509,7 +2332,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: page-position="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2523,7 +2345,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: page-width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2532,7 +2353,6 @@
    <rule context="fo:*/@pause">
       <report test=". eq ''" role="Warning">pause="" should be '[&lt;time&gt; | &lt;percentage&gt;]{1,2} | inherit'.</report>
    </rule>
-
    
    
    
@@ -2541,7 +2361,6 @@
    <rule context="fo:*/@position">
       <report test=". eq ''" role="Warning">position="" should be 'static | relative | absolute | fixed | inherit'.</report>
    </rule>
-
    
    
    
@@ -2555,7 +2374,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: precedence="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2569,7 +2387,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: provisional-distance-between-starts="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2583,7 +2400,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: provisional-label-separation="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2592,7 +2408,6 @@
    <rule context="fo:*/@ref-id">
       <report test=". eq ''" role="Warning">ref-id="" should be '&lt;idref&gt; | inherit'.</report>
    </rule>
-
    
    
    
@@ -2601,7 +2416,6 @@
    <rule context="fo:*/@ref-index-key">
       <report test=". eq ''" role="Warning">ref-index-key="" should be '&lt;string&gt;'.</report>
    </rule>
-
    
    
    
@@ -2610,7 +2424,6 @@
    <rule context="fo:*/@reference-orientation">
       <report test=". eq ''" role="Warning">reference-orientation="" should be '0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit'.</report>
    </rule>
-
    
    
    
@@ -2623,7 +2436,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: region-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2636,7 +2448,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: region-name-reference="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2650,7 +2461,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: relative-align="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2664,7 +2474,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: relative-position="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2678,7 +2487,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: rendering-intent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2692,7 +2500,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: retrieve-boundary="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2706,7 +2513,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: retrieve-boundary-within-table="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2719,7 +2525,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: retrieve-class-name="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2733,7 +2538,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: retrieve-position="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2747,7 +2551,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: retrieve-position-within-table="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2761,7 +2564,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: right="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2770,7 +2572,6 @@
    <rule context="fo:*/@role">
       <report test=". eq ''" role="Warning">role="" should be '&lt;string&gt; | &lt;uri-specification&gt; | none | inherit'.</report>
    </rule>
-
    
    
    
@@ -2784,7 +2585,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: rule-style="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2797,7 +2597,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: rule-thickness="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2811,7 +2610,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: scale-option="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2825,7 +2623,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: scaling="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2839,7 +2636,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: scaling-method="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2853,7 +2649,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: score-spaces="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2867,7 +2662,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: script="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2881,7 +2675,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: show-destination="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2890,7 +2683,6 @@
    <rule context="fo:*/@size">
       <report test=". eq ''" role="Warning">size="" should be '&lt;length&gt;{1,2} | auto | landscape | portrait | inherit'.</report>
    </rule>
-
    
    
    
@@ -2903,7 +2695,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: source-document="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2917,7 +2708,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: space-after="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2931,7 +2721,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: space-before="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2945,7 +2734,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: space-end="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2959,7 +2747,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: space-start="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2973,7 +2760,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: span="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -2982,7 +2768,6 @@
    <rule context="fo:*/@src">
       <report test=". eq ''" role="Warning">src="" should be '&lt;uri-specification&gt; | inherit'.</report>
    </rule>
-
    
    
    
@@ -2996,7 +2781,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: start-indent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3010,7 +2794,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: starting-state="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3024,7 +2807,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: starts-row="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3038,7 +2820,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: suppress-at-line-break="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3051,7 +2832,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: switch-to="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3065,7 +2845,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: table-layout="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3079,7 +2858,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: table-omit-footer-at-break="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3093,7 +2871,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: table-omit-header-at-break="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3106,7 +2883,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: target-presentation-context="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3119,7 +2895,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: target-processing-context="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3132,7 +2907,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: target-stylesheet="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3141,7 +2915,6 @@
    <rule context="fo:*/@text-align">
       <report test=". eq ''" role="Warning">text-align="" should be 'start | center | end | justify | inside | outside | left | right | &lt;string&gt; | inherit'.</report>
    </rule>
-
    
    
    
@@ -3155,7 +2928,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-align-last="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3169,7 +2941,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-altitude="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3183,7 +2954,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-decoration="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3197,7 +2967,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-depth="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3211,7 +2980,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-indent="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3225,7 +2993,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-shadow="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3239,7 +3006,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: text-transform="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3253,7 +3019,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: top="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3267,7 +3032,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: treat-as-word-space="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3281,7 +3045,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: unicode-bidi="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3290,7 +3053,6 @@
    <rule context="fo:*/@vertical-align">
       <report test=". eq ''" role="Warning">vertical-align="" should be 'baseline | middle | sub | super | text-top | text-bottom | &lt;percentage&gt; | &lt;length&gt; | top | bottom | inherit'.</report>
    </rule>
-
    
    
    
@@ -3304,7 +3066,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: visibility="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3313,7 +3074,6 @@
    <rule context="fo:*/@white-space">
       <report test=". eq ''" role="Warning">white-space="" should be 'normal | pre | nowrap | inherit'.</report>
    </rule>
-
    
    
    
@@ -3327,7 +3087,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: white-space-collapse="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3341,7 +3100,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: white-space-treatment="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3355,7 +3113,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: widows="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3369,7 +3126,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: width="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3383,7 +3139,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: word-spacing="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3397,7 +3152,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: wrap-option="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3411,7 +3165,6 @@
       <report test="local-name($expression) = 'ERROR'">Syntax error: writing-mode="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
-
    
    
    
@@ -3420,7 +3173,6 @@
    <rule context="fo:*/@xml.lang">
       <report test=". eq ''" role="Warning">xml.lang="" should be '&lt;language-country&gt; | inherit'.</report>
    </rule>
-
    
    
    
