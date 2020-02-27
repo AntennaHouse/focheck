@@ -155,11 +155,10 @@
     </sqf:fix>
   </rule>
 
-  <rule context="fo:*/@column-width">
+  <rule context="fo:*/@column-width[exists(../@number-columns-spanned)]">
     <let name="number-columns-spanned"
 	 value="ahf:parser-runner(../@number-columns-spanned)"/>
-    <report test="exists(../@number-columns-spanned) and
-		  local-name($number-columns-spanned) = 'Number' and
+    <report test="local-name($number-columns-spanned) = 'Number' and
                   (exists($number-columns-spanned/@value) and
 		   number($number-columns-spanned/@value) >= 1.5)" id="column-width" role="Warning"><value-of select="name()" /> is ignored with 'number-columns-spanned' is present and has a value greater than 1.</report>
   </rule>
@@ -257,6 +256,11 @@
     <!-- https://www.w3.org/TR/xsl11/#region-name-reference -->
     <assert test="count(ancestor::fo:flow-map//fo:region-name-specifier/@region-name-reference[. eq current()]) = 1">region-name-reference="<value-of select="."/>" must be unique within its fo:flow-map.</assert>
   </rule>
+
+   <!-- retrieve-class-name -->
+   <rule context="fo:*/@retrieve-class-name">
+      <assert test="exists(key('marker-class-name', .))" role="Warning"><value-of select="local-name()" />="<value-of select="."/>" does not refer to an existing fo:marker.</assert>
+   </rule>
 
   <rule context="fo:*/@span">
     <!-- https://www.w3.org/TR/xsl11/#span -->

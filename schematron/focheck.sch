@@ -24,6 +24,9 @@
     <xsl:key name="index-key"
 	     match="*[exists(@index-key)]"
 	     use="@index-key" />
+    <xsl:key name="marker-class-name"
+	     match="fo:marker"
+	     use="@marker-class-name" />
     <xsl:key name="master-name"
 	     match="fo:simple-page-master | fo:page-sequence-master |
 		    axf:spread-page-master"
