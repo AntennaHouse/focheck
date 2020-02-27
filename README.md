@@ -27,7 +27,7 @@ Pull requests and new issues are welcome.
 ## Installing
 
 * If you want to keep up-to-date with **focheck** releases, then you can install **focheck** as an add-on oXygen framework.
-* **focheck** 0.7.1 (from 2019) is bundled with oXygen 21. (Earlier oXygen versions, starting with oXygen 17.1, bundled earlier **focheck** versions.)
+* **focheck** 0.7.5 (from 2019) is bundled with oXygen 22. (Earlier oXygen versions, starting with oXygen 17.1, bundled earlier **focheck** versions.)
 * If you want to use the current **focheck** version with an older oXygen version, then you can install **focheck** as an add-on oXygen framework.
 * Alternatively, you can download a static copy of the oXygen framework from GitHub.
 * If you want to easily keep up-to-date with changes, then you can clone this repository and 'pull' the latest version whenever you want.
@@ -62,7 +62,7 @@ If you don't have permission to modify the oXygen installation – for example, 
 ### Installing a repository clone
 
 1. Clone the repository into either the oXygen `frameworks` directory or another directory.
- - **focheck** incorporates **[stf](https://github.com/MenteaXML/stf)** as a submodule.  There are two ways to also check out **stf**:
+ - **focheck** incorporates **[stf](https://github.com/Schematron/stf)** as a submodule.  There are two ways to also check out **stf**:
    - Pass `--recursive` to `git clone` when you check out **focheck**
    - If you've already checked out **focheck**, you can run
      `git submodule init`
@@ -122,7 +122,7 @@ Makes a Zip archive of just the oXygen framework.
 
 ## License
 
-Copyright 2015-2019 Antenna House, Inc.
+Copyright 2015-2020 Antenna House, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -250,7 +250,7 @@ oXygen はアドオンフレームワークをインストールした後、エ�
 ### リポジトリクローンのインストール
 
 1. oXygen `frameworks` ディレクトリ又は別のディレクトリのどちらかにリポジトリをクローンします。
- - **focheck** はサブモジュールとして **[stf](https://github.com/MenteaXML/stf)** を組み込まれています。**stf** を確認するのは、二つの方法があります。
+ - **focheck** はサブモジュールとして **[stf](https://github.com/Schematron/stf)** を組み込まれています。**stf** を確認するのは、二つの方法があります。
    - **focheck** を確認すると、`git clone` に `--recursive` を飛び出します。
    - **focheck** を既に確認していた場合、次下を実行できます。
      `git submodule init `
@@ -315,7 +315,7 @@ oXygen フレームワークの Zip アーカイブを生成します。
 ## ライセンス
 
 
-Copyright 2015-2019 Antenna House, Inc.
+Copyright 2015-2020 Antenna House, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
