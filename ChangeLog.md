@@ -1,3 +1,10 @@
+# focheck 0.7.5
+
+- Handling `column-width` without `number-columns-spanned` (#41)
+- Warning about reference to undefined marker class name.
+- Added short Apache License text in `axs.rnc`, etc. (closes #40)
+- Updated `README.md` for 2020.
+
 # focheck 0.7.4
 
 - Able to add percent and length (#39) or percent and percent.
