@@ -130,7 +130,7 @@
 <property name="axf:leader-expansion" model="'auto' | 'force'" description="Whether to forcibly expand a leader" />
 <property name="axf:letter-spacing-side" model="'both' | 'start' | 'end'" description="Which side of the character the space by letter-spacing is distributed" />
 <property name="axf:ligature-mode" model="text" description="Whether to perform the ligature processing: none | [ latin || kana ] | all | auto" />
-<property name="axf:line-break" model="'normal' | 'strict'" description="Line-breaking method" />
+<property name="axf:line-break" model="text" description="Line-breaking method: auto | [[normal | strict | loose | anywhere] || [line | bpil]]" />
 <property name="axf:line-continued-mark" model="text" description="Whether to show line continued marks: &lt;string>" />
 <property name="axf:line-continued-mark-background-color" model="text" description="Background color of line continued marks" />
 <property name="axf:line-continued-mark-color" model="text" description="Color of line continued marks" />
