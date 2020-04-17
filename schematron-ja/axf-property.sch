@@ -643,6 +643,17 @@
 	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー： axf:text-line-width=&quot;<value-of select="."/>&quot;</report>
 	</rule>
 
+   <!-- color-profile-name -->
+   <!-- #CMYK | #Grayscale | #RGB -->
+   <!-- Inherited: no -->
+   <!-- Shorthand: no -->
+   <!-- http://www.w3.org/TR/xsl11/#color-profile-name -->
+   <!-- https://www.docs.antennahouse.com/formatter/ahf-pdf.html#pdfx -->
+   <rule context="fo:*/@color-profile-name">
+      <let name="expression" value="normalize-space(.)"></let>
+      <report test="not($expression = ('#CMYK', '#Grayscale', '#RGB'))">color-profile-name=&quot;<value-of select="."/>&quot;. Allowed keywords are '#CMYK', '#Grayscale', and '#RGB'. トークンは '<value-of select="$expression"/>' です。</report>
+   </rule>
+
 	<!-- overflow -->
 	<!-- visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto -->
 	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.overflow -->

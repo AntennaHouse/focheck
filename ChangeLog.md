@@ -1,3 +1,8 @@
+# focheck 0.7.6
+
+- Corrected `fo:declarations` and `color-profile-name`.
+- Less checking for `axf:line-break`. (V7.0)
+
 # focheck 0.7.5
 
 - Handling `column-width` without `number-columns-spanned` (#41)

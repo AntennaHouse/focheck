@@ -86,12 +86,10 @@
       <xs:element ref="fo:region-end"/>
     </xs:choice>
   </xs:complexType>
-  <!--
-    AH Formatter uses axf:custom-property and axf:document-info within
-    fo:declarations.
-  -->
+  <!-- AH Formatter uses some axf:* elements within fo:declarations. -->
   <xs:complexType name="fo_declarations.model">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="fo:color-profile"/>
       <xs:element ref="axf:custom-property"/>
       <xs:element ref="axf:document-info"/>
       <xs:element ref="axf:font-face"/>
@@ -102,6 +100,7 @@
       <xs:element ref="axf:space-end-punctuation"/>
       <xs:element ref="axf:space-start-punctuation"/>
       <xs:element ref="axf:output-volume-info"/>
+      <xs:group ref="axf:non-xsl-element"/>
     </xs:choice>
   </xs:complexType>
   <!-- AH Formatter allows empty fo:static-content. -->
@@ -195,6 +194,15 @@
   <xs:attributeGroup name="non-xsl">
     <xs:anyAttribute processContents="skip"/>
   </xs:attributeGroup>
+  <!--
+    For fo:declarations
+    Exclude axf:* elements from counting as 'non-xsl'.
+  -->
+  <xs:group name="non-xsl-element">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+    </xs:sequence>
+  </xs:group>
   <!--
     
     End of overrides to patterns in 'axf-inherited.rnc'.
@@ -563,13 +571,14 @@
     </xs:attribute>
     <xs:attribute name="bookmark-include">
       <xs:annotation>
-        <xs:documentation>How to include bookmarks in multiple separate volumes: first | all | separate</xs:documentation>
+        <xs:documentation>How to include bookmarks in multiple separate volumes: first | all | separate | separate-group</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
           <xs:enumeration value="first"/>
           <xs:enumeration value="all"/>
           <xs:enumeration value="separate"/>
+          <xs:enumeration value="separate-group"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>

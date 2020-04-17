@@ -1049,11 +1049,7 @@
    
    
    <rule context="fo:*/@color-profile-name">
-      <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">color-profile-name="<value-of select="."/>" should be 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">color-profile-name="" should be 'inherit'.</report>
-      <report test="local-name($expression) = 'ERROR'">Syntax error: color-profile-name="<value-of select="."/>":: <value-of select="$expression"/>
-      </report>
+      <report test=". eq ''" role="Warning">color-profile-name="" should be '&lt;name&gt; | inherit'.</report>
    </rule>
    
    
@@ -3842,6 +3838,17 @@
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:text-line-width="" should be 'auto', 'thin', 'medium', 'thick', 'inherit', or Length.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:text-line-width="<value-of select="."/>"</report>
 	</rule>
+
+   
+   
+   
+   
+   
+   
+   <rule context="fo:*/@color-profile-name">
+      <let name="expression" value="normalize-space(.)"/>
+      <report test="not($expression = ('#CMYK', '#Grayscale', '#RGB'))">color-profile-name="<value-of select="."/>". Allowed keywords are '#CMYK', '#Grayscale', and '#RGB'. Token is '<value-of select="$expression"/>'.</report>
+   </rule>
 
 	
 	

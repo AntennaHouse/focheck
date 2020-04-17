@@ -116,13 +116,11 @@
         </optional>
       </interleave>
     </define>
-    <!--
-      AH Formatter uses axf:custom-property and axf:document-info within
-      fo:declarations.
-    -->
-    <define name="fo_declarations.model" combine="choice">
+    <!-- AH Formatter uses some axf:* elements within fo:declarations. -->
+    <define name="fo_declarations.model">
       <zeroOrMore>
         <choice>
+          <ref name="fo_color-profile"/>
           <ref name="axf_custom-property"/>
           <ref name="axf_document-info"/>
           <ref name="axf_font-face"/>
@@ -133,6 +131,7 @@
           <ref name="axf_space-end-punctuation"/>
           <ref name="axf_space-start-punctuation"/>
           <ref name="axf_output-volume-info"/>
+          <ref name="non-xsl-element"/>
         </choice>
       </zeroOrMore>
     </define>
@@ -266,7 +265,57 @@
           </anyName>
           <zeroOrMore>
             <attribute>
-              <anyName/>
+              <anyName>
+                <except>
+                  <name ns="">id</name>
+                  <name ns="">ref-id</name>
+                  <name ns="">internal-destination</name>
+                </except>
+              </anyName>
+            </attribute>
+          </zeroOrMore>
+          <optional>
+            <attribute name="id">
+              <data type="ID"/>
+            </attribute>
+          </optional>
+          <optional>
+            <attribute name="ref-id">
+              <data type="IDREF"/>
+            </attribute>
+          </optional>
+          <optional>
+            <attribute name="internal-destination">
+              <data type="IDREF"/>
+            </attribute>
+          </optional>
+          <ref name="anything"/>
+        </element>
+      </zeroOrMore>
+    </define>
+    <!--
+      For fo:declarations
+      Exclude axf:* elements from counting as 'non-xsl'.
+    -->
+    <define name="non-xsl-element">
+      <zeroOrMore>
+        <element>
+          <anyName>
+            <except>
+              <nsName ns=""/>
+              <nsName ns="http://www.w3.org/1999/XSL/Format"/>
+              <nsName/>
+            </except>
+          </anyName>
+          <zeroOrMore>
+            <attribute>
+              <anyName>
+                <except>
+                  <name ns="">id</name>
+                  <name ns="">ref-id</name>
+                  <name ns="">internal-destination</name>
+                </except>
+              </anyName>
             </attribute>
           </zeroOrMore>
           <ref name="anything"/>
@@ -610,11 +659,12 @@
     </optional>
     <optional>
       <attribute name="bookmark-include">
-        <a:documentation>How to include bookmarks in multiple separate volumes: first | all | separate</a:documentation>
+        <a:documentation>How to include bookmarks in multiple separate volumes: first | all | separate | separate-group</a:documentation>
         <choice>
           <value>first</value>
           <value>all</value>
           <value>separate</value>
+          <value>separate-group</value>
         </choice>
       </attribute>
     </optional>

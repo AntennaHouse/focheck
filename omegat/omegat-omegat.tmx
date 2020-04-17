@@ -3151,14 +3151,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>How to include bookmarks in multiple separate volumes: first | all | separate</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20190521T111721Z" creationid="mtan" creationdate="20190521T111721Z">
-        <seg>多分冊にしおりを付ける方法： first | all | separate</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>How to justify text</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160309T145327Z" creationid="mtan" creationdate="20160309T130619Z">
@@ -3533,14 +3525,6 @@ you may not use this file except in compliance with the License.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T125343Z" creationid="mtan" creationdate="20160120T125343Z">
         <seg>トンボの線の幅</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Line-breaking method</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160118T161922Z" creationid="mtan" creationdate="20160118T161922Z">
-        <seg>行分割の方法</seg>
       </tuv>
     </tu>
     <tu>
@@ -4933,14 +4917,6 @@ limitations under the License.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190527T154520Z" creationid="mtan" creationdate="20190527T154520Z">
         <seg>シンタックスエラー： clip="&lt;v0/&gt;"::</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: color-profile-name="&lt;v0/&gt;"::</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20190527T154520Z" creationid="mtan" creationdate="20190527T154520Z">
-        <seg>シンタックスエラー： color-profile-name="&lt;v0/&gt;"::</seg>
       </tuv>
     </tu>
     <tu>
@@ -9730,22 +9706,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171020T095437Z" creationid="tkg" creationdate="20171020T095437Z">
         <seg>collapse | collapse-with-precedence | separate | inherit</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>color-profile-name="" should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T111224Z" creationid="mtan" creationdate="20151029T153847Z">
-        <seg>color-profile-name="" は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>color-profile-name="&lt;v0/&gt;" should be 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T111211Z" creationid="mtan" creationdate="20151029T153835Z">
-        <seg>color-profile-name="&lt;v0/&gt;" は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>

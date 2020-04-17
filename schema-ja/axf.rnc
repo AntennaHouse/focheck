@@ -64,10 +64,10 @@ include "axf-inherited.rnc" inherit = axf {
     & fo_region-after?
     & fo_region-start?
     & fo_region-end?
-  # AH Formatter uses axf:custom-property and axf:document-info within
-  # fo:declarations.
-  fo_declarations.model |=
-    (axf_custom-property
+  # AH Formatter uses some axf:* elements within fo:declarations.
+  fo_declarations.model =
+    (fo_color-profile
+     | axf_custom-property
      | axf_document-info
      | axf_font-face
      | axf_formatter-config
@@ -76,7 +76,8 @@ include "axf-inherited.rnc" inherit = axf {
      | axf_space-between-punctuation-and-digit
      | axf_space-end-punctuation
      | axf_space-start-punctuation
-     | axf_output-volume-info)*
+     | axf_output-volume-info
+     | non-xsl-element)*
   # AH Formatter allows empty fo:static-content.
   fo_static-content.model =
     (block.fo.list | neutral.fo.list)* & point.fo.list*
@@ -107,7 +108,17 @@ include "axf-inherited.rnc" inherit = axf {
   non-xsl =
     attribute * - (local:* | axf:* | xml:*) { text }*,
     element * - (local:* | fo:* | axf:*) {
-      attribute * { text }*,
+      attribute * - (id | ref-id | internal-destination) { text }*,
+      attribute id { xsd:ID }?,
+      attribute ref-id { xsd:IDREF }?,
+      attribute internal-destination { xsd:IDREF }?,
+      anything
+    }*
+  # For fo:declarations
+  # Exclude axf:* elements from counting as 'non-xsl'.
+  non-xsl-element =
+    element * - (local:* | fo:* | axf:*) {
+      attribute * - (id | ref-id | internal-destination) { text }*,
       anything
     }*
   # 
@@ -332,8 +343,10 @@ axf_output-volume-info.attlist =
   ## 書式指定： <string>
   attribute format { text }?,
   
-  ## 多分冊にしおりを付ける方法： first | all | separate
-  attribute bookmark-include { "first" | "all" | "separate" }?
+  ## How to include bookmarks in multiple separate volumes: first | all | separate | separate-group
+  attribute bookmark-include {
+    "first" | "all" | "separate" | "separate-group"
+  }?
 # <axf:ruby>
 # https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby
 axf_ruby =
