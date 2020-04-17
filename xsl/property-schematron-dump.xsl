@@ -115,6 +115,7 @@ allowed-height-scale
 allowed-width-scale
 background-image
 character
+color-profile-name
 content-type
 country
 external-destination

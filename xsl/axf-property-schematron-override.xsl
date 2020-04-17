@@ -83,6 +83,8 @@
   <item property="background-repeat">repeat | repeat-x | repeat-y | no-repeat | paginate</item>
   <!-- AH Formatter adds 'transparent'. -->
   <item property="color">&lt;color> | transparent | inherit</item>
+  <!-- AH Formatter supports these three values. -->
+  <item property="color-profile-name">#CMYK | #Grayscale | #RGB</item>
   <!-- AH Formatter adds 'justify'. -->
   <item property="display-align">auto | before | center | after | justify</item>
   <!-- AH Formatter allows <percentage>. -->
@@ -101,6 +103,7 @@ allowed-height-scale
 allowed-width-scale
 background-image
 character
+color-profile-name
 content-type
 country
 external-destination

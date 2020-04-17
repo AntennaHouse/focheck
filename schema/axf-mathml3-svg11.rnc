@@ -40,7 +40,7 @@ non-xsl =
 
 # For fo:instream-foreign-object
 anything =
-   ( element * -( fo:* ) {
+   ( element * - ( fo:* ) {
         attribute * - (id | ref-id | internal-destination ) { text }*,
         anything } |
      text )*

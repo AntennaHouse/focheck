@@ -652,6 +652,17 @@
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:text-line-width="<value-of select="."/>"</report>
 	</rule>
 
+   <!-- color-profile-name -->
+   <!-- #CMYK | #Grayscale | #RGB -->
+   <!-- Inherited: no -->
+   <!-- Shorthand: no -->
+   <!-- http://www.w3.org/TR/xsl11/#color-profile-name -->
+   <!-- https://www.docs.antennahouse.com/formatter/ahf-pdf.html#pdfx -->
+   <rule context="fo:*/@color-profile-name">
+      <let name="expression" value="normalize-space(.)"/>
+      <report test="not($expression = ('#CMYK', '#Grayscale', '#RGB'))">color-profile-name="<value-of select="."/>". Allowed keywords are '#CMYK', '#Grayscale', and '#RGB'. Token is '<value-of select="$expression"/>'.</report>
+   </rule>
+
 	<!-- overflow -->
 	<!-- visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto -->
 	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.overflow -->

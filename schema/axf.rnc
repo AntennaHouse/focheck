@@ -69,10 +69,10 @@ fo_simple-page-master.model =
        fo_region-start? &
        fo_region-end?) )
 
-# AH Formatter uses axf:custom-property and axf:document-info within
-# fo:declarations.
-fo_declarations.model |=
-   (axf_custom-property |
+# AH Formatter uses some axf:* elements within fo:declarations.
+fo_declarations.model =
+   (fo_color-profile |
+      axf_custom-property |
       axf_document-info |
       axf_font-face |
       axf_formatter-config |
@@ -81,7 +81,8 @@ fo_declarations.model |=
       axf_space-between-punctuation-and-digit |
       axf_space-end-punctuation |
       axf_space-start-punctuation |
-      axf_output-volume-info)*
+      axf_output-volume-info |
+      non-xsl-element)*
 
 # AH Formatter allows empty fo:static-content.
 fo_static-content.model =
@@ -118,7 +119,19 @@ fo_table-cell.model =
 # Exclude axf:* elements and attributes from counting as 'non-xsl'.
 non-xsl =
   ( attribute * - ( local:* | axf:* | xml:* ) { text }*,
-    element * - ( local:* | fo:* | axf:* ) { attribute * { text }*, anything }* )
+     element * - ( local:* | fo:* | axf:* ) {
+        attribute * - ( id | ref-id | internal-destination ) { text }*,
+        attribute id { xsd:ID }?,
+        attribute ref-id { xsd:IDREF }?,
+        attribute internal-destination { xsd:IDREF }?,
+        anything }* )
+
+# For fo:declarations
+# Exclude axf:* elements from counting as 'non-xsl'.
+non-xsl-element =
+   element * - ( local:* | fo:* | axf:* ) {
+      attribute * - ( id | ref-id | internal-destination ) { text }*,
+      anything }*
 
 #
 # End of overrides to patterns in 'axf-inherited.rnc'.
@@ -331,8 +344,8 @@ axf_output-volume-info.attlist =
    attribute initial-volume-number { xsd:positiveInteger }?,
    ## Format specification: <string>
    attribute format { text }?,
-   ## How to include bookmarks in multiple separate volumes: first | all | separate
-   attribute bookmark-include { 'first' | 'all' | 'separate' }?
+   ## How to include bookmarks in multiple separate volumes: first | all | separate | separate-group
+   attribute bookmark-include { 'first' | 'all' | 'separate' | 'separate-group' }?
 
 # <axf:ruby>
 # https://www.antennahouse.com/product/ahf65/ahf-ruby.html#axf.ruby
