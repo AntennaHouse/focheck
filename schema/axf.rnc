@@ -236,7 +236,9 @@ axf_form-field =
 }
 
 axf_form-field.model =
-    (axf_form-field-option | axf_form-field-event)*
+   (axf_form-field-option |
+      axf_form-field-event |
+      fo_external-graphic)*
 
 axf_form-field.attlist =
     # 'action-type' is required for <axf:form-field-event>.
@@ -270,6 +272,7 @@ axf_form-field.attlist =
     common-border-padding-and-background-properties,
     external-destination,
     height,
+    internal-destination,
     width
 
 # <axf:form-field-event>
@@ -963,12 +966,11 @@ axf_action-type =
     ## Specifies the action of external link or form action
     attribute axf:action-type | action-type { 'gotor' | 'launch' | 'uri' | 'reset' | 'submit' | 'auto' }?
 
-axf_action-type.form.model =
-     'auto' | 'gotor' | 'gotor' | 'launch' | 'uri' | 'reset' | 'submit'
-
 # @axf:action-type
 #
 # https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.action-type2
+axf_action-type.form.model =
+     'auto' | 'goto' | 'gotor' | 'gotor' | 'launch' | 'uri' | 'reset' | 'submit'
 axf_action-type.form =
     ## Specifies the action of form action
     attribute axf:action-type | action-type { axf_action-type.form.model }?
