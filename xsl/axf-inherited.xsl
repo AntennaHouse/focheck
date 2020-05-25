@@ -109,17 +109,29 @@
 <property name="axf:abbreviation-character-count" model="'auto' | text" description="Minimum number of characters considered to be an abbreviation" />
 <property name="axf:alt-glyph" model="text" description="Alternative glyph of a character: &lt;number> | &lt;string> &lt;number>?" />
 <property name="axf:assumed-page-number" model="text" description="Assumed page number" />
-<property name="axf:avoid-widow-words" model="'true' | 'false'" description="Spacing behavior between words or characters so that the last line of the paragraph does not have only one word left (one character for CJK)" />
+<property name="axf:avoid-widow-words" model="text" description="Spacing behavior between words or characters so that the last line of the paragraph does not have only one word left (one character for CJK): false | true | [&lt;length> || &lt;percentage>]" />
+<property name="axf:balanced-text-align" model="'true' | 'false' | 'auto'" description="Whether to balance entire block including the last line: true | false | auto" /><!-- V7.0 -->
 <property name="axf:base-uri" model="text" description="Location which becomes the base of relative URI" />
 <property name="axf:border-double-thickness" model="text" description="Line thickness of border-style=&quot;double&quot;" />
 <property name="axf:border-connection-form" model="'mixed' | 'precedence' | 'wedge'" description="Shape of border connections" />
 <property name="axf:border-wave-form" model="text" description="Wave form for border-style=&quot;wave&quot;" />
 <property name="axf:diagonal-border-color" model="text" description="Color of the diagonal border" />
 <property name="axf:diagonal-border-width" model="text" description="Width of the diagonal border" />
+<property name="axf:display-alttext" model="'true' | 'false' | 'auto'" description="Whether to display the alternate text of a missing image: true | false | auto" /><!-- V7.0 -->
+<property name="axf:flush-zone" model="text" description="Threshold for justifying last line: none | &lt;length> | &lt;percentage>" /><!-- V7.0 -->
 <property name="axf:hanging-punctuation" model="text" description="Whether to hang punctuations at the start of the line or end of the line: none | [ start || first || [ force-end | allow-end ] || last ]" />
+<property name="axf:hyphenate-caps-word" model="'true' | 'false'" description="Whether to hyphenate words consisting only of uppercase letters: true | false" /><!-- V7.0 -->
 <property name="axf:hyphenate-hyphenated-word" model="'true' | 'false'" description="Whether to hyphenate an already hyphenated word" />
 <property name="axf:hyphenation-minimum-character-count" model="text" description="Minimum number of the character to hyphenate" />
 <property name="axf:hyphenation-zone" model="'none' | text" description="Range where a hyphenation is available: none | &lt;length>" />
+<property name="axf:initial-letters-color" model="text" description="Color of a dropped initial: &lt;color>" /><!-- V7.0 -->
+<property name="axf:initial-letters-end-indent" model="text" description="Space on the end side of a dropped initial: &lt;length>+" /><!-- V7.0 -->
+<property name="axf:initial-letters-first-line-head-height" model="'cap-height' | 'x-height' | 'auto'" description="Alignment of the top of an initial letter: cap-height | x-height | auto" /><!-- V7.0 -->
+<property name="axf:initial-letters-leading-punctuation" model="text" description="Size of the leading punctuation of a dropped initial: normal | hide | [&lt;length> || &lt;color>]" /><!-- V7.0 -->
+<property name="axf:initial-letters-leading-punctuation-position" model="text" description="Position of the leading punctuation of a dropped initial in the inline progression direction: normal | [[hang | intrude] &amp;&amp; &lt;length>?]" /><!-- V7.0 -->
+<property name="axf:initial-letters-leading-punctuation-shift" model="text" description="Position of the leading punctuation of a dropped initial in the block progression direction: normal | [[baseline | before | middle | after] || &lt;length>]" /><!-- V7.0 -->
+<property name="axf:initial-letters-text-align" model="'start' | 'center' | 'end' | 'left' | 'right'" description="Alignment of a dropped initial: start | center | end | left | right" /><!-- V7.0 -->
+<property name="axf:initial-letters-width" model="text" description="Width of a dropped initial: auto | &lt;length> | &lt;percentage>" /><!-- V7.0 -->
 <property name="axf:japanese-glyph" model="'none' | 'jp78' | 'jp83' | 'jp90' | 'jp04'" description="Glyph of Japanese Kanji" />
 <property name="axf:justify-nbsp" model="'true' | 'false'" description="Whether to justify NON-BREAKING SPACE" />
 <property name="axf:kansuji-grouping-letter" model="text" description="Grouping character used for Japanese numerals" />
@@ -129,7 +141,7 @@
 <property name="axf:layer" model="'none' | text" description="Layer to which the area is arranged." />
 <property name="axf:leader-expansion" model="'auto' | 'force'" description="Whether to forcibly expand a leader" />
 <property name="axf:letter-spacing-side" model="'both' | 'start' | 'end'" description="Which side of the character the space by letter-spacing is distributed" />
-<property name="axf:ligature-mode" model="text" description="Whether to perform the ligature processing: none | [ latin || kana ] | all | auto" />
+<property name="axf:ligature-mode" model="text" description="Whether to perform the ligature processing: none | [ latin || kana || jamo ] | all | auto" />
 <property name="axf:line-break" model="text" description="Line-breaking method: auto | [[normal | strict | loose | anywhere] || [line | bpil]]" />
 <property name="axf:line-continued-mark" model="text" description="Whether to show line continued marks: &lt;string>" />
 <property name="axf:line-continued-mark-background-color" model="text" description="Background color of line continued marks" />
@@ -199,11 +211,14 @@
 <property name="axf:ruby-position" model="'before' | 'after'" description="Side of the base characters on which the ruby text appears: before | after" />
 <property name="axf:ruby-small-kana" model="'auto' | 'convert'" description="Whether to allow using small kana for ruby text: auto | convert" />
 <property name="axf:soft-hyphen-treatment" model="'auto' | 'preserve'" description="Whether to print SOFT HYPHEN (U+00AD)" />
-<property name="axf:suppress-duplicate-footnote" model="'true' | 'false'" description="Whether to delete footnotes duplicated in the same page" />
-<property name="axf:suppress-duplicate-page-number" model="'true' | 'false'" description="Whether to delete duplicated page numbers" />
-<property name="axf:tab-overlap-treatment" model="'auto' | 'ignore-tab' | 'next-tab'" description="Behavior when tab alignment makes letters overlap" />
+<property name="axf:suppress-duplicate-footnote" model="'true' | 'false'" description="Whether to delete footnotes duplicated in the same page: true | false" />
+<property name="axf:suppress-duplicate-marker-contents" model="'true' | 'false'" description="Whether to delete markers duplicated in the same page: true | false" /><!-- V7.0 -->
+<property name="axf:suppress-duplicate-page-number" model="'true' | 'false'" description="Whether to delete duplicated page numbers: true | false" />
+<property name="axf:tab-overlap-treatment" model="'auto' | 'ignore-tab' | 'next-tab'" description="Behavior when tab alignment makes letters overlap: auto | ignore-tab | next-tab" />
 <property name="axf:tab-stops" model="text" description="Tab stop positions" />
 <property name="axf:tab-treatment" model="text" description="Treatment for literal tab characters" />
+<property name="axf:table-row-orphans" model="text" description="Number of table-rows that must remain at the bottom of the page (column): &lt;integer>" /><!-- V7.0 -->
+<property name="axf:table-row-widows" model="text" description="Number of table-rows that must remain at the top of the page (column): &lt;integer>" /><!-- V7.0 -->
 <property name="axf:text-align-first" model="'relative' | 'start' | 'center' | 'end' | 'justify' | 'inside' | 'outside' | 'left' | 'right'" description="Text alignment of the first line" />
 <property name="axf:text-align-string" model="'start' | 'center' | 'end' | 'inside' | 'outside' | 'left' | 'right'" description="Text alignment when text-align=&quot;&lt;string>&quot;" />
 <property name="axf:text-autospace" model="text" description="Whether to add space surrounding ideographic glyphs: none | [ ideograph-numeric || ideograph-alpha || ideograph-parenthesis ] | auto" />
@@ -219,7 +234,8 @@
 <property name="axf:text-emphasis-position" model="'before' | 'after'" description="Which side of base characters emphasis marks are put" />
 <property name="axf:text-emphasis-skip" model="text" description="Characters to which emphasis marks are not applied: none | [ spaces || punctuation || symbols || narrow ]" />
 <property name="axf:text-emphasis-style" model="text" description="Style of emphasis marks: none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | &lt;string> " />
-<property name="axf:text-justify" model="'auto' | 'inter-word' | 'distribute'" description="How to justify text" />
+<property name="axf:text-indent-if-first-on-page" model="text" description="text-indent of a block at the top of a page or column: &lt;length> | &lt;percentage> | auto" /><!-- V7.0 -->
+<property name="axf:text-justify" model="'auto' | 'inter-word' | 'distribute'" description="How to justify text: auto | inter-word | distribute" />
 <property name="axf:text-justify-trim" model="text" description="The way to trim spaces between characters in justified text" />
 <property name="axf:text-kashida-space" model="text" description="Percentage of Kashida in Arabic justification: &lt;percentage> | auto" />
 <property name="axf:text-orientation" model="'mixed' | 'upright' | 'sideways-right' | 'sideways' | 'none'" description="Orientation of text in vertical writing mode" />
@@ -241,6 +257,14 @@
 
   <xsl:call-template name="ahf:rnc-initial-comment" />
   <xsl:text>
+# AH Formatter extension properties that are inherited.
+#
+# These properties are defined in:
+#  - https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html
+#  - https://www.antenna.co.jp/AHF/help/v70e/ahf-float.html
+#  - https://www.antenna.co.jp/AHF/help/v70e/ahf-ruby.html
+#  - https://www.antenna.co.jp/AHF/help/v70e/ahf-spread.html
+
 default namespace fo = "http://www.w3.org/1999/XSL/Format"
 namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
 namespace local = ""
