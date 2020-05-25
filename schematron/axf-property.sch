@@ -299,6 +299,15 @@
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:indent-here="<value-of select="."/>"</report>
 	</rule>
 
+	<!-- axf:initial-letters-color -->
+	<!-- <color> | inherit -->
+	<!-- Inherited: yes -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.initial-letters -->
+	<rule context="fo:*/@axf:initial-letters-color">
+	  <extends rule="color" />
+	</rule>
+
 	<!-- axf:keep-together-within-dimension -->
 	<!-- auto | <length> -->
 	<!-- Inherited: no -->

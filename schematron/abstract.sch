@@ -19,6 +19,16 @@
 	 xmlns:sqf="http://www.schematron-quickfix.com/validator/process"
 	 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
+  <!-- <color> | inherit -->
+  <rule abstract="true" id="color">
+    <let name="context" value="."/>
+    <let name="expression" value="ahf:parser-runner(.)"/>
+    <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()" />="<value-of select="."/>" should be Color or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))"><value-of select="name()" />="<value-of select="."/>" token should be 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+    <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()" />="" should be Color, or 'inherit'.</report>
+    <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="name()" />="<value-of select="."/>"</report>
+  </rule>
+
   <!-- <color> | transparent | inherit -->
   <rule abstract="true" id="color-transparent">
     <let name="context" value="."/>
