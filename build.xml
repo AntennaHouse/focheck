@@ -60,6 +60,19 @@ AFTER making a release on GitHub:
 <property name="tests.dir"
 	  value="${focheck.basedir.converted}/test/stf"/>
 
+<!-- Directory containing OmegaT project (not OmegaT itself). -->
+<property name="omegat.project.dir"
+	  value="${focheck.basedir.converted}/omegat" />
+<!-- Directory containing OmegaT project configuration. -->
+<property name="omegat.config.dir"
+	  value="${omegat.project.dir}/config" />
+<!-- Directory into which to copy source files to be translated. -->
+<property name="omegat.source.dir"
+	  value="${omegat.project.dir}/source" />
+<!-- Directory from which to copy translated files. -->
+<property name="omegat.target.dir"
+	  value="${omegat.project.dir}/target" />
+
 <property name="stf.dir" location="${focheck.basedir.converted}/stf" />
 <import file="${stf.dir}/build.xml" optional="true" />
 
@@ -372,33 +385,36 @@ AFTER making a release on GitHub:
 
 <!-- Translation targets. -->
 
-<target name="translate" depends="rng">
-  <mkdir dir="${focheck.basedir.converted}/omegat/target" />
+<target name="translate.source.copy">
   <!-- Preserve modification dates for ease of comparison with
        'reference' OmegaT project where original translations are
        done. -->
-  <copy todir="${focheck.basedir.converted}/omegat/source"
+  <copy todir="${omegat.source.dir}"
 	preservelastmodified="true"
 	overwrite="${force}">
     <fileset dir="${focheck.basedir.converted}/schematron"
 	     includes="*.sch" />
   </copy>
-  <copy todir="${focheck.basedir.converted}/omegat/source"
+  <copy todir="${omegat.source.dir}"
 	preservelastmodified="true"
 	overwrite="${force}">
     <fileset dir="${focheck.basedir.converted}/schema/rng"
 	     includes="*.rng" />
   </copy>
+</target>
+
+<target name="translate" depends="rng, translate.source.copy">
+  <mkdir dir="${omegat.target.dir}" />
   <java jar="omegat/OmegaT.jar" fork="true">
-    <arg value="${focheck.basedir.converted}/omegat" />
-    <arg value="--config-dic=${focheck.basedir.converted}/omegat/config" />
+    <arg value="${omegat.project.dir}" />
+    <arg value="--config-dic=${omegat.config.dir}" />
     <arg value="--mode=console-translate" />
     <!--<arg value="- -quiet" />-->
   </java>
   <copy todir="${focheck.basedir.converted}/schematron-ja"
 	preservelastmodified="true"
 	overwrite="${force}">
-    <fileset dir="${focheck.basedir.converted}/omegat/target"
+    <fileset dir="${omegat.target.dir}"
 	     includes="*.sch" />
   </copy>
   <chmod dir="${focheck.basedir.converted}/schematron-ja"
@@ -407,7 +423,7 @@ AFTER making a release on GitHub:
   <copy todir="${focheck.basedir.converted}/schema-ja/rng"
 	preservelastmodified="true"
 	overwrite="${force}">
-    <fileset dir="${focheck.basedir.converted}/omegat/target"
+    <fileset dir="${omegat.target.dir}"
 	     includes="*.rng" />
   </copy>
   <chmod dir="${focheck.basedir.converted}/schema-ja/rng"
