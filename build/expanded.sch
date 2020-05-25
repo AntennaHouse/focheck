@@ -21,6 +21,16 @@
 
     <?DSDL_INCLUDE_START abstract.sch?><pattern id="abstract">
 
+  <!-- <color> | inherit -->
+  <rule abstract="true" id="color">
+    <let name="context" value="."/>
+    <let name="expression" value="ahf:parser-runner(.)"/>
+    <assert test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()"/>="<value-of select="."/>" should be Color or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))"><value-of select="name()"/>="<value-of select="."/>" token should be 'inherit'. Enumeration token is '<value-of select="$expression/@token"/>'.</report>
+    <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()"/>="" should be Color, or 'inherit'.</report>
+    <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="name()"/>="<value-of select="."/>"</report>
+  </rule>
+
   <!-- <color> | transparent | inherit -->
   <rule abstract="true" id="color-transparent">
     <let name="context" value="."/>
@@ -3208,29 +3218,36 @@
 </pattern><?DSDL_INCLUDE_END fo-property.sch?>
     <?DSDL_INCLUDE_START axf-fo.sch?><pattern id="axf-fo">
 
-	<!-- axf:custom-property -->
-	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property -->
-        <rule context="axf:custom-property">
-	  <assert test="empty((../../axf:document-info, ../axf:document-info)[@name eq 'xmp'])" role="Warning"><value-of select="name()"/>" is ignored when axf:document-info with name="xmp" is present.</assert>
-          <assert test="normalize-space(@name) ne ''" role="Warning">name="" should not be empty.</assert>
-          <assert test="not(normalize-space(@name) = ('Title', 'Author', 'Subject', 'Keywords', 'Creator', 'Producer', 'CreationDate', 'ModDate', 'Trapped'))">name="<value-of select="@name"/>" cannot be used with <value-of select="name()"/>.</assert>
-          <assert test="normalize-space(@value) ne ''" role="Warning">value="" should not be empty.</assert>
-        </rule>
+  <!-- axf:custom-property -->
+  <!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property -->
+  <rule context="axf:custom-property">
+    <assert test="empty((../../axf:document-info, ../axf:document-info)[@name eq 'xmp'])" role="Warning"><value-of select="name()"/>" is ignored when axf:document-info with name="xmp" is present.</assert>
+    <assert test="normalize-space(@name) ne ''" role="Warning">name="" should not be empty.</assert>
+    <assert test="not(normalize-space(@name) = ('Title', 'Author', 'Subject', 'Keywords', 'Creator', 'Producer', 'CreationDate', 'ModDate', 'Trapped'))">name="<value-of select="@name"/>" cannot be used with <value-of select="name()"/>.</assert>
+    <assert test="normalize-space(@value) ne ''" role="Warning">value="" should not be empty.</assert>
+  </rule>
 
-	<!-- axf:document-info -->
-	<!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
-        <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1">
-	  <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="Warning">name="<value-of select="@name"/>" is ignored when axf:document-info with name="xmp" is present.</assert>
-        </rule>
-        <rule context="axf:document-info[@name = 'title']">
-	  <assert test="false()" id="axf-3f" sqf:fix="axf-3fix" role="Warning">name="<value-of select="@name"/>" is deprecated.  Please use name="document-title".</assert>
-          <sqf:fix id="axf-3fix">
-	    <sqf:description>
-              <sqf:title>Change the 'title' axf:document-info into 'document-title'</sqf:title>
-            </sqf:description>
-            <sqf:replace match="@name" node-type="attribute" target="name" select="'document-title'"/>
-          </sqf:fix>
-        </rule>
+  <!-- axf:document-info -->
+  <!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
+  <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1">
+    <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="Warning">name="<value-of select="@name"/>" is ignored when axf:document-info with name="xmp" is present.</assert>
+  </rule>
+  <rule context="axf:document-info[@name = 'title']">
+    <assert test="false()" id="axf-3f" sqf:fix="axf-3fix" role="Warning">name="<value-of select="@name"/>" is deprecated.  Please use name="document-title".</assert>
+    <sqf:fix id="axf-3fix">
+      <sqf:description>
+        <sqf:title>Change the 'title' axf:document-info into 'document-title'</sqf:title>
+      </sqf:description>
+      <sqf:replace match="@name" node-type="attribute" target="name" select="'document-title'"/>
+    </sqf:fix>
+  </rule>
+
+  <!-- https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#action-link -->
+  <rule context="axf:form-field[@field-type = 'button']">
+    <assert test="empty(@internal-destination) or exists(@internal-destination) and (empty(@action-type) or @action-type = 'goto')">'action-type' may only be 'goto' with &lt;axf:form-field field-type="button" internal-destiniation="..."&gt;</assert>
+    <assert test="empty(@external-destination) or exists(@external-destination) and (empty(@action-type) or @action-type = ('gotor', 'launch', 'uri'))">'action-type' may only be 'gotor', 'launch', or 'uri' with &lt;axf:form-field field-type="button" external-destination="..."&gt;</assert>
+    <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning">An '<value-of select="name()"/>' should not have both 'internal-destination' and 'external-destination' properties.  AH Formatter may report an error or may use 'internal-destination'.</report>
+  </rule>
 </pattern><?DSDL_INCLUDE_END axf-fo.sch?>
     <?DSDL_INCLUDE_START axf-property.sch?><pattern id="axf-property">
 
@@ -3508,6 +3525,15 @@
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">axf:indent-here="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'none'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:indent-here="" should be EnumerationToken or Length.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:indent-here="<value-of select="."/>"</report>
+	</rule>
+
+	<!-- axf:initial-letters-color -->
+	<!-- <color> | inherit -->
+	<!-- Inherited: yes -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.initial-letters -->
+	<rule context="fo:*/@axf:initial-letters-color">
+	  <extends rule="color"/>
 	</rule>
 
 	<!-- axf:keep-together-within-dimension -->

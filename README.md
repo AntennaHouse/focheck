@@ -27,7 +27,7 @@ Pull requests and new issues are welcome.
 ## Installing
 
 * If you want to keep up-to-date with **focheck** releases, then you can install **focheck** as an add-on oXygen framework.
-* **focheck** 0.7.5 (from 2019) is bundled with oXygen 22. (Earlier oXygen versions, starting with oXygen 17.1, bundled earlier **focheck** versions.)
+* Versions of **focheck** have been bundled with oXygen since Oxygen 17.1.
 * If you want to use the current **focheck** version with an older oXygen version, then you can install **focheck** as an add-on oXygen framework.
 * Alternatively, you can download a static copy of the oXygen framework from GitHub.
 * If you want to easily keep up-to-date with changes, then you can clone this repository and 'pull' the latest version whenever you want.
@@ -45,7 +45,7 @@ Note that oXygen will require you to restart the editor after installing the add
 
 1. Download the ZIP archive from the latest release on the 'Releases' page.
 1. Extract the folder in the ZIP archive to the oXygen `frameworks` directory.
- - On Windows, this is `C:\Program Files\Oxygen XML Editor 19\frameworks`, or something similar.
+ - On Windows, this is `C:\Program Files\Oxygen XML Editor 22.1\frameworks`, or something similar.
  - If you don't have permission to copy the folder to the `frameworks` directory, then you can use an alternative location as described below.
 1. Restart oXygen.
 
@@ -138,7 +138,7 @@ limitations under the License.
 
 Additional components:
  
-The HTML MathML entity set is bundled with the focheck oXygen framework but is not included in the focheck schema.
+The HTML MathML entity set is bundled with the **focheck** oXygen framework but is not included in the **focheck** schema.
 The entity set was downloaded from http://www.w3.org/TR/xml-entity-names/
 
      Copyright 1998 - 2011 W3C.
@@ -156,7 +156,7 @@ The entity set was downloaded from http://www.w3.org/TR/xml-entity-names/
 
 
 
-The schema for MathML3 is included in the Relax NG and Relax NG compact syntax versions of focheck.
+The schema for MathML3 is included in the Relax NG and Relax NG compact syntax versions of **focheck**.
 The MathML3 schema was downloaded from http://www.w3.org/Math/RelaxNG/
 
 ````
@@ -172,7 +172,7 @@ The MathML3 schema was downloaded from http://www.w3.org/Math/RelaxNG/
 ````
 
 
-The schema for SVG 1.1 is included in the Relax NG and Relax NG compact syntax versions of focheck.
+The schema for SVG 1.1 is included in the Relax NG and Relax NG compact syntax versions of **focheck**.
 The SVG 1.1 DTD was downloaded from http://www.w3.org/TR/SVG/svgdtd.html
 
 ````
@@ -229,7 +229,7 @@ http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.html 
 oXygen はアドオンフレームワークをインストールした後、エデイタの再起動する必要になります。
 
 
-### oXygen `frameworks` ディレクトリの ZIP アーカイブのインストール
+### oXygen `frameworks` ディレクトリの ZIP アーカイブにインストールする
 
 1. Releases ページにある最新リリースから ZIP アーカイブをダウンロードして下さい。
 1. oXygen `frameworks` ディレクトリに ZIP アーカイブにあるフォルダーを解凍します。
@@ -247,7 +247,7 @@ oXygen はアドオンフレームワークをインストールした後、エ�
  - http://oxygenxml.com/doc/ug-editor/index.html#topics/framework-location.html を参照して下さい。
 1. oXygen を再起動します。
 
-### リポジトリクローンのインストール
+### リポジトリクローンをインストールする
 
 1. oXygen `frameworks` ディレクトリ又は別のディレクトリのどちらかにリポジトリをクローンします。
  - **focheck** はサブモジュールとして **[stf](https://github.com/Schematron/stf)** を組み込まれています。**stf** を確認するのは、二つの方法があります。
@@ -272,7 +272,7 @@ oXygen はアドオンフレームワークをインストールした後、エ�
 
 Relax NG と Schematron の両方を使用してファイルを有効するために、Ant のビルドファイルの `build-focheck.xml` と `validate.single` のターゲットを使用します。代わりに、一つ又は複数のファイルでの Schematron を実行するには、`schematron.single` 又は `schematron.dir` ターゲットを使用します。
 
-### Emacs mode
+### Emacs モード
 
 `focheck.el` は RELAX NG スキーマを `.fo` ファイルに関連付けます。
 
@@ -329,9 +329,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Additional components:
+### Additional components
  
-The HTML MathML entity set is bundled with the focheck oXygen framework but is not included in the focheck schema.
+The HTML MathML entity set is bundled with the **focheck** oXygen framework but is not included in the **focheck** schema.
 The entity set was downloaded from http://www.w3.org/TR/xml-entity-names/
 
      Copyright 1998 - 2011 W3C.
@@ -349,7 +349,7 @@ The entity set was downloaded from http://www.w3.org/TR/xml-entity-names/
 
 
 
-The schema for MathML3 is included in the Relax NG and Relax NG compact syntax versions of focheck.
+The schema for MathML3 is included in the Relax NG and Relax NG compact syntax versions of **focheck**.
 The MathML3 schema was downloaded from http://www.w3.org/Math/RelaxNG/
 
 ````
@@ -365,7 +365,7 @@ The MathML3 schema was downloaded from http://www.w3.org/Math/RelaxNG/
 ````
 
 
-The schema for SVG 1.1 is included in the Relax NG and Relax NG compact syntax versions of focheck.
+The schema for SVG 1.1 is included in the Relax NG and Relax NG compact syntax versions of **focheck**.
 The SVG 1.1 DTD was downloaded from http://www.w3.org/TR/SVG/svgdtd.html
 
 ````

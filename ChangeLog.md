@@ -1,3 +1,10 @@
+# focheck 0.7.7
+
+- Added `axf:balanced-text-align`, `axf:display-alttext`, `axf:flush-zone`, `axf:hyphenate-caps-word`, `axf:initial-letters-color`, `axf:initial-letters-end-indent`, `axf:initial-letters-first-line-head-height`, `axf:initial-letters-leading-punctuation`, `axf:initial-letters-leading-punctuation-position`, `axf:initial-letters-leading-letters-punctuation-shift`, `axf:initial-letters-text-align`, `axf:initial-letters-width`, `axf:suppress-duplicate-marker-contents`, `axf:table-row-orphans`, `axf:table-row-widows`, and `axf:text-indent-if-first-on-page`. (V7.0)
+- `button` form field may contain a graphic as internal or external cross-reference.
+- Added `axf:initial-letters-color` rule. (V7.0)
+- More Ant properties for 'translate' target.
+
 # focheck 0.7.6
 
 - Corrected `fo:declarations` and `color-profile-name`.

@@ -16386,7 +16386,7 @@
    </xsl:template>
    <!--PATTERN axf-fo-->
    <!--RULE -->
-   <xsl:template match="axf:custom-property" priority="1002" mode="M8">
+   <xsl:template match="axf:custom-property" priority="1003" mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="axf:custom-property"/>
       <!--ASSERT Warning-->
       <xsl:choose>
@@ -16462,7 +16462,7 @@
    </xsl:template>
    <!--RULE axf-1-->
    <xsl:template match="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
-                 priority="1001"
+                 priority="1002"
                  mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
@@ -16489,7 +16489,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="axf:document-info[@name = 'title']"
-                 priority="1000"
+                 priority="1001"
                  mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:document-info[@name = 'title']"/>
@@ -16513,13 +16513,66 @@
       </xsl:choose>
       <xsl:apply-templates select="@*|*" mode="M8"/>
    </xsl:template>
+   <!--RULE -->
+   <xsl:template match="axf:form-field[@field-type = 'button']"
+                 priority="1000"
+                 mode="M8">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="axf:form-field[@field-type = 'button']"/>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="empty(@internal-destination) or exists(@internal-destination) and (empty(@action-type) or @action-type = 'goto')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="empty(@internal-destination) or exists(@internal-destination) and (empty(@action-type) or @action-type = 'goto')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>'action-type' may only be 'goto' with &lt;axf:form-field field-type="button" internal-destiniation="..."&gt;</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="empty(@external-destination) or exists(@external-destination) and (empty(@action-type) or @action-type = ('gotor', 'launch', 'uri'))"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="empty(@external-destination) or exists(@external-destination) and (empty(@action-type) or @action-type = ('gotor', 'launch', 'uri'))">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>'action-type' may only be 'gotor', 'launch', or 'uri' with &lt;axf:form-field field-type="button" external-destination="..."&gt;</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--REPORT Warning-->
+      <xsl:if test="exists(@internal-destination) and exists(@external-destination)">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="exists(@internal-destination) and exists(@external-destination)">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>An '<xsl:text/>
+               <xsl:value-of select="name()"/>
+               <xsl:text/>' should not have both 'internal-destination' and 'external-destination' properties.  AH Formatter may report an error or may use 'internal-destination'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+      <xsl:apply-templates select="@*|*" mode="M8"/>
+   </xsl:template>
    <xsl:template match="text()" priority="-1" mode="M8"/>
    <xsl:template match="@*|node()" priority="-2" mode="M8">
       <xsl:apply-templates select="@*|*" mode="M8"/>
    </xsl:template>
    <!--PATTERN axf-property-->
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:annotation-color" priority="1052" mode="M9">
+   <xsl:template match="fo:*/@axf:annotation-color" priority="1053" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:annotation-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -16573,7 +16626,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:annotation-contents" priority="1051" mode="M9">
+   <xsl:template match="fo:*/@axf:annotation-contents" priority="1052" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:annotation-contents"/>
       <!--ASSERT Warning-->
@@ -16597,7 +16650,7 @@
       </xsl:choose>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:assumed-page-number" priority="1050" mode="M9">
+   <xsl:template match="fo:*/@axf:assumed-page-number" priority="1051" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:assumed-page-number"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -16636,7 +16689,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-color" priority="1049" mode="M9">
+   <xsl:template match="fo:*/@axf:background-color" priority="1050" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -16696,7 +16749,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-height"
-                 priority="1048"
+                 priority="1049"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-height"/>
@@ -16767,7 +16820,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-content-type" priority="1047" mode="M9">
+   <xsl:template match="fo:*/@axf:background-content-type" priority="1048" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-type"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -16838,7 +16891,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-width"
-                 priority="1046"
+                 priority="1047"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-width"/>
@@ -16909,7 +16962,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-image" priority="1045" mode="M9">
+   <xsl:template match="fo:*/@axf:background-image" priority="1046" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-image"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -16979,7 +17032,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@background-position" priority="1044" mode="M9">
+   <xsl:template match="fo:*/@background-position" priority="1045" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-position"/>
       <!--REPORT Warning-->
@@ -16997,7 +17050,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="fo:*/@axf:background-position-horizontal"
-                 priority="1043"
+                 priority="1044"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-horizontal"/>
@@ -17069,7 +17122,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="fo:*/@axf:background-position-vertical"
-                 priority="1042"
+                 priority="1043"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-vertical"/>
@@ -17140,7 +17193,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-repeat" priority="1041" mode="M9">
+   <xsl:template match="fo:*/@axf:background-repeat" priority="1042" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-repeat"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -17210,7 +17263,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:baseline-block-snap" priority="1040" mode="M9">
+   <xsl:template match="fo:*/@axf:baseline-block-snap" priority="1041" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:baseline-block-snap"/>
       <!--ASSERT Warning-->
@@ -17231,7 +17284,7 @@
       </xsl:choose>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-color" priority="1039" mode="M9">
+   <xsl:template match="fo:*/@axf:outline-color" priority="1040" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:outline-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -17270,7 +17323,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:float" priority="1038" mode="M9">
+   <xsl:template match="fo:*/@axf:float" priority="1039" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:float"/>
       <xsl:variable name="tokens" select="tokenize(normalize-space(.), '\s+')"/>
       <!--ASSERT -->
@@ -17309,7 +17362,7 @@
       </xsl:choose>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-level" priority="1037" mode="M9">
+   <xsl:template match="fo:*/@axf:outline-level" priority="1038" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:outline-level"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -17349,7 +17402,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-height | fo:*/@axf:background-content-width"
-                 priority="1036"
+                 priority="1037"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-height | fo:*/@axf:background-content-width"/>
@@ -17370,7 +17423,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-scaling" priority="1035" mode="M9">
+   <xsl:template match="fo:*/@axf:background-scaling" priority="1036" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-scaling"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -17443,7 +17496,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:column-rule-color" priority="1034" mode="M9">
+   <xsl:template match="fo:*/@axf:column-rule-color" priority="1035" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:column-rule-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -17482,7 +17535,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:column-rule-length" priority="1033" mode="M9">
+   <xsl:template match="fo:*/@axf:column-rule-length" priority="1034" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:column-rule-length"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -17537,7 +17590,7 @@
    </xsl:template>
    <!--RULE -->
    <xsl:template match="fo:*/@axf:field-button-icon |          fo:*/@axf:field-button-icon-down |          fo:*/@axf:field-button-icon-rollover"
-                 priority="1032"
+                 priority="1033"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:field-button-icon |          fo:*/@axf:field-button-icon-down |          fo:*/@axf:field-button-icon-rollover"/>
@@ -17597,7 +17650,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:field-font-size" priority="1031" mode="M9">
+   <xsl:template match="fo:*/@axf:field-font-size" priority="1032" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:field-font-size"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -17667,7 +17720,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:hyphenation-zone" priority="1030" mode="M9">
+   <xsl:template match="fo:*/@axf:hyphenation-zone" priority="1031" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:hyphenation-zone"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -17753,7 +17806,7 @@
       </xsl:if>
    </xsl:template>
    <!--RULE -->
-   <xsl:template match="fo:*/@axf:indent-here" priority="1029" mode="M9">
+   <xsl:template match="fo:*/@axf:indent-here" priority="1030" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:indent-here"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
       <!--ASSERT -->
@@ -17816,6 +17869,88 @@
             <xsl:attribute name="line-number" select="saxon:line-number()"/>
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>Syntax error: axf:indent-here="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>"</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+   </xsl:template>
+   <!--RULE -->
+   <xsl:template match="fo:*/@axf:initial-letters-color" priority="1029" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:initial-letters-color"/>
+      <xsl:variable name="context" select="."/>
+      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
+      <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>
+                  <xsl:text/>
+                  <xsl:value-of select="name()"/>
+                  <xsl:text/>="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be Color or 'inherit'.  '<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>' is a <xsl:text/>
+                  <xsl:value-of select="local-name($expression)"/>
+                  <xsl:text/>.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+      <!--REPORT -->
+      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name()"/>
+               <xsl:text/>="<xsl:text/>
+               <xsl:value-of select="."/>
+               <xsl:text/>" token should be 'inherit'. Enumeration token is '<xsl:text/>
+               <xsl:value-of select="$expression/@token"/>
+               <xsl:text/>'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+      <!--REPORT Warning-->
+      <xsl:if test="local-name($expression) = 'EMPTY'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'EMPTY'">
+            <xsl:attribute name="role">Warning</xsl:attribute>
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>
+               <xsl:text/>
+               <xsl:value-of select="name()"/>
+               <xsl:text/>="" should be Color, or 'inherit'.</svrl:text>
+         </svrl:successful-report>
+      </xsl:if>
+      <!--REPORT -->
+      <xsl:if test="local-name($expression) = 'ERROR'">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                 test="local-name($expression) = 'ERROR'">
+            <xsl:attribute name="location">
+               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+            </xsl:attribute>
+            <xsl:attribute name="line-number" select="saxon:line-number()"/>
+            <xsl:attribute name="column-number" select="saxon:column-number()"/>
+            <svrl:text>Syntax error: <xsl:text/>
+               <xsl:value-of select="name()"/>
+               <xsl:text/>="<xsl:text/>
                <xsl:value-of select="."/>
                <xsl:text/>"</svrl:text>
          </svrl:successful-report>
