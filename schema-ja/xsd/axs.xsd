@@ -277,7 +277,7 @@
       </xs:attribute>
       <xs:attribute name="HyphenationOption" type="axs:ah.boolean">
         <xs:annotation>
-          <xs:documentation>カスタムハイフネーションか TeX ハイフネーションの辞書を利用するかどうか： 'true' | 'false'</xs:documentation>
+          <xs:documentation>カスタムハイフネーションか TeX ハイフネーションの辞書を利用するかどうか： true | false</xs:documentation>
         </xs:annotation>
       </xs:attribute>
       <xs:attribute name="hyphenation-TeX">
@@ -420,7 +420,7 @@
       </xs:attribute>
       <xs:attribute name="font-selection-mode">
         <xs:annotation>
-          <xs:documentation>フォントの選択 方法： 5 = disregard 'font-selection-strategy'; 6 = act on 'font-selection-strategy="character-by-character"'</xs:documentation>
+          <xs:documentation>フォントの選択 方法： 5 = disregard font-selection-strategy; 6 = act on font-selection-strategy="character-by-character"</xs:documentation>
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:token">

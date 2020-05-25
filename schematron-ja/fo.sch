@@ -177,9 +177,9 @@
     <let name="expression" value="ahf:parser-runner(.)"></let>
     <!-- What would be generated if we could... -->
     <!-- https://www.w3.org/TR/xsl11/#language -->
-    <assert test="local-name($expression) = ('EnumerationToken', 'ERROR', 'Object')">language=&quot;<value-of select="."/>&quot; は EnumerationToken でなければなりません。<value-of select="."/> は <value-of select="local-name($expression)"/> です。</assert>
+    <assert test="local-name($expression) = ('EnumerationToken', 'ERROR', 'Object')">language=&quot;<value-of select="."/>&quot; は EnumerationToken でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
     <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit') or string-length($expression/@token) = 2 or string-length($expression/@token) = 3)">language=&quot;<value-of select="."/>&quot; は ISO639-2 用語又は書誌に対応している 3 文字コード、ISO639 2 文字コード に対応している 2 文字コード、none 又は inherit でなければなりません。</report>
-    <report test="local-name($expression) = 'ERROR'">シンタックスエラー： 'language=&quot;<value-of select="."/>&quot;'</report>
+    <report test="local-name($expression) = 'ERROR'">シンタックスエラー： language=&quot;<value-of select="."/>&quot;</report>
     <!-- https://www.w3.org/TR/xsl11/#d0e4626 -->
     <!-- Warnings aren't needed (#21) -->
     <!--

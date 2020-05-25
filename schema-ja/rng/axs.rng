@@ -368,7 +368,7 @@
       </optional>
       <optional>
         <attribute name="HyphenationOption">
-          <a:documentation>カスタムハイフネーションか TeX ハイフネーションの辞書を利用するかどうか： 'true' | 'false'</a:documentation>
+          <a:documentation>カスタムハイフネーションか TeX ハイフネーションの辞書を利用するかどうか： true | false</a:documentation>
           <ref name="ah.boolean"/>
         </attribute>
       </optional>
@@ -674,7 +674,7 @@
       </optional>
       <optional>
         <attribute name="font-selection-mode">
-          <a:documentation>フォントの選択 方法： 5 = disregard 'font-selection-strategy'; 6 = act on 'font-selection-strategy=&quot;character-by-character&quot;'</a:documentation>
+          <a:documentation>フォントの選択 方法： 5 = disregard font-selection-strategy; 6 = act on font-selection-strategy=&quot;character-by-character&quot;</a:documentation>
           <choice>
             <value>5</value>
             <value>6</value>

@@ -176,7 +176,7 @@ formatter-settings =
     ## ハイフネーション例外辞書に <hyphen-min> ができるかどうか： false | true | without-exceptions
     attribute hyphenation-min { ah.boolean | "without-exceptions" }?,
     
-    ## カスタムハイフネーションか TeX ハイフネーションの辞書を利用するかどうか： 'true' | 'false'
+    ## カスタムハイフネーションか TeX ハイフネーションの辞書を利用するかどうか： true | false
     attribute HyphenationOption { ah.boolean }?,
     
     ## HyphenationOption をハイフネーション処理をする言語のカンマ区切りリスト ="true"
@@ -260,7 +260,7 @@ font-settings =
     ## どのレベルでフォールバックフォントにグリフを持つものが見つからなかったときに報告するかどうか
     attribute fallback-glyph { "0" | "1" | "2" }?,
     
-    ## フォントの選択 方法： 5 = disregard 'font-selection-strategy'; 6 = act on 'font-selection-strategy="character-by-character"'
+    ## フォントの選択 方法： 5 = disregard font-selection-strategy; 6 = act on font-selection-strategy="character-by-character"
     attribute font-selection-mode { "5" | "6" }?,
     attribute font-selection-strategy { xsd:NCName }?,
     attribute font-stretch-mode { xsd:integer }?,
