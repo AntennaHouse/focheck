@@ -84,6 +84,15 @@ fo_declarations.model =
       axf_output-volume-info |
       non-xsl-element)*
 
+# AH Formatter allows axf:document-info with multi-volume output.
+fo_page-sequence.model =
+   (axf_document-info?,
+      fo_title?,
+      fo_folio-prefix?,
+      fo_folio-suffix?,
+      fo_static-content*,
+      fo_flow+)
+
 # AH Formatter allows empty fo:static-content.
 fo_static-content.model =
     ( ( (block.fo.list | neutral.fo.list)* ) & (point.fo.list)* )
@@ -348,7 +357,9 @@ axf_output-volume-info.attlist =
    ## Format specification: <string>
    attribute format { text }?,
    ## How to include bookmarks in multiple separate volumes: first | all | separate | separate-group
-   attribute bookmark-include { 'first' | 'all' | 'separate' | 'separate-group' }?
+   attribute bookmark-include { 'first' | 'all' | 'separate' | 'separate-group' }?,
+   ## How to include document information in multiple separate volumes: first | all
+   attribute document-info-include { 'first' | 'all' }?
 
 # <axf:ruby>
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ruby.html#axf.ruby
