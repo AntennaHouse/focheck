@@ -11918,8 +11918,8 @@ axf_text-indent-if-first-on-page =
     ## text-indent of a block at the top of a page or column: <length> | <percentage> | auto
     attribute axf:text-indent-if-first-on-page { text }?
 axf_text-justify = 
-    ## How to justify text: auto | inter-word | distribute
-    attribute axf:text-justify { 'auto' | 'inter-word' | 'distribute' }?
+    ## How to justify text: auto | inter-word | inter-character | distribute [compatibility]
+    attribute axf:text-justify { 'auto' | 'inter-word' | 'inter-character' | 'distribute' }?
 axf_text-justify-trim = 
     ## The way to trim spaces between characters in justified text
     attribute axf:text-justify-trim { text }?

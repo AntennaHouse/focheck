@@ -29,7 +29,7 @@
 <!--                                                               -->
 <!-- ============================================================= -->
 <!--
-     Copyright 2015 Antenna House, Inc.
+     Copyright 2015-2020 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -235,7 +235,7 @@
 <property name="axf:text-emphasis-skip" model="text" description="Characters to which emphasis marks are not applied: none | [ spaces || punctuation || symbols || narrow ]" />
 <property name="axf:text-emphasis-style" model="text" description="Style of emphasis marks: none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | &lt;string> " />
 <property name="axf:text-indent-if-first-on-page" model="text" description="text-indent of a block at the top of a page or column: &lt;length> | &lt;percentage> | auto" /><!-- V7.0 -->
-<property name="axf:text-justify" model="'auto' | 'inter-word' | 'distribute'" description="How to justify text: auto | inter-word | distribute" />
+<property name="axf:text-justify" model="'auto' | 'inter-word' | 'inter-character' | 'distribute'" description="How to justify text: auto | inter-word | inter-character" />
 <property name="axf:text-justify-trim" model="text" description="The way to trim spaces between characters in justified text" />
 <property name="axf:text-kashida-space" model="text" description="Percentage of Kashida in Arabic justification: &lt;percentage> | auto" />
 <property name="axf:text-orientation" model="'mixed' | 'upright' | 'sideways-right' | 'sideways' | 'none'" description="Orientation of text in vertical writing mode" />
