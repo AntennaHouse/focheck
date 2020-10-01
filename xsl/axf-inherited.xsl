@@ -220,7 +220,7 @@
 <property name="axf:table-row-orphans" model="text" description="Number of table-rows that must remain at the bottom of the page (column): &lt;integer>" /><!-- V7.0 -->
 <property name="axf:table-row-widows" model="text" description="Number of table-rows that must remain at the top of the page (column): &lt;integer>" /><!-- V7.0 -->
 <property name="axf:text-align-first" model="'relative' | 'start' | 'center' | 'end' | 'justify' | 'inside' | 'outside' | 'left' | 'right'" description="Text alignment of the first line" />
-<property name="axf:text-align-string" model="'start' | 'center' | 'end' | 'inside' | 'outside' | 'left' | 'right'" description="Text alignment when text-align=&quot;&lt;string>&quot;" />
+<property name="axf:text-align-string" model="'start' | 'center' | 'end' | 'inside' | 'outside' | 'left' | 'right' | 'from-table-column()'" description="Text alignment when text-align=&quot;&lt;string>&quot;: start | center | end | inside | outside | left | right | from-table-column()" />
 <property name="axf:text-autospace" model="text" description="Whether to add space surrounding ideographic glyphs: none | [ ideograph-numeric || ideograph-alpha || ideograph-parenthesis ] | auto" />
 <property name="axf:text-autospace-width" model="text" description="Width for axf:text-autospace" />
 <property name="axf:text-combine-horizontal" model="text" description="Sets horizontal-in-vertical composition in vertical writing mode automatically: none | all | [ digits &lt;integer> || alpha &lt;integer> || alphanumeric &lt;integer> ]" />
