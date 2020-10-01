@@ -28,7 +28,7 @@
 <!--                                                               -->
 <!-- ============================================================= -->
 <!--
-     Copyright 2015-2019 Antenna House, Inc.
+     Copyright 2015-2020 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -197,7 +197,6 @@ margin margin-top margin-bottom margin-left margin-right</item>
   <xsl:call-template name="ahf:rnc-initial-comment" />
 <xsl:text>
 default namespace fo = "http://www.w3.org/1999/XSL/Format"
-namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
 namespace local = ""
 
 start = fo_root
@@ -500,8 +499,8 @@ fo_</xsl:text>
 
 # For fo:instream-foreign-object
 anything =
-   ( element * {
-        attribute * - (id | ref-id | internal-destination ) { text }*,
+   ( element * - ( fo:* ) {
+        attribute * { text }*,
         anything } |
      text )*
 
