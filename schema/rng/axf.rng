@@ -3,7 +3,7 @@
   Schema for Antenna House extension elements and non-inherited
   extension attributes.
   
-  Copyright 2015-2019 Antenna House, Inc.
+  Copyright 2015-2020 Antenna House, Inc.
   
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<grammar xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations" ns="" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axs="http://www.antennahouse.com/names/XSL/Settings" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar xmlns:axh="http://www.antennahouse.com/names/XSL/Hyphenations" ns="" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:svg="http://www.w3.org/2000/svg" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axs="http://www.antennahouse.com/names/XSL/Settings" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <include href="axh.rng" ns="http://www.antennahouse.com/names/XSL/Extensions">
     <a:documentation>Hyphenation settings</a:documentation>
   </include>
@@ -134,6 +134,27 @@
           <ref name="non-xsl-element"/>
         </choice>
       </zeroOrMore>
+    </define>
+    <!-- AH Formatter allows axf:document-info with multi-volume output. -->
+    <define name="fo_page-sequence.model">
+      <optional>
+        <ref name="axf_document-info"/>
+      </optional>
+      <optional>
+        <ref name="fo_title"/>
+      </optional>
+      <optional>
+        <ref name="fo_folio-prefix"/>
+      </optional>
+      <optional>
+        <ref name="fo_folio-suffix"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="fo_static-content"/>
+      </zeroOrMore>
+      <oneOrMore>
+        <ref name="fo_flow"/>
+      </oneOrMore>
     </define>
     <!-- AH Formatter allows empty fo:static-content. -->
     <define name="fo_static-content.model">
@@ -261,34 +282,15 @@
               <nsName ns=""/>
               <nsName ns="http://www.w3.org/1999/XSL/Format"/>
               <nsName/>
+              <nsName ns="http://www.w3.org/1998/Math/MathML"/>
+              <nsName ns="http://www.w3.org/2000/svg"/>
             </except>
           </anyName>
           <zeroOrMore>
             <attribute>
-              <anyName>
-                <except>
-                  <name ns="">id</name>
-                  <name ns="">ref-id</name>
-                  <name ns="">internal-destination</name>
-                </except>
-              </anyName>
+              <anyName/>
             </attribute>
           </zeroOrMore>
-          <optional>
-            <attribute name="id">
-              <data type="ID"/>
-            </attribute>
-          </optional>
-          <optional>
-            <attribute name="ref-id">
-              <data type="IDREF"/>
-            </attribute>
-          </optional>
-          <optional>
-            <attribute name="internal-destination">
-              <data type="IDREF"/>
-            </attribute>
-          </optional>
           <ref name="anything"/>
         </element>
       </zeroOrMore>
@@ -667,6 +669,15 @@
           <value>all</value>
           <value>separate</value>
           <value>separate-group</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="document-info-include">
+        <a:documentation>How to include document information in multiple separate volumes: first | all</a:documentation>
+        <choice>
+          <value>first</value>
+          <value>all</value>
         </choice>
       </attribute>
     </optional>

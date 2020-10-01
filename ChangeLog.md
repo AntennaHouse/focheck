@@ -1,3 +1,14 @@
+# focheck 0.7.8
+
+- Excluding elements in more namespaces instead of allowing 'id', etc. (#42)
+- Added 'from-table-column()' to `axf:text-align-string` tool-tip since most likely to come from table column.
+- Add 'inter-character' to `axf:text-justify`.
+- Remove 'distribute' from `axf:text-justify` tool-tip.
+- Add SQF to convert 'distribute' to 'inter-character'.
+- Add `document-info-include`.
+- Updated from 'ahfsettings' project.
+- Corrected URLs to point to V7.0 manual.
+
 # focheck 0.7.7
 
 - Added `axf:balanced-text-align`, `axf:display-alttext`, `axf:flush-zone`, `axf:hyphenate-caps-word`, `axf:initial-letters-color`, `axf:initial-letters-end-indent`, `axf:initial-letters-first-line-head-height`, `axf:initial-letters-leading-punctuation`, `axf:initial-letters-leading-punctuation-position`, `axf:initial-letters-leading-letters-punctuation-shift`, `axf:initial-letters-text-align`, `axf:initial-letters-width`, `axf:suppress-duplicate-marker-contents`, `axf:table-row-orphans`, `axf:table-row-widows`, and `axf:text-indent-if-first-on-page`. (V7.0)
@@ -14,7 +25,7 @@
 
 - Handling `column-width` without `number-columns-spanned` (#41)
 - Warning about reference to undefined marker class name.
-- Added short Apache License text in `axs.rnc`, etc. (closes #40)
+- Added short Apache License text in `axs.rnc`, etc. (#40)
 - Updated `README.md` for 2020.
 
 # focheck 0.7.4
@@ -286,13 +297,6 @@
 - Schematron for `language`. (#9) 
 - Property comments includes URL
 - More repeating of whole attribute first in Schematron messages so the context is more obvious.
-
-# focheck 0.2.0
-
-- Requiring property attributes for which a value is required.
-- Schema checking of `<id>` and `<idref>` datatypes.
-- Schema checking of `xml:lang` value.
-- Improved Schematron checking of `fo:footnote`.
 
 # focheck 0.2.0
 

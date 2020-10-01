@@ -3272,14 +3272,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>How to justify text: auto | inter-word | distribute</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20200521T130711Z" creationid="mtan" creationdate="20200521T130711Z">
-        <seg>均等割り付けの処理方法: auto | inter-word | distribute</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>How to treat full width punctuations in Japanese</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="mtan" changedate="20160118T172841Z" creationid="mtan" creationdate="20160118T172506Z">
@@ -6366,14 +6358,6 @@ limitations under the License.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="mtan" changedate="20160118T175457Z" creationid="mtan" creationdate="20160118T175457Z">
         <seg>最初の行のテキストの配置</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>Text alignment when text-align="&lt;string&gt;"</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20160118T175718Z" creationid="mtan" creationdate="20160118T175718Z">
-        <seg>text-align="&lt;string&gt;" のときのテキストの配置</seg>
       </tuv>
     </tu>
     <tu>

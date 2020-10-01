@@ -1167,7 +1167,7 @@
   <xs:attributeGroup name="axf_text-align-string">
     <xs:attribute name="text-align-string" form="qualified">
       <xs:annotation>
-        <xs:documentation>Text alignment when text-align="&lt;string&gt;"</xs:documentation>
+        <xs:documentation>Text alignment when text-align="&lt;string&gt;": start | center | end | inside | outside | left | right | from-table-column()</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1178,6 +1178,7 @@
           <xs:enumeration value="outside"/>
           <xs:enumeration value="left"/>
           <xs:enumeration value="right"/>
+          <xs:enumeration value="from-table-column()"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -1312,12 +1313,13 @@
   <xs:attributeGroup name="axf_text-justify">
     <xs:attribute name="text-justify" form="qualified">
       <xs:annotation>
-        <xs:documentation>How to justify text: auto | inter-word | distribute</xs:documentation>
+        <xs:documentation>How to justify text: auto | inter-word | inter-character</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
           <xs:enumeration value="auto"/>
           <xs:enumeration value="inter-word"/>
+          <xs:enumeration value="inter-character"/>
           <xs:enumeration value="distribute"/>
         </xs:restriction>
       </xs:simpleType>

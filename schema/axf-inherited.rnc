@@ -11873,8 +11873,8 @@ axf_text-align-first =
     ## Text alignment of the first line
     attribute axf:text-align-first { 'relative' | 'start' | 'center' | 'end' | 'justify' | 'inside' | 'outside' | 'left' | 'right' }?
 axf_text-align-string = 
-    ## Text alignment when text-align="<string>"
-    attribute axf:text-align-string { 'start' | 'center' | 'end' | 'inside' | 'outside' | 'left' | 'right' }?
+    ## Text alignment when text-align="<string>": start | center | end | inside | outside | left | right | from-table-column()
+    attribute axf:text-align-string { 'start' | 'center' | 'end' | 'inside' | 'outside' | 'left' | 'right' | 'from-table-column()' }?
 axf_text-autospace = 
     ## Whether to add space surrounding ideographic glyphs: none | [ ideograph-numeric || ideograph-alpha || ideograph-parenthesis ] | auto
     attribute axf:text-autospace { text }?
@@ -11918,7 +11918,7 @@ axf_text-indent-if-first-on-page =
     ## text-indent of a block at the top of a page or column: <length> | <percentage> | auto
     attribute axf:text-indent-if-first-on-page { text }?
 axf_text-justify = 
-    ## How to justify text: auto | inter-word | inter-character | distribute [compatibility]
+    ## How to justify text: auto | inter-word | inter-character
     attribute axf:text-justify { 'auto' | 'inter-word' | 'inter-character' | 'distribute' }?
 axf_text-justify-trim = 
     ## The way to trim spaces between characters in justified text

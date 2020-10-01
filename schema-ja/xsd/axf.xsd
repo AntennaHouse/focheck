@@ -3,7 +3,7 @@
   Schema for Antenna House extension elements and non-inherited
   extension attributes.
   
-  Copyright 2015-2019 Antenna House, Inc.
+  Copyright 2015-2020 Antenna House, Inc.
   
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -102,6 +102,17 @@
       <xs:element ref="axf:output-volume-info"/>
       <xs:group ref="axf:non-xsl-element"/>
     </xs:choice>
+  </xs:complexType>
+  <!-- AH Formatter allows axf:document-info with multi-volume output. -->
+  <xs:complexType name="fo_page-sequence.model">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="axf:document-info"/>
+      <xs:element minOccurs="0" ref="fo:title"/>
+      <xs:element minOccurs="0" ref="fo:folio-prefix"/>
+      <xs:element minOccurs="0" ref="fo:folio-suffix"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:static-content"/>
+      <xs:element maxOccurs="unbounded" ref="fo:flow"/>
+    </xs:sequence>
   </xs:complexType>
   <!-- AH Formatter allows empty fo:static-content. -->
   <xs:complexType name="fo_static-content.model">
@@ -581,6 +592,17 @@
           <xs:enumeration value="all"/>
           <xs:enumeration value="separate"/>
           <xs:enumeration value="separate-group"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="document-info-include">
+      <xs:annotation>
+        <xs:documentation>How to include document information in multiple separate volumes: first | all</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="first"/>
+          <xs:enumeration value="all"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>

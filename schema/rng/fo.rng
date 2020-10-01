@@ -17,7 +17,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<grammar ns="http://www.w3.org/1999/XSL/Format" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar ns="http://www.w3.org/1999/XSL/Format" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <start>
     <ref name="fo_root"/>
   </start>
@@ -4529,16 +4529,14 @@
     <zeroOrMore>
       <choice>
         <element>
-          <anyName/>
+          <anyName>
+            <except>
+              <nsName/>
+            </except>
+          </anyName>
           <zeroOrMore>
             <attribute>
-              <anyName>
-                <except>
-                  <name ns="">id</name>
-                  <name ns="">ref-id</name>
-                  <name ns="">internal-destination</name>
-                </except>
-              </anyName>
+              <anyName/>
             </attribute>
           </zeroOrMore>
           <ref name="anything"/>

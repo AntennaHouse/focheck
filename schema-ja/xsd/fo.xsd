@@ -502,21 +502,12 @@
     </xs:annotation>
     <xs:complexType>
       <xs:complexContent>
-        <xs:extension base="fo:fo_page-sequence.model">
+        <xs:extension base="axf:fo_page-sequence.model">
           <xs:attributeGroup ref="fo:fo_page-sequence.attlist"/>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  <xs:complexType name="fo_page-sequence.model">
-    <xs:sequence>
-      <xs:element minOccurs="0" ref="fo:title"/>
-      <xs:element minOccurs="0" ref="fo:folio-prefix"/>
-      <xs:element minOccurs="0" ref="fo:folio-suffix"/>
-      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:static-content"/>
-      <xs:element maxOccurs="unbounded" ref="fo:flow"/>
-    </xs:sequence>
-  </xs:complexType>
   <xs:attributeGroup name="fo_page-sequence.attlist">
     <xs:attributeGroup ref="fo:country"/>
     <xs:attributeGroup ref="fo:flow-map-reference"/>
@@ -19041,7 +19032,10 @@
   <!-- For fo:instream-foreign-object -->
   <xs:group name="anything">
     <xs:sequence>
-      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:any namespace="##other" processContents="skip"/>
+        <xs:any namespace="##local" processContents="skip"/>
+      </xs:choice>
     </xs:sequence>
   </xs:group>
   <!-- For fo:declarations -->

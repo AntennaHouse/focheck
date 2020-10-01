@@ -2,7 +2,7 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 
 # Schema for Antenna House Option Setting File.
 # 
-# Copyright 2015-2019 Antenna House, Inc.
+# Copyright 2015-2020 Antenna House, Inc.
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 
 # default namespace = ""
 ah.boolean = "false" | "true"
+bpil-penalty-hyphenation.model =
+  xsd:integer { minInclusive = "0" maxInclusive = "1000" }
 compression.list =
   "auto"
   | "zlib"
@@ -94,11 +96,12 @@ script.list =
   "Latn"
   | "Grek"
   | "Cyrl"
+  | "Ethi"
   | "Arab"
+  | "Syrc"
   | "Hebr"
   | "Deva"
   | "Beng"
-  | "Ethi"
   | "Guru"
   | "Gujr"
   | "Orya"
@@ -107,16 +110,17 @@ script.list =
   | "Knda"
   | "Mlym"
   | "Sinh"
-  | "Syrc"
   | "Thai"
   | "Khmr"
   | "Laoo"
-  | "Myanmar"
+  | "Mymr"
+  | "Kana"
+  | "Hira"
   | "Hang"
+  | "Hani"
   | "Hans"
   | "Hant"
   | "Jpan"
-  | "Hrkt"
   | "."
   | ""
 # start = formatter-config
@@ -133,13 +137,21 @@ formatter-config.model =
   mif-settings?,
   cgm-settings?,
   text-settings?,
-  xslt-settings?
+  xslt-settings?,
+  analyzer-settings?
 formatter-settings =
   element formatter-settings {
     attribute abbreviation-character-count { xsd:integer }?,
+    
+    ## Whether to automatically break footnotes when axf:footnote-max-height=​"auto": true | false
     attribute auto-break-footnote { ah.boolean }?,
+    
+    ## Formatter type when unclear if HTML or XHTML: html | xhtml
     attribute auto-formatter-type { "html" | "xhtml" }?,
-    attribute avoid-widow-words-CJK-punctuation { ah.boolean },
+    attribute avoid-orphan-hyphen { text }?,
+    
+    ## Whether to count the last punctuation to be included in one character when axf:avoid-widow-word="true" is specified in CJK: true | false
+    attribute avoid-widow-words-CJK-punctuation { ah.boolean }?,
     
     ## <axf:formatter-config> は許可するかどうか
     attribute axf-formatter-config { ah.boolean }?,
@@ -151,6 +163,20 @@ formatter-settings =
     attribute border-medium-width { xsd:NMTOKEN }?,
     attribute border-thick-width { xsd:NMTOKEN }?,
     attribute border-thin-width { xsd:NMTOKEN }?,
+    
+    ## Languages or scripts to which to apply Knuth-Plass Breaking Paragraphs into Lines [BPIL]
+    attribute bpil { text }?,
+    
+    ## Maximum number of characters to which [BPIL] applies: <integer>
+    attribute bpil-limit-chars { xsd:positiveInteger }?,
+    
+    ## Minimum line width (in em) to which to apply [BPIL]: <number>
+    attribute bpil-minimum-line-width { text }?,
+    
+    ## Frequency of hyphenation in [BPIL] with a value of 0 to 1000
+    attribute bpil-penalty-hyphenation {
+      bpil-penalty-hyphenation.model
+    }?,
     attribute css-media-type { xsd:NCName }?,
     attribute default-CJK { xsd:NCName }?,
     attribute default-color { text }?,
@@ -166,6 +192,7 @@ formatter-settings =
     attribute default-page-margin-top { text }?,
     attribute default-page-width { xsd:NMTOKEN }?,
     attribute descendant-or-self-files { ah.boolean }?,
+    attribute display-alttext { ah.boolean }?,
     attribute external-entity { ah.boolean }?,
     
     ## font-family の構文を厳密にチックする方法： auto | loose | strict
@@ -185,6 +212,9 @@ formatter-settings =
     attribute intrusion-displace-mode { xsd:integer }?,
     attribute img-alt { ah.boolean }?,
     attribute issue-scale-to-fit { ah.boolean }?,
+    
+    ## Whether to process the ligature of Hangul Jamo (U+1100 to U+11FF)
+    attribute jamo-ligature { ah.boolean }?,
     attribute justify-leader { ah.boolean }?,
     attribute justify-rowspan-height { ah.boolean }?,
     attribute keep-footnote-anchor { ah.boolean }?,
@@ -321,6 +351,9 @@ pdf-settings.attlist =
   attribute allow-javascript { ah.boolean }?,
   attribute certificate-name { xsd:NCName }?,
   
+  ## Whether to check the parent-child relationship between tags: true | false
+  attribute check-tag-relationship { ah.boolean }?,
+  
   ## PDF ファイル内でビットマップに変換されたカラー画像の圧縮方法： auto | zlib | jpeg | jpeg2000 | keeplzw | auto2k | keeplzw2k
   attribute color-compression { compression.list }?,
   
@@ -455,7 +488,13 @@ pdf-settings.attlist =
   attribute object-compression-default { ah.boolean }?,
   attribute object-compression-minimum { ah.boolean }?,
   attribute overprint { xsd:NCName }?,
+  attribute owner-password { text }?,
+  
+  ## Whether to apply page labels to page numbers: true | false
   attribute page-labels { ah.boolean }?,
+  
+  ## Maximum number of elements in the /Kids array of the PDF /Pages dictionary
+  attribute pages-max-kids { xsd:integer }?,
   attribute pass-through { pass-through.model }?,
   attribute pass-through-default { pass-through.model }?,
   attribute pass-through-minimum { pass-through.model }?,
@@ -475,7 +514,10 @@ pdf-settings.attlist =
   attribute transparency { ah.boolean }?,
   attribute transparency-color-space { xsd:NCName }?,
   attribute use-launch-for-local-file { ah.boolean }?,
-  attribute user-password { text }?
+  attribute user-password { text }?,
+  
+  ## Padding size to assist XMP editing in place when embedding XMP
+  attribute xmp-padding { xsd:integer }?
 pdf-settings.model = embed-font*, (tag-role-map, embed-font*)?
 embed-font =
   element embed-font {
@@ -687,4 +729,16 @@ param =
   element param {
     attribute name { xsd:NCName },
     attribute value { xsd:anyURI }
+  }
+analyzer-settings =
+  element analyzer-settings {
+    attribute hyphen-limit { xsd:positiveInteger }?,
+    attribute line-end-limit { xsd:positiveInteger }?,
+    attribute line-end-repeat-limit { xsd:positiveInteger }?,
+    attribute line-start-limit { xsd:positiveInteger }?,
+    attribute line-start-repeat-limit { xsd:positiveInteger }?,
+    attribute page-widow-limit-em { text }?,
+    attribute page-widow-limit-percent { text }?,
+    attribute paragraph-widow-limit-em { text }?,
+    attribute paragraph-widow-limit-percent { text }?
   }

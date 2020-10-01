@@ -3,7 +3,7 @@
   <!--
     Schema for Antenna House Option Setting File.
     
-    Copyright 2015-2019 Antenna House, Inc.
+    Copyright 2015-2020 Antenna House, Inc.
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,6 +23,12 @@
       <value>false</value>
       <value>true</value>
     </choice>
+  </define>
+  <define name="bpil-penalty-hyphenation.model">
+    <data type="integer">
+      <param name="minInclusive">0</param>
+      <param name="maxInclusive">1000</param>
+    </data>
   </define>
   <define name="compression.list">
     <choice>
@@ -136,11 +142,12 @@
       <value>Latn</value>
       <value>Grek</value>
       <value>Cyrl</value>
+      <value>Ethi</value>
       <value>Arab</value>
+      <value>Syrc</value>
       <value>Hebr</value>
       <value>Deva</value>
       <value>Beng</value>
-      <value>Ethi</value>
       <value>Guru</value>
       <value>Gujr</value>
       <value>Orya</value>
@@ -149,16 +156,17 @@
       <value>Knda</value>
       <value>Mlym</value>
       <value>Sinh</value>
-      <value>Syrc</value>
       <value>Thai</value>
       <value>Khmr</value>
       <value>Laoo</value>
-      <value>Myanmar</value>
+      <value>Mymr</value>
+      <value>Kana</value>
+      <value>Hira</value>
       <value>Hang</value>
+      <value>Hani</value>
       <value>Hans</value>
       <value>Hant</value>
       <value>Jpan</value>
-      <value>Hrkt</value>
       <value>.</value>
       <value/>
     </choice>
@@ -206,6 +214,9 @@
     <optional>
       <ref name="xslt-settings"/>
     </optional>
+    <optional>
+      <ref name="analyzer-settings"/>
+    </optional>
   </define>
   <define name="formatter-settings">
     <element name="formatter-settings">
@@ -216,20 +227,28 @@
       </optional>
       <optional>
         <attribute name="auto-break-footnote">
+          <a:documentation>Whether to automatically break footnotes when axf:footnote-max-height=​"auto": true | false</a:documentation>
           <ref name="ah.boolean"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="auto-formatter-type">
+          <a:documentation>Formatter type when unclear if HTML or XHTML: html | xhtml</a:documentation>
           <choice>
             <value>html</value>
             <value>xhtml</value>
           </choice>
         </attribute>
       </optional>
-      <attribute name="avoid-widow-words-CJK-punctuation">
-        <ref name="ah.boolean"/>
-      </attribute>
+      <optional>
+        <attribute name="avoid-orphan-hyphen"/>
+      </optional>
+      <optional>
+        <attribute name="avoid-widow-words-CJK-punctuation">
+          <a:documentation>Whether to count the last punctuation to be included in one character when axf:avoid-widow-word="true" is specified in CJK: true | false</a:documentation>
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
       <optional>
         <attribute name="axf-formatter-config">
           <a:documentation>Whether &lt;axf:formatter-config&gt; is allowed</a:documentation>
@@ -269,6 +288,28 @@
       <optional>
         <attribute name="border-thin-width">
           <data type="NMTOKEN"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="bpil">
+          <a:documentation>Languages or scripts to which to apply Knuth-Plass Breaking Paragraphs into Lines [BPIL]</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="bpil-limit-chars">
+          <a:documentation>Maximum number of characters to which [BPIL] applies: &lt;integer&gt;</a:documentation>
+          <data type="positiveInteger"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="bpil-minimum-line-width">
+          <a:documentation>Minimum line width (in em) to which to apply [BPIL]: &lt;number&gt;</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="bpil-penalty-hyphenation">
+          <a:documentation>Frequency of hyphenation in [BPIL] with a value of 0 to 1000</a:documentation>
+          <ref name="bpil-penalty-hyphenation.model"/>
         </attribute>
       </optional>
       <optional>
@@ -335,6 +376,11 @@
         </attribute>
       </optional>
       <optional>
+        <attribute name="display-alttext">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="external-entity">
           <ref name="ah.boolean"/>
         </attribute>
@@ -394,6 +440,12 @@
       </optional>
       <optional>
         <attribute name="issue-scale-to-fit">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="jamo-ligature">
+          <a:documentation>Whether to process the ligature of Hangul Jamo (U+1100 to U+11FF)</a:documentation>
           <ref name="ah.boolean"/>
         </attribute>
       </optional>
@@ -813,6 +865,12 @@
     <optional>
       <attribute name="certificate-name">
         <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="check-tag-relationship">
+        <a:documentation>Whether to check the parent-child relationship between tags: true | false</a:documentation>
+        <ref name="ah.boolean"/>
       </attribute>
     </optional>
     <optional>
@@ -1289,8 +1347,18 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="owner-password"/>
+    </optional>
+    <optional>
       <attribute name="page-labels">
+        <a:documentation>Whether to apply page labels to page numbers: true | false</a:documentation>
         <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="pages-max-kids">
+        <a:documentation>Maximum number of elements in the /Kids array of the PDF /Pages dictionary</a:documentation>
+        <data type="integer"/>
       </attribute>
     </optional>
     <optional>
@@ -1395,6 +1463,12 @@
     </optional>
     <optional>
       <attribute name="user-password"/>
+    </optional>
+    <optional>
+      <attribute name="xmp-padding">
+        <a:documentation>Padding size to assist XMP editing in place when embedding XMP</a:documentation>
+        <data type="integer"/>
+      </attribute>
     </optional>
   </define>
   <define name="pdf-settings.model">
@@ -1952,6 +2026,47 @@
       <attribute name="value">
         <data type="anyURI"/>
       </attribute>
+    </element>
+  </define>
+  <define name="analyzer-settings">
+    <element name="analyzer-settings">
+      <optional>
+        <attribute name="hyphen-limit">
+          <data type="positiveInteger"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="line-end-limit">
+          <data type="positiveInteger"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="line-end-repeat-limit">
+          <data type="positiveInteger"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="line-start-limit">
+          <data type="positiveInteger"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="line-start-repeat-limit">
+          <data type="positiveInteger"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="page-widow-limit-em"/>
+      </optional>
+      <optional>
+        <attribute name="page-widow-limit-percent"/>
+      </optional>
+      <optional>
+        <attribute name="paragraph-widow-limit-em"/>
+      </optional>
+      <optional>
+        <attribute name="paragraph-widow-limit-percent"/>
+      </optional>
     </element>
   </define>
 </grammar>

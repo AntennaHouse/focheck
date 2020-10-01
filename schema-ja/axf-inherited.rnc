@@ -12000,9 +12000,16 @@ axf_text-align-first =
   }?
 axf_text-align-string =
   
-  ## text-align="<string>" のときのテキストの配置
+  ## Text alignment when text-align="<string>": start | center | end | inside | outside | left | right | from-table-column()
   attribute axf:text-align-string {
-    "start" | "center" | "end" | "inside" | "outside" | "left" | "right"
+    "start"
+    | "center"
+    | "end"
+    | "inside"
+    | "outside"
+    | "left"
+    | "right"
+    | "from-table-column()"
   }?
 axf_text-autospace =
   
@@ -12076,8 +12083,10 @@ axf_text-indent-if-first-on-page =
   attribute axf:text-indent-if-first-on-page { text }?
 axf_text-justify =
   
-  ## 均等割り付けの処理方法: auto | inter-word | distribute
-  attribute axf:text-justify { "auto" | "inter-word" | "distribute" }?
+  ## How to justify text: auto | inter-word | inter-character
+  attribute axf:text-justify {
+    "auto" | "inter-word" | "inter-character" | "distribute"
+  }?
 axf_text-justify-trim =
   
   ## 文字の間を詰めの対象として追い込みの処理方法

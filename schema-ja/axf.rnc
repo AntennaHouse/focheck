@@ -1,7 +1,7 @@
 # Schema for Antenna House extension elements and non-inherited
 # extension attributes.
 # 
-# Copyright 2015-2019 Antenna House, Inc.
+# Copyright 2015-2020 Antenna House, Inc.
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,8 @@ namespace axh = "http://www.antennahouse.com/names/XSL/Hyphenations"
 namespace axs = "http://www.antennahouse.com/names/XSL/Settings"
 namespace fo = "http://www.w3.org/1999/XSL/Format"
 namespace local = ""
+namespace m = "http://www.w3.org/1998/Math/MathML"
+namespace svg = "http://www.w3.org/2000/svg"
 
 
 ## ハイフネーション 指定
@@ -78,6 +80,14 @@ include "axf-inherited.rnc" inherit = axf {
      | axf_space-start-punctuation
      | axf_output-volume-info
      | non-xsl-element)*
+  # AH Formatter allows axf:document-info with multi-volume output.
+  fo_page-sequence.model =
+    axf_document-info?,
+    fo_title?,
+    fo_folio-prefix?,
+    fo_folio-suffix?,
+    fo_static-content*,
+    fo_flow+
   # AH Formatter allows empty fo:static-content.
   fo_static-content.model =
     (block.fo.list | neutral.fo.list)* & point.fo.list*
@@ -107,11 +117,8 @@ include "axf-inherited.rnc" inherit = axf {
   # Exclude axf:* elements and attributes from counting as 'non-xsl'.
   non-xsl =
     attribute * - (local:* | axf:* | xml:*) { text }*,
-    element * - (local:* | fo:* | axf:*) {
-      attribute * - (id | ref-id | internal-destination) { text }*,
-      attribute id { xsd:ID }?,
-      attribute ref-id { xsd:IDREF }?,
-      attribute internal-destination { xsd:IDREF }?,
+    element * - (local:* | fo:* | axf:* | m:* | svg:*) {
+      attribute * { text }*,
       anything
     }*
   # For fo:declarations
@@ -348,7 +355,10 @@ axf_output-volume-info.attlist =
   ## 多分冊にしおりを付ける方法: first | all | separate | separate-group
   attribute bookmark-include {
     "first" | "all" | "separate" | "separate-group"
-  }?
+  }?,
+  
+  ## How to include document information in multiple separate volumes: first | all
+  attribute document-info-include { "first" | "all" }?
 # <axf:ruby>
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ruby.html#axf.ruby
 axf_ruby =

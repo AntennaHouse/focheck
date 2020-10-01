@@ -12590,7 +12590,7 @@
   <define name="axf_text-align-string">
     <optional>
       <attribute name="axf:text-align-string">
-        <a:documentation>text-align=&quot;&lt;string&gt;&quot; のときのテキストの配置</a:documentation>
+        <a:documentation>Text alignment when text-align=&quot;&lt;string&gt;&quot;: start | center | end | inside | outside | left | right | from-table-column()</a:documentation>
         <choice>
           <value>start</value>
           <value>center</value>
@@ -12599,6 +12599,7 @@
           <value>outside</value>
           <value>left</value>
           <value>right</value>
+          <value>from-table-column()</value>
         </choice>
       </attribute>
     </optional>
@@ -12727,10 +12728,11 @@
   <define name="axf_text-justify">
     <optional>
       <attribute name="axf:text-justify">
-        <a:documentation>均等割り付けの処理方法: auto | inter-word | distribute</a:documentation>
+        <a:documentation>How to justify text: auto | inter-word | inter-character</a:documentation>
         <choice>
           <value>auto</value>
           <value>inter-word</value>
+          <value>inter-character</value>
           <value>distribute</value>
         </choice>
       </attribute>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2015-2019 Antenna House, Inc.
+     Copyright 2015-2020 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 --><pattern id="axf-fo" xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sqf="http://www.schematron-quickfix.com/validator/process" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <!-- axf:custom-property -->
-  <!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.custom-property -->
+  <!-- https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.custom-property -->
   <rule context="axf:custom-property">
     <assert test="empty((../../axf:document-info, ../axf:document-info)[@name eq 'xmp'])" role="Warning"><value-of select="name()"/>name=&quot;xmp&quot; というの axf:document-info が存在場合は &quot; が無効にする</assert>
     <assert test="normalize-space(@name) ne ''" role="Warning">name=&quot;&quot; は空ではいけません。</assert>
@@ -25,7 +25,7 @@
   </rule>
 
   <!-- axf:document-info -->
-  <!-- https://www.antennahouse.com/product/ahf65/ahf-ext.html#axf.document-info -->
+  <!-- https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.document-info -->
   <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1">
     <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="Warning">name=&quot;<value-of select="@name"/>&quot; name=&quot;xmp&quot; というの axf:document-info が存在場合は無効にする。</assert>
   </rule>

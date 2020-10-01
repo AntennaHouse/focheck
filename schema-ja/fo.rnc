@@ -16,7 +16,6 @@
 # limitations under the License.
 
 namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
 default namespace fo = "http://www.w3.org/1999/XSL/Format"
 namespace local = ""
 
@@ -2651,8 +2650,8 @@ z-index =
 
 # For fo:instream-foreign-object
 anything =
-  (element * {
-     attribute * - (id | ref-id | internal-destination) { text }*,
+  (element * - fo:* {
+     attribute * { text }*,
      anything
    }
    | text)*
