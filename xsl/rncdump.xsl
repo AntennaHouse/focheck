@@ -197,6 +197,7 @@ margin margin-top margin-bottom margin-left margin-right</item>
   <xsl:call-template name="ahf:rnc-initial-comment" />
 <xsl:text>
 default namespace fo = "http://www.w3.org/1999/XSL/Format"
+namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
 namespace local = ""
 
 start = fo_root
@@ -499,18 +500,18 @@ fo_</xsl:text>
 
 # For fo:instream-foreign-object
 anything =
-   ( element * - ( fo:* ) {
+   ( element * - ( fo:* | axf:* ) {
         attribute * { text }*,
         anything } |
      text )*
 
 non-xsl =
-  ( attribute * - ( local:* | xml:* ) { text }*,
-    element * - ( local:* | fo:* ) { attribute * { text }*, anything }* )
+  ( attribute * - ( local:* | xml:* | axf:* ) { text }*,
+    element * - ( local:* | fo:* | axf:* ) { attribute * { text }*, anything }* )
 
 # For fo:declarations
 non-xsl-element =
-  element * - ( local:* | fo:* ) { attribute * - id { text }*, anything }*
+  element * - ( local:* | fo:* ) { attribute * { text }*, anything }*
 
 # From http://www.w3.org/TR/xsl/#fo_wrapper:
 #
