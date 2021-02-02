@@ -31,15 +31,15 @@ include "axf.rnc" inherit = ns1 {
   non-xsl =
     attribute * - (local:* | ns1:* | xml:*) { text }*,
     (element * - (local:* | ns2:* | ns1:* | ns3:* | ns4:*) {
-       attribute * - (id | ref-id | internal-destination) { text }*,
+       attribute * { text }*,
        anything
      }*
      | math
      | svg)
   # For fo:instream-foreign-object
   anything =
-    (element * - ns2:* {
-       attribute * - (id | ref-id | internal-destination) { text }*,
+    (element * - (ns2:* | ns1:* | ns3:* | ns4:*) {
+       attribute * { text }*,
        anything
      }
      | text)*

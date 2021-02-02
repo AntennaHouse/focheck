@@ -1,3 +1,11 @@
+# focheck 0.7.9
+
+- Add `axf:annotation-createdate`, `axf:annotation-modify-date`, `axf:avoid-widow-words`, `axf:condensed-text-align-last`, `axf:inline-overflow-align`, `axf:keep-together-within-inline-dimension`, `axf:line-number-except-continued-line`, `axf:overflow-condense-limit-letter-spacing`, `axf:overflow-condense-limit-line-height`, `axf:quotetype`, `axf:retrieve-table-rows`, and `axf:table-auto-layout-limit`. (V7.1)
+- `axf:overflow-condense` model allows multiple tokens. (V7.1)
+- Add `keep-non-spaces` to `axf:word-break`. (V7.1)
+- Reformat patterns for `axf:spread-page-master`.
+- More thrashing with IDS. (#42)
+
 # focheck 0.7.8
 
 - Excluding elements in more namespaces instead of allowing 'id', etc. (#42)

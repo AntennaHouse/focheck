@@ -116,7 +116,7 @@ include "axf-inherited.rnc" inherit = axf {
   # For fo:instream-foreign-object
   # Exclude axf:* elements and attributes from counting as 'non-xsl'.
   non-xsl =
-    attribute * - (local:* | axf:* | xml:*) { text }*,
+    attribute * - (local:* | xml:* | axf:*) { text }*,
     element * - (local:* | fo:* | axf:* | m:* | svg:*) {
       attribute * { text }*,
       anything
@@ -124,8 +124,8 @@ include "axf-inherited.rnc" inherit = axf {
   # For fo:declarations
   # Exclude axf:* elements from counting as 'non-xsl'.
   non-xsl-element =
-    element * - (local:* | fo:* | axf:*) {
-      attribute * - (id | ref-id | internal-destination) { text }*,
+    element * - (local:* | fo:* | axf:* | m:* | svg:*) {
+      attribute * { text }*,
       anything
     }*
   # 
@@ -364,13 +364,31 @@ axf_output-volume-info.attlist =
 axf_ruby =
   
   ## ルビ構造
-  element axf:ruby { axf.ruby.attlist, (axf_ruby-base, axf_ruby-text)+ }
+  element axf:ruby { axf_ruby.attlist, (axf_ruby-base, axf_ruby-text)+ }
+axf_ruby.attlist =
+  axf_ruby-align,
+  axf_ruby-position,
+  axf_ruby-offset,
+  axf_ruby-overhang,
+  axf_ruby-limit-overhang,
+  axf_ruby-limit-space,
+  axf_ruby-small-kana,
+  axf_ruby-font-family,
+  axf_ruby-font-size,
+  axf_ruby-minimum-font-size,
+  axf_ruby-font-style,
+  axf_ruby-font-weight,
+  axf_ruby-font-stretch,
+  axf_ruby-condense,
+  axf_ruby-color,
+  common-border-padding-and-background-properties
 # <axf:ruby-base>
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ruby.html#axf.ruby-base
 axf_ruby-base =
   
   ## ルビの親文字
-  element axf:ruby-base { text | axf_ruby }
+  element axf:ruby-base { axf_ruby-base.attlist, (text | axf_ruby) }
+axf_ruby-base.attlist = common-border-padding-and-background-properties
 # <axf:ruby-text>
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ruby.html#axf.ruby-text
 axf_ruby-text =
@@ -436,23 +454,17 @@ axf_spread-page-master =
     axf_background-scaling,
     axf_background-size,
     axf_bleed,
-    common-margin-properties-block,
-    
-    ## 見開きでの左ページのマスタ名
-    attribute left-page-master-reference { xsd:NCName },
-    master-name,
-    reference-orientation,
-    
-    ## 見開きでの右ページのマスタ
-    attribute right-page-master-reference { xsd:NCName },
-    writing-mode,
+    axf_left-page-master-reference,
+    axf_right-page-master-reference,
     background-attachment,
     background-image,
     background-position,
     background-position-horizontal,
     background-position-vertical,
     background-repeat,
-    axf_spread-region+
+    master-name,
+    writing-mode,
+    axf_spread-region*
   }
 # <axf:spread-region>
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-spread.html#axf.spread-region
@@ -627,7 +639,10 @@ fo_block-container.attlist &=
   xml_id,
   axf.annotation.properties
 fo_character.attlist &=
-  xml_id, axf.annotation.properties, axf.text-decoration.attlist
+  xml_id,
+  axf_quotetype,
+  axf.annotation.properties,
+  axf.text-decoration.attlist
 fo_external-graphic.attlist &=
   axf_alttext,
   axf_background-image-resolution,
@@ -693,6 +708,7 @@ fo_page-number-citation.attlist &=
   xml_id, axf.annotation.properties, axf.page-number.attlist
 fo_page-number-citation-last.attlist &=
   xml_id, axf.annotation.properties, axf.page-number.attlist
+fo_retrieve-table-marker.attlist &= axf_retrieve-table-rows
 fo_scaling-value-citation.attlist &=
   xml_id, axf.annotation.properties, axf.text-decoration.attlist
 fo_table.attlist &=
@@ -751,6 +767,7 @@ axf.annotation.properties =
   axf_annotation-border-width,
   axf_annotation-color,
   axf_annotation-contents,
+  axf_annotation-createdate,
   axf_annotation-file-attachment,
   axf_annotation-flags,
   axf_annotation-font-family,
@@ -759,6 +776,7 @@ axf.annotation.properties =
   axf_annotation-font-weight,
   axf_annotation-height,
   axf_annotation-icon-name,
+  axf_annotation-modifydate,
   axf_annotation-open,
   axf_annotation-position-horizontal,
   axf_annotation-position-vertical,
@@ -827,23 +845,8 @@ axf.block.attlist =
   axf-baseline-grid-properties,
   axf-outline-properties,
   axf_keep-together-within-dimension,
+  axf_keep-together-within-inline-dimension,
   axf_text-overflow
-axf.ruby.attlist =
-  axf_ruby-align,
-  axf_ruby-position,
-  axf_ruby-offset,
-  axf_ruby-overhang,
-  axf_ruby-limit-overhang,
-  axf_ruby-limit-space,
-  axf_ruby-small-kana,
-  axf_ruby-font-family,
-  axf_ruby-font-size,
-  axf_ruby-minimum-font-size,
-  axf_ruby-font-style,
-  axf_ruby-font-weight,
-  axf_ruby-font-stretch,
-  axf_ruby-condense,
-  axf_ruby-color
 # @axf:action-type
 # 
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.action-type
@@ -922,6 +925,13 @@ axf_annotation-contents =
   
   ## 注釈の内容：<string>
   attribute axf:annotation-contents { text }?
+# @axf:annotation-createdate
+# 
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.annotation-createdate
+axf_annotation-createdate =
+  
+  ## Annotation creation date: <string>
+  attribute axf:annotation-createdate { text }?
 # @axf:annotation-file-attachment
 # 
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.annotation-file-attachment
@@ -989,6 +999,13 @@ axf_annotation-icon-name =
   
   ## 注釈の表示に用いるアイコンの名前： <string>
   attribute axf:annotation-icon-name { text }?
+# @axf:annotation-modifydate
+# 
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.annotation-modifydate
+axf_annotation-modifydate =
+  
+  ## Annotation modification date: <string>
+  attribute axf:annotation-modifydate { text }?
 # @axf:annotation-open
 # 
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.annotation-open
@@ -1772,8 +1789,8 @@ axf_footnote-position =
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.footnote-keep
 axf_footnote-keep =
   
-  ## 脚注とアンカーを同一ページ内または段内に配置するようにします
-  attribute axf:footnote-keep { "auto" | "always" }?
+  ## Whether to arrange a footnote and an anchor in the same page: auto | always | none
+  attribute axf:footnote-keep { "auto" | "always" | "none" }?
 # @axf:footnote-max-height
 # 
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.footnote-max-height
@@ -1809,6 +1826,13 @@ axf_keep-together-within-dimension =
   
   ## keep-together の上限高さ： auto | <length>
   attribute axf:keep-together-within-dimension { text }?
+# @axf:keep-together-within-inline-dimension
+# 
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.keep-together-within-dimension
+axf_keep-together-within-inline-dimension =
+  
+  ## Upper limit of 'keep-together.within-line': auto | <length>
+  attribute axf:keep-together-within-inline-dimension { text }?
 # @axf:layer-settings
 # 
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.layer-settings
@@ -1816,6 +1840,14 @@ axf_layer-settings =
   
   ## レイヤを定義します: none | <layer-setting>#
   attribute axf:layer-settings { text }?
+# @axf:left-page-master-reference
+# 
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.left-page-master-reference
+axf_left-page-master-reference =
+  
+  ## Master name of the page master for the left page of a two-page spread
+  attribute axf:left-page-master-reference
+            | left-page-master-reference { xsd:NCName }
 # @axf:media-activation
 # 
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.media-activation
@@ -2091,6 +2123,13 @@ axf_printer-marks-spine-width =
   
   ## 見開きの背表紙の幅： <length>
   attribute axf:printer-marks-spine-width { text }?
+# @axf:quotetype
+# 
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.quotetype
+axf_quotetype =
+  
+  ## Direction of quotes: QU | OP | CL
+  attribute axf:quotetype { "QU" | "OP" | "CL" }?
 # @axf:repeat-cell-content-at-break
 # 
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.repeat-cell-content-at-break
@@ -2112,6 +2151,13 @@ axf_reverse-diagonal-border-style =
   
   ## 対角罫のスタイルを指定します: <border-style>
   attribute axf:reverse-diagonal-border-style { text }?
+# @axf:retrieve-table-rows
+# 
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.retrieve-table-rows
+axf_retrieve-table-rows =
+  
+  ## Maximum number of fo:table-row in fo:marker referenced from fo:retrieve-table-marker: <integer>
+  attribute axf:retrieve-table-rows { xsd:integer }?
 # @axf:reverse-page
 # 
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.reverse-page
@@ -2126,6 +2172,14 @@ axf_reverse-page-number =
   
   ## ページ番号を逆順に振るかどうか： true | false
   attribute axf:reverse-page-number { "true" | "false" }?
+# @axf:right-page-master-reference
+# 
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.right-page-master-reference
+axf_right-page-master-reference =
+  
+  ## Master name of the page master for the right page of a two-page spread
+  attribute axf:right-page-master-reference
+            | right-page-master-reference { xsd:NCName }
 # @axf:scope
 # 
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.scope
@@ -2161,8 +2215,10 @@ axf_suppress-folio-suffix =
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.suppress-if-first-on-page
 axf_suppress-if-first-on-page =
   
-  ## ページ先頭のブロックを削除するかどうか: true | false
-  attribute axf:suppress-if-first-on-page { "true" | "false" }?
+  ## Whether to suppress the block at the beginning of a page: true | false | unless
+  attribute axf:suppress-if-first-on-page {
+    "true" | "false" | "unless"
+  }?
 # @axf:tab-align
 # 
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.tab-align

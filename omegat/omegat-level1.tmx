@@ -3248,14 +3248,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>How to condense the overflowed text within the region: letter-spacing | font-stretch | font-size | line-height | auto | none</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T122028Z" creationid="mtan" creationdate="20171005T122028Z">
-        <seg>オーバフローしたテキストを領域内にどのように詰め込むか: letter-spacing | font-stretch | font-size | line-height | auto | none</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>How to convert the RGB or CMYK color space to DeviceGray or DeviceCMYK: none | black | gray | all-gray | all-cmyk</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190523T150126Z" creationid="mtan" creationdate="20190523T150126Z">
@@ -3695,22 +3687,6 @@ you may not use this file except in compliance with the License.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T120229Z" creationid="mtan" creationdate="20160120T125205Z">
         <seg>bleed が 0 のときの、版面とトンボの間のマージン： &lt;length&gt; | auto</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Master name of the page master for the left page of a two-page spread.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T152357Z" creationid="mtan" creationdate="20171005T152357Z">
-        <seg>見開きでの左ページのマスタ名</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Master name of the page master for the right page of a two-page spread.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T152430Z" creationid="mtan" creationdate="20171005T152430Z">
-        <seg>見開きでの右ページのマスタ</seg>
       </tuv>
     </tu>
     <tu>
@@ -7780,14 +7756,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Whether to arrange a footnote and an anchor in the same page</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200522T150533Z" creationid="mtan" creationdate="20160120T130332Z">
-        <seg>脚注とアンカーを同一ページ内または段内に配置するようにします</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Whether to automatically hide rich media skin: true | false</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190522T150214Z" creationid="mtan" creationdate="20190522T150214Z">
@@ -7912,14 +7880,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190523T115954Z" creationid="mtan" creationdate="20190523T115954Z">
         <seg>ハイフネーション例外辞書に &lt;hyphen-min&gt; ができるかどうか： false | true | without-exceptions</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Whether to enable line breaking even inside a word</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160118T182700Z" creationid="mtan" creationdate="20160118T182700Z">
-        <seg>単語の途中でも行分割可能にするかどうか</seg>
       </tuv>
     </tu>
     <tu>
@@ -8096,14 +8056,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190522T151407Z" creationid="mtan" creationdate="20190522T151407Z">
         <seg>マルチメディアの再生コントロールバーを表示するかどうか： true | false</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Whether to suppress the block at the beginning of a page: true | false</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160310T105343Z" creationid="mtan" creationdate="20160310T105343Z">
-        <seg>ページ先頭のブロックを削除するかどうか: true | false</seg>
       </tuv>
     </tu>
     <tu>

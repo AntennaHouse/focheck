@@ -136,7 +136,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Additional components:
+### Additional components:
  
 The HTML MathML entity set is bundled with the **focheck** oXygen framework but is not included in the **focheck** schema.
 The entity set was downloaded from http://www.w3.org/TR/xml-entity-names/

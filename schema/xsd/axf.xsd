@@ -620,9 +620,27 @@
         <xs:element ref="axf:ruby-base"/>
         <xs:element ref="axf:ruby-text"/>
       </xs:sequence>
-      <xs:attributeGroup ref="axf:axf.ruby.attlist"/>
+      <xs:attributeGroup ref="axf:axf_ruby.attlist"/>
     </xs:complexType>
   </xs:element>
+  <xs:attributeGroup name="axf_ruby.attlist">
+    <xs:attributeGroup ref="axf:axf_ruby-align"/>
+    <xs:attributeGroup ref="axf:axf_ruby-position"/>
+    <xs:attributeGroup ref="axf:axf_ruby-offset"/>
+    <xs:attributeGroup ref="axf:axf_ruby-overhang"/>
+    <xs:attributeGroup ref="axf:axf_ruby-limit-overhang"/>
+    <xs:attributeGroup ref="axf:axf_ruby-limit-space"/>
+    <xs:attributeGroup ref="axf:axf_ruby-small-kana"/>
+    <xs:attributeGroup ref="axf:axf_ruby-font-family"/>
+    <xs:attributeGroup ref="axf:axf_ruby-font-size"/>
+    <xs:attributeGroup ref="axf:axf_ruby-minimum-font-size"/>
+    <xs:attributeGroup ref="axf:axf_ruby-font-style"/>
+    <xs:attributeGroup ref="axf:axf_ruby-font-weight"/>
+    <xs:attributeGroup ref="axf:axf_ruby-font-stretch"/>
+    <xs:attributeGroup ref="axf:axf_ruby-condense"/>
+    <xs:attributeGroup ref="axf:axf_ruby-color"/>
+    <xs:attributeGroup ref="fo:common-border-padding-and-background-properties"/>
+  </xs:attributeGroup>
   <!--
     <axf:ruby-base>
     https://www.antenna.co.jp/AHF/help/v70e/ahf-ruby.html#axf.ruby-base
@@ -635,8 +653,12 @@
       <xs:sequence>
         <xs:element minOccurs="0" ref="axf:ruby"/>
       </xs:sequence>
+      <xs:attributeGroup ref="axf:axf_ruby-base.attlist"/>
     </xs:complexType>
   </xs:element>
+  <xs:attributeGroup name="axf_ruby-base.attlist">
+    <xs:attributeGroup ref="fo:common-border-padding-and-background-properties"/>
+  </xs:attributeGroup>
   <!--
     <axf:ruby-text>
     https://www.antenna.co.jp/AHF/help/v70e/ahf-ruby.html#axf.ruby-text
@@ -721,7 +743,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="axf:spread-region"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="axf:spread-region"/>
       </xs:sequence>
       <xs:attributeGroup ref="axf:axf_background-color"/>
       <xs:attributeGroup ref="axf:axf_background-clip"/>
@@ -736,26 +758,16 @@
       <xs:attributeGroup ref="axf:axf_background-scaling"/>
       <xs:attributeGroup ref="axf:axf_background-size"/>
       <xs:attributeGroup ref="axf:axf_bleed"/>
-      <xs:attributeGroup ref="fo:common-margin-properties-block"/>
-      <xs:attribute name="left-page-master-reference" use="required" type="xs:NCName">
-        <xs:annotation>
-          <xs:documentation>Master name of the page master for the left page of a two-page spread.</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
-      <xs:attributeGroup ref="fo:master-name"/>
-      <xs:attributeGroup ref="fo:reference-orientation"/>
-      <xs:attribute name="right-page-master-reference" use="required" type="xs:NCName">
-        <xs:annotation>
-          <xs:documentation>Master name of the page master for the right page of a two-page spread.</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
-      <xs:attributeGroup ref="fo:writing-mode"/>
+      <xs:attributeGroup ref="axf:axf_left-page-master-reference"/>
+      <xs:attributeGroup ref="axf:axf_right-page-master-reference"/>
       <xs:attributeGroup ref="fo:background-attachment"/>
       <xs:attributeGroup ref="fo:background-image"/>
       <xs:attributeGroup ref="fo:background-position"/>
       <xs:attributeGroup ref="fo:background-position-horizontal"/>
       <xs:attributeGroup ref="fo:background-position-vertical"/>
       <xs:attributeGroup ref="fo:background-repeat"/>
+      <xs:attributeGroup ref="fo:master-name"/>
+      <xs:attributeGroup ref="fo:writing-mode"/>
     </xs:complexType>
   </xs:element>
   <!--
@@ -843,6 +855,7 @@
     <xs:attributeGroup ref="axf:axf_annotation-border-width"/>
     <xs:attributeGroup ref="axf:axf_annotation-color"/>
     <xs:attributeGroup ref="axf:axf_annotation-contents"/>
+    <xs:attributeGroup ref="axf:axf_annotation-createdate"/>
     <xs:attributeGroup ref="axf:axf_annotation-file-attachment"/>
     <xs:attributeGroup ref="axf:axf_annotation-flags"/>
     <xs:attributeGroup ref="axf:axf_annotation-font-family"/>
@@ -851,6 +864,7 @@
     <xs:attributeGroup ref="axf:axf_annotation-font-weight"/>
     <xs:attributeGroup ref="axf:axf_annotation-height"/>
     <xs:attributeGroup ref="axf:axf_annotation-icon-name"/>
+    <xs:attributeGroup ref="axf:axf_annotation-modifydate"/>
     <xs:attributeGroup ref="axf:axf_annotation-open"/>
     <xs:attributeGroup ref="axf:axf_annotation-position-horizontal"/>
     <xs:attributeGroup ref="axf:axf_annotation-position-vertical"/>
@@ -935,24 +949,8 @@
     <xs:attributeGroup ref="axf:axf-baseline-grid-properties"/>
     <xs:attributeGroup ref="axf:axf-outline-properties"/>
     <xs:attributeGroup ref="axf:axf_keep-together-within-dimension"/>
+    <xs:attributeGroup ref="axf:axf_keep-together-within-inline-dimension"/>
     <xs:attributeGroup ref="axf:axf_text-overflow"/>
-  </xs:attributeGroup>
-  <xs:attributeGroup name="axf.ruby.attlist">
-    <xs:attributeGroup ref="axf:axf_ruby-align"/>
-    <xs:attributeGroup ref="axf:axf_ruby-position"/>
-    <xs:attributeGroup ref="axf:axf_ruby-offset"/>
-    <xs:attributeGroup ref="axf:axf_ruby-overhang"/>
-    <xs:attributeGroup ref="axf:axf_ruby-limit-overhang"/>
-    <xs:attributeGroup ref="axf:axf_ruby-limit-space"/>
-    <xs:attributeGroup ref="axf:axf_ruby-small-kana"/>
-    <xs:attributeGroup ref="axf:axf_ruby-font-family"/>
-    <xs:attributeGroup ref="axf:axf_ruby-font-size"/>
-    <xs:attributeGroup ref="axf:axf_ruby-minimum-font-size"/>
-    <xs:attributeGroup ref="axf:axf_ruby-font-style"/>
-    <xs:attributeGroup ref="axf:axf_ruby-font-weight"/>
-    <xs:attributeGroup ref="axf:axf_ruby-font-stretch"/>
-    <xs:attributeGroup ref="axf:axf_ruby-condense"/>
-    <xs:attributeGroup ref="axf:axf_ruby-color"/>
   </xs:attributeGroup>
   <!--
     @axf:action-type
@@ -1097,6 +1095,18 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:annotation-createdate
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.annotation-createdate
+  -->
+  <xs:attributeGroup name="axf_annotation-createdate">
+    <xs:attribute name="annotation-createdate" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Annotation creation date: &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:annotation-file-attachment
     
     https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.annotation-file-attachment
@@ -1203,6 +1213,18 @@
     <xs:attribute name="annotation-icon-name" form="qualified">
       <xs:annotation>
         <xs:documentation>Name of the icon used for displaying the annotation: &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:annotation-modifydate
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.annotation-modifydate
+  -->
+  <xs:attributeGroup name="axf_annotation-modifydate">
+    <xs:attribute name="annotation-modifydate" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Annotation modification date: &lt;string&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -2646,12 +2668,13 @@
   <xs:attributeGroup name="axf_footnote-keep">
     <xs:attribute name="footnote-keep" form="qualified">
       <xs:annotation>
-        <xs:documentation>Whether to arrange a footnote and an anchor in the same page</xs:documentation>
+        <xs:documentation>Whether to arrange a footnote and an anchor in the same page: auto | always | none</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
           <xs:enumeration value="auto"/>
           <xs:enumeration value="always"/>
+          <xs:enumeration value="none"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -2717,6 +2740,18 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:keep-together-within-inline-dimension
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.keep-together-within-dimension
+  -->
+  <xs:attributeGroup name="axf_keep-together-within-inline-dimension">
+    <xs:attribute name="keep-together-within-inline-dimension" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Upper limit of 'keep-together.within-line': auto | &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:layer-settings
     
     https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.layer-settings
@@ -2727,6 +2762,15 @@
         <xs:documentation>Layer definitions: none | &lt;layer-setting&gt;#</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:left-page-master-reference
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.left-page-master-reference
+  -->
+  <xs:attributeGroup name="axf_left-page-master-reference">
+    <xs:attribute name="left-page-master-reference" form="qualified" type="xs:NCName"/>
+    <xs:attribute name="left-page-master-reference" type="xs:NCName"/>
   </xs:attributeGroup>
   <!--
     @axf:media-activation
@@ -3258,6 +3302,25 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:quotetype
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.quotetype
+  -->
+  <xs:attributeGroup name="axf_quotetype">
+    <xs:attribute name="quotetype" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Direction of quotes: QU | OP | CL</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="QU"/>
+          <xs:enumeration value="OP"/>
+          <xs:enumeration value="CL"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:repeat-cell-content-at-break
     
     https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.repeat-cell-content-at-break
@@ -3306,6 +3369,18 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:retrieve-table-rows
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.retrieve-table-rows
+  -->
+  <xs:attributeGroup name="axf_retrieve-table-rows">
+    <xs:attribute name="retrieve-table-rows" form="qualified" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>Maximum number of fo:table-row in fo:marker referenced from fo:retrieve-table-marker: &lt;integer&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:reverse-page
     
     https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.reverse-page
@@ -3340,6 +3415,15 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:right-page-master-reference
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.right-page-master-reference
+  -->
+  <xs:attributeGroup name="axf_right-page-master-reference">
+    <xs:attribute name="right-page-master-reference" form="qualified" type="xs:NCName"/>
+    <xs:attribute name="right-page-master-reference" type="xs:NCName"/>
   </xs:attributeGroup>
   <!--
     @axf:scope
@@ -3425,12 +3509,13 @@
   <xs:attributeGroup name="axf_suppress-if-first-on-page">
     <xs:attribute name="suppress-if-first-on-page" form="qualified">
       <xs:annotation>
-        <xs:documentation>Whether to suppress the block at the beginning of a page: true | false</xs:documentation>
+        <xs:documentation>Whether to suppress the block at the beginning of a page: true | false | unless</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
           <xs:enumeration value="true"/>
           <xs:enumeration value="false"/>
+          <xs:enumeration value="unless"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>

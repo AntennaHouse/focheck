@@ -269,8 +269,8 @@
           <anyName>
             <except>
               <nsName ns=""/>
-              <nsName/>
               <nsName ns="http://www.w3.org/XML/1998/namespace"/>
+              <nsName/>
             </except>
           </anyName>
         </attribute>
@@ -307,17 +307,13 @@
               <nsName ns=""/>
               <nsName ns="http://www.w3.org/1999/XSL/Format"/>
               <nsName/>
+              <nsName ns="http://www.w3.org/1998/Math/MathML"/>
+              <nsName ns="http://www.w3.org/2000/svg"/>
             </except>
           </anyName>
           <zeroOrMore>
             <attribute>
-              <anyName>
-                <except>
-                  <name ns="">id</name>
-                  <name ns="">ref-id</name>
-                  <name ns="">internal-destination</name>
-                </except>
-              </anyName>
+              <anyName/>
             </attribute>
           </zeroOrMore>
           <ref name="anything"/>
@@ -689,12 +685,30 @@
   <define name="axf_ruby">
     <element name="axf:ruby">
       <a:documentation>The ruby structure</a:documentation>
-      <ref name="axf.ruby.attlist"/>
+      <ref name="axf_ruby.attlist"/>
       <oneOrMore>
         <ref name="axf_ruby-base"/>
         <ref name="axf_ruby-text"/>
       </oneOrMore>
     </element>
+  </define>
+  <define name="axf_ruby.attlist">
+    <ref name="axf_ruby-align"/>
+    <ref name="axf_ruby-position"/>
+    <ref name="axf_ruby-offset"/>
+    <ref name="axf_ruby-overhang"/>
+    <ref name="axf_ruby-limit-overhang"/>
+    <ref name="axf_ruby-limit-space"/>
+    <ref name="axf_ruby-small-kana"/>
+    <ref name="axf_ruby-font-family"/>
+    <ref name="axf_ruby-font-size"/>
+    <ref name="axf_ruby-minimum-font-size"/>
+    <ref name="axf_ruby-font-style"/>
+    <ref name="axf_ruby-font-weight"/>
+    <ref name="axf_ruby-font-stretch"/>
+    <ref name="axf_ruby-condense"/>
+    <ref name="axf_ruby-color"/>
+    <ref name="common-border-padding-and-background-properties"/>
   </define>
   <!--
     <axf:ruby-base>
@@ -703,11 +717,15 @@
   <define name="axf_ruby-base">
     <element name="axf:ruby-base">
       <a:documentation>Base character of ruby</a:documentation>
+      <ref name="axf_ruby-base.attlist"/>
       <choice>
         <text/>
         <ref name="axf_ruby"/>
       </choice>
     </element>
+  </define>
+  <define name="axf_ruby-base.attlist">
+    <ref name="common-border-padding-and-background-properties"/>
   </define>
   <!--
     <axf:ruby-text>
@@ -792,27 +810,19 @@
       <ref name="axf_background-scaling"/>
       <ref name="axf_background-size"/>
       <ref name="axf_bleed"/>
-      <ref name="common-margin-properties-block"/>
-      <attribute name="left-page-master-reference">
-        <a:documentation>Master name of the page master for the left page of a two-page spread.</a:documentation>
-        <data type="NCName"/>
-      </attribute>
-      <ref name="master-name"/>
-      <ref name="reference-orientation"/>
-      <attribute name="right-page-master-reference">
-        <a:documentation>Master name of the page master for the right page of a two-page spread.</a:documentation>
-        <data type="NCName"/>
-      </attribute>
-      <ref name="writing-mode"/>
+      <ref name="axf_left-page-master-reference"/>
+      <ref name="axf_right-page-master-reference"/>
       <ref name="background-attachment"/>
       <ref name="background-image"/>
       <ref name="background-position"/>
       <ref name="background-position-horizontal"/>
       <ref name="background-position-vertical"/>
       <ref name="background-repeat"/>
-      <oneOrMore>
+      <ref name="master-name"/>
+      <ref name="writing-mode"/>
+      <zeroOrMore>
         <ref name="axf_spread-region"/>
-      </oneOrMore>
+      </zeroOrMore>
     </element>
   </define>
   <!--
@@ -1037,6 +1047,7 @@
   </define>
   <define name="fo_character.attlist" combine="interleave">
     <ref name="xml_id"/>
+    <ref name="axf_quotetype"/>
     <ref name="axf.annotation.properties"/>
     <ref name="axf.text-decoration.attlist"/>
   </define>
@@ -1155,6 +1166,9 @@
     <ref name="axf.annotation.properties"/>
     <ref name="axf.page-number.attlist"/>
   </define>
+  <define name="fo_retrieve-table-marker.attlist" combine="interleave">
+    <ref name="axf_retrieve-table-rows"/>
+  </define>
   <define name="fo_scaling-value-citation.attlist" combine="interleave">
     <ref name="xml_id"/>
     <ref name="axf.annotation.properties"/>
@@ -1249,6 +1263,7 @@
     <ref name="axf_annotation-border-width"/>
     <ref name="axf_annotation-color"/>
     <ref name="axf_annotation-contents"/>
+    <ref name="axf_annotation-createdate"/>
     <ref name="axf_annotation-file-attachment"/>
     <ref name="axf_annotation-flags"/>
     <ref name="axf_annotation-font-family"/>
@@ -1257,6 +1272,7 @@
     <ref name="axf_annotation-font-weight"/>
     <ref name="axf_annotation-height"/>
     <ref name="axf_annotation-icon-name"/>
+    <ref name="axf_annotation-modifydate"/>
     <ref name="axf_annotation-open"/>
     <ref name="axf_annotation-position-horizontal"/>
     <ref name="axf_annotation-position-vertical"/>
@@ -1344,24 +1360,8 @@
     <ref name="axf-baseline-grid-properties"/>
     <ref name="axf-outline-properties"/>
     <ref name="axf_keep-together-within-dimension"/>
+    <ref name="axf_keep-together-within-inline-dimension"/>
     <ref name="axf_text-overflow"/>
-  </define>
-  <define name="axf.ruby.attlist">
-    <ref name="axf_ruby-align"/>
-    <ref name="axf_ruby-position"/>
-    <ref name="axf_ruby-offset"/>
-    <ref name="axf_ruby-overhang"/>
-    <ref name="axf_ruby-limit-overhang"/>
-    <ref name="axf_ruby-limit-space"/>
-    <ref name="axf_ruby-small-kana"/>
-    <ref name="axf_ruby-font-family"/>
-    <ref name="axf_ruby-font-size"/>
-    <ref name="axf_ruby-minimum-font-size"/>
-    <ref name="axf_ruby-font-style"/>
-    <ref name="axf_ruby-font-weight"/>
-    <ref name="axf_ruby-font-stretch"/>
-    <ref name="axf_ruby-condense"/>
-    <ref name="axf_ruby-color"/>
   </define>
   <!--
     @axf:action-type
@@ -1512,6 +1512,18 @@
     </optional>
   </define>
   <!--
+    @axf:annotation-createdate
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.annotation-createdate
+  -->
+  <define name="axf_annotation-createdate">
+    <optional>
+      <attribute name="axf:annotation-createdate">
+        <a:documentation>Annotation creation date: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:annotation-file-attachment
     
     https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.annotation-file-attachment
@@ -1617,6 +1629,18 @@
     <optional>
       <attribute name="axf:annotation-icon-name">
         <a:documentation>Name of the icon used for displaying the annotation: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-modifydate
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.annotation-modifydate
+  -->
+  <define name="axf_annotation-modifydate">
+    <optional>
+      <attribute name="axf:annotation-modifydate">
+        <a:documentation>Annotation modification date: &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -3097,10 +3121,11 @@
   <define name="axf_footnote-keep">
     <optional>
       <attribute name="axf:footnote-keep">
-        <a:documentation>Whether to arrange a footnote and an anchor in the same page</a:documentation>
+        <a:documentation>Whether to arrange a footnote and an anchor in the same page: auto | always | none</a:documentation>
         <choice>
           <value>auto</value>
           <value>always</value>
+          <value>none</value>
         </choice>
       </attribute>
     </optional>
@@ -3167,6 +3192,18 @@
     </optional>
   </define>
   <!--
+    @axf:keep-together-within-inline-dimension
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.keep-together-within-dimension
+  -->
+  <define name="axf_keep-together-within-inline-dimension">
+    <optional>
+      <attribute name="axf:keep-together-within-inline-dimension">
+        <a:documentation>Upper limit of 'keep-together.within-line': auto | &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:layer-settings
     
     https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.layer-settings
@@ -3177,6 +3214,21 @@
         <a:documentation>Layer definitions: none | &lt;layer-setting&gt;#</a:documentation>
       </attribute>
     </optional>
+  </define>
+  <!--
+    @axf:left-page-master-reference
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.left-page-master-reference
+  -->
+  <define name="axf_left-page-master-reference">
+    <attribute>
+      <a:documentation>Master name of the page master for the left page of a two-page spread</a:documentation>
+      <choice>
+        <name>axf:left-page-master-reference</name>
+        <name>left-page-master-reference</name>
+      </choice>
+      <data type="NCName"/>
+    </attribute>
   </define>
   <!--
     @axf:media-activation
@@ -3687,6 +3739,23 @@
     </optional>
   </define>
   <!--
+    @axf:quotetype
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.quotetype
+  -->
+  <define name="axf_quotetype">
+    <optional>
+      <attribute name="axf:quotetype">
+        <a:documentation>Direction of quotes: QU | OP | CL</a:documentation>
+        <choice>
+          <value>QU</value>
+          <value>OP</value>
+          <value>CL</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:repeat-cell-content-at-break
     
     https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.repeat-cell-content-at-break
@@ -3731,6 +3800,19 @@
     </optional>
   </define>
   <!--
+    @axf:retrieve-table-rows
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.retrieve-table-rows
+  -->
+  <define name="axf_retrieve-table-rows">
+    <optional>
+      <attribute name="axf:retrieve-table-rows">
+        <a:documentation>Maximum number of fo:table-row in fo:marker referenced from fo:retrieve-table-marker: &lt;integer&gt;</a:documentation>
+        <data type="integer"/>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:reverse-page
     
     https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.reverse-page
@@ -3761,6 +3843,21 @@
         </choice>
       </attribute>
     </optional>
+  </define>
+  <!--
+    @axf:right-page-master-reference
+    
+    https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.right-page-master-reference
+  -->
+  <define name="axf_right-page-master-reference">
+    <attribute>
+      <a:documentation>Master name of the page master for the right page of a two-page spread</a:documentation>
+      <choice>
+        <name>axf:right-page-master-reference</name>
+        <name>right-page-master-reference</name>
+      </choice>
+      <data type="NCName"/>
+    </attribute>
   </define>
   <!--
     @axf:scope
@@ -3838,10 +3935,11 @@
   <define name="axf_suppress-if-first-on-page">
     <optional>
       <attribute name="axf:suppress-if-first-on-page">
-        <a:documentation>Whether to suppress the block at the beginning of a page: true | false</a:documentation>
+        <a:documentation>Whether to suppress the block at the beginning of a page: true | false | unless</a:documentation>
         <choice>
           <value>true</value>
           <value>false</value>
+          <value>unless</value>
         </choice>
       </attribute>
     </optional>

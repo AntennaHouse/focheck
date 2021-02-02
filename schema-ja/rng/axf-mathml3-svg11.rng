@@ -15,7 +15,7 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
---><grammar ns="" xmlns="http://relaxng.org/ns/structure/1.0">
+--><grammar ns="http://www.w3.org/2000/svg" xmlns="http://relaxng.org/ns/structure/1.0">
   <!-- MathML 3.0 schema with Antenna House overrides. -->
   <define name="math">
     <externalRef href="axf-mathml3-override.rng" ns="http://www.antennahouse.com/names/XSL/Extensions"/>
@@ -56,13 +56,7 @@
             </anyName>
             <zeroOrMore>
               <attribute>
-                <anyName>
-                  <except>
-                    <name ns="">id</name>
-                    <name ns="">ref-id</name>
-                    <name ns="">internal-destination</name>
-                  </except>
-                </anyName>
+                <anyName/>
               </attribute>
             </zeroOrMore>
             <ref name="anything"/>
@@ -80,17 +74,14 @@
             <anyName>
               <except>
                 <nsName ns="http://www.w3.org/1999/XSL/Format"></nsName>
+                <nsName></nsName>
+                <nsName ns="http://www.w3.org/1998/Math/MathML"></nsName>
+                <nsName ns="http://www.w3.org/2000/svg"></nsName>
               </except>
             </anyName>
             <zeroOrMore>
               <attribute>
-                <anyName>
-                  <except>
-                    <name ns="">id</name>
-                    <name ns="">ref-id</name>
-                    <name ns="">internal-destination</name>
-                  </except>
-                </anyName>
+                <anyName/>
               </attribute>
             </zeroOrMore>
             <ref name="anything"/>
