@@ -34,14 +34,14 @@ include "axf.rnc" {
 non-xsl =
   ( attribute * - ( local:* | axf:* | xml:* ) { text }*,
   ( ( element * - ( local:* | fo:* | axf:* | m:* | svg:* )
-      { attribute * - (id | ref-id | internal-destination ) { text }*,
+      { attribute * { text }*,
       anything }* ) |
      math | svg) )
 
 # For fo:instream-foreign-object
 anything =
-   ( element * - ( fo:* ) {
-        attribute * - (id | ref-id | internal-destination ) { text }*,
+   ( element * - ( fo:* | axf:* | m:* | svg:* ) {
+        attribute * { text }*,
         anything } |
      text )*
 
