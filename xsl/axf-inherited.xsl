@@ -110,11 +110,13 @@
 <property name="axf:alt-glyph" model="text" description="Alternative glyph of a character: &lt;number> | &lt;string> &lt;number>?" />
 <property name="axf:assumed-page-number" model="text" description="Assumed page number" />
 <property name="axf:avoid-widow-words" model="text" description="Spacing behavior between words or characters so that the last line of the paragraph does not have only one word left (one character for CJK): false | true | [&lt;length> || &lt;percentage>]" />
+<property name="axf:avoid-widow-words-cjk-punctuation" model="text" description="Whether to include the last punctuation mark and count them in one character when axf:avoid-widow-word=&quot;true&quot;: auto | true | false | &lt;string&gt;" /><!-- V7.1 -->
 <property name="axf:balanced-text-align" model="'true' | 'false' | 'auto'" description="Whether to balance entire block including the last line: true | false | auto" /><!-- V7.0 -->
 <property name="axf:base-uri" model="text" description="Location which becomes the base of relative URI" />
 <property name="axf:border-double-thickness" model="text" description="Line thickness of border-style=&quot;double&quot;" />
 <property name="axf:border-connection-form" model="'mixed' | 'precedence' | 'wedge'" description="Shape of border connections" />
 <property name="axf:border-wave-form" model="text" description="Wave form for border-style=&quot;wave&quot;" />
+<property name="axf:condensed-text-align-last" model="'false' | 'true' | 'justify' | 'auto'" description="whether to set text-align-last=&quot;justify&quot; automatically after condensing the overflow: false | true | justify | auto" /><!-- V7.1 -->
 <property name="axf:diagonal-border-color" model="text" description="Color of the diagonal border" />
 <property name="axf:diagonal-border-width" model="text" description="Width of the diagonal border" />
 <property name="axf:display-alttext" model="'true' | 'false' | 'auto'" description="Whether to display the alternate text of a missing image: true | false | auto" /><!-- V7.0 -->
@@ -132,6 +134,8 @@
 <property name="axf:initial-letters-leading-punctuation-shift" model="text" description="Position of the leading punctuation of a dropped initial in the block progression direction: normal | [[baseline | before | middle | after] || &lt;length>]" /><!-- V7.0 -->
 <property name="axf:initial-letters-text-align" model="'start' | 'center' | 'end' | 'left' | 'right'" description="Alignment of a dropped initial: start | center | end | left | right" /><!-- V7.0 -->
 <property name="axf:initial-letters-width" model="text" description="Width of a dropped initial: auto | &lt;length> | &lt;percentage>" /><!-- V7.0 -->
+<property name="axf:inline-overflow-align" model="'normal' | 'start' | 'end' | 'left' | 'right'" description="Adjustments when the blocks in &lt;fo:inline-container> overflow: normal | start | end | left | right" /><!-- V7.1 -->
+<property name="axf:intrude-into-punctuation" model="text" description="Intrusion of inline element into punctuation: none | [start || end]" /><!-- V7.1 -->
 <property name="axf:japanese-glyph" model="'none' | 'jp78' | 'jp83' | 'jp90' | 'jp04'" description="Glyph of Japanese Kanji" />
 <property name="axf:justify-nbsp" model="'true' | 'false'" description="Whether to justify NON-BREAKING SPACE" />
 <property name="axf:kansuji-grouping-letter" model="text" description="Grouping character used for Japanese numerals" />
@@ -155,6 +159,7 @@
 <property name="axf:line-number-background-color" model="text" description="Background color of line numbers: &lt;color> | transparent" />
 <property name="axf:line-number-color" model="text" description="Color of line numbers" />
 <property name="axf:line-number-display-align" model="'auto' | 'before' | 'center' | 'after'" description="Alignment, in the block-progression-direction, of line numbers in the line area" />
+<property name="axf:line-number-except-continued-line" model="'true' | 'false'" description="Whether to add line numbers except for continued lines: true | false" /><!-- V7.1 -->
 <property name="axf:line-number-font-family" model="text" description="Font family of line numbers" />
 <property name="axf:line-number-font-size" model="text" description="Font size of line numbers" />
 <property name="axf:line-number-font-style" model="'normal' | 'italic'" description="Whether to make the font style italic" />
@@ -176,9 +181,11 @@
 <property name="axf:normalize-exclude" model="'full-composition-exclusion' | 'none'" description="Whether Composition Exclusions are excluded or not when the normalization (axf:normalize) is specified: full-composition-exclusion | none" />
 <property name="axf:number-transform" model="text" description="Converts the number sequence in the character string: none | kansuji | kansuji-if-vertical | &lt;list-style-type> | &lt;string>" />
 <property name="axf:overflow-align" model="'normal' | 'start' | 'end' | 'center'" description="Alignment of the overflowed block: normal | start | end | center" />
-<property name="axf:overflow-condense" model="'letter-spacing' | 'font-stretch' | 'font-size' | 'line-height' | 'auto' | 'none'" description="How to condense the overflowed text within the region: letter-spacing | font-stretch | font-size | line-height | auto | none" />
+<property name="axf:overflow-condense" model="text" description="How to condense the overflowed text within the region: [ font-size | font-stretch | line-height | letter-spacing ]+ | auto | none" />
 <property name="axf:overflow-condense-limit-font-size" model="text" description="Minimum font size when axf:overflow-condense=&quot;font-size&quot; is specified: &lt;length> [ visible | hidden | scroll | error-if-overflow | repeat ]" />
 <property name="axf:overflow-condense-limit-font-stretch" model="text" description="Minimum value when axf:overflow-condense=&quot;font-stretch&quot; is specified: [ &lt;number> | &lt;percentage> ] [ visible | hidden | scroll | error-if-overflow | repeat ]" />
+<property name="axf:overflow-condense-limit-letter-spacing" model="text" description="Minimum value when axf:overflow-condense=&quot;letter-spacing&quot; is specified: none | [ &lt;length> [ visible | hidden | error-if-overflow | repeat ]? ]" /><!-- V7.1 -->
+<property name="axf:overflow-condense-limit-line-height" model="text" description="Minimum value when axf:overflow-condense=&quot;line-height&quot; is specified: none | [ &lt;number> [ visible | hidden | error-if-overflow | repeat ]? ]" /><!-- V7.1 -->
 <property name="axf:overflow-limit" model="text" description="Overflow limit value: &lt;length>{1,2}" />
 <property name="axf:overflow-limit-block" model="text" description="Block overflow limit value" />
 <property name="axf:overflow-limit-inline" model="text" description="Inline overflow limit value" />
@@ -217,6 +224,7 @@
 <property name="axf:tab-overlap-treatment" model="'auto' | 'ignore-tab' | 'next-tab'" description="Behavior when tab alignment makes letters overlap: auto | ignore-tab | next-tab" />
 <property name="axf:tab-stops" model="text" description="Tab stop positions" />
 <property name="axf:tab-treatment" model="text" description="Treatment for literal tab characters" />
+<property name="axf:table-auto-layout-limit" model="text" description="Number of table-rows to read ahead: auto | &lt;number>" /><!-- V7.1 -->
 <property name="axf:table-row-orphans" model="text" description="Number of table-rows that must remain at the bottom of the page (column): &lt;integer>" /><!-- V7.0 -->
 <property name="axf:table-row-widows" model="text" description="Number of table-rows that must remain at the top of the page (column): &lt;integer>" /><!-- V7.0 -->
 <property name="axf:text-align-first" model="'relative' | 'start' | 'center' | 'end' | 'justify' | 'inside' | 'outside' | 'left' | 'right'" description="Text alignment of the first line" />
@@ -243,7 +251,7 @@
 <property name="axf:text-stroke-color" model="text" description="Stroke color: &lt;color>" />
 <property name="axf:text-stroke-width" model="text" description="Stroke width: &lt;length>" />
 <property name="axf:vertical-underline-side" model="'left' | 'right' | 'depend-on-language' | 'auto'" description="Which side of the text to put underline in vertical writing-mode" />
-<property name="axf:word-break" model="'normal' | 'break-all' | 'keep-all'" description="Whether to enable line breaking even inside a word" />
+<property name="axf:word-break" model="'normal' | 'break-all' | 'keep-all' | 'keep-non-spaces'" description="Whether to enable line breaking even inside a word: normal | break-all | keep-all | keep-non-spaces" />
 <property name="axf:word-wrap" model="'normal' | 'break-word'" description="Whether to forcibly break a word when line break cannot be performed: normal | break-word" />
 <property name="text-shadow" model="text" description="Shadow to display behind text: none | [ &lt;length>{{2,3}} &amp;&amp; &lt;color>? ]#" exclude="fo:character fo:initial-property-set fo:leader fo:page-number fo:page-number-citation fo:page-number-citation-last fo:scaling-value-citation" combine="yes" />
 </xsl:variable>
