@@ -108,6 +108,16 @@
     as="element(property)+">
 <property name="axf:abbreviation-character-count" model="'auto' | text" description="Minimum number of characters considered to be an abbreviation" />
 <property name="axf:alt-glyph" model="text" description="Alternative glyph of a character: &lt;number> | &lt;string> &lt;number>?" />
+<property name="axf:analyze" model="'true' | 'false' | 'auto'" description="Whether to perform analyzer checks on the current FO and its descendants: true | false | auto" /><!-- V7.1 -->
+<property name="axf:analyze-end-blank-page" model="text" description="Whether to perform end-blank-page analyzer checks on the current FO and its descendants: auto | none | &lt;integer>" /><!-- V7.1 -->
+<property name="axf:analyze-hyphen" model="text" description="Whether to perform hyphen analyzer checks on the current FO and its descendants: auto | none | &lt;integer>" /><!-- V7.1 -->
+<property name="axf:analyze-line-end-repeat" model="text" description="Whether to perform line-end-repeat analyzer checks on the current FO and its descendants: auto | none | [&lt;integer> &lt;integer>?]" /><!-- V7.1 -->
+<property name="axf:analyze-line-start-repeat" model="text" description="Whether to perform line-start-repeat analyzer checks on the current FO and its descendants: auto | none | [&lt;integer> &lt;integer>?]" /><!-- V7.1 -->
+<property name="axf:analyze-page-widow" model="text" description="Whether to perform page widow analyzer checks on the current FO and its descendants: auto | none | &lt;length> | &lt;percentage>" /><!-- V7.1 -->
+<property name="axf:analyze-paragraph-widow" model="text" description="Whether to perform paragraph widow analyzer checks on the current FO and its descendants: auto | none | &lt;length> | &lt;percentage>" /><!-- V7.1 -->
+<property name="axf:analyze-river" model="text" description="Whether to perform river analyzer checks on the current FO and its descendants: auto | none | [&lt;length> &lt;length>?]" /><!-- V7.1 -->
+<property name="axf:analyze-unbalanced-spread" model="text" description="Whether to perform unbalanced-spread analyzer checks on the current FO and its descendants: auto | none | &lt;length>" /><!-- V7.1 -->
+<property name="axf:analyze-white-space" model="text" description="Whether to perform white-space analyzer checks on the current FO and its descendants: auto | none | &lt;length> | &lt;percentage>" /><!-- V7.1 -->
 <property name="axf:assumed-page-number" model="text" description="Assumed page number" />
 <property name="axf:avoid-widow-words" model="text" description="Spacing behavior between words or characters so that the last line of the paragraph does not have only one word left (one character for CJK): false | true | [&lt;length> || &lt;percentage>]" />
 <property name="axf:avoid-widow-words-cjk-punctuation" model="text" description="Whether to include the last punctuation mark and count them in one character when axf:avoid-widow-word=&quot;true&quot;: auto | true | false | &lt;string&gt;" /><!-- V7.1 -->
