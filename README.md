@@ -35,7 +35,7 @@ Pull requests and new issues are welcome.
 
 ### Installing as add-on oXygen framework
 
-Follow the instructions in the oXygen manual at http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.html
+Follow the instructions in the oXygen manual at https://www.oxygenxml.com/doc/ug-editor/topics/installing-and-updating-add-ons.html
 
 The **focheck** update site URL is https://github.com/AntennaHouse/focheck/raw/master/add-on.xml
 
@@ -56,7 +56,7 @@ If you don't have permission to modify the oXygen installation – for example, 
 1. Click on the "Download ZIP" button on this project's main page to download the files.
 1. Extract the folder in the ZIP archive to a folder where you can create the new folder.
 1. In your oXygen preferences, add the **focheck** folder as an alternative frameworks location.
- - See http://oxygenxml.com/doc/ug-editor/index.html#topics/framework-location.html
+ - See https://www.oxygenxml.com/doc/ug-editor/topics/framework-location.html
 1. Restart oXygen.
 
 ### Installing a repository clone
@@ -221,8 +221,7 @@ Pullリクエストや問題がありましたらお知らせください。
 
 ### アドオン oXygen フレームワークとしてのインストール
 
-
-http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.html の oXygen のマニュアルの指示に従ってください。
+https://www.oxygenxml.com/doc/ug-editor/topics/installing-and-updating-add-ons.html の oXygen のマニュアルの指示に従ってください。
 
 **focheck** の最新サイトの URL は https://github.com/AntennaHouse/focheck/raw/master/add-on-ja.xml です。
 
@@ -244,7 +243,7 @@ oXygen はアドオンフレームワークをインストールした後、エ�
 1. ファイルをダウンロードするには、このプロジェクトのメインページの Download ZIP をクリックします。
 1. 新しいフォルダを作成することができるフォルダに ZIP アーカイブ内のフォルダを解凍します。 
 1. oXygen の環境設定で、代替フレームワークスの場所として解凍した **focheck** フォルダを追加します。
- - http://oxygenxml.com/doc/ug-editor/index.html#topics/framework-location.html を参照して下さい。
+ - https://www.oxygenxml.com/doc/ug-editor/topics/framework-location.html を参照して下さい。
 1. oXygen を再起動します。
 
 ### リポジトリクローンをインストールする
