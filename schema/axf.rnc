@@ -74,6 +74,7 @@ fo_simple-page-master.model =
 # AH Formatter uses some axf:* elements within fo:declarations.
 fo_declarations.model =
    (fo_color-profile |
+      axf_counter-style |
       axf_custom-property |
       axf_document-info |
       axf_font-face |
@@ -149,6 +150,34 @@ non-xsl-element =
 #
 # Antenna House extension elements
 #
+
+# <axf:counter-style/>
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.counter-style
+axf_counter-style =
+  ## Custom PDF property Effective with PDF 1.4 or later. Invalid with PDF/A
+  element axf:counter-style {
+    ## Name of the counter style: <name>.
+    attribute name { text },
+    ## Type of the counter system: cyclic | numeric | alphabetic | symbolic | additive | [fixed <integer>?] | [ extends <counter-style-name> ]
+    attribute system { text }?,
+    ## Prefix and suffix for a negative value: <symbol> <symbol>?
+    attribute negative { text }?,
+    ## Prefix: <symbol>
+    attribute prefix { text }?,
+    ## Suffix: <symbol>
+    attribute suffix { text }?,
+    ## Range to which the counter style is applied: [ [ <integer> | infinite ]{2} ]# | auto
+    attribute range { text }?,
+    ## Padding for a small digit: <integer> && <symbol>
+    attribute pad { text }?,
+    ## Fallback style: <counter-style-name>
+    attribute fallback { text }?,
+    ## Counter symbols: <symbol>+
+    attribute symbols { text }?,
+    ## Weighted counter symbols: [ <integer> && <symbol> ]#
+    attribute additive-symbols { text }?,
+    empty
+}
 
 # <axf:custom-property/>
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.custom-property
