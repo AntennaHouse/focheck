@@ -25,6 +25,7 @@
   <rule context="fo:basic-link | fo:bookmark">
     <!-- https://www.w3.org/TR/xsl/#fo_basic-link -->
     <!-- https://www.w3.org/TR/xsl11/#fo_bookmark -->
+    <assert test="exists(@internal-destination | @external-destination)" role="Error">An '<value-of select="name()" />' should have an 'internal-destination' or 'external-destination' property.</assert>
     <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning">An '<value-of select="name()" />' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</report>
   </rule>
 
