@@ -6,167 +6,10 @@
 <!-- Default translations -->
     <tu>
       <tuv lang="EN-US">
-        <seg>![](etc/screenshot.png)</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171020T100100Z" creationid="tkg" creationdate="20171020T100100Z">
-        <seg>![](etc/screenshot-ja.png)</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>" is ignored when axf:document-info with name="xmp" is present.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T120310Z" creationid="mtan" creationdate="20190521T103357Z">
         <seg>name="xmp" というの axf:document-info が存在場合は " が無効にする</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg># &lt;a name="en"&gt;&lt;/a&gt;focheck – Validate XSL-FO and Antenna House extensions in oXygen or standalone</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171020T133807Z" creationid="mtan" creationdate="20160303T145853Z">
-        <seg># &lt;a name="ja"&gt;&lt;/a&gt;focheck – oXygenまたはスタンドアロンでの XSL-FO とアンテナハウスの拡張を有効にします。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>## Building</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T152722Z" creationid="mtan" creationdate="20200521T152722Z">
-        <seg>## 構築</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>## Disclaimer</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160303T163357Z" creationid="mtan" creationdate="20160303T163357Z">
-        <seg>## 免責事項</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>## Installing</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160304T110157Z" creationid="mtan" creationdate="20160303T171149Z">
-        <seg>## インストール
-</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>## License</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160303T171816Z" creationid="mtan" creationdate="20160303T171816Z">
-        <seg>## ライセンス
-</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>## Other Ant targets</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160303T172209Z" creationid="mtan" creationdate="20160303T172013Z">
-        <seg>## その他の Ant ターゲット
-</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>## Using **focheck**</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115644Z" creationid="mtan" creationdate="20160304T144828Z">
-        <seg>## **focheck** の使用</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>### Ant</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171020T100121Z" creationid="tkg" creationdate="20171020T100121Z">
-        <seg>### Ant</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>### Emacs mode</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T152613Z" creationid="tkg" creationdate="20171120T165250Z">
-        <seg>### Emacs モード</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>### Installing a ZIP archive to an alternative frameworks location</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171019T094112Z" creationid="mtan" creationdate="20160304T114834Z">
-        <seg>### 代替 フレームワークスの場所に ZIP アーカイブのインストール</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>### Installing a ZIP archive to oXygen `frameworks` directory</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T151812Z" creationid="mtan" creationdate="20160304T112905Z">
-        <seg>### oXygen frameworks ディレクトリの ZIP アーカイブにインストールする</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>### Installing a repository clone</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T152058Z" creationid="mtan" creationdate="20200521T152058Z">
-        <seg>### リポジトリクローンをインストールする</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>### Installing as add-on oXygen framework</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160304T110139Z" creationid="mtan" creationdate="20160304T110043Z">
-        <seg>### アドオン oXygen フレームワークとしてのインストール
-</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>### Standalone</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T152631Z" creationid="mtan" creationdate="20200521T152631Z">
-        <seg>### スタンドアロン</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>### `framework.zip`</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T152947Z" creationid="tkg" creationdate="20171020T100140Z">
-        <seg>### framework.zip</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>### `run.parser`</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T152821Z" creationid="mtan" creationdate="20160307T163103Z">
-        <seg>### run.parser </seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>### oXygen XML Editor</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T152339Z" creationid="mtan" creationdate="20200521T152339Z">
-        <seg>### oXygen XML エディタ
-</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>#### Transformation scenarios</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160304T145606Z" creationid="mtan" creationdate="20160304T145606Z">
-        <seg>#### 変換のシナリオ</seg>
       </tuv>
     </tu>
     <tu>
@@ -251,81 +94,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>* **focheck** 0.3.1 (from 2015) is bundled with oXgen 17.1 through 19.1.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T113912Z" creationid="mtan" creationdate="20171017T113853Z">
-        <seg>* **focheck** 0.3.1 は ( 2015 年から) oXgen 17.1 から 19.1 までにバンドルされています。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>* Alternatively, you can download a static copy of the oXygen framework from here.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T114549Z" creationid="mtan" creationdate="20160304T104008Z">
-        <seg>*代わりに、ここから oXygen フレームワークの静的なコピーをダウンロードすることができます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>* If you want to easily keep up-to-date with changes, then you can clone this repository and 'pull' the latest version whenever you want.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T114610Z" creationid="mtan" creationdate="20160304T104958Z">
-        <seg>*最新の変更を続けたい場合、このリポジトリをクローンして、いつでも好きな時に最新版を pull することができます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>* If you want to hack on **focheck** or submit pull requests, then you can fork this repository and clone that onto your local machine.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T114620Z" creationid="mtan" creationdate="20160304T105558Z">
-        <seg>* **focheck** をハックしたり pull リクエストをサブミットしたり場合は、このリポジトリをフォークして、ローカルマシンにクローンすることができます。
-</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>* If you want to keep up-to-date with **focheck** releases, then you can install **focheck** as an add-on oXygen framework.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T113359Z" creationid="mtan" creationdate="20171017T113359Z">
-        <seg>*最新の **focheck** リリースを続けたい場合、oXygen のアドオンフレームワークとして **focheck** をインストールすることができます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>* If you want to use **focheck** with an older oXygen version, then you can install **focheck** as an add-on oXygen framework.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T114534Z" creationid="mtan" creationdate="20171017T114510Z">
-        <seg>** oXygen の古い版での **focheck** を使用する場合、oXygen のアドオンフレームワークとして **focheck** をインストールすることができます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>**focheck** also validates the extension FOs and properties that AH Formatter provides for improved formatted output.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T111526Z" creationid="mtan" creationdate="20160303T164942Z">
-        <seg>**focheck** は、AH Formatter が改善された組版出力を用意する拡張とプロパティも有効にします。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>**focheck** bundles a Relax NG schema and a Schematron grammar in an oXygen framework for detailed validation
-of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XML Editor.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171019T113212Z" creationid="mtan" creationdate="20160303T163200Z">
-        <seg>XML Editor 内ー XSL 1.1 に追加された FO とプロパティを含む **focheck** は oXygen フレームワークで XSL-FO の詳細な有効のために、Relax NG と Schematron 文法がバンドルします。
-</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>**focheck** is a work in progress.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T111833Z" creationid="mtan" creationdate="20160303T163420Z">
-        <seg>**focheck** の開発は進行中です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>,]* [&lt;color&gt; || &lt;length&gt; &lt;length&gt; &lt;length&gt;?] | inherit</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171020T095943Z" creationid="tkg" creationdate="20171020T095943Z">
@@ -334,108 +102,10 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>- **focheck** incorporates **[stf](https://github.com/MenteaXML/stf)** as a submodule.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115423Z" creationid="mtan" creationdate="20160304T143137Z">
-        <seg>- **focheck** はサブモジュールとして **[stf](https://github.com/MenteaXML/stf)** を組み込まれています。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>- If you don't have permission to copy the folder to the `frameworks` directory, then you can use an alternative location as described below.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T145558Z" creationid="mtan" creationdate="20160304T114523Z">
-        <seg>- frameworks ディレクトリにフォルダをコピーする許可がない場合は、以下に説明するように、別の場所を使用することができます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>- If you've already checked out **focheck**, you can run</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171019T113601Z" creationid="mtan" creationdate="20160304T144519Z">
-        <seg>- **focheck** を既に確認していた場合、次下を実行できます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>- On Windows, this is `C:\Program Files\Oxygen XML Editor 19\frameworks`, or something similar.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171019T093552Z" creationid="mtan" creationdate="20171017T114959Z">
-        <seg>- Windows では、これは `C:\Program Files\Oxygen XML Editor 19\frameworks` か同様のものです。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>- Pass `--recursive` to `git clone` when you check out **focheck**</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T150428Z" creationid="mtan" creationdate="20160304T144108Z">
-        <seg>- **focheck** を確認すると、git clone に --recursive を飛び出します。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>- See http://oxygenxml.com/doc/ug-editor/index.html#topics/framework-location.html
-1.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115352Z" creationid="mtan" creationdate="20160304T121807Z">
-        <seg>- http://oxygenxml.com/doc/ug-editor/index.html#topics/framework-location.html を参照して下さい。
-1.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>- The Relax NG schema works with Jing and with Emacs `nxml-mode` but not with `xmllint`.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T151108Z" creationid="mtan" creationdate="20171017T172757Z">
-        <seg>- Relax NG は、xmllint ではなく、Jing と Emacs nxml-mode と動作します。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>- The Schematron requires an XSLT 2.0 binding and a Schematron implementation that will both match on attributes as contexts as well as import and use external XSLT 2.0 stylesheets.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171019T113757Z" creationid="mtan" creationdate="20160304T154349Z">
-        <seg>- Schematron は XSLT 2.0 の結合と Schematron 実行を必要とします。それは、コンテキストの属性 の両方に一致するだけでなく、外部 XSLT 2.0 スタイルシートを読み込んで使用します。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>- You can delete or comment out any properties in `build.local.properties` that you don't need to change.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T152807Z" creationid="mtan" creationdate="20160303T172201Z">
-        <seg>- build.local.properties にあるいずれのプロパティーも変更する必要はない場合、削除するか、コメントアウトもできます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171020T095820Z" creationid="tkg" creationdate="20171020T095820Z">
         <seg>0 | 90 | 180 | 270 | -90 | -180 | -270 | inherit</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>1.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171019T095854Z" creationid="mtan" creationdate="20160303T172507Z">
-        <seg>1.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>2.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171020T100131Z" creationid="tkg" creationdate="20171020T100131Z">
-        <seg>2.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>3.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171020T100116Z" creationid="tkg" creationdate="20171020T100116Z">
-        <seg>3.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2008,14 +1678,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Alternatively, use the `schematron.single` or `schematron.dir` target to run Schematron on one or multiple files.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T150813Z" creationid="mtan" creationdate="20160304T151936Z">
-        <seg>代わりに、一つ又は複数のファイルでの Schematron を実行するには、schematron.single 又は schematron.dir ターゲットを使用します。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Amount of space after punctuation</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190521T113258Z" creationid="mtan" creationdate="20190521T112747Z">
@@ -2196,14 +1858,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190521T120629Z" creationid="mtan" creationdate="20190521T120629Z">
         <seg>背景が描かれている領域： [ border-box | padding-box | content-box ]#</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>As well as providing validation, **focheck** defines two validation scenarios for processing your FO file with Antenna House Formatter.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115740Z" creationid="mtan" creationdate="20160304T150315Z">
-        <seg>同様に有効を用意するとして、**focheck** は、Antenna House Formatter を使用して FO ファイルを処理するための二つの有効なシナリオを定義します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -2408,22 +2062,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Click on the "Download ZIP" button on this project's main page to download the files.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T150224Z" creationid="mtan" creationdate="20160304T121153Z">
-        <seg>ファイルをダウンロードするには、このプロジェクトのメインページの "Download ZIP" をクリックします。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Clone the repository into either the oXygen `frameworks` directory or another directory.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T150352Z" creationid="mtan" creationdate="20160304T142825Z">
-        <seg>oXygen のframeworks ディレクトリ又は別のディレクトリのどちらかにリポジトリをクローンします。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Code point</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190521T113526Z" creationid="mtan" creationdate="20190521T113526Z">
@@ -2608,14 +2246,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Copyright 2015-2017 Antenna House, Inc.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171020T100147Z" creationid="tkg" creationdate="20171020T100147Z">
-        <seg>Copyright 2015-2017 Antenna House, Inc.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Creates drop initials: normal | [[&lt;number&gt; | &lt;length&gt;] &lt;integer&gt;?</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20200521T140823Z" creationid="mtan" creationdate="20200521T140823Z">
@@ -2752,14 +2382,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Download the ZIP archive from the latest release on the 'Releases' page.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T114751Z" creationid="mtan" creationdate="20160304T113112Z">
-        <seg>Releases ページにある最新リリースから ZIP アーカイブをダウンロードして下さい。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Duration of a time period of the multimedia: intrinsic | infinity | &lt;number&gt;</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190522T145742Z" creationid="mtan" creationdate="20190522T145742Z">
@@ -2824,22 +2446,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Extract the folder in the ZIP archive to a folder where you can create the new folder.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115335Z" creationid="mtan" creationdate="20160304T121530Z">
-        <seg>新しいフォルダを作成することができるフォルダに ZIP アーカイブ内のフォルダを解凍します。 </seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Extract the folder in the ZIP archive to the oXygen `frameworks` directory.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T151831Z" creationid="mtan" creationdate="20160304T113508Z">
-        <seg>oXygen frameworks ディレクトリに ZIP アーカイブにあるフォルダーを解凍します。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Field name: &lt;string&gt;</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190521T125820Z" creationid="mtan" creationdate="20190521T125820Z">
@@ -2876,14 +2482,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190521T124853Z" creationid="mtan" creationdate="20190521T124853Z">
         <seg>フォームフィールドに適用されるフラグ： &lt;string&gt;</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Follow the instructions in the oXygen manual at http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.html</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T114635Z" creationid="mtan" creationdate="20160304T111910Z">
-        <seg>http://oxygenxml.com/doc/ug-editor/#topics/installing-and-updating-add-ons.html の oXygen のマニュアルの指示に従ってください。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3272,14 +2870,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>However:</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160309T121826Z" creationid="mtan" creationdate="20160304T152812Z">
-        <seg>しかし：</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Hyphenation settings</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T115757Z" creationid="mtan" creationdate="20190521T105354Z">
@@ -3308,30 +2898,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190521T122739Z" creationid="mtan" creationdate="20190521T122739Z">
         <seg>プッシュボタンロールオーバー時に表示するアイコン： &lt;uri-specification&gt;</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>If necessary, add the **focheck** folder as an alternative frameworks location.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115613Z" creationid="mtan" creationdate="20160304T144637Z">
-        <seg>必要ならば、別のフレームワークスの場所として **focheck** フォルダを追加します。 .</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>If the properties in `build.properties` are not correct for your system, then copy `build.properties` to `build.local.properties` in the same directory and set the correct values there.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T152754Z" creationid="mtan" creationdate="20160303T172443Z">
-        <seg>build.properties の プロパティーが使用するシステムに合わない場合は、同じディレクトリで build.properties を build.local.properties に コピーして、そこに正しい値を設定します。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>If you don't have permission to modify the oXygen installation – for example, if oXygen is installed on Windows under `C:\Program Files\` and you are not an Administrator – you can set oXygen to also use an alternative frameworks location.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T145610Z" creationid="mtan" creationdate="20160304T120338Z">
-        <seg>インストールを変更する許可がない場合は、例えば、oXygen は C:\Program Files\ で Windows にインストール場合、あなたは管理者でない場合、代替フレームワークの場所も使用するように oXygen を設定することができます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3380,14 +2946,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T120548Z" creationid="mtan" creationdate="20160126T155708Z">
         <seg>lr-tb writing-mode では、この領域はヘッダ領域に対応します。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>In your oXygen preferences, add the **focheck** folder as an alternative frameworks location.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115346Z" creationid="mtan" creationdate="20160304T121709Z">
-        <seg>oXygen の環境設定で、代替フレームワークスの場所として解凍した **focheck** フォルダを追加します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3452,14 +3010,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T115825Z" creationid="mtan" creationdate="20171117T132116Z">
         <seg>PDF/A では無効です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>It does not (yet) handle every XSL-FO property or every requirement in the XSL-FO spec, nor does it evaluate either functions or relative lengths.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T111936Z" creationid="mtan" creationdate="20160303T171034Z">
-        <seg>まだ全ての XSL-FO プロパティ又は XSL-FO 仕様の全ての必要条件を扱わない、またそれは、機能や相対的な長さのいずれかを評価しません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -3568,16 +3118,6 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171020T100150Z" creationid="tkg" creationdate="20171020T100150Z">
-        <seg>Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Limit of the amount of spaces leading and following the ruby text when the ruby text is shorter than its base characters: &lt;number&gt; | &lt;length&gt; | &lt;percentage&gt; | none</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171005T151059Z" creationid="mtan" creationdate="20171005T151059Z">
@@ -3662,15 +3202,6 @@ you may not use this file except in compliance with the License.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T155336Z" creationid="mtan" creationdate="20160118T155336Z">
         <seg>相対指定のURIのベースとなる位置</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Makes a Zip archive of just the oXygen framework.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T173246Z" creationid="mtan" creationdate="20160303T171856Z">
-        <seg>oXygen フレームワークの Zip アーカイブを生成します。
-</seg>
       </tuv>
     </tu>
     <tu>
@@ -3837,15 +3368,6 @@ you may not use this file except in compliance with the License.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Note that oXygen will require you to restart the editor after installing the add-on framework.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160309T154105Z" creationid="mtan" creationdate="20160303T171708Z">
-        <seg>oXygen はアドオンフレームワークをインストールした後、エデイタの再起動する必要になります。
-</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Number of digits after the decimal point of real numbers to be output in PDF: 1 to 6</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T120530Z" creationid="mtan" creationdate="20190523T150257Z">
@@ -3914,14 +3436,6 @@ you may not use this file except in compliance with the License.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T145502Z" creationid="mtan" creationdate="20160120T145502Z">
         <seg>フロートのオフセット配置を指定します（y方向）： &lt;length&gt; | &lt;percentage&gt;</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Open `build.xml` in oXygen.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T151424Z" creationid="mtan" creationdate="20160303T172603Z">
-        <seg> oXygen で build.xml を開きます。</seg>
       </tuv>
     </tu>
     <tu>
@@ -4110,14 +3624,6 @@ you may not use this file except in compliance with the License.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Pull requests and new issues are welcome.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160303T171134Z" creationid="mtan" creationdate="20160303T171134Z">
-        <seg>Pullリクエストや問題がありましたらお知らせください。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Radii of the bottom-left corner: [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T150437Z" creationid="mtan" creationdate="20160120T131609Z">
@@ -4206,14 +3712,6 @@ you may not use this file except in compliance with the License.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Restart oXygen.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115208Z" creationid="mtan" creationdate="20160304T114548Z">
-        <seg>oXygen を再起動します。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Rotates line numbers: 0 | 90 | 180 | 270 | -90 | -180 | -270</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171005T121011Z" creationid="mtan" creationdate="20171005T121011Z">
@@ -4230,32 +3728,6 @@ you may not use this file except in compliance with the License.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Run Ant.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160303T172031Z" creationid="mtan" creationdate="20160303T172031Z">
-        <seg>Antを実行します。
-</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Run the default "ANT" transformation scenario.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T172848Z" creationid="mtan" creationdate="20160303T172545Z">
-        <seg>デフォルトの ANT 変換のシナリオを実行します。
-</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Runs the parser on `${input}`.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T152935Z" creationid="mtan" creationdate="20160303T171949Z">
-        <seg>${input} でパーサーを実行します。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Script code</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190523T143526Z" creationid="mtan" creationdate="20190523T143526Z">
@@ -4268,24 +3740,6 @@ you may not use this file except in compliance with the License.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160125T160725Z" creationid="mtan" creationdate="20160125T160725Z">
         <seg>詳細については、参照して下さい。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>See https://github.com/AntennaHouse/focheck/wiki/focheck</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115750Z" creationid="mtan" creationdate="20160304T150343Z">
-        <seg>https://github.com/AntennaHouse/focheck/wiki/focheck を参照して下さい。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>See the License for the specific language governing permissions and
-limitations under the License.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171020T100158Z" creationid="tkg" creationdate="20171020T100158Z">
-        <seg>See the License for the specific language governing permissions and
-limitations under the License.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4518,14 +3972,6 @@ limitations under the License.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T125110Z" creationid="mtan" creationdate="20160120T125110Z">
         <seg>見開きの背表紙の幅： &lt;length&gt;</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Standalone checking requires Saxon 9 and Jing.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T120047Z" creationid="mtan" creationdate="20160304T154623Z">
-        <seg>Standalone の確認は Saxon 9 と Jing が必要です。</seg>
       </tuv>
     </tu>
     <tu>
@@ -6370,40 +5816,10 @@ limitations under the License.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The **focheck** update site URL is https://github.com/AntennaHouse/focheck/raw/master/add-on.xml</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T114657Z" creationid="mtan" creationdate="20160304T112022Z">
-        <seg>**focheck** の最新サイトの URL は https://github.com/AntennaHouse/focheck/raw/master/add-on.xml です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The FO processor may report an error or may use 'internal-destination'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T152616Z" creationid="mtan" creationdate="20160112T141244Z">
         <seg>FO プロセサーはエラーを報告できるし、internal-destination も使用できる。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>The Relax NG handles structural validation and the
-Schematron handles the additional constraints that cannot be
-expressed in Relax NG.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T111712Z" creationid="mtan" creationdate="20160303T170439Z">
-        <seg>Relax NG は、構造の有効を扱い、Schematron のは Relax NG では表現できない追加の制約を扱います。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>The Schematron parses property value
-expressions using an XSLT-based parser generated by the REx
-parser generator plus an XSLT library for reducing the parse tree
-to XSL-FO datatypes.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T111809Z" creationid="mtan" creationdate="20160303T170911Z">
-        <seg>Schematron は REx パーサージエネレーターによって生成された XSLT ベースのパーサと XSL-FO のデータタイプにパースツリーを縮小するために作成された XSLT ライブラリーを使用してプロパティ値を解析します。
-</seg>
       </tuv>
     </tu>
     <tu>
@@ -7160,14 +6576,6 @@ to XSL-FO datatypes.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>There are two ways to also check out **stf**:</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T115432Z" creationid="mtan" creationdate="20160304T143456Z">
-        <seg>**stf** を確認するのは、二つの方法があります。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>There must be at least one fo:page-sequence descendant of fo:root.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T153649Z" creationid="mtan" creationdate="20151105T112749Z">
@@ -7424,18 +6832,6 @@ to XSL-FO datatypes.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171020T100156Z" creationid="tkg" creationdate="20171020T100156Z">
-        <seg>Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Upper height limit of 'keep-together': auto | &lt;length&gt;</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190618T125424Z" creationid="mtan" creationdate="20190618T125424Z">
@@ -7456,14 +6852,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190520T160616Z" creationid="mtan" creationdate="20190520T160616Z">
         <seg>AH Formatter V6.6 以降で axf:background-size を利用します。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Use the `build-focheck.xml` Ant build file and the `validate.single` target to validate a file using both Relax NG and Schematron.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T150727Z" creationid="mtan" creationdate="20160304T151245Z">
-        <seg>Relax NG と Schematron の両方を使用してファイルを有効するために、Ant のビルドファイルの build-focheck.xml と validate.single のターゲットを使用します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -7600,14 +6988,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171005T121709Z" creationid="mtan" creationdate="20171005T121709Z">
         <seg>行番号のリセットする場合: auto | none | page | column | force</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>When you open an XSL-FO document – where the document element is `root` in the XSL-FO namespace – oXygen will automatically validate the document against both the Relax NG schema and the Schematron grammar.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T150704Z" creationid="mtan" creationdate="20160304T145211Z">
-        <seg>文書要素が XSL-FO の名前空間内の root である XSL-FO 文書を開くと、oXygen は自動的に Relax NG スキーマと Schematron 文法の両方に対して文書を有効にします。</seg>
       </tuv>
     </tu>
     <tu>
@@ -8204,39 +7584,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>You can get Jing from https://github.com/relaxng/jing-trang/releases.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T120054Z" creationid="mtan" creationdate="20160304T155238Z">
-        <seg>Jing は https://github.com/relaxng/jing-trang/releases からダウンロードできます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>You can use the Relax NG schema in the `schema` folder and the Schematron files in the `schematron` folder outside of oXygen and Ant.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T151001Z" creationid="mtan" creationdate="20160304T152710Z">
-        <seg>oXygen と ant を使用せずに、schema のフォルダに Relax NG のスキーマと schematron のフォルダに Schematron ファイルを使用することができます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>You can, of course,
-also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside of oXygen, either together or separately.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171017T111615Z" creationid="mtan" creationdate="20160303T170023Z">
-        <seg>もちろん、**focheck** Relax NG （または、W3C XSD と等しい）と oXygen 以外の Schematron を一緒に又は別々に使用することもできます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>You may obtain a copy of the License at</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171020T100152Z" creationid="tkg" creationdate="20171020T100152Z">
-        <seg>You may obtain a copy of the License at</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>ZERO WIDTH SPACE (U+200B) compatibility mode: 5 | 6</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190523T132042Z" creationid="mtan" creationdate="20190523T132042Z">
@@ -8313,32 +7660,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171020T095611Z" creationid="tkg" creationdate="20171020T095611Z">
         <seg>[[ &lt;family-name&gt; | &lt;generic-family&gt; ],]* [&lt;family-name&gt; | &lt;generic-family&gt;] | inherit</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>`focheck.el` associates the RELAX NG schema with `.fo` files.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T150830Z" creationid="mtan" creationdate="20171017T172339Z">
-        <seg>focheck.el は RELAX NG スキーマを .fo ファイルに関連付けます。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>`git submodule init`</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T150502Z" creationid="mtan" creationdate="20171017T115624Z">
-        <seg>git submodule init </seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>`git submodule update`
-2.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T152250Z" creationid="mtan" creationdate="20171017T115600Z">
-        <seg>git submodule 更新 
-2.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10843,14 +10164,6 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T151102Z" creationid="mtan" creationdate="20190527T160003Z">
         <seg>height="" です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>http://www.apache.org/licenses/LICENSE-2.0</seg>
-      </tuv>
-      <tuv lang="JA" changeid="tkg" changedate="20171020T100154Z" creationid="tkg" creationdate="20171020T100154Z">
-        <seg>http://www.apache.org/licenses/LICENSE-2.0</seg>
       </tuv>
     </tu>
     <tu>

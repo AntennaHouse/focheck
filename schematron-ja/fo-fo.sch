@@ -20,6 +20,7 @@
   <rule context="fo:basic-link | fo:bookmark">
     <!-- https://www.w3.org/TR/xsl/#fo_basic-link -->
     <!-- https://www.w3.org/TR/xsl11/#fo_bookmark -->
+    <assert test="exists(@internal-destination | @external-destination)" role="Warning">An '<value-of select="name()"/>' should have an 'internal-destination' or 'external-destination' property.</assert>
     <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning"><value-of select="name()"/> は internal-destination と external-destination のプロパティの両方を持ってなければなりません。FO プロセサーはエラーを報告できるし、internal-destination も使用できる。</report>
   </rule>
 

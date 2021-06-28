@@ -1,3 +1,10 @@
+# focheck 0.7.10
+
+- Added `<axf:counter-style>` for custom counter styles in `<fo:declarations>`.
+- Both `<fo:basic-link>` and `<fo:bookmark>` should have an `internal-destination` or `external-destination` property.
+- Added analyzer properties. (V7.1)
+- Updated links to Oxygen manual in `README.md`.
+
 # focheck 0.7.9
 
 - Add `axf:annotation-createdate`, `axf:annotation-modify-date`, `axf:avoid-widow-words`, `axf:condensed-text-align-last`, `axf:inline-overflow-align`, `axf:keep-together-within-inline-dimension`, `axf:line-number-except-continued-line`, `axf:overflow-condense-limit-letter-spacing`, `axf:overflow-condense-limit-line-height`, `axf:quotetype`, `axf:retrieve-table-rows`, and `axf:table-auto-layout-limit`. (V7.1)

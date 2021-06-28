@@ -82,6 +82,7 @@
   <rule context="fo:basic-link | fo:bookmark">
     
     
+    <assert test="exists(@internal-destination | @external-destination)" role="Warning">An '<value-of select="name()"/>' should have an 'internal-destination' or 'external-destination' property.</assert>
     <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning">An '<value-of select="name()"/>' should not have both 'internal-destination' and 'external-destination' properties.  The FO processor may report an error or may use 'internal-destination'.</report>
   </rule>
 

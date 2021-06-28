@@ -252,6 +252,25 @@
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:basic-link | fo:bookmark"/>
 
+		    <!--ASSERT Warning-->
+      <xsl:choose>
+         <xsl:when test="exists(@internal-destination | @external-destination)"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="exists(@internal-destination | @external-destination)">
+               <xsl:attribute name="role">Warning</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>An '<xsl:text/>
+                  <xsl:value-of select="name()"/>
+                  <xsl:text/>' should have an 'internal-destination' or 'external-destination' property.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
 		    <!--REPORT Warning-->
       <xsl:if test="exists(@internal-destination) and exists(@external-destination)">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
