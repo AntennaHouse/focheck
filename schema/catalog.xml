@@ -1,11 +1,11 @@
 <!--
-  An XML Catalog that rewrites any reference to a file at a URI
-  beginning with 'http://www.w3.org/2003/entities/2007/' to a
+  An XML Catalog that rewrites any reference to a file at
+  'http://www.w3.org/2003/entities/2007/htmlmathml-f.ent' to a
   similarly named file in the local directory.
 -->
 <catalog  xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-<rewriteSystem
-  id = "w3centities"
-  systemIdStartString = "http://www.w3.org/2003/entities/2007/"
-  rewritePrefix = "file:./" />
+<system
+  id = "htmlmathml-f"
+  systemId = "http://www.w3.org/2003/entities/2007/htmlmathml-f.ent"
+  uri = "file:./htmlmathml-f.ent" />
 </catalog>
