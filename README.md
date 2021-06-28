@@ -76,6 +76,17 @@ If you don't have permission to modify the oXygen installation – for example, 
 
 When you open an XSL-FO document – where the document element is `root` in the XSL-FO namespace – oXygen will automatically validate the document against both the Relax NG schema and the Schematron grammar.
 
+#### Schematron severity levels
+
+oXygen uses the Schematron `role` attribute to determine the severity level of a failed `assert` or `report`. See https://www.oxygenxml.com/doc/ug-editor/topics/validate-xml-with-sch.html
+
+**focheck** maps the RFC 2119 keywords that are used in the XSL 1.1 Recommendation to oXygen severity levels as follows:
+
+| RFC 2119 Keyword | oXygen severity level |
+| ---------------- | --------------------- |
+| MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT  | Error  |
+| SHOULD, SHOULD NOT, RECOMMENDED, MAY, OPTIONAL  | Warning  |
+
 #### Transformation scenarios
 
 As well as providing validation, **focheck** defines two validation scenarios for processing your FO file with Antenna House Formatter.  See https://github.com/AntennaHouse/focheck/wiki/focheck
@@ -314,7 +325,7 @@ oXygen フレームワークの Zip アーカイブを生成します。
 ## ライセンス
 
 
-Copyright 2015-2020 Antenna House, Inc.
+Copyright 2015-2021 Antenna House, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
