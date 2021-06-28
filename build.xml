@@ -80,7 +80,10 @@ AFTER making a release on GitHub:
      'build-focheck.xml'. -->
 
 <tstamp>
-  <format property="timestamp" pattern="yyyy-MM-dd"/>
+  <format property="timestamp" pattern="yyyy-MM-dd" />
+</tstamp>
+<tstamp>
+  <format property="year" pattern="yyyy" />
 </tstamp>
 
 <!-- ${saxon.jar} set in 'build-focheck.xml'. -->
@@ -405,7 +408,10 @@ AFTER making a release on GitHub:
 
 <target name="translate" depends="rng, translate.source.copy">
   <mkdir dir="${omegat.target.dir}" />
-  <java jar="omegat/OmegaT.jar" fork="true">
+  <!--<java jar="omegat/OmegaT.jar" fork="true"
+	jvm="C:/openjdk-8u232-b09/bin/java.exe">-->
+  <java jar="omegat/OmegaT.jar" fork="true"
+	jvm="C:/openjdk-8u232-b09/bin/java.exe">
     <arg value="${omegat.project.dir}" />
     <arg value="--config-dic=${omegat.config.dir}" />
     <arg value="--mode=console-translate" />
@@ -475,6 +481,12 @@ AFTER making a release on GitHub:
     <substitution
 	expression="releases/download/v${version}/${ant.project.name}-framework-${version}.zip"/>
   </replaceregexp>
+  <replaceregexp file="${focheck.basedir.converted}/add-on.xml"
+		 encoding="UTF-8">
+    <regexp pattern='Copyright 2015-[^ ]+' />
+    <substitution
+	expression="Copyright 2015-${year}"/>
+  </replaceregexp>
 </target>
 
 <target name="framework.zip" depends="build, add-on.xml"
@@ -526,6 +538,12 @@ AFTER making a release on GitHub:
     <regexp pattern='releases/download/[^"]+' />
     <substitution
 	expression="releases/download/v${version}/${ant.project.name}-framework-ja-${version}.zip"/>
+  </replaceregexp>
+  <replaceregexp file="${focheck.basedir.converted}/add-on-ja.xml"
+		 encoding="UTF-8">
+    <regexp pattern='Copyright 2015-[^ ]+' />
+    <substitution
+	expression="Copyright 2015-${year}"/>
   </replaceregexp>
 </target>
 
