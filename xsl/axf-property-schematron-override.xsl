@@ -124,6 +124,7 @@ text-align
 
 font-variant
 force-page-count
+text-transform
 </xsl:variable>
 
 </xsl:stylesheet>
