@@ -1,7 +1,7 @@
 # Schema for Antenna House extension elements and non-inherited
 # extension attributes.
 #
-# Copyright 2015-2020 Antenna House, Inc.
+# Copyright 2015-2021 Antenna House, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -721,6 +721,7 @@ fo_character.attlist &=
 fo_external-graphic.attlist &=
     axf_alttext,
     axf_background-image-resolution,
+    axf_image-resolution,
     xml_id,
     axf.annotation.properties,
     axf.multimedia.properties
@@ -776,6 +777,7 @@ fo_inline-container.attlist &=
 fo_instream-foreign-object.attlist &=
     axf_alttext,
     axf_background-image-resolution,
+    axf_image-resolution,
     xml_id,
     axf.annotation.properties
 
@@ -1871,6 +1873,13 @@ axf_footnote-max-height =
 axf_headers =
     ## Table header cells associated with this cell: <idrefs>
     attribute axf:headers { xsd:IDREFS }?
+
+# @axf:image-resolution
+#
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.image-resolution
+axf_image-resolution =
+    ## Resolution of a background image: [ normal | [ from-image || <dpi> ] ]#
+    attribute axf:image-resolution { text }?
 
 # @axf:indent-here
 #
