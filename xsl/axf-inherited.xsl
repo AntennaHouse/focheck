@@ -29,7 +29,7 @@
 <!--                                                               -->
 <!-- ============================================================= -->
 <!--
-     Copyright 2015-2020 Antenna House, Inc.
+     Copyright 2015-2021 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -107,6 +107,7 @@
     name="inherited-properties"
     as="element(property)+">
 <property name="axf:abbreviation-character-count" model="'auto' | text" description="Minimum number of characters considered to be an abbreviation" />
+<property name="axf:adjust-last-line-spacing" model="'true' | 'false'" description="Whether to adjust word spacing on last line: true | false" /><!-- V7.2 -->
 <property name="axf:alt-glyph" model="text" description="Alternative glyph of a character: &lt;number> | &lt;string> &lt;number>?" />
 <property name="axf:analyze" model="'true' | 'false' | 'auto'" description="Whether to perform analyzer checks on the current FO and its descendants: true | false | auto" /><!-- V7.1 -->
 <property name="axf:analyze-end-blank-page" model="text" description="Whether to perform end-blank-page analyzer checks on the current FO and its descendants: auto | none | &lt;integer>" /><!-- V7.1 -->
@@ -132,7 +133,7 @@
 <property name="axf:display-alttext" model="'true' | 'false' | 'auto'" description="Whether to display the alternate text of a missing image: true | false | auto" /><!-- V7.0 -->
 <property name="axf:flush-zone" model="text" description="Threshold for justifying last line: none | &lt;length> | &lt;percentage>" /><!-- V7.0 -->
 <property name="axf:hanging-punctuation" model="text" description="Whether to hang punctuations at the start of the line or end of the line: none | [ start || first || [ force-end | allow-end ] || last ]" />
-<property name="axf:hyphenate-caps-word" model="'true' | 'false'" description="Whether to hyphenate words consisting only of uppercase letters: true | false" /><!-- V7.0 -->
+<property name="axf:hyphenate-caps-word" model="'true' | 'false' | 'false-all'" description="Whether to hyphenate words consisting only of uppercase letters: true | false" /><!-- V7.0; V7.2 added 'false-all'. -->
 <property name="axf:hyphenate-hyphenated-word" model="'true' | 'false'" description="Whether to hyphenate an already hyphenated word" />
 <property name="axf:hyphenation-minimum-character-count" model="text" description="Minimum number of the character to hyphenate" />
 <property name="axf:hyphenation-zone" model="'none' | text" description="Range where a hyphenation is available: none | &lt;length>" />
@@ -278,10 +279,10 @@
 # AH Formatter extension properties that are inherited.
 #
 # These properties are defined in:
-#  - https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html
-#  - https://www.antenna.co.jp/AHF/help/v70e/ahf-float.html
-#  - https://www.antenna.co.jp/AHF/help/v70e/ahf-ruby.html
-#  - https://www.antenna.co.jp/AHF/help/v70e/ahf-spread.html
+#  - https://www.antenna.co.jp/AHF/help/en/ahf-ext.html
+#  - https://www.antenna.co.jp/AHF/help/en/ahf-float.html
+#  - https://www.antenna.co.jp/AHF/help/en/ahf-ruby.html
+#  - https://www.antenna.co.jp/AHF/help/en/ahf-spread.html
 
 default namespace fo = "http://www.w3.org/1999/XSL/Format"
 namespace axf = "http://www.antennahouse.com/names/XSL/Extensions"
