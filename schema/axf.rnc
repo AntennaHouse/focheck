@@ -578,7 +578,10 @@ fo_page-sequence.attlist &=
     axf_background-position-vertical,
     axf_background-repeat,
     axf_background-size,
+    axf_footnote-number-initial,
+    axf_footnote-number-format,
     axf_footnote-number-reset,
+    axf_line-number-show,
     axf_output-volume-break,
     axf_output-volume-filename,
     axf_page-number-prefix,
@@ -862,6 +865,7 @@ fo_table-cell.attlist &=
 fo_table-column.attlist &=
     id,
     xml_id,
+    axf_line-number-show,
     axf.annotation.properties
 
 fo_table-body.attlist &=
@@ -1812,6 +1816,20 @@ axf_footnote-align =
     ## Specifies the alignment of the footnotes.
     attribute axf:footnote-align { 'auto' | 'before' | 'after' }?
 
+# @axf:footnote-number-initial
+#
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.footnote-number-initial
+axf_footnote-number-initial =
+    ## Boundary at which to initial footnote numbering.
+    attribute axf:footnote-number-initial { 'auto' | xsd:float }?
+
+# @axf:footnote-number-format
+#
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.footnote-number-format
+axf_footnote-number-format =
+    ## Boundary at which to format footnote numbering.
+    attribute axf:footnote-number-format { text }?
+
 # @axf:footnote-number-reset
 #
 # https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.footnote-number-reset
@@ -1895,6 +1913,13 @@ axf_layer-settings =
 axf_left-page-master-reference =
     ## Master name of the page master for the left page of a two-page spread
     attribute (axf:left-page-master-reference | left-page-master-reference) { xsd:NCName }
+
+# @axf:line-number-show
+#
+# https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.line-number-show
+axf_line-number-show =
+    ## Line numbers to always output: <number*>
+    attribute axf:line-number-show { text }?
 
 # @axf:media-activation
 #
