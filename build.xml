@@ -5,7 +5,7 @@
 <description>Additional properties and targets used when developing
 'focheck' and making a release.</description>
 <!--
-     Copyright 2015-2019 Antenna House, Inc.
+     Copyright 2015-2021 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -397,12 +397,26 @@ AFTER making a release on GitHub:
 	overwrite="${force}">
     <fileset dir="${focheck.basedir.converted}/schematron"
 	     includes="*.sch" />
+    <!-- Rewrite links to manual to point to Japanese manual. -->
+    <filterchain>
+      <tokenfilter>
+	<replacestring from="https://www.antenna.co.jp/AHF/help/en"
+		       to="https://www.antenna.co.jp/AHF/help/ja"/>
+      </tokenfilter>
+    </filterchain>
   </copy>
   <copy todir="${omegat.source.dir}"
 	preservelastmodified="true"
 	overwrite="${force}">
     <fileset dir="${focheck.basedir.converted}/schema/rng"
 	     includes="*.rng" />
+    <!-- Rewrite links to manual to point to Japanese manual. -->
+    <filterchain>
+      <tokenfilter>
+	<replacestring from="https://www.antenna.co.jp/AHF/help/en"
+		       to="https://www.antenna.co.jp/AHF/help/ja"/>
+      </tokenfilter>
+    </filterchain>
   </copy>
 </target>
 
@@ -410,7 +424,8 @@ AFTER making a release on GitHub:
   <mkdir dir="${omegat.target.dir}" />
   <!--<java jar="omegat/OmegaT.jar" fork="true"
 	jvm="C:/openjdk-8u232-b09/bin/java.exe">-->
-  <java jar="omegat/OmegaT.jar" fork="true">
+  <java jar="omegat/OmegaT.jar" fork="true"
+	jvm="C:/openjdk-8u232-b09/bin/java.exe">
     <arg value="${omegat.project.dir}" />
     <arg value="--config-dic=${omegat.config.dir}" />
     <arg value="--mode=console-translate" />
