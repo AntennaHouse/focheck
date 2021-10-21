@@ -425,7 +425,7 @@ AFTER making a release on GitHub:
   <!--<java jar="omegat/OmegaT.jar" fork="true"
 	jvm="C:/openjdk-8u232-b09/bin/java.exe">-->
   <java jar="omegat/OmegaT.jar" fork="true"
-	jvm="C:/openjdk-8u232-b09/bin/java.exe">
+	jvm="${omegat.jvm}">
     <arg value="${omegat.project.dir}" />
     <arg value="--config-dic=${omegat.config.dir}" />
     <arg value="--mode=console-translate" />
