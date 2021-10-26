@@ -669,12 +669,12 @@ fo_basic-link.attlist &=
     axf_alttext,
     text-decoration,
     xml_id,
-    axf.annotation.properties,
+    axf.inline.attlist,
     axf.text-decoration.attlist
 
 fo_bidi-override.attlist &=
     xml_id,
-    axf.annotation.properties,
+    axf.inline.attlist,
     axf.text-decoration.attlist
 
 fo_block.attlist &=
@@ -689,7 +689,6 @@ fo_block.attlist &=
     text-decoration,
     width,
     xml_id,
-    axf.annotation.properties,
     axf.block.attlist,
     axf.text-decoration.attlist
 
@@ -710,13 +709,12 @@ fo_block-container.attlist &=
     column-count,
     column-gap,
     role,
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_character.attlist &=
     xml_id,
     axf_quotetype,
-    axf.annotation.properties,
+    axf.inline.attlist,
     axf.text-decoration.attlist
 
 fo_external-graphic.attlist &=
@@ -724,7 +722,7 @@ fo_external-graphic.attlist &=
     axf_background-image-resolution,
     axf_image-resolution,
     xml_id,
-    axf.annotation.properties,
+    axf.inline.attlist,
     axf.multimedia.properties
 
 fo_float.attlist &=
@@ -755,42 +753,40 @@ fo_footnote.attlist &=
     axf_footnote-position,
     axf_footnote-keep,
     xml_id,
-    axf.annotation.properties
+    axf.inline.attlist
 
 fo_footnote-body.attlist &=
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_index-range-begin.attlist &=
     xml_id,
-    axf.annotation.properties
+    axf.inline.attlist
 
 fo_inline.attlist &=
     xml_id,
-    axf.annotation.properties,
+    axf.inline.attlist,
     axf.text-decoration.attlist,
     axf_indent-here
 
 fo_inline-container.attlist &=
     xml_id,
-    axf.annotation.properties
+    axf.inline.attlist
 
 fo_instream-foreign-object.attlist &=
     axf_alttext,
     axf_background-image-resolution,
     axf_image-resolution,
     xml_id,
-    axf.annotation.properties
+    axf.inline.attlist
 
 fo_leader.attlist &=
     xml_id,
-    axf.annotation.properties,
+    axf.inline.attlist,
     axf.text-decoration.attlist
 
 fo_list-block.attlist &=
     axf.block.attlist,
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_list-item.attlist &=
     xml_id,
@@ -798,42 +794,37 @@ fo_list-item.attlist &=
     axf-outline-properties
 
 fo_list-item-body.attlist &=
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_list-item-label.attlist &=
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_multi-case.attlist &=
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_multi-property-set.attlist &=
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_multi-switch.attlist &=
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_multi-toggle.attlist &=
     xml_id,
-    axf.annotation.properties
+    axf.inline.attlist
 
 fo_page-number.attlist &=
     xml_id,
-    axf.annotation.properties,
+    axf.inline.attlist,
     axf.page-number.attlist
 
 fo_page-number-citation.attlist &=
     xml_id,
-    axf.annotation.properties,
+    axf.inline.attlist,
     axf.page-number.attlist
 
 fo_page-number-citation-last.attlist &=
     xml_id,
-    axf.annotation.properties,
+    axf.inline.attlist,
     axf.page-number.attlist
 
 fo_retrieve-table-marker.attlist &=
@@ -841,13 +832,12 @@ fo_retrieve-table-marker.attlist &=
 
 fo_scaling-value-citation.attlist &=
     xml_id,
-    axf.annotation.properties,
+    axf.inline.attlist,
     axf.text-decoration.attlist
 
 fo_table.attlist &=
     axf_table-summary,
     xml_id,
-    axf.annotation.properties,
     axf.block.attlist
 
 fo_table-and-caption.attlist &=
@@ -855,8 +845,7 @@ fo_table-and-caption.attlist &=
     axf.block.attlist
 
 fo_table-caption.attlist &=
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_table-cell.attlist &=
     axf_headers,
@@ -868,24 +857,19 @@ fo_table-cell.attlist &=
 fo_table-column.attlist &=
     id,
     xml_id,
-    axf_line-number-show,
-    axf.annotation.properties
+    axf_line-number-show
 
 fo_table-body.attlist &=
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_table-footer.attlist &=
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_table-header.attlist &=
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_table-row.attlist &=
-    xml_id,
-    axf.annotation.properties
+    xml_id
 
 fo_wrapper.attlist &=
     text-decoration,
@@ -1012,6 +996,7 @@ axf.text-decoration.attlist =
 # List of extension properties common to all block-level formatting
 # objects
 axf.block.attlist =
+    axf.annotation.properties,
     axf-baseline-grid-properties,
     axf-outline-properties,
     axf_analyze-lines-after,
@@ -1019,6 +1004,12 @@ axf.block.attlist =
     axf_keep-together-within-dimension,
     axf_keep-together-within-inline-dimension,
     axf_text-overflow,
+    axf_text-replace
+
+# List of extension properties common to all inline-level formatting
+# objects
+axf.inline.attlist =
+    axf.annotation.properties,
     axf_text-replace
 
 # @axf:action-type
