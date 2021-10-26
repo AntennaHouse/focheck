@@ -16,7 +16,7 @@
 --><pattern id="axf-fo" xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sqf="http://www.schematron-quickfix.com/validator/process" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <!-- axf:custom-property -->
-  <!-- https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.custom-property -->
+  <!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.custom-property -->
   <rule context="axf:custom-property">
     <assert test="empty((../../axf:document-info, ../axf:document-info)[@name eq 'xmp'])" role="Warning"><value-of select="name()"/>name=&quot;xmp&quot; というの axf:document-info が存在場合は &quot; が無効にする</assert>
     <assert test="normalize-space(@name) ne ''" role="Warning">name=&quot;&quot; は空ではいけません。</assert>
@@ -25,7 +25,7 @@
   </rule>
 
   <!-- axf:document-info -->
-  <!-- https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.document-info -->
+  <!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.document-info -->
   <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1">
     <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="Warning">name=&quot;<value-of select="@name"/>&quot; name=&quot;xmp&quot; というの axf:document-info が存在場合は無効にする。</assert>
   </rule>
@@ -39,7 +39,7 @@
     </sqf:fix>
   </rule>
 
-  <!-- https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#action-link -->
+  <!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#action-link -->
   <rule context="axf:form-field[@field-type = 'button']">
     <assert test="empty(@internal-destination) or exists(@internal-destination) and (empty(@action-type) or @action-type = 'goto')">action-type は&lt;axf:form-field field-type=&quot;button&quot; internal-destiniation=&quot;...&quot;&gt;とgotoのみです。</assert>
     <assert test="empty(@external-destination) or exists(@external-destination) and (empty(@action-type) or @action-type = ('gotor', 'launch', 'uri'))">action-type は gotor、launch 又は uri と &lt;axf:form-field field-type=&quot;button&quot; external-destination=&quot;...&quot;&gt;のみです。</assert>

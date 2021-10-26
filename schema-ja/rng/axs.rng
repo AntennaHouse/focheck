@@ -227,7 +227,7 @@
       </optional>
       <optional>
         <attribute name="auto-break-footnote">
-          <a:documentation>Whether to automatically break footnotes when axf:footnote-max-height=​&quot;auto&quot;: true | false</a:documentation>
+          <a:documentation>Whether to automatically break footnotes when axf:footnote-max-height=�?&quot;auto&quot;: true | false</a:documentation>
           <ref name="ah.boolean"/>
         </attribute>
       </optional>

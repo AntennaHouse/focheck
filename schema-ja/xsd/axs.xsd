@@ -210,7 +210,7 @@
       <xs:attribute name="abbreviation-character-count" type="xs:integer"/>
       <xs:attribute name="auto-break-footnote" type="axs:ah.boolean">
         <xs:annotation>
-          <xs:documentation>Whether to automatically break footnotes when axf:footnote-max-height=​"auto": true | false</xs:documentation>
+          <xs:documentation>Whether to automatically break footnotes when axf:footnote-max-height=�?"auto": true | false</xs:documentation>
         </xs:annotation>
       </xs:attribute>
       <xs:attribute name="auto-formatter-type">

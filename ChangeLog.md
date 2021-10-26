@@ -1,3 +1,16 @@
+# focheck 0.7.11
+
+- Added `axf:adjust-last-line-spacing`. (V7.2)
+- Overriding XSL 1.1 `hyphenate` to add `none`. (V7.2)
+- Updated `axf:hyphenate-caps-word`. (V7.2)
+- Added `axf:footnote-number-initial`, `axf:footnote-number-reset`, `axf:image-resolution`, `axf:line-number-show`, and `axf:text-replace`.
+- No Schematron for `text-transform` because extensions make it too free-form.
+- Use `<system>` for `htmlmathml-f.ent`. Removed `file:./` from URI. (re #43, #26)
+- Using `axf.inline.properties` for common inline extensions.
+- Updated documentation links.
+- Links in Japanese files refer to Japanese manual.
+- Ant property for JVM to use with OmegaT.
+
 # focheck 0.7.10
 
 - Added `<axf:counter-style>` for custom counter styles in `<fo:declarations>`.
@@ -15,7 +28,7 @@
 
 # focheck 0.7.8
 
-- Excluding elements in more namespaces instead of allowing 'id', etc. (#42)
+- Excluding elements in more namespaces instead of allowing `id`, etc. (#42)
 - Added 'from-table-column()' to `axf:text-align-string` tool-tip since most likely to come from table column.
 - Add 'inter-character' to `axf:text-justify`.
 - Remove 'distribute' from `axf:text-justify` tool-tip.

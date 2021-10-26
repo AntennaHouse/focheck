@@ -1,8 +1,11 @@
 <!--
-  An XML Catalog that rewrites any reference to a file at a URI
-  ending with 'htmlmathml-f.ent' to a similarly named file in the
-  local directory.
+  An XML Catalog that rewrites any reference to a file at
+  'http://www.w3.org/2003/entities/2007/htmlmathml-f.ent' to a
+  similarly named file in the local directory.
 -->
 <catalog  xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-  <systemSuffix systemIdSuffix="htmlmathml-f.ent" uri="htmlmathml-f.ent"/>
+<system
+  id = "htmlmathml-f"
+  systemId = "http://www.w3.org/2003/entities/2007/htmlmathml-f.ent"
+  uri = "htmlmathml-f.ent" />
 </catalog>

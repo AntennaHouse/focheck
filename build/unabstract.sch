@@ -1630,9 +1630,9 @@
    
    <rule context="fo:*/@hyphenate">
       <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">hyphenate="<value-of select="."/>" should be 'false', 'true', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('false', 'true', 'inherit'))">hyphenate="<value-of select="."/>". Allowed keywords are 'false', 'true', and 'inherit'. Token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">hyphenate="" should be 'false', 'true', or 'inherit'.</report>
+      <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">hyphenate="<value-of select="."/>" should be 'none', 'false', 'true', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'false', 'true', 'inherit'))">hyphenate="<value-of select="."/>". Allowed keywords are 'none', 'false', 'true', and 'inherit'. Token is '<value-of select="$expression/@token"/>'.</report>
+      <report test="local-name($expression) = 'EMPTY'" role="Warning">hyphenate="" should be 'none', 'false', 'true', or 'inherit'.</report>
       <report test="local-name($expression) = 'ERROR'">Syntax error: hyphenate="<value-of select="."/>":: <value-of select="$expression"/>
       </report>
    </rule>
@@ -3245,12 +3245,7 @@
    
    
    <rule context="fo:*/@text-transform">
-      <let name="expression" value="ahf:parser-runner(.)"/>
-      <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">text-transform="<value-of select="."/>" should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-      <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('capitalize', 'uppercase', 'lowercase', 'none', 'inherit'))">text-transform="<value-of select="."/>". Allowed keywords are 'capitalize', 'uppercase', 'lowercase', 'none', and 'inherit'. Token is '<value-of select="$expression/@token"/>'.</report>
-      <report test="local-name($expression) = 'EMPTY'" role="Warning">text-transform="" should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.</report>
-      <report test="local-name($expression) = 'ERROR'">Syntax error: text-transform="<value-of select="."/>":: <value-of select="$expression"/>
-      </report>
+      <report test=". eq ''" role="Warning">text-transform="" should be 'capitalize | uppercase | lowercase | none | inherit'.</report>
    </rule>
 
    

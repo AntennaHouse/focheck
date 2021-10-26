@@ -1206,14 +1206,6 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>Allowed keywords are 'capitalize', 'uppercase', 'lowercase', 'none', and 'inherit'.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20190528T094937Z" creationid="mtan" creationdate="20190527T154355Z">
-        <seg>許可されたキーワードは capitalize、uppercase、lowercase、none 又は inherit です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>Allowed keywords are 'collapse', 'collapse-with-precedence', 'separate', and 'inherit'.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="mtan" changedate="20190527T154442Z" creationid="mtan" creationdate="20190527T154355Z">
@@ -5636,14 +5628,6 @@
       </tuv>
       <tuv xml:lang="JA" changeid="mtan" changedate="20190527T154520Z" creationid="mtan" creationdate="20190527T154520Z">
         <seg>シンタックスエラー： text-shadow="<ph x="0">&lt;v0/&gt;</ph>"::</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>Syntax error: text-transform="<ph x="0">&lt;v0/&gt;</ph>"::</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20190527T154520Z" creationid="mtan" creationdate="20190527T154520Z">
-        <seg>シンタックスエラー： text-transform="<ph x="0">&lt;v0/&gt;</ph>"::</seg>
       </tuv>
     </tu>
     <tu>
@@ -10168,22 +10152,6 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>hyphenate="" should be 'false', 'true', or 'inherit'.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20171012T120151Z" creationid="mtan" creationdate="20151102T153326Z">
-        <seg>hyphenate="" は false、true 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>hyphenate="<ph x="0">&lt;v0/&gt;</ph>" should be 'false', 'true', or 'inherit'.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20171012T120107Z" creationid="mtan" creationdate="20151102T153235Z">
-        <seg>hyphenate="<ph x="0">&lt;v0/&gt;</ph>" は false、true 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>hyphenate="<ph x="0">&lt;v0/&gt;</ph>".</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="mtan" changedate="20190528T151115Z" creationid="mtan" creationdate="20190527T160018Z">
@@ -13284,30 +13252,6 @@
       </tuv>
       <tuv xml:lang="JA" changeid="mtan" changedate="20190528T153304Z" creationid="mtan" creationdate="20190528T094804Z">
         <seg>text-shadow="<ph x="0">&lt;v0/&gt;</ph>" です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>text-transform="" should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20171016T110922Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>text-transform="" は capitalize、uppercase、lowercase、none 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>text-transform="<ph x="0">&lt;v0/&gt;</ph>" should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20171016T110829Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>text-transform="<ph x="0">&lt;v0/&gt;</ph>" は capitalize、uppercase、lowercase、none 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>text-transform="<ph x="0">&lt;v0/&gt;</ph>".</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20190528T153338Z" creationid="mtan" creationdate="20190528T094913Z">
-        <seg>text-transform="<ph x="0">&lt;v0/&gt;</ph>" です。</seg>
       </tuv>
     </tu>
     <tu>

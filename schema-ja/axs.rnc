@@ -143,7 +143,7 @@ formatter-settings =
   element formatter-settings {
     attribute abbreviation-character-count { xsd:integer }?,
     
-    ## Whether to automatically break footnotes when axf:footnote-max-height=​"auto": true | false
+    ## Whether to automatically break footnotes when axf:footnote-max-height=�?"auto": true | false
     attribute auto-break-footnote { ah.boolean }?,
     
     ## Formatter type when unclear if HTML or XHTML: html | xhtml

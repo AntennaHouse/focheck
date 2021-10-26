@@ -20,7 +20,7 @@
 	 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <!-- axf:custom-property -->
-  <!-- https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.custom-property -->
+  <!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.custom-property -->
   <rule context="axf:custom-property">
     <assert test="empty((../../axf:document-info, ../axf:document-info)[@name eq 'xmp'])" role="Warning"><value-of select="name()"/>" is ignored when axf:document-info with name="xmp" is present.</assert>
     <assert test="normalize-space(@name) ne ''" role="Warning">name="" should not be empty.</assert>
@@ -29,7 +29,7 @@
   </rule>
 
   <!-- axf:document-info -->
-  <!-- https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#axf.document-info -->
+  <!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.document-info -->
   <rule context="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]" id="axf-1">
     <assert test="empty(../axf:document-info[@name eq 'xmp'])" role="Warning">name="<value-of select="@name"/>" is ignored when axf:document-info with name="xmp" is present.</assert>
   </rule>
@@ -43,7 +43,7 @@
     </sqf:fix>
   </rule>
 
-  <!-- https://www.antenna.co.jp/AHF/help/v70e/ahf-ext.html#action-link -->
+  <!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#action-link -->
   <rule context="axf:form-field[@field-type = 'button']">
     <assert test="empty(@internal-destination) or exists(@internal-destination) and (empty(@action-type) or @action-type = 'goto')">'action-type' may only be 'goto' with &lt;axf:form-field field-type="button" internal-destiniation="..."></assert>
     <assert test="empty(@external-destination) or exists(@external-destination) and (empty(@action-type) or @action-type = ('gotor', 'launch', 'uri'))">'action-type' may only be 'gotor', 'launch', or 'uri' with &lt;axf:form-field field-type="button" external-destination="..."></assert>

@@ -8500,7 +8500,7 @@
                <xsl:attribute name="column-number" select="saxon:column-number()"/>
                <svrl:text>hyphenate="<xsl:text/>
                   <xsl:value-of select="."/>
-                  <xsl:text/>" should be 'false', 'true', or 'inherit'.  '<xsl:text/>
+                  <xsl:text/>" should be 'none', 'false', 'true', or 'inherit'.  '<xsl:text/>
                   <xsl:value-of select="."/>
                   <xsl:text/>' is a <xsl:text/>
                   <xsl:value-of select="local-name($expression)"/>
@@ -8510,9 +8510,9 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('false', 'true', 'inherit'))">
+      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'false', 'true', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('false', 'true', 'inherit'))">
+                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'false', 'true', 'inherit'))">
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
@@ -8520,7 +8520,7 @@
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
             <svrl:text>hyphenate="<xsl:text/>
                <xsl:value-of select="."/>
-               <xsl:text/>". Allowed keywords are 'false', 'true', and 'inherit'. Token is '<xsl:text/>
+               <xsl:text/>". Allowed keywords are 'none', 'false', 'true', and 'inherit'. Token is '<xsl:text/>
                <xsl:value-of select="$expression/@token"/>
                <xsl:text/>'.</svrl:text>
          </svrl:successful-report>
@@ -8536,7 +8536,7 @@
             </xsl:attribute>
             <xsl:attribute name="line-number" select="saxon:line-number()"/>
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>hyphenate="" should be 'false', 'true', or 'inherit'.</svrl:text>
+            <svrl:text>hyphenate="" should be 'none', 'false', 'true', or 'inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
 
@@ -16525,76 +16525,17 @@
 	  <!--RULE -->
    <xsl:template match="fo:*/@text-transform" priority="1015" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-transform"/>
-      <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
-
-		    <!--ASSERT -->
-      <xsl:choose>
-         <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
-         <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')">
-               <xsl:attribute name="location">
-                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-               </xsl:attribute>
-               <xsl:attribute name="line-number" select="saxon:line-number()"/>
-               <xsl:attribute name="column-number" select="saxon:column-number()"/>
-               <svrl:text>text-transform="<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>" should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.  '<xsl:text/>
-                  <xsl:value-of select="."/>
-                  <xsl:text/>' is a <xsl:text/>
-                  <xsl:value-of select="local-name($expression)"/>
-                  <xsl:text/>.</svrl:text>
-            </svrl:failed-assert>
-         </xsl:otherwise>
-      </xsl:choose>
-
-		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('capitalize', 'uppercase', 'lowercase', 'none', 'inherit'))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="$expression instance of element(EnumerationToken) and not($expression/@token = ('capitalize', 'uppercase', 'lowercase', 'none', 'inherit'))">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <xsl:attribute name="line-number" select="saxon:line-number()"/>
-            <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>text-transform="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>". Allowed keywords are 'capitalize', 'uppercase', 'lowercase', 'none', and 'inherit'. Token is '<xsl:text/>
-               <xsl:value-of select="$expression/@token"/>
-               <xsl:text/>'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'EMPTY'">
+      <xsl:if test=". eq ''">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
             </xsl:attribute>
             <xsl:attribute name="line-number" select="saxon:line-number()"/>
             <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>text-transform="" should be 'capitalize', 'uppercase', 'lowercase', 'none', or 'inherit'.</svrl:text>
-         </svrl:successful-report>
-      </xsl:if>
-
-		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="local-name($expression) = 'ERROR'">
-            <xsl:attribute name="location">
-               <xsl:apply-templates select="." mode="schematron-select-full-path"/>
-            </xsl:attribute>
-            <xsl:attribute name="line-number" select="saxon:line-number()"/>
-            <xsl:attribute name="column-number" select="saxon:column-number()"/>
-            <svrl:text>Syntax error: text-transform="<xsl:text/>
-               <xsl:value-of select="."/>
-               <xsl:text/>":: <xsl:text/>
-               <xsl:value-of select="$expression"/>
-               <xsl:text/>
-            </svrl:text>
+            <svrl:text>text-transform="" should be 'capitalize | uppercase | lowercase | none | inherit'.</svrl:text>
          </svrl:successful-report>
       </xsl:if>
    </xsl:template>
