@@ -7,5 +7,5 @@
 <system
   id = "htmlmathml-f"
   systemId = "http://www.w3.org/2003/entities/2007/htmlmathml-f.ent"
-  uri = "file:./htmlmathml-f.ent" />
+  uri = "htmlmathml-f.ent" />
 </catalog>
