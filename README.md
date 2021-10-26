@@ -37,7 +37,7 @@ Pull requests and new issues are welcome.
 
 Follow the instructions in the oXygen manual at https://www.oxygenxml.com/doc/ug-editor/topics/installing-and-updating-add-ons.html
 
-The **focheck** update site URL is https://github.com/AntennaHouse/focheck/raw/master/add-on.xml
+The **focheck** update site URL is https://raw.githubusercontent.com/AntennaHouse/focheck/master/add-on.xml
 
 Note that oXygen will require you to restart the editor after installing the add-on framework.
 
@@ -234,7 +234,7 @@ Pullリクエストや問題がありましたらお知らせください。
 
 https://www.oxygenxml.com/doc/ug-editor/topics/installing-and-updating-add-ons.html の oXygen のマニュアルの指示に従ってください。
 
-**focheck** の最新サイトの URL は https://github.com/AntennaHouse/focheck/raw/master/add-on-ja.xml です。
+**focheck** の最新サイトの URL は https://raw.githubusercontent.com/AntennaHouse/focheck/master/add-on-ja.xml
 
 oXygen はアドオンフレームワークをインストールした後、エデイタの再起動する必要になります。
 
