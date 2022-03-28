@@ -81,8 +81,6 @@ AFTER making a release on GitHub:
 
 <tstamp>
   <format property="timestamp" pattern="yyyy-MM-dd" />
-</tstamp>
-<tstamp>
   <format property="year" pattern="yyyy" />
 </tstamp>
 
@@ -497,9 +495,9 @@ AFTER making a release on GitHub:
   </replaceregexp>
   <replaceregexp file="${focheck.basedir.converted}/add-on.xml"
 		 encoding="UTF-8">
-    <regexp pattern='Copyright 2015-[^ ]+' />
+    <regexp pattern='Copyright ([0-9]+)-[0-9]+' />
     <substitution
-	expression="Copyright 2015-${year}"/>
+	expression="Copyright \1-${year}"/>
   </replaceregexp>
 </target>
 
@@ -555,9 +553,9 @@ AFTER making a release on GitHub:
   </replaceregexp>
   <replaceregexp file="${focheck.basedir.converted}/add-on-ja.xml"
 		 encoding="UTF-8">
-    <regexp pattern='Copyright 2015-[^ ]+' />
+    <regexp pattern='Copyright ([0-9]+)-[0-9]+' />
     <substitution
-	expression="Copyright 2015-${year}"/>
+	expression="Copyright \1-${year}"/>
   </replaceregexp>
 </target>
 
