@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
     <xt:extension id="focheck">
-        <xt:location href="https://github.com/AntennaHouse/focheck/releases/download/v0.7.11/focheck-framework-0.7.11.zip"/>
-        <xt:version>0.7.11</xt:version>
+        <xt:location href="https://github.com/AntennaHouse/focheck/releases/download/v0.7.12/focheck-framework-0.7.12.zip"/>
+        <xt:version>0.7.12</xt:version>
         <xt:oxy_version>14.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Antenna House, Inc.</xt:author>
@@ -14,7 +14,7 @@
 
 <p>See <a href="https://github.com/AntennaHouse/focheck#en">https://github.com/AntennaHouse/focheck#en</a>.</p>
 	</xt:description>
-        <xt:license><![CDATA[   Copyright 2015-2021 Antenna House, Inc.
+        <xt:license><![CDATA[   Copyright 2015-2022 Antenna House, Inc.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

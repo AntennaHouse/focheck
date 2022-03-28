@@ -234,6 +234,7 @@ axf_footnote-number =
   ## Generates a footnote number
   element axf:footnote-number {
     id,
+    xml_id,
     empty
 }
 
@@ -690,7 +691,8 @@ fo_block.attlist &=
     width,
     xml_id,
     axf.block.attlist,
-    axf.text-decoration.attlist
+    axf.text-decoration.attlist,
+    axf.transformation.attlist
 
 fo_block-container.attlist &=
     axf_column-count,
@@ -992,6 +994,12 @@ axf.text-decoration.attlist =
     axf_text-line-style,
     axf_text-line-width,
     axf_text-underline-position
+
+# List of text decoration extension properties
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#text-decoration
+axf.transformation.attlist =
+    axf_transform,
+    axf_transform-origin
 
 # List of extension properties common to all block-level formatting
 # objects
@@ -1829,21 +1837,21 @@ axf_footnote-number-format =
 #
 # https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.footnote-number-reset
 axf_footnote-number-reset =
-    ## Boundary at which to reset footnote numbering.
+    ## Boundary at which to reset footnote numbering: auto | none | page | odd-page | even-page | column
     attribute axf:footnote-number-reset { 'auto' | 'none' | 'page' | 'odd-page' | 'even-page' | 'column' }?
 
 # @axf:footnote-stacking
 #
 # https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.footnote-stacking
 axf_footnote-stacking =
-    ## Method to layout the footnote.
+    ## Method to layout the footnote: block | inline
     attribute axf:footnote-stacking { 'block' | 'inline' }?
 
 # @axf:footnote-position
 #
 # https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.footnote-position
 axf_footnote-position =
-    ## Location to layout the footnote.
+    ## Location to layout the footnote: page | odd-page | even-page | start | end | inside | outside | column | start-column | end-column | inside-column | outside-column
     attribute axf:footnote-position { 'page' | 'odd-page' | 'even-page' | 'start' | 'end' | 'inside' | 'outside' | 'column' | 'start-column' | 'end-column' | 'inside-column' | 'outside-column' }?
 
 # @axf:footnote-keep
@@ -2283,9 +2291,13 @@ axf_suppress-if-first-on-page =
 # @axf:tab-align
 #
 # https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.tab-align
+axf_tab-align.model =
+    'auto' | 'start' | 'center' | 'end' | 'left' | 'right' | 'decimal' | text
+
 axf_tab-align =
     ## Tab alignment at the tab stop position
-    attribute axf:tab-align { 'auto' | 'start' | 'center' | 'end' | 'left' | 'right' | 'decimal' | text }?
+    attribute axf:tab-align { axf_tab-align.model }? |
+    attribute tab-align { axf_tab-align.model }?
 
 # @axf:table-summary
 #
@@ -2335,6 +2347,20 @@ axf_text-underline-position =
 axf_text-overflow =
     ## What to display when text overflows in the inline progression direction: clip | ellipsis | <string>
     attribute axf:text-overflow { text }?
+
+# @axf:transform
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.transform
+axf_transform =
+    ## Block transformation: none | <transform-function>+
+    attribute axf:transform { text }?
+
+# @axf:transform-origin
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.transform-origin
+axf_transform-origin =
+    ## Origin of block transformation: [ <percentage> | <length> | left | center | right | top | bottom] | [ [ <percentage> | <length> | left | center | right ] && [ <percentage> | <length> | top | center | bottom ] ]
+    attribute axf:transform-origin { text }?
 
 # @xml:id
 #

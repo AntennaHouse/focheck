@@ -1942,14 +1942,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Boundary at which to reset footnote numbering.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T140711Z" creationid="mtan" creationdate="20200521T140711Z">
-        <seg>脚注番号のリセットする境界。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Box shadow: none | [ inset?</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190521T121853Z" creationid="mtan" creationdate="20190521T121853Z">
@@ -3182,14 +3174,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Location to layout the footnote.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160120T130403Z" creationid="mtan" creationdate="20160120T130403Z">
-        <seg>脚注を配置する場所</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Location which becomes the base of relative URI</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160118T155336Z" creationid="mtan" creationdate="20160118T155336Z">
@@ -3226,14 +3210,6 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190521T125524Z" creationid="mtan" creationdate="20190521T125524Z">
         <seg>テキストフィールドに入力できるテキストの最大文字数： &lt;number&gt;</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Method to layout the footnote.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160120T130429Z" creationid="mtan" creationdate="20160120T130429Z">
-        <seg>脚注の配置の方法</seg>
       </tuv>
     </tu>
     <tu>

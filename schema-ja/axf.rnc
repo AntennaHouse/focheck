@@ -256,7 +256,7 @@ axf_font-face.attlist =
 axf_footnote-number =
   
   ## 脚注番号を生成します
-  element axf:footnote-number { id, empty }
+  element axf:footnote-number { id, xml_id, empty }
 # <axf:footnote-number-citation/>
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.footnote-number-citation
 axf_footnote-number-citation =
@@ -643,10 +643,10 @@ fo_basic-link.attlist &=
   axf_alttext,
   text-decoration,
   xml_id,
-  axf.annotation.properties,
+  axf.inline.attlist,
   axf.text-decoration.attlist
 fo_bidi-override.attlist &=
-  xml_id, axf.annotation.properties, axf.text-decoration.attlist
+  xml_id, axf.inline.attlist, axf.text-decoration.attlist
 fo_block.attlist &=
   axf_destination-type,
   axf_initial-letters,
@@ -659,9 +659,9 @@ fo_block.attlist &=
   text-decoration,
   width,
   xml_id,
-  axf.annotation.properties,
   axf.block.attlist,
-  axf.text-decoration.attlist
+  axf.text-decoration.attlist,
+  axf.transformation.attlist
 fo_block-container.attlist &=
   axf_column-count,
   axf_column-fill,
@@ -679,19 +679,15 @@ fo_block-container.attlist &=
   column-count,
   column-gap,
   role,
-  xml_id,
-  axf.annotation.properties
+  xml_id
 fo_character.attlist &=
-  xml_id,
-  axf_quotetype,
-  axf.annotation.properties,
-  axf.text-decoration.attlist
+  xml_id, axf_quotetype, axf.inline.attlist, axf.text-decoration.attlist
 fo_external-graphic.attlist &=
   axf_alttext,
   axf_background-image-resolution,
   axf_image-resolution,
   xml_id,
-  axf.annotation.properties,
+  axf.inline.attlist,
   axf.multimedia.properties
 fo_float.attlist &=
   axf_float,
@@ -720,61 +716,55 @@ fo_footnote.attlist &=
   axf_footnote-position,
   axf_footnote-keep,
   xml_id,
-  axf.annotation.properties
-fo_footnote-body.attlist &= xml_id, axf.annotation.properties
-fo_index-range-begin.attlist &= xml_id, axf.annotation.properties
+  axf.inline.attlist
+fo_footnote-body.attlist &= xml_id
+fo_index-range-begin.attlist &= xml_id, axf.inline.attlist
 fo_inline.attlist &=
   xml_id,
-  axf.annotation.properties,
+  axf.inline.attlist,
   axf.text-decoration.attlist,
   axf_indent-here
-fo_inline-container.attlist &= xml_id, axf.annotation.properties
+fo_inline-container.attlist &= xml_id, axf.inline.attlist
 fo_instream-foreign-object.attlist &=
   axf_alttext,
   axf_background-image-resolution,
   axf_image-resolution,
   xml_id,
-  axf.annotation.properties
+  axf.inline.attlist
 fo_leader.attlist &=
-  xml_id, axf.annotation.properties, axf.text-decoration.attlist
-fo_list-block.attlist &=
-  axf.block.attlist, xml_id, axf.annotation.properties
+  xml_id, axf.inline.attlist, axf.text-decoration.attlist
+fo_list-block.attlist &= axf.block.attlist, xml_id
 fo_list-item.attlist &=
   xml_id, axf.annotation.properties, axf-outline-properties
-fo_list-item-body.attlist &= xml_id, axf.annotation.properties
-fo_list-item-label.attlist &= xml_id, axf.annotation.properties
-fo_multi-case.attlist &= xml_id, axf.annotation.properties
-fo_multi-property-set.attlist &= xml_id, axf.annotation.properties
-fo_multi-switch.attlist &= xml_id, axf.annotation.properties
-fo_multi-toggle.attlist &= xml_id, axf.annotation.properties
+fo_list-item-body.attlist &= xml_id
+fo_list-item-label.attlist &= xml_id
+fo_multi-case.attlist &= xml_id
+fo_multi-property-set.attlist &= xml_id
+fo_multi-switch.attlist &= xml_id
+fo_multi-toggle.attlist &= xml_id, axf.inline.attlist
 fo_page-number.attlist &=
-  xml_id, axf.annotation.properties, axf.page-number.attlist
+  xml_id, axf.inline.attlist, axf.page-number.attlist
 fo_page-number-citation.attlist &=
-  xml_id, axf.annotation.properties, axf.page-number.attlist
+  xml_id, axf.inline.attlist, axf.page-number.attlist
 fo_page-number-citation-last.attlist &=
-  xml_id, axf.annotation.properties, axf.page-number.attlist
+  xml_id, axf.inline.attlist, axf.page-number.attlist
 fo_retrieve-table-marker.attlist &= axf_retrieve-table-rows
 fo_scaling-value-citation.attlist &=
-  xml_id, axf.annotation.properties, axf.text-decoration.attlist
-fo_table.attlist &=
-  axf_table-summary,
-  xml_id,
-  axf.annotation.properties,
-  axf.block.attlist
+  xml_id, axf.inline.attlist, axf.text-decoration.attlist
+fo_table.attlist &= axf_table-summary, xml_id, axf.block.attlist
 fo_table-and-caption.attlist &= xml_id, axf.block.attlist
-fo_table-caption.attlist &= xml_id, axf.annotation.properties
+fo_table-caption.attlist &= xml_id
 fo_table-cell.attlist &=
   axf_headers,
   axf_repeat-cell-content-at-break,
   axf_scope,
   xml_id,
   axf.annotation.properties
-fo_table-column.attlist &=
-  id, xml_id, axf_line-number-show, axf.annotation.properties
-fo_table-body.attlist &= xml_id, axf.annotation.properties
-fo_table-footer.attlist &= xml_id, axf.annotation.properties
-fo_table-header.attlist &= xml_id, axf.annotation.properties
-fo_table-row.attlist &= xml_id, axf.annotation.properties
+fo_table-column.attlist &= id, xml_id, axf_line-number-show
+fo_table-body.attlist &= xml_id
+fo_table-footer.attlist &= xml_id
+fo_table-header.attlist &= xml_id
+fo_table-row.attlist &= xml_id
 fo_wrapper.attlist &=
   text-decoration,
   xml_id,
@@ -885,16 +875,24 @@ axf.text-decoration.attlist =
   axf_text-line-style,
   axf_text-line-width,
   axf_text-underline-position
+# List of text decoration extension properties
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#text-decoration
+axf.transformation.attlist = axf_transform, axf_transform-origin
 # List of extension properties common to all block-level formatting
 # objects
 axf.block.attlist =
+  axf.annotation.properties,
   axf-baseline-grid-properties,
   axf-outline-properties,
   axf_analyze-lines-after,
   axf_analyze-lines-before,
   axf_keep-together-within-dimension,
   axf_keep-together-within-inline-dimension,
-  axf_text-overflow
+  axf_text-overflow,
+  axf_text-replace
+# List of extension properties common to all inline-level formatting
+# objects
+axf.inline.attlist = axf.annotation.properties, axf_text-replace
 # @axf:action-type
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.action-type
@@ -1829,7 +1827,7 @@ axf_footnote-number-format =
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.footnote-number-reset
 axf_footnote-number-reset =
   
-  ## 脚注番号のリセットする境界。
+  ## Boundary at which to reset footnote numbering: auto | none | page | odd-page | even-page | column
   attribute axf:footnote-number-reset {
     "auto" | "none" | "page" | "odd-page" | "even-page" | "column"
   }?
@@ -1838,14 +1836,14 @@ axf_footnote-number-reset =
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.footnote-stacking
 axf_footnote-stacking =
   
-  ## 脚注の配置の方法
+  ## Method to layout the footnote: block | inline
   attribute axf:footnote-stacking { "block" | "inline" }?
 # @axf:footnote-position
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.footnote-position
 axf_footnote-position =
   
-  ## 脚注を配置する場所
+  ## Location to layout the footnote: page | odd-page | even-page | start | end | inside | outside | column | start-column | end-column | inside-column | outside-column
   attribute axf:footnote-position {
     "page"
     | "odd-page"
@@ -2312,19 +2310,20 @@ axf_suppress-if-first-on-page =
 # @axf:tab-align
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.tab-align
+axf_tab-align.model =
+  "auto"
+  | "start"
+  | "center"
+  | "end"
+  | "left"
+  | "right"
+  | "decimal"
+  | text
 axf_tab-align =
   
   ## タブ位置での配置
-  attribute axf:tab-align {
-    "auto"
-    | "start"
-    | "center"
-    | "end"
-    | "left"
-    | "right"
-    | "decimal"
-    | text
-  }?
+  attribute axf:tab-align { axf_tab-align.model }?
+  | attribute tab-align { axf_tab-align.model }?
 # @axf:table-summary
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.table-summary
@@ -2353,6 +2352,13 @@ axf_text-line-width =
   
   ## 下線、取消し線、上線の太さ： auto | <border-width>
   attribute axf:text-line-width { text }?
+# @axf:text-replace
+# 
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.text-replace
+axf_text-replace =
+  
+  ## Replaces character strings: none | [ <string> <string> ]+
+  attribute axf:text-replace { text }?
 # @axf:text-underline-position
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.text-underline-position
@@ -2367,6 +2373,20 @@ axf_text-overflow =
   
   ## インライン方向にオーバーフローしたときの、内容末尾の表示方法： clip | ellipsis | <string>
   attribute axf:text-overflow { text }?
+# @axf:transform
+# 
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.transform
+axf_transform =
+  
+  ## Block transformation: none | <transform-function>+
+  attribute axf:transform { text }?
+# @axf:transform-origin
+# 
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.transform-origin
+axf_transform-origin =
+  
+  ## Origin of block transformation: [ <percentage> | <length> | left | center | right | top | bottom] | [ [ <percentage> | <length> | left | center | right ] && [ <percentage> | <length> | top | center | bottom ] ]
+  attribute axf:transform-origin { text }?
 # @xml:id
 # 
 # https://www.w3.org/TR/xml-id/

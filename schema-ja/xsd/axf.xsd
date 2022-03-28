@@ -403,6 +403,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:attributeGroup ref="fo:id"/>
+      <xs:attributeGroup ref="axf:xml_id"/>
     </xs:complexType>
   </xs:element>
   <!--
@@ -1002,6 +1003,14 @@
     <xs:attributeGroup ref="axf:axf_text-line-style"/>
     <xs:attributeGroup ref="axf:axf_text-line-width"/>
     <xs:attributeGroup ref="axf:axf_text-underline-position"/>
+  </xs:attributeGroup>
+  <!--
+    List of text decoration extension properties
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#text-decoration
+  -->
+  <xs:attributeGroup name="axf.transformation.attlist">
+    <xs:attributeGroup ref="axf:axf_transform"/>
+    <xs:attributeGroup ref="axf:axf_transform-origin"/>
   </xs:attributeGroup>
   <!--
     List of extension properties common to all block-level formatting
@@ -2731,7 +2740,7 @@
   <xs:attributeGroup name="axf_footnote-number-reset">
     <xs:attribute name="footnote-number-reset" form="qualified">
       <xs:annotation>
-        <xs:documentation>脚注番号のリセットする境界。</xs:documentation>
+        <xs:documentation>Boundary at which to reset footnote numbering: auto | none | page | odd-page | even-page | column</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -2753,7 +2762,7 @@
   <xs:attributeGroup name="axf_footnote-stacking">
     <xs:attribute name="footnote-stacking" form="qualified">
       <xs:annotation>
-        <xs:documentation>脚注の配置の方法</xs:documentation>
+        <xs:documentation>Method to layout the footnote: block | inline</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -2771,7 +2780,7 @@
   <xs:attributeGroup name="axf_footnote-position">
     <xs:attribute name="footnote-position" form="qualified">
       <xs:annotation>
-        <xs:documentation>脚注を配置する場所</xs:documentation>
+        <xs:documentation>Location to layout the footnote: page | odd-page | even-page | start | end | inside | outside | column | start-column | end-column | inside-column | outside-column</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -3686,6 +3695,7 @@
         <xs:documentation>タブ位置での配置</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="tab-align"/>
   </xs:attributeGroup>
   <!--
     @axf:table-summary
@@ -3768,6 +3778,30 @@
     <xs:attribute name="text-overflow" form="qualified">
       <xs:annotation>
         <xs:documentation>インライン方向にオーバーフローしたときの、内容末尾の表示方法： clip | ellipsis | &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:transform
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.transform
+  -->
+  <xs:attributeGroup name="axf_transform">
+    <xs:attribute name="transform" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Block transformation: none | &lt;transform-function&gt;+</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:transform-origin
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.transform-origin
+  -->
+  <xs:attributeGroup name="axf_transform-origin">
+    <xs:attribute name="transform-origin" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Origin of block transformation: [ &lt;percentage&gt; | &lt;length&gt; | left | center | right | top | bottom] | [ [ &lt;percentage&gt; | &lt;length&gt; | left | center | right ] &amp;&amp; [ &lt;percentage&gt; | &lt;length&gt; | top | center | bottom ] ]</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>

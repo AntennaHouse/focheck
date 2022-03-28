@@ -499,6 +499,7 @@
     <element name="axf:footnote-number">
       <a:documentation>Generates a footnote number</a:documentation>
       <ref name="id"/>
+      <ref name="xml_id"/>
       <empty/>
     </element>
   </define>
@@ -1086,6 +1087,7 @@
     <ref name="xml_id"/>
     <ref name="axf.block.attlist"/>
     <ref name="axf.text-decoration.attlist"/>
+    <ref name="axf.transformation.attlist"/>
   </define>
   <define name="fo_block-container.attlist" combine="interleave">
     <ref name="axf_column-count"/>
@@ -1401,6 +1403,14 @@
     <ref name="axf_text-line-style"/>
     <ref name="axf_text-line-width"/>
     <ref name="axf_text-underline-position"/>
+  </define>
+  <!--
+    List of text decoration extension properties
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#text-decoration
+  -->
+  <define name="axf.transformation.attlist">
+    <ref name="axf_transform"/>
+    <ref name="axf_transform-origin"/>
   </define>
   <!--
     List of extension properties common to all block-level formatting
@@ -3173,7 +3183,7 @@
   <define name="axf_footnote-number-reset">
     <optional>
       <attribute name="axf:footnote-number-reset">
-        <a:documentation>Boundary at which to reset footnote numbering.</a:documentation>
+        <a:documentation>Boundary at which to reset footnote numbering: auto | none | page | odd-page | even-page | column</a:documentation>
         <choice>
           <value>auto</value>
           <value>none</value>
@@ -3193,7 +3203,7 @@
   <define name="axf_footnote-stacking">
     <optional>
       <attribute name="axf:footnote-stacking">
-        <a:documentation>Method to layout the footnote.</a:documentation>
+        <a:documentation>Method to layout the footnote: block | inline</a:documentation>
         <choice>
           <value>block</value>
           <value>inline</value>
@@ -3209,7 +3219,7 @@
   <define name="axf_footnote-position">
     <optional>
       <attribute name="axf:footnote-position">
-        <a:documentation>Location to layout the footnote.</a:documentation>
+        <a:documentation>Location to layout the footnote: page | odd-page | even-page | start | end | inside | outside | column | start-column | end-column | inside-column | outside-column</a:documentation>
         <choice>
           <value>page</value>
           <value>odd-page</value>
@@ -4087,22 +4097,32 @@
     
     https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.tab-align
   -->
+  <define name="axf_tab-align.model">
+    <choice>
+      <value>auto</value>
+      <value>start</value>
+      <value>center</value>
+      <value>end</value>
+      <value>left</value>
+      <value>right</value>
+      <value>decimal</value>
+      <text/>
+    </choice>
+  </define>
   <define name="axf_tab-align">
-    <optional>
-      <attribute name="axf:tab-align">
-        <a:documentation>Tab alignment at the tab stop position</a:documentation>
-        <choice>
-          <value>auto</value>
-          <value>start</value>
-          <value>center</value>
-          <value>end</value>
-          <value>left</value>
-          <value>right</value>
-          <value>decimal</value>
-          <text/>
-        </choice>
-      </attribute>
-    </optional>
+    <choice>
+      <optional>
+        <attribute name="axf:tab-align">
+          <a:documentation>Tab alignment at the tab stop position</a:documentation>
+          <ref name="axf_tab-align.model"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="tab-align">
+          <ref name="axf_tab-align.model"/>
+        </attribute>
+      </optional>
+    </choice>
   </define>
   <!--
     @axf:table-summary
@@ -4185,6 +4205,30 @@
     <optional>
       <attribute name="axf:text-overflow">
         <a:documentation>What to display when text overflows in the inline progression direction: clip | ellipsis | &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:transform
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.transform
+  -->
+  <define name="axf_transform">
+    <optional>
+      <attribute name="axf:transform">
+        <a:documentation>Block transformation: none | &lt;transform-function&gt;+</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:transform-origin
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.transform-origin
+  -->
+  <define name="axf_transform-origin">
+    <optional>
+      <attribute name="axf:transform-origin">
+        <a:documentation>Origin of block transformation: [ &lt;percentage&gt; | &lt;length&gt; | left | center | right | top | bottom] | [ [ &lt;percentage&gt; | &lt;length&gt; | left | center | right ] &amp;&amp; [ &lt;percentage&gt; | &lt;length&gt; | top | center | bottom ] ]</a:documentation>
       </attribute>
     </optional>
   </define>

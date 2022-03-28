@@ -1,3 +1,9 @@
+# focheck 0.7.12
+
+- Updated to 'axs' schema module to 'ahfsettings 7.2.4' schema.
+- Added `axf:font-feature-settings`.
+- `text-shadow` is too complex for current Schematron rule.
+
 # focheck 0.7.11
 
 - Added `axf:adjust-last-line-spacing`. (V7.2)

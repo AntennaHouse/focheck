@@ -7,7 +7,7 @@
   <!--
     Schema for Antenna House Option Setting File.
     
-    Copyright 2015-2020 Antenna House, Inc.
+    Copyright 2015-2021 Antenna House, Inc.
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -115,6 +115,7 @@
       <xs:enumeration value="PDF1.5"/>
       <xs:enumeration value="PDF1.6"/>
       <xs:enumeration value="PDF1.7"/>
+      <xs:enumeration value="PDF2.0"/>
       <xs:enumeration value="PDF/X-1a:2001"/>
       <xs:enumeration value="PDF/X-3:2002"/>
       <xs:enumeration value="PDF/X-1a:2003"/>
@@ -157,6 +158,8 @@
       <xs:enumeration value="Latn"/>
       <xs:enumeration value="Grek"/>
       <xs:enumeration value="Cyrl"/>
+      <xs:enumeration value="Armn"/>
+      <xs:enumeration value="Geor"/>
       <xs:enumeration value="Ethi"/>
       <xs:enumeration value="Arab"/>
       <xs:enumeration value="Syrc"/>
@@ -194,19 +197,19 @@
       <xs:element minOccurs="0" ref="axs:font-settings"/>
       <xs:element minOccurs="0" ref="axs:pdf-settings"/>
       <xs:element minOccurs="0" ref="axs:ps-settings"/>
-      <xs:element minOccurs="0" ref="axs:mathml-settings"/>
-      <xs:element minOccurs="0" ref="axs:rxe-settings"/>
       <xs:element minOccurs="0" ref="axs:svg-settings"/>
-      <xs:element minOccurs="0" ref="axs:inx-settings"/>
-      <xs:element minOccurs="0" ref="axs:mif-settings"/>
-      <xs:element minOccurs="0" ref="axs:cgm-settings"/>
       <xs:element minOccurs="0" ref="axs:text-settings"/>
+      <xs:element minOccurs="0" ref="axs:mathml-settings"/>
+      <xs:element minOccurs="0" ref="axs:cgm-settings"/>
       <xs:element minOccurs="0" ref="axs:xslt-settings"/>
       <xs:element minOccurs="0" ref="axs:analyzer-settings"/>
     </xs:sequence>
   </xs:complexType>
   <xs:element name="formatter-settings">
     <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="axs:unbreakable-words"/>
+      </xs:sequence>
       <xs:attribute name="abbreviation-character-count" type="xs:integer"/>
       <xs:attribute name="auto-break-footnote" type="axs:ah.boolean">
         <xs:annotation>
@@ -224,8 +227,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="avoid-orphan-hyphen"/>
-      <xs:attribute name="avoid-widow-words-CJK-punctuation" type="axs:ah.boolean">
+      <xs:attribute name="avoid-widow-words-cjk-punctuation" type="axs:ah.boolean">
         <xs:annotation>
           <xs:documentation>Whether to count the last punctuation to be included in one character when axf:avoid-widow-word="true" is specified in CJK: true | false</xs:documentation>
         </xs:annotation>
@@ -301,8 +303,23 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="fixed-width-space-treatment" type="axs:ah.boolean"/>
-      <xs:attribute name="hair-space-width"/>
+      <xs:attribute name="fixed-width-space-treatment">
+        <xs:annotation>
+          <xs:documentation>Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="false"/>
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="always"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="hair-space-width">
+        <xs:annotation>
+          <xs:documentation>Width, in em, of HAIR SPACE (U+200A)</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="hyphenation-min">
         <xs:annotation>
           <xs:documentation>Whether to enable &lt;hyphen-min&gt; in the Hyphenation Exception Dictionary: false | true | without-exceptions</xs:documentation>
@@ -343,7 +360,11 @@
       <xs:attribute name="non-starter-ideographic-space" type="axs:ah.boolean"/>
       <xs:attribute name="normal-line-height"/>
       <xs:attribute name="normalize" type="xs:NCName"/>
-      <xs:attribute name="oblique-skew" type="xs:integer"/>
+      <xs:attribute name="oblique-skew" type="xs:integer">
+        <xs:annotation>
+          <xs:documentation>Angle when emulating font-style="oblique" or "backslant": &lt;number&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="omit-uppercase-word-accents"/>
       <xs:attribute name="output-area-id" type="axs:ah.boolean"/>
       <xs:attribute name="output-fo-tree" type="axs:ah.boolean"/>
@@ -358,17 +379,40 @@
       <xs:attribute name="punctuation-spacing"/>
       <xs:attribute name="punctuation-trim" type="axs:ah.boolean"/>
       <xs:attribute name="pxpi" type="xs:integer"/>
-      <xs:attribute name="ruby-align"/>
-      <xs:attribute name="small-caps-emulation-size"/>
-      <xs:attribute name="SeparatePrinterDuplexJob" type="axs:ah.boolean"/>
-      <xs:attribute name="splitting-blocks-space" type="axs:ah.boolean"/>
-      <xs:attribute name="SVGViewer" type="axs:ah.boolean"/>
-      <xs:attribute name="tab-overlap-treatment">
+      <xs:attribute name="responsive-svg-size">
+        <xs:annotation>
+          <xs:documentation>Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox</xs:documentation>
+        </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:token">
-            <xs:enumeration value=""/>
+            <xs:enumeration value="reference"/>
+            <xs:enumeration value="viewBox"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="ruby-align">
+        <xs:annotation>
+          <xs:documentation>Ruby alignment when axf:ruby-align="auto"</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="SeparatePrinterDuplexJob" type="axs:ah.boolean"/>
+      <xs:attribute name="small-caps-emulation-always" type="axs:ah.boolean"/>
+      <xs:attribute name="small-caps-emulation-size">
+        <xs:annotation>
+          <xs:documentation>Scale-down ratio when the font does not have small-caps</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="small-caps-emulation-x-height" type="axs:ah.boolean"/>
+      <xs:attribute name="splitting-blocks-space" type="axs:ah.boolean"/>
+      <xs:attribute name="tab-overlap-treatment">
+        <xs:annotation>
+          <xs:documentation>Behavior when tab alignment makes letters overlap: ignore-tab | next-tab</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
             <xs:enumeration value="ignore-tab"/>
             <xs:enumeration value="next-tab"/>
+            <xs:enumeration value=""/>
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -565,6 +609,18 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
+  <xs:element name="unbreakable-words">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="axs:unbreakable-words.attlist"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="unbreakable-words.attlist">
+    <xs:attribute name="src">
+      <xs:annotation>
+        <xs:documentation>External &lt;unbreakable-words&gt; document</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
   <xs:element name="pdf-settings">
     <xs:complexType>
       <xs:complexContent>
@@ -578,6 +634,11 @@
     <xs:attribute name="allow-javascript" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether JavaScript specified by openaction or axf:action-type is enabled: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="allow-nest-alt-text" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to set alt text in descendants of tags with alt text: true | false</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="certificate-name" type="xs:NCName"/>
@@ -705,7 +766,16 @@
     <xs:attribute name="error-on-missing-glyph" type="axs:ah.boolean"/>
     <xs:attribute name="error-on-pdfx-fault" type="axs:ah.boolean"/>
     <xs:attribute name="error-on-tagged-pdf-fault" type="axs:ah.boolean"/>
-    <xs:attribute name="ghostscript"/>
+    <xs:attribute name="fallback-alttext">
+      <xs:annotation>
+        <xs:documentation>Fallback string when 'axf:alttext' is not specified</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ghostscript">
+      <xs:annotation>
+        <xs:documentation>Full path to Ghostscript</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="gif-pass-through" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Available up to V6.2. Use 'pass-through' instead.</xs:documentation>
@@ -861,160 +931,175 @@
   </xs:element>
   <xs:element name="ps-settings">
     <xs:complexType>
-      <xs:attribute name="noembed-font" use="required" type="axs:ah.boolean"/>
-      <xs:attribute name="transparency" use="required" type="axs:ah.boolean"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="inx-settings">
-    <xs:complexType>
-      <xs:attribute name="block-newline" type="axs:ah.boolean"/>
-      <xs:attribute name="output-mode" use="required" type="xs:NCName"/>
+      <xs:attribute name="noembed-font" type="axs:ah.boolean">
+        <xs:annotation>
+          <xs:documentation>Whether fonts are embedded in PostScript output: true | false</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="transparency" type="axs:ah.boolean">
+        <xs:annotation>
+          <xs:documentation>Whether transparency is processed when outputting pdfmark: true | false</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="use-launch-for-local-file" type="axs:ah.boolean">
+        <xs:annotation>
+          <xs:documentation>Whether anexternal link is transformed into “Open the file” or “World Wide Web link”: true | false</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="mathml-settings">
     <xs:complexType>
-      <xs:choice minOccurs="0">
-        <xs:element ref="axs:variant-font"/>
-        <xs:sequence>
-          <xs:element ref="axs:math"/>
-          <xs:element ref="axs:mfenced"/>
-          <xs:element ref="axs:mfrac"/>
-          <xs:element ref="axs:mi"/>
-          <xs:element ref="axs:mo"/>
-          <xs:element ref="axs:mroot"/>
-          <xs:element ref="axs:mscript"/>
-          <xs:element ref="axs:mstyle"/>
-          <xs:element ref="axs:mtable"/>
-          <xs:element ref="axs:munderover"/>
-        </xs:sequence>
-      </xs:choice>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="axs:variant-font"/>
+        <xs:element minOccurs="0" ref="axs:operator-dictionary"/>
+      </xs:sequence>
       <xs:attributeGroup ref="axs:mathml-settings.attlist"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="variant-font">
     <xs:complexType>
+      <xs:attribute name="center-shift"/>
       <xs:attribute name="fontfamily" use="required"/>
-      <xs:attribute name="mathvariant" use="required" type="xs:NCName"/>
+      <xs:attribute name="mathvariant" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value=""/>
+            <xs:enumeration value="normal"/>
+            <xs:enumeration value="bold"/>
+            <xs:enumeration value="italic"/>
+            <xs:enumeration value="bold-italic"/>
+            <xs:enumeration value="double-struck"/>
+            <xs:enumeration value="bold-fraktur"/>
+            <xs:enumeration value="script"/>
+            <xs:enumeration value="bold-script"/>
+            <xs:enumeration value="fraktur"/>
+            <xs:enumeration value="sans-serif"/>
+            <xs:enumeration value="bold-sans-serif"/>
+            <xs:enumeration value="sans-serif-italic"/>
+            <xs:enumeration value="sans-serif-bold-italic"/>
+            <xs:enumeration value="monospace"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
-  <xs:element name="math">
+  <xs:element name="operator-dictionary">
     <xs:complexType>
-      <xs:attribute name="axis-shift" use="required" type="xs:integer"/>
-      <xs:attribute name="big" use="required"/>
-      <xs:attribute name="normal" use="required" type="xs:integer"/>
-      <xs:attribute name="small" use="required"/>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="axs:entry"/>
+      </xs:sequence>
+      <xs:attribute name="src"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="mfenced">
+  <xs:element name="entry">
     <xs:complexType>
-      <xs:attribute name="center-shift" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="mfrac">
-    <xs:complexType>
-      <xs:attribute name="bar-lspace" use="required"/>
-      <xs:attribute name="bar-padding" use="required"/>
-      <xs:attribute name="bar-rspace" use="required"/>
-      <xs:attribute name="bar-width" use="required"/>
-      <xs:attribute name="denominator-space" use="required"/>
-      <xs:attribute name="italic-lspace" type="xs:integer"/>
-      <xs:attribute name="italic-rspace" type="xs:decimal"/>
-      <xs:attribute name="medium" use="required" type="xs:integer"/>
-      <xs:attribute name="neumerator-space"/>
-      <xs:attribute name="numerator-space" type="xs:decimal"/>
-      <xs:attribute name="thick" use="required"/>
-      <xs:attribute name="thin" use="required"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="mi">
-    <xs:complexType>
-      <xs:attribute name="italic-lspace" use="required" type="xs:decimal"/>
-      <xs:attribute name="italic-rspace" use="required"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="mo">
-    <xs:complexType>
-      <xs:attribute name="adjust-largeop-space" type="xs:decimal"/>
-      <xs:attribute name="default-space" type="xs:decimal"/>
-      <xs:attribute name="integral-bottom-width" type="xs:decimal"/>
-      <xs:attribute name="integral-italic" type="axs:ah.boolean"/>
-      <xs:attribute name="integral-largeop" type="xs:integer"/>
-      <xs:attribute name="integral-largeop-bottom-width" type="xs:decimal"/>
-      <xs:attribute name="integral-largeop-subscript-shift" type="xs:decimal"/>
-      <xs:attribute name="integral-largeop-superscript-shift" type="xs:decimal"/>
-      <xs:attribute name="integral-largeop-top-width" type="xs:decimal"/>
-      <xs:attribute name="integral-subscript-shift" type="xs:decimal"/>
-      <xs:attribute name="integral-superscript-shift" type="xs:decimal"/>
-      <xs:attribute name="integral-top-width" type="xs:decimal"/>
-      <xs:attribute name="largeop" use="required"/>
-      <xs:attribute name="largeop-integral" type="xs:integer"/>
-      <xs:attribute name="largeop-subscript-shift" type="xs:integer"/>
-      <xs:attribute name="largeop-superscript-shift" type="xs:decimal"/>
-      <xs:attribute name="paren-bottom" type="xs:NCName"/>
-      <xs:attribute name="paren-top" type="xs:NCName"/>
-      <xs:attribute name="paren-width-max" type="xs:integer"/>
-      <xs:attribute name="paren-width-min" type="xs:decimal"/>
-      <xs:attribute name="paren-width-scale" type="xs:decimal"/>
-      <xs:attribute name="paren-width-step" type="axs:ah.boolean"/>
-      <xs:attribute name="subscript-shift" type="xs:integer"/>
-      <xs:attribute name="superscript-shift" type="xs:decimal"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="mroot">
-    <xs:complexType>
-      <xs:attribute name="index-rspace" use="required"/>
-      <xs:attribute name="index-shift" use="required"/>
-      <xs:attribute name="padding-bottom" use="required" type="xs:integer"/>
-      <xs:attribute name="padding-left" use="required" type="xs:integer"/>
-      <xs:attribute name="padding-right" use="required" type="xs:integer"/>
-      <xs:attribute name="padding-top" use="required"/>
-      <xs:attribute name="root-pos1.x" use="required" type="xs:integer"/>
-      <xs:attribute name="root-pos1.y" use="required"/>
-      <xs:attribute name="root-pos2.x" use="required"/>
-      <xs:attribute name="root-pos2.y" use="required"/>
-      <xs:attribute name="root-pos3.x" use="required"/>
-      <xs:attribute name="root-pos3.y" use="required"/>
-      <xs:attribute name="root-pos4.x" use="required"/>
-      <xs:attribute name="root-pos4.y" use="required"/>
-      <xs:attribute name="root-width1" use="required"/>
-      <xs:attribute name="root-width2" use="required"/>
-      <xs:attribute name="root-width3" use="required"/>
-      <xs:attribute name="root-width4" use="required"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="mscript">
-    <xs:complexType>
-      <xs:attribute name="presubscript-italic-shift" use="required"/>
-      <xs:attribute name="presuperscript-italic-shift" use="required"/>
-      <xs:attribute name="script-lspace" use="required"/>
-      <xs:attribute name="script-lspace2" use="required"/>
-      <xs:attribute name="script-rspace" use="required"/>
-      <xs:attribute name="script-rspace2" use="required"/>
-      <xs:attribute name="subscript-italic-shift" use="required"/>
-      <xs:attribute name="subscript-shift" use="required" type="xs:integer"/>
-      <xs:attribute name="superscript-italic-shift" use="required"/>
-      <xs:attribute name="superscript-shift" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="mstyle">
-    <xs:complexType>
-      <xs:attribute name="background" use="required" type="xs:NCName"/>
-      <xs:attribute name="displaystyle" use="required" type="axs:ah.boolean"/>
-      <xs:attribute name="mediummathspace" use="required"/>
-      <xs:attribute name="scriptlevel" use="required" type="xs:integer"/>
-      <xs:attribute name="scriptminsize" use="required" type="xs:NMTOKEN"/>
-      <xs:attribute name="scriptsizemultiplier" use="required"/>
-      <xs:attribute name="thickmathspace" use="required"/>
-      <xs:attribute name="thinmathspace" use="required"/>
-      <xs:attribute name="verythickmathspace" use="required"/>
-      <xs:attribute name="verythinmathspace" use="required"/>
-      <xs:attribute name="veryverythickmathspace" use="required"/>
-      <xs:attribute name="veryverythinmathspace" use="required"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="mtable">
-    <xs:complexType>
-      <xs:attribute name="border-width" use="required"/>
+      <xs:attribute name="operator" use="required"/>
+      <xs:attribute name="form" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="prefix"/>
+            <xs:enumeration value="infix"/>
+            <xs:enumeration value="postfix"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="priority" type="xs:integer"/>
+      <xs:attribute name="lspace">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="4"/>
+            <xs:enumeration value="5"/>
+            <xs:enumeration value="6"/>
+            <xs:enumeration value="7"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="rspace">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="4"/>
+            <xs:enumeration value="5"/>
+            <xs:enumeration value="6"/>
+            <xs:enumeration value="7"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="minsize"/>
+      <xs:attribute name="maxsize"/>
+      <xs:attribute name="accent">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="fence">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="separator">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="stretchy">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="symmetric">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="largeop">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="moveablelimits">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="linebreakstyle">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="before"/>
+            <xs:enumeration value="after"/>
+            <xs:enumeration value="duplicate"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:attributeGroup name="mathml-settings.attlist">
@@ -1051,17 +1136,6 @@
     <xs:attribute name="underbar-space" use="required"/>
     <xs:attribute name="underscript-space" use="required"/>
   </xs:attributeGroup>
-  <xs:element name="mif-settings">
-    <xs:complexType>
-      <xs:attribute name="char-units" use="required" type="xs:NCName"/>
-      <xs:attribute name="image-processing" type="xs:NCName"/>
-      <xs:attribute name="output-mode" use="required" type="xs:NCName"/>
-      <xs:attribute name="units" use="required" type="xs:NCName"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="rxe-settings">
-    <xs:complexType/>
-  </xs:element>
   <xs:element name="svg-settings">
     <xs:complexType>
       <xs:attributeGroup ref="axs:svg-settings.attlist"/>
@@ -1069,25 +1143,25 @@
   </xs:element>
   <xs:attributeGroup name="svg-settings.attlist">
     <xs:attribute name="base-uri"/>
-    <xs:attribute name="copy-image-path" use="required"/>
-    <xs:attribute name="copy-image-prefix" use="required"/>
-    <xs:attribute name="embed-all-fonts" use="required" type="axs:ah.boolean"/>
+    <xs:attribute name="copy-image-path"/>
+    <xs:attribute name="copy-image-prefix"/>
+    <xs:attribute name="embed-all-fonts" type="axs:ah.boolean"/>
     <xs:attribute name="encoding"/>
-    <xs:attribute name="error-on-embed-fault" use="required" type="axs:ah.boolean"/>
-    <xs:attribute name="format" use="required"/>
-    <xs:attribute name="gzip-compression" use="required" type="axs:ah.boolean"/>
-    <xs:attribute name="image-conversion" use="required" type="xs:NCName"/>
+    <xs:attribute name="error-on-embed-fault" type="axs:ah.boolean"/>
+    <xs:attribute name="format"/>
+    <xs:attribute name="gzip-compression" type="axs:ah.boolean"/>
+    <xs:attribute name="image-conversion" type="xs:NCName"/>
     <xs:attribute name="image-downsampling-dpi" type="axs:dpi.model"/>
     <xs:attribute name="image-downsampling-method" type="xs:integer"/>
-    <xs:attribute name="image-processing" use="required" type="xs:NCName"/>
-    <xs:attribute name="jpeg-quality" use="required" type="xs:integer"/>
-    <xs:attribute name="rasterize-resolution" use="required" type="xs:integer"/>
-    <xs:attribute name="rename-copy-image" use="required" type="axs:ah.boolean"/>
+    <xs:attribute name="image-processing" type="xs:NCName"/>
+    <xs:attribute name="jpeg-quality" type="xs:integer"/>
+    <xs:attribute name="rasterize-resolution" type="xs:integer"/>
+    <xs:attribute name="rename-copy-image" type="axs:ah.boolean"/>
     <xs:attribute name="single-file-max-height"/>
     <xs:attribute name="single-file-max-pages" type="xs:integer"/>
     <xs:attribute name="single-page-number" type="axs:ah.boolean"/>
-    <xs:attribute name="singlefile" use="required" type="axs:ah.boolean"/>
-    <xs:attribute name="svg-version" use="required" type="xs:decimal"/>
+    <xs:attribute name="singlefile" type="axs:ah.boolean"/>
+    <xs:attribute name="svg-version" type="xs:decimal"/>
   </xs:attributeGroup>
   <xs:element name="text-settings">
     <xs:complexType/>
@@ -1102,9 +1176,22 @@
     </xs:complexType>
   </xs:element>
   <xs:attributeGroup name="xslt-settings.attlist">
-    <xs:attribute name="command"/>
-    <xs:attribute name="msxml" use="required" type="axs:ah.boolean"/>
-    <xs:attribute name="param-option"/>
+    <xs:attribute name="command">
+      <xs:annotation>
+        <xs:documentation>Command line of external XSLT processor. Must include '%1', '%2', and '%3. Can include '%param'. On Windows, can be empty or '@MSXML'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="msxml" type="axs:ah.boolean"/>
+    <xs:attribute name="msxmlver" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>Highest MSXML version to use: 6 | 5 | 4 | 3 | 0</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="param-option">
+      <xs:annotation>
+        <xs:documentation>Template for passing XSLT parameters. Must include '%p' and '%v'.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:attributeGroup>
   <xs:complexType name="xslt-settings.model">
     <xs:sequence>

@@ -3,7 +3,7 @@
   <!--
     Schema for Antenna House Option Setting File.
     
-    Copyright 2015-2020 Antenna House, Inc.
+    Copyright 2015-2021 Antenna House, Inc.
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -100,6 +100,7 @@
       <value>PDF1.5</value>
       <value>PDF1.6</value>
       <value>PDF1.7</value>
+      <value>PDF2.0</value>
       <value>PDF/X-1a:2001</value>
       <value>PDF/X-3:2002</value>
       <value>PDF/X-1a:2003</value>
@@ -142,6 +143,8 @@
       <value>Latn</value>
       <value>Grek</value>
       <value>Cyrl</value>
+      <value>Armn</value>
+      <value>Geor</value>
       <value>Ethi</value>
       <value>Arab</value>
       <value>Syrc</value>
@@ -191,25 +194,16 @@
       <ref name="ps-settings"/>
     </optional>
     <optional>
-      <ref name="mathml-settings"/>
-    </optional>
-    <optional>
-      <ref name="rxe-settings"/>
-    </optional>
-    <optional>
       <ref name="svg-settings"/>
     </optional>
     <optional>
-      <ref name="inx-settings"/>
+      <ref name="text-settings"/>
     </optional>
     <optional>
-      <ref name="mif-settings"/>
+      <ref name="mathml-settings"/>
     </optional>
     <optional>
       <ref name="cgm-settings"/>
-    </optional>
-    <optional>
-      <ref name="text-settings"/>
     </optional>
     <optional>
       <ref name="xslt-settings"/>
@@ -241,10 +235,7 @@
         </attribute>
       </optional>
       <optional>
-        <attribute name="avoid-orphan-hyphen"/>
-      </optional>
-      <optional>
-        <attribute name="avoid-widow-words-CJK-punctuation">
+        <attribute name="avoid-widow-words-cjk-punctuation">
           <a:documentation>Whether to count the last punctuation to be included in one character when axf:avoid-widow-word="true" is specified in CJK: true | false</a:documentation>
           <ref name="ah.boolean"/>
         </attribute>
@@ -397,11 +388,18 @@
       </optional>
       <optional>
         <attribute name="fixed-width-space-treatment">
-          <ref name="ah.boolean"/>
+          <a:documentation>Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always</a:documentation>
+          <choice>
+            <value>false</value>
+            <value>true</value>
+            <value>always</value>
+          </choice>
         </attribute>
       </optional>
       <optional>
-        <attribute name="hair-space-width"/>
+        <attribute name="hair-space-width">
+          <a:documentation>Width, in em, of HAIR SPACE (U+200A)</a:documentation>
+        </attribute>
       </optional>
       <optional>
         <attribute name="hyphenation-min">
@@ -484,6 +482,7 @@
       </optional>
       <optional>
         <attribute name="oblique-skew">
+          <a:documentation>Angle when emulating font-style="oblique" or "backslant": &lt;number&gt;</a:documentation>
           <data type="integer"/>
         </attribute>
       </optional>
@@ -548,13 +547,36 @@
         </attribute>
       </optional>
       <optional>
-        <attribute name="ruby-align"/>
+        <attribute name="responsive-svg-size">
+          <a:documentation>Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox</a:documentation>
+          <choice>
+            <value>reference</value>
+            <value>viewBox</value>
+          </choice>
+        </attribute>
       </optional>
       <optional>
-        <attribute name="small-caps-emulation-size"/>
+        <attribute name="ruby-align">
+          <a:documentation>Ruby alignment when axf:ruby-align="auto"</a:documentation>
+        </attribute>
       </optional>
       <optional>
         <attribute name="SeparatePrinterDuplexJob">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="small-caps-emulation-always">
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="small-caps-emulation-size">
+          <a:documentation>Scale-down ratio when the font does not have small-caps</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="small-caps-emulation-x-height">
           <ref name="ah.boolean"/>
         </attribute>
       </optional>
@@ -564,16 +586,12 @@
         </attribute>
       </optional>
       <optional>
-        <attribute name="SVGViewer">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
         <attribute name="tab-overlap-treatment">
+          <a:documentation>Behavior when tab alignment makes letters overlap: ignore-tab | next-tab</a:documentation>
           <choice>
-            <value/>
             <value>ignore-tab</value>
             <value>next-tab</value>
+            <value/>
           </choice>
         </attribute>
       </optional>
@@ -689,6 +707,9 @@
           </choice>
         </attribute>
       </optional>
+      <zeroOrMore>
+        <ref name="unbreakable-words"/>
+      </zeroOrMore>
     </element>
   </define>
   <define name="font-settings">
@@ -849,6 +870,22 @@
       <a:documentation>Name of font to use in place of source font</a:documentation>
     </attribute>
   </define>
+  <define name="unbreakable-words">
+    <element name="unbreakable-words">
+      <ref name="unbreakable-words.attlist"/>
+      <ref name="unbreakable-words.model"/>
+    </element>
+  </define>
+  <define name="unbreakable-words.model">
+    <text/>
+  </define>
+  <define name="unbreakable-words.attlist">
+    <optional>
+      <attribute name="src">
+        <a:documentation>External &lt;unbreakable-words&gt; document</a:documentation>
+      </attribute>
+    </optional>
+  </define>
   <define name="pdf-settings">
     <element name="pdf-settings">
       <ref name="pdf-settings.attlist"/>
@@ -859,6 +896,12 @@
     <optional>
       <attribute name="allow-javascript">
         <a:documentation>Whether JavaScript specified by openaction or axf:action-type is enabled: true | false</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="allow-nest-alt-text">
+        <a:documentation>Whether to set alt text in descendants of tags with alt text: true | false</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
@@ -1071,7 +1114,14 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="ghostscript"/>
+      <attribute name="fallback-alttext">
+        <a:documentation>Fallback string when 'axf:alttext' is not specified</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="ghostscript">
+        <a:documentation>Full path to Ghostscript</a:documentation>
+      </attribute>
     </optional>
     <optional>
       <attribute name="gif-pass-through">
@@ -1517,279 +1567,178 @@
   </define>
   <define name="ps-settings">
     <element name="ps-settings">
-      <attribute name="noembed-font">
-        <ref name="ah.boolean"/>
-      </attribute>
-      <attribute name="transparency">
-        <ref name="ah.boolean"/>
-      </attribute>
-    </element>
-  </define>
-  <define name="inx-settings">
-    <element name="inx-settings">
       <optional>
-        <attribute name="block-newline">
+        <attribute name="noembed-font">
+          <a:documentation>Whether fonts are embedded in PostScript output: true | false</a:documentation>
           <ref name="ah.boolean"/>
         </attribute>
       </optional>
-      <attribute name="output-mode">
-        <data type="NCName"/>
-      </attribute>
+      <optional>
+        <attribute name="transparency">
+          <a:documentation>Whether transparency is processed when outputting pdfmark: true | false</a:documentation>
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="use-launch-for-local-file">
+          <a:documentation>Whether anexternal link is transformed into “Open the file” or “World Wide Web link”: true | false</a:documentation>
+          <ref name="ah.boolean"/>
+        </attribute>
+      </optional>
     </element>
   </define>
   <define name="mathml-settings">
     <element name="mathml-settings">
       <ref name="mathml-settings.attlist"/>
+      <zeroOrMore>
+        <element name="variant-font">
+          <optional>
+            <attribute name="center-shift"/>
+          </optional>
+          <attribute name="fontfamily"/>
+          <attribute name="mathvariant">
+            <choice>
+              <value/>
+              <value>normal</value>
+              <value>bold</value>
+              <value>italic</value>
+              <value>bold-italic</value>
+              <value>double-struck</value>
+              <value>bold-fraktur</value>
+              <value>script</value>
+              <value>bold-script</value>
+              <value>fraktur</value>
+              <value>sans-serif</value>
+              <value>bold-sans-serif</value>
+              <value>sans-serif-italic</value>
+              <value>sans-serif-bold-italic</value>
+              <value>monospace</value>
+            </choice>
+          </attribute>
+        </element>
+      </zeroOrMore>
       <optional>
-        <choice>
-          <element name="variant-font">
-            <attribute name="fontfamily"/>
-            <attribute name="mathvariant">
-              <data type="NCName"/>
-            </attribute>
-          </element>
-          <group>
-            <element name="math">
-              <attribute name="axis-shift">
-                <data type="integer"/>
+        <element name="operator-dictionary">
+          <optional>
+            <attribute name="src"/>
+          </optional>
+          <zeroOrMore>
+            <element name="entry">
+              <attribute name="operator"/>
+              <attribute name="form">
+                <choice>
+                  <value>prefix</value>
+                  <value>infix</value>
+                  <value>postfix</value>
+                </choice>
               </attribute>
-              <attribute name="big"/>
-              <attribute name="normal">
-                <data type="integer"/>
-              </attribute>
-              <attribute name="small"/>
-            </element>
-            <element name="mfenced">
-              <attribute name="center-shift">
-                <data type="integer"/>
-              </attribute>
-            </element>
-            <element name="mfrac">
-              <attribute name="bar-lspace"/>
-              <attribute name="bar-padding"/>
-              <attribute name="bar-rspace"/>
-              <attribute name="bar-width"/>
-              <attribute name="denominator-space"/>
               <optional>
-                <attribute name="italic-lspace">
+                <attribute name="priority">
                   <data type="integer"/>
                 </attribute>
               </optional>
               <optional>
-                <attribute name="italic-rspace">
-                  <data type="decimal"/>
-                </attribute>
-              </optional>
-              <attribute name="medium">
-                <data type="integer"/>
-              </attribute>
-              <optional>
-                <attribute name="neumerator-space"/>
-              </optional>
-              <optional>
-                <attribute name="numerator-space">
-                  <data type="decimal"/>
-                </attribute>
-              </optional>
-              <attribute name="thick"/>
-              <attribute name="thin"/>
-            </element>
-            <element name="mi">
-              <attribute name="italic-lspace">
-                <data type="decimal"/>
-              </attribute>
-              <attribute name="italic-rspace"/>
-            </element>
-            <element name="mo">
-              <optional>
-                <attribute name="adjust-largeop-space">
-                  <data type="decimal"/>
+                <attribute name="lspace">
+                  <choice>
+                    <value>0</value>
+                    <value>1</value>
+                    <value>2</value>
+                    <value>3</value>
+                    <value>4</value>
+                    <value>5</value>
+                    <value>6</value>
+                    <value>7</value>
+                  </choice>
                 </attribute>
               </optional>
               <optional>
-                <attribute name="default-space">
-                  <data type="decimal"/>
+                <attribute name="rspace">
+                  <choice>
+                    <value>0</value>
+                    <value>1</value>
+                    <value>2</value>
+                    <value>3</value>
+                    <value>4</value>
+                    <value>5</value>
+                    <value>6</value>
+                    <value>7</value>
+                  </choice>
                 </attribute>
               </optional>
               <optional>
-                <attribute name="integral-bottom-width">
-                  <data type="decimal"/>
+                <attribute name="minsize"/>
+              </optional>
+              <optional>
+                <attribute name="maxsize"/>
+              </optional>
+              <optional>
+                <attribute name="accent">
+                  <choice>
+                    <value>true</value>
+                    <value>false</value>
+                  </choice>
                 </attribute>
               </optional>
               <optional>
-                <attribute name="integral-italic">
-                  <ref name="ah.boolean"/>
+                <attribute name="fence">
+                  <choice>
+                    <value>true</value>
+                    <value>false</value>
+                  </choice>
                 </attribute>
               </optional>
               <optional>
-                <attribute name="integral-largeop">
-                  <data type="integer"/>
+                <attribute name="separator">
+                  <choice>
+                    <value>true</value>
+                    <value>false</value>
+                  </choice>
                 </attribute>
               </optional>
               <optional>
-                <attribute name="integral-largeop-bottom-width">
-                  <data type="decimal"/>
+                <attribute name="stretchy">
+                  <choice>
+                    <value>true</value>
+                    <value>false</value>
+                  </choice>
                 </attribute>
               </optional>
               <optional>
-                <attribute name="integral-largeop-subscript-shift">
-                  <data type="decimal"/>
+                <attribute name="symmetric">
+                  <choice>
+                    <value>true</value>
+                    <value>false</value>
+                  </choice>
                 </attribute>
               </optional>
               <optional>
-                <attribute name="integral-largeop-superscript-shift">
-                  <data type="decimal"/>
+                <attribute name="largeop">
+                  <choice>
+                    <value>true</value>
+                    <value>false</value>
+                  </choice>
                 </attribute>
               </optional>
               <optional>
-                <attribute name="integral-largeop-top-width">
-                  <data type="decimal"/>
+                <attribute name="moveablelimits">
+                  <choice>
+                    <value>true</value>
+                    <value>false</value>
+                  </choice>
                 </attribute>
               </optional>
               <optional>
-                <attribute name="integral-subscript-shift">
-                  <data type="decimal"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="integral-superscript-shift">
-                  <data type="decimal"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="integral-top-width">
-                  <data type="decimal"/>
-                </attribute>
-              </optional>
-              <attribute name="largeop"/>
-              <optional>
-                <attribute name="largeop-integral">
-                  <data type="integer"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="largeop-subscript-shift">
-                  <data type="integer"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="largeop-superscript-shift">
-                  <data type="decimal"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="paren-bottom">
-                  <data type="NCName"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="paren-top">
-                  <data type="NCName"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="paren-width-max">
-                  <data type="integer"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="paren-width-min">
-                  <data type="decimal"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="paren-width-scale">
-                  <data type="decimal"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="paren-width-step">
-                  <ref name="ah.boolean"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="subscript-shift">
-                  <data type="integer"/>
-                </attribute>
-              </optional>
-              <optional>
-                <attribute name="superscript-shift">
-                  <data type="decimal"/>
+                <attribute name="linebreakstyle">
+                  <choice>
+                    <value>before</value>
+                    <value>after</value>
+                    <value>duplicate</value>
+                  </choice>
                 </attribute>
               </optional>
             </element>
-            <element name="mroot">
-              <attribute name="index-rspace"/>
-              <attribute name="index-shift"/>
-              <attribute name="padding-bottom">
-                <data type="integer"/>
-              </attribute>
-              <attribute name="padding-left">
-                <data type="integer"/>
-              </attribute>
-              <attribute name="padding-right">
-                <data type="integer"/>
-              </attribute>
-              <attribute name="padding-top"/>
-              <attribute name="root-pos1.x">
-                <data type="integer"/>
-              </attribute>
-              <attribute name="root-pos1.y"/>
-              <attribute name="root-pos2.x"/>
-              <attribute name="root-pos2.y"/>
-              <attribute name="root-pos3.x"/>
-              <attribute name="root-pos3.y"/>
-              <attribute name="root-pos4.x"/>
-              <attribute name="root-pos4.y"/>
-              <attribute name="root-width1"/>
-              <attribute name="root-width2"/>
-              <attribute name="root-width3"/>
-              <attribute name="root-width4"/>
-            </element>
-            <element name="mscript">
-              <attribute name="presubscript-italic-shift"/>
-              <attribute name="presuperscript-italic-shift"/>
-              <attribute name="script-lspace"/>
-              <attribute name="script-lspace2"/>
-              <attribute name="script-rspace"/>
-              <attribute name="script-rspace2"/>
-              <attribute name="subscript-italic-shift"/>
-              <attribute name="subscript-shift">
-                <data type="integer"/>
-              </attribute>
-              <attribute name="superscript-italic-shift"/>
-              <attribute name="superscript-shift">
-                <data type="integer"/>
-              </attribute>
-            </element>
-            <element name="mstyle">
-              <attribute name="background">
-                <data type="NCName"/>
-              </attribute>
-              <attribute name="displaystyle">
-                <ref name="ah.boolean"/>
-              </attribute>
-              <attribute name="mediummathspace"/>
-              <attribute name="scriptlevel">
-                <data type="integer"/>
-              </attribute>
-              <attribute name="scriptminsize">
-                <data type="NMTOKEN"/>
-              </attribute>
-              <attribute name="scriptsizemultiplier"/>
-              <attribute name="thickmathspace"/>
-              <attribute name="thinmathspace"/>
-              <attribute name="verythickmathspace"/>
-              <attribute name="verythinmathspace"/>
-              <attribute name="veryverythickmathspace"/>
-              <attribute name="veryverythinmathspace"/>
-            </element>
-            <element name="mtable">
-              <attribute name="border-width"/>
-            </element>
-            <ref name="munderover"/>
-          </group>
-        </choice>
+          </zeroOrMore>
+        </element>
       </optional>
     </element>
   </define>
@@ -1895,29 +1844,6 @@
     <attribute name="underbar-space"/>
     <attribute name="underscript-space"/>
   </define>
-  <define name="mif-settings">
-    <element name="mif-settings">
-      <attribute name="char-units">
-        <data type="NCName"/>
-      </attribute>
-      <optional>
-        <attribute name="image-processing">
-          <data type="NCName"/>
-        </attribute>
-      </optional>
-      <attribute name="output-mode">
-        <data type="NCName"/>
-      </attribute>
-      <attribute name="units">
-        <data type="NCName"/>
-      </attribute>
-    </element>
-  </define>
-  <define name="rxe-settings">
-    <element name="rxe-settings">
-      <empty/>
-    </element>
-  </define>
   <define name="svg-settings">
     <element name="svg-settings">
       <ref name="svg-settings.attlist"/>
@@ -1928,24 +1854,38 @@
     <optional>
       <attribute name="base-uri"/>
     </optional>
-    <attribute name="copy-image-path"/>
-    <attribute name="copy-image-prefix"/>
-    <attribute name="embed-all-fonts">
-      <ref name="ah.boolean"/>
-    </attribute>
+    <optional>
+      <attribute name="copy-image-path"/>
+    </optional>
+    <optional>
+      <attribute name="copy-image-prefix"/>
+    </optional>
+    <optional>
+      <attribute name="embed-all-fonts">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
     <optional>
       <attribute name="encoding"/>
     </optional>
-    <attribute name="error-on-embed-fault">
-      <ref name="ah.boolean"/>
-    </attribute>
-    <attribute name="format"/>
-    <attribute name="gzip-compression">
-      <ref name="ah.boolean"/>
-    </attribute>
-    <attribute name="image-conversion">
-      <data type="NCName"/>
-    </attribute>
+    <optional>
+      <attribute name="error-on-embed-fault">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="format"/>
+    </optional>
+    <optional>
+      <attribute name="gzip-compression">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="image-conversion">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
     <optional>
       <attribute name="image-downsampling-dpi">
         <ref name="dpi.model"/>
@@ -1956,18 +1896,26 @@
         <data type="integer"/>
       </attribute>
     </optional>
-    <attribute name="image-processing">
-      <data type="NCName"/>
-    </attribute>
-    <attribute name="jpeg-quality">
-      <data type="integer"/>
-    </attribute>
-    <attribute name="rasterize-resolution">
-      <data type="integer"/>
-    </attribute>
-    <attribute name="rename-copy-image">
-      <ref name="ah.boolean"/>
-    </attribute>
+    <optional>
+      <attribute name="image-processing">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="jpeg-quality">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rasterize-resolution">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rename-copy-image">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
     <optional>
       <attribute name="single-file-max-height"/>
     </optional>
@@ -1981,12 +1929,16 @@
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
-    <attribute name="singlefile">
-      <ref name="ah.boolean"/>
-    </attribute>
-    <attribute name="svg-version">
-      <data type="decimal"/>
-    </attribute>
+    <optional>
+      <attribute name="singlefile">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="svg-version">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
   </define>
   <define name="svg-settings.model">
     <empty/>
@@ -2004,13 +1956,25 @@
   </define>
   <define name="xslt-settings.attlist">
     <optional>
-      <attribute name="command"/>
+      <attribute name="command">
+        <a:documentation>Command line of external XSLT processor. Must include '%1', '%2', and '%3. Can include '%param'. On Windows, can be empty or '@MSXML'.</a:documentation>
+      </attribute>
     </optional>
-    <attribute name="msxml">
-      <ref name="ah.boolean"/>
-    </attribute>
     <optional>
-      <attribute name="param-option"/>
+      <attribute name="msxml">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="msxmlver">
+        <a:documentation>Highest MSXML version to use: 6 | 5 | 4 | 3 | 0</a:documentation>
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="param-option">
+        <a:documentation>Template for passing XSLT parameters. Must include '%p' and '%v'.</a:documentation>
+      </attribute>
     </optional>
   </define>
   <define name="xslt-settings.model">
