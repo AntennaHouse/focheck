@@ -132,6 +132,7 @@
 <property name="axf:diagonal-border-width" model="text" description="Width of the diagonal border" />
 <property name="axf:display-alttext" model="'true' | 'false' | 'auto'" description="Whether to display the alternate text of a missing image: true | false | auto" /><!-- V7.0 -->
 <property name="axf:flush-zone" model="text" description="Threshold for justifying last line: none | &lt;length> | &lt;percentage>" /><!-- V7.0 -->
+<property name="axf:font-feature-settings" model="text" description="OpenType font features: normal | &lt;feature-tag-value>#" /><!-- V6.5 -->
 <property name="axf:hanging-punctuation" model="text" description="Whether to hang punctuations at the start of the line or end of the line: none | [ start || first || [ force-end | allow-end ] || last ]" />
 <property name="axf:hyphenate-caps-word" model="'true' | 'false' | 'false-all'" description="Whether to hyphenate words consisting only of uppercase letters: true | false" /><!-- V7.0; V7.2 added 'false-all'. -->
 <property name="axf:hyphenate-hyphenated-word" model="'true' | 'false'" description="Whether to hyphenate an already hyphenated word" />
