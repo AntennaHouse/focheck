@@ -1,6 +1,6 @@
 # Schema for Antenna House Option Setting File.
 #
-# Copyright 2015-2020 Antenna House, Inc.
+# Copyright 2015-2021 Antenna House, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,6 +59,7 @@ pdf-version.list =
     | 'PDF1.5'
     | 'PDF1.6'
     | 'PDF1.7'
+    | 'PDF2.0'
     | 'PDF/X-1a:2001'
     | 'PDF/X-3:2002'
     | 'PDF/X-1a:2003'
@@ -99,6 +100,8 @@ script.list =
     'Latn'
   | 'Grek'
   | 'Cyrl'
+  | 'Armn'
+  | 'Geor'
   | 'Ethi'
   | 'Arab'
   | 'Syrc'
@@ -135,20 +138,17 @@ formatter-config =
 }
 
 formatter-config.model =
-    formatter-settings?,
+    (formatter-settings?,
     font-settings?,
     pdf-settings?,
     ps-settings?,
-    mathml-settings?,
-    rxe-settings?,
     svg-settings?,
-    inx-settings?,
-    mif-settings?,
-    cgm-settings?,
     text-settings?,
+    mathml-settings?,
+    cgm-settings?,
     xslt-settings?,
-    analyzer-settings?
-    
+    analyzer-settings?)
+
 formatter-settings =
     element formatter-settings {
       attribute abbreviation-character-count { xsd:integer }?,
@@ -156,9 +156,8 @@ formatter-settings =
       attribute auto-break-footnote { ah.boolean }?,
       ## Formatter type when unclear if HTML or XHTML: html | xhtml
       attribute auto-formatter-type { 'html' | 'xhtml' }?,
-      attribute avoid-orphan-hyphen { text }?,
       ## Whether to count the last punctuation to be included in one character when axf:avoid-widow-word="true" is specified in CJK: true | false
-      attribute avoid-widow-words-CJK-punctuation { ah.boolean }?,
+      attribute avoid-widow-words-cjk-punctuation { ah.boolean }?,
       ## Whether <axf:formatter-config> is allowed
       attribute axf-formatter-config { ah.boolean }?,
       ## Mode for handling baselines of mixed scripts: 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6
@@ -195,7 +194,9 @@ formatter-settings =
       attribute external-entity { ah.boolean }?,
       ## How strictly to check 'font-family' syntax: auto | loose | strict
       attribute family-name-syntax { 'auto' | 'loose' | 'strict' }?,
-      attribute fixed-width-space-treatment { ah.boolean }?,
+      ## Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always
+      attribute fixed-width-space-treatment { 'false' | 'true' | 'always' }?,
+      ## Width, in em, of HAIR SPACE (U+200A)
       attribute hair-space-width { text }?,
       ## Whether to enable <hyphen-min> in the Hyphenation Exception Dictionary: false | true | without-exceptions
       attribute hyphenation-min { ah.boolean | 'without-exceptions' }?,
@@ -216,6 +217,7 @@ formatter-settings =
       attribute non-starter-ideographic-space { ah.boolean }?,
       attribute normal-line-height { text }?,
       attribute normalize { xsd:NCName }?,
+      ## Angle when emulating font-style="oblique" or "backslant": <number>
       attribute oblique-skew { xsd:integer }?,
       attribute omit-uppercase-word-accents { text }?,
       attribute output-area-id { ah.boolean }?,
@@ -231,12 +233,18 @@ formatter-settings =
       attribute punctuation-spacing { text }?,
       attribute punctuation-trim { ah.boolean }?,
       attribute pxpi { xsd:integer }?,
+      ## Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox
+      attribute responsive-svg-size { 'reference' | 'viewBox' }?,
+      ## Ruby alignment when axf:ruby-align="auto"
       attribute ruby-align { text }?,
-      attribute small-caps-emulation-size { text }?,
       attribute SeparatePrinterDuplexJob { ah.boolean }?,
+      attribute small-caps-emulation-always { ah.boolean }?,
+      ## Scale-down ratio when the font does not have small-caps
+      attribute small-caps-emulation-size { text }?,
+      attribute small-caps-emulation-x-height { ah.boolean }?,
       attribute splitting-blocks-space { ah.boolean }?,
-      attribute SVGViewer { ah.boolean }?,
-      attribute tab-overlap-treatment { '' | 'ignore-tab' | 'next-tab' }?,
+      ## Behavior when tab alignment makes letters overlap: ignore-tab | next-tab
+      attribute tab-overlap-treatment { 'ignore-tab' | 'next-tab' | '' }?,
       attribute table-auto-layout-limit { xsd:integer }?,
       attribute table-is-reference-area { ah.boolean }?,
       attribute text-autospace { ah.boolean }?,
@@ -263,9 +271,10 @@ formatter-settings =
       attribute viewport-length-units-mode { xsd:integer }?,
       attribute WindowsFontAPI { text }?,
       ## ZERO WIDTH SPACE (U+200B) compatibility mode: 5 | 6
-      attribute zwsp-mode { '5' | '6' }?
+      attribute zwsp-mode { '5' | '6' }?,
+      unbreakable-words*
     }
-    
+
 font-settings =
     ## Settings for fonts
     element font-settings {
@@ -332,6 +341,20 @@ font-alias.attlist =
     ## Name of font to use in place of source font
     attribute dst { text }
 
+unbreakable-words =
+    element unbreakable-words {
+        unbreakable-words.attlist,
+        unbreakable-words.model
+    }
+
+unbreakable-words.model =
+    text
+
+unbreakable-words.attlist =
+    ## External <unbreakable-words> document
+    attribute src { text }?
+
+
 pdf-settings =
      element pdf-settings {
        pdf-settings.attlist,
@@ -341,6 +364,8 @@ pdf-settings =
 pdf-settings.attlist =
          ## Whether JavaScript specified by openaction or axf:action-type is enabled: true | false
          attribute allow-javascript { ah.boolean }?,
+         ## Whether to set alt text in descendants of tags with alt text: true | false
+         attribute allow-nest-alt-text { ah.boolean }?,
          attribute certificate-name { xsd:NCName }?,
          ## Whether to check the parent-child relationship between tags: true | false
          attribute check-tag-relationship { ah.boolean }?,
@@ -384,6 +409,9 @@ pdf-settings.attlist =
          attribute error-on-missing-glyph { ah.boolean }?,
          attribute error-on-pdfx-fault { ah.boolean }?,
          attribute error-on-tagged-pdf-fault { ah.boolean }?,
+         ## Fallback string when 'axf:alttext' is not specified
+         attribute fallback-alttext { text }?,
+         ## Full path to Ghostscript
          attribute ghostscript { text }?,
          ## Available up to V6.2. Use 'pass-through' instead.
          attribute gif-pass-through { ah.boolean }?,
@@ -499,131 +527,43 @@ cgm-settings =
 
 ps-settings =
     element ps-settings {
-      attribute noembed-font { ah.boolean },  
-      attribute transparency { ah.boolean }
+      ## Whether fonts are embedded in PostScript output: true | false
+      attribute noembed-font { ah.boolean }?,
+      ## Whether transparency is processed when outputting pdfmark: true | false
+      attribute transparency { ah.boolean }?,
+      ## Whether anexternal link is transformed into “Open the file” or “World Wide Web link”: true | false
+      attribute use-launch-for-local-file { ah.boolean }?
     }
-
-inx-settings =
-    element inx-settings {
-       attribute block-newline { ah.boolean }?,
-       attribute output-mode { xsd:NCName }
-     }
 
 mathml-settings =
     element mathml-settings {
          mathml-settings.attlist,
-         (element variant-font {
+         element variant-font {
+            attribute center-shift { text }?,
             attribute fontfamily { text },
-            attribute mathvariant { xsd:NCName }
-          }
-          | (element math {
-               attribute axis-shift { xsd:integer },
-               attribute big { text },
-               attribute normal { xsd:integer },
-               attribute small { text }
-             },
-             element mfenced {
-               attribute center-shift { xsd:integer }
-             },
-             element mfrac {
-               attribute bar-lspace { text },
-               attribute bar-padding { text },
-               attribute bar-rspace { text },
-               attribute bar-width { text },
-               attribute denominator-space { text },
-               attribute italic-lspace { xsd:integer }?,
-               attribute italic-rspace { xsd:decimal }?,
-               attribute medium { xsd:integer },
-               attribute neumerator-space { text }?,
-               attribute numerator-space { xsd:decimal }?,
-               attribute thick { text },
-               attribute thin { text }
-             },
-             element mi {
-               attribute italic-lspace { xsd:decimal },
-               attribute italic-rspace { text }
-             },
-             element mo {
-               attribute adjust-largeop-space { xsd:decimal }?,
-               attribute default-space { xsd:decimal }?,
-               attribute integral-bottom-width { xsd:decimal }?,
-               attribute integral-italic { ah.boolean }?,
-               attribute integral-largeop { xsd:integer }?,
-               attribute integral-largeop-bottom-width { xsd:decimal }?,
-               attribute integral-largeop-subscript-shift {
-                 xsd:decimal
-               }?,
-               attribute integral-largeop-superscript-shift {
-                 xsd:decimal
-               }?,
-               attribute integral-largeop-top-width { xsd:decimal }?,
-               attribute integral-subscript-shift { xsd:decimal }?,
-               attribute integral-superscript-shift { xsd:decimal }?,
-               attribute integral-top-width { xsd:decimal }?,
-               attribute largeop { text },
-               attribute largeop-integral { xsd:integer }?,
-               attribute largeop-subscript-shift { xsd:integer }?,
-               attribute largeop-superscript-shift { xsd:decimal }?,
-               attribute paren-bottom { xsd:NCName }?,
-               attribute paren-top { xsd:NCName }?,
-               attribute paren-width-max { xsd:integer }?,
-               attribute paren-width-min { xsd:decimal }?,
-               attribute paren-width-scale { xsd:decimal }?,
-               attribute paren-width-step { ah.boolean }?,
-               attribute subscript-shift { xsd:integer }?,
-               attribute superscript-shift { xsd:decimal }?
-             },
-             element mroot {
-               attribute index-rspace { text },
-               attribute index-shift { text },
-               attribute padding-bottom { xsd:integer },
-               attribute padding-left { xsd:integer },
-               attribute padding-right { xsd:integer },
-               attribute padding-top { text },
-               attribute root-pos1.x { xsd:integer },
-               attribute root-pos1.y { text },
-               attribute root-pos2.x { text },
-               attribute root-pos2.y { text },
-               attribute root-pos3.x { text },
-               attribute root-pos3.y { text },
-               attribute root-pos4.x { text },
-               attribute root-pos4.y { text },
-               attribute root-width1 { text },
-               attribute root-width2 { text },
-               attribute root-width3 { text },
-               attribute root-width4 { text }
-             },
-             element mscript {
-               attribute presubscript-italic-shift { text },
-               attribute presuperscript-italic-shift { text },
-               attribute script-lspace { text },
-               attribute script-lspace2 { text },
-               attribute script-rspace { text },
-               attribute script-rspace2 { text },
-               attribute subscript-italic-shift { text },
-               attribute subscript-shift { xsd:integer },
-               attribute superscript-italic-shift { text },
-               attribute superscript-shift { xsd:integer }
-             },
-             element mstyle {
-               attribute background { xsd:NCName },
-               attribute displaystyle { ah.boolean },
-               attribute mediummathspace { text },
-               attribute scriptlevel { xsd:integer },
-               attribute scriptminsize { xsd:NMTOKEN },
-               attribute scriptsizemultiplier { text },
-               attribute thickmathspace { text },
-               attribute thinmathspace { text },
-               attribute verythickmathspace { text },
-               attribute verythinmathspace { text },
-               attribute veryverythickmathspace { text },
-               attribute veryverythinmathspace { text }
-             },
-             element mtable {
-               attribute border-width { text }
-             },
-             munderover))?
-       }
+            attribute mathvariant { '' | 'normal' | 'bold' | 'italic' | 'bold-italic' | 'double-struck' | 'bold-fraktur' | 'script' | 'bold-script' | 'fraktur' | 'sans-serif' | 'bold-sans-serif' | 'sans-serif-italic' | 'sans-serif-bold-italic' | 'monospace' }
+         }*,
+       element operator-dictionary {
+          attribute src { text }?,
+          element entry {
+             attribute operator { text },
+             attribute form { 'prefix' | 'infix' | 'postfix' },
+             attribute priority { xsd:integer }?,
+             attribute lspace { '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' }?,
+             attribute rspace { '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' }?,
+             attribute minsize { text }?,
+             attribute maxsize { text }?,
+             attribute accent { 'true' | 'false' }?,
+             attribute fence { 'true' | 'false' }?,
+             attribute separator { 'true' | 'false' }?,
+             attribute stretchy { 'true' | 'false' }?,
+             attribute symmetric { 'true' | 'false' }?,
+             attribute largeop { 'true' | 'false' }?,
+             attribute moveablelimits { 'true' | 'false' }?,
+             attribute linebreakstyle { 'before' | 'after' | 'duplicate' }?
+          }*
+       }?
+    }
 
 mathml-settings.attlist =
     attribute double_struck { xsd:NCName }?,
@@ -663,17 +603,6 @@ munderover.attlist =
     attribute underbar-space { text },
     attribute underscript-space { text }
 
-mif-settings =
-    element mif-settings {
-         attribute char-units { xsd:NCName },
-         attribute image-processing { xsd:NCName }?,
-         attribute output-mode { xsd:NCName },
-         attribute units { xsd:NCName }
-       }
-
-rxe-settings =
-       element rxe-settings { empty }
-
 svg-settings =
      element svg-settings {
          svg-settings.attlist,
@@ -682,32 +611,32 @@ svg-settings =
 
 svg-settings.attlist =
          attribute base-uri { text }?,
-         attribute copy-image-path { text },
-         attribute copy-image-prefix { text },
-         attribute embed-all-fonts { ah.boolean },
+         attribute copy-image-path { text }?,
+         attribute copy-image-prefix { text }?,
+         attribute embed-all-fonts { ah.boolean }?,
          attribute encoding { text }?,
-         attribute error-on-embed-fault { ah.boolean },
-         attribute format { text },
-         attribute gzip-compression { ah.boolean },
-         attribute image-conversion { xsd:NCName },
+         attribute error-on-embed-fault { ah.boolean }?,
+         attribute format { text }?,
+         attribute gzip-compression { ah.boolean }?,
+         attribute image-conversion { xsd:NCName }?,
          attribute image-downsampling-dpi { dpi.model }?,
          attribute image-downsampling-method { xsd:integer }?,
-         attribute image-processing { xsd:NCName },
-         attribute jpeg-quality { xsd:integer },
-         attribute rasterize-resolution { xsd:integer },
-         attribute rename-copy-image { ah.boolean },
+         attribute image-processing { xsd:NCName }?,
+         attribute jpeg-quality { xsd:integer }?,
+         attribute rasterize-resolution { xsd:integer }?,
+         attribute rename-copy-image { ah.boolean }?,
          attribute single-file-max-height { text }?,
          attribute single-file-max-pages { xsd:integer }?,
          attribute single-page-number { ah.boolean }?,
-         attribute singlefile { ah.boolean },
-         attribute svg-version { xsd:decimal }
+         attribute singlefile { ah.boolean }?,
+         attribute svg-version { xsd:decimal }?
 
 svg-settings.model =
          empty
 
 text-settings =
      element text-settings { empty }
-     
+
 xslt-settings =
      element xslt-settings {
          xslt-settings.attlist,
@@ -715,9 +644,13 @@ xslt-settings =
     }
 
 xslt-settings.attlist =
-         attribute command { text }?,
-         attribute msxml { ah.boolean },
-         attribute param-option { text }?
+   ## Command line of external XSLT processor. Must include '%1', '%2', and '%3. Can include '%param'. On Windows, can be empty or '@MSXML'.
+   attribute command { text }?,
+   attribute msxml { ah.boolean }?,
+   ## Highest MSXML version to use: 6 | 5 | 4 | 3 | 0
+   attribute msxmlver { xsd:integer }?,
+   ## Template for passing XSLT parameters. Must include '%p' and '%v'.
+   attribute param-option { text }?
 
 xslt-settings.model =
          param*
