@@ -44,20 +44,20 @@ Note that oXygen will require you to restart the editor after installing the add
 ### Installing a ZIP archive to oXygen `frameworks` directory
 
 1. Download the ZIP archive from the latest release on the 'Releases' page.
-1. Extract the folder in the ZIP archive to the oXygen `frameworks` directory.
- - On Windows, this is `C:\Program Files\Oxygen XML Editor 22.1\frameworks`, or something similar.
+2. Extract the folder in the ZIP archive to the oXygen `frameworks` directory.
+ - On Windows, this is `C:\Program Files\Oxygen XML Editor 24.1\frameworks`, or something similar.
  - If you don't have permission to copy the folder to the `frameworks` directory, then you can use an alternative location as described below.
-1. Restart oXygen.
+3. Restart oXygen.
 
 ### Installing a ZIP archive to an alternative frameworks location
 
 If you don't have permission to modify the oXygen installation – for example, if oXygen is installed on Windows under `C:\Program Files\` and you are not an Administrator – you can set oXygen to also use an alternative frameworks location.
 
 1. Click on the "Download ZIP" button on this project's main page to download the files.
-1. Extract the folder in the ZIP archive to a folder where you can create the new folder.
-1. In your oXygen preferences, add the **focheck** folder as an alternative frameworks location.
+2. Extract the folder in the ZIP archive to a folder where you can create the new folder.
+3. In your oXygen preferences, add the **focheck** folder as an alternative frameworks location.
  - See https://www.oxygenxml.com/doc/ug-editor/topics/framework-location.html
-1. Restart oXygen.
+4. Restart oXygen.
 
 ### Installing a repository clone
 
@@ -133,7 +133,7 @@ Makes a Zip archive of just the oXygen framework.
 
 ## License
 
-Copyright 2015-2021 Antenna House, Inc.
+Copyright 2015-2022 Antenna House, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -243,7 +243,7 @@ oXygen はアドオンフレームワークをインストールした後、エ�
 
 1. Releases ページにある最新リリースから ZIP アーカイブをダウンロードして下さい。
 1. oXygen `frameworks` ディレクトリに ZIP アーカイブにあるフォルダーを解凍します。
- - Windows では、これは `C:\Program Files\Oxygen XML Editor 19\frameworks` か同様のものです。
+ - Windows では、これは `C:\Program Files\Oxygen XML Editor 24.1\frameworks` か同様のものです。
  - `frameworks` ディレクトリにフォルダをコピーする許可がない場合は、以下に説明するように、別の場所を使用することができます。
 1. oXygen を再起動します。
 
