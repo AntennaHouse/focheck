@@ -4,3 +4,4 @@ out
 *.zip
 *~
 *_Conflict.*
+test/issues
