@@ -302,6 +302,7 @@ axf_form-field.attlist =
     axf_field-multiple,
     axf_field-name,
     axf_field-name-suffix-page-number,
+    axf_field-readonly,
     axf_field-scroll,
     axf_field-text-align,
     axf_field-top-index,
@@ -1643,6 +1644,14 @@ axf_field-name =
 axf_field-name-suffix-page-number =
   ## Add page number to the field name: <string>
   attribute axf:field-name-suffix-page-number | field-name-suffix-page-number { text }?
+
+# @axf:field-readonly
+# @field-readonly
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.field-readonly
+axf_field-readonly =
+  ## Whether the field is read-only: true | false
+  attribute axf:field-readonly | field-readonly { 'true' | 'false' }?
 
 # @axf:field-scroll
 # @field-scroll
