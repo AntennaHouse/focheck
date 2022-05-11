@@ -203,30 +203,29 @@ The SVG 1.1 DTD was downloaded from http://www.w3.org/TR/SVG/svgdtd.html
 ````
 ----
 
-# <a name="ja"></a>focheck – oXygenまたはスタンドアロンでの XSL-FO とアンテナハウスの拡張を有効にします。
+# <a name="ja"></a>focheck – oXygenまたはスタンドアロンで XSL-FO とアンテナハウスの拡張を検証します。
 
-XML Editor 内ー XSL 1.1 に追加された FO とプロパティを含む **focheck** は oXygen フレームワークで XSL-FO の詳細な有効のために、Relax NG と Schematron 文法がバンドルします。
-**focheck** は、AH Formatter が改善された組版出力を用意する拡張とプロパティも有効にします。もちろん、**focheck** Relax NG （または、W3C XSD と等しい）と oXygen 以外の Schematron を一緒に又は別々に使用することもできます。
+**focheck** には、（ XSL 1.1で追加された FO とプロパティを含めた） XSL-FO の詳細な検証のための Relax NG スキーマと Schematron グラマーが oXygen XML Editor の oXygen フレームワーク内にバンドルされます。
+**focheck** は、より良い組版出力のため、AH Formatter が提供する拡張とプロパティも検証します。もちろん、**focheck** Relax NG （または、W3C XSD と等しい）と oXygen 以外の Schematron を一緒に、または別々に使用することもできます。
 
 ![](etc/screenshot-ja.png)
 
-Relax NG は、構造の有効を扱い、Schematron のは Relax NG では表現できない追加の制約を扱います。Schematron は REx パーサージエネレーターによって生成された XSLT ベースのパーサと XSL-FO のデータタイプにパースツリーを縮小するために作成された XSLT ライブラリーを使用してプロパティ値を解析します。
-
+Relax NG は、構造的な検証を扱い、Schematron は Relax NG では表現できない追加の制約を扱います。Schematron は、 REx パーサジェネレータによって生成された XSLT ベースのパーサと、 パースツリーを削減するための XSLT ライブラリを使用して、プロパティ値の式を XSL-FO のデータタイプにパースします。
 
 ## 免責事項
 
-**focheck** の開発は進行中です。まだ全ての XSL-FO プロパティ又は XSL-FO 仕様の全ての必要条件を扱わない、またそれは、機能や相対的な長さのいずれかを評価しません。
+**focheck** の開発は進行中です。まだ全ての XSL-FO プロパティ又は XSL-FO 仕様の全ての必要条件を扱わない、また、関数や相対的な長さを評価しません。
 
 Pullリクエストや問題がありましたらお知らせください。
 
 ## インストール
 
 
-*最新の **focheck** リリースを続けたい場合、oXygen のアドオンフレームワークとして **focheck** をインストールすることができます。
+*最新の **focheck** リリースに追従したい場合、oXygen のアドオンフレームワークとして **focheck** をインストールすることができます。
 * **focheck** 0.3.1 は ( 2015 年から) oXgen 17.1 から 19.1 までにバンドルされています。
 ** oXygen の古い版での **focheck** を使用する場合、oXygen のアドオンフレームワークとして **focheck** をインストールすることができます。
 *代わりに、ここから oXygen フレームワークの静的なコピーをダウンロードすることができます。
-*最新の変更を続けたい場合、このリポジトリをクローンして、いつでも好きな時に最新版を pull することができます。
+*最新の変更に追従したい場合、このリポジトリをクローンして、いつでも好きな時に最新版を pull することができます。
 * **focheck** をハックしたり pull リクエストをサブミットしたり場合は、このリポジトリをフォークして、ローカルマシンにクローンすることができます。
 
 
@@ -236,26 +235,27 @@ https://www.oxygenxml.com/doc/ug-editor/topics/installing-and-updating-add-ons.h
 
 **focheck** の最新サイトの URL は https://raw.githubusercontent.com/AntennaHouse/focheck/master/add-on-ja.xml
 
-oXygen はアドオンフレームワークをインストールした後、エデイタの再起動する必要になります。
+oXygen はアドオンフレームワークをインストールした後、エディタの再起動が必要になります。
 
 
-### oXygen `frameworks` ディレクトリの ZIP アーカイブにインストールする
+### oXygen `frameworks` ディレクトリに ZIP アーカイブをインストールする
 
 1. Releases ページにある最新リリースから ZIP アーカイブをダウンロードして下さい。
-1. oXygen `frameworks` ディレクトリに ZIP アーカイブにあるフォルダーを解凍します。
+2. oXygen `frameworks` ディレクトリに ZIP アーカイブにあるフォルダを解凍します。
  - Windows では、これは `C:\Program Files\Oxygen XML Editor 24.1\frameworks` か同様のものです。
  - `frameworks` ディレクトリにフォルダをコピーする許可がない場合は、以下に説明するように、別の場所を使用することができます。
-1. oXygen を再起動します。
+3. oXygen を再起動します。
 
-### 代替 フレームワークスの場所に ZIP アーカイブのインストール
 
-インストールを変更する許可がない場合は、例えば、oXygen は `C:\Program Files\` で Windows にインストール場合、あなたは管理者でない場合、代替フレームワークの場所も使用するように oXygen を設定することができます。
+### 代替 フレームワークの場所に ZIP アーカイブをインストールする
+
+インストールを変更する許可がない場合は、例えば、 Windows で `C:\Program Files\` 下に oXygen が インストールされていて、あなたが管理者でない場合、代替フレームワークの場所を使用するように oXygen を設定することができます。
 
 1. ファイルをダウンロードするには、このプロジェクトのメインページの Download ZIP をクリックします。
-1. 新しいフォルダを作成することができるフォルダに ZIP アーカイブ内のフォルダを解凍します。 
-1. oXygen の環境設定で、代替フレームワークスの場所として解凍した **focheck** フォルダを追加します。
+2. 新しいフォルダを作成することができるフォルダに ZIP アーカイブ内のフォルダを解凍します。 
+3. oXygen の環境設定で、代替フレームワークの場所として解凍した **focheck** フォルダを追加します。
  - https://www.oxygenxml.com/doc/ug-editor/topics/framework-location.html を参照して下さい。
-1. oXygen を再起動します。
+4. oXygen を再起動します。
 
 ### リポジトリクローンをインストールする
 
@@ -265,14 +265,14 @@ oXygen はアドオンフレームワークをインストールした後、エ�
    - **focheck** を既に確認していた場合、次下を実行できます。
      `git submodule init `
      `git submodule update` 
-2. 必要ならば、別のフレームワークスの場所として **focheck** フォルダを追加します。 .
+2. 必要ならば、別のフレームワークの場所として **focheck** フォルダを追加します。 .
 3. oXygen を再起動します。
 
 ## **focheck** の使用
 
 ### oXygen XML エディタ
 
-文書要素が XSL-FO の名前空間内の `root` である XSL-FO 文書を開くと、oXygen は自動的に Relax NG スキーマと Schematron 文法の両方に対して文書を有効にします。
+XSL-FO 名前空間の `root` が文書要素がである XSL-FO 文書を開くと、oXygen は Relax NG スキーマと Schematron グラマーの両方に対して文書を自動的に検証します。
 
 #### 変換のシナリオ
 
@@ -280,7 +280,7 @@ oXygen はアドオンフレームワークをインストールした後、エ�
 
 ### Ant
 
-Relax NG と Schematron の両方を使用してファイルを有効するために、Ant のビルドファイルの `build-focheck.xml` と `validate.single` のターゲットを使用します。代わりに、一つ又は複数のファイルでの Schematron を実行するには、`schematron.single` 又は `schematron.dir` ターゲットを使用します。
+Relax NG と Schematron の両方を使用してファイルを検証するため、Ant のビルドファイル `build-focheck.xml` と `validate.single` のターゲットを使用します。代わりに、一つまたは複数のファイルでの Schematron を実行するには、`schematron.single` 又は `schematron.dir` ターゲットを使用します。
 
 ### Emacs モード
 
@@ -288,25 +288,25 @@ Relax NG と Schematron の両方を使用してファイルを有効するた�
 
 ### スタンドアロン
 
-oXygen と ant を使用せずに、`schema-ja` のフォルダに Relax NG のスキーマと `schematron-ja` のフォルダに Schematron ファイルを使用することができます。しかし：
+oXygen と Ant を使用せずに、`schema-ja` のフォルダに Relax NG のスキーマと `schematron-ja` のフォルダに Schematron ファイルを使用することができます。しかし：
 
-- Relax NG は、`xmllint` ではなく、Jing と Emacs `nxml-mode` と動作します。
-- Schematron は XSLT 2.0 の結合と Schematron 実行を必要とします。それは、コンテキストの属性 の両方に一致するだけでなく、外部 XSLT 2.0 スタイルシートを読み込んで使用します。
+- Relax NG は、`xmllint` ではなく、Jing と Emacs `nxml-mode` で動作します。
+- Schematron は XSLT 2.0 バインディングと、次の Schematron 実装を必要とします。それは、外部 XSLT 2.0 スタイルシートを読み込み使用するのと同様のコンテキストで属性に合致するものです。
 
-Standalone の確認は Saxon 9 と Jing が必要です。Jing は https://github.com/relaxng/jing-trang/releases からダウンロードできます。
+Standalone での確認は Saxon 9 と Jing が必要です。Jing は https://github.com/relaxng/jing-trang/releases からダウンロードできます。
 
 ## 構築
 
 ### oXygen XML エディタ
 
 1.  oXygen で `build.xml` を開きます。
-2. デフォルトの ANT 変換のシナリオを実行します。
+2. デフォルトの Ant 変換のシナリオを実行します。
 
 
 ### スタンドアロン
 
-1. `build.properties` の プロパティーが使用するシステムに合わない場合は、同じディレクトリで `build.properties` を `build.local.properties` に コピーして、そこに正しい値を設定します。
- - `build.local.properties` にあるいずれのプロパティーも変更する必要はない場合、削除するか、コメントアウトもできます。
+1. `build.properties` の プロパティが使用するシステムに合わない場合は、同じディレクトリで `build.properties` を `build.local.properties` に コピーして、そこに正しい値を設定します。
+ - `build.local.properties` にあるいずれのプロパティも変更する必要はない場合、削除するか、コメントアウトできます。
 1. Antを実行します。
 
 
@@ -315,7 +315,7 @@ Standalone の確認は Saxon 9 と Jing が必要です。Jing は https://gith
 
 ### `run.parser` 
 
-`${input}` でパーサーを実行します。
+`${input}` でパーサを実行します。
 
 ### `framework.zip`
 
