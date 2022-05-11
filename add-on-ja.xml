@@ -2,7 +2,7 @@
 <xt:extensions xmlns:xt="http://www.oxygenxml.com/ns/extension"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
-    <xt:extension id="focheck">
+    <xt:extension id="focheck-ja">
         <xt:location href="https://github.com/AntennaHouse/focheck/releases/download/v0.7.12/focheck-framework-ja-0.7.12.zip"/>
         <xt:version>0.7.12</xt:version>
         <xt:oxy_version>14.0+</xt:oxy_version>
