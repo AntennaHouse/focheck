@@ -53,7 +53,7 @@
 (defcustom fo-format-command
   (list
    ;; AH Formatter GUI on Windows (opens in already-running AHFormatter)
-   "AHFormatter -s -d %f -o %o"
+   "AHFormatter -s -d %f"
    ;; AH Formatter on Windows
    "AHFCmd -x 4 -d %f -o %o"
    ;; AH Formatter GUI on Windows
