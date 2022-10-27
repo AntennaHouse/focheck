@@ -156,7 +156,8 @@ margin margin-top margin-bottom margin-left margin-right</item>
   <!-- 'max-height', 'max-width', 'min-height', and 'min-width' aren't
        listed in the shorthand section but they're also not listed for
        the FOs to which they apply. -->
-  <item property="inline-progression-dimension">max-height max-width min-height min-width</item>
+  <item property="width">max-width min-width</item>
+  <item property="height">max-height min-height</item>
 
   <!-- Omit 'page-break-inside' since it is an inherited property. -->
   <!--<item property="keep-together">page-break-inside</item>-->
