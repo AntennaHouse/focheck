@@ -585,6 +585,7 @@
     <ref name="axf_field-multiple"/>
     <ref name="axf_field-name"/>
     <ref name="axf_field-name-suffix-page-number"/>
+    <ref name="axf_field-readonly"/>
     <ref name="axf_field-scroll"/>
     <ref name="axf_field-text-align"/>
     <ref name="axf_field-top-index"/>
@@ -2747,6 +2748,27 @@
         <choice>
           <name>axf:field-name-suffix-page-number</name>
           <name>field-name-suffix-page-number</name>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:field-readonly
+    @field-readonly
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.field-readonly
+  -->
+  <define name="axf_field-readonly">
+    <optional>
+      <attribute>
+        <a:documentation>Whether the field is read-only: true | false</a:documentation>
+        <choice>
+          <name>axf:field-readonly</name>
+          <name>field-readonly</name>
+        </choice>
+        <choice>
+          <value>true</value>
+          <value>false</value>
         </choice>
       </attribute>
     </optional>

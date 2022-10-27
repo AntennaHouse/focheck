@@ -3,7 +3,7 @@
   <!--
     Schema for Antenna House Option Setting File.
     
-    Copyright 2015-2021 Antenna House, Inc.
+    Copyright 2015-2022 Antenna House, Inc.
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -174,6 +174,20 @@
       <value/>
     </choice>
   </define>
+  <define name="language-code-space.atts">
+    <attribute name="language">
+      <a:documentation>Language for which to apply the space</a:documentation>
+    </attribute>
+    <optional>
+      <attribute name="code">
+        <a:documentation>Character code for which to apply the space</a:documentation>
+      </attribute>
+    </optional>
+    <attribute name="space">
+      <a:documentation>Amount of space to apply</a:documentation>
+      <data type="decimal"/>
+    </attribute>
+  </define>
   <!-- start = formatter-config -->
   <define name="formatter-config">
     <element name="formatter-config">
@@ -214,502 +228,714 @@
   </define>
   <define name="formatter-settings">
     <element name="formatter-settings">
-      <optional>
-        <attribute name="abbreviation-character-count">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="auto-break-footnote">
-          <a:documentation>Whether to automatically break footnotes when axf:footnote-max-height=​"auto": true | false</a:documentation>
+      <ref name="formatter-settings.attlist"/>
+      <ref name="formatter-settings.model"/>
+    </element>
+  </define>
+  <define name="formatter-settings.model">
+    <zeroOrMore>
+      <ref name="list-style-type"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="quotationmark"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="script-chars"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="script-language-in-CJK"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="space-end-punctuation"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="space-start-punctuation"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="space-between-digit-and-punctuation"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="usercss"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="multimedia"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="GS1-128"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="UAX50"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="unbreakable-words"/>
+    </zeroOrMore>
+  </define>
+  <define name="formatter-settings.attlist">
+    <optional>
+      <attribute name="abbreviation-character-count">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="auto-break-footnote">
+        <a:documentation>Whether to automatically break footnotes when axf:footnote-max-height=​"auto": true | false</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="auto-formatter-type">
+        <a:documentation>Formatter type when unclear if HTML or XHTML: html | xhtml</a:documentation>
+        <choice>
+          <value>html</value>
+          <value>xhtml</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="avoid-widow-words-cjk-punctuation">
+        <a:documentation>Whether to count the last punctuation to be included in one character when axf:avoid-widow-word="true" is specified in CJK: true | false</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="axf-formatter-config">
+        <a:documentation>Whether &lt;axf:formatter-config&gt; is allowed</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="baseline-mode">
+        <a:documentation>Mode for handling baselines of mixed scripts: 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6</a:documentation>
+        <choice>
+          <value>4</value>
+          <value>5</value>
+          <value>6</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="bidi-override-mode">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="bold-ratio">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="border-medium-width">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="border-thick-width">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="border-thin-width">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="bpil">
+        <a:documentation>Languages or scripts to which to apply Knuth-Plass Breaking Paragraphs into Lines [BPIL]</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="bpil-limit-chars">
+        <a:documentation>Maximum number of characters to which [BPIL] applies: &lt;integer&gt;</a:documentation>
+        <data type="positiveInteger"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="bpil-minimum-line-width">
+        <a:documentation>Minimum line width (in em) to which to apply [BPIL]: &lt;number&gt;</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="bpil-penalty-hyphenation">
+        <a:documentation>Frequency of hyphenation in [BPIL] with a value of 0 to 1000</a:documentation>
+        <ref name="bpil-penalty-hyphenation.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="css-media-type">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="default-CJK">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="default-color"/>
+    </optional>
+    <optional>
+      <attribute name="default-font-size">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="default-from-page-master-region">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="default-html-charset">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="default-lang"/>
+    </optional>
+    <optional>
+      <attribute name="default-lang2">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="default-page-height">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="default-page-margin-bottom"/>
+    </optional>
+    <optional>
+      <attribute name="default-page-margin-left"/>
+    </optional>
+    <optional>
+      <attribute name="default-page-margin-right"/>
+    </optional>
+    <optional>
+      <attribute name="default-page-margin-top"/>
+    </optional>
+    <optional>
+      <attribute name="default-page-width">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="descendant-or-self-files">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="display-alttext">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="external-entity">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="family-name-syntax">
+        <a:documentation>How strictly to check 'font-family' syntax: auto | loose | strict</a:documentation>
+        <choice>
+          <value>auto</value>
+          <value>loose</value>
+          <value>strict</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="fixed-width-space-treatment">
+        <a:documentation>Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always</a:documentation>
+        <choice>
+          <value>false</value>
+          <value>true</value>
+          <value>always</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="hair-space-width">
+        <a:documentation>Width, in em, of HAIR SPACE (U+200A)</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="hyphenation-min">
+        <a:documentation>Whether to enable &lt;hyphen-min&gt; in the Hyphenation Exception Dictionary: false | true | without-exceptions</a:documentation>
+        <choice>
           <ref name="ah.boolean"/>
+          <value>without-exceptions</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="HyphenationOption">
+        <a:documentation>Whether to use custom hyphenation processing or TeX hyphenation dictionaries: 'true' | 'false'</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="hyphenation-TeX">
+        <a:documentation>Comma-delimited list of languages to hyphenate when HyphenationOption="true"</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="hyphen-min">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="intrusion-displace-mode">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="img-alt">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="issue-scale-to-fit">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="jamo-ligature">
+        <a:documentation>Whether to process the ligature of Hangul Jamo (U+1100 to U+11FF)</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="justify-leader">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="justify-rowspan-height">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="keep-footnote-anchor">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="latin-ligature">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="non-starter-ideographic-space">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="normal-line-height"/>
+    </optional>
+    <optional>
+      <attribute name="normalize">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="oblique-skew">
+        <a:documentation>Angle when emulating font-style="oblique" or "backslant": &lt;number&gt;</a:documentation>
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="omit-uppercase-word-accents"/>
+    </optional>
+    <optional>
+      <attribute name="output-area-id">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="output-fo-tree">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="overflow-limit-block">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="overflow-limit-inline">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="pair-kerning">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="printer-marks-line-length"/>
+    </optional>
+    <optional>
+      <attribute name="printer-marks-line-width"/>
+    </optional>
+    <optional>
+      <attribute name="printer-marks-zero-margin"/>
+    </optional>
+    <optional>
+      <attribute name="PrinterOrientation">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="PscriptPassThrough">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="punctuation-spacing"/>
+    </optional>
+    <optional>
+      <attribute name="punctuation-trim">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="pxpi">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="responsive-svg-size">
+        <a:documentation>Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox</a:documentation>
+        <choice>
+          <value>reference</value>
+          <value>viewBox</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="ruby-align">
+        <a:documentation>Ruby alignment when axf:ruby-align="auto"</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="SeparatePrinterDuplexJob">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="small-caps-emulation-always">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="small-caps-emulation-size">
+        <a:documentation>Scale-down ratio when the font does not have small-caps</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="small-caps-emulation-x-height">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="splitting-blocks-space">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="tab-overlap-treatment">
+        <a:documentation>Behavior when tab alignment makes letters overlap: ignore-tab | next-tab</a:documentation>
+        <choice>
+          <value>ignore-tab</value>
+          <value>next-tab</value>
+          <value/>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="table-auto-layout-limit">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="table-is-reference-area">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="text-autospace">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="text-autospace-width"/>
+    </optional>
+    <optional>
+      <attribute name="text-decoration-baseline-mode">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="text-decoration-mode">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="text-justify-mode">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="text-kashida-space"/>
+    </optional>
+    <optional>
+      <attribute name="text-orientation-mode">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="textshadow-blur-cannot-embed-font">
+        <a:documentation>Whether to apply blur to a font that is not allowed to be embedded: false | true</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="textshadow-resolution-minimum-dpi">
+        <a:documentation>Minimum resolution of the image when applying blur in text-shadow: &lt;positive-integer&gt;</a:documentation>
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="textshadow-resolution-pixel-per-em">
+        <a:documentation>Image resolution when applying blur in text-shadow: &lt;positive-integer&gt;</a:documentation>
+        <ref name="dpi.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="text-underline-mode">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="thin-space-width"/>
+    </optional>
+    <optional>
+      <attribute name="two-pass-formatting">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="use-default-page-margin-CSS">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="use-default-page-margin-XSL">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="vertical-block-width-mode">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="vertical-coloring-text"/>
+    </optional>
+    <optional>
+      <attribute name="vertical-underline-side">
+        <data type="NCName"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="viewport-length-units-mode">
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="WindowsFontAPI"/>
+    </optional>
+    <optional>
+      <attribute name="zwsp-mode">
+        <a:documentation>ZERO WIDTH SPACE (U+200B) compatibility mode: 5 | 6</a:documentation>
+        <choice>
+          <value>5</value>
+          <value>6</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="list-style-type">
+    <element name="list-style-type">
+      <a:documentation>Characters to use for standard 'list-style-type' values</a:documentation>
+      <optional>
+        <attribute name="box">
+          <a:documentation>Character to use for list-style-type="box"</a:documentation>
         </attribute>
       </optional>
       <optional>
-        <attribute name="auto-formatter-type">
-          <a:documentation>Formatter type when unclear if HTML or XHTML: html | xhtml</a:documentation>
+        <attribute name="check">
+          <a:documentation>Character to use for list-style-type="check"</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="circle">
+          <a:documentation>Character to use for list-style-type="cirle"</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="diamond">
+          <a:documentation>Character to use for list-style-type="diamond"</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="disc">
+          <a:documentation>Character to use for list-style-type="disc"</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="hyphen">
+          <a:documentation>Character to use for list-style-type="hyphen"</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="square">
+          <a:documentation>Character to use for list-style-type="square"</a:documentation>
+        </attribute>
+      </optional>
+      <empty/>
+    </element>
+  </define>
+  <define name="quotationmark">
+    <element name="quotationmark">
+      <attribute name="language"/>
+      <attribute name="code"/>
+      <attribute name="quotetype">
+        <choice>
+          <value>QU</value>
+          <value>OP</value>
+          <value>CL</value>
+        </choice>
+      </attribute>
+      <empty/>
+    </element>
+  </define>
+  <define name="script-chars">
+    <element name="script-chars">
+      <optional>
+        <attribute name="script"/>
+      </optional>
+      <optional>
+        <attribute name="code"/>
+      </optional>
+      <empty/>
+    </element>
+  </define>
+  <define name="script-language-in-CJK">
+    <element name="script-languge-in-CJK">
+      <attribute name="script"/>
+      <optional>
+        <attribute name="language"/>
+      </optional>
+      <empty/>
+    </element>
+  </define>
+  <define name="space-end-punctuation">
+    <element name="space-end-punctuation">
+      <a:documentation>Space to add after a punctuation character</a:documentation>
+      <ref name="language-code-space.atts"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="space-start-punctuation">
+    <element name="space-start-punctuation">
+      <a:documentation>Space to add before a punctuation character</a:documentation>
+      <ref name="language-code-space.atts"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="space-between-digit-and-punctuation">
+    <element name="space-between-digit-and-punctuation">
+      <a:documentation>Space to add between a digit and a punctuation character</a:documentation>
+      <ref name="language-code-space.atts"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="space-between-punctuation-and-digit">
+    <element name="space-between-punctuation-and-digit">
+      <a:documentation>Space to add between a digit and a punctuation character</a:documentation>
+      <ref name="language-code-space.atts"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="usercss">
+    <element name="usercss">
+      <a:documentation>One or more user CSS stylesheets</a:documentation>
+      <oneOrMore>
+        <ref name="css"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="css">
+    <element name="css">
+      <a:documentation>User CSS stylesheet</a:documentation>
+      <attribute name="path">
+        <a:documentation>Path to user CSS stylesheet</a:documentation>
+        <data type="anyURI"/>
+      </attribute>
+      <empty/>
+    </element>
+  </define>
+  <define name="multimedia">
+    <element name="multimedia">
+      <a:documentation>Additional 'content-type' values for multimedia formats</a:documentation>
+      <optional>
+        <attribute name="audio">
+          <a:documentation>Additional audio content type</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="video">
+          <a:documentation>Additional video content type</a:documentation>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="flash">
+          <a:documentation>Additional Flash content type</a:documentation>
+        </attribute>
+      </optional>
+      <empty/>
+    </element>
+  </define>
+  <define name="GS1-128">
+    <element name="GS1-128">
+      <attribute name="AI"/>
+      <attribute name="format"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="UAX50">
+    <element name="UAX50">
+      <attribute name="code"/>
+      <optional>
+        <attribute name="SVO">
           <choice>
-            <value>html</value>
-            <value>xhtml</value>
+            <value>U</value>
+            <value>R</value>
+            <value>V</value>
           </choice>
         </attribute>
       </optional>
       <optional>
-        <attribute name="avoid-widow-words-cjk-punctuation">
-          <a:documentation>Whether to count the last punctuation to be included in one character when axf:avoid-widow-word="true" is specified in CJK: true | false</a:documentation>
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="axf-formatter-config">
-          <a:documentation>Whether &lt;axf:formatter-config&gt; is allowed</a:documentation>
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="baseline-mode">
-          <a:documentation>Mode for handling baselines of mixed scripts: 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6</a:documentation>
+        <attribute name="MVO">
           <choice>
-            <value>4</value>
-            <value>5</value>
-            <value>6</value>
+            <value>U</value>
+            <value>R</value>
+            <value>V</value>
           </choice>
         </attribute>
       </optional>
-      <optional>
-        <attribute name="bidi-override-mode">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="bold-ratio">
-          <data type="decimal"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="border-medium-width">
-          <data type="NMTOKEN"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="border-thick-width">
-          <data type="NMTOKEN"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="border-thin-width">
-          <data type="NMTOKEN"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="bpil">
-          <a:documentation>Languages or scripts to which to apply Knuth-Plass Breaking Paragraphs into Lines [BPIL]</a:documentation>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="bpil-limit-chars">
-          <a:documentation>Maximum number of characters to which [BPIL] applies: &lt;integer&gt;</a:documentation>
-          <data type="positiveInteger"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="bpil-minimum-line-width">
-          <a:documentation>Minimum line width (in em) to which to apply [BPIL]: &lt;number&gt;</a:documentation>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="bpil-penalty-hyphenation">
-          <a:documentation>Frequency of hyphenation in [BPIL] with a value of 0 to 1000</a:documentation>
-          <ref name="bpil-penalty-hyphenation.model"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="css-media-type">
-          <data type="NCName"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="default-CJK">
-          <data type="NCName"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="default-color"/>
-      </optional>
-      <optional>
-        <attribute name="default-font-size">
-          <data type="NMTOKEN"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="default-from-page-master-region">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="default-html-charset">
-          <data type="NCName"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="default-lang"/>
-      </optional>
-      <optional>
-        <attribute name="default-lang2">
-          <data type="NCName"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="default-page-height">
-          <data type="NMTOKEN"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="default-page-margin-bottom"/>
-      </optional>
-      <optional>
-        <attribute name="default-page-margin-left"/>
-      </optional>
-      <optional>
-        <attribute name="default-page-margin-right"/>
-      </optional>
-      <optional>
-        <attribute name="default-page-margin-top"/>
-      </optional>
-      <optional>
-        <attribute name="default-page-width">
-          <data type="NMTOKEN"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="descendant-or-self-files">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="display-alttext">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="external-entity">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="family-name-syntax">
-          <a:documentation>How strictly to check 'font-family' syntax: auto | loose | strict</a:documentation>
-          <choice>
-            <value>auto</value>
-            <value>loose</value>
-            <value>strict</value>
-          </choice>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="fixed-width-space-treatment">
-          <a:documentation>Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always</a:documentation>
-          <choice>
-            <value>false</value>
-            <value>true</value>
-            <value>always</value>
-          </choice>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="hair-space-width">
-          <a:documentation>Width, in em, of HAIR SPACE (U+200A)</a:documentation>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="hyphenation-min">
-          <a:documentation>Whether to enable &lt;hyphen-min&gt; in the Hyphenation Exception Dictionary: false | true | without-exceptions</a:documentation>
-          <choice>
-            <ref name="ah.boolean"/>
-            <value>without-exceptions</value>
-          </choice>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="HyphenationOption">
-          <a:documentation>Whether to use custom hyphenation processing or TeX hyphenation dictionaries: 'true' | 'false'</a:documentation>
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="hyphenation-TeX">
-          <a:documentation>Comma-delimited list of languages to hyphenate when HyphenationOption="true"</a:documentation>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="hyphen-min">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="intrusion-displace-mode">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="img-alt">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="issue-scale-to-fit">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="jamo-ligature">
-          <a:documentation>Whether to process the ligature of Hangul Jamo (U+1100 to U+11FF)</a:documentation>
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="justify-leader">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="justify-rowspan-height">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="keep-footnote-anchor">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="latin-ligature">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="non-starter-ideographic-space">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="normal-line-height"/>
-      </optional>
-      <optional>
-        <attribute name="normalize">
-          <data type="NCName"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="oblique-skew">
-          <a:documentation>Angle when emulating font-style="oblique" or "backslant": &lt;number&gt;</a:documentation>
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="omit-uppercase-word-accents"/>
-      </optional>
-      <optional>
-        <attribute name="output-area-id">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="output-fo-tree">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="overflow-limit-block">
-          <data type="NMTOKEN"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="overflow-limit-inline">
-          <data type="NMTOKEN"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="pair-kerning">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="printer-marks-line-length"/>
-      </optional>
-      <optional>
-        <attribute name="printer-marks-line-width"/>
-      </optional>
-      <optional>
-        <attribute name="printer-marks-zero-margin"/>
-      </optional>
-      <optional>
-        <attribute name="PrinterOrientation">
-          <data type="NCName"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="PscriptPassThrough">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="punctuation-spacing"/>
-      </optional>
-      <optional>
-        <attribute name="punctuation-trim">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="pxpi">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="responsive-svg-size">
-          <a:documentation>Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox</a:documentation>
-          <choice>
-            <value>reference</value>
-            <value>viewBox</value>
-          </choice>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="ruby-align">
-          <a:documentation>Ruby alignment when axf:ruby-align="auto"</a:documentation>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="SeparatePrinterDuplexJob">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="small-caps-emulation-always">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="small-caps-emulation-size">
-          <a:documentation>Scale-down ratio when the font does not have small-caps</a:documentation>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="small-caps-emulation-x-height">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="splitting-blocks-space">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="tab-overlap-treatment">
-          <a:documentation>Behavior when tab alignment makes letters overlap: ignore-tab | next-tab</a:documentation>
-          <choice>
-            <value>ignore-tab</value>
-            <value>next-tab</value>
-            <value/>
-          </choice>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="table-auto-layout-limit">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="table-is-reference-area">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="text-autospace">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="text-autospace-width"/>
-      </optional>
-      <optional>
-        <attribute name="text-decoration-baseline-mode">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="text-decoration-mode">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="text-justify-mode">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="text-kashida-space"/>
-      </optional>
-      <optional>
-        <attribute name="text-orientation-mode">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="textshadow-blur-cannot-embed-font">
-          <a:documentation>Whether to apply blur to a font that is not allowed to be embedded: false | true</a:documentation>
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="textshadow-resolution-minimum-dpi">
-          <a:documentation>Minimum resolution of the image when applying blur in text-shadow: &lt;positive-integer&gt;</a:documentation>
-          <ref name="dpi.model"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="textshadow-resolution-pixel-per-em">
-          <a:documentation>Image resolution when applying blur in text-shadow: &lt;positive-integer&gt;</a:documentation>
-          <ref name="dpi.model"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="text-underline-mode">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="thin-space-width"/>
-      </optional>
-      <optional>
-        <attribute name="two-pass-formatting">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="use-default-page-margin-CSS">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="use-default-page-margin-XSL">
-          <ref name="ah.boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="vertical-block-width-mode">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="vertical-coloring-text"/>
-      </optional>
-      <optional>
-        <attribute name="vertical-underline-side">
-          <data type="NCName"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="viewport-length-units-mode">
-          <data type="integer"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="WindowsFontAPI"/>
-      </optional>
-      <optional>
-        <attribute name="zwsp-mode">
-          <a:documentation>ZERO WIDTH SPACE (U+200B) compatibility mode: 5 | 6</a:documentation>
-          <choice>
-            <value>5</value>
-            <value>6</value>
-          </choice>
-        </attribute>
-      </optional>
-      <zeroOrMore>
-        <ref name="unbreakable-words"/>
-      </zeroOrMore>
+      <empty/>
     </element>
   </define>
   <define name="font-settings">

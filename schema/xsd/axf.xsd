@@ -488,6 +488,7 @@
     <xs:attributeGroup ref="axf:axf_field-multiple"/>
     <xs:attributeGroup ref="axf:axf_field-name"/>
     <xs:attributeGroup ref="axf:axf_field-name-suffix-page-number"/>
+    <xs:attributeGroup ref="axf:axf_field-readonly"/>
     <xs:attributeGroup ref="axf:axf_field-scroll"/>
     <xs:attributeGroup ref="axf:axf_field-text-align"/>
     <xs:attributeGroup ref="axf:axf_field-top-index"/>
@@ -2268,6 +2269,30 @@
   <xs:attributeGroup name="axf_field-name-suffix-page-number">
     <xs:attribute name="field-name-suffix-page-number" form="qualified"/>
     <xs:attribute name="field-name-suffix-page-number"/>
+  </xs:attributeGroup>
+  <!--
+    @axf:field-readonly
+    @field-readonly
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.field-readonly
+  -->
+  <xs:attributeGroup name="axf_field-readonly">
+    <xs:attribute name="field-readonly" form="qualified">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="field-readonly">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="true"/>
+          <xs:enumeration value="false"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:attributeGroup>
   <!--
     @axf:field-scroll

@@ -11299,6 +11299,8 @@
     <xs:attributeGroup ref="fo:keep-together"/>
     <xs:attributeGroup ref="fo:keep-with-next"/>
     <xs:attributeGroup ref="fo:keep-with-previous"/>
+    <xs:attributeGroup ref="fo:max-height"/>
+    <xs:attributeGroup ref="fo:min-height"/>
     <xs:attributeGroup ref="fo:page-break-after"/>
     <xs:attributeGroup ref="fo:page-break-before"/>
     <xs:attributeGroup ref="fo:visibility"/>

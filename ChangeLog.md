@@ -1,3 +1,13 @@
+# focheck 0.7.13
+
+- `axs.rnc` updated to match ahfsettings 7.2.8.
+- `width` as 'shorthand' for `min-width` and `max-width`.
+- `height` as 'shorthand' for `min-height` and `max-height`.
+- Added missing 'axf:field-readonly'. (#45)
+- Made Japanese more readable. (#44, @hidaruma)
+- Unique ID for Japanese add-on file so both can be active (though only one will take effect at any one time).
+- Remove `-o` from 'AHFormatter' alternative of `fo-format`.
+
 # focheck 0.7.12
 
 - Updated to 'axs' schema module to 'ahfsettings 7.2.4' schema.

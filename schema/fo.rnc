@@ -1241,6 +1241,8 @@ fo_table-row.attlist =
     keep-together,
     keep-with-next,
     keep-with-previous,
+    max-height,
+    min-height,
     page-break-after,
     page-break-before,
     visibility

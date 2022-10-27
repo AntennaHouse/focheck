@@ -1577,6 +1577,8 @@
     <ref name="keep-together"/>
     <ref name="keep-with-next"/>
     <ref name="keep-with-previous"/>
+    <ref name="max-height"/>
+    <ref name="min-height"/>
     <ref name="page-break-after"/>
     <ref name="page-break-before"/>
     <ref name="visibility"/>
