@@ -6,7 +6,9 @@
 # <a name="en"></a>focheck – Validate XSL-FO and Antenna House extensions in oXygen or standalone
 
 **focheck** bundles a Relax NG schema and a Schematron grammar in an oXygen framework for detailed validation
-of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XML Editor.  **focheck** also validates the extension FOs and properties that AH Formatter provides for improved formatted output.  You can, of course,
+of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XML Editor.  **focheck** also validates the extension FOs and properties that Antenna House Formatter provides for improved formatted output. You can enable additional Schematron checks of some of the requirements of PDF/UA.
+
+You can, of course,
 also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside of oXygen, either together or separately.
 
 ![](etc/screenshot.png)
@@ -76,6 +78,13 @@ If you don't have permission to modify the oXygen installation – for example, 
 
 When you open an XSL-FO document – where the document element is `root` in the XSL-FO namespace – oXygen will automatically validate the document against both the Relax NG schema and the Schematron grammar.
 
+#### PDF/UA checks
+
+Enable the 'PDF/UA Accessibility' validation scenario to enable additional Schematron checks of some of the requirements of PDF/UA.
+
+
+!['PDF/UA Accessibility' enabled in 'Configure Validation Scenarios' dialog box](etc/validation-scenarios-en.png)
+
 #### Schematron severity levels
 
 oXygen uses the Schematron `role` attribute to determine the severity level of a failed `assert` or `report`. See https://www.oxygenxml.com/doc/ug-editor/topics/validate-xml-with-sch.html
@@ -97,7 +106,26 @@ Use the `build-focheck.xml` Ant build file and the `validate.single` target to v
 
 ### Emacs mode
 
-`focheck.el` associates the RELAX NG schema with `.fo` files.
+`focheck.el` associates the RELAX NG schema with `.fo` files. The `fo-format` command runs Antenna House Formatter (or any command-line formatter) on the current file.
+
+Add this to our `.emacs` file.
+
+```elisp
+(setq load-path
+      (append
+       (list
+	"/path/to/focheck/emacs"
+	)
+       load-path))
+
+;; XSL-FO mode
+(autoload 'fo-mode "focheck" "Major mode for editing XSL-FO." t)
+(setq auto-mode-alist
+      (append
+       (list
+	'("\\.fo$" . fo-mode))
+       auto-mode-alist))
+```
 
 ### Standalone
 
@@ -105,6 +133,7 @@ You can use the Relax NG schema in the `schema` folder and the Schematron files 
 
 - The Relax NG schema works with Jing and with Emacs `nxml-mode` but not with `xmllint`.
 - The Schematron requires an XSLT 2.0 binding and a Schematron implementation that will both match on attributes as contexts as well as import and use external XSLT 2.0 stylesheets.
+- Use `focheck.sch` for XSL-FO and Antenna House Formatter checks, and use `pdf-ua.sch` for checking some of the requirements of PDF/UA.
 
 Standalone checking requires Saxon 9 and Jing.  You can get Jing from https://github.com/relaxng/jing-trang/releases.
 
@@ -206,7 +235,7 @@ The SVG 1.1 DTD was downloaded from http://www.w3.org/TR/SVG/svgdtd.html
 # <a name="ja"></a>focheck – oXygenまたはスタンドアロンで XSL-FO とアンテナハウスの拡張を検証します。
 
 **focheck** には、（ XSL 1.1で追加された FO とプロパティを含めた） XSL-FO の詳細な検証のための Relax NG スキーマと Schematron グラマーが oXygen XML Editor の oXygen フレームワーク内にバンドルされます。
-**focheck** は、より良い組版出力のため、AH Formatter が提供する拡張とプロパティも検証します。もちろん、**focheck** Relax NG （または、W3C XSD と等しい）と oXygen 以外の Schematron を一緒に、または別々に使用することもできます。
+**focheck** は、より良い組版出力のため、Antenna House Formatter が提供する拡張とプロパティも検証します。もちろん、**focheck** Relax NG （または、W3C XSD と等しい）と oXygen 以外の Schematron を一緒に、または別々に使用することもできます。
 
 ![](etc/screenshot-ja.png)
 
