@@ -7,7 +7,7 @@
   <!--
     Schema for Antenna House Option Setting File.
     
-    Copyright 2015-2022 Antenna House, Inc.
+    Copyright 2015-2023 Antenna House, Inc.
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -64,6 +64,11 @@
       <xs:maxInclusive value="100"/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name="length.model">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="[+\-]?(([0-9]+(\.[0-9]*)?)|\.[0-9]+)('cm' | 'mm' | 'in' | 'pt' | 'pc' | 'px'| 'ex' | 'jpt' | 'q' | 'dpi' | 'dd' | 'cc' | 'rem' | 'ch' | 'wch' | 'lh' | 'rlh' | 'vw' | 'vh' | 'vmin' | 'vmax' | 'pvw' | 'pvh' | 'pvmin' | 'pvmax' | 'gr')"/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="monochrome.compression.list">
     <xs:restriction base="xs:token">
       <xs:enumeration value="ccitt4"/>
@@ -71,6 +76,24 @@
       <xs:enumeration value="runlength"/>
       <xs:enumeration value="zlib"/>
       <xs:enumeration value="none"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="named-length.list">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="veryverythinmathspace"/>
+      <xs:enumeration value="verythinmathspace"/>
+      <xs:enumeration value="thinmathspace"/>
+      <xs:enumeration value="mediummathspace"/>
+      <xs:enumeration value="thickmathspace"/>
+      <xs:enumeration value="verythickmathspace"/>
+      <xs:enumeration value="veryverythickmathspace"/>
+      <xs:enumeration value="negativeveryverythinmathspace"/>
+      <xs:enumeration value="negativeverythinmathspace"/>
+      <xs:enumeration value="negativethinmathspace"/>
+      <xs:enumeration value="negativemediummathspace"/>
+      <xs:enumeration value="negativethickmathspace"/>
+      <xs:enumeration value="negativeverythickmathspace"/>
+      <xs:enumeration value="negativeveryverythickmathspace"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="pass-through.model">
@@ -214,6 +237,7 @@
       <xs:element minOccurs="0" ref="axs:font-settings"/>
       <xs:element minOccurs="0" ref="axs:pdf-settings"/>
       <xs:element minOccurs="0" ref="axs:ps-settings"/>
+      <xs:element minOccurs="0" ref="axs:svg-render-settings"/>
       <xs:element minOccurs="0" ref="axs:svg-settings"/>
       <xs:element minOccurs="0" ref="axs:text-settings"/>
       <xs:element minOccurs="0" ref="axs:mathml-settings"/>
@@ -277,7 +301,7 @@
     </xs:attribute>
     <xs:attribute name="baseline-mode">
       <xs:annotation>
-        <xs:documentation>Mode for handling baselines of mixed scripts: 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6</xs:documentation>
+        <xs:documentation>Mode for handling baselines of mixed scripts: 4 = XSL Formatter V4; 5 = Antenna House Formatter V5; 6 = Antenna House Formatter V6</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -312,7 +336,36 @@
         <xs:documentation>Frequency of hyphenation in [BPIL] with a value of 0 to 1000</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="css-media-type" type="xs:NCName"/>
+    <xs:attribute name="condensed-text-align-last">
+      <xs:annotation>
+        <xs:documentation>Initial value when 'axf:condensed-text-align-last="auto"': true | false | justify</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:union memberTypes="axs:ah.boolean">
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="justify"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="css-allow-bare-expression" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether expressions not enclosed in 'calc()' are allowed: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="css-child-match-root" type="axs:ah.boolean"/>
+    <xs:attribute name="css-child-match-root" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether pseudo-classes match root element: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="css-float-in-float" type="xs:NCName">
+      <xs:annotation>
+        <xs:documentation>Whether nested floats are allowed in CSS: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="default-CJK" type="xs:NCName"/>
     <xs:attribute name="default-color"/>
     <xs:attribute name="default-font-size" type="xs:NMTOKEN"/>
@@ -346,11 +399,13 @@
         <xs:documentation>Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
-        <xs:restriction base="xs:token">
-          <xs:enumeration value="false"/>
-          <xs:enumeration value="true"/>
-          <xs:enumeration value="always"/>
-        </xs:restriction>
+        <xs:union memberTypes="axs:ah.boolean">
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="always"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
       </xs:simpleType>
     </xs:attribute>
     <xs:attribute name="hair-space-width">
@@ -383,6 +438,11 @@
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="hyphen-min" type="axs:ah.boolean"/>
+    <xs:attribute name="ignore-certificate-error" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to ignore certificate errors: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="intrusion-displace-mode" type="xs:integer"/>
     <xs:attribute name="img-alt" type="axs:ah.boolean"/>
     <xs:attribute name="issue-scale-to-fit" type="axs:ah.boolean"/>
@@ -457,6 +517,14 @@
     <xs:attribute name="table-auto-layout-limit" type="xs:integer"/>
     <xs:attribute name="table-is-reference-area" type="axs:ah.boolean"/>
     <xs:attribute name="text-autospace" type="axs:ah.boolean"/>
+    <xs:attribute name="text-autospace-mode">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="6"/>
+          <xs:enumeration value="7"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="text-autospace-width"/>
     <xs:attribute name="text-decoration-baseline-mode" type="xs:integer"/>
     <xs:attribute name="text-decoration-mode" type="xs:integer"/>
@@ -481,13 +549,72 @@
     <xs:attribute name="text-underline-mode" type="xs:integer"/>
     <xs:attribute name="thin-space-width"/>
     <xs:attribute name="two-pass-formatting" type="axs:ah.boolean"/>
+    <xs:attribute name="unresolved-internal-destination">
+      <xs:annotation>
+        <xs:documentation>Error level for an unresolved internal-destination</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="0"/>
+          <xs:enumeration value="1"/>
+          <xs:enumeration value="2"/>
+          <xs:enumeration value="3"/>
+          <xs:enumeration value="4"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="use-default-page-margin-CSS" type="axs:ah.boolean"/>
     <xs:attribute name="use-default-page-margin-XSL" type="axs:ah.boolean"/>
     <xs:attribute name="vertical-block-width-mode" type="xs:integer"/>
     <xs:attribute name="vertical-coloring-text"/>
     <xs:attribute name="vertical-underline-side" type="xs:NCName"/>
     <xs:attribute name="viewport-length-units-mode" type="xs:integer"/>
-    <xs:attribute name="WindowsFontAPI"/>
+    <xs:attribute name="watermark-fill-color">
+      <xs:annotation>
+        <xs:documentation>Fill color for 'watermark-text'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="watermark-font-family"/>
+    <xs:attribute name="watermark-font-style"/>
+    <xs:attribute name="watermark-font-weight"/>
+    <xs:attribute name="watermark-opacity">
+      <xs:annotation>
+        <xs:documentation>Opacity for 'watermark-text'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="watermark-stroke-color">
+      <xs:annotation>
+        <xs:documentation>Stroke color for 'watermark-text'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="watermark-stroke-width">
+      <xs:annotation>
+        <xs:documentation>Stroke width for 'watermark-text'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="watermark-rotate">
+      <xs:annotation>
+        <xs:documentation>Angle of rotation for 'watermark-text'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="watermark-scale">
+      <xs:annotation>
+        <xs:documentation>Magnification for 'watermark-text'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="watermark-text"/>
+    <xs:attribute name="watermark2-font-family"/>
+    <xs:attribute name="watermark2-font-style"/>
+    <xs:attribute name="watermark2-font-weight"/>
+    <xs:attribute name="watermark2-text"/>
+    <xs:attribute name="white-space-collapse-mode">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="6"/>
+          <xs:enumeration value="7"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="zwsp-mode">
       <xs:annotation>
         <xs:documentation>ZERO WIDTH SPACE (U+200B) compatibility mode: 5 | 6</xs:documentation>
@@ -1021,6 +1148,11 @@
     <xs:attribute name="joboptions"/>
     <xs:attribute name="jpeg-quality" type="xs:integer"/>
     <xs:attribute name="linearized" type="axs:ah.boolean"/>
+    <xs:attribute name="mediabox-origin-zero" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether the origin of /MediaBox is adjusted to '(0,0)': true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="monochrome-compression" type="axs:monochrome.compression.list"/>
     <xs:attribute name="monochrome-compression-default" type="axs:monochrome.compression.list"/>
     <xs:attribute name="monochrome-compression-minimum" type="axs:monochrome.compression.list"/>
@@ -1314,7 +1446,20 @@
     </xs:complexType>
   </xs:element>
   <xs:attributeGroup name="mathml-settings.attlist">
-    <xs:attribute name="double_struck" type="xs:NCName"/>
+    <xs:attribute name="mathDisplay">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="inline"/>
+          <xs:enumeration value="block"/>
+          <xs:enumeration value="context"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="scriptsizemultiplier" type="xs:decimal"/>
+    <xs:attribute name="scriptsizemultiplierMscarries" type="xs:decimal"/>
+    <xs:attribute name="scriptminsize" type="xs:NMTOKEN"/>
+    <xs:attribute name="scriptmaxsize" type="xs:NMTOKEN"/>
+    <xs:attribute name="largeop-multiplier" type="xs:decimal"/>
     <xs:attribute name="error-display" type="xs:NCName"/>
     <xs:attribute name="fraktur" type="xs:NCName"/>
     <xs:attribute name="mode" type="xs:NCName"/>
@@ -1323,17 +1468,21 @@
     <xs:attribute name="sans-serif" type="xs:NCName"/>
     <xs:attribute name="script" type="xs:NCName"/>
     <xs:attribute name="script-maxnest" type="xs:integer"/>
-    <xs:attribute name="scriptminsize" type="xs:NMTOKEN"/>
-    <xs:attribute name="scriptsizemultiplier" type="xs:decimal"/>
   </xs:attributeGroup>
+  <!--
+    ,
+    attribute  { xsd:NMTOKEN }?,
+    attribute  { xsd:decimal }?,
+    attribute scriptsizemultiplier { xsd:decimal }?
+  -->
   <xs:element name="munderover">
     <xs:complexType>
       <xs:attributeGroup ref="axs:munderover.attlist"/>
     </xs:complexType>
   </xs:element>
   <xs:attributeGroup name="munderover.attlist">
-    <xs:attribute name="bar-padding" use="required"/>
-    <xs:attribute name="bar-width" use="required"/>
+    <xs:attribute name="bar-padding"/>
+    <xs:attribute name="bar-width"/>
     <xs:attribute name="integral-largeop-overscript-space" type="xs:decimal"/>
     <xs:attribute name="integral-largeop-underscript-space" type="xs:decimal"/>
     <xs:attribute name="integral-overscript-space" type="xs:decimal"/>
@@ -1346,6 +1495,24 @@
     <xs:attribute name="underaccent-shift" use="required"/>
     <xs:attribute name="underbar-space" use="required"/>
     <xs:attribute name="underscript-space" use="required"/>
+  </xs:attributeGroup>
+  <xs:element name="svg-render-settings">
+    <xs:complexType>
+      <xs:attributeGroup ref="axs:svg-render-settings.attlist"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="svg-render-settings.attlist">
+    <xs:attribute name="current-color-eval-at-painting" type="axs:ah.boolean"/>
+    <xs:attribute name="image-element-eval-as-svg20" type="axs:ah.boolean"/>
+    <xs:attribute name="inherit-svg-fill-color" type="axs:ah.boolean"/>
+    <xs:attribute name="outermost-svg-eval-as-isolate" type="axs:ah.boolean"/>
+    <xs:attribute name="radial-gradient-eval-as-svg20" type="axs:ah.boolean"/>
+    <xs:attribute name="rasterize-dpi" type="xs:decimal"/>
+    <xs:attribute name="rasterize-size-lower-limit" type="xs:decimal"/>
+    <xs:attribute name="rasterize-size-upper-limit" type="xs:decimal"/>
+    <xs:attribute name="responsive-svg-size"/>
+    <xs:attribute name="use-element-eval-as-shadow-element" type="axs:ah.boolean"/>
+    <xs:attribute name="width-height-as-presentation-attribute" type="axs:ah.boolean"/>
   </xs:attributeGroup>
   <xs:element name="svg-settings">
     <xs:complexType>

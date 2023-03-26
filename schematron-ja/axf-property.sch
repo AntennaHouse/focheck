@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2015-2020 Antenna House, Inc.
+     Copyright 2015-2023 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-height">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">content-height=&quot;<value-of select="."/>&quot; は EnumerationToken、Length 又は Percent でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">content-height=&quot;<value-of select="."/>&quot; は EnumerationToken、Length 又は Percent でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">content-height=&quot;<value-of select="."/>&quot; の EnumerationToken は <value-of select="$expression/@token"/> です。トークンは auto、scale-to-fit、scale-down-to-fit、scale-up-to-fit 又は inherit でなければなりません。</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">content-height=&quot;&quot; は EnumerationToken、Length 又は Percent でなければなりません。</report>
 	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー：content-height=&quot;<value-of select="."/>&quot;</report>
@@ -88,10 +88,10 @@
 	<!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-width">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">content-width=&quot;<value-of select="."/>&quot; は EnumerationToken、Length 又は Percent でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
-	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">content-width=&quot;<value-of select="."/>&quot; の EnumerationToken は <value-of select="$expression/@token"/> です。トークンは auto、scale-to-fit、scale-down-to-fit、scale-up-to-fit 又は inherit でなければなりません。</report>
-	  <report test="local-name($expression) = 'EMPTY'" role="Warning">content-width=&quot;&quot; は EnumerationToken、Length 又は Percent でなければなりません。</report>
-	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー：content-width=&quot;<value-of select="."/>&quot;</report>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"><value-of select="local-name()"/>=&quot;<value-of select="."/>&quot; should be EnumerationToken, Length, or Percent. 「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))"><value-of select="local-name()"/>=&quot;<value-of select="."/>&quot; の EnumerationToken は <value-of select="$expression/@token"/> です。トークンは auto、scale-to-fit、scale-down-to-fit、scale-up-to-fit 又は inherit でなければなりません。</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="local-name()"/>=&quot;&quot; should be EnumerationToken, Length, or Percent.</report>
+	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー： <value-of select="local-name()"/>=&quot;<value-of select="."/>&quot;</report>
 	</rule>
 
 	<!-- axf:background-image -->
@@ -123,7 +123,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.background-position-horizontal -->
 	<rule context="fo:*/@axf:background-position-horizontal">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
-	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-position-horizontal=&quot;<value-of select="."/>&quot; は Percent、Length 又は EnumerationToken でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">background-position-horizontal=&quot;<value-of select="."/>&quot; は Percent、Length 又は EnumerationToken でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('left', 'center', 'right', 'inherit'))">background-position-horizontal=&quot;<value-of select="."/>&quot; の EnumerationToken は <value-of select="$expression/@token"/> です。トークンは left、center、right 又は inherit でなければなりません。</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">background-position-horizontal=&quot;&quot; は Percent、Length 又は EnumerationToken でなければなりません。</report>
 	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー：background-position-horizontal=&quot;<value-of select="."/>&quot;</report>
@@ -136,7 +136,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.background-position-vertical -->
 	<rule context="fo:*/@axf:background-position-vertical">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
-	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-position-vertical=&quot;<value-of select="."/>&quot; は Percent、Length 又は EnumerationToken でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">background-position-vertical=&quot;<value-of select="."/>&quot; は Percent、Length 又は EnumerationToken でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('top', 'center', 'bottom', 'inherit'))">background-position-vertical=&quot;<value-of select="."/>&quot; の EnumerationToken は <value-of select="$expression/@token"/> です。トークンは top、center 又は bottom でなければなりません。</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">background-position-vertical=&quot;&quot; は Percent、Length 又はEnumerationToken でなければなりません。</report>
 	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー：background-position-vertical=&quot;<value-of select="."/>&quot;</report>
@@ -193,7 +193,7 @@
 	<!-- axf:background-content-height -->
 	<!-- axf:background-content-width -->
 	<rule context="fo:*/@axf:background-content-height | fo:*/@axf:background-content-width">
-	  <report test="true()" role="Warning"><value-of select="name(.)"/>AH Formatter V6.6 以降に利用できません。AH Formatter V6.6 以降で axf:background-size を利用します。</report>
+	  <report test="true()" role="Warning"><value-of select="name(.)"/>Antenna House Formatter V6.6 以降に利用できません。Antenna House Formatter V6.6 以降で axf:background-size を利用します。</report>
 	</rule>
 
 	<!-- axf:background-scaling -->
@@ -207,6 +207,19 @@
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('uniform', 'non-uniform', 'inherit'))"><value-of select="name(.)"/>=&quot;<value-of select="."/>&quot; の EnumerationToken は <value-of select="$expression/@token"/> です。トークンは uniform、non-uniform 又は inherit でなければなりません。</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">scaling=&quot;&quot; は EnumerationToken でなければなりません。</report>
 	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー：scaling=&quot;<value-of select="."/>&quot;</report>
+	</rule>
+
+	<!-- axf:break-distance -->
+	<!-- always | <length> | <percentage> | inherit -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.break-distance -->
+	<rule context="fo:*/@axf:break-distance">
+	  <let name="expression" value="ahf:parser-runner(.)"></let>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Number', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"><value-of select="local-name()"/>=&quot;<value-of select="."/>&quot; should be EnumerationToken, Length, or Percent. 「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('always', 'inherit'))"><value-of select="local-name()"/>=&quot;<value-of select="."/>&quot; の EnumerationToken は <value-of select="$expression/@token"/> です。Token should be 'always' or 'inherit'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="local-name()"/>=&quot;&quot; should be EnumerationToken, Length, or Percent.</report>
+	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー： <value-of select="local-name()"/>=&quot;<value-of select="."/>&quot;</report>
 	</rule>
 
 	<!-- axf:column-rule-color -->
@@ -252,7 +265,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.field-font-size -->
 	<rule context="fo:*/@axf:field-font-size">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:field-font-size=&quot;<value-of select="."/>&quot; は EnumerationToken 又は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'">axf:field-font-size=&quot;<value-of select="."/>&quot; は EnumerationToken 又は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('font-size', 'auto'))">axf:field-font-size=&quot;<value-of select="."/>&quot; の列挙トークンは <value-of select="$expression/@token"/> です。トークンは font-size 又は autoでなければなりません。</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:field-font-size=&quot;&quot; は EnumerationToken 又は Length でなければなりません。</report>
 	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー: axf:field-font-size=&quot;<value-of select="."/>&quot;</report>
@@ -265,7 +278,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.hyphenation-zone -->
 	<rule context="fo:*/@axf:hyphenation-zone">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:hyphenation-zone=&quot;<value-of select="."/>&quot; は EnumerationToken 又は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'">axf:hyphenation-zone=&quot;<value-of select="."/>&quot; は EnumerationToken 又は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">axf:hyphenation-zone=&quot;<value-of select="."/>&quot; の EnumerationToken は <value-of select="$expression/@token"/> です。トークンは none でなければなりません。</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:hyphenation-zone=&quot;&quot; は EnumerationToken 又は Length でなければなりません。</report>
 	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー： axf:hyphenation-zone=&quot;<value-of select="."/>&quot;</report>
@@ -285,7 +298,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.indent-here -->
 	<rule context="fo:*/@axf:indent-here">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:indent-here=&quot;<value-of select="."/>&quot; は EnumerationToken 又は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'">axf:indent-here=&quot;<value-of select="."/>&quot; は EnumerationToken 又は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">axf:indent-here=&quot;<value-of select="."/>&quot; の EnumerationToken は <value-of select="$expression/@token"/> です。トークンは none でなければなりません。</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:indent-here=&quot;&quot; は EnumerationToken 又は Length でなければなりません。</report>
 	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー： axf:indent-here=&quot;<value-of select="."/>&quot;</report>
@@ -307,7 +320,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.keep-together-within-dimension -->
 	<rule context="fo:*/@axf:keep-together-within-dimension">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:keep-together-within-dimension=&quot;<value-of select="."/>&quot; は EnumerationToken 又は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'">axf:keep-together-within-dimension=&quot;<value-of select="."/>&quot; は EnumerationToken 又は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">axf:keep-together-within-dimension=&quot;<value-of select="."/>&quot; の列挙トークンは <value-of select="$expression/@token"/> です。トークンは auto でなければなりません。</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:keep-together-within-dimension=&quot;&quot; は EnumerationToken 又は Length でなければなりません。</report>
 	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー： axf:keep-together-within-dimension=&quot;<value-of select="."/>&quot;</report>
@@ -380,7 +393,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.line-number-offset -->
 	<rule context="fo:*/@axf:line-number-offset">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
-	  <assert test="local-name($expression) = ('Length', 'EMPTY', 'ERROR')">axf:line-number-offset=&quot;<value-of select="."/>&quot; は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+	  <assert test="local-name($expression) = ('Length', 'EMPTY', 'ERROR') or $expression/@value = '0'">axf:line-number-offset=&quot;<value-of select="."/>&quot; は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:line-number-offset=&quot;&quot; は Length でなければなりません。</report>
 	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー： axf:line-number-offset=&quot;<value-of select="."/>&quot;</report>
 	</rule>
@@ -485,7 +498,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.media-window-width -->
 	<rule context="fo:*/@axf:media-window-height |          fo:*/@axf:media-window-width">
 	  <let name="expression" value="ahf:parser-runner(.)"></let>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>=「<value-of select="."/>&quot;」は EnumerationToken 又は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR') or $expression/@value = '0'"><value-of select="name(.)"/>=「<value-of select="."/>&quot;」は EnumerationToken 又は Length でなければなりません。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))"><value-of select="name(.)"/>=&quot;<value-of select="."/>&quot; の EnumerationToken は <value-of select="$expression/@token"/> です。トークンは auto でなければなりません。</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name(.)"/>=&quot;&quot; は EnumerationToken 又は Length でなければなりません。</report>
 	  <report test="local-name($expression) = 'ERROR'">シンタックスエラー： <value-of select="name(.)"/>=&quot;<value-of select="."/>&quot;</report>

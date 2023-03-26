@@ -76,7 +76,7 @@
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
-  <!-- AH Formatter allows fo:region-* in any order. -->
+  <!-- Antenna House Formatter allows fo:region-* in any order. -->
   <xs:complexType name="fo_simple-page-master.model">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element ref="fo:region-body"/>
@@ -86,7 +86,10 @@
       <xs:element ref="fo:region-end"/>
     </xs:choice>
   </xs:complexType>
-  <!-- AH Formatter uses some axf:* elements within fo:declarations. -->
+  <!--
+    Antenna House Formatter uses some axf:* elements within
+    fo:declarations.
+  -->
   <xs:complexType name="fo_declarations.model">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element ref="fo:color-profile"/>
@@ -96,6 +99,7 @@
       <xs:element ref="axf:font-face"/>
       <xs:element ref="axf:formatter-config"/>
       <xs:element ref="axf:hyphenation-info"/>
+      <xs:element ref="axf:script-font"/>
       <xs:element ref="axf:space-between-digit-and-punctuation"/>
       <xs:element ref="axf:space-between-punctuation-and-digit"/>
       <xs:element ref="axf:space-end-punctuation"/>
@@ -104,7 +108,10 @@
       <xs:group ref="axf:non-xsl-element"/>
     </xs:choice>
   </xs:complexType>
-  <!-- AH Formatter allows axf:document-info with multi-volume output. -->
+  <!--
+    Antenna House Formatter allows axf:document-info with multi-volume
+    output.
+  -->
   <xs:complexType name="fo_page-sequence.model">
     <xs:sequence>
       <xs:element minOccurs="0" ref="axf:document-info"/>
@@ -115,7 +122,7 @@
       <xs:element maxOccurs="unbounded" ref="fo:flow"/>
     </xs:sequence>
   </xs:complexType>
-  <!-- AH Formatter allows empty fo:static-content. -->
+  <!-- Antenna House Formatter allows empty fo:static-content. -->
   <xs:complexType name="fo_static-content.model">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:choice>
@@ -125,7 +132,7 @@
       <xs:element ref="fo:point.fo.list"/>
     </xs:choice>
   </xs:complexType>
-  <!-- AH Formatter allows fo:block-container to omit block FOs. -->
+  <!-- Antenna House Formatter allows fo:block-container to omit block FOs. -->
   <xs:complexType name="fo_block-container.model">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
@@ -138,7 +145,7 @@
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
-  <!-- AH Formatter allows fo:inline-container to omit block FOs. -->
+  <!-- Antenna House Formatter allows fo:inline-container to omit block FOs. -->
   <xs:complexType name="fo_inline-container.model">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
@@ -151,7 +158,7 @@
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
-  <!-- AH Formatter allows empty fo:list-item. -->
+  <!-- Antenna House Formatter allows empty fo:list-item. -->
   <xs:complexType name="fo_list-item.model">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
@@ -164,7 +171,7 @@
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
-  <!-- AH Formatter allows fo:list-item-label omit block FOs. -->
+  <!-- Antenna House Formatter allows fo:list-item-label omit block FOs. -->
   <xs:complexType name="fo_list-item-label.model">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:marker"/>
@@ -178,7 +185,7 @@
     </xs:sequence>
   </xs:complexType>
   <!--
-    AH Formatter allows fo:table-cell to omit block FOs.
+    Antenna House Formatter allows fo:table-cell to omit block FOs.
     axf:table-cell-repeated-marker used when cell repeats.
   -->
   <xs:complexType name="fo_table-cell.model">
@@ -367,6 +374,21 @@
   <xs:attributeGroup name="axf_font-face.attlist">
     <xs:attribute name="src" use="required"/>
     <xs:attribute name="font-family" use="required"/>
+    <xs:attribute name="font-stretch">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="ultra-condensed"/>
+          <xs:enumeration value="extra-condensed"/>
+          <xs:enumeration value="condensed"/>
+          <xs:enumeration value="semi-condensed"/>
+          <xs:enumeration value="semi-expanded"/>
+          <xs:enumeration value="expanded"/>
+          <xs:enumeration value="extra-expanded"/>
+          <xs:enumeration value="ultra-expanded"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="font-style">
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -392,6 +414,66 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
+    <xs:attribute name="size-adjust"/>
+    <xs:attribute name="unicode-range"/>
+  </xs:attributeGroup>
+  <!--
+    <axf:script-font>
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.script-font
+  -->
+  <xs:element name="script-font">
+    <xs:annotation>
+      <xs:documentation>追加のハイフネーション情報</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="axs:script-font.attlist"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="axf_script-font.attlist">
+    <xs:attribute name="src" use="required"/>
+    <xs:attribute name="font-family" use="required"/>
+    <xs:attribute name="font-stretch">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="ultra-condensed"/>
+          <xs:enumeration value="extra-condensed"/>
+          <xs:enumeration value="condensed"/>
+          <xs:enumeration value="semi-condensed"/>
+          <xs:enumeration value="semi-expanded"/>
+          <xs:enumeration value="expanded"/>
+          <xs:enumeration value="extra-expanded"/>
+          <xs:enumeration value="ultra-expanded"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="font-style">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="italic"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="font-weight">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="normal"/>
+          <xs:enumeration value="bold"/>
+          <xs:enumeration value="100"/>
+          <xs:enumeration value="200"/>
+          <xs:enumeration value="300"/>
+          <xs:enumeration value="400"/>
+          <xs:enumeration value="500"/>
+          <xs:enumeration value="600"/>
+          <xs:enumeration value="700"/>
+          <xs:enumeration value="800"/>
+          <xs:enumeration value="900"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="size-adjust"/>
+    <xs:attribute name="unicode-range"/>
   </xs:attributeGroup>
   <!--
     <axf:footnote-number/>
@@ -1020,6 +1102,7 @@
   <xs:attributeGroup name="axf.block.attlist">
     <xs:attributeGroup ref="axf:axf.annotation.properties"/>
     <xs:attributeGroup ref="axf:axf-baseline-grid-properties"/>
+    <xs:attributeGroup ref="axf:axf_break-distance"/>
     <xs:attributeGroup ref="axf:axf-outline-properties"/>
     <xs:attributeGroup ref="axf:axf_analyze-lines-after"/>
     <xs:attributeGroup ref="axf:axf_analyze-lines-before"/>
@@ -1715,6 +1798,18 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:break-distance
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.break-distance
+  -->
+  <xs:attributeGroup name="axf_break-distance">
+    <xs:attribute name="break-distance" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Effective height for 'break-after' and 'break-before': always | &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:column-count
     
     https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.column-count
@@ -1753,6 +1848,18 @@
     <xs:attribute name="column-gap" form="qualified">
       <xs:annotation>
         <xs:documentation>段と段の間： &lt;length&gt; | &lt;percentage&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:column-rule
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.column-rule
+  -->
+  <xs:attributeGroup name="axf_column-rule">
+    <xs:attribute name="column-rule" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Column rule shorthand: &lt;border-width&gt; || &lt;border-style&gt; || &lt;color&gt; || &lt;column-rule-display&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -2478,7 +2585,7 @@
   <xs:attributeGroup name="axf_float-x">
     <xs:attribute name="float-x" form="qualified">
       <xs:annotation>
-        <xs:documentation>水平（縦書きでは垂直）方向のフロート配置： none | start | end | left | right | top | bottom | center | inside | outside | alternate</xs:documentation>
+        <xs:documentation>Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside | alternate | column-outside</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -2493,6 +2600,7 @@
           <xs:enumeration value="inside"/>
           <xs:enumeration value="outside"/>
           <xs:enumeration value="alternate"/>
+          <xs:enumeration value="column-outside"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -2505,7 +2613,7 @@
   <xs:attributeGroup name="axf_float-y">
     <xs:attribute name="float-y" form="qualified">
       <xs:annotation>
-        <xs:documentation>垂直（縦書きでは水平）方向のフロート配置： none | before | after | top | bottom | left | right | center | inside | outside</xs:documentation>
+        <xs:documentation>Vertical (or horizontal if writing-mode is vertical) float alignment:    none | before | after | top | bottom | left | right | center | inside | outside | anchor</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -2519,6 +2627,7 @@
           <xs:enumeration value="center"/>
           <xs:enumeration value="inside"/>
           <xs:enumeration value="outside"/>
+          <xs:enumeration value="anchor"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -2869,6 +2978,18 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:image-orientation
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-orientation
+  -->
+  <xs:attributeGroup name="axf_image-orientation">
+    <xs:attribute name="image-orientation" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Orientation of an image: from-image | none | [ 0 | 90 | 180 | 270 ] flip?</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:image-resolution
     
     https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-resolution
@@ -2876,7 +2997,7 @@
   <xs:attributeGroup name="axf_image-resolution">
     <xs:attribute name="image-resolution" form="qualified">
       <xs:annotation>
-        <xs:documentation>背景画像の解像度： [ normal | [ from-image || &lt;dpi&gt; ] ]#</xs:documentation>
+        <xs:documentation>Resolution of an image: [ normal | [ from-image || &lt;dpi&gt; ] ]#</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>

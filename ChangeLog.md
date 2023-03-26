@@ -1,3 +1,15 @@
+# focheck 7.3.2
+
+- **focheck** version numbers now correspond to the Antenna House Formatter version current at the time of the release.
+- `axs.rnc` updated to match ahfsettings 7.3.2.
+- Add `axf:script-font`. (V7.3)
+- Add `font-stretch`, `size-adjust`, and `unicode-range` to `axf:font-face`. (V7.3)
+- Add `axf:break-distance`, `axf:colmun-rule`, and `axf:image-orientation` (V7.3)
+- Additional values for `axf:float-x` and `axf:float-y`. (V7.3)
+-`axf:footnote-number` can have `id` or `xml:id`.
+- Schematron accepts `0` for any length or percentage.
+- Schematron also ignores `force-page-count` and `page-position`.
+
 # focheck 0.7.13
 
 - `axs.rnc` updated to match ahfsettings 7.2.8.
@@ -80,9 +92,9 @@
 
 # focheck 0.7.3
 
-- `axf:background-content-height` and `axf:background-content-width` should not be used with AH Formatter V6.6 or later.
-- AH Formatter supports `dot-dash`, `dot-dot-dash` and `wave` border styles.
-- AH Formatter does not support `overflow="scroll"`.
+- `axf:background-content-height` and `axf:background-content-width` should not be used with Antenna House Formatter V6.6 or later.
+- Antenna House Formatter supports `dot-dash`, `dot-dot-dash` and `wave` border styles.
+- Antenna House Formatter does not support `overflow="scroll"`.
 - Added `axf:keep-together-within-dimension`, `axf:repeat-page-sequence-master`, and `axf:reverse-page`.
 - Added `axf:field-button-icon`, `axf:field-button-icon-down`, `axf:field-button-icon-rollover`, and `axf:field-font-size` rules.
 - Fixed typo in `axf:media-duration` and `axf:media-play-mode` rules.
@@ -93,7 +105,7 @@
 - Added `<axf:font-face>`.
 - Added more properties for forms in PDF: `axf:field-checked`, `axf:field-checked-style`, `axf:field-default-text`, `axf:field-description`, `axf:field-editable`, `axf:field-flags`, `axf:field-maxlen`, `axf:field-multiline`, `axf:field-multiple`, `axf:field-name`, `axf:field-scroll`, `axf:field-top-index`, `axf:field-type`, and `axf:field-value`, `axf:field-button-face-down`, `axf:field-button-face-rollover`, `axf:field-button-icon`, `axf:field-button-icon-down`, `axf:field-button-icon-rollover`, `axf:field-button-layout`, `axf:field-font-size`, `axf:field-name-suffix-page-number`, and `axf:field-text-align`.
 - Added multimedia properties: `axf:media-activation`, `axf:media-duration`, `axf:media-extraction-policy`, `axf:media-flash-context-menu`, `axf:media-flash-vars`, `axf:media-play-mode`, `axf:media-skin-auto-hide`, `axf:media-skin-color`, `axf:media-skin-control`, `axf:media-transparent-background`, `axf:media-volume`, `axf:media-window-height`, `axf:media-window-width`, `axf:multimedia-treatment`, `axf:poster-content-type`, `axf:poster-image`, `axf:show-controls`.
-- Added `axf:text-stroke`, `axf:text-stroke-color`, `axf:text-stroke-width`. `text-shadow` is an inherited property in AH Formatter.
+- Added `axf:text-stroke`, `axf:text-stroke-color`, `axf:text-stroke-width`. `text-shadow` is an inherited property in Antenna House Formatter.
 - Link to GitHub in add-on files.
 - 'ahfsettings' project renamed its `ahfsettings.rnc` as `axs.rnc`.
 - Updated from 'ahfsettings' project.
@@ -106,7 +118,7 @@
 - Added Schematron for optionally checking Matterhorn Protocol PDF/UA accessibility rules.
 - Added `axf:formatter-config` and `axf:output-volume-info`.
 - Started validating `axf:formatter-config` using formatter settings schema from 'ahfsettings' framework.
-- Added `hsl()` and `hsla()` functions from AH Formatter V6.6.
+- Added `hsl()` and `hsla()` functions from Antenna House Formatter V6.6.
 - Echoing specific error message when expression language syntax error.
 - Corrected type in `page-citation-strategy` value list.
 - Added this ChangeLog for **focheck** releases
@@ -114,13 +126,13 @@
 # focheck 0.7.1
 
 - `axf:background-image-resolution` should be optional.
-- AH Formatter allows `transparent` as `color` value. 
+- Antenna House Formatter allows `transparent` as `color` value. 
 
 # focheck 0.7.0
 
 - Added more annotation extension properties: `axf:annotation-border-color`, `axf:annotation-border-style`, `axf:annotation-border-width`, `axf:annotation-flags`, `axf:annotation-font-family`, `axf:annotation-font-size`, `axf:annotation-font-style`, `axf:annotation-font-weight`, `axf:annotation-text-align`, and `axf:annotation-text-color`.
 - Added `axf:text-overflow`.
-- `font-variant` has extended values in AH Formatter.
+- `font-variant` has extended values in Antenna House Formatter.
 - Added `axf:hyphenation-info`.
 - Added `axf:border-connection-form`.
 - Added `xml:lang`.
@@ -145,7 +157,7 @@
 
 - `font-stretch` may also be a &lt;number>. (#37)
 - Added `axf:diagonal-border-style` and `axf:reverse-diagonal-border-style`.
-- Added `axf:custom-property` from AH Formatter V6.5.
+- Added `axf:custom-property` from Antenna House Formatter V6.5.
 - Added `axf:column-rule-align`, `axf:column-rule-color`, `axf:column-rule-display`, `axf:column-rule-length`, `axf:column-rule-style`, and `axf:column-rule-width`.
 - Added `axf:layer-settings`.
 - `axf:layer-name` corrected to be `axf:layer`.
@@ -233,13 +245,13 @@
 - Schematron and SQF for `axf:hyphenation-zone` (#28) and Schematron for `axf:line-number-interval` and `axf:line-number-offset`.
 - Skipping autogenerated Schematron checking of `content-type`.
 - Copying catalog for MathML entities from W3C example catalog. (#26)
-- Updated documentation links to point to AH Formatter V6.3 Online Manual at http://www.antennahouse.com/product/ahf63/.
+- Updated documentation links to point to Antenna House Formatter V6.3 Online Manual at http://www.antennahouse.com/product/ahf63/.
 - Updated Japanese translation in `README.md`.
 - When copying Schematron files to translate, copy only `.sch` files.
 
 # focheck 0.4.0
 
-- For AH Formatter V6.3:
+- For Antenna House Formatter V6.3:
   - Added `axf:spread-page-master` and `axf:spread-region`.
   - Added `cmyk()` and `cmyka()`.
 - Schematron Quick Fixes for `fo:list-item-body` and `fo:list-item-label`.
@@ -264,7 +276,7 @@
 - Checking `index-key` and `ref-index-key`.
 - Handling `character`, `grouping-separator`, and `hyphenation-character`.
 - Not complaining about EnumerationToken when Literal allowed.
-- AH Formatter allows `fo:block-container/@role`.
+- Antenna House Formatter allows `fo:block-container/@role`.
 
 # focheck 0.3.2
 
@@ -319,7 +331,7 @@
 - Added Schematron rules for handling `fo:flow-map` and descendants.
 - Added Schematron rules for `flow-name`, `master-name`, and `region-name`.
 - Also making a property, other than `region-name`, required if 'Inherited' definition contains 'required'.
-- When running AH Formatter GUI with '-s' from oXygen, not also opening PDF if it already exists.
+- When running Antenna House Formatter GUI with '-s' from oXygen, not also opening PDF if it already exists.
 
 # focheck 0.2.3
 
@@ -379,7 +391,7 @@
 - Not parsing either 'id' or 'role' as expressions.
 - Accepting any integer for 'font-weight'.
 - Handling more Antenna House extensions.
-- AH Formatter allows percentage as 'font-stretch' value.
+- Antenna House Formatter allows percentage as 'font-stretch' value.
 - Generating XSD files as part of 'build' target.
 
 # focheck 0.0.8

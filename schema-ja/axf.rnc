@@ -59,14 +59,15 @@ include "axf-inherited.rnc" inherit = axf {
     fo_bookmark-tree?,
     axf_document-info*,
     (fo_page-sequence | fo_page-sequence-wrapper)+
-  # AH Formatter allows fo:region-* in any order.
+  # Antenna House Formatter allows fo:region-* in any order.
   fo_simple-page-master.model =
     fo_region-body+
     & fo_region-before?
     & fo_region-after?
     & fo_region-start?
     & fo_region-end?
-  # AH Formatter uses some axf:* elements within fo:declarations.
+  # Antenna House Formatter uses some axf:* elements within
+  # fo:declarations.
   fo_declarations.model =
     (fo_color-profile
      | axf_counter-style
@@ -75,13 +76,15 @@ include "axf-inherited.rnc" inherit = axf {
      | axf_font-face
      | axf_formatter-config
      | axf_hyphenation-info
+     | axf_script-font
      | axf_space-between-digit-and-punctuation
      | axf_space-between-punctuation-and-digit
      | axf_space-end-punctuation
      | axf_space-start-punctuation
      | axf_output-volume-info
      | non-xsl-element)*
-  # AH Formatter allows axf:document-info with multi-volume output.
+  # Antenna House Formatter allows axf:document-info with multi-volume
+  # output.
   fo_page-sequence.model =
     axf_document-info?,
     fo_title?,
@@ -89,26 +92,26 @@ include "axf-inherited.rnc" inherit = axf {
     fo_folio-suffix?,
     fo_static-content*,
     fo_flow+
-  # AH Formatter allows empty fo:static-content.
+  # Antenna House Formatter allows empty fo:static-content.
   fo_static-content.model =
     (block.fo.list | neutral.fo.list)* & point.fo.list*
-  # AH Formatter allows fo:block-container to omit block FOs.
+  # Antenna House Formatter allows fo:block-container to omit block FOs.
   fo_block-container.model =
     fo_marker*,
     ((block.fo.list | neutral.fo.list)* & point.fo.list*)
-  # AH Formatter allows fo:inline-container to omit block FOs.
+  # Antenna House Formatter allows fo:inline-container to omit block FOs.
   fo_inline-container.model =
     fo_marker*,
     ((block.fo.list | neutral.fo.list)* & point.fo.list*)
-  # AH Formatter allows empty fo:list-item.
+  # Antenna House Formatter allows empty fo:list-item.
   fo_list-item.model =
     fo_marker*,
     ((fo_list-item-label, fo_list-item-body)? & point.fo.list*)
-  # AH Formatter allows fo:list-item-label omit block FOs.
+  # Antenna House Formatter allows fo:list-item-label omit block FOs.
   fo_list-item-label.model =
     fo_marker*,
     ((block.fo.list | neutral.fo.list)* & point.fo.list*)
-  # AH Formatter allows fo:table-cell to omit block FOs.
+  # Antenna House Formatter allows fo:table-cell to omit block FOs.
   # axf:table-cell-repeated-marker used when cell repeats.
   fo_table-cell.model =
     fo_marker*,
@@ -237,6 +240,17 @@ axf_font-face.model = empty
 axf_font-face.attlist =
   attribute src { text },
   attribute font-family { text },
+  attribute font-stretch {
+    "normal"
+    | "ultra-condensed"
+    | "extra-condensed"
+    | "condensed"
+    | "semi-condensed"
+    | "semi-expanded"
+    | "expanded"
+    | "extra-expanded"
+    | "ultra-expanded"
+  }?,
   attribute font-style { "normal" | "italic" }?,
   attribute font-weight {
     "normal"
@@ -250,13 +264,56 @@ axf_font-face.attlist =
     | "700"
     | "800"
     | "900"
-  }?
+  }?,
+  attribute size-adjust { text }?,
+  attribute unicode-range { text }?
+# <axf:script-font>
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.script-font
+axf_script-font =
+  
+  ## 追加のハイフネーション情報
+  element axf:script-font {
+    # Reuse script-font.attlist from axs.rnc.
+    script-font.attlist,
+    axf_script-font.model
+  }
+axf_script-font.model = empty
+axf_script-font.attlist =
+  attribute src { text },
+  attribute font-family { text },
+  attribute font-stretch {
+    "normal"
+    | "ultra-condensed"
+    | "extra-condensed"
+    | "condensed"
+    | "semi-condensed"
+    | "semi-expanded"
+    | "expanded"
+    | "extra-expanded"
+    | "ultra-expanded"
+  }?,
+  attribute font-style { "normal" | "italic" }?,
+  attribute font-weight {
+    "normal"
+    | "bold"
+    | "100"
+    | "200"
+    | "300"
+    | "400"
+    | "500"
+    | "600"
+    | "700"
+    | "800"
+    | "900"
+  }?,
+  attribute size-adjust { text }?,
+  attribute unicode-range { text }?
 # <axf:footnote-number/>
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.footnote-number
 axf_footnote-number =
   
   ## 脚注番号を生成します
-  element axf:footnote-number { id, xml_id, empty }
+  element axf:footnote-number { (id | xml_id), empty }
 # <axf:footnote-number-citation/>
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.footnote-number-citation
 axf_footnote-number-citation =
@@ -309,6 +366,7 @@ axf_form-field.attlist =
   axf_field-multiple,
   axf_field-name,
   axf_field-name-suffix-page-number,
+  axf_field-readonly,
   axf_field-scroll,
   axf_field-text-align,
   axf_field-top-index,
@@ -624,6 +682,7 @@ fo_simple-page-master.attlist &=
   background-repeat
 fo_region-body.attlist &=
   axf_column-fill,
+  axf_column-rule,
   axf_column-rule-align,
   axf_column-rule-color,
   axf_column-rule-display,
@@ -666,6 +725,7 @@ fo_block-container.attlist &=
   axf_column-count,
   axf_column-fill,
   axf_column-gap,
+  axf_column-rule,
   axf_column-rule-align,
   axf_column-rule-color,
   axf_column-rule-display,
@@ -684,7 +744,7 @@ fo_character.attlist &=
   xml_id, axf_quotetype, axf.inline.attlist, axf.text-decoration.attlist
 fo_external-graphic.attlist &=
   axf_alttext,
-  axf_background-image-resolution,
+  axf_image-orientation,
   axf_image-resolution,
   xml_id,
   axf.inline.attlist,
@@ -727,7 +787,7 @@ fo_inline.attlist &=
 fo_inline-container.attlist &= xml_id, axf.inline.attlist
 fo_instream-foreign-object.attlist &=
   axf_alttext,
-  axf_background-image-resolution,
+  axf_image-orientation,
   axf_image-resolution,
   xml_id,
   axf.inline.attlist
@@ -779,6 +839,8 @@ common-border-padding-and-background-properties &=
   axf_background-content-width,
   axf_background-content-height,
   axf_background-content-type,
+  axf_background-image,
+  axf_background-image-resolution,
   axf_background-origin,
   axf_background-scaling,
   axf_background-size,
@@ -883,6 +945,7 @@ axf.transformation.attlist = axf_transform, axf_transform-origin
 axf.block.attlist =
   axf.annotation.properties,
   axf-baseline-grid-properties,
+  axf_break-distance,
   axf-outline-properties,
   axf_analyze-lines-after,
   axf_analyze-lines-before,
@@ -1285,6 +1348,13 @@ axf_box-shadow =
   
   ## ボックスシャドウ： none | [ inset?&& [ <length>{2,4} && <color>?] ]#
   attribute axf:box-shadow { text }?
+# @axf:break-distance
+# 
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.break-distance
+axf_break-distance =
+  
+  ## Effective height for 'break-after' and 'break-before': always | <length> | <percentage>
+  attribute axf:break-distance { text }?
 # @axf:column-count
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.column-count
@@ -1306,6 +1376,13 @@ axf_column-gap =
   
   ## 段と段の間： <length> | <percentage>
   attribute axf:column-gap { text }?
+# @axf:column-rule
+# 
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.column-rule
+axf_column-rule =
+  
+  ## Column rule shorthand: <border-width> || <border-style> || <color> || <column-rule-display>
+  attribute axf:column-rule { text }?
 # @axf:column-rule-align
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.column-rule-align
@@ -1590,6 +1667,14 @@ axf_field-name-suffix-page-number =
   ## フィールドの名前にページ番号を付加する： <string>
   attribute axf:field-name-suffix-page-number
             | field-name-suffix-page-number { text }?
+# @axf:field-readonly
+# @field-readonly
+# 
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.field-readonly
+axf_field-readonly =
+  
+  ## Whether the field is read-only: true | false
+  attribute axf:field-readonly | field-readonly { "true" | "false" }?
 # @axf:field-scroll
 # @field-scroll
 # 
@@ -1674,7 +1759,7 @@ axf_float =
 # https://www.antenna.co.jp/AHF/help/ja/ahf-float.html#axf.float-x
 axf_float-x =
   
-  ## 水平（縦書きでは垂直）方向のフロート配置： none | start | end | left | right | top | bottom | center | inside | outside | alternate
+  ## Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside | alternate | column-outside
   attribute axf:float-x {
     "none"
     | "start"
@@ -1687,13 +1772,14 @@ axf_float-x =
     | "inside"
     | "outside"
     | "alternate"
+    | "column-outside"
   }?
 # @axf:float-y
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-float.html#axf.float-y
 axf_float-y =
   
-  ## 垂直（縦書きでは水平）方向のフロート配置： none | before | after | top | bottom | left | right | center | inside | outside
+  ## Vertical (or horizontal if writing-mode is vertical) float alignment:    none | before | after | top | bottom | left | right | center | inside | outside | anchor
   attribute axf:float-y {
     "none"
     | "before"
@@ -1705,6 +1791,7 @@ axf_float-y =
     | "center"
     | "inside"
     | "outside"
+    | "anchor"
   }?
 # @axf:float-reference
 # 
@@ -1879,12 +1966,19 @@ axf_headers =
   
   ## あるセルがどの見出しに対応する内容である： <idrefs>
   attribute axf:headers { xsd:IDREFS }?
+# @axf:image-orientation
+# 
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-orientation
+axf_image-orientation =
+  
+  ## Orientation of an image: from-image | none | [ 0 | 90 | 180 | 270 ] flip?
+  attribute axf:image-orientation { text }?
 # @axf:image-resolution
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-resolution
 axf_image-resolution =
   
-  ## 背景画像の解像度： [ normal | [ from-image || <dpi> ] ]#
+  ## Resolution of an image: [ normal | [ from-image || <dpi> ] ]#
   attribute axf:image-resolution { text }?
 # @axf:indent-here
 # 

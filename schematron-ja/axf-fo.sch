@@ -43,6 +43,6 @@
   <rule context="axf:form-field[@field-type = 'button']">
     <assert test="empty(@internal-destination) or exists(@internal-destination) and (empty(@action-type) or @action-type = 'goto')">action-type は&lt;axf:form-field field-type=&quot;button&quot; internal-destiniation=&quot;...&quot;&gt;とgotoのみです。</assert>
     <assert test="empty(@external-destination) or exists(@external-destination) and (empty(@action-type) or @action-type = ('gotor', 'launch', 'uri'))">action-type は gotor、launch 又は uri と &lt;axf:form-field field-type=&quot;button&quot; external-destination=&quot;...&quot;&gt;のみです。</assert>
-    <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning"><value-of select="name()"/> は internal-destination と external-destination のプロパティの両方を持ってなければなりません。AH Formatter はエラーを報告できるし、internal-destination も使用できる。</report>
+    <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning"><value-of select="name()"/> は internal-destination と external-destination のプロパティの両方を持ってなければなりません。Antenna House Formatter はエラーを報告できるし、internal-destination も使用できる。</report>
   </rule>
 </pattern><!-- Local Variables:  --><!-- mode: nxml        --><!-- End:              -->

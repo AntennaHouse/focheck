@@ -213,11 +213,14 @@
   <xsl:if test="$debug">
     <xsl:message select="$input" />
   </xsl:if>
+  <!-- XSL 1.1 units + units from table at
+       https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#ext-unit-conf
+  -->
   <xsl:sequence
       select="ahf:raw-parser-runner(replace(replace($input,
                                                     'url\(([^''&quot;)]+)\)',
                                                     'url(''$1'')'),
-                                            '(\d)(cm|mm|in|pt|pc|px|em|ex|jpt|q|dpi|dd|cc|rem|ch|wch|lh|rlh|vw|vh|vmin|vmax|pvw|pvh|pvmin|pvmax|gr)($|[\s),+])',
+                                            '(\d)(cm|mm|in|pt|pc|px|em|rem|dcem|ex|cap|jpt|q|dpi|dpcm|emu|ch|ic|lh|rlh|vw|vh|vmin|vmax|pvw|pvh|pvmin|pvmax|gr)($|[\s),+])',
                                             '$1 $2$3'),
                                     $debug)" />
 </xsl:function>
