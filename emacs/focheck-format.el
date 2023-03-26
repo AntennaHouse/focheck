@@ -1,7 +1,7 @@
 ;;;; focheck-format.el --- Format an XSL-FO document
 ;; $Id: focheck-format.el,v 1.3 2003/06/05 22:13:01 tonygraham Exp $
 
-;; Copyright (C) 2018 Antenna House
+;; Copyright (C) 2018-2023 Antenna House
 
 ;; Author: Tony Graham, Antenna House <tgraham@antenna.co.jp>
 ;; Contributors: 
@@ -52,11 +52,12 @@
 
 (defcustom fo-format-command
   (list
-   ;; AH Formatter GUI on Windows (opens in already-running AHFormatter)
+   ;; Antenna House Formatter GUI on Windows (opens in already-running
+   ;; AHFormatter)
    "AHFormatter -s -d %f"
-   ;; AH Formatter on Windows
+   ;; Antenna House Formatter on Windows
    "AHFCmd -x 4 -d %f -o %o"
-   ;; AH Formatter GUI on Windows
+   ;; Antenna House Formatter GUI on Windows
    "run.sh -x 4 -d %f -o %o"
    )
   "*The shell command to format an XSL document.

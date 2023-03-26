@@ -29,7 +29,7 @@
 <!--                                                               -->
 <!-- ============================================================= -->
 <!--
-     Copyright 2015-2021 Antenna House, Inc.
+     Copyright 2015-2023 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -277,7 +277,7 @@
 
   <xsl:call-template name="ahf:rnc-initial-comment" />
   <xsl:text>
-# AH Formatter extension properties that are inherited.
+# Antenna House Formatter extension properties that are inherited.
 #
 # These properties are defined in:
 #  - https://www.antenna.co.jp/AHF/help/en/ahf-ext.html
