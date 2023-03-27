@@ -226,7 +226,6 @@ formatter-settings.attlist =
    attribute condensed-text-align-last { ah.boolean | 'justify' }?,
    ## Whether expressions not enclosed in 'calc()' are allowed: true | false
    attribute css-allow-bare-expression { ah.boolean }?,
-   attribute css-child-match-root { ah.boolean }?,
    ## Whether pseudo-classes match root element: true | false
    attribute css-child-match-root { ah.boolean }?,
    ## Whether nested floats are allowed in CSS: true | false
