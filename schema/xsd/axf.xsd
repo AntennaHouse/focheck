@@ -1003,6 +1003,7 @@
     <xs:attributeGroup ref="axf:axf_annotation-contents"/>
     <xs:attributeGroup ref="axf:axf_annotation-createdate"/>
     <xs:attributeGroup ref="axf:axf_annotation-file-attachment"/>
+    <xs:attributeGroup ref="axf:axf_annotation-file-name"/>
     <xs:attributeGroup ref="axf:axf_annotation-flags"/>
     <xs:attributeGroup ref="axf:axf_annotation-font-family"/>
     <xs:attributeGroup ref="axf:axf_annotation-font-size"/>
@@ -1306,6 +1307,18 @@
     <xs:attribute name="annotation-file-attachment" form="qualified" type="xs:anyURI">
       <xs:annotation>
         <xs:documentation>File with which file attachment annotation is related: &lt;uri-specification&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:annotation-file-name
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.annotation-file-name
+  -->
+  <xs:attributeGroup name="axf_annotation-file-name">
+    <xs:attribute name="annotation-file-name" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Alternate file name to output: &lt;string&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -3667,14 +3680,14 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
-    @axf:reverse-diagonal-border-style
+    @axf:require
     
-    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.reverse-diagonal-border-style
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.require
   -->
-  <xs:attributeGroup name="axf_reverse-diagonal-border-style">
-    <xs:attribute name="reverse-diagonal-border-style" form="qualified">
+  <xs:attributeGroup name="axf_require">
+    <xs:attribute name="require" form="qualified">
       <xs:annotation>
-        <xs:documentation>Style of the reverse diagonal border: &lt;border-style&gt;</xs:documentation>
+        <xs:documentation>Antenna House Formatter version required for formatting: &lt;string&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -3687,6 +3700,18 @@
     <xs:attribute name="retrieve-table-rows" form="qualified" type="xs:integer">
       <xs:annotation>
         <xs:documentation>Maximum number of fo:table-row in fo:marker referenced from fo:retrieve-table-marker: &lt;integer&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:reverse-diagonal-border-style
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.reverse-diagonal-border-style
+  -->
+  <xs:attributeGroup name="axf_reverse-diagonal-border-style">
+    <xs:attribute name="reverse-diagonal-border-style" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Style of the reverse diagonal border: &lt;border-style&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>

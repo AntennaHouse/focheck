@@ -4,7 +4,8 @@
 - `axs.rnc` updated to match ahfsettings 7.3.2.
 - Add `axf:script-font`. (V7.3)
 - Add `font-stretch`, `size-adjust`, and `unicode-range` to `axf:font-face`. (V7.3)
-- Add `axf:break-distance`, `axf:colmun-rule`, and `axf:image-orientation` (V7.3)
+- Add `axf:border-wave-form`, `axf:break-distance`, `axf:colmun-rule`, `axf:image-orientation`, `axf:printer-duplex`, and `axf:require`. (V7.3)
+- Add `axf:annotation-file-name`. (V7.3MR1)
 - Additional values for `axf:float-x` and `axf:float-y`. (V7.3)
 -`axf:footnote-number` can have `id` or `xml:id`.
 - Schematron accepts `0` for any length or percentage.

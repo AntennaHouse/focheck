@@ -279,6 +279,7 @@
     <xs:attributeGroup ref="axf:axf_word-wrap"/>
     <xs:attributeGroup ref="fo:text-shadow"/>
     <xs:attributeGroup ref="axf:axf_layer-settings"/>
+    <xs:attributeGroup ref="axf:axf_require"/>
     <xs:attributeGroup ref="axf:xml_id"/>
   </xs:attributeGroup>
   <xs:element name="declarations" type="axf:fo_declarations.model">

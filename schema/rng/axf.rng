@@ -1057,6 +1057,7 @@
   <!-- FOs that are not descendants of fo:flow -->
   <define name="fo_root.attlist" combine="interleave">
     <ref name="axf_layer-settings"/>
+    <ref name="axf_require"/>
     <ref name="xml_id"/>
   </define>
   <define name="fo_page-sequence.attlist" combine="interleave">
@@ -1417,6 +1418,7 @@
     <ref name="axf_annotation-contents"/>
     <ref name="axf_annotation-createdate"/>
     <ref name="axf_annotation-file-attachment"/>
+    <ref name="axf_annotation-file-name"/>
     <ref name="axf_annotation-flags"/>
     <ref name="axf_annotation-font-family"/>
     <ref name="axf_annotation-font-size"/>
@@ -1730,6 +1732,18 @@
       <attribute name="axf:annotation-file-attachment">
         <a:documentation>File with which file attachment annotation is related: &lt;uri-specification&gt;</a:documentation>
         <data type="anyURI"/>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-file-name
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.annotation-file-name
+  -->
+  <define name="axf_annotation-file-name">
+    <optional>
+      <attribute name="axf:annotation-file-name">
+        <a:documentation>Alternate file name to output: &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -4096,14 +4110,14 @@
     </optional>
   </define>
   <!--
-    @axf:reverse-diagonal-border-style
+    @axf:require
     
-    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.reverse-diagonal-border-style
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.require
   -->
-  <define name="axf_reverse-diagonal-border-style">
+  <define name="axf_require">
     <optional>
-      <attribute name="axf:reverse-diagonal-border-style">
-        <a:documentation>Style of the reverse diagonal border: &lt;border-style&gt;</a:documentation>
+      <attribute name="axf:require">
+        <a:documentation>Antenna House Formatter version required for formatting: &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -4117,6 +4131,18 @@
       <attribute name="axf:retrieve-table-rows">
         <a:documentation>Maximum number of fo:table-row in fo:marker referenced from fo:retrieve-table-marker: &lt;integer&gt;</a:documentation>
         <data type="integer"/>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:reverse-diagonal-border-style
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.reverse-diagonal-border-style
+  -->
+  <define name="axf_reverse-diagonal-border-style">
+    <optional>
+      <attribute name="axf:reverse-diagonal-border-style">
+        <a:documentation>Style of the reverse diagonal border: &lt;border-style&gt;</a:documentation>
       </attribute>
     </optional>
   </define>

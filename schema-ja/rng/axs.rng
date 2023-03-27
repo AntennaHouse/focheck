@@ -403,11 +403,6 @@
     </optional>
     <optional>
       <attribute name="css-child-match-root">
-        <ref name="ah.boolean"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="css-child-match-root">
         <a:documentation>Whether pseudo-classes match root element: true | false</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>

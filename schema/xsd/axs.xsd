@@ -355,7 +355,6 @@
         <xs:documentation>Whether expressions not enclosed in 'calc()' are allowed: true | false</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="css-child-match-root" type="axs:ah.boolean"/>
     <xs:attribute name="css-child-match-root" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether pseudo-classes match root element: true | false</xs:documentation>

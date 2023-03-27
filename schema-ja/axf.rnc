@@ -613,7 +613,7 @@ inline.fo.list |=
 #
 
 # FOs that are not descendants of fo:flow
-fo_root.attlist &= axf_layer-settings, xml_id
+fo_root.attlist &= axf_layer-settings, axf_require, xml_id
 fo_page-sequence.attlist &=
   axf_baseline-grid, axf_repeat-page-sequence-master
 fo_page-sequence.attlist &=
@@ -867,6 +867,7 @@ axf.annotation.properties =
   axf_annotation-contents,
   axf_annotation-createdate,
   axf_annotation-file-attachment,
+  axf_annotation-file-name,
   axf_annotation-flags,
   axf_annotation-font-family,
   axf_annotation-font-size,
@@ -1062,6 +1063,13 @@ axf_annotation-file-attachment =
   
   ## ファイル添付注釈の関連付けられるファイル： <uri-specification>
   attribute axf:annotation-file-attachment { xsd:anyURI }?
+# @axf:annotation-file-name
+# 
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.annotation-file-name
+axf_annotation-file-name =
+  
+  ## Alternate file name to output: <string>
+  attribute axf:annotation-file-name { text }?
 # @axf:annotation-flags
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.annotation-flags
@@ -2326,13 +2334,13 @@ axf_repeat-page-sequence-master =
   
   ## さらにページの fo:page-sequence-master を再起動するかどうか： true | false
   attribute axf:repeat-page-sequence-master { "true" | "false" }?
-# @axf:reverse-diagonal-border-style
+# @axf:require
 # 
-# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.reverse-diagonal-border-style
-axf_reverse-diagonal-border-style =
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.require
+axf_require =
   
-  ## 対角罫のスタイルを指定します: <border-style>
-  attribute axf:reverse-diagonal-border-style { text }?
+  ## Antenna House Formatter version required for formatting: <string>
+  attribute axf:require { text }?
 # @axf:retrieve-table-rows
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.retrieve-table-rows
@@ -2340,6 +2348,13 @@ axf_retrieve-table-rows =
   
   ## Maximum number of fo:table-row in fo:marker referenced from fo:retrieve-table-marker: <integer>
   attribute axf:retrieve-table-rows { xsd:integer }?
+# @axf:reverse-diagonal-border-style
+# 
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.reverse-diagonal-border-style
+axf_reverse-diagonal-border-style =
+  
+  ## 対角罫のスタイルを指定します: <border-style>
+  attribute axf:reverse-diagonal-border-style { text }?
 # @axf:reverse-page
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.reverse-page
