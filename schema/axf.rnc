@@ -302,7 +302,9 @@ axf_form-field =
 axf_form-field.model =
    (axf_form-field-option |
       axf_form-field-event |
-      fo_external-graphic)*
+      fo_external-graphic |
+      fo_inline |
+      text)*
 
 axf_form-field.attlist =
     # 'action-type' is required for <axf:form-field-event>.
@@ -334,6 +336,7 @@ axf_form-field.attlist =
     axf_field-top-index,
     axf_field-type,
     axf_field-value,
+    color,
     common-border-padding-and-background-properties,
     external-destination,
     height,
