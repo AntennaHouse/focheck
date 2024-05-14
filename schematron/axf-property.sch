@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2015-2020 Antenna House, Inc.
+     Copyright 2015-2023 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-height">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">content-height="<value-of select="."/>" should be EnumerationToken, Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">content-height="<value-of select="."/>" should be EnumerationToken, Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">content-height="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">content-height="" should be EnumerationToken, Length, or Percent.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: content-height="<value-of select="."/>"</report>
@@ -92,10 +92,10 @@
 	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.background-content -->
 	<rule context="fo:*/@axf:background-content-width">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object')">content-width="<value-of select="."/>" should be EnumerationToken, Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">content-width="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'.</report>
-	  <report test="local-name($expression) = 'EMPTY'" role="Warning">content-width="" should be EnumerationToken, Length, or Percent.</report>
-	  <report test="local-name($expression) = 'ERROR'">Syntax error: content-width="<value-of select="."/>"</report>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"><value-of select="local-name()" />="<value-of select="."/>" should be EnumerationToken, Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))"><value-of select="local-name()" />="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', or 'inherit'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="local-name()" />="" should be EnumerationToken, Length, or Percent.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="local-name()" />="<value-of select="."/>"</report>
 	</rule>
 
 	<!-- axf:background-image -->
@@ -127,7 +127,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.background-position-horizontal -->
 	<rule context="fo:*/@axf:background-position-horizontal">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-position-horizontal="<value-of select="."/>" should be Percent, Length, or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">background-position-horizontal="<value-of select="."/>" should be Percent, Length, or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('left', 'center', 'right', 'inherit'))">background-position-horizontal="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'left', 'center', 'right', or 'inherit'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">background-position-horizontal="" should be Percent, Length, or EnumerationToken.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: background-position-horizontal="<value-of select="."/>"</report>
@@ -140,7 +140,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.background-position-vertical -->
 	<rule context="fo:*/@axf:background-position-vertical">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')">background-position-vertical="<value-of select="."/>" should be Percent, Length, or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <assert test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'">background-position-vertical="<value-of select="."/>" should be Percent, Length, or EnumerationToken.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('top', 'center', 'bottom', 'inherit'))">background-position-vertical="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'top', 'center', or 'bottom'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">background-position-vertical="" should be Percent, Length, or EnumerationToken.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: background-position-vertical="<value-of select="."/>"</report>
@@ -197,7 +197,7 @@
 	<!-- axf:background-content-height -->
 	<!-- axf:background-content-width -->
 	<rule context="fo:*/@axf:background-content-height | fo:*/@axf:background-content-width">
-	  <report test="true()" role="Warning"><value-of select="name(.)" /> should not be used with AH Formatter V6.6 or later.  Use axf:background-size with AH Formatter V6.6 or later.</report>
+	  <report test="true()" role="Warning"><value-of select="name(.)" /> should not be used with Antenna House Formatter V6.6 or later.  Use axf:background-size with Antenna House Formatter V6.6 or later.</report>
 	</rule>
 
 	<!-- axf:background-scaling -->
@@ -211,6 +211,19 @@
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('uniform', 'non-uniform', 'inherit'))"><value-of select="name(.)" />="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'uniform', 'non-uniform', or 'inherit'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">scaling="" should be EnumerationToken.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: scaling="<value-of select="."/>"</report>
+	</rule>
+
+	<!-- axf:break-distance -->
+	<!-- always | <length> | <percentage> | inherit -->
+	<!-- Inherited: no -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.break-distance -->
+	<rule context="fo:*/@axf:break-distance">
+	  <let name="expression" value="ahf:parser-runner(.)"/>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'Number', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"><value-of select="local-name()" />="<value-of select="."/>" should be EnumerationToken, Length, or Percent.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('always', 'inherit'))"><value-of select="local-name()" />="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'always' or 'inherit'.</report>
+	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="local-name()" />="" should be EnumerationToken, Length, or Percent.</report>
+	  <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="local-name()" />="<value-of select="."/>"</report>
 	</rule>
 
 	<!-- axf:column-rule-color -->
@@ -258,7 +271,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.field-font-size -->
 	<rule context="fo:*/@axf:field-font-size">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:field-font-size="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'">axf:field-font-size="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('font-size', 'auto'))">axf:field-font-size="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'font-size' or 'auto'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:field-font-size="" should be EnumerationToken or Length.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:field-font-size="<value-of select="."/>"</report>
@@ -271,7 +284,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.hyphenation-zone -->
 	<rule context="fo:*/@axf:hyphenation-zone">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:hyphenation-zone="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'">axf:hyphenation-zone="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">axf:hyphenation-zone="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'none'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:hyphenation-zone="" should be EnumerationToken or Length.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:hyphenation-zone="<value-of select="."/>"</report>
@@ -293,7 +306,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.indent-here -->
 	<rule context="fo:*/@axf:indent-here">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:indent-here="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'">axf:indent-here="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">axf:indent-here="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'none'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:indent-here="" should be EnumerationToken or Length.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:indent-here="<value-of select="."/>"</report>
@@ -315,7 +328,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.keep-together-within-dimension -->
 	<rule context="fo:*/@axf:keep-together-within-dimension">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY')">axf:keep-together-within-dimension="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'">axf:keep-together-within-dimension="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">axf:keep-together-within-dimension="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:keep-together-within-dimension="" should be EnumerationToken or Length.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:keep-together-within-dimension="<value-of select="."/>"</report>
@@ -388,7 +401,7 @@
 	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-offset -->
 	<rule context="fo:*/@axf:line-number-offset">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('Length', 'EMPTY', 'ERROR')">axf:line-number-offset="<value-of select="."/>" should be Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <assert test="local-name($expression) = ('Length', 'EMPTY', 'ERROR') or $expression/@value = '0'">axf:line-number-offset="<value-of select="."/>" should be Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning">axf:line-number-offset="" should be Length.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:line-number-offset="<value-of select="."/>"</report>
 	</rule>
@@ -494,7 +507,7 @@
 	<rule context="fo:*/@axf:media-window-height |
 		       fo:*/@axf:media-window-width">
 	  <let name="expression" value="ahf:parser-runner(.)"/>
-	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR')"><value-of select="name(.)"/>="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+	  <assert test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR') or $expression/@value = '0'"><value-of select="name(.)"/>="<value-of select="."/>" should be EnumerationToken or Length.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
 	  <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))"><value-of select="name(.)"/>="<value-of select="."/>" enumeration token is '<value-of select="$expression/@token"/>'.  Token should be 'auto'.</report>
 	  <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name(.)"/>="" should be EnumerationToken or Length.</report>
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="name(.)"/>="<value-of select="."/>"</report>

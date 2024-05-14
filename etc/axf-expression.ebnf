@@ -16,8 +16,11 @@ Numeric	   ::=   	AbsoluteNumeric
 AbsoluteNumeric	   ::=  AbsoluteLength
 AbsoluteLength	   ::=  Number AbsoluteUnitName?
 AbsoluteUnitName   ::=  ('cm' | 'mm' | 'in' | 'pt' | 'pc' | 'px'
-			| 'ex' | 'jpt' | 'q' | 'dpi' | 'dd' | 'cc'
-			| 'rem' | 'ch' | 'wch' | 'lh' | 'rlh' | 'vw'
+		   	/* In same sequence as in table at
+			   https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#ext-unit-conf */
+			| 'rem' | 'dcem' | 'ex' | 'cap' | 'jpt'
+			| 'q' | 'dpi' | 'dpcm' | 'emu'
+			| 'ch' | 'ic' | 'lh' | 'rlh' | 'vw'
 			| 'vh' | 'vmin' | 'vmax' | 'pvw' | 'pvh'
 			| 'pvmin' | 'pvmax' | 'gr')
 RelativeNumeric	   ::=  Percent

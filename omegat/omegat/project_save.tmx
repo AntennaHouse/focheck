@@ -348,10 +348,10 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>**focheck** also validates the extension FOs and properties that AH Formatter provides for improved formatted output.</seg>
+        <seg>**focheck** also validates the extension FOs and properties that Antenna House Formatter provides for improved formatted output.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171017T111526Z" creationid="mtan" creationdate="20160303T164942Z">
-        <seg>**focheck** は、AH Formatter が改善された組版出力を用意する拡張とプロパティも有効にします。</seg>
+        <seg>**focheck** は、Antenna House Formatter が改善された組版出力を用意する拡張とプロパティも有効にします。</seg>
       </tuv>
     </tu>
     <tu>
@@ -1324,10 +1324,10 @@ of XSL-FO – including FOs and properties added in XSL 1.1 – within oXygen XM
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>AH Formatter may report an error or may use 'internal-destination'.</seg>
+        <seg>Antenna House Formatter may report an error or may use 'internal-destination'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20200521T103348Z" creationid="mtan" creationdate="20200521T103348Z">
-        <seg>AH Formatter はエラーを報告できるし、internal-destination も使用できる。</seg>
+        <seg>Antenna House Formatter はエラーを報告できるし、internal-destination も使用できる。</seg>
       </tuv>
     </tu>
     <tu>
@@ -4161,10 +4161,10 @@ you may not use this file except in compliance with the License.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Mode for handling baselines of mixed scripts: 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6</seg>
+        <seg>Mode for handling baselines of mixed scripts: 4 = XSL Formatter V4; 5 = Antenna House Formatter V5; 6 = Antenna House Formatter V6</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190523T115150Z" creationid="mtan" creationdate="20190523T115150Z">
-        <seg>混合スクリプトを扱い方法： 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6</seg>
+        <seg>混合スクリプトを扱い方法： 4 = XSL Formatter V4; 5 = Antenna House Formatter V5; 6 = Antenna House Formatter V6</seg>
       </tuv>
     </tu>
     <tu>
@@ -9552,10 +9552,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Use axf:background-size with AH Formatter V6.6 or later.</seg>
+        <seg>Use axf:background-size with Antenna House Formatter V6.6 or later.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190520T160616Z" creationid="mtan" creationdate="20190520T160616Z">
-        <seg>AH Formatter V6.6 以降で axf:background-size を利用します。</seg>
+        <seg>Antenna House Formatter V6.6 以降で axf:background-size を利用します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -17395,10 +17395,10 @@ also use the **focheck** Relax NG (or equivalent W3C XSD) and Schematron outside
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>should not be used with AH Formatter V6.6 or later.</seg>
+        <seg>should not be used with Antenna House Formatter V6.6 or later.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T114639Z" creationid="mtan" creationdate="20190520T160146Z">
-        <seg>AH Formatter V6.6 以降に利用できません。</seg>
+        <seg>Antenna House Formatter V6.6 以降に利用できません。</seg>
       </tuv>
     </tu>
     <tu>

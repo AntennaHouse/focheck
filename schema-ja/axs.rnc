@@ -2,7 +2,7 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 
 # Schema for Antenna House Option Setting File.
 # 
-# Copyright 2015-2021 Antenna House, Inc.
+# Copyright 2015-2023 Antenna House, Inc.
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,8 +32,28 @@ downsampling.list = "none" | "average" | "bicubic" | "subsampling"
 dpi.model = xsd:positiveInteger { minInclusive = "1" }
 jpeg-quality.model =
   xsd:positiveInteger { minInclusive = "1" maxInclusive = "100" }
+length.model =
+  xsd:token {
+    pattern =
+      "[+\-]?(([0-9]+(\.[0-9]*)?)|\.[0-9]+)('cm' | 'mm' | 'in' | 'pt' | 'pc' | 'px'| 'ex' | 'jpt' | 'q' | 'dpi' | 'dd' | 'cc' | 'rem' | 'ch' | 'wch' | 'lh' | 'rlh' | 'vw' | 'vh' | 'vmin' | 'vmax' | 'pvw' | 'pvh' | 'pvmin' | 'pvmax' | 'gr')"
+  }
 monochrome.compression.list =
   "ccitt4" | "ccitt3" | "runlength" | "zlib" | "none"
+named-length.list =
+  "veryverythinmathspace"
+  | "verythinmathspace"
+  | "thinmathspace"
+  | "mediummathspace"
+  | "thickmathspace"
+  | "verythickmathspace"
+  | "veryverythickmathspace"
+  | "negativeveryverythinmathspace"
+  | "negativeverythinmathspace"
+  | "negativethinmathspace"
+  | "negativemediummathspace"
+  | "negativethickmathspace"
+  | "negativeverythickmathspace"
+  | "negativeveryverythickmathspace"
 pass-through.model =
   list {
     ("all"
@@ -126,6 +146,16 @@ script.list =
   | "Jpan"
   | "."
   | ""
+language-code-space.atts =
+  
+  ## Language for which to apply the space
+  attribute language { text },
+  
+  ## Character code for which to apply the space
+  attribute code { text }?,
+  
+  ## Amount of space to apply
+  attribute space { xsd:decimal }
 # start = formatter-config
 formatter-config = element formatter-config { formatter-config.model }
 formatter-config.model =
@@ -133,6 +163,7 @@ formatter-config.model =
   font-settings?,
   pdf-settings?,
   ps-settings?,
+  svg-render-settings?,
   svg-settings?,
   text-settings?,
   mathml-settings?,
@@ -141,157 +172,322 @@ formatter-config.model =
   analyzer-settings?
 formatter-settings =
   element formatter-settings {
-    attribute abbreviation-character-count { xsd:integer }?,
+    formatter-settings.attlist, formatter-settings.model
+  }
+formatter-settings.model =
+  list-style-type*,
+  quotationmark*,
+  script-chars*,
+  script-language-in-CJK*,
+  space-end-punctuation*,
+  space-start-punctuation*,
+  space-between-digit-and-punctuation*,
+  usercss*,
+  multimedia*,
+  GS1-128*,
+  UAX50*,
+  unbreakable-words*
+formatter-settings.attlist =
+  attribute abbreviation-character-count { xsd:integer }?,
+  
+  ## Whether to automatically break footnotes when axf:footnote-max-height=�?"auto": true | false
+  attribute auto-break-footnote { ah.boolean }?,
+  
+  ## Formatter type when unclear if HTML or XHTML: html | xhtml
+  attribute auto-formatter-type { "html" | "xhtml" }?,
+  
+  ## Whether to count the last punctuation to be included in one character when axf:avoid-widow-word="true" is specified in CJK: true | false
+  attribute avoid-widow-words-cjk-punctuation { ah.boolean }?,
+  
+  ## <axf:formatter-config> は許可するかどうか
+  attribute axf-formatter-config { ah.boolean }?,
+  
+  ## 混合スクリプトを扱い方法： 4 = XSL Formatter V4; 5 = Antenna House Formatter V5; 6 = Antenna House Formatter V6
+  attribute baseline-mode { "4" | "5" | "6" }?,
+  attribute bidi-override-mode { xsd:integer }?,
+  attribute bold-ratio { xsd:decimal }?,
+  attribute border-medium-width { xsd:NMTOKEN }?,
+  attribute border-thick-width { xsd:NMTOKEN }?,
+  attribute border-thin-width { xsd:NMTOKEN }?,
+  
+  ## Languages or scripts to which to apply Knuth-Plass Breaking Paragraphs into Lines [BPIL]
+  attribute bpil { text }?,
+  
+  ## Maximum number of characters to which [BPIL] applies: <integer>
+  attribute bpil-limit-chars { xsd:positiveInteger }?,
+  
+  ## Minimum line width (in em) to which to apply [BPIL]: <number>
+  attribute bpil-minimum-line-width { text }?,
+  
+  ## Frequency of hyphenation in [BPIL] with a value of 0 to 1000
+  attribute bpil-penalty-hyphenation {
+    bpil-penalty-hyphenation.model
+  }?,
+  
+  ## Initial value when 'axf:condensed-text-align-last="auto"': true | false | justify
+  attribute condensed-text-align-last { ah.boolean | "justify" }?,
+  
+  ## Whether expressions not enclosed in 'calc()' are allowed: true | false
+  attribute css-allow-bare-expression { ah.boolean }?,
+  
+  ## Whether pseudo-classes match root element: true | false
+  attribute css-child-match-root { ah.boolean }?,
+  
+  ## Whether nested floats are allowed in CSS: true | false
+  attribute css-float-in-float { xsd:NCName }?,
+  attribute default-CJK { xsd:NCName }?,
+  attribute default-color { text }?,
+  attribute default-font-size { xsd:NMTOKEN }?,
+  attribute default-from-page-master-region { ah.boolean }?,
+  attribute default-html-charset { xsd:NCName }?,
+  attribute default-lang { text }?,
+  attribute default-lang2 { xsd:NCName }?,
+  attribute default-page-height { xsd:NMTOKEN }?,
+  attribute default-page-margin-bottom { text }?,
+  attribute default-page-margin-left { text }?,
+  attribute default-page-margin-right { text }?,
+  attribute default-page-margin-top { text }?,
+  attribute default-page-width { xsd:NMTOKEN }?,
+  attribute descendant-or-self-files { ah.boolean }?,
+  attribute display-alttext { ah.boolean }?,
+  attribute external-entity { ah.boolean }?,
+  
+  ## font-family の構文を厳密にチックする方法： auto | loose | strict
+  attribute family-name-syntax { "auto" | "loose" | "strict" }?,
+  
+  ## Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always
+  attribute fixed-width-space-treatment { ah.boolean | "always" }?,
+  
+  ## Width, in em, of HAIR SPACE (U+200A)
+  attribute hair-space-width { text }?,
+  
+  ## ハイフネーション例外辞書に <hyphen-min> ができるかどうか： false | true | without-exceptions
+  attribute hyphenation-min { ah.boolean | "without-exceptions" }?,
+  
+  ## カスタムハイフネーションか TeX ハイフネーションの辞書を利用するかどうか： true | false
+  attribute HyphenationOption { ah.boolean }?,
+  
+  ## HyphenationOption をハイフネーション処理をする言語のカンマ区切りリスト ="true"
+  attribute hyphenation-TeX { text }?,
+  attribute hyphen-min { ah.boolean }?,
+  
+  ## Whether to ignore certificate errors: true | false
+  attribute ignore-certificate-error { ah.boolean }?,
+  attribute intrusion-displace-mode { xsd:integer }?,
+  attribute img-alt { ah.boolean }?,
+  attribute issue-scale-to-fit { ah.boolean }?,
+  
+  ## Whether to process the ligature of Hangul Jamo (U+1100 to U+11FF)
+  attribute jamo-ligature { ah.boolean }?,
+  attribute justify-leader { ah.boolean }?,
+  attribute justify-rowspan-height { ah.boolean }?,
+  attribute keep-footnote-anchor { ah.boolean }?,
+  attribute latin-ligature { ah.boolean }?,
+  attribute non-starter-ideographic-space { ah.boolean }?,
+  attribute normal-line-height { text }?,
+  attribute normalize { xsd:NCName }?,
+  
+  ## Angle when emulating font-style="oblique" or "backslant": <number>
+  attribute oblique-skew { xsd:integer }?,
+  attribute omit-uppercase-word-accents { text }?,
+  attribute output-area-id { ah.boolean }?,
+  attribute output-fo-tree { ah.boolean }?,
+  attribute overflow-limit-block { xsd:NMTOKEN }?,
+  attribute overflow-limit-inline { xsd:NMTOKEN }?,
+  attribute pair-kerning { ah.boolean }?,
+  attribute printer-marks-line-length { text }?,
+  attribute printer-marks-line-width { text }?,
+  attribute printer-marks-zero-margin { text }?,
+  attribute PrinterOrientation { xsd:NCName }?,
+  attribute PscriptPassThrough { ah.boolean }?,
+  attribute punctuation-spacing { text }?,
+  attribute punctuation-trim { ah.boolean }?,
+  attribute pxpi { xsd:integer }?,
+  
+  ## Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox
+  attribute responsive-svg-size { "reference" | "viewBox" }?,
+  
+  ## Ruby alignment when axf:ruby-align="auto"
+  attribute ruby-align { text }?,
+  attribute SeparatePrinterDuplexJob { ah.boolean }?,
+  attribute small-caps-emulation-always { ah.boolean }?,
+  
+  ## Scale-down ratio when the font does not have small-caps
+  attribute small-caps-emulation-size { text }?,
+  attribute small-caps-emulation-x-height { ah.boolean }?,
+  attribute splitting-blocks-space { ah.boolean }?,
+  
+  ## Behavior when tab alignment makes letters overlap: ignore-tab | next-tab
+  attribute tab-overlap-treatment { "ignore-tab" | "next-tab" | "" }?,
+  attribute table-auto-layout-limit { xsd:integer }?,
+  attribute table-is-reference-area { ah.boolean }?,
+  attribute text-autospace { ah.boolean }?,
+  attribute text-autospace-mode { "6" | "7" }?,
+  attribute text-autospace-width { text }?,
+  attribute text-decoration-baseline-mode { xsd:integer }?,
+  attribute text-decoration-mode { xsd:integer }?,
+  attribute text-justify-mode { xsd:integer }?,
+  attribute text-kashida-space { text }?,
+  attribute text-orientation-mode { xsd:integer }?,
+  
+  ## 埋め込むことが許可されていないフォントにぼかしを適用するかどうか： false | true
+  attribute textshadow-blur-cannot-embed-font { ah.boolean }?,
+  
+  ## テキストシャドウにぼかしを適用するときの画像の最小解像度： <positive-integer>
+  attribute textshadow-resolution-minimum-dpi { dpi.model }?,
+  
+  ## テキストシャドウにぼかしを適用するときの画像の解像度： <positive-integer>
+  attribute textshadow-resolution-pixel-per-em { dpi.model }?,
+  attribute text-underline-mode { xsd:integer }?,
+  attribute thin-space-width { text }?,
+  attribute two-pass-formatting { ah.boolean }?,
+  
+  ## Error level for an unresolved internal-destination
+  attribute unresolved-internal-destination {
+    "0" | "1" | "2" | "3" | "4"
+  }?,
+  attribute use-default-page-margin-CSS { ah.boolean }?,
+  attribute use-default-page-margin-XSL { ah.boolean }?,
+  attribute vertical-block-width-mode { xsd:integer }?,
+  attribute vertical-coloring-text { text }?,
+  attribute vertical-underline-side { xsd:NCName }?,
+  attribute viewport-length-units-mode { xsd:integer }?,
+  
+  ## Fill color for 'watermark-text'
+  attribute watermark-fill-color { text }?,
+  attribute watermark-font-family { text }?,
+  attribute watermark-font-style { text }?,
+  attribute watermark-font-weight { text }?,
+  
+  ## Opacity for 'watermark-text'
+  attribute watermark-opacity { text }?,
+  
+  ## Stroke color for 'watermark-text'
+  attribute watermark-stroke-color { text }?,
+  
+  ## Stroke width for 'watermark-text'
+  attribute watermark-stroke-width { text }?,
+  
+  ## Angle of rotation for 'watermark-text'
+  attribute watermark-rotate { text }?,
+  
+  ## Magnification for 'watermark-text'
+  attribute watermark-scale { text }?,
+  attribute watermark-text { text }?,
+  attribute watermark2-font-family { text }?,
+  attribute watermark2-font-style { text }?,
+  attribute watermark2-font-weight { text }?,
+  attribute watermark2-text { text }?,
+  attribute white-space-collapse-mode { "6" | "7" }?,
+  
+  ## ZERO WIDTH SPACE (U+200B) 互換性： 5 | 6
+  attribute zwsp-mode { "5" | "6" }?
+list-style-type =
+  
+  ## Characters to use for standard 'list-style-type' values
+  element list-style-type {
     
-    ## Whether to automatically break footnotes when axf:footnote-max-height=�?"auto": true | false
-    attribute auto-break-footnote { ah.boolean }?,
+    ## Character to use for list-style-type="box"
+    attribute box { text }?,
     
-    ## Formatter type when unclear if HTML or XHTML: html | xhtml
-    attribute auto-formatter-type { "html" | "xhtml" }?,
+    ## Character to use for list-style-type="check"
+    attribute check { text }?,
     
-    ## Whether to count the last punctuation to be included in one character when axf:avoid-widow-word="true" is specified in CJK: true | false
-    attribute avoid-widow-words-cjk-punctuation { ah.boolean }?,
+    ## Character to use for list-style-type="cirle"
+    attribute circle { text }?,
     
-    ## <axf:formatter-config> は許可するかどうか
-    attribute axf-formatter-config { ah.boolean }?,
+    ## Character to use for list-style-type="diamond"
+    attribute diamond { text }?,
     
-    ## 混合スクリプトを扱い方法： 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6
-    attribute baseline-mode { "4" | "5" | "6" }?,
-    attribute bidi-override-mode { xsd:integer }?,
-    attribute bold-ratio { xsd:decimal }?,
-    attribute border-medium-width { xsd:NMTOKEN }?,
-    attribute border-thick-width { xsd:NMTOKEN }?,
-    attribute border-thin-width { xsd:NMTOKEN }?,
+    ## Character to use for list-style-type="disc"
+    attribute disc { text }?,
     
-    ## Languages or scripts to which to apply Knuth-Plass Breaking Paragraphs into Lines [BPIL]
-    attribute bpil { text }?,
+    ## Character to use for list-style-type="hyphen"
+    attribute hyphen { text }?,
     
-    ## Maximum number of characters to which [BPIL] applies: <integer>
-    attribute bpil-limit-chars { xsd:positiveInteger }?,
+    ## Character to use for list-style-type="square"
+    attribute square { text }?,
+    empty
+  }
+quotationmark =
+  element quotationmark {
+    attribute language { text },
+    attribute code { text },
+    attribute quotetype { "QU" | "OP" | "CL" },
+    empty
+  }
+script-chars =
+  element script-chars {
+    attribute script { text }?,
+    attribute code { text }?,
+    empty
+  }
+script-language-in-CJK =
+  element script-languge-in-CJK {
+    attribute script { text },
+    attribute language { text }?,
+    empty
+  }
+space-end-punctuation =
+  
+  ## Space to add after a punctuation character
+  element space-end-punctuation { language-code-space.atts, empty }
+space-start-punctuation =
+  
+  ## Space to add before a punctuation character
+  element space-start-punctuation { language-code-space.atts, empty }
+space-between-digit-and-punctuation =
+  
+  ## Space to add between a digit and a punctuation character
+  element space-between-digit-and-punctuation {
+    language-code-space.atts, empty
+  }
+space-between-punctuation-and-digit =
+  
+  ## Space to add between a digit and a punctuation character
+  element space-between-punctuation-and-digit {
+    language-code-space.atts, empty
+  }
+usercss =
+  
+  ## One or more user CSS stylesheets
+  element usercss { css+ }
+css =
+  
+  ## User CSS stylesheet
+  element css {
     
-    ## Minimum line width (in em) to which to apply [BPIL]: <number>
-    attribute bpil-minimum-line-width { text }?,
+    ## Path to user CSS stylesheet
+    attribute path { xsd:anyURI },
+    empty
+  }
+multimedia =
+  
+  ## Additional 'content-type' values for multimedia formats
+  element multimedia {
     
-    ## Frequency of hyphenation in [BPIL] with a value of 0 to 1000
-    attribute bpil-penalty-hyphenation {
-      bpil-penalty-hyphenation.model
-    }?,
-    attribute css-media-type { xsd:NCName }?,
-    attribute default-CJK { xsd:NCName }?,
-    attribute default-color { text }?,
-    attribute default-font-size { xsd:NMTOKEN }?,
-    attribute default-from-page-master-region { ah.boolean }?,
-    attribute default-html-charset { xsd:NCName }?,
-    attribute default-lang { text }?,
-    attribute default-lang2 { xsd:NCName }?,
-    attribute default-page-height { xsd:NMTOKEN }?,
-    attribute default-page-margin-bottom { text }?,
-    attribute default-page-margin-left { text }?,
-    attribute default-page-margin-right { text }?,
-    attribute default-page-margin-top { text }?,
-    attribute default-page-width { xsd:NMTOKEN }?,
-    attribute descendant-or-self-files { ah.boolean }?,
-    attribute display-alttext { ah.boolean }?,
-    attribute external-entity { ah.boolean }?,
+    ## Additional audio content type
+    attribute audio { text }?,
     
-    ## font-family の構文を厳密にチックする方法： auto | loose | strict
-    attribute family-name-syntax { "auto" | "loose" | "strict" }?,
+    ## Additional video content type
+    attribute video { text }?,
     
-    ## Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always
-    attribute fixed-width-space-treatment {
-      "false" | "true" | "always"
-    }?,
-    
-    ## Width, in em, of HAIR SPACE (U+200A)
-    attribute hair-space-width { text }?,
-    
-    ## ハイフネーション例外辞書に <hyphen-min> ができるかどうか： false | true | without-exceptions
-    attribute hyphenation-min { ah.boolean | "without-exceptions" }?,
-    
-    ## カスタムハイフネーションか TeX ハイフネーションの辞書を利用するかどうか： true | false
-    attribute HyphenationOption { ah.boolean }?,
-    
-    ## HyphenationOption をハイフネーション処理をする言語のカンマ区切りリスト ="true"
-    attribute hyphenation-TeX { text }?,
-    attribute hyphen-min { ah.boolean }?,
-    attribute intrusion-displace-mode { xsd:integer }?,
-    attribute img-alt { ah.boolean }?,
-    attribute issue-scale-to-fit { ah.boolean }?,
-    
-    ## Whether to process the ligature of Hangul Jamo (U+1100 to U+11FF)
-    attribute jamo-ligature { ah.boolean }?,
-    attribute justify-leader { ah.boolean }?,
-    attribute justify-rowspan-height { ah.boolean }?,
-    attribute keep-footnote-anchor { ah.boolean }?,
-    attribute latin-ligature { ah.boolean }?,
-    attribute non-starter-ideographic-space { ah.boolean }?,
-    attribute normal-line-height { text }?,
-    attribute normalize { xsd:NCName }?,
-    
-    ## Angle when emulating font-style="oblique" or "backslant": <number>
-    attribute oblique-skew { xsd:integer }?,
-    attribute omit-uppercase-word-accents { text }?,
-    attribute output-area-id { ah.boolean }?,
-    attribute output-fo-tree { ah.boolean }?,
-    attribute overflow-limit-block { xsd:NMTOKEN }?,
-    attribute overflow-limit-inline { xsd:NMTOKEN }?,
-    attribute pair-kerning { ah.boolean }?,
-    attribute printer-marks-line-length { text }?,
-    attribute printer-marks-line-width { text }?,
-    attribute printer-marks-zero-margin { text }?,
-    attribute PrinterOrientation { xsd:NCName }?,
-    attribute PscriptPassThrough { ah.boolean }?,
-    attribute punctuation-spacing { text }?,
-    attribute punctuation-trim { ah.boolean }?,
-    attribute pxpi { xsd:integer }?,
-    
-    ## Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox
-    attribute responsive-svg-size { "reference" | "viewBox" }?,
-    
-    ## Ruby alignment when axf:ruby-align="auto"
-    attribute ruby-align { text }?,
-    attribute SeparatePrinterDuplexJob { ah.boolean }?,
-    attribute small-caps-emulation-always { ah.boolean }?,
-    
-    ## Scale-down ratio when the font does not have small-caps
-    attribute small-caps-emulation-size { text }?,
-    attribute small-caps-emulation-x-height { ah.boolean }?,
-    attribute splitting-blocks-space { ah.boolean }?,
-    
-    ## Behavior when tab alignment makes letters overlap: ignore-tab | next-tab
-    attribute tab-overlap-treatment { "ignore-tab" | "next-tab" | "" }?,
-    attribute table-auto-layout-limit { xsd:integer }?,
-    attribute table-is-reference-area { ah.boolean }?,
-    attribute text-autospace { ah.boolean }?,
-    attribute text-autospace-width { text }?,
-    attribute text-decoration-baseline-mode { xsd:integer }?,
-    attribute text-decoration-mode { xsd:integer }?,
-    attribute text-justify-mode { xsd:integer }?,
-    attribute text-kashida-space { text }?,
-    attribute text-orientation-mode { xsd:integer }?,
-    
-    ## 埋め込むことが許可されていないフォントにぼかしを適用するかどうか： false | true
-    attribute textshadow-blur-cannot-embed-font { ah.boolean }?,
-    
-    ## テキストシャドウにぼかしを適用するときの画像の最小解像度： <positive-integer>
-    attribute textshadow-resolution-minimum-dpi { dpi.model }?,
-    
-    ## テキストシャドウにぼかしを適用するときの画像の解像度： <positive-integer>
-    attribute textshadow-resolution-pixel-per-em { dpi.model }?,
-    attribute text-underline-mode { xsd:integer }?,
-    attribute thin-space-width { text }?,
-    attribute two-pass-formatting { ah.boolean }?,
-    attribute use-default-page-margin-CSS { ah.boolean }?,
-    attribute use-default-page-margin-XSL { ah.boolean }?,
-    attribute vertical-block-width-mode { xsd:integer }?,
-    attribute vertical-coloring-text { text }?,
-    attribute vertical-underline-side { xsd:NCName }?,
-    attribute viewport-length-units-mode { xsd:integer }?,
-    attribute WindowsFontAPI { text }?,
-    
-    ## ZERO WIDTH SPACE (U+200B) 互換性： 5 | 6
-    attribute zwsp-mode { "5" | "6" }?,
-    unbreakable-words*
+    ## Additional Flash content type
+    attribute flash { text }?,
+    empty
+  }
+GS1-128 =
+  element GS1-128 {
+    attribute AI { text },
+    attribute format { text },
+    empty
+  }
+UAX50 =
+  element UAX50 {
+    attribute code { text },
+    attribute SVO { "U" | "R" | "V" }?,
+    attribute MVO { "U" | "R" | "V" }?,
+    empty
   }
 font-settings =
   
@@ -485,6 +681,9 @@ pdf-settings.attlist =
   attribute joboptions { text }?,
   attribute jpeg-quality { xsd:integer }?,
   attribute linearized { ah.boolean }?,
+  
+  ## Whether the origin of /MediaBox is adjusted to '(0,0)': true | false
+  attribute mediabox-origin-zero { ah.boolean }?,
   attribute monochrome-compression { monochrome.compression.list }?,
   attribute monochrome-compression-default {
     monochrome.compression.list
@@ -632,7 +831,12 @@ mathml-settings =
     }?
   }
 mathml-settings.attlist =
-  attribute double_struck { xsd:NCName }?,
+  attribute mathDisplay { "inline" | "block" | "context" }?,
+  attribute scriptsizemultiplier { xsd:decimal }?,
+  attribute scriptsizemultiplierMscarries { xsd:decimal }?,
+  attribute scriptminsize { xsd:NMTOKEN }?,
+  attribute scriptmaxsize { xsd:NMTOKEN }?,
+  attribute largeop-multiplier { xsd:decimal }?,
   attribute error-display { xsd:NCName }?,
   attribute fraktur { xsd:NCName }?,
   attribute mode { xsd:NCName }?,
@@ -640,14 +844,16 @@ mathml-settings.attlist =
   attribute opspace-multiplier { xsd:decimal }?,
   attribute sans-serif { xsd:NCName }?,
   attribute script { xsd:NCName }?,
-  attribute script-maxnest { xsd:integer }?,
-  attribute scriptminsize { xsd:NMTOKEN }?,
-  attribute scriptsizemultiplier { xsd:decimal }?
+  attribute script-maxnest { xsd:integer }?
+# ,
+# attribute  { xsd:NMTOKEN }?,
+# attribute  { xsd:decimal }?,
+# attribute scriptsizemultiplier { xsd:decimal }?
 munderover = element munderover { munderover.attlist, munderover.model }
 munderover.model = empty
 munderover.attlist =
-  attribute bar-padding { text },
-  attribute bar-width { text },
+  attribute bar-padding { text }?,
+  attribute bar-width { text }?,
   attribute integral-largeop-overscript-space { xsd:decimal }?,
   attribute integral-largeop-underscript-space { xsd:decimal }?,
   attribute integral-overscript-space { xsd:decimal }?,
@@ -660,6 +866,23 @@ munderover.attlist =
   attribute underaccent-shift { text },
   attribute underbar-space { text },
   attribute underscript-space { text }
+svg-render-settings =
+  element svg-render-settings {
+    svg-render-settings.attlist, svg-render-settings.model
+  }
+svg-render-settings.attlist =
+  attribute current-color-eval-at-painting { ah.boolean }?,
+  attribute image-element-eval-as-svg20 { ah.boolean }?,
+  attribute inherit-svg-fill-color { ah.boolean }?,
+  attribute outermost-svg-eval-as-isolate { ah.boolean }?,
+  attribute radial-gradient-eval-as-svg20 { ah.boolean }?,
+  attribute rasterize-dpi { xsd:decimal }?,
+  attribute rasterize-size-lower-limit { xsd:decimal }?,
+  attribute rasterize-size-upper-limit { xsd:decimal }?,
+  attribute responsive-svg-size { text }?,
+  attribute use-element-eval-as-shadow-element { ah.boolean }?,
+  attribute width-height-as-presentation-attribute { ah.boolean }?
+svg-render-settings.model = empty
 svg-settings =
   element svg-settings { svg-settings.attlist, svg-settings.model }
 svg-settings.attlist =

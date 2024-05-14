@@ -1,6 +1,6 @@
 # Schema for Antenna House Option Setting File.
 #
-# Copyright 2015-2022 Antenna House, Inc.
+# Copyright 2015-2023 Antenna House, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,12 +40,31 @@ dpi.model =
 jpeg-quality.model =
     xsd:positiveInteger { minInclusive = "1" maxInclusive = "100" }
 
+length.model =
+   xsd:token { pattern = "[+\-]?(([0-9]+(\.[0-9]*)?)|\.[0-9]+)('cm' | 'mm' | 'in' | 'pt' | 'pc' | 'px'| 'ex' | 'jpt' | 'q' | 'dpi' | 'dd' | 'cc' | 'rem' | 'ch' | 'wch' | 'lh' | 'rlh' | 'vw' | 'vh' | 'vmin' | 'vmax' | 'pvw' | 'pvh' | 'pvmin' | 'pvmax' | 'gr')" }
+
 monochrome.compression.list =
     'ccitt4'
     | 'ccitt3'
     | 'runlength'
     | 'zlib'
     | 'none'
+
+named-length.list =
+    'veryverythinmathspace'
+    | 'verythinmathspace'
+    | 'thinmathspace'
+    | 'mediummathspace'
+    | 'thickmathspace'
+    | 'verythickmathspace'
+    | 'veryverythickmathspace'
+    | 'negativeveryverythinmathspace'
+    | 'negativeverythinmathspace'
+    | 'negativethinmathspace'
+    | 'negativemediummathspace'
+    | 'negativethickmathspace'
+    | 'negativeverythickmathspace'
+    | 'negativeveryverythickmathspace'
 
 pass-through.model =
     list { ( 'all' | 'gif' | '-gif' | 'tiff' | '-tiff' | 'png' | '-png'
@@ -150,6 +169,7 @@ formatter-config.model =
     font-settings?,
     pdf-settings?,
     ps-settings?,
+    svg-render-settings?,
     svg-settings?,
     text-settings?,
     mathml-settings?,
@@ -187,7 +207,7 @@ formatter-settings.attlist =
    attribute avoid-widow-words-cjk-punctuation { ah.boolean }?,
    ## Whether <axf:formatter-config> is allowed
    attribute axf-formatter-config { ah.boolean }?,
-   ## Mode for handling baselines of mixed scripts: 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6
+   ## Mode for handling baselines of mixed scripts: 4 = XSL Formatter V4; 5 = Antenna House Formatter V5; 6 = Antenna House Formatter V6
    attribute baseline-mode { '4' | '5' | '6' }?,
    attribute bidi-override-mode { xsd:integer }?,
    attribute bold-ratio { xsd:decimal }?,
@@ -202,7 +222,14 @@ formatter-settings.attlist =
    attribute bpil-minimum-line-width { text }?,
    ## Frequency of hyphenation in [BPIL] with a value of 0 to 1000
    attribute bpil-penalty-hyphenation { bpil-penalty-hyphenation.model }?,
-   attribute css-media-type { xsd:NCName }?,
+   ## Initial value when 'axf:condensed-text-align-last="auto"': true | false | justify
+   attribute condensed-text-align-last { ah.boolean | 'justify' }?,
+   ## Whether expressions not enclosed in 'calc()' are allowed: true | false
+   attribute css-allow-bare-expression { ah.boolean }?,
+   ## Whether pseudo-classes match root element: true | false
+   attribute css-child-match-root { ah.boolean }?,
+   ## Whether nested floats are allowed in CSS: true | false
+   attribute css-float-in-float { xsd:NCName }?,
    attribute default-CJK { xsd:NCName }?,
    attribute default-color { text }?,
    attribute default-font-size { xsd:NMTOKEN }?,
@@ -222,7 +249,7 @@ formatter-settings.attlist =
    ## How strictly to check 'font-family' syntax: auto | loose | strict
    attribute family-name-syntax { 'auto' | 'loose' | 'strict' }?,
    ## Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always
-   attribute fixed-width-space-treatment { 'false' | 'true' | 'always' }?,
+   attribute fixed-width-space-treatment { ah.boolean | 'always' }?,
    ## Width, in em, of HAIR SPACE (U+200A)
    attribute hair-space-width { text }?,
    ## Whether to enable <hyphen-min> in the Hyphenation Exception Dictionary: false | true | without-exceptions
@@ -232,6 +259,8 @@ formatter-settings.attlist =
    ## Comma-delimited list of languages to hyphenate when HyphenationOption="true"
    attribute hyphenation-TeX { text }?,
    attribute hyphen-min { ah.boolean }?,
+   ## Whether to ignore certificate errors: true | false
+   attribute ignore-certificate-error { ah.boolean }?,
    attribute intrusion-displace-mode { xsd:integer }?,
    attribute img-alt { ah.boolean }?,
    attribute issue-scale-to-fit { ah.boolean }?,
@@ -275,6 +304,7 @@ formatter-settings.attlist =
    attribute table-auto-layout-limit { xsd:integer }?,
    attribute table-is-reference-area { ah.boolean }?,
    attribute text-autospace { ah.boolean }?,
+   attribute text-autospace-mode { '6' | '7' }?,
    attribute text-autospace-width { text }?,
    attribute text-decoration-baseline-mode { xsd:integer }?,
    attribute text-decoration-mode { xsd:integer }?,
@@ -290,13 +320,35 @@ formatter-settings.attlist =
    attribute text-underline-mode { xsd:integer }?,
    attribute thin-space-width { text }?,
    attribute two-pass-formatting { ah.boolean }?,
+   ## Error level for an unresolved internal-destination
+   attribute unresolved-internal-destination { '0' | '1' | '2' | '3' | '4' }?,
    attribute use-default-page-margin-CSS { ah.boolean }?,
    attribute use-default-page-margin-XSL { ah.boolean }?,
    attribute vertical-block-width-mode { xsd:integer }?,
    attribute vertical-coloring-text { text }?,
    attribute vertical-underline-side { xsd:NCName }?,
    attribute viewport-length-units-mode { xsd:integer }?,
-   attribute WindowsFontAPI { text }?,
+   ## Fill color for 'watermark-text'
+   attribute watermark-fill-color { text }?,
+   attribute watermark-font-family { text }?,
+   attribute watermark-font-style { text }?,
+   attribute watermark-font-weight { text }?,
+   ## Opacity for 'watermark-text'
+   attribute watermark-opacity { text }?,
+   ## Stroke color for 'watermark-text'
+   attribute watermark-stroke-color { text }?,
+   ## Stroke width for 'watermark-text'
+   attribute watermark-stroke-width { text }?,
+   ## Angle of rotation for 'watermark-text'
+   attribute watermark-rotate { text }?,
+   ## Magnification for 'watermark-text'
+   attribute watermark-scale { text }?,
+   attribute watermark-text { text }?,
+   attribute watermark2-font-family { text }?,
+   attribute watermark2-font-style { text }?,
+   attribute watermark2-font-weight { text }?,
+   attribute watermark2-text { text }?,
+   attribute white-space-collapse-mode { '6' | '7' }?,
    ## ZERO WIDTH SPACE (U+200B) compatibility mode: 5 | 6
    attribute zwsp-mode { '5' | '6' }?
 
@@ -580,6 +632,8 @@ pdf-settings.attlist =
          attribute joboptions { text }?,
          attribute jpeg-quality { xsd:integer }?,
          attribute linearized { ah.boolean }?,
+         ## Whether the origin of /MediaBox is adjusted to '(0,0)': true | false
+         attribute mediabox-origin-zero { ah.boolean }?,
          attribute monochrome-compression { monochrome.compression.list }?,
          attribute monochrome-compression-default { monochrome.compression.list }?,
          attribute monochrome-compression-minimum { monochrome.compression.list }?,
@@ -702,7 +756,12 @@ mathml-settings =
     }
 
 mathml-settings.attlist =
-    attribute double_struck { xsd:NCName }?,
+    attribute mathDisplay { 'inline' | 'block' | 'context' }?,
+    attribute scriptsizemultiplier { xsd:decimal }?,
+    attribute scriptsizemultiplierMscarries { xsd:decimal }?,
+    attribute scriptminsize { xsd:NMTOKEN }?,
+    attribute scriptmaxsize { xsd:NMTOKEN }?,
+    attribute largeop-multiplier { xsd:decimal }?,
     attribute error-display { xsd:NCName }?,
     attribute fraktur { xsd:NCName }?,
     attribute mode { xsd:NCName }?,
@@ -710,9 +769,10 @@ mathml-settings.attlist =
     attribute opspace-multiplier { xsd:decimal }?,
     attribute sans-serif { xsd:NCName }?,
     attribute script { xsd:NCName }?,
-    attribute script-maxnest { xsd:integer }?,
-    attribute scriptminsize { xsd:NMTOKEN }?,
-    attribute scriptsizemultiplier { xsd:decimal }?
+    attribute script-maxnest { xsd:integer }?#,
+    #attribute  { xsd:NMTOKEN }?,
+    #attribute  { xsd:decimal }?,
+    #attribute scriptsizemultiplier { xsd:decimal }?
 
 munderover =
     element munderover {
@@ -724,8 +784,8 @@ munderover.model =
     empty
 
 munderover.attlist =
-    attribute bar-padding { text },
-    attribute bar-width { text },
+    attribute bar-padding { text }?,
+    attribute bar-width { text }?,
     attribute integral-largeop-overscript-space { xsd:decimal }?,
     attribute integral-largeop-underscript-space { xsd:decimal }?,
     attribute integral-overscript-space { xsd:decimal }?,
@@ -738,6 +798,28 @@ munderover.attlist =
     attribute underaccent-shift { text },
     attribute underbar-space { text },
     attribute underscript-space { text }
+
+svg-render-settings =
+     element svg-render-settings {
+         svg-render-settings.attlist,
+         svg-render-settings.model
+    }
+
+svg-render-settings.attlist =
+         attribute current-color-eval-at-painting { ah.boolean }?,
+         attribute image-element-eval-as-svg20 { ah.boolean }?,
+         attribute inherit-svg-fill-color { ah.boolean }?,
+         attribute outermost-svg-eval-as-isolate { ah.boolean }?,
+         attribute radial-gradient-eval-as-svg20 { ah.boolean }?,
+         attribute rasterize-dpi { xsd:decimal }?,
+         attribute rasterize-size-lower-limit { xsd:decimal }?,
+         attribute rasterize-size-upper-limit { xsd:decimal }?,
+         attribute responsive-svg-size { text }?,
+         attribute use-element-eval-as-shadow-element { ah.boolean }?,
+         attribute width-height-as-presentation-attribute { ah.boolean }?
+
+svg-render-settings.model =
+    empty
 
 svg-settings =
      element svg-settings {

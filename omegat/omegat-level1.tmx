@@ -822,14 +822,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>AH Formatter may report an error or may use 'internal-destination'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T103348Z" creationid="mtan" creationdate="20200521T103348Z">
-        <seg>AH Formatter はエラーを報告できるし、internal-destination も使用できる。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Add 'end-indent="label-end()"'</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T153539Z" creationid="mtan" creationdate="20160310T114408Z">
@@ -1058,14 +1050,6 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T150526Z" creationid="mtan" creationdate="20190527T154355Z">
         <seg>許可されたキーワードは auto、character-by-character 又は inherit です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Allowed keywords are 'auto', 'column', 'page', 'even-page', 'odd-page', and 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20190527T154736Z" creationid="mtan" creationdate="20190527T154355Z">
-        <seg>許可されたキーワードは auto、column、page、even-page、odd-page 又は inheritです。</seg>
       </tuv>
     </tu>
     <tu>
@@ -1454,14 +1438,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Allowed keywords are 'only', 'first', 'last', 'rest', 'any', and 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20190528T093106Z" creationid="mtan" creationdate="20190527T154355Z">
-        <seg>許可されたキーワードは only、first、last、rest、any 又は inherit です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Allowed keywords are 'page', 'page-sequence', and 'document'.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T093459Z" creationid="mtan" creationdate="20190527T154355Z">
@@ -1842,6 +1818,14 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T120107Z" creationid="mtan" creationdate="20160125T153339Z">
         <seg>fo:single-page-master-reference は最も単純な sub-sequence-specifier です。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Antenna House Formatter may report an error or may use 'internal-destination'.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="mtan" changedate="20200521T103348Z" creationid="mtan" creationdate="20200521T103348Z">
+        <seg>Antenna House Formatter はエラーを報告できるし、internal-destination も使用できる。</seg>
       </tuv>
     </tu>
     <tu>
@@ -2790,14 +2774,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside | alternate</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T154056Z" creationid="mtan" creationdate="20171005T154056Z">
-        <seg>水平（縦書きでは垂直）方向のフロート配置： none | start | end | left | right | top | bottom | center | inside | outside | alternate</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Horizontal position of the annotation: &lt;length&gt;</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171005T153019Z" creationid="mtan" creationdate="20171005T153019Z">
@@ -3280,10 +3256,10 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Mode for handling baselines of mixed scripts: 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6</seg>
+        <seg>Mode for handling baselines of mixed scripts: 4 = XSL Formatter V4; 5 = Antenna House Formatter V5; 6 = Antenna House Formatter V6</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190523T115150Z" creationid="mtan" creationdate="20190523T115150Z">
-        <seg>混合スクリプトを扱い方法： 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6</seg>
+        <seg>混合スクリプトを扱い方法： 4 = XSL Formatter V4; 5 = Antenna House Formatter V5; 6 = Antenna House Formatter V6</seg>
       </tuv>
     </tu>
     <tu>
@@ -4544,14 +4520,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Syntax error: content-width=""</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171011T104448Z" creationid="mtan" creationdate="20151028T171917Z">
-        <seg>シンタックスエラー：content-width=""</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Syntax error: content-width=""::</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190527T154520Z" creationid="mtan" creationdate="20190527T154520Z">
@@ -5196,14 +5164,6 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190527T154520Z" creationid="mtan" creationdate="20190527T154520Z">
         <seg>シンタックスエラー： page-number-treatment=""::</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Syntax error: page-position=""::</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20190527T154520Z" creationid="mtan" creationdate="20190527T154520Z">
-        <seg>シンタックスエラー： page-position=""::</seg>
       </tuv>
     </tu>
     <tu>
@@ -6808,10 +6768,10 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Use axf:background-size with AH Formatter V6.6 or later.</seg>
+        <seg>Use axf:background-size with Antenna House Formatter V6.6 or later.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190520T160616Z" creationid="mtan" creationdate="20190520T160616Z">
-        <seg>AH Formatter V6.6 以降で axf:background-size を利用します。</seg>
+        <seg>Antenna House Formatter V6.6 以降で axf:background-size を利用します。</seg>
       </tuv>
     </tu>
     <tu>
@@ -6860,14 +6820,6 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T120050Z" creationid="mtan" creationdate="20190522T145924Z">
         <seg>リッチメディアに Flash を埋め込むときの変数： &lt;string&gt;</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Vertical (or horizontal if writing-mode is vertical) float alignment: none | before | after | top | bottom | left | right | center | inside | outside</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T154132Z" creationid="mtan" creationdate="20160120T123158Z">
-        <seg>垂直（縦書きでは水平）方向のフロート配置： none | before | after | top | bottom | left | right | center | inside | outside</seg>
       </tuv>
     </tu>
     <tu>
@@ -8856,42 +8808,10 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>break-after="" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100913Z" creationid="mtan" creationdate="20151029T151656Z">
-        <seg>break-after="" は auto、column、page、even-page、odd-page 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>break-after="" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100801Z" creationid="mtan" creationdate="20151029T151549Z">
-        <seg>break-after="" は auto、column、page、even-page、odd-page 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>break-after="".</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T121802Z" creationid="mtan" creationdate="20190527T154650Z">
         <seg>break-after="" です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>break-before="" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T101044Z" creationid="mtan" creationdate="20151029T151754Z">
-        <seg>break-before="" は auto、column、page、even-page、odd-page 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>break-before="" should be 'auto', 'column', 'page', 'even-page', 'odd-page', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T100943Z" creationid="mtan" creationdate="20151029T151712Z">
-        <seg>break-before="" は auto、column、page、even-page、odd-page 又は inherit でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -9368,34 +9288,10 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>content-width="" should be EnumerationToken, Length, or Percent.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T113717Z" creationid="mtan" creationdate="20151028T171904Z">
-        <seg>content-width="" は EnumerationToken、Length 又は Percent でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>content-width="" enumeration token is ''.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T113655Z" creationid="mtan" creationdate="20151028T171724Z">
-        <seg>content-width="" の EnumerationToken は  です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>content-width="" should be 'auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit', Length, or Percent.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T111919Z" creationid="mtan" creationdate="20151029T154819Z">
         <seg>content-width="" は auto、scale-to-fit、scale-down-to-fit、scale-up-to-fit、inherit、Length 又は Percent でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>content-width="" should be EnumerationToken, Length, or Percent.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171016T113626Z" creationid="mtan" creationdate="20151028T171603Z">
-        <seg>content-width="" は EnumerationToken、Length 又は Percent でなければなりません。</seg>
       </tuv>
     </tu>
     <tu>
@@ -11848,30 +11744,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>page-position="" should be 'only', 'first', 'last', 'rest', 'any', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T143949Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>page-position="" は only、first、last、rest、any 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>page-position="" should be 'only', 'first', 'last', 'rest', 'any', or 'inherit'.</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171012T143842Z" creationid="mtan" creationdate="20151102T153431Z">
-        <seg>page-position="" は only、first、last、rest、any 又は inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>page-position="".</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20190528T152311Z" creationid="mtan" creationdate="20190528T093045Z">
-        <seg>page-position="" です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>page-width="" should be 'auto', 'indefinite', 'inherit', or Length.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T144116Z" creationid="mtan" creationdate="20151102T153431Z">
@@ -12576,10 +12448,10 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>should not be used with AH Formatter V6.6 or later.</seg>
+        <seg>should not be used with Antenna House Formatter V6.6 or later.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T114639Z" creationid="mtan" creationdate="20190520T160146Z">
-        <seg>AH Formatter V6.6 以降に利用できません。</seg>
+        <seg>Antenna House Formatter V6.6 以降に利用できません。</seg>
       </tuv>
     </tu>
     <tu>

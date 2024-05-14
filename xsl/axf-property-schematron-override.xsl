@@ -28,7 +28,7 @@
 <!--                                                               -->
 <!-- ============================================================= -->
 <!--
-     Copyright 2015 Antenna House, Inc.
+     Copyright 2015-2023 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -79,22 +79,26 @@
 
 <!-- Extended property values to override definitions in XSL spec.  -->
 <xsl:variable name="property-value-overrides" as="element(item)+">
-  <!-- AH Formatter adds 'paginate'. -->
+  <!-- Antenna House Formatter adds 'paginate'. -->
   <item property="background-repeat">repeat | repeat-x | repeat-y | no-repeat | paginate</item>
-  <!-- AH Formatter adds 'transparent'. -->
+  <!-- Antenna House Formatter adds 'even-document' and 'odd-document'. -->
+  <item property="break-after">auto | column | page | even-page | odd-page | even-document | odd-document</item>
+  <!-- Antenna House Formatter adds 'even-document' and 'odd-document'. -->
+  <item property="break-before">auto | column | page | even-page | odd-page | even-document | odd-document</item>
+  <!-- Antenna House Formatter adds 'transparent'. -->
   <item property="color">&lt;color> | transparent | inherit</item>
-  <!-- AH Formatter supports these three values. -->
+  <!-- Antenna House Formatter supports these three values. -->
   <item property="color-profile-name">#CMYK | #Grayscale | #RGB</item>
-  <!-- AH Formatter adds 'justify'. -->
+  <!-- Antenna House Formatter adds 'justify'. -->
   <item property="display-align">auto | before | center | after | justify</item>
-  <!-- AH Formatter allows <percentage>. -->
+  <!-- Antenna House Formatter allows <percentage>. -->
   <item property="font-stretch">normal | wider | narrower | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded | inherit | &lt;percentage> | &lt;number></item>
   <item property="font-weight">normal | bold | bolder | lighter | &lt;integer> | inherit</item>
-  <!-- AH Formatter V7.2 allows 'none'. -->
+  <!-- Antenna House Formatter V7.2 allows 'none'. -->
   <item property="hyphenate">none | false | true | inherit</item>
   <item property="leader-alignment">none | reference-area | page | start | center | end</item>
   <item property="odd-or-even">odd | even | odd-document | even-document | any</item>
-  <!-- AH Formatter adds 'replace' and 'condense' and does not support 'scroll'. -->
+  <!-- Antenna House Formatter adds 'replace' and 'condense' and does not support 'scroll'. -->
   <item property="overflow">visible | hidden | scroll | error-if-overflow | repeat | replace | condense | auto</item>
 </xsl:variable>
 
@@ -110,6 +114,7 @@ content-type
 country
 external-destination
 font-family
+force-page-count
 format
 grouping-separator
 hyphenation-character
@@ -117,6 +122,7 @@ id
 index-key
 internal-destination
 language
+page-position
 ref-id
 ref-index-key
 reference-orientation

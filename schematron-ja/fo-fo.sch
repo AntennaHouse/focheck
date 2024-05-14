@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2015-2019 Antenna House, Inc.
+     Copyright 2015-2023 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -191,7 +191,8 @@
 
   <rule context="fo:marker/@marker-class-name">
     <!-- https://www.w3.org/TR/xsl/#fo_marker -->
-    <!-- Error in XSL 1.1 spec, but AH Formatter not complaining. -->
+    <!-- Error in XSL 1.1 spec, but Antenna House Formatter not
+         complaining. -->
     <assert test="count(../../fo:marker[@marker-class-name eq current()]) = 1" role="Warning">marker-class-name=&quot;<value-of select="."/>&quot; は 同じ親を持つ fo:marker の中で特殊でなければなりません。</assert>
   </rule>
 

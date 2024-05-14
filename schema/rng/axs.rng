@@ -3,7 +3,7 @@
   <!--
     Schema for Antenna House Option Setting File.
     
-    Copyright 2015-2022 Antenna House, Inc.
+    Copyright 2015-2023 Antenna House, Inc.
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -60,6 +60,11 @@
       <param name="maxInclusive">100</param>
     </data>
   </define>
+  <define name="length.model">
+    <data type="token">
+      <param name="pattern">[+\-]?(([0-9]+(\.[0-9]*)?)|\.[0-9]+)('cm' | 'mm' | 'in' | 'pt' | 'pc' | 'px'| 'ex' | 'jpt' | 'q' | 'dpi' | 'dd' | 'cc' | 'rem' | 'ch' | 'wch' | 'lh' | 'rlh' | 'vw' | 'vh' | 'vmin' | 'vmax' | 'pvw' | 'pvh' | 'pvmin' | 'pvmax' | 'gr')</param>
+    </data>
+  </define>
   <define name="monochrome.compression.list">
     <choice>
       <value>ccitt4</value>
@@ -67,6 +72,24 @@
       <value>runlength</value>
       <value>zlib</value>
       <value>none</value>
+    </choice>
+  </define>
+  <define name="named-length.list">
+    <choice>
+      <value>veryverythinmathspace</value>
+      <value>verythinmathspace</value>
+      <value>thinmathspace</value>
+      <value>mediummathspace</value>
+      <value>thickmathspace</value>
+      <value>verythickmathspace</value>
+      <value>veryverythickmathspace</value>
+      <value>negativeveryverythinmathspace</value>
+      <value>negativeverythinmathspace</value>
+      <value>negativethinmathspace</value>
+      <value>negativemediummathspace</value>
+      <value>negativethickmathspace</value>
+      <value>negativeverythickmathspace</value>
+      <value>negativeveryverythickmathspace</value>
     </choice>
   </define>
   <define name="pass-through.model">
@@ -208,6 +231,9 @@
       <ref name="ps-settings"/>
     </optional>
     <optional>
+      <ref name="svg-render-settings"/>
+    </optional>
+    <optional>
       <ref name="svg-settings"/>
     </optional>
     <optional>
@@ -305,7 +331,7 @@
     </optional>
     <optional>
       <attribute name="baseline-mode">
-        <a:documentation>Mode for handling baselines of mixed scripts: 4 = AH Formatter V4; 5 = AH Formatter V5; 6 = AH Formatter V6</a:documentation>
+        <a:documentation>Mode for handling baselines of mixed scripts: 4 = XSL Formatter V4; 5 = Antenna House Formatter V5; 6 = Antenna House Formatter V6</a:documentation>
         <choice>
           <value>4</value>
           <value>5</value>
@@ -361,7 +387,29 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="css-media-type">
+      <attribute name="condensed-text-align-last">
+        <a:documentation>Initial value when 'axf:condensed-text-align-last="auto"': true | false | justify</a:documentation>
+        <choice>
+          <ref name="ah.boolean"/>
+          <value>justify</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="css-allow-bare-expression">
+        <a:documentation>Whether expressions not enclosed in 'calc()' are allowed: true | false</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="css-child-match-root">
+        <a:documentation>Whether pseudo-classes match root element: true | false</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="css-float-in-float">
+        <a:documentation>Whether nested floats are allowed in CSS: true | false</a:documentation>
         <data type="NCName"/>
       </attribute>
     </optional>
@@ -447,8 +495,7 @@
       <attribute name="fixed-width-space-treatment">
         <a:documentation>Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always</a:documentation>
         <choice>
-          <value>false</value>
-          <value>true</value>
+          <ref name="ah.boolean"/>
           <value>always</value>
         </choice>
       </attribute>
@@ -480,6 +527,12 @@
     </optional>
     <optional>
       <attribute name="hyphen-min">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="ignore-certificate-error">
+        <a:documentation>Whether to ignore certificate errors: true | false</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
@@ -668,6 +721,14 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="text-autospace-mode">
+        <choice>
+          <value>6</value>
+          <value>7</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="text-autospace-width"/>
     </optional>
     <optional>
@@ -725,6 +786,18 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="unresolved-internal-destination">
+        <a:documentation>Error level for an unresolved internal-destination</a:documentation>
+        <choice>
+          <value>0</value>
+          <value>1</value>
+          <value>2</value>
+          <value>3</value>
+          <value>4</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="use-default-page-margin-CSS">
         <ref name="ah.boolean"/>
       </attribute>
@@ -753,7 +826,66 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="WindowsFontAPI"/>
+      <attribute name="watermark-fill-color">
+        <a:documentation>Fill color for 'watermark-text'</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="watermark-font-family"/>
+    </optional>
+    <optional>
+      <attribute name="watermark-font-style"/>
+    </optional>
+    <optional>
+      <attribute name="watermark-font-weight"/>
+    </optional>
+    <optional>
+      <attribute name="watermark-opacity">
+        <a:documentation>Opacity for 'watermark-text'</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="watermark-stroke-color">
+        <a:documentation>Stroke color for 'watermark-text'</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="watermark-stroke-width">
+        <a:documentation>Stroke width for 'watermark-text'</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="watermark-rotate">
+        <a:documentation>Angle of rotation for 'watermark-text'</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="watermark-scale">
+        <a:documentation>Magnification for 'watermark-text'</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="watermark-text"/>
+    </optional>
+    <optional>
+      <attribute name="watermark2-font-family"/>
+    </optional>
+    <optional>
+      <attribute name="watermark2-font-style"/>
+    </optional>
+    <optional>
+      <attribute name="watermark2-font-weight"/>
+    </optional>
+    <optional>
+      <attribute name="watermark2-text"/>
+    </optional>
+    <optional>
+      <attribute name="white-space-collapse-mode">
+        <choice>
+          <value>6</value>
+          <value>7</value>
+        </choice>
+      </attribute>
     </optional>
     <optional>
       <attribute name="zwsp-mode">
@@ -1495,6 +1627,12 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="mediabox-origin-zero">
+        <a:documentation>Whether the origin of /MediaBox is adjusted to '(0,0)': true | false</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="monochrome-compression">
         <ref name="monochrome.compression.list"/>
       </attribute>
@@ -1970,8 +2108,37 @@
   </define>
   <define name="mathml-settings.attlist">
     <optional>
-      <attribute name="double_struck">
-        <data type="NCName"/>
+      <attribute name="mathDisplay">
+        <choice>
+          <value>inline</value>
+          <value>block</value>
+          <value>context</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="scriptsizemultiplier">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="scriptsizemultiplierMscarries">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="scriptminsize">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="scriptmaxsize">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="largeop-multiplier">
+        <data type="decimal"/>
       </attribute>
     </optional>
     <optional>
@@ -2014,17 +2181,13 @@
         <data type="integer"/>
       </attribute>
     </optional>
-    <optional>
-      <attribute name="scriptminsize">
-        <data type="NMTOKEN"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="scriptsizemultiplier">
-        <data type="decimal"/>
-      </attribute>
-    </optional>
   </define>
+  <!--
+    ,
+    attribute  { xsd:NMTOKEN }?,
+    attribute  { xsd:decimal }?,
+    attribute scriptsizemultiplier { xsd:decimal }?
+  -->
   <define name="munderover">
     <element name="munderover">
       <ref name="munderover.attlist"/>
@@ -2035,8 +2198,12 @@
     <empty/>
   </define>
   <define name="munderover.attlist">
-    <attribute name="bar-padding"/>
-    <attribute name="bar-width"/>
+    <optional>
+      <attribute name="bar-padding"/>
+    </optional>
+    <optional>
+      <attribute name="bar-width"/>
+    </optional>
     <optional>
       <attribute name="integral-largeop-overscript-space">
         <data type="decimal"/>
@@ -2069,6 +2236,70 @@
     <attribute name="underaccent-shift"/>
     <attribute name="underbar-space"/>
     <attribute name="underscript-space"/>
+  </define>
+  <define name="svg-render-settings">
+    <element name="svg-render-settings">
+      <ref name="svg-render-settings.attlist"/>
+      <ref name="svg-render-settings.model"/>
+    </element>
+  </define>
+  <define name="svg-render-settings.attlist">
+    <optional>
+      <attribute name="current-color-eval-at-painting">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="image-element-eval-as-svg20">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="inherit-svg-fill-color">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="outermost-svg-eval-as-isolate">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="radial-gradient-eval-as-svg20">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rasterize-dpi">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rasterize-size-lower-limit">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rasterize-size-upper-limit">
+        <data type="decimal"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="responsive-svg-size"/>
+    </optional>
+    <optional>
+      <attribute name="use-element-eval-as-shadow-element">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="width-height-as-presentation-attribute">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="svg-render-settings.model">
+    <empty/>
   </define>
   <define name="svg-settings">
     <element name="svg-settings">

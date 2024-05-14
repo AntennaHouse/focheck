@@ -47,7 +47,7 @@
   <rule context="axf:form-field[@field-type = 'button']">
     <assert test="empty(@internal-destination) or exists(@internal-destination) and (empty(@action-type) or @action-type = 'goto')">'action-type' may only be 'goto' with &lt;axf:form-field field-type="button" internal-destiniation="..."></assert>
     <assert test="empty(@external-destination) or exists(@external-destination) and (empty(@action-type) or @action-type = ('gotor', 'launch', 'uri'))">'action-type' may only be 'gotor', 'launch', or 'uri' with &lt;axf:form-field field-type="button" external-destination="..."></assert>
-    <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning">An '<value-of select="name()" />' should not have both 'internal-destination' and 'external-destination' properties.  AH Formatter may report an error or may use 'internal-destination'.</report>
+    <report test="exists(@internal-destination) and exists(@external-destination)" role="Warning">An '<value-of select="name()" />' should not have both 'internal-destination' and 'external-destination' properties.  Antenna House Formatter may report an error or may use 'internal-destination'.</report>
   </rule>
 </pattern>
 

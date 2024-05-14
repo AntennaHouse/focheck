@@ -96,7 +96,7 @@
         </choice>
       </oneOrMore>
     </define>
-    <!-- AH Formatter allows fo:region-* in any order. -->
+    <!-- Antenna House Formatter allows fo:region-* in any order. -->
     <define name="fo_simple-page-master.model">
       <interleave>
         <oneOrMore>
@@ -116,7 +116,10 @@
         </optional>
       </interleave>
     </define>
-    <!-- AH Formatter uses some axf:* elements within fo:declarations. -->
+    <!--
+      Antenna House Formatter uses some axf:* elements within
+      fo:declarations.
+    -->
     <define name="fo_declarations.model">
       <zeroOrMore>
         <choice>
@@ -127,6 +130,7 @@
           <ref name="axf_font-face"/>
           <ref name="axf_formatter-config"/>
           <ref name="axf_hyphenation-info"/>
+          <ref name="axf_script-font"/>
           <ref name="axf_space-between-digit-and-punctuation"/>
           <ref name="axf_space-between-punctuation-and-digit"/>
           <ref name="axf_space-end-punctuation"/>
@@ -136,7 +140,10 @@
         </choice>
       </zeroOrMore>
     </define>
-    <!-- AH Formatter allows axf:document-info with multi-volume output. -->
+    <!--
+      Antenna House Formatter allows axf:document-info with multi-volume
+      output.
+    -->
     <define name="fo_page-sequence.model">
       <optional>
         <ref name="axf_document-info"/>
@@ -157,7 +164,7 @@
         <ref name="fo_flow"/>
       </oneOrMore>
     </define>
-    <!-- AH Formatter allows empty fo:static-content. -->
+    <!-- Antenna House Formatter allows empty fo:static-content. -->
     <define name="fo_static-content.model">
       <interleave>
         <zeroOrMore>
@@ -171,7 +178,7 @@
         </zeroOrMore>
       </interleave>
     </define>
-    <!-- AH Formatter allows fo:block-container to omit block FOs. -->
+    <!-- Antenna House Formatter allows fo:block-container to omit block FOs. -->
     <define name="fo_block-container.model">
       <zeroOrMore>
         <ref name="fo_marker"/>
@@ -188,7 +195,7 @@
         </zeroOrMore>
       </interleave>
     </define>
-    <!-- AH Formatter allows fo:inline-container to omit block FOs. -->
+    <!-- Antenna House Formatter allows fo:inline-container to omit block FOs. -->
     <define name="fo_inline-container.model">
       <zeroOrMore>
         <ref name="fo_marker"/>
@@ -205,7 +212,7 @@
         </zeroOrMore>
       </interleave>
     </define>
-    <!-- AH Formatter allows empty fo:list-item. -->
+    <!-- Antenna House Formatter allows empty fo:list-item. -->
     <define name="fo_list-item.model">
       <zeroOrMore>
         <ref name="fo_marker"/>
@@ -220,7 +227,7 @@
         </zeroOrMore>
       </interleave>
     </define>
-    <!-- AH Formatter allows fo:list-item-label omit block FOs. -->
+    <!-- Antenna House Formatter allows fo:list-item-label omit block FOs. -->
     <define name="fo_list-item-label.model">
       <zeroOrMore>
         <ref name="fo_marker"/>
@@ -238,7 +245,7 @@
       </interleave>
     </define>
     <!--
-      AH Formatter allows fo:table-cell to omit block FOs.
+      Antenna House Formatter allows fo:table-cell to omit block FOs.
       axf:table-cell-repeated-marker used when cell repeats.
     -->
     <define name="fo_table-cell.model">
@@ -466,6 +473,21 @@
     <attribute name="src"/>
     <attribute name="font-family"/>
     <optional>
+      <attribute name="font-stretch">
+        <choice>
+          <value>normal</value>
+          <value>ultra-condensed</value>
+          <value>extra-condensed</value>
+          <value>condensed</value>
+          <value>semi-condensed</value>
+          <value>semi-expanded</value>
+          <value>expanded</value>
+          <value>extra-expanded</value>
+          <value>ultra-expanded</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="font-style">
         <choice>
           <value>normal</value>
@@ -490,6 +512,77 @@
         </choice>
       </attribute>
     </optional>
+    <optional>
+      <attribute name="size-adjust"/>
+    </optional>
+    <optional>
+      <attribute name="unicode-range"/>
+    </optional>
+  </define>
+  <!--
+    <axf:script-font>
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.script-font
+  -->
+  <define name="axf_script-font">
+    <element name="axf:script-font">
+      <a:documentation>Additional hyphenation information</a:documentation>
+      <!-- Reuse script-font.attlist from axs.rnc. -->
+      <ref name="script-font.attlist"/>
+      <ref name="axf_script-font.model"/>
+    </element>
+  </define>
+  <define name="axf_script-font.model">
+    <empty/>
+  </define>
+  <define name="axf_script-font.attlist">
+    <attribute name="src"/>
+    <attribute name="font-family"/>
+    <optional>
+      <attribute name="font-stretch">
+        <choice>
+          <value>normal</value>
+          <value>ultra-condensed</value>
+          <value>extra-condensed</value>
+          <value>condensed</value>
+          <value>semi-condensed</value>
+          <value>semi-expanded</value>
+          <value>expanded</value>
+          <value>extra-expanded</value>
+          <value>ultra-expanded</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="font-style">
+        <choice>
+          <value>normal</value>
+          <value>italic</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="font-weight">
+        <choice>
+          <value>normal</value>
+          <value>bold</value>
+          <value>100</value>
+          <value>200</value>
+          <value>300</value>
+          <value>400</value>
+          <value>500</value>
+          <value>600</value>
+          <value>700</value>
+          <value>800</value>
+          <value>900</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="size-adjust"/>
+    </optional>
+    <optional>
+      <attribute name="unicode-range"/>
+    </optional>
   </define>
   <!--
     <axf:footnote-number/>
@@ -498,8 +591,10 @@
   <define name="axf_footnote-number">
     <element name="axf:footnote-number">
       <a:documentation>Generates a footnote number</a:documentation>
-      <ref name="id"/>
-      <ref name="xml_id"/>
+      <choice>
+        <ref name="id"/>
+        <ref name="xml_id"/>
+      </choice>
       <empty/>
     </element>
   </define>
@@ -962,6 +1057,7 @@
   <!-- FOs that are not descendants of fo:flow -->
   <define name="fo_root.attlist" combine="interleave">
     <ref name="axf_layer-settings"/>
+    <ref name="axf_require"/>
     <ref name="xml_id"/>
   </define>
   <define name="fo_page-sequence.attlist" combine="interleave">
@@ -1038,6 +1134,7 @@
   </define>
   <define name="fo_region-body.attlist" combine="interleave">
     <ref name="axf_column-fill"/>
+    <ref name="axf_column-rule"/>
     <ref name="axf_column-rule-align"/>
     <ref name="axf_column-rule-color"/>
     <ref name="axf_column-rule-display"/>
@@ -1094,6 +1191,7 @@
     <ref name="axf_column-count"/>
     <ref name="axf_column-fill"/>
     <ref name="axf_column-gap"/>
+    <ref name="axf_column-rule"/>
     <ref name="axf_column-rule-align"/>
     <ref name="axf_column-rule-color"/>
     <ref name="axf_column-rule-display"/>
@@ -1117,7 +1215,7 @@
   </define>
   <define name="fo_external-graphic.attlist" combine="interleave">
     <ref name="axf_alttext"/>
-    <ref name="axf_background-image-resolution"/>
+    <ref name="axf_image-orientation"/>
     <ref name="axf_image-resolution"/>
     <ref name="xml_id"/>
     <ref name="axf.inline.attlist"/>
@@ -1172,7 +1270,7 @@
   </define>
   <define name="fo_instream-foreign-object.attlist" combine="interleave">
     <ref name="axf_alttext"/>
-    <ref name="axf_background-image-resolution"/>
+    <ref name="axf_image-orientation"/>
     <ref name="axf_image-resolution"/>
     <ref name="xml_id"/>
     <ref name="axf.inline.attlist"/>
@@ -1288,6 +1386,8 @@
     <ref name="axf_background-content-width"/>
     <ref name="axf_background-content-height"/>
     <ref name="axf_background-content-type"/>
+    <ref name="axf_background-image"/>
+    <ref name="axf_background-image-resolution"/>
     <ref name="axf_background-origin"/>
     <ref name="axf_background-scaling"/>
     <ref name="axf_background-size"/>
@@ -1318,6 +1418,7 @@
     <ref name="axf_annotation-contents"/>
     <ref name="axf_annotation-createdate"/>
     <ref name="axf_annotation-file-attachment"/>
+    <ref name="axf_annotation-file-name"/>
     <ref name="axf_annotation-flags"/>
     <ref name="axf_annotation-font-family"/>
     <ref name="axf_annotation-font-size"/>
@@ -1420,6 +1521,7 @@
   <define name="axf.block.attlist">
     <ref name="axf.annotation.properties"/>
     <ref name="axf-baseline-grid-properties"/>
+    <ref name="axf_break-distance"/>
     <ref name="axf-outline-properties"/>
     <ref name="axf_analyze-lines-after"/>
     <ref name="axf_analyze-lines-before"/>
@@ -1630,6 +1732,18 @@
       <attribute name="axf:annotation-file-attachment">
         <a:documentation>File with which file attachment annotation is related: &lt;uri-specification&gt;</a:documentation>
         <data type="anyURI"/>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:annotation-file-name
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.annotation-file-name
+  -->
+  <define name="axf_annotation-file-name">
+    <optional>
+      <attribute name="axf:annotation-file-name">
+        <a:documentation>Alternate file name to output: &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2138,6 +2252,18 @@
     </optional>
   </define>
   <!--
+    @axf:break-distance
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.break-distance
+  -->
+  <define name="axf_break-distance">
+    <optional>
+      <attribute name="axf:break-distance">
+        <a:documentation>Effective height for 'break-after' and 'break-before': always | &lt;length&gt; | &lt;percentage&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:column-count
     
     https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.column-count
@@ -2174,6 +2300,18 @@
     <optional>
       <attribute name="axf:column-gap">
         <a:documentation>The gap between columns: &lt;length&gt; | &lt;percentage&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:column-rule
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.column-rule
+  -->
+  <define name="axf_column-rule">
+    <optional>
+      <attribute name="axf:column-rule">
+        <a:documentation>Column rule shorthand: &lt;border-width&gt; || &lt;border-style&gt; || &lt;color&gt; || &lt;column-rule-display&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2935,7 +3073,7 @@
   <define name="axf_float-x">
     <optional>
       <attribute name="axf:float-x">
-        <a:documentation>Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside | alternate</a:documentation>
+        <a:documentation>Horizontal (or vertical if writing-mode is vertical) float alignment: none | start | end | left | right | top | bottom | center | inside | outside | alternate | column-outside</a:documentation>
         <choice>
           <value>none</value>
           <value>start</value>
@@ -2948,6 +3086,7 @@
           <value>inside</value>
           <value>outside</value>
           <value>alternate</value>
+          <value>column-outside</value>
         </choice>
       </attribute>
     </optional>
@@ -2960,7 +3099,7 @@
   <define name="axf_float-y">
     <optional>
       <attribute name="axf:float-y">
-        <a:documentation>Vertical (or horizontal if writing-mode is vertical) float alignment:    none | before | after | top | bottom | left | right | center | inside | outside</a:documentation>
+        <a:documentation>Vertical (or horizontal if writing-mode is vertical) float alignment:    none | before | after | top | bottom | left | right | center | inside | outside | anchor</a:documentation>
         <choice>
           <value>none</value>
           <value>before</value>
@@ -2972,6 +3111,7 @@
           <value>center</value>
           <value>inside</value>
           <value>outside</value>
+          <value>anchor</value>
         </choice>
       </attribute>
     </optional>
@@ -3302,6 +3442,18 @@
     </optional>
   </define>
   <!--
+    @axf:image-orientation
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.image-orientation
+  -->
+  <define name="axf_image-orientation">
+    <optional>
+      <attribute name="axf:image-orientation">
+        <a:documentation>Orientation of an image: from-image | none | [ 0 | 90 | 180 | 270 ] flip?</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:image-resolution
     
     https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.image-resolution
@@ -3309,7 +3461,7 @@
   <define name="axf_image-resolution">
     <optional>
       <attribute name="axf:image-resolution">
-        <a:documentation>Resolution of a background image: [ normal | [ from-image || &lt;dpi&gt; ] ]#</a:documentation>
+        <a:documentation>Resolution of an image: [ normal | [ from-image || &lt;dpi&gt; ] ]#</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -3958,14 +4110,14 @@
     </optional>
   </define>
   <!--
-    @axf:reverse-diagonal-border-style
+    @axf:require
     
-    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.reverse-diagonal-border-style
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.require
   -->
-  <define name="axf_reverse-diagonal-border-style">
+  <define name="axf_require">
     <optional>
-      <attribute name="axf:reverse-diagonal-border-style">
-        <a:documentation>Style of the reverse diagonal border: &lt;border-style&gt;</a:documentation>
+      <attribute name="axf:require">
+        <a:documentation>Antenna House Formatter version required for formatting: &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -3979,6 +4131,18 @@
       <attribute name="axf:retrieve-table-rows">
         <a:documentation>Maximum number of fo:table-row in fo:marker referenced from fo:retrieve-table-marker: &lt;integer&gt;</a:documentation>
         <data type="integer"/>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:reverse-diagonal-border-style
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.reverse-diagonal-border-style
+  -->
+  <define name="axf_reverse-diagonal-border-style">
+    <optional>
+      <attribute name="axf:reverse-diagonal-border-style">
+        <a:documentation>Style of the reverse diagonal border: &lt;border-style&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
