@@ -652,6 +652,8 @@
         <ref name="axf_form-field-option"/>
         <ref name="axf_form-field-event"/>
         <ref name="fo_external-graphic"/>
+        <ref name="fo_inline"/>
+        <text/>
       </choice>
     </zeroOrMore>
   </define>
@@ -685,6 +687,7 @@
     <ref name="axf_field-top-index"/>
     <ref name="axf_field-type"/>
     <ref name="axf_field-value"/>
+    <ref name="color"/>
     <ref name="common-border-padding-and-background-properties"/>
     <ref name="external-destination"/>
     <ref name="height"/>
@@ -1122,6 +1125,7 @@
     <ref name="axf_printer-marks-line-color"/>
     <ref name="axf_printer-marks-line-length"/>
     <ref name="axf_printer-marks-line-width"/>
+    <ref name="axf_printer-marks-over-content"/>
     <ref name="axf_printer-marks-spine-width"/>
     <ref name="axf_printer-marks-zero-margin"/>
     <ref name="background-color"/>
@@ -1215,6 +1219,7 @@
   <define name="fo_external-graphic.attlist" combine="interleave">
     <ref name="axf_alttext"/>
     <ref name="axf_image-orientation"/>
+    <ref name="axf_image-preproc"/>
     <ref name="axf_image-resolution"/>
     <ref name="xml_id"/>
     <ref name="axf.inline.attlist"/>
@@ -2186,7 +2191,7 @@
   <define name="axf_border-radius">
     <optional>
       <attribute>
-        <a:documentation>丸め罫の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+        <a:documentation>丸め罫の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?diagonal?</a:documentation>
         <choice>
           <name>axf:border-radius</name>
           <name>border-radius</name>
@@ -2197,7 +2202,7 @@
   <define name="axf_border-top-left-radius">
     <optional>
       <attribute>
-        <a:documentation>丸め罫の左上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+        <a:documentation>丸め罫の左上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?diagonal?</a:documentation>
         <choice>
           <name>axf:border-top-left-radius</name>
           <name>border-top-left-radius</name>
@@ -2208,7 +2213,7 @@
   <define name="axf_border-top-right-radius">
     <optional>
       <attribute>
-        <a:documentation>丸め罫の右上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+        <a:documentation>丸め罫の右上の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?diagonal?</a:documentation>
         <choice>
           <name>axf:border-top-right-radius</name>
           <name>border-top-right-radius</name>
@@ -2219,7 +2224,7 @@
   <define name="axf_border-bottom-left-radius">
     <optional>
       <attribute>
-        <a:documentation>丸め罫の左下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+        <a:documentation>丸め罫の左下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?diagonal?</a:documentation>
         <choice>
           <name>axf:border-bottom-left-radius</name>
           <name>border-bottom-left-radius</name>
@@ -2230,7 +2235,7 @@
   <define name="axf_border-bottom-right-radius">
     <optional>
       <attribute>
-        <a:documentation>丸め罫の右下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?</a:documentation>
+        <a:documentation>丸め罫の右下の径： [&lt;length&gt;|&lt;percentage&gt;] [&lt;length&gt;|&lt;percentage&gt;]?diagonal?</a:documentation>
         <choice>
           <name>axf:border-bottom-right-radius</name>
           <name>border-bottom-right-radius</name>
@@ -3453,6 +3458,18 @@
     </optional>
   </define>
   <!--
+    @axf:image-preproc
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-preproc
+  -->
+  <define name="axf_image-preproc">
+    <optional>
+      <attribute name="axf:image-preproc">
+        <a:documentation>Parameters for image preprocessor: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:image-resolution
     
     https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-resolution
@@ -4036,14 +4053,14 @@
     </optional>
   </define>
   <!--
-    @axf:printer-marks-zero-margin
+    @axf:printer-marks-over-content
     
-    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.printer-marks-zero-margin
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.printer-marks-over-content
   -->
-  <define name="axf_printer-marks-zero-margin">
+  <define name="axf_printer-marks-over-content">
     <optional>
-      <attribute name="axf:printer-marks-zero-margin">
-        <a:documentation>bleed が 0 のときの、版面とトンボの間のマージン： &lt;length&gt; | auto</a:documentation>
+      <attribute name="axf:printer-marks-over-content">
+        <a:documentation>Whether printer marks are drawn over page content: true | false</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -4056,6 +4073,18 @@
     <optional>
       <attribute name="axf:printer-marks-spine-width">
         <a:documentation>見開きの背表紙の幅： &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:printer-marks-zero-margin
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.printer-marks-zero-margin
+  -->
+  <define name="axf_printer-marks-zero-margin">
+    <optional>
+      <attribute name="axf:printer-marks-zero-margin">
+        <a:documentation>bleed が 0 のときの、版面とトンボの間のマージン： &lt;length&gt; | auto</a:documentation>
       </attribute>
     </optional>
   </define>

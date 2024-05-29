@@ -341,7 +341,11 @@ axf_form-field =
     axf_form-field.attlist, axf_form-field.model
   }
 axf_form-field.model =
-  (axf_form-field-option | axf_form-field-event | fo_external-graphic)*
+  (axf_form-field-option
+   | axf_form-field-event
+   | fo_external-graphic
+   | fo_inline
+   | text)*
 axf_form-field.attlist =
   # 'action-type' is required for <axf:form-field-event>.
   axf_action-type.form,
@@ -372,6 +376,7 @@ axf_form-field.attlist =
   axf_field-top-index,
   axf_field-type,
   axf_field-value,
+  color,
   common-border-padding-and-background-properties,
   external-destination,
   height,
@@ -672,6 +677,7 @@ fo_simple-page-master.attlist &=
   axf_printer-marks-line-color,
   axf_printer-marks-line-length,
   axf_printer-marks-line-width,
+  axf_printer-marks-over-content,
   axf_printer-marks-spine-width,
   axf_printer-marks-zero-margin,
   background-color,
@@ -745,6 +751,7 @@ fo_character.attlist &=
 fo_external-graphic.attlist &=
   axf_alttext,
   axf_image-orientation,
+  axf_image-preproc,
   axf_image-resolution,
   xml_id,
   axf.inline.attlist,
@@ -1324,29 +1331,29 @@ axf_bleed-right =
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.border-radius
 axf_border-radius =
   
-  ## 丸め罫の径： [<length>|<percentage>] [<length>|<percentage>]?
+  ## 丸め罫の径： [<length>|<percentage>] [<length>|<percentage>]?diagonal?
   attribute axf:border-radius | border-radius { text }?
 axf_border-top-left-radius =
   
-  ## 丸め罫の左上の径： [<length>|<percentage>] [<length>|<percentage>]?
+  ## 丸め罫の左上の径： [<length>|<percentage>] [<length>|<percentage>]?diagonal?
   attribute axf:border-top-left-radius | border-top-left-radius {
     text
   }?
 axf_border-top-right-radius =
   
-  ## 丸め罫の右上の径： [<length>|<percentage>] [<length>|<percentage>]?
+  ## 丸め罫の右上の径： [<length>|<percentage>] [<length>|<percentage>]?diagonal?
   attribute axf:border-top-right-radius | border-top-right-radius {
     text
   }?
 axf_border-bottom-left-radius =
   
-  ## 丸め罫の左下の径： [<length>|<percentage>] [<length>|<percentage>]?
+  ## 丸め罫の左下の径： [<length>|<percentage>] [<length>|<percentage>]?diagonal?
   attribute axf:border-bottom-left-radius | border-bottom-left-radius {
     text
   }?
 axf_border-bottom-right-radius =
   
-  ## 丸め罫の右下の径： [<length>|<percentage>] [<length>|<percentage>]?
+  ## 丸め罫の右下の径： [<length>|<percentage>] [<length>|<percentage>]?diagonal?
   attribute axf:border-bottom-right-radius
             | border-bottom-right-radius { text }?
 # @axf:box-shadow
@@ -1981,6 +1988,13 @@ axf_image-orientation =
   
   ## Orientation of an image: from-image | none | [ 0 | 90 | 180 | 270 ] flip?
   attribute axf:image-orientation { text }?
+# @axf:image-preproc
+# 
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-preproc
+axf_image-preproc =
+  
+  ## Parameters for image preprocessor: <string>
+  attribute axf:image-preproc { text }?
 # @axf:image-resolution
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-resolution
@@ -2299,13 +2313,13 @@ axf_printer-marks-line-width =
   
   ## トンボの線の幅
   attribute axf:printer-marks-line-width { text }?
-# @axf:printer-marks-zero-margin
+# @axf:printer-marks-over-content
 # 
-# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.printer-marks-zero-margin
-axf_printer-marks-zero-margin =
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.printer-marks-over-content
+axf_printer-marks-over-content =
   
-  ## bleed が 0 のときの、版面とトンボの間のマージン： <length> | auto
-  attribute axf:printer-marks-zero-margin { text }?
+  ## Whether printer marks are drawn over page content: true | false
+  attribute axf:printer-marks-over-content { text }?
 # @axf:printer-marks-spine-width
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.printer-marks-spine-width
@@ -2313,6 +2327,13 @@ axf_printer-marks-spine-width =
   
   ## 見開きの背表紙の幅： <length>
   attribute axf:printer-marks-spine-width { text }?
+# @axf:printer-marks-zero-margin
+# 
+# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.printer-marks-zero-margin
+axf_printer-marks-zero-margin =
+  
+  ## bleed が 0 のときの、版面とトンボの間のマージン： <length> | auto
+  attribute axf:printer-marks-zero-margin { text }?
 # @axf:quotetype
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.quotetype

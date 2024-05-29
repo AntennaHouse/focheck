@@ -540,11 +540,12 @@
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  <xs:complexType name="axf_form-field.model">
+  <xs:complexType name="axf_form-field.model" mixed="true">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element ref="axf:form-field-option"/>
       <xs:element ref="axf:form-field-event"/>
       <xs:element ref="fo:external-graphic"/>
+      <xs:element ref="fo:inline"/>
     </xs:choice>
   </xs:complexType>
   <xs:attributeGroup name="axf_form-field.attlist">
@@ -576,6 +577,7 @@
     <xs:attributeGroup ref="axf:axf_field-top-index"/>
     <xs:attributeGroup ref="axf:axf_field-type"/>
     <xs:attributeGroup ref="axf:axf_field-value"/>
+    <xs:attributeGroup ref="fo:color"/>
     <xs:attributeGroup ref="fo:common-border-padding-and-background-properties"/>
     <xs:attributeGroup ref="fo:external-destination"/>
     <xs:attributeGroup ref="fo:height"/>
@@ -3003,6 +3005,18 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
+    @axf:image-preproc
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-preproc
+  -->
+  <xs:attributeGroup name="axf_image-preproc">
+    <xs:attribute name="image-preproc" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Parameters for image preprocessor: &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:image-resolution
     
     https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-resolution
@@ -3601,14 +3615,14 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
-    @axf:printer-marks-zero-margin
+    @axf:printer-marks-over-content
     
-    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.printer-marks-zero-margin
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.printer-marks-over-content
   -->
-  <xs:attributeGroup name="axf_printer-marks-zero-margin">
-    <xs:attribute name="printer-marks-zero-margin" form="qualified">
+  <xs:attributeGroup name="axf_printer-marks-over-content">
+    <xs:attribute name="printer-marks-over-content" form="qualified">
       <xs:annotation>
-        <xs:documentation>bleed が 0 のときの、版面とトンボの間のマージン： &lt;length&gt; | auto</xs:documentation>
+        <xs:documentation>Whether printer marks are drawn over page content: true | false</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -3621,6 +3635,18 @@
     <xs:attribute name="printer-marks-spine-width" form="qualified">
       <xs:annotation>
         <xs:documentation>見開きの背表紙の幅： &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:printer-marks-zero-margin
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.printer-marks-zero-margin
+  -->
+  <xs:attributeGroup name="axf_printer-marks-zero-margin">
+    <xs:attribute name="printer-marks-zero-margin" form="qualified">
+      <xs:annotation>
+        <xs:documentation>bleed が 0 のときの、版面とトンボの間のマージン： &lt;length&gt; | auto</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>

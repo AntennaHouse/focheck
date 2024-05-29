@@ -7,7 +7,7 @@
   <!--
     Schema for Antenna House Option Setting File.
     
-    Copyright 2015-2023 Antenna House, Inc.
+    Copyright 2015-2024 Antenna House, Inc.
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@
   </xs:simpleType>
   <xs:simpleType name="length.model">
     <xs:restriction base="xs:token">
-      <xs:pattern value="[+\-]?(([0-9]+(\.[0-9]*)?)|\.[0-9]+)('cm' | 'mm' | 'in' | 'pt' | 'pc' | 'px'| 'ex' | 'jpt' | 'q' | 'dpi' | 'dd' | 'cc' | 'rem' | 'ch' | 'wch' | 'lh' | 'rlh' | 'vw' | 'vh' | 'vmin' | 'vmax' | 'pvw' | 'pvh' | 'pvmin' | 'pvmax' | 'gr')"/>
+      <xs:pattern value="[+\-]?(([0-9]+(\.[0-9]*)?)|\.[0-9]+)(cm|mm|in|pt|pc|px|ex|jpt|q|dpi|dd|cc|rem|ch|wch|lh|rlh|vw|vh|vmin|vmax|pvw|pvh|pvmin|pvmax|gr)"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="monochrome.compression.list">
@@ -201,15 +201,19 @@
       <xs:enumeration value="Khmr"/>
       <xs:enumeration value="Laoo"/>
       <xs:enumeration value="Mymr"/>
-      <xs:enumeration value="Kana"/>
-      <xs:enumeration value="Hira"/>
       <xs:enumeration value="Hang"/>
-      <xs:enumeration value="Hani"/>
       <xs:enumeration value="Hans"/>
       <xs:enumeration value="Hant"/>
       <xs:enumeration value="Jpan"/>
+      <xs:enumeration value="Zsye"/>
+      <xs:enumeration value="Zsym"/>
       <xs:enumeration value="."/>
       <xs:enumeration value=""/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ah.errorNumber">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="[0-9]+|0x[0-9a-fA-F]+"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:attributeGroup name="language-code-space.atts">
@@ -237,11 +241,11 @@
       <xs:element minOccurs="0" ref="axs:font-settings"/>
       <xs:element minOccurs="0" ref="axs:pdf-settings"/>
       <xs:element minOccurs="0" ref="axs:ps-settings"/>
-      <xs:element minOccurs="0" ref="axs:svg-render-settings"/>
-      <xs:element minOccurs="0" ref="axs:svg-settings"/>
-      <xs:element minOccurs="0" ref="axs:text-settings"/>
       <xs:element minOccurs="0" ref="axs:mathml-settings"/>
+      <xs:element minOccurs="0" ref="axs:svg-settings"/>
+      <xs:element minOccurs="0" ref="axs:svg-render-settings"/>
       <xs:element minOccurs="0" ref="axs:cgm-settings"/>
+      <xs:element minOccurs="0" ref="axs:text-settings"/>
       <xs:element minOccurs="0" ref="axs:xslt-settings"/>
       <xs:element minOccurs="0" ref="axs:analyzer-settings"/>
     </xs:sequence>
@@ -272,7 +276,26 @@
     </xs:sequence>
   </xs:complexType>
   <xs:attributeGroup name="formatter-settings.attlist">
-    <xs:attribute name="abbreviation-character-count" type="xs:integer"/>
+    <xs:attribute name="abbreviation-character-count" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>Number of characters considered an abbreviation when a line break is inserted</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="append-non-end-of-line-characters" type="xs:token">
+      <xs:annotation>
+        <xs:documentation>Additional non-end-of-line characters</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="append-non-starter-characters" type="xs:token">
+      <xs:annotation>
+        <xs:documentation>Additional non-starter characters</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="apply-default-html-css-to-XML" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to apply the Default CSS for HTML (html.css) even for XML+CSS</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="auto-break-footnote" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether to automatically break footnotes when axf:footnote-max-height=​"auto": true | false</xs:documentation>
@@ -288,6 +311,11 @@
           <xs:enumeration value="xhtml"/>
         </xs:restriction>
       </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="avoid-orphan-single-word" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Languages that are not allowed to have single-letter words at the end of the line</xs:documentation>
+      </xs:annotation>
     </xs:attribute>
     <xs:attribute name="avoid-widow-words-cjk-punctuation" type="axs:ah.boolean">
       <xs:annotation>
@@ -311,22 +339,37 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="bidi-override-mode" type="xs:integer"/>
     <xs:attribute name="bold-ratio" type="xs:decimal"/>
-    <xs:attribute name="border-medium-width" type="xs:NMTOKEN"/>
-    <xs:attribute name="border-thick-width" type="xs:NMTOKEN"/>
-    <xs:attribute name="border-thin-width" type="xs:NMTOKEN"/>
+    <xs:attribute name="border-medium-width" type="axs:length.model"/>
+    <xs:attribute name="border-thick-width" type="axs:length.model"/>
+    <xs:attribute name="border-thin-width" type="axs:length.model"/>
+    <xs:attribute name="boxshadow-resolution-dpi">
+      <xs:annotation>
+        <xs:documentation>DPI of image when blurring a box shadow.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:positiveInteger">
+          <xs:minInclusive value="72"/>
+          <xs:maxInclusive value="1440"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="bpil">
       <xs:annotation>
         <xs:documentation>Languages or scripts to which to apply Knuth-Plass Breaking Paragraphs into Lines [BPIL]</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="bpil-limit-chars" type="xs:positiveInteger">
+    <xs:attribute name="bpil-limit-chars">
       <xs:annotation>
         <xs:documentation>Maximum number of characters to which [BPIL] applies: &lt;integer&gt;</xs:documentation>
       </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:positiveInteger">
+          <xs:minInclusive value="1000"/>
+        </xs:restriction>
+      </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="bpil-minimum-line-width">
+    <xs:attribute name="bpil-minimum-line-width" type="xs:positiveInteger">
       <xs:annotation>
         <xs:documentation>Minimum line width (in em) to which to apply [BPIL]: &lt;number&gt;</xs:documentation>
       </xs:annotation>
@@ -360,18 +403,48 @@
         <xs:documentation>Whether pseudo-classes match root element: true | false</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="css-float-in-float" type="xs:NCName">
+    <xs:attribute name="css-debug" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to enable the CSS debugging feature in the GUI: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="css-float-in-float" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether nested floats are allowed in CSS: true | false</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="default-CJK" type="xs:NCName"/>
-    <xs:attribute name="default-color"/>
-    <xs:attribute name="default-font-size" type="xs:NMTOKEN"/>
+    <xs:attribute name="css-media-type">
+      <xs:annotation>
+        <xs:documentation>@media tokens that apply to Antenna House Formatter</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="default-CJK" type="xs:NCName">
+      <xs:annotation>
+        <xs:documentation>Language to be applied when the script for a CJK character is ambiguous</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="default-color">
+      <xs:annotation>
+        <xs:documentation>Default color for text</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="default-font-size" type="xs:NMTOKEN">
+      <xs:annotation>
+        <xs:documentation>Default font size</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="default-from-page-master-region" type="axs:ah.boolean"/>
     <xs:attribute name="default-html-charset" type="xs:NCName"/>
-    <xs:attribute name="default-lang"/>
-    <xs:attribute name="default-lang2" type="xs:NCName"/>
+    <xs:attribute name="default-lang">
+      <xs:annotation>
+        <xs:documentation>Default language code</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="default-lang2" type="xs:NCName">
+      <xs:annotation>
+        <xs:documentation>Default language to use when 'default-lang' is empty</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="default-page-height" type="xs:NMTOKEN"/>
     <xs:attribute name="default-page-margin-bottom"/>
     <xs:attribute name="default-page-margin-left"/>
@@ -379,7 +452,23 @@
     <xs:attribute name="default-page-margin-top"/>
     <xs:attribute name="default-page-width" type="xs:NMTOKEN"/>
     <xs:attribute name="descendant-or-self-files" type="axs:ah.boolean"/>
-    <xs:attribute name="display-alttext" type="axs:ah.boolean"/>
+    <xs:attribute name="display-alttext" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to display axf:alttext content when no image in &lt;fo:external-graphic&gt; or &lt;img&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="double-hyphen-translineation">
+      <xs:annotation>
+        <xs:documentation>Comma-separated languages for which to also place a hyphen at the start of a line</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="error-if-overflow" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to perform 'error-if-overflow' checks when 'overflow="auto"'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="except-non-end-of-line-characters"/>
+    <xs:attribute name="except-non-starter-characters"/>
     <xs:attribute name="external-entity" type="axs:ah.boolean"/>
     <xs:attribute name="family-name-syntax">
       <xs:annotation>
@@ -393,6 +482,7 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
+    <xs:attribute name="fix-css-img-percentage" type="axs:ah.boolean"/>
     <xs:attribute name="fixed-width-space-treatment">
       <xs:annotation>
         <xs:documentation>Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always</xs:documentation>
@@ -412,7 +502,8 @@
         <xs:documentation>Width, in em, of HAIR SPACE (U+200A)</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="hyphenation-min">
+    <xs:attribute name="href-page-link" type="axs:ah.boolean"/>
+    <xs:attribute name="hyphen-min">
       <xs:annotation>
         <xs:documentation>Whether to enable &lt;hyphen-min&gt; in the Hyphenation Exception Dictionary: false | true | without-exceptions</xs:documentation>
       </xs:annotation>
@@ -426,6 +517,14 @@
         </xs:union>
       </xs:simpleType>
     </xs:attribute>
+    <xs:attribute name="hyphenation-keep-mode">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="word"/>
+          <xs:enumeration value="line"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="HyphenationOption" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether to use custom hyphenation processing or TeX hyphenation dictionaries: 'true' | 'false'</xs:documentation>
@@ -436,14 +535,12 @@
         <xs:documentation>Comma-delimited list of languages to hyphenate when HyphenationOption="true"</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="hyphen-min" type="axs:ah.boolean"/>
     <xs:attribute name="ignore-certificate-error" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether to ignore certificate errors: true | false</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="intrusion-displace-mode" type="xs:integer"/>
-    <xs:attribute name="img-alt" type="axs:ah.boolean"/>
     <xs:attribute name="issue-scale-to-fit" type="axs:ah.boolean"/>
     <xs:attribute name="jamo-ligature" type="axs:ah.boolean">
       <xs:annotation>
@@ -453,18 +550,52 @@
     <xs:attribute name="justify-leader" type="axs:ah.boolean"/>
     <xs:attribute name="justify-rowspan-height" type="axs:ah.boolean"/>
     <xs:attribute name="keep-footnote-anchor" type="axs:ah.boolean"/>
-    <xs:attribute name="latin-ligature" type="axs:ah.boolean"/>
+    <xs:attribute name="latin-ligature" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to process ligatures in European languages</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="no-disp-warnings">
+      <xs:annotation>
+        <xs:documentation>Suppress specific error messages</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction>
+          <xs:simpleType>
+            <xs:list itemType="axs:ah.errorNumber"/>
+          </xs:simpleType>
+          <xs:minLength value="1"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="non-starter-ideographic-space" type="axs:ah.boolean"/>
     <xs:attribute name="normal-line-height"/>
-    <xs:attribute name="normalize" type="xs:NCName"/>
+    <xs:attribute name="normalize">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="nfc"/>
+          <xs:enumeration value="nfd"/>
+          <xs:enumeration value="nfkc"/>
+          <xs:enumeration value="nfkd"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="oblique-skew" type="xs:integer">
       <xs:annotation>
         <xs:documentation>Angle when emulating font-style="oblique" or "backslant": &lt;number&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="omit-uppercase-word-accents"/>
-    <xs:attribute name="output-area-id" type="axs:ah.boolean"/>
-    <xs:attribute name="output-fo-tree" type="axs:ah.boolean"/>
+    <xs:attribute name="osdc-cmd">
+      <xs:annotation>
+        <xs:documentation>Full path to OSDC ('SBCCmd' or 'SBCCmd.exe') program</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="osdc-param">
+      <xs:annotation>
+        <xs:documentation>Additional command-line parameters when running OSDC</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="overflow-limit-block" type="xs:NMTOKEN"/>
     <xs:attribute name="overflow-limit-inline" type="xs:NMTOKEN"/>
     <xs:attribute name="pair-kerning" type="axs:ah.boolean"/>
@@ -473,23 +604,13 @@
     <xs:attribute name="printer-marks-zero-margin"/>
     <xs:attribute name="PrinterOrientation" type="xs:NCName"/>
     <xs:attribute name="PscriptPassThrough" type="axs:ah.boolean"/>
+    <xs:attribute name="pair-kerning" use="required" type="axs:ah.boolean"/>
     <xs:attribute name="punctuation-spacing"/>
     <xs:attribute name="punctuation-trim" type="axs:ah.boolean"/>
     <xs:attribute name="pxpi" type="xs:integer"/>
-    <xs:attribute name="responsive-svg-size">
-      <xs:annotation>
-        <xs:documentation>Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox</xs:documentation>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:token">
-          <xs:enumeration value="reference"/>
-          <xs:enumeration value="viewBox"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
     <xs:attribute name="ruby-align">
       <xs:annotation>
-        <xs:documentation>Ruby alignment when axf:ruby-align="auto"</xs:documentation>
+        <xs:documentation>Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="SeparatePrinterDuplexJob" type="axs:ah.boolean"/>
@@ -607,12 +728,20 @@
     <xs:attribute name="watermark2-font-weight"/>
     <xs:attribute name="watermark2-text"/>
     <xs:attribute name="white-space-collapse-mode">
+      <xs:annotation>
+        <xs:documentation>Compatibility mode for 'white-space-collapse'</xs:documentation>
+      </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
           <xs:enumeration value="6"/>
           <xs:enumeration value="7"/>
         </xs:restriction>
       </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="xml-catalog">
+      <xs:annotation>
+        <xs:documentation>Location of XML Catalog file</xs:documentation>
+      </xs:annotation>
     </xs:attribute>
     <xs:attribute name="zwsp-mode">
       <xs:annotation>
@@ -968,6 +1097,16 @@
     </xs:complexType>
   </xs:element>
   <xs:attributeGroup name="pdf-settings.attlist">
+    <xs:attribute name="allow-deprecated-annotation" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to allow annotation types that are deprecated in PDF 2.0</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="allow-embedding-lower-versions" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to allow PDF 1.x files in PDF 2.0</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="allow-javascript" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether JavaScript specified by openaction or axf:action-type is enabled: true | false</xs:documentation>
@@ -978,7 +1117,6 @@
         <xs:documentation>Whether to set alt text in descendants of tags with alt text: true | false</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="certificate-name" type="xs:NCName"/>
     <xs:attribute name="check-tag-relationship" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether to check the parent-child relationship between tags: true | false</xs:documentation>
@@ -1012,6 +1150,11 @@
           <xs:enumeration value="all-cmyk"/>
         </xs:restriction>
       </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="color-conversion-k100" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to always convert black to K100 when 'color-conversion="all-cmyk"'</xs:documentation>
+      </xs:annotation>
     </xs:attribute>
     <xs:attribute name="color-downsampling" type="axs:downsampling.list"/>
     <xs:attribute name="color-downsampling-above-dpi" type="axs:dpi.model"/>
@@ -1145,7 +1288,7 @@
     <xs:attribute name="import-tagged-pdf" type="axs:ah.boolean"/>
     <xs:attribute name="import-textmarkup-annotation" type="axs:ah.boolean"/>
     <xs:attribute name="joboptions"/>
-    <xs:attribute name="jpeg-quality" type="xs:integer"/>
+    <xs:attribute name="jpeg-quality" type="axs:jpeg-quality.model"/>
     <xs:attribute name="linearized" type="axs:ah.boolean"/>
     <xs:attribute name="mediabox-origin-zero" type="axs:ah.boolean">
       <xs:annotation>
@@ -1178,7 +1321,11 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="new-tagging-mode" type="axs:ah.boolean"/>
+    <xs:attribute name="new-tagging-mode" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to enable the role map and axf:pdftag="''" support: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="no-accessibility" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether to permit text access for screen reader devices of PDF files: false | true</xs:documentation>
@@ -1519,26 +1666,58 @@
     </xs:complexType>
   </xs:element>
   <xs:attributeGroup name="svg-settings.attlist">
-    <xs:attribute name="base-uri"/>
-    <xs:attribute name="copy-image-path"/>
-    <xs:attribute name="copy-image-prefix"/>
-    <xs:attribute name="embed-all-fonts" type="axs:ah.boolean"/>
-    <xs:attribute name="encoding"/>
-    <xs:attribute name="error-on-embed-fault" type="axs:ah.boolean"/>
+    <xs:attribute name="copy-image-path">
+      <xs:annotation>
+        <xs:documentation>Destination directory when 'image-processing' is 'copy-all' or 'copy'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="copy-image-prefix">
+      <xs:annotation>
+        <xs:documentation>Prefix to add to files copied to 'copy-image-path' directory</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="create-copy-image-path" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to create 'copy-image-path' directory if it does not exist</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="format"/>
     <xs:attribute name="gzip-compression" type="axs:ah.boolean"/>
     <xs:attribute name="image-conversion" type="xs:NCName"/>
-    <xs:attribute name="image-downsampling-dpi" type="axs:dpi.model"/>
-    <xs:attribute name="image-downsampling-method" type="xs:integer"/>
     <xs:attribute name="image-processing" type="xs:NCName"/>
-    <xs:attribute name="jpeg-quality" type="xs:integer"/>
-    <xs:attribute name="rasterize-resolution" type="xs:integer"/>
-    <xs:attribute name="rename-copy-image" type="axs:ah.boolean"/>
-    <xs:attribute name="single-file-max-height"/>
-    <xs:attribute name="single-file-max-pages" type="xs:integer"/>
-    <xs:attribute name="single-page-number" type="axs:ah.boolean"/>
-    <xs:attribute name="singlefile" type="axs:ah.boolean"/>
-    <xs:attribute name="svg-version" type="xs:decimal"/>
+    <xs:attribute name="jpeg-quality" type="axs:jpeg-quality.model">
+      <xs:annotation>
+        <xs:documentation>Image quality for images that cannot be embedded directly in SVG</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="rename-copy-image" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to add 'copy-image-prefix' prefix when copying files</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="singlefile" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether multi-page formatted result is output as a single SVG file</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="singlefile-number" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to add a sequence number to a one-page formatted document when 'singlefile="false"'</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="svg-version">
+      <xs:annotation>
+        <xs:documentation>SVG version to create</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="2.0"/>
+          <xs:enumeration value="1.1"/>
+          <xs:enumeration value="Basic"/>
+          <xs:enumeration value="Tiny"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:attributeGroup>
   <xs:element name="text-settings">
     <xs:complexType/>

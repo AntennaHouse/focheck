@@ -38,14 +38,6 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>'@xml:lang' should be specified on fo:root to indicate the natural language of the text and metadata.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20190528T155941Z" creationid="mtan" creationdate="20190528T103840Z">
-        <seg>@xml:lang は テクストとメタデータの自然言語を表示するために fo:root で指定されてはいけません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>'action-type' may only be 'goto' with &lt;axf:form-field field-type="button" internal-destiniation="..."&gt;</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="mtan" changedate="20200521T104633Z" creationid="mtan" creationdate="20200521T103847Z">

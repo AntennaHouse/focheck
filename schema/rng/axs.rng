@@ -3,7 +3,7 @@
   <!--
     Schema for Antenna House Option Setting File.
     
-    Copyright 2015-2023 Antenna House, Inc.
+    Copyright 2015-2024 Antenna House, Inc.
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@
   </define>
   <define name="length.model">
     <data type="token">
-      <param name="pattern">[+\-]?(([0-9]+(\.[0-9]*)?)|\.[0-9]+)('cm' | 'mm' | 'in' | 'pt' | 'pc' | 'px'| 'ex' | 'jpt' | 'q' | 'dpi' | 'dd' | 'cc' | 'rem' | 'ch' | 'wch' | 'lh' | 'rlh' | 'vw' | 'vh' | 'vmin' | 'vmax' | 'pvw' | 'pvh' | 'pvmin' | 'pvmax' | 'gr')</param>
+      <param name="pattern">[+\-]?(([0-9]+(\.[0-9]*)?)|\.[0-9]+)(cm|mm|in|pt|pc|px|ex|jpt|q|dpi|dd|cc|rem|ch|wch|lh|rlh|vw|vh|vmin|vmax|pvw|pvh|pvmin|pvmax|gr)</param>
     </data>
   </define>
   <define name="monochrome.compression.list">
@@ -186,16 +186,25 @@
       <value>Khmr</value>
       <value>Laoo</value>
       <value>Mymr</value>
-      <value>Kana</value>
-      <value>Hira</value>
+      <!--
+        | 'Kana'
+        | 'Hira'
+      -->
       <value>Hang</value>
-      <value>Hani</value>
+      <!-- | 'Hani' -->
       <value>Hans</value>
       <value>Hant</value>
       <value>Jpan</value>
+      <value>Zsye</value>
+      <value>Zsym</value>
       <value>.</value>
       <value/>
     </choice>
+  </define>
+  <define name="ah.errorNumber">
+    <data type="token">
+      <param name="pattern">[0-9]+|0x[0-9a-fA-F]+</param>
+    </data>
   </define>
   <define name="language-code-space.atts">
     <attribute name="language">
@@ -231,19 +240,19 @@
       <ref name="ps-settings"/>
     </optional>
     <optional>
-      <ref name="svg-render-settings"/>
+      <ref name="mathml-settings"/>
     </optional>
     <optional>
       <ref name="svg-settings"/>
     </optional>
     <optional>
-      <ref name="text-settings"/>
-    </optional>
-    <optional>
-      <ref name="mathml-settings"/>
+      <ref name="svg-render-settings"/>
     </optional>
     <optional>
       <ref name="cgm-settings"/>
+    </optional>
+    <optional>
+      <ref name="text-settings"/>
     </optional>
     <optional>
       <ref name="xslt-settings"/>
@@ -299,7 +308,26 @@
   <define name="formatter-settings.attlist">
     <optional>
       <attribute name="abbreviation-character-count">
+        <a:documentation>Number of characters considered an abbreviation when a line break is inserted</a:documentation>
         <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="append-non-end-of-line-characters">
+        <a:documentation>Additional non-end-of-line characters</a:documentation>
+        <data type="token" datatypeLibrary=""/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="append-non-starter-characters">
+        <a:documentation>Additional non-starter characters</a:documentation>
+        <data type="token" datatypeLibrary=""/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="apply-default-html-css-to-XML">
+        <a:documentation>Whether to apply the Default CSS for HTML (html.css) even for XML+CSS</a:documentation>
+        <ref name="ah.boolean"/>
       </attribute>
     </optional>
     <optional>
@@ -315,6 +343,12 @@
           <value>html</value>
           <value>xhtml</value>
         </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="avoid-orphan-single-word">
+        <a:documentation>Languages that are not allowed to have single-letter words at the end of the line</a:documentation>
+        <data type="string" datatypeLibrary=""/>
       </attribute>
     </optional>
     <optional>
@@ -340,28 +374,36 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="bidi-override-mode">
-        <data type="integer"/>
-      </attribute>
-    </optional>
-    <optional>
+      <!--
+        'bidi-override-mode' removed in V6.2
+        attribute bidi-override-mode { xsd:integer }?,
+      -->
       <attribute name="bold-ratio">
         <data type="decimal"/>
       </attribute>
     </optional>
     <optional>
       <attribute name="border-medium-width">
-        <data type="NMTOKEN"/>
+        <ref name="length.model"/>
       </attribute>
     </optional>
     <optional>
       <attribute name="border-thick-width">
-        <data type="NMTOKEN"/>
+        <ref name="length.model"/>
       </attribute>
     </optional>
     <optional>
       <attribute name="border-thin-width">
-        <data type="NMTOKEN"/>
+        <ref name="length.model"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="boxshadow-resolution-dpi">
+        <a:documentation>DPI of image when blurring a box shadow.</a:documentation>
+        <data type="positiveInteger">
+          <param name="minInclusive">72</param>
+          <param name="maxInclusive">1440</param>
+        </data>
       </attribute>
     </optional>
     <optional>
@@ -372,12 +414,15 @@
     <optional>
       <attribute name="bpil-limit-chars">
         <a:documentation>Maximum number of characters to which [BPIL] applies: &lt;integer&gt;</a:documentation>
-        <data type="positiveInteger"/>
+        <data type="positiveInteger">
+          <param name="minInclusive">1000</param>
+        </data>
       </attribute>
     </optional>
     <optional>
       <attribute name="bpil-minimum-line-width">
         <a:documentation>Minimum line width (in em) to which to apply [BPIL]: &lt;number&gt;</a:documentation>
+        <data type="positiveInteger"/>
       </attribute>
     </optional>
     <optional>
@@ -408,21 +453,36 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="css-debug">
+        <a:documentation>Whether to enable the CSS debugging feature in the GUI: true | false</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="css-float-in-float">
         <a:documentation>Whether nested floats are allowed in CSS: true | false</a:documentation>
-        <data type="NCName"/>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="css-media-type">
+        <a:documentation>@media tokens that apply to Antenna House Formatter</a:documentation>
       </attribute>
     </optional>
     <optional>
       <attribute name="default-CJK">
+        <a:documentation>Language to be applied when the script for a CJK character is ambiguous</a:documentation>
         <data type="NCName"/>
       </attribute>
     </optional>
     <optional>
-      <attribute name="default-color"/>
+      <attribute name="default-color">
+        <a:documentation>Default color for text</a:documentation>
+      </attribute>
     </optional>
     <optional>
       <attribute name="default-font-size">
+        <a:documentation>Default font size</a:documentation>
         <data type="NMTOKEN"/>
       </attribute>
     </optional>
@@ -437,10 +497,13 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="default-lang"/>
+      <attribute name="default-lang">
+        <a:documentation>Default language code</a:documentation>
+      </attribute>
     </optional>
     <optional>
       <attribute name="default-lang2">
+        <a:documentation>Default language to use when 'default-lang' is empty</a:documentation>
         <data type="NCName"/>
       </attribute>
     </optional>
@@ -473,8 +536,26 @@
     </optional>
     <optional>
       <attribute name="display-alttext">
+        <a:documentation>Whether to display axf:alttext content when no image in &lt;fo:external-graphic&gt; or &lt;img&gt;</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
+    </optional>
+    <optional>
+      <attribute name="double-hyphen-translineation">
+        <a:documentation>Comma-separated languages for which to also place a hyphen at the start of a line</a:documentation>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="error-if-overflow">
+        <a:documentation>Whether to perform 'error-if-overflow' checks when 'overflow="auto"'</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="except-non-end-of-line-characters"/>
+    </optional>
+    <optional>
+      <attribute name="except-non-starter-characters"/>
     </optional>
     <optional>
       <attribute name="external-entity">
@@ -492,6 +573,11 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="fix-css-img-percentage">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="fixed-width-space-treatment">
         <a:documentation>Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always</a:documentation>
         <choice>
@@ -506,11 +592,24 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="hyphenation-min">
+      <attribute name="href-page-link">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="hyphen-min">
         <a:documentation>Whether to enable &lt;hyphen-min&gt; in the Hyphenation Exception Dictionary: false | true | without-exceptions</a:documentation>
         <choice>
           <ref name="ah.boolean"/>
           <value>without-exceptions</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="hyphenation-keep-mode">
+        <choice>
+          <value>word</value>
+          <value>line</value>
         </choice>
       </attribute>
     </optional>
@@ -526,11 +625,6 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="hyphen-min">
-        <ref name="ah.boolean"/>
-      </attribute>
-    </optional>
-    <optional>
       <attribute name="ignore-certificate-error">
         <a:documentation>Whether to ignore certificate errors: true | false</a:documentation>
         <ref name="ah.boolean"/>
@@ -542,11 +636,7 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="img-alt">
-        <ref name="ah.boolean"/>
-      </attribute>
-    </optional>
-    <optional>
+      <!-- attribute img-alt { ah.boolean }?, -->
       <attribute name="issue-scale-to-fit">
         <ref name="ah.boolean"/>
       </attribute>
@@ -574,7 +664,18 @@
     </optional>
     <optional>
       <attribute name="latin-ligature">
+        <a:documentation>Whether to process ligatures in European languages</a:documentation>
         <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="no-disp-warnings">
+        <a:documentation>Suppress specific error messages</a:documentation>
+        <list>
+          <oneOrMore>
+            <ref name="ah.errorNumber"/>
+          </oneOrMore>
+        </list>
       </attribute>
     </optional>
     <optional>
@@ -587,7 +688,13 @@
     </optional>
     <optional>
       <attribute name="normalize">
-        <data type="NCName"/>
+        <choice>
+          <value>none</value>
+          <value>nfc</value>
+          <value>nfd</value>
+          <value>nfkc</value>
+          <value>nfkd</value>
+        </choice>
       </attribute>
     </optional>
     <optional>
@@ -597,19 +704,21 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="omit-uppercase-word-accents"/>
-    </optional>
-    <optional>
-      <attribute name="output-area-id">
-        <ref name="ah.boolean"/>
+      <attribute name="osdc-cmd">
+        <a:documentation>Full path to OSDC ('SBCCmd' or 'SBCCmd.exe') program</a:documentation>
       </attribute>
     </optional>
     <optional>
-      <attribute name="output-fo-tree">
-        <ref name="ah.boolean"/>
+      <attribute name="osdc-param">
+        <a:documentation>Additional command-line parameters when running OSDC</a:documentation>
       </attribute>
     </optional>
     <optional>
+      <!--
+        attribute omit-uppercase-word-accents { text }?,
+        attribute output-area-id { ah.boolean }?,
+        attribute output-fo-tree { ah.boolean }?,
+      -->
       <attribute name="overflow-limit-block">
         <data type="NMTOKEN"/>
       </attribute>
@@ -643,6 +752,9 @@
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
+    <attribute name="pair-kerning">
+      <ref name="ah.boolean"/>
+    </attribute>
     <optional>
       <attribute name="punctuation-spacing"/>
     </optional>
@@ -657,16 +769,9 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="responsive-svg-size">
-        <a:documentation>Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox</a:documentation>
-        <choice>
-          <value>reference</value>
-          <value>viewBox</value>
-        </choice>
-      </attribute>
-    </optional>
-    <optional>
       <attribute name="ruby-align">
+        <a:documentation>Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox</a:documentation>
+        <!-- attribute responsive-svg-size { 'reference' | 'viewBox' }?, -->
         <a:documentation>Ruby alignment when axf:ruby-align="auto"</a:documentation>
       </attribute>
     </optional>
@@ -881,10 +986,16 @@
     </optional>
     <optional>
       <attribute name="white-space-collapse-mode">
+        <a:documentation>Compatibility mode for 'white-space-collapse'</a:documentation>
         <choice>
           <value>6</value>
           <value>7</value>
         </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="xml-catalog">
+        <a:documentation>Location of XML Catalog file</a:documentation>
       </attribute>
     </optional>
     <optional>
@@ -1252,6 +1363,18 @@
   </define>
   <define name="pdf-settings.attlist">
     <optional>
+      <attribute name="allow-deprecated-annotation">
+        <a:documentation>Whether to allow annotation types that are deprecated in PDF 2.0</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="allow-embedding-lower-versions">
+        <a:documentation>Whether to allow PDF 1.x files in PDF 2.0</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="allow-javascript">
         <a:documentation>Whether JavaScript specified by openaction or axf:action-type is enabled: true | false</a:documentation>
         <ref name="ah.boolean"/>
@@ -1264,11 +1387,7 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="certificate-name">
-        <data type="NCName"/>
-      </attribute>
-    </optional>
-    <optional>
+      <!-- attribute certificate-name { xsd:NCName }?, -->
       <attribute name="check-tag-relationship">
         <a:documentation>Whether to check the parent-child relationship between tags: true | false</a:documentation>
         <ref name="ah.boolean"/>
@@ -1302,6 +1421,12 @@
           <value>all-gray</value>
           <value>all-cmyk</value>
         </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-conversion-k100">
+        <a:documentation>Whether to always convert black to K100 when 'color-conversion="all-cmyk"'</a:documentation>
+        <ref name="ah.boolean"/>
       </attribute>
     </optional>
     <optional>
@@ -1618,7 +1743,7 @@
     </optional>
     <optional>
       <attribute name="jpeg-quality">
-        <data type="integer"/>
+        <ref name="jpeg-quality.model"/>
       </attribute>
     </optional>
     <optional>
@@ -1706,6 +1831,7 @@
     </optional>
     <optional>
       <attribute name="new-tagging-mode">
+        <a:documentation>Whether to enable the role map and axf:pdftag="''" support: true | false</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
@@ -2309,28 +2435,28 @@
   </define>
   <define name="svg-settings.attlist">
     <optional>
-      <attribute name="base-uri"/>
+      <!-- attribute base-uri { text }?, -->
+      <attribute name="copy-image-path">
+        <a:documentation>Destination directory when 'image-processing' is 'copy-all' or 'copy'</a:documentation>
+      </attribute>
     </optional>
     <optional>
-      <attribute name="copy-image-path"/>
+      <attribute name="copy-image-prefix">
+        <a:documentation>Prefix to add to files copied to 'copy-image-path' directory</a:documentation>
+      </attribute>
     </optional>
     <optional>
-      <attribute name="copy-image-prefix"/>
-    </optional>
-    <optional>
-      <attribute name="embed-all-fonts">
+      <attribute name="create-copy-image-path">
+        <a:documentation>Whether to create 'copy-image-path' directory if it does not exist</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
     <optional>
-      <attribute name="encoding"/>
-    </optional>
-    <optional>
-      <attribute name="error-on-embed-fault">
-        <ref name="ah.boolean"/>
-      </attribute>
-    </optional>
-    <optional>
+      <!--
+        attribute embed-all-fonts { ah.boolean }?,
+        attribute encoding { text }?,
+        attribute error-on-embed-fault { ah.boolean }?,
+      -->
       <attribute name="format"/>
     </optional>
     <optional>
@@ -2344,56 +2470,53 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="image-downsampling-dpi">
-        <ref name="dpi.model"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="image-downsampling-method">
-        <data type="integer"/>
-      </attribute>
-    </optional>
-    <optional>
+      <!--
+        attribute image-downsampling-dpi { dpi.model }?,
+        attribute image-downsampling-method { xsd:integer }?,
+      -->
       <attribute name="image-processing">
         <data type="NCName"/>
       </attribute>
     </optional>
     <optional>
       <attribute name="jpeg-quality">
-        <data type="integer"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="rasterize-resolution">
-        <data type="integer"/>
+        <a:documentation>Image quality for images that cannot be embedded directly in SVG</a:documentation>
+        <ref name="jpeg-quality.model"/>
       </attribute>
     </optional>
     <optional>
       <attribute name="rename-copy-image">
-        <ref name="ah.boolean"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="single-file-max-height"/>
-    </optional>
-    <optional>
-      <attribute name="single-file-max-pages">
-        <data type="integer"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="single-page-number">
+        <a:documentation>Whether to add 'copy-image-prefix' prefix when copying files</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
     <optional>
       <attribute name="singlefile">
+        <a:documentation>Whether multi-page formatted result is output as a single SVG file</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
     <optional>
+      <attribute name="singlefile-number">
+        <a:documentation>Whether to add a sequence number to a one-page formatted document when 'singlefile="false"'</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <!--
+        attribute rasterize-resolution { xsd:integer }?,
+        attribute single-file-max-height { text }?,
+        attribute single-file-max-pages { xsd:integer }?,
+        attribute single-page-number { ah.boolean }?,
+      -->
       <attribute name="svg-version">
-        <data type="decimal"/>
+        <a:documentation>SVG version to create</a:documentation>
+        <choice>
+          <value>2.0</value>
+          <value>1.1</value>
+          <value>Basic</value>
+          <value>Tiny</value>
+        </choice>
       </attribute>
     </optional>
   </define>

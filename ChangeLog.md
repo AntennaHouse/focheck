@@ -1,3 +1,12 @@
+# focheck 7.4.3
+
+- `axs.rnc` updated to match ahfsettings 7.4.3.
+- Add `axf:image-preproc`, `axf:printer-marks-over-content`, `axf:double-hyphen-translineation`, `axf:initial-letters-start-intrusion`, and `axf:url-break`.
+- `axf:form-field` now allows `fo:inline` and text and optional `color` attribute.
+- `*-radius` properties have optional `diagonal` keyword.
+- Add 'PDF/UA Accessibility' validation scenario.
+- sqf:fix for empty or missing `<fo:root>` `lang` attribute.
+
 # focheck 7.3.2
 
 - **focheck** version numbers now correspond to the Antenna House Formatter version current at the time of the release.

@@ -2,7 +2,7 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 
 # Schema for Antenna House Option Setting File.
 # 
-# Copyright 2015-2023 Antenna House, Inc.
+# Copyright 2015-2024 Antenna House, Inc.
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ jpeg-quality.model =
 length.model =
   xsd:token {
     pattern =
-      "[+\-]?(([0-9]+(\.[0-9]*)?)|\.[0-9]+)('cm' | 'mm' | 'in' | 'pt' | 'pc' | 'px'| 'ex' | 'jpt' | 'q' | 'dpi' | 'dd' | 'cc' | 'rem' | 'ch' | 'wch' | 'lh' | 'rlh' | 'vw' | 'vh' | 'vmin' | 'vmax' | 'pvw' | 'pvh' | 'pvmin' | 'pvmax' | 'gr')"
+      "[+\-]?(([0-9]+(\.[0-9]*)?)|\.[0-9]+)(cm|mm|in|pt|pc|px|ex|jpt|q|dpi|dd|cc|rem|ch|wch|lh|rlh|vw|vh|vmin|vmax|pvw|pvh|pvmin|pvmax|gr)"
   }
 monochrome.compression.list =
   "ccitt4" | "ccitt3" | "runlength" | "zlib" | "none"
@@ -137,15 +137,18 @@ script.list =
   | "Khmr"
   | "Laoo"
   | "Mymr"
-  | "Kana"
-  | "Hira"
-  | "Hang"
-  | "Hani"
-  | "Hans"
+  | # | 'Kana'
+    # | 'Hira'
+    "Hang"
+  | # | 'Hani'
+    "Hans"
   | "Hant"
   | "Jpan"
+  | "Zsye"
+  | "Zsym"
   | "."
   | ""
+ah.errorNumber = xsd:token { pattern = "[0-9]+|0x[0-9a-fA-F]+" }
 language-code-space.atts =
   
   ## Language for which to apply the space
@@ -163,11 +166,11 @@ formatter-config.model =
   font-settings?,
   pdf-settings?,
   ps-settings?,
-  svg-render-settings?,
-  svg-settings?,
-  text-settings?,
   mathml-settings?,
+  svg-settings?,
+  svg-render-settings?,
   cgm-settings?,
+  text-settings?,
   xslt-settings?,
   analyzer-settings?
 formatter-settings =
@@ -188,13 +191,27 @@ formatter-settings.model =
   UAX50*,
   unbreakable-words*
 formatter-settings.attlist =
+  
+  ## Number of characters considered an abbreviation when a line break is inserted
   attribute abbreviation-character-count { xsd:integer }?,
+  
+  ## Additional non-end-of-line characters
+  attribute append-non-end-of-line-characters { token }?,
+  
+  ## Additional non-starter characters
+  attribute append-non-starter-characters { token }?,
+  
+  ## Whether to apply the Default CSS for HTML (html.css) even for XML+CSS
+  attribute apply-default-html-css-to-XML { ah.boolean }?,
   
   ## Whether to automatically break footnotes when axf:footnote-max-height=�?"auto": true | false
   attribute auto-break-footnote { ah.boolean }?,
   
   ## Formatter type when unclear if HTML or XHTML: html | xhtml
   attribute auto-formatter-type { "html" | "xhtml" }?,
+  
+  ## Languages that are not allowed to have single-letter words at the end of the line
+  attribute avoid-orphan-single-word { string }?,
   
   ## Whether to count the last punctuation to be included in one character when axf:avoid-widow-word="true" is specified in CJK: true | false
   attribute avoid-widow-words-cjk-punctuation { ah.boolean }?,
@@ -204,20 +221,28 @@ formatter-settings.attlist =
   
   ## 混合スクリプトを扱い方法： 4 = XSL Formatter V4; 5 = Antenna House Formatter V5; 6 = Antenna House Formatter V6
   attribute baseline-mode { "4" | "5" | "6" }?,
-  attribute bidi-override-mode { xsd:integer }?,
+  # 'bidi-override-mode' removed in V6.2
+  # attribute bidi-override-mode { xsd:integer }?,
   attribute bold-ratio { xsd:decimal }?,
-  attribute border-medium-width { xsd:NMTOKEN }?,
-  attribute border-thick-width { xsd:NMTOKEN }?,
-  attribute border-thin-width { xsd:NMTOKEN }?,
+  attribute border-medium-width { length.model }?,
+  attribute border-thick-width { length.model }?,
+  attribute border-thin-width { length.model }?,
+  
+  ## DPI of image when blurring a box shadow.
+  attribute boxshadow-resolution-dpi {
+    xsd:positiveInteger { minInclusive = "72" maxInclusive = "1440" }
+  }?,
   
   ## Languages or scripts to which to apply Knuth-Plass Breaking Paragraphs into Lines [BPIL]
   attribute bpil { text }?,
   
   ## Maximum number of characters to which [BPIL] applies: <integer>
-  attribute bpil-limit-chars { xsd:positiveInteger }?,
+  attribute bpil-limit-chars {
+    xsd:positiveInteger { minInclusive = "1000" }
+  }?,
   
   ## Minimum line width (in em) to which to apply [BPIL]: <number>
-  attribute bpil-minimum-line-width { text }?,
+  attribute bpil-minimum-line-width { xsd:positiveInteger }?,
   
   ## Frequency of hyphenation in [BPIL] with a value of 0 to 1000
   attribute bpil-penalty-hyphenation {
@@ -233,14 +258,30 @@ formatter-settings.attlist =
   ## Whether pseudo-classes match root element: true | false
   attribute css-child-match-root { ah.boolean }?,
   
+  ## Whether to enable the CSS debugging feature in the GUI: true | false
+  attribute css-debug { ah.boolean }?,
+  
   ## Whether nested floats are allowed in CSS: true | false
-  attribute css-float-in-float { xsd:NCName }?,
+  attribute css-float-in-float { ah.boolean }?,
+  
+  ## @media tokens that apply to Antenna House Formatter
+  attribute css-media-type { text }?,
+  
+  ## Language to be applied when the script for a CJK character is ambiguous
   attribute default-CJK { xsd:NCName }?,
+  
+  ## Default color for text
   attribute default-color { text }?,
+  
+  ## Default font size
   attribute default-font-size { xsd:NMTOKEN }?,
   attribute default-from-page-master-region { ah.boolean }?,
   attribute default-html-charset { xsd:NCName }?,
+  
+  ## Default language code
   attribute default-lang { text }?,
+  
+  ## Default language to use when 'default-lang' is empty
   attribute default-lang2 { xsd:NCName }?,
   attribute default-page-height { xsd:NMTOKEN }?,
   attribute default-page-margin-bottom { text }?,
@@ -249,32 +290,44 @@ formatter-settings.attlist =
   attribute default-page-margin-top { text }?,
   attribute default-page-width { xsd:NMTOKEN }?,
   attribute descendant-or-self-files { ah.boolean }?,
+  
+  ## Whether to display axf:alttext content when no image in <fo:external-graphic> or <img>
   attribute display-alttext { ah.boolean }?,
+  
+  ## Comma-separated languages for which to also place a hyphen at the start of a line
+  attribute double-hyphen-translineation { text }?,
+  
+  ## Whether to perform 'error-if-overflow' checks when 'overflow="auto"'
+  attribute error-if-overflow { ah.boolean }?,
+  attribute except-non-end-of-line-characters { text }?,
+  attribute except-non-starter-characters { text }?,
   attribute external-entity { ah.boolean }?,
   
   ## font-family の構文を厳密にチックする方法： auto | loose | strict
   attribute family-name-syntax { "auto" | "loose" | "strict" }?,
+  attribute fix-css-img-percentage { ah.boolean }?,
   
   ## Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always
   attribute fixed-width-space-treatment { ah.boolean | "always" }?,
   
   ## Width, in em, of HAIR SPACE (U+200A)
   attribute hair-space-width { text }?,
+  attribute href-page-link { ah.boolean }?,
   
   ## ハイフネーション例外辞書に <hyphen-min> ができるかどうか： false | true | without-exceptions
-  attribute hyphenation-min { ah.boolean | "without-exceptions" }?,
+  attribute hyphen-min { ah.boolean | "without-exceptions" }?,
+  attribute hyphenation-keep-mode { "word" | "line" }?,
   
   ## カスタムハイフネーションか TeX ハイフネーションの辞書を利用するかどうか： true | false
   attribute HyphenationOption { ah.boolean }?,
   
   ## HyphenationOption をハイフネーション処理をする言語のカンマ区切りリスト ="true"
   attribute hyphenation-TeX { text }?,
-  attribute hyphen-min { ah.boolean }?,
   
   ## Whether to ignore certificate errors: true | false
   attribute ignore-certificate-error { ah.boolean }?,
   attribute intrusion-displace-mode { xsd:integer }?,
-  attribute img-alt { ah.boolean }?,
+  # attribute img-alt { ah.boolean }?,
   attribute issue-scale-to-fit { ah.boolean }?,
   
   ## Whether to process the ligature of Hangul Jamo (U+1100 to U+11FF)
@@ -282,16 +335,29 @@ formatter-settings.attlist =
   attribute justify-leader { ah.boolean }?,
   attribute justify-rowspan-height { ah.boolean }?,
   attribute keep-footnote-anchor { ah.boolean }?,
+  
+  ## Whether to process ligatures in European languages
   attribute latin-ligature { ah.boolean }?,
+  
+  ## Suppress specific error messages
+  attribute no-disp-warnings {
+    list { ah.errorNumber+ }
+  }?,
   attribute non-starter-ideographic-space { ah.boolean }?,
   attribute normal-line-height { text }?,
-  attribute normalize { xsd:NCName }?,
+  attribute normalize { "none" | "nfc" | "nfd" | "nfkc" | "nfkd" }?,
   
   ## Angle when emulating font-style="oblique" or "backslant": <number>
   attribute oblique-skew { xsd:integer }?,
-  attribute omit-uppercase-word-accents { text }?,
-  attribute output-area-id { ah.boolean }?,
-  attribute output-fo-tree { ah.boolean }?,
+  
+  ## Full path to OSDC ('SBCCmd' or 'SBCCmd.exe') program
+  attribute osdc-cmd { text }?,
+  
+  ## Additional command-line parameters when running OSDC
+  attribute osdc-param { text }?,
+  # attribute omit-uppercase-word-accents { text }?,
+  # attribute output-area-id { ah.boolean }?,
+  # attribute output-fo-tree { ah.boolean }?,
   attribute overflow-limit-block { xsd:NMTOKEN }?,
   attribute overflow-limit-inline { xsd:NMTOKEN }?,
   attribute pair-kerning { ah.boolean }?,
@@ -300,13 +366,13 @@ formatter-settings.attlist =
   attribute printer-marks-zero-margin { text }?,
   attribute PrinterOrientation { xsd:NCName }?,
   attribute PscriptPassThrough { ah.boolean }?,
+  attribute pair-kerning { ah.boolean },
   attribute punctuation-spacing { text }?,
   attribute punctuation-trim { ah.boolean }?,
   attribute pxpi { xsd:integer }?,
   
   ## Whether the size matches the viewBox setting when the width and height of the root element are omitted in SVG: reference | viewBox
-  attribute responsive-svg-size { "reference" | "viewBox" }?,
-  
+  # attribute responsive-svg-size { 'reference' | 'viewBox' }?,
   ## Ruby alignment when axf:ruby-align="auto"
   attribute ruby-align { text }?,
   attribute SeparatePrinterDuplexJob { ah.boolean }?,
@@ -378,7 +444,12 @@ formatter-settings.attlist =
   attribute watermark2-font-style { text }?,
   attribute watermark2-font-weight { text }?,
   attribute watermark2-text { text }?,
+  
+  ## Compatibility mode for 'white-space-collapse'
   attribute white-space-collapse-mode { "6" | "7" }?,
+  
+  ## Location of XML Catalog file
+  attribute xml-catalog { text }?,
   
   ## ZERO WIDTH SPACE (U+200B) 互換性： 5 | 6
   attribute zwsp-mode { "5" | "6" }?
@@ -570,12 +641,18 @@ pdf-settings =
   element pdf-settings { pdf-settings.attlist, pdf-settings.model }
 pdf-settings.attlist =
   
+  ## Whether to allow annotation types that are deprecated in PDF 2.0
+  attribute allow-deprecated-annotation { ah.boolean }?,
+  
+  ## Whether to allow PDF 1.x files in PDF 2.0
+  attribute allow-embedding-lower-versions { ah.boolean }?,
+  
   ## openaction や axf:action-type で JavaScript を指定しても有効にするかどうか： true | false
   attribute allow-javascript { ah.boolean }?,
   
   ## Whether to set alt text in descendants of tags with alt text: true | false
   attribute allow-nest-alt-text { ah.boolean }?,
-  attribute certificate-name { xsd:NCName }?,
+  # attribute certificate-name { xsd:NCName }?,
   
   ## Whether to check the parent-child relationship between tags: true | false
   attribute check-tag-relationship { ah.boolean }?,
@@ -593,6 +670,9 @@ pdf-settings.attlist =
   attribute color-conversion {
     "none" | "black" | "gray" | "all-gray" | "all-cmyk"
   }?,
+  
+  ## Whether to always convert black to K100 when 'color-conversion="all-cmyk"'
+  attribute color-conversion-k100 { ah.boolean }?,
   attribute color-downsampling { downsampling.list }?,
   attribute color-downsampling-above-dpi { dpi.model }?,
   attribute color-downsampling-target-dpi { dpi.model }?,
@@ -679,7 +759,7 @@ pdf-settings.attlist =
   attribute import-tagged-pdf { ah.boolean }?,
   attribute import-textmarkup-annotation { ah.boolean }?,
   attribute joboptions { text }?,
-  attribute jpeg-quality { xsd:integer }?,
+  attribute jpeg-quality { jpeg-quality.model }?,
   attribute linearized { ah.boolean }?,
   
   ## Whether the origin of /MediaBox is adjusted to '(0,0)': true | false
@@ -709,6 +789,8 @@ pdf-settings.attlist =
     | "richmedia"
     | "richmedia-windowed"
   }?,
+  
+  ## Whether to enable the role map and axf:pdftag="''" support: true | false
   attribute new-tagging-mode { ah.boolean }?,
   
   ## 作成する PDF ファイルのスクリーンリーダデバイスのテキストアクセスを許可するか否か： false | true
@@ -886,26 +968,44 @@ svg-render-settings.model = empty
 svg-settings =
   element svg-settings { svg-settings.attlist, svg-settings.model }
 svg-settings.attlist =
-  attribute base-uri { text }?,
+  # attribute base-uri { text }?,
+  
+  ## Destination directory when 'image-processing' is 'copy-all' or 'copy'
   attribute copy-image-path { text }?,
+  
+  ## Prefix to add to files copied to 'copy-image-path' directory
   attribute copy-image-prefix { text }?,
-  attribute embed-all-fonts { ah.boolean }?,
-  attribute encoding { text }?,
-  attribute error-on-embed-fault { ah.boolean }?,
+  
+  ## Whether to create 'copy-image-path' directory if it does not exist
+  attribute create-copy-image-path { ah.boolean }?,
+  # attribute embed-all-fonts { ah.boolean }?,
+  # attribute encoding { text }?,
+  # attribute error-on-embed-fault { ah.boolean }?,
   attribute format { text }?,
   attribute gzip-compression { ah.boolean }?,
   attribute image-conversion { xsd:NCName }?,
-  attribute image-downsampling-dpi { dpi.model }?,
-  attribute image-downsampling-method { xsd:integer }?,
+  # attribute image-downsampling-dpi { dpi.model }?,
+  # attribute image-downsampling-method { xsd:integer }?,
   attribute image-processing { xsd:NCName }?,
-  attribute jpeg-quality { xsd:integer }?,
-  attribute rasterize-resolution { xsd:integer }?,
+  
+  ## Image quality for images that cannot be embedded directly in SVG
+  attribute jpeg-quality { jpeg-quality.model }?,
+  
+  ## Whether to add 'copy-image-prefix' prefix when copying files
   attribute rename-copy-image { ah.boolean }?,
-  attribute single-file-max-height { text }?,
-  attribute single-file-max-pages { xsd:integer }?,
-  attribute single-page-number { ah.boolean }?,
+  
+  ## Whether multi-page formatted result is output as a single SVG file
   attribute singlefile { ah.boolean }?,
-  attribute svg-version { xsd:decimal }?
+  
+  ## Whether to add a sequence number to a one-page formatted document when 'singlefile="false"'
+  attribute singlefile-number { ah.boolean }?,
+  # attribute rasterize-resolution { xsd:integer }?,
+  # attribute single-file-max-height { text }?,
+  # attribute single-file-max-pages { xsd:integer }?,
+  # attribute single-page-number { ah.boolean }?,
+  
+  ## SVG version to create
+  attribute svg-version { "2.0" | "1.1" | "Basic" | "Tiny" }?
 svg-settings.model = empty
 text-settings = element text-settings { empty }
 xslt-settings =
