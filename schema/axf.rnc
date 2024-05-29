@@ -661,6 +661,7 @@ fo_simple-page-master.attlist &=
     axf_printer-marks-line-color,
     axf_printer-marks-line-length,
     axf_printer-marks-line-width,
+    axf_printer-marks-over-content,
     axf_printer-marks-spine-width,
     axf_printer-marks-zero-margin,
     background-color,
@@ -755,6 +756,7 @@ fo_character.attlist &=
 fo_external-graphic.attlist &=
     axf_alttext,
     axf_image-orientation,
+    axf_image-preproc,
     axf_image-resolution,
     xml_id,
     axf.inline.attlist,
@@ -1384,19 +1386,19 @@ axf_bleed-right =
 #
 # https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.border-radius
 axf_border-radius =
-    ## Radii of the rounded corners: [<length>|<percentage>] [<length>|<percentage>]?
+    ## Radii of the rounded corners: [<length>|<percentage>] [<length>|<percentage>]? diagonal?
     attribute axf:border-radius | border-radius { text }?
 axf_border-top-left-radius =
-    ## Radii of the top-left corner: [<length>|<percentage>] [<length>|<percentage>]?
+    ## Radii of the top-left corner: [<length>|<percentage>] [<length>|<percentage>]? diagonal?
     attribute axf:border-top-left-radius | border-top-left-radius { text }?
 axf_border-top-right-radius =
-    ## Radii of the top-right corner: [<length>|<percentage>] [<length>|<percentage>]?
+    ## Radii of the top-right corner: [<length>|<percentage>] [<length>|<percentage>]? diagonal?
     attribute axf:border-top-right-radius | border-top-right-radius { text }?
 axf_border-bottom-left-radius =
-    ## Radii of the bottom-left corner: [<length>|<percentage>] [<length>|<percentage>]?
+    ## Radii of the bottom-left corner: [<length>|<percentage>] [<length>|<percentage>]? diagonal?
     attribute axf:border-bottom-left-radius | border-bottom-left-radius { text }?
 axf_border-bottom-right-radius =
-    ## Radii of the bottom-right corner: [<length>|<percentage>] [<length>|<percentage>]?
+    ## Radii of the bottom-right corner: [<length>|<percentage>] [<length>|<percentage>]? diagonal?
     attribute axf:border-bottom-right-radius | border-bottom-right-radius { text }?
 
 # @axf:box-shadow
@@ -1948,6 +1950,13 @@ axf_image-orientation =
     ## Orientation of an image: from-image | none | [ 0 | 90 | 180 | 270 ] flip?
     attribute axf:image-orientation { text }?
 
+# @axf:image-preproc
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.image-preproc
+axf_image-preproc =
+    ## Parameters for image preprocessor: <string>
+    attribute axf:image-preproc { text }?
+
 # @axf:image-resolution
 #
 # https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.image-resolution
@@ -2256,12 +2265,12 @@ axf_printer-marks-line-width =
     ## Line width of printer marks
     attribute axf:printer-marks-line-width { text }?
 
-# @axf:printer-marks-zero-margin
+# @axf:printer-marks-over-content
 #
-# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.printer-marks-zero-margin
-axf_printer-marks-zero-margin =
-    ## Margin between the page and the printer marks when bleed is 0: <length> | auto
-    attribute axf:printer-marks-zero-margin { text }?
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.printer-marks-over-content
+axf_printer-marks-over-content =
+    ## Whether printer marks are drawn over page content: true | false
+    attribute axf:printer-marks-over-content { text }?
 
 # @axf:printer-marks-spine-width
 #
@@ -2269,6 +2278,13 @@ axf_printer-marks-zero-margin =
 axf_printer-marks-spine-width =
     ## Spine width of the facing page: <length>
     attribute axf:printer-marks-spine-width { text }?
+
+# @axf:printer-marks-zero-margin
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.printer-marks-zero-margin
+axf_printer-marks-zero-margin =
+    ## Margin between the page and the printer marks when bleed is 0: <length> | auto
+    attribute axf:printer-marks-zero-margin { text }?
 
 # @axf:quotetype
 #
