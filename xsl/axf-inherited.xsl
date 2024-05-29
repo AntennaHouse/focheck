@@ -131,6 +131,7 @@
 <property name="axf:diagonal-border-color" model="text" description="Color of the diagonal border" />
 <property name="axf:diagonal-border-width" model="text" description="Width of the diagonal border" />
 <property name="axf:display-alttext" model="'true' | 'false' | 'auto'" description="Whether to display the alternate text of a missing image: true | false | auto" /><!-- V7.0 -->
+<property name="axf:double-hyphen-translineation" model="'true' | 'false' | 'auto'" description="Whether to also place a hyphen at the start of the line when breaking lines at a hyphen: auto | true | false" /><!-- V7.4 -->
 <property name="axf:flush-zone" model="text" description="Threshold for justifying last line: none | &lt;length> | &lt;percentage>" /><!-- V7.0 -->
 <property name="axf:font-feature-settings" model="text" description="OpenType font features: normal | &lt;feature-tag-value>#" /><!-- V6.5 -->
 <property name="axf:hanging-punctuation" model="text" description="Whether to hang punctuations at the start of the line or end of the line: none | [ start || first || [ force-end | allow-end ] || last ]" />
@@ -144,6 +145,7 @@
 <property name="axf:initial-letters-leading-punctuation" model="text" description="Size of the leading punctuation of a dropped initial: normal | hide | [&lt;length> || &lt;color>]" /><!-- V7.0 -->
 <property name="axf:initial-letters-leading-punctuation-position" model="text" description="Position of the leading punctuation of a dropped initial in the inline progression direction: normal | [[hang | intrude] &amp;&amp; &lt;length>?]" /><!-- V7.0 -->
 <property name="axf:initial-letters-leading-punctuation-shift" model="text" description="Position of the leading punctuation of a dropped initial in the block progression direction: normal | [[baseline | before | middle | after] || &lt;length>]" /><!-- V7.0 -->
+<property name="axf:initial-letters-start-intrusion" model="'none' | 'first-line'" description="Alignment of a float on the start side of a dropped initial: none | first-line" /><!-- V7.4 -->
 <property name="axf:initial-letters-text-align" model="'start' | 'center' | 'end' | 'left' | 'right'" description="Alignment of a dropped initial: start | center | end | left | right" /><!-- V7.0 -->
 <property name="axf:initial-letters-width" model="text" description="Width of a dropped initial: auto | &lt;length> | &lt;percentage>" /><!-- V7.0 -->
 <property name="axf:inline-overflow-align" model="'normal' | 'start' | 'end' | 'left' | 'right'" description="Adjustments when the blocks in &lt;fo:inline-container> overflow: normal | start | end | left | right" /><!-- V7.1 -->
@@ -266,6 +268,7 @@
 <property name="axf:word-break" model="'normal' | 'break-all' | 'keep-all' | 'keep-non-spaces'" description="Whether to enable line breaking even inside a word: normal | break-all | keep-all | keep-non-spaces" />
 <property name="axf:word-wrap" model="'normal' | 'break-word'" description="Whether to forcibly break a word when line break cannot be performed: normal | break-word" />
 <property name="text-shadow" model="text" description="Shadow to display behind text: none | [ &lt;length>{{2,3}} &amp;&amp; &lt;color>? ]#" exclude="fo:character fo:initial-property-set fo:leader fo:page-number fo:page-number-citation fo:page-number-citation-last fo:scaling-value-citation" combine="yes" />
+<property name="axf:url-break" model="'normal' | 'chicago'" description="How to perform line breaking in a URL: normal | chicago" /><!-- V7.4 -->
 </xsl:variable>
 
 
