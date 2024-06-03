@@ -328,7 +328,6 @@ formatter-settings.attlist =
    attribute printer-marks-zero-margin { text }?,
    attribute PrinterOrientation { xsd:NCName }?,
    attribute PscriptPassThrough { ah.boolean }?,
-   attribute pair-kerning { ah.boolean },
    attribute punctuation-spacing { text }?,
    attribute punctuation-trim { ah.boolean }?,
    attribute pxpi { xsd:integer }?,
@@ -893,10 +892,12 @@ svg-settings.attlist =
    #attribute error-on-embed-fault { ah.boolean }?,
    attribute format { text }?,
    attribute gzip-compression { ah.boolean }?,
-   attribute image-conversion { xsd:NCName }?,
+   ## Format for image to be embedded that is not already JPEG or PNG: auto | jpeg | png
+   attribute image-conversion { 'auto' | 'jpeg' | 'png' }?,
    #attribute image-downsampling-dpi { dpi.model }?,
    #attribute image-downsampling-method { xsd:integer }?,
-   attribute image-processing { xsd:NCName }?,
+   ## How to treat a referenced image: embed-all | link | copy-all | copy
+   attribute image-processing { 'embed-all' | 'link' | 'copy-all' | 'copy' }?,
    ## Image quality for images that cannot be embedded directly in SVG
    attribute jpeg-quality { jpeg-quality.model }?,
    ## Whether to add 'copy-image-prefix' prefix when copying files
