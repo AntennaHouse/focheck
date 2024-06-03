@@ -2993,18 +2993,6 @@
     </xs:attribute>
   </xs:attributeGroup>
   <!--
-    @axf:image-orientation
-    
-    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-orientation
-  -->
-  <xs:attributeGroup name="axf_image-orientation">
-    <xs:attribute name="image-orientation" form="qualified">
-      <xs:annotation>
-        <xs:documentation>Orientation of an image: from-image | none | [ 0 | 90 | 180 | 270 ] flip?</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-  </xs:attributeGroup>
-  <!--
     @axf:image-preproc
     
     https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-preproc

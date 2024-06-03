@@ -750,7 +750,6 @@ fo_character.attlist &=
   xml_id, axf_quotetype, axf.inline.attlist, axf.text-decoration.attlist
 fo_external-graphic.attlist &=
   axf_alttext,
-  axf_image-orientation,
   axf_image-preproc,
   axf_image-resolution,
   xml_id,
@@ -793,11 +792,7 @@ fo_inline.attlist &=
   axf_indent-here
 fo_inline-container.attlist &= xml_id, axf.inline.attlist
 fo_instream-foreign-object.attlist &=
-  axf_alttext,
-  axf_image-orientation,
-  axf_image-resolution,
-  xml_id,
-  axf.inline.attlist
+  axf_alttext, axf_image-resolution, xml_id, axf.inline.attlist
 fo_leader.attlist &=
   xml_id, axf.inline.attlist, axf.text-decoration.attlist
 fo_list-block.attlist &= axf.block.attlist, xml_id
@@ -1981,13 +1976,6 @@ axf_headers =
   
   ## あるセルがどの見出しに対応する内容である： <idrefs>
   attribute axf:headers { xsd:IDREFS }?
-# @axf:image-orientation
-# 
-# https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-orientation
-axf_image-orientation =
-  
-  ## Orientation of an image: from-image | none | [ 0 | 90 | 180 | 270 ] flip?
-  attribute axf:image-orientation { text }?
 # @axf:image-preproc
 # 
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-preproc

@@ -17671,7 +17671,7 @@
 
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:annotation-color" priority="1055" mode="M9">
+   <xsl:template match="fo:*/@axf:annotation-color" priority="1056" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:annotation-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -17729,7 +17729,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:annotation-contents" priority="1054" mode="M9">
+   <xsl:template match="fo:*/@axf:annotation-contents" priority="1055" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:annotation-contents"/>
 
@@ -17755,7 +17755,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:assumed-page-number" priority="1053" mode="M9">
+   <xsl:template match="fo:*/@axf:assumed-page-number" priority="1054" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:assumed-page-number"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -17797,7 +17797,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-color" priority="1052" mode="M9">
+   <xsl:template match="fo:*/@axf:background-color" priority="1053" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -17861,7 +17861,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-height"
-                 priority="1051"
+                 priority="1052"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-height"/>
@@ -17937,7 +17937,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-content-type" priority="1050" mode="M9">
+   <xsl:template match="fo:*/@axf:background-content-type" priority="1051" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-type"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -18013,7 +18013,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-width"
-                 priority="1049"
+                 priority="1050"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-width"/>
@@ -18100,7 +18100,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-image" priority="1048" mode="M9">
+   <xsl:template match="fo:*/@axf:background-image" priority="1049" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-image"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -18175,7 +18175,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-position" priority="1047" mode="M9">
+   <xsl:template match="fo:*/@background-position" priority="1048" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-position"/>
 
@@ -18195,7 +18195,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-position-horizontal"
-                 priority="1046"
+                 priority="1047"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-horizontal"/>
@@ -18272,7 +18272,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-position-vertical"
-                 priority="1045"
+                 priority="1046"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-vertical"/>
@@ -18348,7 +18348,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-repeat" priority="1044" mode="M9">
+   <xsl:template match="fo:*/@axf:background-repeat" priority="1045" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-repeat"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -18423,7 +18423,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:baseline-block-snap" priority="1043" mode="M9">
+   <xsl:template match="fo:*/@axf:baseline-block-snap" priority="1044" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:baseline-block-snap"/>
 
@@ -18446,7 +18446,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-color" priority="1042" mode="M9">
+   <xsl:template match="fo:*/@axf:outline-color" priority="1043" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:outline-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -18488,7 +18488,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:float" priority="1041" mode="M9">
+   <xsl:template match="fo:*/@axf:float" priority="1042" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:float"/>
       <xsl:variable name="tokens" select="tokenize(normalize-space(.), '\s+')"/>
 
@@ -18530,7 +18530,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-level" priority="1040" mode="M9">
+   <xsl:template match="fo:*/@axf:outline-level" priority="1041" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:outline-level"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -18573,7 +18573,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:background-content-height | fo:*/@axf:background-content-width"
-                 priority="1039"
+                 priority="1040"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-height | fo:*/@axf:background-content-width"/>
@@ -18596,7 +18596,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-scaling" priority="1038" mode="M9">
+   <xsl:template match="fo:*/@axf:background-scaling" priority="1039" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-scaling"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -18674,7 +18674,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:break-distance" priority="1037" mode="M9">
+   <xsl:template match="fo:*/@axf:break-distance" priority="1038" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:break-distance"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -18760,7 +18760,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:column-rule-color" priority="1036" mode="M9">
+   <xsl:template match="fo:*/@axf:column-rule-color" priority="1037" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:column-rule-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -18802,7 +18802,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:column-rule-length" priority="1035" mode="M9">
+   <xsl:template match="fo:*/@axf:column-rule-length" priority="1036" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:column-rule-length"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -18861,7 +18861,7 @@
 
 	  <!--RULE -->
    <xsl:template match="fo:*/@axf:field-button-icon |          fo:*/@axf:field-button-icon-down |          fo:*/@axf:field-button-icon-rollover"
-                 priority="1034"
+                 priority="1035"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:field-button-icon |          fo:*/@axf:field-button-icon-down |          fo:*/@axf:field-button-icon-rollover"/>
@@ -18925,7 +18925,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:field-font-size" priority="1033" mode="M9">
+   <xsl:template match="fo:*/@axf:field-font-size" priority="1034" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:field-font-size"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -19000,7 +19000,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:hyphenation-zone" priority="1032" mode="M9">
+   <xsl:template match="fo:*/@axf:hyphenation-zone" priority="1033" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:hyphenation-zone"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
@@ -19092,7 +19092,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:indent-here" priority="1031" mode="M9">
+   <xsl:template match="fo:*/@axf:indent-here" priority="1032" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:indent-here"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
@@ -19163,6 +19163,30 @@
                <xsl:text/>"</svrl:text>
          </svrl:successful-report>
       </xsl:if>
+   </xsl:template>
+
+	  <!--RULE -->
+   <xsl:template match="fo:*/@axf:image-orientation" priority="1031" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                       context="fo:*/@axf:image-orientation"/>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="normalize-space(.) = ('from-image', 'none', '0', '0 flip', '90', '90 flip', '180', '180 flip', '270', '270 flip')"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="normalize-space(.) = ('from-image', 'none', '0', '0 flip', '90', '90 flip', '180', '180 flip', '270', '270 flip')">
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <xsl:attribute name="line-number" select="saxon:line-number()"/>
+               <xsl:attribute name="column-number" select="saxon:column-number()"/>
+               <svrl:text>axf:image-orientation="<xsl:text/>
+                  <xsl:value-of select="."/>
+                  <xsl:text/>" should be 'from-image | none | [ 0 | 90 | 180 | 270 ] flip?'.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
    </xsl:template>
 
 	  <!--RULE -->

@@ -1218,7 +1218,6 @@
   </define>
   <define name="fo_external-graphic.attlist" combine="interleave">
     <ref name="axf_alttext"/>
-    <ref name="axf_image-orientation"/>
     <ref name="axf_image-preproc"/>
     <ref name="axf_image-resolution"/>
     <ref name="xml_id"/>
@@ -1274,7 +1273,6 @@
   </define>
   <define name="fo_instream-foreign-object.attlist" combine="interleave">
     <ref name="axf_alttext"/>
-    <ref name="axf_image-orientation"/>
     <ref name="axf_image-resolution"/>
     <ref name="xml_id"/>
     <ref name="axf.inline.attlist"/>
@@ -3442,18 +3440,6 @@
       <attribute name="axf:headers">
         <a:documentation>あるセルがどの見出しに対応する内容である： &lt;idrefs&gt;</a:documentation>
         <data type="IDREFS"/>
-      </attribute>
-    </optional>
-  </define>
-  <!--
-    @axf:image-orientation
-    
-    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.image-orientation
-  -->
-  <define name="axf_image-orientation">
-    <optional>
-      <attribute name="axf:image-orientation">
-        <a:documentation>Orientation of an image: from-image | none | [ 0 | 90 | 180 | 270 ] flip?</a:documentation>
       </attribute>
     </optional>
   </define>

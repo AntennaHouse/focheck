@@ -3786,6 +3786,15 @@
 	  <report test="local-name($expression) = 'ERROR'">Syntax error: axf:indent-here="<value-of select="."/>"</report>
 	</rule>
 
+	<!-- axf:image-orientation -->
+	<!-- from-image | none | [ 0 | 90 | 180 | 270 ] flip? -->
+	<!-- Inherited: yes -->
+	<!-- Shorthand: no -->
+	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.image-orientation -->
+	<rule context="fo:*/@axf:image-orientation">
+	  <assert test="normalize-space(.) = ('from-image', 'none', '0', '0 flip', '90', '90 flip', '180', '180 flip', '270', '270 flip')">axf:image-orientation="<value-of select="."/>" should be 'from-image | none | [ 0 | 90 | 180 | 270 ] flip?'.</assert>
+	</rule>
+
 	<!-- axf:initial-letters-color -->
 	<!-- <color> | inherit -->
 	<!-- Inherited: yes -->

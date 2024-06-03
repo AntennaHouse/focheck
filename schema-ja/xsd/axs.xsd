@@ -604,7 +604,6 @@
     <xs:attribute name="printer-marks-zero-margin"/>
     <xs:attribute name="PrinterOrientation" type="xs:NCName"/>
     <xs:attribute name="PscriptPassThrough" type="axs:ah.boolean"/>
-    <xs:attribute name="pair-kerning" use="required" type="axs:ah.boolean"/>
     <xs:attribute name="punctuation-spacing"/>
     <xs:attribute name="punctuation-trim" type="axs:ah.boolean"/>
     <xs:attribute name="pxpi" type="xs:integer"/>
@@ -1683,8 +1682,31 @@
     </xs:attribute>
     <xs:attribute name="format"/>
     <xs:attribute name="gzip-compression" type="axs:ah.boolean"/>
-    <xs:attribute name="image-conversion" type="xs:NCName"/>
-    <xs:attribute name="image-processing" type="xs:NCName"/>
+    <xs:attribute name="image-conversion">
+      <xs:annotation>
+        <xs:documentation>Format for image to be embedded that is not already JPEG or PNG: auto | jpeg | png</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="jpeg"/>
+          <xs:enumeration value="png"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="image-processing">
+      <xs:annotation>
+        <xs:documentation>How to treat a referenced image: embed-all | link | copy-all | copy</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="embed-all"/>
+          <xs:enumeration value="link"/>
+          <xs:enumeration value="copy-all"/>
+          <xs:enumeration value="copy"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="jpeg-quality" type="axs:jpeg-quality.model">
       <xs:annotation>
         <xs:documentation>Image quality for images that cannot be embedded directly in SVG</xs:documentation>

@@ -3767,6 +3767,15 @@
 	
 	
 	
+	<rule context="fo:*/@axf:image-orientation">
+	  <assert test="normalize-space(.) = ('from-image', 'none', '0', '0 flip', '90', '90 flip', '180', '180 flip', '270', '270 flip')">axf:image-orientation="<value-of select="."/>" should be 'from-image | none | [ 0 | 90 | 180 | 270 ] flip?'.</assert>
+	</rule>
+
+	
+	
+	
+	
+	
 	<rule context="fo:*/@axf:initial-letters-color">
 	  <extends rule="color"/>
 	</rule>

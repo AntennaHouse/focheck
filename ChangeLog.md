@@ -1,3 +1,8 @@
+# focheck 7.4.4
+
+- `axs.rnc` updated to match (early) ahfsettings 7.4.4.
+- `axf:image-orientation` is inherited.
+
 # focheck 7.4.3
 
 - `axs.rnc` updated to match ahfsettings 7.4.3.

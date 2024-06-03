@@ -752,9 +752,6 @@
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
-    <attribute name="pair-kerning">
-      <ref name="ah.boolean"/>
-    </attribute>
     <optional>
       <attribute name="punctuation-spacing"/>
     </optional>
@@ -2466,7 +2463,12 @@
     </optional>
     <optional>
       <attribute name="image-conversion">
-        <data type="NCName"/>
+        <a:documentation>Format for image to be embedded that is not already JPEG or PNG: auto | jpeg | png</a:documentation>
+        <choice>
+          <value>auto</value>
+          <value>jpeg</value>
+          <value>png</value>
+        </choice>
       </attribute>
     </optional>
     <optional>
@@ -2475,7 +2477,13 @@
         attribute image-downsampling-method { xsd:integer }?,
       -->
       <attribute name="image-processing">
-        <data type="NCName"/>
+        <a:documentation>How to treat a referenced image: embed-all | link | copy-all | copy</a:documentation>
+        <choice>
+          <value>embed-all</value>
+          <value>link</value>
+          <value>copy-all</value>
+          <value>copy</value>
+        </choice>
       </attribute>
     </optional>
     <optional>
