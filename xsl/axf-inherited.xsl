@@ -139,6 +139,7 @@
 <property name="axf:hyphenate-hyphenated-word" model="'true' | 'false'" description="Whether to hyphenate an already hyphenated word" />
 <property name="axf:hyphenation-minimum-character-count" model="text" description="Minimum number of the character to hyphenate" />
 <property name="axf:hyphenation-zone" model="'none' | text" description="Range where a hyphenation is available: none | &lt;length>" />
+<property name="axf:image-orientation" model="text" description="Orientation of an image: from-image | none | [ 0 | 90 | 180 | 270 ] flip?" />
 <property name="axf:initial-letters-color" model="text" description="Color of a dropped initial: &lt;color>" /><!-- V7.0 -->
 <property name="axf:initial-letters-end-indent" model="text" description="Space on the end side of a dropped initial: &lt;length>+" /><!-- V7.0 -->
 <property name="axf:initial-letters-first-line-head-height" model="'cap-height' | 'x-height' | 'auto'" description="Alignment of the top of an initial letter: cap-height | x-height | auto" /><!-- V7.0 -->

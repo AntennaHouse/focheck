@@ -755,7 +755,6 @@ fo_character.attlist &=
 
 fo_external-graphic.attlist &=
     axf_alttext,
-    axf_image-orientation,
     axf_image-preproc,
     axf_image-resolution,
     xml_id,
@@ -811,7 +810,6 @@ fo_inline-container.attlist &=
 
 fo_instream-foreign-object.attlist &=
     axf_alttext,
-    axf_image-orientation,
     axf_image-resolution,
     xml_id,
     axf.inline.attlist
@@ -1942,13 +1940,6 @@ axf_footnote-max-height =
 axf_headers =
     ## Table header cells associated with this cell: <idrefs>
     attribute axf:headers { xsd:IDREFS }?
-
-# @axf:image-orientation
-#
-# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.image-orientation
-axf_image-orientation =
-    ## Orientation of an image: from-image | none | [ 0 | 90 | 180 | 270 ] flip?
-    attribute axf:image-orientation { text }?
 
 # @axf:image-preproc
 #
