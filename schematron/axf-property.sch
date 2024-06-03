@@ -318,7 +318,7 @@
 	<!-- Shorthand: no -->
 	<!-- https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.image-orientation -->
 	<rule context="fo:*/@axf:image-orientation">
-	  <assert test="normalize-space(.) = ('from-image', 'none', '0', '0 flip', '90', '90 flip', '180', '180 flip', '270', '270 flip')">axf:image-orientation="<value-of select="."/>" should be 'from-image | none | [ 0 | 90 | 180 | 270 ] flip?'.</assert>
+	  <assert test="matches(normalize-space(.), '^(from-image|none|((0|90|180|270)(deg)?( flip)?)$)')">axf:image-orientation="<value-of select="."/>" should be 'from-image | none | [ 0 | 90 | 180 | 270 ] flip?'. 'deg' is optional, e.g., '90deg'.</assert>
 	</rule>
 
 	<!-- axf:initial-letters-color -->
