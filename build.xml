@@ -618,7 +618,10 @@ AFTER making a release on GitHub:
   </zip>
 </target>
 
-<target name="release" depends="add-on.xml, add-on-ja.xml, framework.zip, framework-ja.zip" />
+<target name="release" depends="add-on.xml, add-on-ja.xml, framework.zip, framework-ja.zip">
+    <copy file="${focheck.basedir.converted}/resources/formatter-options/formatter-options.xml"
+	todir="${focheck.basedir.converted}/releases" />
+</target>
 
 <!-- Utility targets. -->
 
