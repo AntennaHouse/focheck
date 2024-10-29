@@ -1676,8 +1676,22 @@
     <xs:attribute name="rasterize-dpi" type="xs:decimal"/>
     <xs:attribute name="rasterize-size-lower-limit" type="xs:decimal"/>
     <xs:attribute name="rasterize-size-upper-limit" type="xs:decimal"/>
-    <xs:attribute name="responsive-svg-size"/>
-    <xs:attribute name="use-element-eval-as-shadow-element" type="axs:ah.boolean"/>
+    <xs:attribute name="responsive-svg-size">
+      <xs:annotation>
+        <xs:documentation>Whether the size matches the viewBox setting when width/height of the root element are omitted: reference | viewBox</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="reference"/>
+          <xs:enumeration value="viewBox"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="use-element-eval-as-shadow-element" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether &lt;use&gt; should be evaluated according to the SVG 2.0 specification: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="width-height-as-presentation-attribute" type="axs:ah.boolean"/>
   </xs:attributeGroup>
   <xs:element name="svg-settings">

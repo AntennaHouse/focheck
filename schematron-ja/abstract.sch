@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2015-2019 Antenna House, Inc.
+     Copyright 2015-2024 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,7 +13,11 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
---><pattern id="abstract" xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sqf="http://www.schematron-quickfix.com/validator/process" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+--><!DOCTYPE pattern
+[
+<!ENTITY border-style-keywords "'none', 'hidden', 'thin-thick-thin', 'triple', 'thick-thin', 'thin-thick', 'double', 'solid', 'dashed', 'dot-dash', 'dot-dot-dash', 'dotted', 'ridge', 'outset', 'groove', 'inset', 'emboss', 'imprint', 'double-wave', 'double-wavy', 'wave', 'wavy'">
+]>
+<pattern id="abstract" xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sqf="http://www.schematron-quickfix.com/validator/process" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <!-- <color> | inherit -->
   <rule abstract="true" id="color">
@@ -65,9 +69,9 @@
   <!-- http://www.w3.org/TR/xsl11/#border-top-style -->
   <rule abstract="true" id="border-style">
     <let name="expression" value="ahf:parser-runner(.)"></let>
-    <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset、dot-dash、dot-dot-dash、wave 又は inherit でなければなりま せん。「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
-    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset、dot-dash、dot-dot-dash、wave 又は inherit でなければなりま せん。トークン は <value-of select="$expression/@token"/> です。</report>
-    <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()"/>=&quot;&quot; は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset、dot-dash、dot-dot-dash、wave 又は inherit でなければなりま せん。</report>
+    <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; should be 'none', 'hidden', 'thin-thick-thin', 'triple', 'thick-thin', 'thin-thick', 'double', 'solid', 'dashed', 'dot-dash', 'dot-dot-dash', 'dotted', 'ridge', 'outset', 'groove', 'inset', 'emboss', 'imprint', 'double-wave', 'double-wavy', 'wave', 'wavy', or 'inherit'. 「<value-of select="."/>」は <value-of select="local-name($expression)"/> です。</assert>
+    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'thin-thick-thin', 'triple', 'thick-thin', 'thin-thick', 'double', 'solid', 'dashed', 'dot-dash', 'dot-dot-dash', 'dotted', 'ridge', 'outset', 'groove', 'inset', 'emboss', 'imprint', 'double-wave', 'double-wavy', 'wave', 'wavy', 'inherit'))"><value-of select="name()"/>=&quot;<value-of select="."/>&quot; token should be 'none', 'hidden', 'thin-thick-thin', 'triple', 'thick-thin', 'thin-thick', 'double', 'solid', 'dashed', 'dot-dash', 'dot-dot-dash', 'dotted', 'ridge', 'outset', 'groove', 'inset', 'emboss', 'imprint', 'double-wave', 'double-wavy', 'wave', 'wavy', or 'inherit'. トークン は <value-of select="$expression/@token"/> です。</report>
+    <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()"/>=&quot;&quot; should be 'none', 'hidden', 'thin-thick-thin', 'triple', 'thick-thin', 'thin-thick', 'double', 'solid', 'dashed', 'dot-dash', 'dot-dot-dash', 'dotted', 'ridge', 'outset', 'groove', 'inset', 'emboss', 'imprint', 'double-wave', 'double-wavy', 'wave', 'wavy', or 'inherit'.</report>
     <report test="local-name($expression) = 'ERROR'">シンタックスエラー： <value-of select="name()"/>=&quot;<value-of select="."/>&quot;</report>
   </rule>
 

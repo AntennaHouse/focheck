@@ -345,7 +345,7 @@
   -->
   <define name="axf_counter-style">
     <element name="axf:counter-style">
-      <a:documentation>Custom PDF property Effective with PDF 1.4 or later. Invalid with PDF/A</a:documentation>
+      <a:documentation>Custom counter style</a:documentation>
       <attribute name="name">
         <a:documentation>Name of the counter style: &lt;name&gt;.</a:documentation>
       </attribute>

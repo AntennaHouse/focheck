@@ -226,6 +226,11 @@
       <ref name="formatter-config.model"/>
     </element>
   </define>
+  <!--
+    Elements in the same sequence as the manual.
+    Antenna House Formatter does not require any
+    order, but cannot generate a DTD if using '&'.
+  -->
   <define name="formatter-config.model">
     <optional>
       <ref name="formatter-settings"/>
@@ -240,19 +245,19 @@
       <ref name="ps-settings"/>
     </optional>
     <optional>
-      <ref name="mathml-settings"/>
-    </optional>
-    <optional>
       <ref name="svg-settings"/>
     </optional>
     <optional>
       <ref name="svg-render-settings"/>
     </optional>
     <optional>
-      <ref name="cgm-settings"/>
+      <ref name="text-settings"/>
     </optional>
     <optional>
-      <ref name="text-settings"/>
+      <ref name="mathml-settings"/>
+    </optional>
+    <optional>
+      <ref name="cgm-settings"/>
     </optional>
     <optional>
       <ref name="xslt-settings"/>
@@ -1605,7 +1610,7 @@
     </optional>
     <optional>
       <attribute name="gif-pass-through">
-        <a:documentation>V6.2 まで利用できる。代わりに pass-through を使用してください。</a:documentation>
+        <a:documentation>V6.2 まで利用できる。Use 'pass-through' instead.: true | false</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
@@ -1685,66 +1690,45 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="gs-add-options"/>
+      <attribute name="gs-options">
+        <a:documentation>Ghostscript parameters that replace default parameters. Use U+000A to separate multiple parameters.</a:documentation>
+      </attribute>
     </optional>
     <optional>
       <attribute name="image-color-profile">
+        <a:documentation>Whether to embed ICC color profiles for images: true | false</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
     <optional>
-      <attribute name="image-compression">
-        <data type="NCName"/>
+      <!--
+        attribute image-compression { xsd:NCName }?,
+        attribute image-downsampling { xsd:NCName }?,
+        attribute image-downsampling-above-dpi { dpi.model }?,
+        attribute image-downsampling-target-dpi { dpi.model }?,
+        attribute import-3D-annotation { ah.boolean }?,
+        attribute import-3Dannotation { ah.boolean }?,
+      -->
+      <attribute name="import-annotation-types">
+        <a:documentation>Types of annotations to be embed in PDF</a:documentation>
       </attribute>
-    </optional>
-    <optional>
-      <attribute name="image-downsampling">
-        <data type="NCName"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="image-downsampling-above-dpi">
-        <ref name="dpi.model"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="image-downsampling-target-dpi">
-        <ref name="dpi.model"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="import-3D-annotation">
-        <ref name="ah.boolean"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="import-3Dannotation">
-        <ref name="ah.boolean"/>
-      </attribute>
-    </optional>
-    <optional>
-      <attribute name="import-annotation-types"/>
     </optional>
     <optional>
       <attribute name="import-tagged-pdf">
+        <a:documentation>Whether to permit embedding Tagged PDF in Tagged PDF: true | false</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
     <optional>
-      <attribute name="import-textmarkup-annotation">
-        <ref name="ah.boolean"/>
+      <!-- attribute import-textmarkup-annotation { ah.boolean }?, -->
+      <attribute name="joboptions">
+        <a:documentation>Adobe PDF Settings File that is passed to Distiller when converting EPS to PDF using Distiller</a:documentation>
       </attribute>
     </optional>
     <optional>
-      <attribute name="joboptions"/>
-    </optional>
-    <optional>
-      <attribute name="jpeg-quality">
-        <ref name="jpeg-quality.model"/>
-      </attribute>
-    </optional>
-    <optional>
+      <!-- attribute jpeg-quality { jpeg-quality.model }?, -->
       <attribute name="linearized">
+        <a:documentation>Whether to create linearized PDF: true | false</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
@@ -2408,10 +2392,17 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="responsive-svg-size"/>
+      <attribute name="responsive-svg-size">
+        <a:documentation>Whether the size matches the viewBox setting when width/height of the root element are omitted: reference | viewBox</a:documentation>
+        <choice>
+          <value>reference</value>
+          <value>viewBox</value>
+        </choice>
+      </attribute>
     </optional>
     <optional>
       <attribute name="use-element-eval-as-shadow-element">
+        <a:documentation>Whether &lt;use&gt; should be evaluated according to the SVG 2.0 specification: true | false</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>

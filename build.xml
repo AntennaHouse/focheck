@@ -500,8 +500,8 @@ AFTER making a release on GitHub:
 <target name="add-on.xml" depends="add-on.xml.uptodate"
 	unless="add-on.xml.uptodate"
 	description="Update the version information in 'add-on.xml'.">
-  <update-copyright file="${ahfsettings.basedir.converted}/add-on.xml.in" />
-  <update-copyright file="${ahfsettings.basedir.converted}/LICENSE.md" />
+  <update-copyright file="${focheck.basedir.converted}/add-on.xml.in" />
+  <update-copyright file="${focheck.basedir.converted}/LICENSE.md" />
   <copy file="add-on.xml.in" tofile="add-on.xml" />
   <replaceregexp file="${focheck.basedir.converted}/add-on.xml"
 		 encoding="UTF-8">
@@ -515,7 +515,7 @@ AFTER making a release on GitHub:
 	expression="releases/download/v${version}/${ant.project.name}-framework-${version}.zip"/>
   </replaceregexp>
   <loadfile srcfile="ChangeLog.md" property="changelog" />
-  <replaceregexp file="${ahfsettings.basedir.converted}/add-on.xml"
+  <replaceregexp file="${focheck.basedir.converted}/add-on.xml"
 		 encoding="UTF-8">
     <regexp pattern="@@ChangeLog@@" />
     <substitution expression="${changelog}"/>

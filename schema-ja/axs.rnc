@@ -161,16 +161,19 @@ language-code-space.atts =
   attribute space { xsd:decimal }
 # start = formatter-config
 formatter-config = element formatter-config { formatter-config.model }
+# Elements in the same sequence as the manual.
+# Antenna House Formatter does not require any
+# order, but cannot generate a DTD if using '&'.
 formatter-config.model =
   formatter-settings?,
   font-settings?,
   pdf-settings?,
   ps-settings?,
-  mathml-settings?,
   svg-settings?,
   svg-render-settings?,
-  cgm-settings?,
   text-settings?,
+  mathml-settings?,
+  cgm-settings?,
   xslt-settings?,
   analyzer-settings?
 formatter-settings =
@@ -729,7 +732,7 @@ pdf-settings.attlist =
   ## Full path to Ghostscript
   attribute ghostscript { text }?,
   
-  ## V6.2 まで利用できる。代わりに pass-through を使用してください。
+  ## V6.2 まで利用できる。Use 'pass-through' instead.: true | false
   attribute gif-pass-through { ah.boolean }?,
   attribute grayscale-compression { compression.list }?,
   attribute grayscale-compression-default { compression.list }?,
@@ -746,19 +749,31 @@ pdf-settings.attlist =
   attribute grayscale-jpeg-quality { jpeg-quality.model }?,
   attribute grayscale-jpeg-quality-default { jpeg-quality.model }?,
   attribute grayscale-jpeg-quality-minimum { jpeg-quality.model }?,
-  attribute gs-add-options { text }?,
+  
+  ## Ghostscript parameters that replace default parameters. Use U+000A to separate multiple parameters.
+  attribute gs-options { text }?,
+  
+  ## Whether to embed ICC color profiles for images: true | false
   attribute image-color-profile { ah.boolean }?,
-  attribute image-compression { xsd:NCName }?,
-  attribute image-downsampling { xsd:NCName }?,
-  attribute image-downsampling-above-dpi { dpi.model }?,
-  attribute image-downsampling-target-dpi { dpi.model }?,
-  attribute import-3D-annotation { ah.boolean }?,
-  attribute import-3Dannotation { ah.boolean }?,
+  # attribute image-compression { xsd:NCName }?,
+  # attribute image-downsampling { xsd:NCName }?,
+  # attribute image-downsampling-above-dpi { dpi.model }?,
+  # attribute image-downsampling-target-dpi { dpi.model }?,
+  # attribute import-3D-annotation { ah.boolean }?,
+  # attribute import-3Dannotation { ah.boolean }?,
+  
+  ## Types of annotations to be embed in PDF
   attribute import-annotation-types { text }?,
+  
+  ## Whether to permit embedding Tagged PDF in Tagged PDF: true | false
   attribute import-tagged-pdf { ah.boolean }?,
-  attribute import-textmarkup-annotation { ah.boolean }?,
+  # attribute import-textmarkup-annotation { ah.boolean }?,
+  
+  ## Adobe PDF Settings File that is passed to Distiller when converting EPS to PDF using Distiller
   attribute joboptions { text }?,
-  attribute jpeg-quality { jpeg-quality.model }?,
+  # attribute jpeg-quality { jpeg-quality.model }?,
+  
+  ## Whether to create linearized PDF: true | false
   attribute linearized { ah.boolean }?,
   
   ## Whether the origin of /MediaBox is adjusted to '(0,0)': true | false
@@ -960,7 +975,11 @@ svg-render-settings.attlist =
   attribute rasterize-dpi { xsd:decimal }?,
   attribute rasterize-size-lower-limit { xsd:decimal }?,
   attribute rasterize-size-upper-limit { xsd:decimal }?,
-  attribute responsive-svg-size { text }?,
+  
+  ## Whether the size matches the viewBox setting when width/height of the root element are omitted: reference | viewBox
+  attribute responsive-svg-size { "reference" | "viewBox" }?,
+  
+  ## Whether <use> should be evaluated according to the SVG 2.0 specification: true | false
   attribute use-element-eval-as-shadow-element { ah.boolean }?,
   attribute width-height-as-presentation-attribute { ah.boolean }?
 svg-render-settings.model = empty

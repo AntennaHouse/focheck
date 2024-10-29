@@ -145,7 +145,7 @@ include "axf-inherited.rnc" inherit = axf {
 # https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.counter-style
 axf_counter-style =
   
-  ## PDF 1.4 以降のとき Custom PDF は有効です。PDF/A では無効です。
+  ## Custom counter style
   element axf:counter-style {
     
     ## Name of the counter style: <name>.

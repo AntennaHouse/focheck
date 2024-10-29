@@ -238,7 +238,7 @@
   -->
   <xs:element name="counter-style">
     <xs:annotation>
-      <xs:documentation>PDF 1.4 以降のとき Custom PDF は有効です。PDF/A では無効です。</xs:documentation>
+      <xs:documentation>Custom counter style</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:attribute name="name" use="required">

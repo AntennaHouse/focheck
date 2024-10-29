@@ -574,14 +574,6 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', or 'inherit'.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20190618T124239Z" creationid="mtan" creationdate="20190618T124239Z">
-        <seg>="" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset、dot-dash、dot-dot-dash、wave 又は inherit でなければなりま せん。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>="" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="mtan" changedate="20190520T145530Z" creationid="mtan" creationdate="20190520T145530Z">
@@ -670,14 +662,6 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>="<ph x="0">&lt;v0/&gt;</ph>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', or 'inherit'.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20190618T124103Z" creationid="mtan" creationdate="20190618T124103Z">
-        <seg>="<ph x="0">&lt;v0/&gt;</ph>" は none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset、dot-dash、dot-dot-dash、wave 又は inherit でなければなりま せん。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>="<ph x="0">&lt;v0/&gt;</ph>" should be 'thin', 'medium', 'thick', 'inherit', or Length.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="mtan" changedate="20190528T114208Z" creationid="mtan" creationdate="20190520T145344Z">
@@ -754,14 +738,6 @@
       </tuv>
       <tuv xml:lang="JA" changeid="mtan" changedate="20200521T103015Z" creationid="mtan" creationdate="20200521T103015Z">
         <seg>="<ph x="0">&lt;v0/&gt;</ph>" のトークンは inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>="<ph x="0">&lt;v0/&gt;</ph>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', or 'inherit'.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20190618T124152Z" creationid="mtan" creationdate="20190618T124152Z">
-        <seg>="<ph x="0">&lt;v0/&gt;</ph>" のトークンは none、hidden、dotted、dashed、solid、double、groove、ridge、inset、outset、dot-dash、dot-dot-dash、wave 又は inherit でなければなりま せん。</seg>
       </tuv>
     </tu>
     <tu>
@@ -6748,14 +6724,6 @@
       </tuv>
       <tuv xml:lang="JA" changeid="mtan" changedate="20190618T125424Z" creationid="mtan" creationdate="20190618T125424Z">
         <seg>keep-together の上限高さ： auto | &lt;length&gt;</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>Use 'pass-through' instead.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="mtan" changedate="20190528T120604Z" creationid="mtan" creationdate="20190523T150934Z">
-        <seg>代わりに pass-through を使用してください。</seg>
       </tuv>
     </tu>
     <tu>

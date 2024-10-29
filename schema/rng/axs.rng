@@ -2392,10 +2392,17 @@
       </attribute>
     </optional>
     <optional>
-      <attribute name="responsive-svg-size"/>
+      <attribute name="responsive-svg-size">
+        <a:documentation>Whether the size matches the viewBox setting when width/height of the root element are omitted: reference | viewBox</a:documentation>
+        <choice>
+          <value>reference</value>
+          <value>viewBox</value>
+        </choice>
+      </attribute>
     </optional>
     <optional>
       <attribute name="use-element-eval-as-shadow-element">
+        <a:documentation>Whether &lt;use&gt; should be evaluated according to the SVG 2.0 specification: true | false</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>

@@ -875,7 +875,9 @@ svg-render-settings.attlist =
    attribute rasterize-dpi { xsd:decimal }?,
    attribute rasterize-size-lower-limit { xsd:decimal }?,
    attribute rasterize-size-upper-limit { xsd:decimal }?,
-   attribute responsive-svg-size { text }?,
+   ## Whether the size matches the viewBox setting when width/height of the root element are omitted: reference | viewBox
+   attribute responsive-svg-size { 'reference' | 'viewBox' }?,
+   ## Whether <use> should be evaluated according to the SVG 2.0 specification: true | false
    attribute use-element-eval-as-shadow-element { ah.boolean }?,
    attribute width-height-as-presentation-attribute { ah.boolean }?
 

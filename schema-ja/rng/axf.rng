@@ -344,7 +344,7 @@
   -->
   <define name="axf_counter-style">
     <element name="axf:counter-style">
-      <a:documentation>PDF 1.4 以降のとき Custom PDF は有効です。PDF/A では無効です。</a:documentation>
+      <a:documentation>Custom counter style</a:documentation>
       <attribute name="name">
         <a:documentation>Name of the counter style: &lt;name&gt;.</a:documentation>
       </attribute>
