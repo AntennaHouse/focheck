@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-     Copyright 2015-2019 Antenna House, Inc.
+     Copyright 2015-2024 Antenna House, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,6 +14,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<!DOCTYPE pattern [
+<!ENTITY border-style-keywords
+    "'none', 'hidden', 'thin-thick-thin', 'triple', 'thick-thin', 'thin-thick', 'double', 'solid', 'dashed', 'dot-dash', 'dot-dot-dash', 'dotted', 'ridge', 'outset', 'groove', 'inset', 'emboss', 'imprint', 'double-wave', 'double-wavy', 'wave', 'wavy'" >
+]>
 <pattern id="abstract"
 	 xmlns="http://purl.oclc.org/dsdl/schematron"
 	 xmlns:sqf="http://www.schematron-quickfix.com/validator/process"
@@ -69,9 +73,9 @@
   <!-- http://www.w3.org/TR/xsl11/#border-top-style -->
   <rule abstract="true" id="border-style">
     <let name="expression" value="ahf:parser-runner(.)"/>
-    <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()" />="<value-of select="."/>" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
-    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))"><value-of select="name()" />="<value-of select="."/>" token should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', or 'inherit'. Token is '<value-of select="$expression/@token"/>'.</report>
-    <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()" />="" should be 'none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', or 'inherit'.</report>
+    <assert test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"><value-of select="name()" />="<value-of select="."/>" should be &border-style-keywords;, or 'inherit'.  '<value-of select="."/>' is a <value-of select="local-name($expression)"/>.</assert>
+    <report test="$expression instance of element(EnumerationToken) and not($expression/@token = (&border-style-keywords;, 'inherit'))"><value-of select="name()" />="<value-of select="."/>" token should be &border-style-keywords;, or 'inherit'. Token is '<value-of select="$expression/@token"/>'.</report>
+    <report test="local-name($expression) = 'EMPTY'" role="Warning"><value-of select="name()" />="" should be &border-style-keywords;, or 'inherit'.</report>
     <report test="local-name($expression) = 'ERROR'">Syntax error: <value-of select="name()" />="<value-of select="."/>"</report>
   </rule>
 
