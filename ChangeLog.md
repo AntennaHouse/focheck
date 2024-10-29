@@ -1,3 +1,9 @@
+# focheck 7.4.6
+
+- `axs.rnc` updated to match ahfsettings 7.4.6.
+- Added 'triple' border style in Schematron.
+- Instructions for 'Antenna House' external FO processor.
+
 # focheck 7.4.4
 
 - `axs.rnc` updated to match (early) ahfsettings 7.4.4.

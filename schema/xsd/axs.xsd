@@ -235,17 +235,22 @@
   </xs:attributeGroup>
   <!-- start = formatter-config -->
   <xs:element name="formatter-config" type="axs:formatter-config.model"/>
+  <!--
+    Elements in the same sequence as the manual.
+    Antenna House Formatter does not require any
+    order, but cannot generate a DTD if using '&'.
+  -->
   <xs:complexType name="formatter-config.model">
     <xs:sequence>
       <xs:element minOccurs="0" ref="axs:formatter-settings"/>
       <xs:element minOccurs="0" ref="axs:font-settings"/>
       <xs:element minOccurs="0" ref="axs:pdf-settings"/>
       <xs:element minOccurs="0" ref="axs:ps-settings"/>
-      <xs:element minOccurs="0" ref="axs:mathml-settings"/>
       <xs:element minOccurs="0" ref="axs:svg-settings"/>
       <xs:element minOccurs="0" ref="axs:svg-render-settings"/>
-      <xs:element minOccurs="0" ref="axs:cgm-settings"/>
       <xs:element minOccurs="0" ref="axs:text-settings"/>
+      <xs:element minOccurs="0" ref="axs:mathml-settings"/>
+      <xs:element minOccurs="0" ref="axs:cgm-settings"/>
       <xs:element minOccurs="0" ref="axs:xslt-settings"/>
       <xs:element minOccurs="0" ref="axs:analyzer-settings"/>
     </xs:sequence>
@@ -1257,7 +1262,7 @@
     </xs:attribute>
     <xs:attribute name="gif-pass-through" type="axs:ah.boolean">
       <xs:annotation>
-        <xs:documentation>Available up to V6.2. Use 'pass-through' instead.</xs:documentation>
+        <xs:documentation>Available up to V6.2. Use 'pass-through' instead.: true | false</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="grayscale-compression" type="axs:compression.list"/>
@@ -1275,20 +1280,36 @@
     <xs:attribute name="grayscale-jpeg-quality" type="axs:jpeg-quality.model"/>
     <xs:attribute name="grayscale-jpeg-quality-default" type="axs:jpeg-quality.model"/>
     <xs:attribute name="grayscale-jpeg-quality-minimum" type="axs:jpeg-quality.model"/>
-    <xs:attribute name="gs-add-options"/>
-    <xs:attribute name="image-color-profile" type="axs:ah.boolean"/>
-    <xs:attribute name="image-compression" type="xs:NCName"/>
-    <xs:attribute name="image-downsampling" type="xs:NCName"/>
-    <xs:attribute name="image-downsampling-above-dpi" type="axs:dpi.model"/>
-    <xs:attribute name="image-downsampling-target-dpi" type="axs:dpi.model"/>
-    <xs:attribute name="import-3D-annotation" type="axs:ah.boolean"/>
-    <xs:attribute name="import-3Dannotation" type="axs:ah.boolean"/>
-    <xs:attribute name="import-annotation-types"/>
-    <xs:attribute name="import-tagged-pdf" type="axs:ah.boolean"/>
-    <xs:attribute name="import-textmarkup-annotation" type="axs:ah.boolean"/>
-    <xs:attribute name="joboptions"/>
-    <xs:attribute name="jpeg-quality" type="axs:jpeg-quality.model"/>
-    <xs:attribute name="linearized" type="axs:ah.boolean"/>
+    <xs:attribute name="gs-options">
+      <xs:annotation>
+        <xs:documentation>Ghostscript parameters that replace default parameters. Use U+000A to separate multiple parameters.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="image-color-profile" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to embed ICC color profiles for images: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="import-annotation-types">
+      <xs:annotation>
+        <xs:documentation>Types of annotations to be embed in PDF</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="import-tagged-pdf" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to permit embedding Tagged PDF in Tagged PDF: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="joboptions">
+      <xs:annotation>
+        <xs:documentation>Adobe PDF Settings File that is passed to Distiller when converting EPS to PDF using Distiller</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="linearized" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to create linearized PDF: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="mediabox-origin-zero" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether the origin of /MediaBox is adjusted to '(0,0)': true | false</xs:documentation>

@@ -169,16 +169,19 @@ formatter-config =
     formatter-config.model
 }
 
+# Elements in the same sequence as the manual.
+# Antenna House Formatter does not require any
+# order, but cannot generate a DTD if using '&'.
 formatter-config.model =
     (formatter-settings?,
     font-settings?,
     pdf-settings?,
     ps-settings?,
-    mathml-settings?,
     svg-settings?,
     svg-render-settings?,
-    cgm-settings?,
     text-settings?,
+    mathml-settings?,
+    cgm-settings?,
     xslt-settings?,
     analyzer-settings?)
 
@@ -652,7 +655,7 @@ pdf-settings.attlist =
    attribute fallback-alttext { text }?,
    ## Full path to Ghostscript
    attribute ghostscript { text }?,
-   ## Available up to V6.2. Use 'pass-through' instead.
+   ## Available up to V6.2. Use 'pass-through' instead.: true | false
    attribute gif-pass-through { ah.boolean }?,
    attribute grayscale-compression { compression.list }?,
    attribute grayscale-compression-default { compression.list }?,
@@ -669,19 +672,25 @@ pdf-settings.attlist =
    attribute grayscale-jpeg-quality { jpeg-quality.model }?,
    attribute grayscale-jpeg-quality-default { jpeg-quality.model }?,
    attribute grayscale-jpeg-quality-minimum { jpeg-quality.model }?,
-   attribute gs-add-options { text }?,
+   ## Ghostscript parameters that replace default parameters. Use U+000A to separate multiple parameters.
+attribute gs-options { text }?,
+   ## Whether to embed ICC color profiles for images: true | false
    attribute image-color-profile { ah.boolean }?,
-   attribute image-compression { xsd:NCName }?,
-   attribute image-downsampling { xsd:NCName }?,
-   attribute image-downsampling-above-dpi { dpi.model }?,
-   attribute image-downsampling-target-dpi { dpi.model }?,
-   attribute import-3D-annotation { ah.boolean }?,
-   attribute import-3Dannotation { ah.boolean }?,
-   attribute import-annotation-types { text }?,
+   #attribute image-compression { xsd:NCName }?,
+   #attribute image-downsampling { xsd:NCName }?,
+   #attribute image-downsampling-above-dpi { dpi.model }?,
+   #attribute image-downsampling-target-dpi { dpi.model }?,
+   #attribute import-3D-annotation { ah.boolean }?,
+   #attribute import-3Dannotation { ah.boolean }?,
+   ## Types of annotations to be embed in PDF
+attribute import-annotation-types { text }?,
+   ## Whether to permit embedding Tagged PDF in Tagged PDF: true | false
    attribute import-tagged-pdf { ah.boolean }?,
-   attribute import-textmarkup-annotation { ah.boolean }?,
+   #attribute import-textmarkup-annotation { ah.boolean }?,
+   ## Adobe PDF Settings File that is passed to Distiller when converting EPS to PDF using Distiller
    attribute joboptions { text }?,
-   attribute jpeg-quality { jpeg-quality.model }?,
+   #attribute jpeg-quality { jpeg-quality.model }?,
+   ## Whether to create linearized PDF: true | false
    attribute linearized { ah.boolean }?,
    ## Whether the origin of /MediaBox is adjusted to '(0,0)': true | false
    attribute mediabox-origin-zero { ah.boolean }?,

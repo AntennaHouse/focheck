@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xsl:stylesheet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                xmlns:saxon="http://saxon.sf.net/"
+<xsl:stylesheet xmlns:xhtml="http://www.w3.org/1999/xhtml"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:saxon="http://saxon.sf.net/"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                 xmlns:schold="http://www.ascc.net/xml/schematron"
                 xmlns:iso="http://purl.oclc.org/dsdl/schematron"
-                xmlns:xhtml="http://www.w3.org/1999/xhtml"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:ahf="http://www.antennahouse.com/names/XSLT/Functions/Document"
                 xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions"
                 version="2.0"><!--Implementers: please note that overriding process-prolog or process-root is 
     the preferred method for meta-stylesheets to use where possible. -->
-   <xsl:param name="archiveDirParameter"/>
+<xsl:param name="archiveDirParameter"/>
    <xsl:param name="archiveNameParameter"/>
    <xsl:param name="fileNameParameter"/>
    <xsl:param name="fileDirParameter"/>
@@ -22,9 +22,8 @@
    <!--PHASES-->
 
 
-   <!--PROLOG-->
-   <xsl:output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-               method="xml"
+<!--PROLOG-->
+<xsl:output xmlns:svrl="http://purl.oclc.org/dsdl/svrl" method="xml"
                omit-xml-declaration="no"
                standalone="yes"
                indent="yes"/>
@@ -32,10 +31,8 @@
    <!--XSD TYPES FOR XSLT2-->
 
 
-   <!--KEYS AND FUNCTIONS-->
-   <xsl:key name="flow-name"
-            match="fo:flow | fo:static-content"
-            use="@flow-name"/>
+<!--KEYS AND FUNCTIONS-->
+<xsl:key name="flow-name" match="fo:flow | fo:static-content" use="@flow-name"/>
    <xsl:key name="index-key" match="*[exists(@index-key)]" use="@index-key"/>
    <xsl:key name="marker-class-name" match="fo:marker" use="@marker-class-name"/>
    <xsl:key name="master-name"
@@ -48,15 +45,15 @@
    <!--DEFAULT RULES-->
 
 
-   <!--MODE: SCHEMATRON-SELECT-FULL-PATH-->
-   <!--This mode can be used to generate an ugly though full XPath for locators-->
-   <xsl:template match="*" mode="schematron-select-full-path">
+<!--MODE: SCHEMATRON-SELECT-FULL-PATH-->
+<!--This mode can be used to generate an ugly though full XPath for locators-->
+<xsl:template match="*" mode="schematron-select-full-path">
       <xsl:apply-templates select="." mode="schematron-get-full-path"/>
    </xsl:template>
 
    <!--MODE: SCHEMATRON-FULL-PATH-->
-   <!--This mode can be used to generate an ugly though full XPath for locators-->
-   <xsl:template match="*" mode="schematron-get-full-path">
+<!--This mode can be used to generate an ugly though full XPath for locators-->
+<xsl:template match="*" mode="schematron-get-full-path">
       <xsl:apply-templates select="parent::*" mode="schematron-get-full-path"/>
       <xsl:text>/</xsl:text>
       <xsl:choose>
@@ -94,8 +91,8 @@
    </xsl:template>
 
    <!--MODE: SCHEMATRON-FULL-PATH-2-->
-   <!--This mode can be used to generate prefixed XPath for humans-->
-   <xsl:template match="node() | @*" mode="schematron-get-full-path-2">
+<!--This mode can be used to generate prefixed XPath for humans-->
+<xsl:template match="node() | @*" mode="schematron-get-full-path-2">
       <xsl:for-each select="ancestor-or-self::*">
          <xsl:text>/</xsl:text>
          <xsl:value-of select="name(.)"/>
@@ -110,9 +107,9 @@
       </xsl:if>
    </xsl:template>
    <!--MODE: SCHEMATRON-FULL-PATH-3-->
-   <!--This mode can be used to generate prefixed XPath for humans 
+<!--This mode can be used to generate prefixed XPath for humans 
 	(Top-level element has index)-->
-   <xsl:template match="node() | @*" mode="schematron-get-full-path-3">
+<xsl:template match="node() | @*" mode="schematron-get-full-path-3">
       <xsl:for-each select="ancestor-or-self::*">
          <xsl:text>/</xsl:text>
          <xsl:value-of select="name(.)"/>
@@ -128,7 +125,7 @@
    </xsl:template>
 
    <!--MODE: GENERATE-ID-FROM-PATH -->
-   <xsl:template match="/" mode="generate-id-from-path"/>
+<xsl:template match="/" mode="generate-id-from-path"/>
    <xsl:template match="text()" mode="generate-id-from-path">
       <xsl:apply-templates select="parent::*" mode="generate-id-from-path"/>
       <xsl:value-of select="concat('.text-', 1+count(preceding-sibling::text()), '-')"/>
@@ -152,7 +149,7 @@
    </xsl:template>
 
    <!--MODE: GENERATE-ID-2 -->
-   <xsl:template match="/" mode="generate-id-2">U</xsl:template>
+<xsl:template match="/" mode="generate-id-2">U</xsl:template>
    <xsl:template match="*" mode="generate-id-2" priority="2">
       <xsl:text>U</xsl:text>
       <xsl:number level="multiple" count="*"/>
@@ -171,11 +168,10 @@
       <xsl:text>_</xsl:text>
       <xsl:value-of select="translate(name(),':','.')"/>
    </xsl:template>
-   <!--Strip characters-->
-   <xsl:template match="text()" priority="-1"/>
+   <!--Strip characters--><xsl:template match="text()" priority="-1"/>
 
    <!--SCHEMA SETUP-->
-   <xsl:template match="/">
+<xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl" title="" schemaVersion="">
          <xsl:comment>
             <xsl:value-of select="$archiveDirParameter"/>   
@@ -229,8 +225,7 @@
          </svrl:active-pattern>
          <xsl:apply-templates select="/" mode="M9"/>
          <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/1999/XSL/Format" prefix="fo"/>
-         <svrl:ns-prefix-in-attribute-values uri="http://www.antennahouse.com/names/XSLT/Functions/Document"
-                                             prefix="ahf"/>
+         <svrl:ns-prefix-in-attribute-values uri="http://www.antennahouse.com/names/XSLT/Functions/Document" prefix="ahf"/>
          <svrl:ns-prefix-in-attribute-values uri="http://www.antennahouse.com/names/XSL/Extensions" prefix="axf"/>
       </svrl:schematron-output>
    </xsl:template>
@@ -238,8 +233,8 @@
    <!--SCHEMATRON PATTERNS-->
 
 
-   <!--PATTERN abstract-->
-   <xsl:template match="text()" priority="-1" mode="M5"/>
+<!--PATTERN abstract-->
+<xsl:template match="text()" priority="-1" mode="M5"/>
    <xsl:template match="@*|node()" priority="-2" mode="M5">
       <xsl:apply-templates select="@*|*" mode="M5"/>
    </xsl:template>
@@ -247,13 +242,12 @@
    <!--PATTERN fo-fo-->
 
 
-	  <!--RULE -->
-   <xsl:template match="fo:basic-link | fo:bookmark" priority="1029" mode="M6">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:basic-link | fo:bookmark"/>
+	<!--RULE -->
+<xsl:template match="fo:basic-link | fo:bookmark" priority="1029" mode="M6">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:basic-link | fo:bookmark"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="exists(@internal-destination | @external-destination)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -272,7 +266,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="exists(@internal-destination) and exists(@external-destination)">
+<xsl:if test="exists(@internal-destination) and exists(@external-destination)">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="exists(@internal-destination) and exists(@external-destination)">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -290,11 +284,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:change-bar-begin" priority="1028" mode="M6">
+<xsl:template match="fo:change-bar-begin" priority="1028" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:change-bar-begin"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="exists(@change-bar-class) and not(@change-bar-class = following::fo:change-bar-end/@change-bar-class)">
+<xsl:if test="exists(@change-bar-class) and not(@change-bar-class = following::fo:change-bar-end/@change-bar-class)">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="exists(@change-bar-class) and not(@change-bar-class = following::fo:change-bar-end/@change-bar-class)">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -312,11 +306,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:change-bar-end" priority="1027" mode="M6">
+<xsl:template match="fo:change-bar-end" priority="1027" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:change-bar-end"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="exists(@change-bar-class) and not(@change-bar-class = preceding::fo:change-bar-begin/@change-bar-class)">
+<xsl:if test="exists(@change-bar-class) and not(@change-bar-class = preceding::fo:change-bar-begin/@change-bar-class)">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="exists(@change-bar-class) and not(@change-bar-class = preceding::fo:change-bar-begin/@change-bar-class)">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -334,11 +328,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:float" priority="1026" mode="M6">
+<xsl:template match="fo:float" priority="1026" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:float"/>
 
 		    <!--REPORT -->
-      <xsl:if test="exists(ancestor::fo:float) or exists(ancestor::fo:footnote)">
+<xsl:if test="exists(ancestor::fo:float) or exists(ancestor::fo:footnote)">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="exists(ancestor::fo:float) or exists(ancestor::fo:footnote)">
             <xsl:attribute name="location">
@@ -355,11 +349,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:footnote" priority="1025" mode="M6">
+<xsl:template match="fo:footnote" priority="1025" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:footnote"/>
 
 		    <!--REPORT -->
-      <xsl:if test="(for $ancestor in ancestor::fo:* return local-name($ancestor)) = ('float', 'footnote')">
+<xsl:if test="(for $ancestor in ancestor::fo:* return local-name($ancestor)) = ('float', 'footnote')">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="(for $ancestor in ancestor::fo:* return local-name($ancestor)) = ('float', 'footnote')">
             <xsl:attribute name="location">
@@ -374,7 +368,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="exists(ancestor::fo:block-container[@absolute-position = ('absolute', 'fixed')])">
+<xsl:if test="exists(ancestor::fo:block-container[@absolute-position = ('absolute', 'fixed')])">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="exists(ancestor::fo:block-container[@absolute-position = ('absolute', 'fixed')])">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -388,7 +382,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="exists(descendant::fo:block-container[@absolute-position = ('absolute', 'fixed')])">
+<xsl:if test="exists(descendant::fo:block-container[@absolute-position = ('absolute', 'fixed')])">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="exists(descendant::fo:block-container[@absolute-position = ('absolute', 'fixed')])">
             <xsl:attribute name="location">
@@ -401,7 +395,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="exists(descendant::fo:*[local-name() = ('float', 'footnote', 'marker')])">
+<xsl:if test="exists(descendant::fo:*[local-name() = ('float', 'footnote', 'marker')])">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="exists(descendant::fo:*[local-name() = ('float', 'footnote', 'marker')])">
             <xsl:attribute name="location">
@@ -416,11 +410,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:list-block" priority="1024" mode="M6">
+<xsl:template match="fo:list-block" priority="1024" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:list-block"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="exists((., ancestor::*)/@provisional-distance-between-starts)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -437,7 +431,7 @@
       </xsl:choose>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="exists((., ancestor::*)/@provisional-label-separation)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -456,14 +450,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:list-item-body[empty(@start-indent)]"
-                 priority="1023"
-                 mode="M6">
+<xsl:template match="fo:list-item-body[empty(@start-indent)]" priority="1023" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:list-item-body[empty(@start-indent)]"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="true()">
+<xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
             <xsl:attribute name="id">list-item-body-start-indent</xsl:attribute>
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -479,14 +471,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:list-item-label[empty(@end-indent)]"
-                 priority="1022"
-                 mode="M6">
+<xsl:template match="fo:list-item-label[empty(@end-indent)]" priority="1022" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:list-item-label[empty(@end-indent)]"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="true()">
+<xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
             <xsl:attribute name="id">list-item-label-end-indent</xsl:attribute>
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -502,15 +492,14 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:marker" priority="1021" mode="M6">
+<xsl:template match="fo:marker" priority="1021" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:marker"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="exists(ancestor::fo:flow)"/>
          <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="exists(ancestor::fo:flow)">
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="exists(ancestor::fo:flow)">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -522,11 +511,10 @@
       </xsl:choose>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="empty(ancestor::fo:marker)"/>
          <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="empty(ancestor::fo:marker)">
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="empty(ancestor::fo:marker)">
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
@@ -538,7 +526,7 @@
       </xsl:choose>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="empty(ancestor::fo:retrieve-marker)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -554,7 +542,7 @@
       </xsl:choose>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="empty(ancestor::fo:retrieve-table-marker)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -572,11 +560,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:retrieve-marker" priority="1020" mode="M6">
+<xsl:template match="fo:retrieve-marker" priority="1020" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:retrieve-marker"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="exists(ancestor::fo:static-content)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -594,12 +582,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:retrieve-table-marker" priority="1019" mode="M6">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:retrieve-table-marker"/>
+<xsl:template match="fo:retrieve-table-marker" priority="1019" mode="M6">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:retrieve-table-marker"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="exists(ancestor::fo:table-header) or                   exists(ancestor::fo:table-footer) or                   (exists(parent::fo:table) and empty(preceding-sibling::fo:table-body) and empty(following-sibling::fo:table-column))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -617,11 +604,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:root" priority="1018" mode="M6">
+<xsl:template match="fo:root" priority="1018" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:root"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="exists(descendant::fo:page-sequence)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -640,11 +627,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:table-cell" priority="1017" mode="M6">
+<xsl:template match="fo:table-cell" priority="1017" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:table-cell"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="empty(*) and normalize-space() ne ''">
+<xsl:if test="empty(*) and normalize-space() ne ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="empty(*) and normalize-space() ne ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -660,14 +647,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@character | fo:*/@grouping-separator"
-                 priority="1016"
-                 mode="M6">
+<xsl:template match="fo:*/@character | fo:*/@grouping-separator" priority="1016" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@character | fo:*/@grouping-separator"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="string-length(.) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="string-length(.) = 1">
@@ -689,15 +674,14 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-count | fo:*/@number-columns-spanned"
-                 priority="1015"
+<xsl:template match="fo:*/@column-count | fo:*/@number-columns-spanned" priority="1015"
                  mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@column-count | fo:*/@number-columns-spanned"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'Number' and                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or                    $expression/@is-zero = 'yes' or                    exists($expression/@value) and not($expression/@value castable as xs:integer))">
+<xsl:if test="local-name($expression) = 'Number' and                   (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or                    $expression/@is-zero = 'yes' or                    exists($expression/@value) and not($expression/@value castable as xs:integer))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'Number' and (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or $expression/@is-zero = 'yes' or exists($expression/@value) and not($expression/@value castable as xs:integer))">
             <xsl:attribute name="id">column-count</xsl:attribute>
@@ -718,8 +702,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-width[exists(../@number-columns-spanned)]"
-                 priority="1014"
+<xsl:template match="fo:*/@column-width[exists(../@number-columns-spanned)]" priority="1014"
                  mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@column-width[exists(../@number-columns-spanned)]"/>
@@ -727,7 +710,7 @@
                     select="ahf:parser-runner(../@number-columns-spanned)"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($number-columns-spanned) = 'Number' and                   (exists($number-columns-spanned/@value) and      number($number-columns-spanned/@value) &gt;= 1.5)">
+<xsl:if test="local-name($number-columns-spanned) = 'Number' and                   (exists($number-columns-spanned/@value) and      number($number-columns-spanned/@value) &gt;= 1.5)">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($number-columns-spanned) = 'Number' and (exists($number-columns-spanned/@value) and number($number-columns-spanned/@value) &gt;= 1.5)">
             <xsl:attribute name="id">column-width</xsl:attribute>
@@ -746,12 +729,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-map-reference" priority="1013" mode="M6">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@flow-map-reference"/>
+<xsl:template match="fo:*/@flow-map-reference" priority="1013" mode="M6">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-map-reference"/>
 
 		    <!--REPORT -->
-      <xsl:if test="empty(/fo:root/fo:layout-master-set/fo:flow-map/@flow-map-name[. eq current()])">
+<xsl:if test="empty(/fo:root/fo:layout-master-set/fo:flow-map/@flow-map-name[. eq current()])">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="empty(/fo:root/fo:layout-master-set/fo:flow-map/@flow-map-name[. eq current()])">
             <xsl:attribute name="location">
@@ -767,11 +749,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name" priority="1012" mode="M6">
+<xsl:template match="fo:*/@flow-name" priority="1012" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-name"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="count(../../*/@flow-name[. eq current()]) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -789,7 +771,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="not(. = ('xsl-region-body',          'xsl-region-start',          'xsl-region-end',          'xsl-region-before',          'xsl-region-after',          'xsl-footnote-separator',          'xsl-before-float-separator')) and               empty(key('region-name', .)) and               empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])">
+<xsl:if test="not(. = ('xsl-region-body',          'xsl-region-start',          'xsl-region-end',          'xsl-region-before',          'xsl-region-after',          'xsl-footnote-separator',          'xsl-before-float-separator')) and               empty(key('region-name', .)) and               empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not(. = ('xsl-region-body', 'xsl-region-start', 'xsl-region-end', 'xsl-region-before', 'xsl-region-after', 'xsl-footnote-separator', 'xsl-before-float-separator')) and empty(key('region-name', .)) and empty(/fo:root/fo:layout-master-set/fo:flow-map[@flow-map-name = current()/ancestor::fo:page-sequence[1]/@flow-map-reference]/fo:flow-assignment/fo:flow-source-list/fo:flow-name-specifier/@flow-name-reference[. eq current()])">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -806,12 +788,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name-reference" priority="1011" mode="M6">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@flow-name-reference"/>
+<xsl:template match="fo:*/@flow-name-reference" priority="1011" mode="M6">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-name-reference"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="count(ancestor::fo:flow-map//fo:flow-name-specifier/@flow-name-reference[. eq current()]) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -829,7 +810,7 @@
       </xsl:choose>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="count(distinct-values(for $fo in key('flow-name', .)[ancestor::fo:page-sequence/@flow-map-reference = current()/ancestor::fo:flow-map/@flow-map-name] return local-name($fo))) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -849,12 +830,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenation-character" priority="1010" mode="M6">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@hyphenation-character"/>
+<xsl:template match="fo:*/@hyphenation-character" priority="1010" mode="M6">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@hyphenation-character"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="string-length(.) = 1 or . eq 'inherit'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -877,12 +857,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@language" priority="1009" mode="M6">
+<xsl:template match="fo:*/@language" priority="1009" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@language"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -904,7 +884,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit') or string-length($expression/@token) = 2 or string-length($expression/@token) = 3)">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit') or string-length($expression/@token) = 2 or string-length($expression/@token) = 3)">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit') or string-length($expression/@token) = 2 or string-length($expression/@token) = 3)">
             <xsl:attribute name="location">
@@ -919,7 +899,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -935,12 +915,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:marker/@marker-class-name" priority="1008" mode="M6">
+<xsl:template match="fo:marker/@marker-class-name" priority="1008" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:marker/@marker-class-name"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="count(../../fo:marker[@marker-class-name eq current()]) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -960,11 +940,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-name" priority="1007" mode="M6">
+<xsl:template match="fo:*/@master-name" priority="1007" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@master-name"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="count(key('master-name', .)) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -984,16 +964,14 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-reference" priority="1006" mode="M6">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@master-reference"/>
+<xsl:template match="fo:*/@master-reference" priority="1006" mode="M6">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@master-reference"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="exists(key('master-name', .))"/>
          <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="exists(key('master-name', .))">
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="exists(key('master-name', .))">
                <xsl:attribute name="role">Warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1008,7 +986,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="count(key('master-name', .)) &gt; 1">
+<xsl:if test="count(key('master-name', .)) &gt; 1">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="count(key('master-name', .)) &gt; 1">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -1025,11 +1003,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@overflow" priority="1005" mode="M6">
+<xsl:template match="fo:*/@overflow" priority="1005" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@overflow"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq 'repeat' and ../@absolute-position = ('absolute', 'fixed')">
+<xsl:if test=". eq 'repeat' and ../@absolute-position = ('absolute', 'fixed')">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test=". eq 'repeat' and ../@absolute-position = ('absolute', 'fixed')">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -1046,17 +1024,14 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:index-key-reference/@ref-index-key"
-                 priority="1004"
-                 mode="M6">
+<xsl:template match="fo:index-key-reference/@ref-index-key" priority="1004" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:index-key-reference/@ref-index-key"/>
       <xsl:variable name="index-key-reference" select="."/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="empty(key('index-key', .))">
-         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                 test="empty(key('index-key', .))">
+<xsl:if test="empty(key('index-key', .))">
+         <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="empty(key('index-key', .))">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
                <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -1070,7 +1045,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="exists(key('index-key', .)) and (some $index-hit in key('index-key', .) satisfies $index-hit &gt;&gt; $index-key-reference)">
+<xsl:if test="exists(key('index-key', .)) and (some $index-hit in key('index-key', .) satisfies $index-hit &gt;&gt; $index-key-reference)">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="exists(key('index-key', .)) and (some $index-hit in key('index-key', .) satisfies $index-hit &gt;&gt; $index-key-reference)">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -1087,11 +1062,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@region-name" priority="1003" mode="M6">
+<xsl:template match="fo:*/@region-name" priority="1003" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@region-name"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="count(distinct-values(for $fo in key('region-name', .) return local-name($fo))) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1110,7 +1085,7 @@
       </xsl:choose>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="not(. eq 'xsl-region-body') or local-name(..) eq 'region-body'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1128,7 +1103,7 @@
       </xsl:choose>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="not(. eq 'xsl-region-start') or local-name(..) eq 'region-start'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1146,7 +1121,7 @@
       </xsl:choose>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="not(. eq 'xsl-region-end') or local-name(..) eq 'region-end'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1164,7 +1139,7 @@
       </xsl:choose>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="not(. eq 'xsl-region-before') or local-name(..) eq 'region-before'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1182,7 +1157,7 @@
       </xsl:choose>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="not(. eq 'xsl-region-after') or local-name(..) eq 'region-after'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1201,12 +1176,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@region-name-reference" priority="1002" mode="M6">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@region-name-reference"/>
+<xsl:template match="fo:*/@region-name-reference" priority="1002" mode="M6">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@region-name-reference"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="count(ancestor::fo:flow-map//fo:region-name-specifier/@region-name-reference[. eq current()]) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1225,12 +1199,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@retrieve-class-name" priority="1001" mode="M6">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@retrieve-class-name"/>
+<xsl:template match="fo:*/@retrieve-class-name" priority="1001" mode="M6">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@retrieve-class-name"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="exists(key('marker-class-name', .))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1253,11 +1226,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@span" priority="1000" mode="M6">
+<xsl:template match="fo:*/@span" priority="1000" mode="M6">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@span"/>
 
 		    <!--REPORT warning-->
-      <xsl:if test="exists(ancestor::fo:static-content)">
+<xsl:if test="exists(ancestor::fo:static-content)">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="exists(ancestor::fo:static-content)">
             <xsl:attribute name="role">warning</xsl:attribute>
@@ -1276,18 +1249,17 @@
    </xsl:template>
 
    <!--PATTERN fo-property-->
-   <xsl:include xmlns="http://purl.oclc.org/dsdl/schematron"
+<xsl:include xmlns="http://purl.oclc.org/dsdl/schematron"
                 xmlns:sqf="http://www.schematron-quickfix.com/validator/process"
                 href="file:/E:/Projects/oxygen/focheck-internal/focheck/xsl/parser-runner.xsl"/>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@absolute-position" priority="1253" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@absolute-position"/>
+<xsl:template match="fo:*/@absolute-position" priority="1253" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@absolute-position"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1309,7 +1281,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'absolute', 'fixed', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'absolute', 'fixed', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'absolute', 'fixed', 'inherit'))">
             <xsl:attribute name="location">
@@ -1326,7 +1298,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -1340,7 +1312,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -1359,12 +1331,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@active-state" priority="1252" mode="M7">
+<xsl:template match="fo:*/@active-state" priority="1252" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@active-state"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1386,7 +1358,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('link', 'visited', 'active', 'hover', 'focus'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('link', 'visited', 'active', 'hover', 'focus'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('link', 'visited', 'active', 'hover', 'focus'))">
             <xsl:attribute name="location">
@@ -1403,7 +1375,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -1417,7 +1389,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -1436,13 +1408,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@alignment-adjust" priority="1251" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@alignment-adjust"/>
+<xsl:template match="fo:*/@alignment-adjust" priority="1251" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@alignment-adjust"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Percent', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1464,7 +1435,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'inherit'))">
             <xsl:attribute name="location">
@@ -1481,7 +1452,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -1495,7 +1466,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -1514,13 +1485,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@alignment-baseline" priority="1250" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@alignment-baseline"/>
+<xsl:template match="fo:*/@alignment-baseline" priority="1250" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@alignment-baseline"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1542,7 +1512,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'baseline', 'before-edge', 'text-before-edge', 'middle', 'central', 'after-edge', 'text-after-edge', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'inherit'))">
             <xsl:attribute name="location">
@@ -1559,7 +1529,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -1573,7 +1543,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -1592,12 +1562,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@allowed-height-scale" priority="1249" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@allowed-height-scale"/>
+<xsl:template match="fo:*/@allowed-height-scale" priority="1249" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@allowed-height-scale"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -1611,12 +1580,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@allowed-width-scale" priority="1248" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@allowed-width-scale"/>
+<xsl:template match="fo:*/@allowed-width-scale" priority="1248" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@allowed-width-scale"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -1630,12 +1598,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@auto-restore" priority="1247" mode="M7">
+<xsl:template match="fo:*/@auto-restore" priority="1247" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@auto-restore"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1657,7 +1625,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
             <xsl:attribute name="location">
@@ -1674,7 +1642,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -1688,7 +1656,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -1707,11 +1675,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background" priority="1246" mode="M7">
+<xsl:template match="fo:*/@background" priority="1246" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@background"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -1725,13 +1693,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-attachment" priority="1245" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@background-attachment"/>
+<xsl:template match="fo:*/@background-attachment" priority="1245" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@background-attachment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1753,7 +1720,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('scroll', 'fixed', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('scroll', 'fixed', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('scroll', 'fixed', 'inherit'))">
             <xsl:attribute name="location">
@@ -1770,7 +1737,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -1784,7 +1751,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -1803,13 +1770,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-color" priority="1244" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@background-color"/>
+<xsl:template match="fo:*/@background-color" priority="1244" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1831,7 +1797,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
@@ -1848,7 +1814,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -1862,7 +1828,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -1881,12 +1847,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-image" priority="1243" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@background-image"/>
+<xsl:template match="fo:*/@background-image" priority="1243" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@background-image"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -1900,12 +1865,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-position" priority="1242" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@background-position"/>
+<xsl:template match="fo:*/@background-position" priority="1242" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@background-position"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -1919,15 +1883,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-position-horizontal"
-                 priority="1241"
-                 mode="M7">
+<xsl:template match="fo:*/@background-position-horizontal" priority="1241" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-position-horizontal"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -1949,7 +1911,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('left', 'center', 'right', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('left', 'center', 'right', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('left', 'center', 'right', 'inherit'))">
             <xsl:attribute name="location">
@@ -1966,7 +1928,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -1980,7 +1942,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -1999,15 +1961,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-position-vertical"
-                 priority="1240"
-                 mode="M7">
+<xsl:template match="fo:*/@background-position-vertical" priority="1240" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@background-position-vertical"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2029,7 +1989,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('top', 'center', 'bottom', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('top', 'center', 'bottom', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('top', 'center', 'bottom', 'inherit'))">
             <xsl:attribute name="location">
@@ -2046,7 +2006,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2060,7 +2020,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2079,13 +2039,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-repeat" priority="1239" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@background-repeat"/>
+<xsl:template match="fo:*/@background-repeat" priority="1239" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@background-repeat"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2107,7 +2066,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('repeat', 'repeat-x', 'repeat-y', 'no-repeat', 'paginate'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('repeat', 'repeat-x', 'repeat-y', 'no-repeat', 'paginate'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('repeat', 'repeat-x', 'repeat-y', 'no-repeat', 'paginate'))">
             <xsl:attribute name="location">
@@ -2124,7 +2083,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2138,7 +2097,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2157,12 +2116,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@baseline-shift" priority="1238" mode="M7">
+<xsl:template match="fo:*/@baseline-shift" priority="1238" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@baseline-shift"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Percent', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2184,7 +2143,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('baseline', 'sub', 'super', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('baseline', 'sub', 'super', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('baseline', 'sub', 'super', 'inherit'))">
             <xsl:attribute name="location">
@@ -2201,7 +2160,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2215,7 +2174,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2234,13 +2193,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@blank-or-not-blank" priority="1237" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@blank-or-not-blank"/>
+<xsl:template match="fo:*/@blank-or-not-blank" priority="1237" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@blank-or-not-blank"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2262,7 +2220,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('blank', 'not-blank', 'any', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('blank', 'not-blank', 'any', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('blank', 'not-blank', 'any', 'inherit'))">
             <xsl:attribute name="location">
@@ -2279,7 +2237,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2293,7 +2251,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2312,13 +2270,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@block-progression-dimension" priority="1236" mode="M7">
+<xsl:template match="fo:*/@block-progression-dimension" priority="1236" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@block-progression-dimension"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2340,7 +2298,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -2357,7 +2315,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2371,7 +2329,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2390,11 +2348,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border" priority="1235" mode="M7">
+<xsl:template match="fo:*/@border" priority="1235" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -2408,14 +2366,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-after-color" priority="1234" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-after-color"/>
+<xsl:template match="fo:*/@border-after-color" priority="1234" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-after-color"/>
       <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2440,7 +2397,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
@@ -2460,7 +2417,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2477,7 +2434,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2495,13 +2452,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-after-precedence" priority="1233" mode="M7">
+<xsl:template match="fo:*/@border-after-precedence" priority="1233" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-after-precedence"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2523,7 +2480,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
             <xsl:attribute name="location">
@@ -2540,7 +2497,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2554,7 +2511,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2573,13 +2530,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-after-style" priority="1232" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-after-style"/>
+<xsl:template match="fo:*/@border-after-style" priority="1232" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-after-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2604,7 +2560,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
             <xsl:attribute name="location">
@@ -2624,7 +2580,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2641,7 +2597,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2659,13 +2615,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-after-width" priority="1231" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-after-width"/>
+<xsl:template match="fo:*/@border-after-width" priority="1231" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-after-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2690,7 +2645,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
             <xsl:attribute name="location">
@@ -2710,7 +2665,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2727,7 +2682,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2745,14 +2700,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-before-color" priority="1230" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-before-color"/>
+<xsl:template match="fo:*/@border-before-color" priority="1230" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-before-color"/>
       <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2777,7 +2731,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
@@ -2797,7 +2751,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2814,7 +2768,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2832,13 +2786,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-before-precedence" priority="1229" mode="M7">
+<xsl:template match="fo:*/@border-before-precedence" priority="1229" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-before-precedence"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2860,7 +2814,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
             <xsl:attribute name="location">
@@ -2877,7 +2831,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2891,7 +2845,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2910,13 +2864,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-before-style" priority="1228" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-before-style"/>
+<xsl:template match="fo:*/@border-before-style" priority="1228" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-before-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -2941,7 +2894,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
             <xsl:attribute name="location">
@@ -2961,7 +2914,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -2978,7 +2931,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -2996,13 +2949,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-before-width" priority="1227" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-before-width"/>
+<xsl:template match="fo:*/@border-before-width" priority="1227" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-before-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -3027,7 +2979,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
             <xsl:attribute name="location">
@@ -3047,7 +2999,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -3064,7 +3016,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -3082,11 +3034,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-bottom" priority="1226" mode="M7">
+<xsl:template match="fo:*/@border-bottom" priority="1226" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-bottom"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -3100,14 +3052,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-bottom-color" priority="1225" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-bottom-color"/>
+<xsl:template match="fo:*/@border-bottom-color" priority="1225" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-bottom-color"/>
       <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -3132,7 +3083,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
@@ -3152,7 +3103,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -3169,7 +3120,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -3187,13 +3138,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-bottom-style" priority="1224" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-bottom-style"/>
+<xsl:template match="fo:*/@border-bottom-style" priority="1224" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-bottom-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -3218,7 +3168,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
             <xsl:attribute name="location">
@@ -3238,7 +3188,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -3255,7 +3205,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -3273,13 +3223,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-bottom-width" priority="1223" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-bottom-width"/>
+<xsl:template match="fo:*/@border-bottom-width" priority="1223" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-bottom-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -3304,7 +3253,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
             <xsl:attribute name="location">
@@ -3324,7 +3273,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -3341,7 +3290,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -3359,12 +3308,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-collapse" priority="1222" mode="M7">
+<xsl:template match="fo:*/@border-collapse" priority="1222" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-collapse"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -3386,7 +3335,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('collapse', 'collapse-with-precedence', 'separate', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('collapse', 'collapse-with-precedence', 'separate', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('collapse', 'collapse-with-precedence', 'separate', 'inherit'))">
             <xsl:attribute name="location">
@@ -3403,7 +3352,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -3417,7 +3366,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -3436,11 +3385,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-color" priority="1221" mode="M7">
+<xsl:template match="fo:*/@border-color" priority="1221" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-color"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -3454,14 +3403,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-end-color" priority="1220" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-end-color"/>
+<xsl:template match="fo:*/@border-end-color" priority="1220" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-end-color"/>
       <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -3486,7 +3434,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
@@ -3506,7 +3454,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -3523,7 +3471,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -3541,13 +3489,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-end-precedence" priority="1219" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-end-precedence"/>
+<xsl:template match="fo:*/@border-end-precedence" priority="1219" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-end-precedence"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -3569,7 +3516,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
             <xsl:attribute name="location">
@@ -3586,7 +3533,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -3600,7 +3547,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -3619,13 +3566,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-end-style" priority="1218" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-end-style"/>
+<xsl:template match="fo:*/@border-end-style" priority="1218" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-end-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -3650,7 +3596,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
             <xsl:attribute name="location">
@@ -3670,7 +3616,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -3687,7 +3633,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -3705,13 +3651,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-end-width" priority="1217" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-end-width"/>
+<xsl:template match="fo:*/@border-end-width" priority="1217" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-end-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -3736,7 +3681,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
             <xsl:attribute name="location">
@@ -3756,7 +3701,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -3773,7 +3718,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -3791,11 +3736,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-left" priority="1216" mode="M7">
+<xsl:template match="fo:*/@border-left" priority="1216" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-left"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -3809,14 +3754,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-left-color" priority="1215" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-left-color"/>
+<xsl:template match="fo:*/@border-left-color" priority="1215" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-left-color"/>
       <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -3841,7 +3785,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
@@ -3861,7 +3805,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -3878,7 +3822,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -3896,13 +3840,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-left-style" priority="1214" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-left-style"/>
+<xsl:template match="fo:*/@border-left-style" priority="1214" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-left-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -3927,7 +3870,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
             <xsl:attribute name="location">
@@ -3947,7 +3890,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -3964,7 +3907,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -3982,13 +3925,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-left-width" priority="1213" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-left-width"/>
+<xsl:template match="fo:*/@border-left-width" priority="1213" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-left-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -4013,7 +3955,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
             <xsl:attribute name="location">
@@ -4033,7 +3975,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -4050,7 +3992,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -4068,11 +4010,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-right" priority="1212" mode="M7">
+<xsl:template match="fo:*/@border-right" priority="1212" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-right"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -4086,14 +4028,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-right-color" priority="1211" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-right-color"/>
+<xsl:template match="fo:*/@border-right-color" priority="1211" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-right-color"/>
       <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -4118,7 +4059,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
@@ -4138,7 +4079,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -4155,7 +4096,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -4173,13 +4114,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-right-style" priority="1210" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-right-style"/>
+<xsl:template match="fo:*/@border-right-style" priority="1210" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-right-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -4204,7 +4144,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
             <xsl:attribute name="location">
@@ -4224,7 +4164,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -4241,7 +4181,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -4259,13 +4199,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-right-width" priority="1209" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-right-width"/>
+<xsl:template match="fo:*/@border-right-width" priority="1209" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-right-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -4290,7 +4229,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
             <xsl:attribute name="location">
@@ -4310,7 +4249,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -4327,7 +4266,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -4345,13 +4284,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-separation" priority="1208" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-separation"/>
+<xsl:template match="fo:*/@border-separation" priority="1208" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-separation"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -4373,7 +4311,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -4390,7 +4328,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -4404,7 +4342,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -4423,11 +4361,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-spacing" priority="1207" mode="M7">
+<xsl:template match="fo:*/@border-spacing" priority="1207" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-spacing"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -4441,14 +4379,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-start-color" priority="1206" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-start-color"/>
+<xsl:template match="fo:*/@border-start-color" priority="1206" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-start-color"/>
       <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -4473,7 +4410,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
@@ -4493,7 +4430,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -4510,7 +4447,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -4528,13 +4465,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-start-precedence" priority="1205" mode="M7">
+<xsl:template match="fo:*/@border-start-precedence" priority="1205" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@border-start-precedence"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -4556,7 +4493,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('force', 'inherit'))">
             <xsl:attribute name="location">
@@ -4573,7 +4510,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -4587,7 +4524,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -4606,13 +4543,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-start-style" priority="1204" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-start-style"/>
+<xsl:template match="fo:*/@border-start-style" priority="1204" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-start-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -4637,7 +4573,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
             <xsl:attribute name="location">
@@ -4657,7 +4593,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -4674,7 +4610,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -4692,13 +4628,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-start-width" priority="1203" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-start-width"/>
+<xsl:template match="fo:*/@border-start-width" priority="1203" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-start-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -4723,7 +4658,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
             <xsl:attribute name="location">
@@ -4743,7 +4678,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -4760,7 +4695,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -4778,11 +4713,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-style" priority="1202" mode="M7">
+<xsl:template match="fo:*/@border-style" priority="1202" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-style"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -4796,11 +4731,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-top" priority="1201" mode="M7">
+<xsl:template match="fo:*/@border-top" priority="1201" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-top"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -4814,14 +4749,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-top-color" priority="1200" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-top-color"/>
+<xsl:template match="fo:*/@border-top-color" priority="1200" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-top-color"/>
       <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -4846,7 +4780,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
@@ -4866,7 +4800,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -4883,7 +4817,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -4901,13 +4835,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-top-style" priority="1199" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-top-style"/>
+<xsl:template match="fo:*/@border-top-style" priority="1199" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-top-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -4932,7 +4865,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
             <xsl:attribute name="location">
@@ -4952,7 +4885,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -4969,7 +4902,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -4987,13 +4920,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-top-width" priority="1198" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@border-top-width"/>
+<xsl:template match="fo:*/@border-top-width" priority="1198" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-top-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5018,7 +4950,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick', 'inherit'))">
             <xsl:attribute name="location">
@@ -5038,7 +4970,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5055,7 +4987,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5073,11 +5005,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@border-width" priority="1197" mode="M7">
+<xsl:template match="fo:*/@border-width" priority="1197" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@border-width"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -5091,12 +5023,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@bottom" priority="1196" mode="M7">
+<xsl:template match="fo:*/@bottom" priority="1196" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@bottom"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5118,7 +5050,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -5135,7 +5067,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5149,7 +5081,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5168,12 +5100,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@break-after" priority="1195" mode="M7">
+<xsl:template match="fo:*/@break-after" priority="1195" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@break-after"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5195,7 +5127,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'column', 'page', 'even-page', 'odd-page', 'even-document', 'odd-document'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'column', 'page', 'even-page', 'odd-page', 'even-document', 'odd-document'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'column', 'page', 'even-page', 'odd-page', 'even-document', 'odd-document'))">
             <xsl:attribute name="location">
@@ -5212,7 +5144,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5226,7 +5158,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5245,12 +5177,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@break-before" priority="1194" mode="M7">
+<xsl:template match="fo:*/@break-before" priority="1194" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@break-before"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5272,7 +5204,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'column', 'page', 'even-page', 'odd-page', 'even-document', 'odd-document'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'column', 'page', 'even-page', 'odd-page', 'even-document', 'odd-document'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'column', 'page', 'even-page', 'odd-page', 'even-document', 'odd-document'))">
             <xsl:attribute name="location">
@@ -5289,7 +5221,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5303,7 +5235,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5322,12 +5254,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@caption-side" priority="1193" mode="M7">
+<xsl:template match="fo:*/@caption-side" priority="1193" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@caption-side"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5349,7 +5281,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('before', 'after', 'start', 'end', 'top', 'bottom', 'left', 'right', 'inherit'))">
             <xsl:attribute name="location">
@@ -5366,7 +5298,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5380,7 +5312,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5399,12 +5331,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@case-name" priority="1192" mode="M7">
+<xsl:template match="fo:*/@case-name" priority="1192" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@case-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5426,7 +5358,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5440,7 +5372,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5459,12 +5391,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@case-title" priority="1191" mode="M7">
+<xsl:template match="fo:*/@case-title" priority="1191" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@case-title"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5486,7 +5418,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5500,7 +5432,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5519,13 +5451,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-class" priority="1190" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@change-bar-class"/>
+<xsl:template match="fo:*/@change-bar-class" priority="1190" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@change-bar-class"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5547,7 +5478,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5561,7 +5492,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5580,13 +5511,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-color" priority="1189" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@change-bar-color"/>
+<xsl:template match="fo:*/@change-bar-color" priority="1189" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@change-bar-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5608,7 +5538,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5622,7 +5552,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5641,13 +5571,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-offset" priority="1188" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@change-bar-offset"/>
+<xsl:template match="fo:*/@change-bar-offset" priority="1188" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@change-bar-offset"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5669,7 +5598,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5683,7 +5612,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5702,13 +5631,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-placement" priority="1187" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@change-bar-placement"/>
+<xsl:template match="fo:*/@change-bar-placement" priority="1187" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@change-bar-placement"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5730,7 +5658,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('start', 'end', 'left', 'right', 'inside', 'outside', 'alternate'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('start', 'end', 'left', 'right', 'inside', 'outside', 'alternate'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('start', 'end', 'left', 'right', 'inside', 'outside', 'alternate'))">
             <xsl:attribute name="location">
@@ -5747,7 +5675,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5761,7 +5689,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5780,13 +5708,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-style" priority="1186" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@change-bar-style"/>
+<xsl:template match="fo:*/@change-bar-style" priority="1186" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@change-bar-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5808,7 +5735,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset'))">
             <xsl:attribute name="location">
@@ -5825,7 +5752,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5839,7 +5766,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5858,13 +5785,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@change-bar-width" priority="1185" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@change-bar-width"/>
+<xsl:template match="fo:*/@change-bar-width" priority="1185" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@change-bar-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5886,7 +5812,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('thin', 'medium', 'thick'))">
             <xsl:attribute name="location">
@@ -5903,7 +5829,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -5917,7 +5843,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -5936,11 +5862,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@character" priority="1184" mode="M7">
+<xsl:template match="fo:*/@character" priority="1184" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@character"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -5954,12 +5880,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@clear" priority="1183" mode="M7">
+<xsl:template match="fo:*/@clear" priority="1183" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@clear"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -5981,7 +5907,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('start', 'end', 'left', 'right', 'inside', 'outside', 'both', 'none', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('start', 'end', 'left', 'right', 'inside', 'outside', 'both', 'none', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('start', 'end', 'left', 'right', 'inside', 'outside', 'both', 'none', 'inherit'))">
             <xsl:attribute name="location">
@@ -5998,7 +5924,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6012,7 +5938,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6031,12 +5957,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@clip" priority="1182" mode="M7">
+<xsl:template match="fo:*/@clip" priority="1182" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@clip"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Function', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6058,7 +5984,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -6075,7 +6001,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6089,7 +6015,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6108,12 +6034,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@color" priority="1181" mode="M7">
+<xsl:template match="fo:*/@color" priority="1181" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6135,7 +6061,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
@@ -6152,7 +6078,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6166,7 +6092,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6185,12 +6111,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@color-profile-name" priority="1180" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@color-profile-name"/>
+<xsl:template match="fo:*/@color-profile-name" priority="1180" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@color-profile-name"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -6204,12 +6129,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-count" priority="1179" mode="M7">
+<xsl:template match="fo:*/@column-count" priority="1179" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-count"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6231,7 +6156,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -6248,7 +6173,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6262,7 +6187,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6281,12 +6206,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-gap" priority="1178" mode="M7">
+<xsl:template match="fo:*/@column-gap" priority="1178" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-gap"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6308,7 +6233,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -6325,7 +6250,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6339,7 +6264,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6358,12 +6283,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-number" priority="1177" mode="M7">
+<xsl:template match="fo:*/@column-number" priority="1177" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-number"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6385,7 +6310,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6399,7 +6324,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6418,12 +6343,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@column-width" priority="1176" mode="M7">
+<xsl:template match="fo:*/@column-width" priority="1176" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@column-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6445,7 +6370,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6459,7 +6384,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6478,12 +6403,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@content-height" priority="1175" mode="M7">
+<xsl:template match="fo:*/@content-height" priority="1175" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@content-height"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6505,7 +6430,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
             <xsl:attribute name="location">
@@ -6522,7 +6447,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6536,7 +6461,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6555,11 +6480,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@content-type" priority="1174" mode="M7">
+<xsl:template match="fo:*/@content-type" priority="1174" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@content-type"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -6573,12 +6498,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@content-width" priority="1173" mode="M7">
+<xsl:template match="fo:*/@content-width" priority="1173" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@content-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6600,7 +6525,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
             <xsl:attribute name="location">
@@ -6617,7 +6542,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6631,7 +6556,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6650,11 +6575,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@country" priority="1172" mode="M7">
+<xsl:template match="fo:*/@country" priority="1172" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@country"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -6668,11 +6593,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@cue" priority="1171" mode="M7">
+<xsl:template match="fo:*/@cue" priority="1171" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@cue"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -6686,15 +6611,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@destination-placement-offset"
-                 priority="1170"
-                 mode="M7">
+<xsl:template match="fo:*/@destination-placement-offset" priority="1170" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@destination-placement-offset"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6716,7 +6639,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6730,7 +6653,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6749,12 +6672,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@direction" priority="1169" mode="M7">
+<xsl:template match="fo:*/@direction" priority="1169" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@direction"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6776,7 +6699,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('ltr', 'rtl', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('ltr', 'rtl', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('ltr', 'rtl', 'inherit'))">
             <xsl:attribute name="location">
@@ -6793,7 +6716,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6807,7 +6730,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6826,12 +6749,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@display-align" priority="1168" mode="M7">
+<xsl:template match="fo:*/@display-align" priority="1168" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@display-align"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6853,7 +6776,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'before', 'center', 'after', 'justify'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'before', 'center', 'after', 'justify'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'before', 'center', 'after', 'justify'))">
             <xsl:attribute name="location">
@@ -6870,7 +6793,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6884,7 +6807,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6903,13 +6826,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@dominant-baseline" priority="1167" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@dominant-baseline"/>
+<xsl:template match="fo:*/@dominant-baseline" priority="1167" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@dominant-baseline"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -6931,7 +6853,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'use-script', 'no-change', 'reset-size', 'ideographic', 'alphabetic', 'hanging', 'mathematical', 'central', 'middle', 'text-after-edge', 'text-before-edge', 'inherit'))">
             <xsl:attribute name="location">
@@ -6948,7 +6870,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -6962,7 +6884,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -6981,12 +6903,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@empty-cells" priority="1166" mode="M7">
+<xsl:template match="fo:*/@empty-cells" priority="1166" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@empty-cells"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7008,7 +6930,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('show', 'hide', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('show', 'hide', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('show', 'hide', 'inherit'))">
             <xsl:attribute name="location">
@@ -7025,7 +6947,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7039,7 +6961,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7058,12 +6980,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@end-indent" priority="1165" mode="M7">
+<xsl:template match="fo:*/@end-indent" priority="1165" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@end-indent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7085,7 +7007,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -7102,7 +7024,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7116,7 +7038,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7135,12 +7057,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@ends-row" priority="1164" mode="M7">
+<xsl:template match="fo:*/@ends-row" priority="1164" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@ends-row"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7162,7 +7084,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
             <xsl:attribute name="location">
@@ -7179,7 +7101,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7193,7 +7115,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7212,12 +7134,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@extent" priority="1163" mode="M7">
+<xsl:template match="fo:*/@extent" priority="1163" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@extent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7239,7 +7161,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -7256,7 +7178,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7270,7 +7192,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7289,18 +7211,17 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@external-destination" priority="1162" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@external-destination"/>
+<xsl:template match="fo:*/@external-destination" priority="1162" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@external-destination"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@float" priority="1161" mode="M7">
+<xsl:template match="fo:*/@float" priority="1161" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@float"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7322,7 +7243,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('before', 'start', 'end', 'left', 'right', 'inside', 'outside', 'none', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('before', 'start', 'end', 'left', 'right', 'inside', 'outside', 'none', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('before', 'start', 'end', 'left', 'right', 'inside', 'outside', 'none', 'inherit'))">
             <xsl:attribute name="location">
@@ -7339,7 +7260,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7353,7 +7274,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7372,12 +7293,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-map-name" priority="1160" mode="M7">
+<xsl:template match="fo:*/@flow-map-name" priority="1160" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-map-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7399,7 +7320,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7413,7 +7334,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7432,13 +7353,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-map-reference" priority="1159" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@flow-map-reference"/>
+<xsl:template match="fo:*/@flow-map-reference" priority="1159" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-map-reference"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7460,7 +7380,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7474,7 +7394,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7493,12 +7413,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name" priority="1158" mode="M7">
+<xsl:template match="fo:*/@flow-name" priority="1158" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7520,7 +7440,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7534,7 +7454,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7553,13 +7473,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@flow-name-reference" priority="1157" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@flow-name-reference"/>
+<xsl:template match="fo:*/@flow-name-reference" priority="1157" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@flow-name-reference"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7581,7 +7500,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7595,7 +7514,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7614,11 +7533,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font" priority="1156" mode="M7">
+<xsl:template match="fo:*/@font" priority="1156" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -7632,11 +7551,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-family" priority="1155" mode="M7">
+<xsl:template match="fo:*/@font-family" priority="1155" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-family"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -7650,13 +7569,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-selection-strategy" priority="1154" mode="M7">
+<xsl:template match="fo:*/@font-selection-strategy" priority="1154" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@font-selection-strategy"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7678,7 +7597,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'character-by-character', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'character-by-character', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'character-by-character', 'inherit'))">
             <xsl:attribute name="location">
@@ -7695,7 +7614,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7709,7 +7628,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7728,12 +7647,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-size" priority="1153" mode="M7">
+<xsl:template match="fo:*/@font-size" priority="1153" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-size"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7755,7 +7674,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller', 'inherit'))">
             <xsl:attribute name="location">
@@ -7772,7 +7691,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7786,7 +7705,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7805,13 +7724,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-size-adjust" priority="1152" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@font-size-adjust"/>
+<xsl:template match="fo:*/@font-size-adjust" priority="1152" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-size-adjust"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7833,7 +7751,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
             <xsl:attribute name="location">
@@ -7850,7 +7768,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7864,7 +7782,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7883,12 +7801,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-stretch" priority="1151" mode="M7">
+<xsl:template match="fo:*/@font-stretch" priority="1151" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-stretch"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Percent', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7910,7 +7828,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'wider', 'narrower', 'ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded', 'inherit'))">
             <xsl:attribute name="location">
@@ -7927,7 +7845,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -7941,7 +7859,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -7960,12 +7878,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-style" priority="1150" mode="M7">
+<xsl:template match="fo:*/@font-style" priority="1150" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -7987,7 +7905,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'italic', 'oblique', 'backslant', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'italic', 'oblique', 'backslant', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'italic', 'oblique', 'backslant', 'inherit'))">
             <xsl:attribute name="location">
@@ -8004,7 +7922,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -8018,7 +7936,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8037,11 +7955,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-variant" priority="1149" mode="M7">
+<xsl:template match="fo:*/@font-variant" priority="1149" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-variant"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -8055,12 +7973,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@font-weight" priority="1148" mode="M7">
+<xsl:template match="fo:*/@font-weight" priority="1148" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@font-weight"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -8082,7 +8000,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'bold', 'bolder', 'lighter', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'bold', 'bolder', 'lighter', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'bold', 'bolder', 'lighter', 'inherit'))">
             <xsl:attribute name="location">
@@ -8099,7 +8017,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -8113,7 +8031,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8132,12 +8050,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@force-page-count" priority="1147" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@force-page-count"/>
+<xsl:template match="fo:*/@force-page-count" priority="1147" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@force-page-count"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -8151,11 +8068,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@format" priority="1146" mode="M7">
+<xsl:template match="fo:*/@format" priority="1146" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@format"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -8169,15 +8086,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@glyph-orientation-horizontal"
-                 priority="1145"
-                 mode="M7">
+<xsl:template match="fo:*/@glyph-orientation-horizontal" priority="1145" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@glyph-orientation-horizontal"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -8199,7 +8114,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -8216,7 +8131,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -8230,7 +8145,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8249,13 +8164,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@glyph-orientation-vertical" priority="1144" mode="M7">
+<xsl:template match="fo:*/@glyph-orientation-vertical" priority="1144" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@glyph-orientation-vertical"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Literal', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -8277,7 +8192,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -8294,7 +8209,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -8308,7 +8223,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8327,12 +8242,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@grouping-separator" priority="1143" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@grouping-separator"/>
+<xsl:template match="fo:*/@grouping-separator" priority="1143" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@grouping-separator"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -8346,12 +8260,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@grouping-size" priority="1142" mode="M7">
+<xsl:template match="fo:*/@grouping-size" priority="1142" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@grouping-size"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -8373,7 +8287,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -8387,7 +8301,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8406,12 +8320,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@height" priority="1141" mode="M7">
+<xsl:template match="fo:*/@height" priority="1141" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@height"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -8433,7 +8347,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -8450,7 +8364,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -8464,7 +8378,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8483,12 +8397,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenate" priority="1140" mode="M7">
+<xsl:template match="fo:*/@hyphenate" priority="1140" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@hyphenate"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -8510,7 +8424,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'false', 'true', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'false', 'true', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'false', 'true', 'inherit'))">
             <xsl:attribute name="location">
@@ -8527,7 +8441,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -8541,7 +8455,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8560,12 +8474,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenation-character" priority="1139" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@hyphenation-character"/>
+<xsl:template match="fo:*/@hyphenation-character" priority="1139" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@hyphenation-character"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -8579,13 +8492,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenation-keep" priority="1138" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@hyphenation-keep"/>
+<xsl:template match="fo:*/@hyphenation-keep" priority="1138" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@hyphenation-keep"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -8607,7 +8519,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'column', 'page', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'column', 'page', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'column', 'page', 'inherit'))">
             <xsl:attribute name="location">
@@ -8624,7 +8536,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -8638,7 +8550,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8657,13 +8569,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenation-ladder-count" priority="1137" mode="M7">
+<xsl:template match="fo:*/@hyphenation-ladder-count" priority="1137" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@hyphenation-ladder-count"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -8685,7 +8597,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('no-limit', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('no-limit', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('no-limit', 'inherit'))">
             <xsl:attribute name="location">
@@ -8702,7 +8614,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -8716,7 +8628,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8735,15 +8647,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenation-push-character-count"
-                 priority="1136"
-                 mode="M7">
+<xsl:template match="fo:*/@hyphenation-push-character-count" priority="1136" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@hyphenation-push-character-count"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -8765,7 +8675,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -8782,7 +8692,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -8796,7 +8706,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8815,15 +8725,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@hyphenation-remain-character-count"
-                 priority="1135"
-                 mode="M7">
+<xsl:template match="fo:*/@hyphenation-remain-character-count" priority="1135" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@hyphenation-remain-character-count"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -8845,7 +8753,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -8862,7 +8770,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -8876,7 +8784,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8895,11 +8803,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@id" priority="1134" mode="M7">
+<xsl:template match="fo:*/@id" priority="1134" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@id"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -8913,12 +8821,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@index-class" priority="1133" mode="M7">
+<xsl:template match="fo:*/@index-class" priority="1133" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@index-class"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -8940,7 +8848,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -8959,11 +8867,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@index-key" priority="1132" mode="M7">
+<xsl:template match="fo:*/@index-key" priority="1132" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@index-key"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -8977,13 +8885,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@indicate-destination" priority="1131" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@indicate-destination"/>
+<xsl:template match="fo:*/@indicate-destination" priority="1131" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@indicate-destination"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9005,7 +8912,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
             <xsl:attribute name="location">
@@ -9022,7 +8929,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9036,7 +8943,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9055,13 +8962,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@initial-page-number" priority="1130" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@initial-page-number"/>
+<xsl:template match="fo:*/@initial-page-number" priority="1130" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@initial-page-number"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9083,7 +8989,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'auto-odd', 'auto-even', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'auto-odd', 'auto-even', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'auto-odd', 'auto-even', 'inherit'))">
             <xsl:attribute name="location">
@@ -9100,7 +9006,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9114,7 +9020,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9133,15 +9039,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@inline-progression-dimension"
-                 priority="1129"
-                 mode="M7">
+<xsl:template match="fo:*/@inline-progression-dimension" priority="1129" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@inline-progression-dimension"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9163,7 +9067,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -9180,7 +9084,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9194,7 +9098,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9213,19 +9117,17 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@internal-destination" priority="1128" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@internal-destination"/>
+<xsl:template match="fo:*/@internal-destination" priority="1128" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@internal-destination"/>
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@intrinsic-scale-value" priority="1127" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@intrinsic-scale-value"/>
+<xsl:template match="fo:*/@intrinsic-scale-value" priority="1127" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@intrinsic-scale-value"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9247,7 +9149,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -9264,7 +9166,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9278,7 +9180,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9297,13 +9199,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@intrusion-displace" priority="1126" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@intrusion-displace"/>
+<xsl:template match="fo:*/@intrusion-displace" priority="1126" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@intrusion-displace"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9325,7 +9226,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'none', 'line', 'indent', 'block', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'none', 'line', 'indent', 'block', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'none', 'line', 'indent', 'block', 'inherit'))">
             <xsl:attribute name="location">
@@ -9342,7 +9243,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9356,7 +9257,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9375,12 +9276,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@keep-together" priority="1125" mode="M7">
+<xsl:template match="fo:*/@keep-together" priority="1125" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@keep-together"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9402,7 +9303,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'always', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'always', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'always', 'inherit'))">
             <xsl:attribute name="location">
@@ -9419,7 +9320,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9433,7 +9334,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9452,12 +9353,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@keep-with-next" priority="1124" mode="M7">
+<xsl:template match="fo:*/@keep-with-next" priority="1124" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@keep-with-next"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9479,7 +9380,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'always', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'always', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'always', 'inherit'))">
             <xsl:attribute name="location">
@@ -9496,7 +9397,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9510,7 +9411,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9529,13 +9430,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@keep-with-previous" priority="1123" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@keep-with-previous"/>
+<xsl:template match="fo:*/@keep-with-previous" priority="1123" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@keep-with-previous"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9557,7 +9457,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'always', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'always', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'always', 'inherit'))">
             <xsl:attribute name="location">
@@ -9574,7 +9474,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9588,7 +9488,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9607,11 +9507,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@language" priority="1122" mode="M7">
+<xsl:template match="fo:*/@language" priority="1122" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@language"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -9625,13 +9525,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@last-line-end-indent" priority="1121" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@last-line-end-indent"/>
+<xsl:template match="fo:*/@last-line-end-indent" priority="1121" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@last-line-end-indent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9653,7 +9552,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -9670,7 +9569,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9684,7 +9583,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9703,13 +9602,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@leader-alignment" priority="1120" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@leader-alignment"/>
+<xsl:template match="fo:*/@leader-alignment" priority="1120" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@leader-alignment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9731,7 +9629,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'reference-area', 'page', 'start', 'center', 'end'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'reference-area', 'page', 'start', 'center', 'end'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'reference-area', 'page', 'start', 'center', 'end'))">
             <xsl:attribute name="location">
@@ -9748,7 +9646,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9762,7 +9660,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9781,12 +9679,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@leader-length" priority="1119" mode="M7">
+<xsl:template match="fo:*/@leader-length" priority="1119" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@leader-length"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9808,7 +9706,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -9825,7 +9723,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9839,7 +9737,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9858,12 +9756,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@leader-pattern" priority="1118" mode="M7">
+<xsl:template match="fo:*/@leader-pattern" priority="1118" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@leader-pattern"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9885,7 +9783,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('space', 'rule', 'dots', 'use-content', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('space', 'rule', 'dots', 'use-content', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('space', 'rule', 'dots', 'use-content', 'inherit'))">
             <xsl:attribute name="location">
@@ -9902,7 +9800,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9916,7 +9814,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -9935,13 +9833,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@leader-pattern-width" priority="1117" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@leader-pattern-width"/>
+<xsl:template match="fo:*/@leader-pattern-width" priority="1117" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@leader-pattern-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -9963,7 +9860,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-font-metrics', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-font-metrics', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-font-metrics', 'inherit'))">
             <xsl:attribute name="location">
@@ -9980,7 +9877,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -9994,7 +9891,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10013,12 +9910,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@left" priority="1116" mode="M7">
+<xsl:template match="fo:*/@left" priority="1116" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@left"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10040,7 +9937,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -10057,7 +9954,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10071,7 +9968,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10090,12 +9987,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@letter-spacing" priority="1115" mode="M7">
+<xsl:template match="fo:*/@letter-spacing" priority="1115" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@letter-spacing"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10117,7 +10014,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'inherit'))">
             <xsl:attribute name="location">
@@ -10134,7 +10031,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10148,7 +10045,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10167,12 +10064,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@letter-value" priority="1114" mode="M7">
+<xsl:template match="fo:*/@letter-value" priority="1114" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@letter-value"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10194,7 +10091,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'alphabetic', 'traditional'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'alphabetic', 'traditional'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'alphabetic', 'traditional'))">
             <xsl:attribute name="location">
@@ -10211,7 +10108,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10225,7 +10122,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10244,12 +10141,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@line-height" priority="1113" mode="M7">
+<xsl:template match="fo:*/@line-height" priority="1113" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@line-height"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Number', 'Percent', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10271,7 +10168,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'inherit'))">
             <xsl:attribute name="location">
@@ -10288,7 +10185,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10302,7 +10199,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10321,15 +10218,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@line-height-shift-adjustment"
-                 priority="1112"
-                 mode="M7">
+<xsl:template match="fo:*/@line-height-shift-adjustment" priority="1112" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@line-height-shift-adjustment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10351,7 +10246,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('consider-shifts', 'disregard-shifts', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('consider-shifts', 'disregard-shifts', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('consider-shifts', 'disregard-shifts', 'inherit'))">
             <xsl:attribute name="location">
@@ -10368,7 +10263,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10382,7 +10277,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10401,13 +10296,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@line-stacking-strategy" priority="1111" mode="M7">
+<xsl:template match="fo:*/@line-stacking-strategy" priority="1111" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@line-stacking-strategy"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10429,7 +10324,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('line-height', 'font-height', 'max-height', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('line-height', 'font-height', 'max-height', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('line-height', 'font-height', 'max-height', 'inherit'))">
             <xsl:attribute name="location">
@@ -10446,7 +10341,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10460,7 +10355,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10479,13 +10374,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@linefeed-treatment" priority="1110" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@linefeed-treatment"/>
+<xsl:template match="fo:*/@linefeed-treatment" priority="1110" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@linefeed-treatment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10507,7 +10401,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('ignore', 'preserve', 'treat-as-space', 'treat-as-zero-width-space', 'inherit'))">
             <xsl:attribute name="location">
@@ -10524,7 +10418,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10538,7 +10432,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10557,11 +10451,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@margin" priority="1109" mode="M7">
+<xsl:template match="fo:*/@margin" priority="1109" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@margin"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -10575,12 +10469,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@margin-bottom" priority="1108" mode="M7">
+<xsl:template match="fo:*/@margin-bottom" priority="1108" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@margin-bottom"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10602,7 +10496,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -10619,7 +10513,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10633,7 +10527,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10652,12 +10546,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@margin-left" priority="1107" mode="M7">
+<xsl:template match="fo:*/@margin-left" priority="1107" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@margin-left"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10679,7 +10573,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -10696,7 +10590,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10710,7 +10604,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10729,12 +10623,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@margin-right" priority="1106" mode="M7">
+<xsl:template match="fo:*/@margin-right" priority="1106" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@margin-right"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10756,7 +10650,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -10773,7 +10667,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10787,7 +10681,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10806,12 +10700,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@margin-top" priority="1105" mode="M7">
+<xsl:template match="fo:*/@margin-top" priority="1105" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@margin-top"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10833,7 +10727,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -10850,7 +10744,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10864,7 +10758,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10883,13 +10777,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@marker-class-name" priority="1104" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@marker-class-name"/>
+<xsl:template match="fo:*/@marker-class-name" priority="1104" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@marker-class-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10911,7 +10804,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10925,7 +10818,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -10944,12 +10837,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-name" priority="1103" mode="M7">
+<xsl:template match="fo:*/@master-name" priority="1103" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@master-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -10971,7 +10864,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -10985,7 +10878,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11004,13 +10897,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@master-reference" priority="1102" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@master-reference"/>
+<xsl:template match="fo:*/@master-reference" priority="1102" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@master-reference"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11032,7 +10924,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11046,7 +10938,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11065,11 +10957,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@max-height" priority="1101" mode="M7">
+<xsl:template match="fo:*/@max-height" priority="1101" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@max-height"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -11083,11 +10975,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@max-width" priority="1100" mode="M7">
+<xsl:template match="fo:*/@max-width" priority="1100" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@max-width"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -11101,12 +10993,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@maximum-repeats" priority="1099" mode="M7">
+<xsl:template match="fo:*/@maximum-repeats" priority="1099" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@maximum-repeats"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11128,7 +11020,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('no-limit', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('no-limit', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('no-limit', 'inherit'))">
             <xsl:attribute name="location">
@@ -11145,7 +11037,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11159,7 +11051,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11178,12 +11070,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@media-usage" priority="1098" mode="M7">
+<xsl:template match="fo:*/@media-usage" priority="1098" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@media-usage"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11205,7 +11097,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'paginate', 'bounded-in-one-dimension', 'unbounded'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'paginate', 'bounded-in-one-dimension', 'unbounded'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'paginate', 'bounded-in-one-dimension', 'unbounded'))">
             <xsl:attribute name="location">
@@ -11222,7 +11114,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11236,7 +11128,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11255,15 +11147,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@merge-pages-across-index-key-references"
-                 priority="1097"
-                 mode="M7">
+<xsl:template match="fo:*/@merge-pages-across-index-key-references" priority="1097" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@merge-pages-across-index-key-references"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11285,7 +11175,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('merge', 'leave-separate'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('merge', 'leave-separate'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('merge', 'leave-separate'))">
             <xsl:attribute name="location">
@@ -11302,7 +11192,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11316,7 +11206,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11335,15 +11225,14 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@merge-ranges-across-index-key-references"
-                 priority="1096"
+<xsl:template match="fo:*/@merge-ranges-across-index-key-references" priority="1096"
                  mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@merge-ranges-across-index-key-references"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11365,7 +11254,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('merge', 'leave-separate'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('merge', 'leave-separate'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('merge', 'leave-separate'))">
             <xsl:attribute name="location">
@@ -11382,7 +11271,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11396,7 +11285,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11415,15 +11304,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@merge-sequential-page-numbers"
-                 priority="1095"
-                 mode="M7">
+<xsl:template match="fo:*/@merge-sequential-page-numbers" priority="1095" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@merge-sequential-page-numbers"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11445,7 +11332,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('merge', 'leave-separate'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('merge', 'leave-separate'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('merge', 'leave-separate'))">
             <xsl:attribute name="location">
@@ -11462,7 +11349,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11476,7 +11363,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11495,11 +11382,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@min-height" priority="1094" mode="M7">
+<xsl:template match="fo:*/@min-height" priority="1094" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@min-height"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -11513,11 +11400,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@min-width" priority="1093" mode="M7">
+<xsl:template match="fo:*/@min-width" priority="1093" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@min-width"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -11531,13 +11418,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@number-columns-repeated" priority="1092" mode="M7">
+<xsl:template match="fo:*/@number-columns-repeated" priority="1092" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@number-columns-repeated"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11559,7 +11446,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11573,7 +11460,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11592,13 +11479,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@number-columns-spanned" priority="1091" mode="M7">
+<xsl:template match="fo:*/@number-columns-spanned" priority="1091" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@number-columns-spanned"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11620,7 +11507,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11634,7 +11521,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11653,13 +11540,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@number-rows-spanned" priority="1090" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@number-rows-spanned"/>
+<xsl:template match="fo:*/@number-rows-spanned" priority="1090" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@number-rows-spanned"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11681,7 +11567,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11695,7 +11581,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11714,12 +11600,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@odd-or-even" priority="1089" mode="M7">
+<xsl:template match="fo:*/@odd-or-even" priority="1089" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@odd-or-even"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11741,7 +11627,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('odd', 'even', 'odd-document', 'even-document', 'any'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('odd', 'even', 'odd-document', 'even-document', 'any'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('odd', 'even', 'odd-document', 'even-document', 'any'))">
             <xsl:attribute name="location">
@@ -11758,7 +11644,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11772,7 +11658,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11791,12 +11677,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@orphans" priority="1088" mode="M7">
+<xsl:template match="fo:*/@orphans" priority="1088" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@orphans"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11818,7 +11704,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -11835,7 +11721,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11849,7 +11735,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11868,12 +11754,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@overflow" priority="1087" mode="M7">
+<xsl:template match="fo:*/@overflow" priority="1087" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@overflow"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11895,7 +11781,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('visible', 'hidden', 'scroll', 'error-if-overflow', 'repeat', 'replace', 'condense', 'auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('visible', 'hidden', 'scroll', 'error-if-overflow', 'repeat', 'replace', 'condense', 'auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('visible', 'hidden', 'scroll', 'error-if-overflow', 'repeat', 'replace', 'condense', 'auto'))">
             <xsl:attribute name="location">
@@ -11912,7 +11798,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -11926,7 +11812,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -11945,11 +11831,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding" priority="1086" mode="M7">
+<xsl:template match="fo:*/@padding" priority="1086" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -11963,12 +11849,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-after" priority="1085" mode="M7">
+<xsl:template match="fo:*/@padding-after" priority="1085" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-after"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -11990,7 +11876,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -12007,7 +11893,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12021,7 +11907,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12040,12 +11926,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-before" priority="1084" mode="M7">
+<xsl:template match="fo:*/@padding-before" priority="1084" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-before"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -12067,7 +11953,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -12084,7 +11970,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12098,7 +11984,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12117,12 +12003,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-bottom" priority="1083" mode="M7">
+<xsl:template match="fo:*/@padding-bottom" priority="1083" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-bottom"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -12144,7 +12030,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -12161,7 +12047,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12175,7 +12061,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12194,12 +12080,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-end" priority="1082" mode="M7">
+<xsl:template match="fo:*/@padding-end" priority="1082" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-end"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -12221,7 +12107,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -12238,7 +12124,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12252,7 +12138,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12271,12 +12157,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-left" priority="1081" mode="M7">
+<xsl:template match="fo:*/@padding-left" priority="1081" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-left"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -12298,7 +12184,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -12315,7 +12201,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12329,7 +12215,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12348,12 +12234,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-right" priority="1080" mode="M7">
+<xsl:template match="fo:*/@padding-right" priority="1080" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-right"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -12375,7 +12261,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -12392,7 +12278,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12406,7 +12292,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12425,12 +12311,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-start" priority="1079" mode="M7">
+<xsl:template match="fo:*/@padding-start" priority="1079" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-start"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -12452,7 +12338,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -12469,7 +12355,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12483,7 +12369,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12502,12 +12388,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@padding-top" priority="1078" mode="M7">
+<xsl:template match="fo:*/@padding-top" priority="1078" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@padding-top"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -12529,7 +12415,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -12546,7 +12432,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12560,7 +12446,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12579,12 +12465,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-break-after" priority="1077" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@page-break-after"/>
+<xsl:template match="fo:*/@page-break-after" priority="1077" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@page-break-after"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -12598,12 +12483,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-break-before" priority="1076" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@page-break-before"/>
+<xsl:template match="fo:*/@page-break-before" priority="1076" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@page-break-before"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -12617,12 +12501,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-break-inside" priority="1075" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@page-break-inside"/>
+<xsl:template match="fo:*/@page-break-inside" priority="1075" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@page-break-inside"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -12636,13 +12519,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-citation-strategy" priority="1074" mode="M7">
+<xsl:template match="fo:*/@page-citation-strategy" priority="1074" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@page-citation-strategy"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -12664,7 +12547,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('all', 'normal', 'non-blank', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('all', 'normal', 'non-blank', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('all', 'normal', 'non-blank', 'inherit'))">
             <xsl:attribute name="location">
@@ -12681,7 +12564,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12695,7 +12578,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12714,12 +12597,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-height" priority="1073" mode="M7">
+<xsl:template match="fo:*/@page-height" priority="1073" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@page-height"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -12741,7 +12624,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'indefinite', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'indefinite', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'indefinite', 'inherit'))">
             <xsl:attribute name="location">
@@ -12758,7 +12641,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12772,7 +12655,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12791,13 +12674,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-number-treatment" priority="1072" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@page-number-treatment"/>
+<xsl:template match="fo:*/@page-number-treatment" priority="1072" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@page-number-treatment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -12819,7 +12701,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('link', 'no-link'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('link', 'no-link'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('link', 'no-link'))">
             <xsl:attribute name="location">
@@ -12836,7 +12718,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12850,7 +12732,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12869,11 +12751,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-position" priority="1071" mode="M7">
+<xsl:template match="fo:*/@page-position" priority="1071" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@page-position"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -12887,12 +12769,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@page-width" priority="1070" mode="M7">
+<xsl:template match="fo:*/@page-width" priority="1070" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@page-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -12914,7 +12796,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'indefinite', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'indefinite', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'indefinite', 'inherit'))">
             <xsl:attribute name="location">
@@ -12931,7 +12813,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -12945,7 +12827,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -12964,11 +12846,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@pause" priority="1069" mode="M7">
+<xsl:template match="fo:*/@pause" priority="1069" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@pause"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -12982,11 +12864,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@position" priority="1068" mode="M7">
+<xsl:template match="fo:*/@position" priority="1068" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@position"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -13000,12 +12882,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@precedence" priority="1067" mode="M7">
+<xsl:template match="fo:*/@precedence" priority="1067" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@precedence"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13027,7 +12909,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false', 'inherit'))">
             <xsl:attribute name="location">
@@ -13044,7 +12926,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13058,7 +12940,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13077,15 +12959,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@provisional-distance-between-starts"
-                 priority="1066"
-                 mode="M7">
+<xsl:template match="fo:*/@provisional-distance-between-starts" priority="1066" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@provisional-distance-between-starts"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13107,7 +12987,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -13124,7 +13004,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13138,7 +13018,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13157,15 +13037,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@provisional-label-separation"
-                 priority="1065"
-                 mode="M7">
+<xsl:template match="fo:*/@provisional-label-separation" priority="1065" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@provisional-label-separation"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13187,7 +13065,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -13204,7 +13082,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13218,7 +13096,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13237,11 +13115,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@ref-id" priority="1064" mode="M7">
+<xsl:template match="fo:*/@ref-id" priority="1064" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@ref-id"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -13255,11 +13133,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@ref-index-key" priority="1063" mode="M7">
+<xsl:template match="fo:*/@ref-index-key" priority="1063" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@ref-index-key"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -13273,12 +13151,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@reference-orientation" priority="1062" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@reference-orientation"/>
+<xsl:template match="fo:*/@reference-orientation" priority="1062" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@reference-orientation"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -13292,12 +13169,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@region-name" priority="1061" mode="M7">
+<xsl:template match="fo:*/@region-name" priority="1061" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@region-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13319,7 +13196,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13333,7 +13210,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13352,13 +13229,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@region-name-reference" priority="1060" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@region-name-reference"/>
+<xsl:template match="fo:*/@region-name-reference" priority="1060" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@region-name-reference"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13380,7 +13256,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13394,7 +13270,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13413,12 +13289,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@relative-align" priority="1059" mode="M7">
+<xsl:template match="fo:*/@relative-align" priority="1059" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@relative-align"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13440,7 +13316,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('before', 'baseline', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('before', 'baseline', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('before', 'baseline', 'inherit'))">
             <xsl:attribute name="location">
@@ -13457,7 +13333,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13471,7 +13347,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13490,13 +13366,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@relative-position" priority="1058" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@relative-position"/>
+<xsl:template match="fo:*/@relative-position" priority="1058" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@relative-position"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13518,7 +13393,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('static', 'relative', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('static', 'relative', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('static', 'relative', 'inherit'))">
             <xsl:attribute name="location">
@@ -13535,7 +13410,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13549,7 +13424,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13568,13 +13443,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@rendering-intent" priority="1057" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@rendering-intent"/>
+<xsl:template match="fo:*/@rendering-intent" priority="1057" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@rendering-intent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13596,7 +13470,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'perceptual', 'relative-colorimetric', 'saturation', 'absolute-colorimetric', 'inherit'))">
             <xsl:attribute name="location">
@@ -13613,7 +13487,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13627,7 +13501,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13646,13 +13520,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@retrieve-boundary" priority="1056" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@retrieve-boundary"/>
+<xsl:template match="fo:*/@retrieve-boundary" priority="1056" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@retrieve-boundary"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13674,7 +13547,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('page', 'page-sequence', 'document'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('page', 'page-sequence', 'document'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('page', 'page-sequence', 'document'))">
             <xsl:attribute name="location">
@@ -13691,7 +13564,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13705,7 +13578,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13724,15 +13597,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@retrieve-boundary-within-table"
-                 priority="1055"
-                 mode="M7">
+<xsl:template match="fo:*/@retrieve-boundary-within-table" priority="1055" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@retrieve-boundary-within-table"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13754,7 +13625,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('table', 'table-fragment', 'page'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('table', 'table-fragment', 'page'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('table', 'table-fragment', 'page'))">
             <xsl:attribute name="location">
@@ -13771,7 +13642,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13785,7 +13656,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13804,13 +13675,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@retrieve-class-name" priority="1054" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@retrieve-class-name"/>
+<xsl:template match="fo:*/@retrieve-class-name" priority="1054" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@retrieve-class-name"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13832,7 +13702,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13846,7 +13716,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13865,13 +13735,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@retrieve-position" priority="1053" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@retrieve-position"/>
+<xsl:template match="fo:*/@retrieve-position" priority="1053" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@retrieve-position"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13893,7 +13762,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', 'last-ending-within-page'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', 'last-ending-within-page'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('first-starting-within-page', 'first-including-carryover', 'last-starting-within-page', 'last-ending-within-page'))">
             <xsl:attribute name="location">
@@ -13910,7 +13779,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -13924,7 +13793,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -13943,15 +13812,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@retrieve-position-within-table"
-                 priority="1052"
-                 mode="M7">
+<xsl:template match="fo:*/@retrieve-position-within-table" priority="1052" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@retrieve-position-within-table"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -13973,7 +13840,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('first-starting', 'first-including-carryover', 'last-starting', 'last-ending'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('first-starting', 'first-including-carryover', 'last-starting', 'last-ending'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('first-starting', 'first-including-carryover', 'last-starting', 'last-ending'))">
             <xsl:attribute name="location">
@@ -13990,7 +13857,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14004,7 +13871,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14023,12 +13890,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@right" priority="1051" mode="M7">
+<xsl:template match="fo:*/@right" priority="1051" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@right"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14050,7 +13917,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -14067,7 +13934,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14081,7 +13948,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14100,11 +13967,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@role" priority="1050" mode="M7">
+<xsl:template match="fo:*/@role" priority="1050" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@role"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -14118,12 +13985,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@rule-style" priority="1049" mode="M7">
+<xsl:template match="fo:*/@rule-style" priority="1049" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@rule-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14145,7 +14012,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inherit'))">
             <xsl:attribute name="location">
@@ -14162,7 +14029,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14176,7 +14043,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14195,12 +14062,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@rule-thickness" priority="1048" mode="M7">
+<xsl:template match="fo:*/@rule-thickness" priority="1048" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@rule-thickness"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14222,7 +14089,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14236,7 +14103,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14255,12 +14122,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@scale-option" priority="1047" mode="M7">
+<xsl:template match="fo:*/@scale-option" priority="1047" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@scale-option"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14282,7 +14149,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('width', 'height', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('width', 'height', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('width', 'height', 'inherit'))">
             <xsl:attribute name="location">
@@ -14299,7 +14166,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14313,7 +14180,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14332,12 +14199,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@scaling" priority="1046" mode="M7">
+<xsl:template match="fo:*/@scaling" priority="1046" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@scaling"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14359,7 +14226,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('uniform', 'non-uniform', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('uniform', 'non-uniform', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('uniform', 'non-uniform', 'inherit'))">
             <xsl:attribute name="location">
@@ -14376,7 +14243,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14390,7 +14257,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14409,12 +14276,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@scaling-method" priority="1045" mode="M7">
+<xsl:template match="fo:*/@scaling-method" priority="1045" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@scaling-method"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14436,7 +14303,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'integer-pixels', 'resample-any-method', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'integer-pixels', 'resample-any-method', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'integer-pixels', 'resample-any-method', 'inherit'))">
             <xsl:attribute name="location">
@@ -14453,7 +14320,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14467,7 +14334,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14486,12 +14353,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@score-spaces" priority="1044" mode="M7">
+<xsl:template match="fo:*/@score-spaces" priority="1044" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@score-spaces"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14513,7 +14380,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false', 'inherit'))">
             <xsl:attribute name="location">
@@ -14530,7 +14397,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14544,7 +14411,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14563,12 +14430,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@script" priority="1043" mode="M7">
+<xsl:template match="fo:*/@script" priority="1043" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@script"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Literal', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14590,7 +14457,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -14607,7 +14474,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14621,7 +14488,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14640,13 +14507,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@show-destination" priority="1042" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@show-destination"/>
+<xsl:template match="fo:*/@show-destination" priority="1042" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@show-destination"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14668,7 +14534,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('replace', 'new'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('replace', 'new'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('replace', 'new'))">
             <xsl:attribute name="location">
@@ -14685,7 +14551,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14699,7 +14565,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14718,11 +14584,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@size" priority="1041" mode="M7">
+<xsl:template match="fo:*/@size" priority="1041" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@size"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -14736,12 +14602,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@source-document" priority="1040" mode="M7">
+<xsl:template match="fo:*/@source-document" priority="1040" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@source-document"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14763,7 +14629,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14777,7 +14643,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14796,12 +14662,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@space-after" priority="1039" mode="M7">
+<xsl:template match="fo:*/@space-after" priority="1039" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@space-after"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14823,7 +14689,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -14840,7 +14706,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14854,7 +14720,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14873,12 +14739,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@space-before" priority="1038" mode="M7">
+<xsl:template match="fo:*/@space-before" priority="1038" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@space-before"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14900,7 +14766,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -14917,7 +14783,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -14931,7 +14797,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -14950,12 +14816,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@space-end" priority="1037" mode="M7">
+<xsl:template match="fo:*/@space-end" priority="1037" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@space-end"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -14977,7 +14843,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -14994,7 +14860,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15008,7 +14874,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15027,12 +14893,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@space-start" priority="1036" mode="M7">
+<xsl:template match="fo:*/@space-start" priority="1036" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@space-start"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15054,7 +14920,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -15071,7 +14937,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15085,7 +14951,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15104,12 +14970,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@span" priority="1035" mode="M7">
+<xsl:template match="fo:*/@span" priority="1035" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@span"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15131,7 +14997,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'all', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'all', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'all', 'inherit'))">
             <xsl:attribute name="location">
@@ -15148,7 +15014,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15162,7 +15028,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15181,11 +15047,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@src" priority="1034" mode="M7">
+<xsl:template match="fo:*/@src" priority="1034" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@src"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -15199,12 +15065,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@start-indent" priority="1033" mode="M7">
+<xsl:template match="fo:*/@start-indent" priority="1033" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@start-indent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15226,7 +15092,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -15243,7 +15109,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15257,7 +15123,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15276,12 +15142,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@starting-state" priority="1032" mode="M7">
+<xsl:template match="fo:*/@starting-state" priority="1032" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@starting-state"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15303,7 +15169,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('show', 'hide'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('show', 'hide'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('show', 'hide'))">
             <xsl:attribute name="location">
@@ -15320,7 +15186,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15334,7 +15200,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15353,12 +15219,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@starts-row" priority="1031" mode="M7">
+<xsl:template match="fo:*/@starts-row" priority="1031" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@starts-row"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15380,7 +15246,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
             <xsl:attribute name="location">
@@ -15397,7 +15263,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15411,7 +15277,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15430,13 +15296,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@suppress-at-line-break" priority="1030" mode="M7">
+<xsl:template match="fo:*/@suppress-at-line-break" priority="1030" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@suppress-at-line-break"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15458,7 +15324,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'suppress', 'retain', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'suppress', 'retain', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'suppress', 'retain', 'inherit'))">
             <xsl:attribute name="location">
@@ -15475,7 +15341,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15489,7 +15355,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15508,12 +15374,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@switch-to" priority="1029" mode="M7">
+<xsl:template match="fo:*/@switch-to" priority="1029" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@switch-to"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15535,7 +15401,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15549,7 +15415,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15568,12 +15434,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@table-layout" priority="1028" mode="M7">
+<xsl:template match="fo:*/@table-layout" priority="1028" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@table-layout"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15595,7 +15461,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'fixed', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'fixed', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'fixed', 'inherit'))">
             <xsl:attribute name="location">
@@ -15612,7 +15478,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15626,7 +15492,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15645,13 +15511,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@table-omit-footer-at-break" priority="1027" mode="M7">
+<xsl:template match="fo:*/@table-omit-footer-at-break" priority="1027" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@table-omit-footer-at-break"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15673,7 +15539,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
             <xsl:attribute name="location">
@@ -15690,7 +15556,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15704,7 +15570,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15723,13 +15589,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@table-omit-header-at-break" priority="1026" mode="M7">
+<xsl:template match="fo:*/@table-omit-header-at-break" priority="1026" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@table-omit-header-at-break"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15751,7 +15617,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('true', 'false'))">
             <xsl:attribute name="location">
@@ -15768,7 +15634,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15782,7 +15648,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15801,13 +15667,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@target-presentation-context" priority="1025" mode="M7">
+<xsl:template match="fo:*/@target-presentation-context" priority="1025" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@target-presentation-context"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'URI', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15829,7 +15695,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15843,7 +15709,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15862,13 +15728,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@target-processing-context" priority="1024" mode="M7">
+<xsl:template match="fo:*/@target-processing-context" priority="1024" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@target-processing-context"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'URI', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15890,7 +15756,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15904,7 +15770,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15923,13 +15789,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@target-stylesheet" priority="1023" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@target-stylesheet"/>
+<xsl:template match="fo:*/@target-stylesheet" priority="1023" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@target-stylesheet"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'URI', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -15951,7 +15816,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -15965,7 +15830,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -15984,11 +15849,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-align" priority="1022" mode="M7">
+<xsl:template match="fo:*/@text-align" priority="1022" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-align"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -16002,12 +15867,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-align-last" priority="1021" mode="M7">
+<xsl:template match="fo:*/@text-align-last" priority="1021" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-align-last"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16029,7 +15894,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('relative', 'start', 'center', 'end', 'justify', 'inside', 'outside', 'left', 'right', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('relative', 'start', 'center', 'end', 'justify', 'inside', 'outside', 'left', 'right', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('relative', 'start', 'center', 'end', 'justify', 'inside', 'outside', 'left', 'right', 'inherit'))">
             <xsl:attribute name="location">
@@ -16046,7 +15911,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16060,7 +15925,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16079,12 +15944,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-altitude" priority="1020" mode="M7">
+<xsl:template match="fo:*/@text-altitude" priority="1020" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-altitude"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16106,7 +15971,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-font-metrics', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-font-metrics', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-font-metrics', 'inherit'))">
             <xsl:attribute name="location">
@@ -16123,7 +15988,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16137,7 +16002,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16156,12 +16021,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-decoration" priority="1019" mode="M7">
+<xsl:template match="fo:*/@text-decoration" priority="1019" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-decoration"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16183,7 +16048,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', 'inherit'))">
             <xsl:attribute name="location">
@@ -16200,7 +16065,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16214,7 +16079,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16233,12 +16098,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-depth" priority="1018" mode="M7">
+<xsl:template match="fo:*/@text-depth" priority="1018" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-depth"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16260,7 +16125,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-font-metrics', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-font-metrics', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('use-font-metrics', 'inherit'))">
             <xsl:attribute name="location">
@@ -16277,7 +16142,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16291,7 +16156,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16310,12 +16175,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-indent" priority="1017" mode="M7">
+<xsl:template match="fo:*/@text-indent" priority="1017" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-indent"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16337,7 +16202,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -16354,7 +16219,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16368,7 +16233,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16387,12 +16252,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-shadow" priority="1016" mode="M7">
+<xsl:template match="fo:*/@text-shadow" priority="1016" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-shadow"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Color', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16414,7 +16279,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
             <xsl:attribute name="location">
@@ -16431,7 +16296,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16445,7 +16310,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16464,11 +16329,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-transform" priority="1015" mode="M7">
+<xsl:template match="fo:*/@text-transform" priority="1015" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-transform"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -16482,12 +16347,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@top" priority="1014" mode="M7">
+<xsl:template match="fo:*/@top" priority="1014" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@top"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16509,7 +16374,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -16526,7 +16391,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16540,7 +16405,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16559,13 +16424,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@treat-as-word-space" priority="1013" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@treat-as-word-space"/>
+<xsl:template match="fo:*/@treat-as-word-space" priority="1013" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@treat-as-word-space"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16587,7 +16451,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'true', 'false', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'true', 'false', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'true', 'false', 'inherit'))">
             <xsl:attribute name="location">
@@ -16604,7 +16468,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16618,7 +16482,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16637,12 +16501,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@unicode-bidi" priority="1012" mode="M7">
+<xsl:template match="fo:*/@unicode-bidi" priority="1012" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@unicode-bidi"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16664,7 +16528,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'embed', 'bidi-override', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'embed', 'bidi-override', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'embed', 'bidi-override', 'inherit'))">
             <xsl:attribute name="location">
@@ -16681,7 +16545,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16695,7 +16559,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16714,11 +16578,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@vertical-align" priority="1011" mode="M7">
+<xsl:template match="fo:*/@vertical-align" priority="1011" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@vertical-align"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -16732,12 +16596,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@visibility" priority="1010" mode="M7">
+<xsl:template match="fo:*/@visibility" priority="1010" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@visibility"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16759,7 +16623,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('visible', 'hidden', 'collapse', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('visible', 'hidden', 'collapse', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('visible', 'hidden', 'collapse', 'inherit'))">
             <xsl:attribute name="location">
@@ -16776,7 +16640,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16790,7 +16654,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16809,11 +16673,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@white-space" priority="1009" mode="M7">
+<xsl:template match="fo:*/@white-space" priority="1009" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@white-space"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -16827,13 +16691,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@white-space-collapse" priority="1008" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@white-space-collapse"/>
+<xsl:template match="fo:*/@white-space-collapse" priority="1008" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@white-space-collapse"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16855,7 +16718,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('false', 'true', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('false', 'true', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('false', 'true', 'inherit'))">
             <xsl:attribute name="location">
@@ -16872,7 +16735,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16886,7 +16749,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16905,13 +16768,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@white-space-treatment" priority="1007" mode="M7">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@white-space-treatment"/>
+<xsl:template match="fo:*/@white-space-treatment" priority="1007" mode="M7">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@white-space-treatment"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -16933,7 +16795,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('ignore', 'preserve', 'ignore-if-before-linefeed', 'ignore-if-after-linefeed', 'ignore-if-surrounding-linefeed', 'inherit'))">
             <xsl:attribute name="location">
@@ -16950,7 +16812,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -16964,7 +16826,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -16983,12 +16845,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@widows" priority="1006" mode="M7">
+<xsl:template match="fo:*/@widows" priority="1006" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@widows"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17010,7 +16872,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -17027,7 +16889,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -17041,7 +16903,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -17060,12 +16922,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@width" priority="1005" mode="M7">
+<xsl:template match="fo:*/@width" priority="1005" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17087,7 +16949,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -17104,7 +16966,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -17118,7 +16980,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -17137,12 +16999,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@word-spacing" priority="1004" mode="M7">
+<xsl:template match="fo:*/@word-spacing" priority="1004" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@word-spacing"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17164,7 +17026,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('normal', 'inherit'))">
             <xsl:attribute name="location">
@@ -17181,7 +17043,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -17195,7 +17057,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -17214,12 +17076,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@wrap-option" priority="1003" mode="M7">
+<xsl:template match="fo:*/@wrap-option" priority="1003" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@wrap-option"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17241,7 +17103,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('no-wrap', 'wrap', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('no-wrap', 'wrap', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('no-wrap', 'wrap', 'inherit'))">
             <xsl:attribute name="location">
@@ -17258,7 +17120,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -17272,7 +17134,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -17291,12 +17153,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@writing-mode" priority="1002" mode="M7">
+<xsl:template match="fo:*/@writing-mode" priority="1002" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@writing-mode"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17318,7 +17180,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('lr-tb', 'rl-tb', 'tb-rl', 'tb-lr', 'bt-lr', 'bt-rl', 'lr-bt', 'rl-bt', 'lr-alternating-rl-bt', 'lr-alternating-rl-tb', 'lr-inverting-rl-bt', 'lr-inverting-rl-tb', 'tb-lr-in-lr-pairs', 'lr', 'rl', 'tb', 'inherit'))">
             <xsl:attribute name="location">
@@ -17335,7 +17197,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -17349,7 +17211,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -17368,11 +17230,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@xml.lang" priority="1001" mode="M7">
+<xsl:template match="fo:*/@xml.lang" priority="1001" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@xml.lang"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -17386,12 +17248,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@z-index" priority="1000" mode="M7">
+<xsl:template match="fo:*/@z-index" priority="1000" mode="M7">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@z-index"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17413,7 +17275,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inherit'))">
             <xsl:attribute name="location">
@@ -17430,7 +17292,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -17444,7 +17306,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -17469,12 +17331,12 @@
    <!--PATTERN axf-fo-->
 
 
-	  <!--RULE -->
-   <xsl:template match="axf:custom-property" priority="1003" mode="M8">
+	<!--RULE -->
+<xsl:template match="axf:custom-property" priority="1003" mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="axf:custom-property"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="empty((../../axf:document-info, ../axf:document-info)[@name eq 'xmp'])"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17494,11 +17356,10 @@
       </xsl:choose>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="normalize-space(@name) ne ''"/>
          <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="normalize-space(@name) ne ''">
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="normalize-space(@name) ne ''">
                <xsl:attribute name="role">Warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -17511,7 +17372,7 @@
       </xsl:choose>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="not(normalize-space(@name) = ('Title', 'Author', 'Subject', 'Keywords', 'Creator', 'Producer', 'CreationDate', 'ModDate', 'Trapped'))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17531,11 +17392,10 @@
       </xsl:choose>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="normalize-space(@value) ne ''"/>
          <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="normalize-space(@value) ne ''">
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="normalize-space(@value) ne ''">
                <xsl:attribute name="role">Warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
@@ -17550,7 +17410,7 @@
    </xsl:template>
 
 	  <!--RULE axf-1-->
-   <xsl:template match="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
+<xsl:template match="axf:document-info[@name = ('author-title', 'description-writer', 'copyright-status', 'copyright-notice', 'copyright-info-url')]"
                  priority="1002"
                  mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17558,7 +17418,7 @@
                        id="axf-1"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="empty(../axf:document-info[@name eq 'xmp'])"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17579,14 +17439,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="axf:document-info[@name = 'title']"
-                 priority="1001"
-                 mode="M8">
+<xsl:template match="axf:document-info[@name = 'title']" priority="1001" mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:document-info[@name = 'title']"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="false()"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="false()">
@@ -17607,14 +17465,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="axf:form-field[@field-type = 'button']"
-                 priority="1000"
-                 mode="M8">
+<xsl:template match="axf:form-field[@field-type = 'button']" priority="1000" mode="M8">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="axf:form-field[@field-type = 'button']"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="empty(@internal-destination) or exists(@internal-destination) and (empty(@action-type) or @action-type = 'goto')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17630,7 +17486,7 @@
       </xsl:choose>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="empty(@external-destination) or exists(@external-destination) and (empty(@action-type) or @action-type = ('gotor', 'launch', 'uri'))"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17646,7 +17502,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="exists(@internal-destination) and exists(@external-destination)">
+<xsl:if test="exists(@internal-destination) and exists(@external-destination)">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="exists(@internal-destination) and exists(@external-destination)">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -17670,14 +17526,13 @@
    <!--PATTERN axf-property-->
 
 
-	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:annotation-color" priority="1056" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:annotation-color"/>
+	<!--RULE -->
+<xsl:template match="fo:*/@axf:annotation-color" priority="1056" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:annotation-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17699,7 +17554,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -17713,7 +17568,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -17729,12 +17584,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:annotation-contents" priority="1055" mode="M9">
+<xsl:template match="fo:*/@axf:annotation-contents" priority="1055" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:annotation-contents"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="normalize-space(../@axf:annotation-type) = ('Text', 'FreeText', 'Stamp', 'FileAttachment') or local-name(..) = 'basic-link'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17755,13 +17610,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:assumed-page-number" priority="1054" mode="M9">
+<xsl:template match="fo:*/@axf:assumed-page-number" priority="1054" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:assumed-page-number"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17781,7 +17636,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -17797,13 +17652,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-color" priority="1053" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:background-color"/>
+<xsl:template match="fo:*/@axf:background-color" priority="1053" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:background-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17825,7 +17679,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -17842,7 +17696,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -17860,15 +17714,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-content-height"
-                 priority="1052"
-                 mode="M9">
+<xsl:template match="fo:*/@axf:background-content-height" priority="1052" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-height"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17890,7 +17742,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
             <xsl:attribute name="location">
@@ -17907,7 +17759,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -17921,7 +17773,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -17937,13 +17789,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-content-type" priority="1051" mode="M9">
+<xsl:template match="fo:*/@axf:background-content-type" priority="1051" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-type"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -17965,7 +17817,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
             <xsl:attribute name="location">
@@ -17982,7 +17834,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -17996,7 +17848,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18012,15 +17864,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-content-width"
-                 priority="1050"
-                 mode="M9">
+<xsl:template match="fo:*/@axf:background-content-width" priority="1050" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18045,7 +17895,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'scale-to-fit', 'scale-down-to-fit', 'scale-up-to-fit', 'inherit'))">
             <xsl:attribute name="location">
@@ -18065,7 +17915,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -18082,7 +17932,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18100,13 +17950,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-image" priority="1049" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:background-image"/>
+<xsl:template match="fo:*/@axf:background-image" priority="1049" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:background-image"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18128,7 +17977,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'inherit'))">
             <xsl:attribute name="location">
@@ -18145,7 +17994,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -18159,7 +18008,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18175,12 +18024,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@background-position" priority="1048" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@background-position"/>
+<xsl:template match="fo:*/@background-position" priority="1048" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@background-position"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test=". eq ''">
+<xsl:if test=". eq ''">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test=". eq ''">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -18194,15 +18042,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-position-horizontal"
-                 priority="1047"
-                 mode="M9">
+<xsl:template match="fo:*/@axf:background-position-horizontal" priority="1047" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-horizontal"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18224,7 +18070,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('left', 'center', 'right', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('left', 'center', 'right', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('left', 'center', 'right', 'inherit'))">
             <xsl:attribute name="location">
@@ -18241,7 +18087,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -18255,7 +18101,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18271,15 +18117,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-position-vertical"
-                 priority="1046"
-                 mode="M9">
+<xsl:template match="fo:*/@axf:background-position-vertical" priority="1046" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-position-vertical"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Percent', 'Length', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18301,7 +18145,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('top', 'center', 'bottom', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('top', 'center', 'bottom', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('top', 'center', 'bottom', 'inherit'))">
             <xsl:attribute name="location">
@@ -18318,7 +18162,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -18332,7 +18176,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18348,13 +18192,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-repeat" priority="1045" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:background-repeat"/>
+<xsl:template match="fo:*/@axf:background-repeat" priority="1045" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:background-repeat"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18376,7 +18219,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('repeat', 'repeat-x', 'repeat-y', 'no-repeat', 'paginate'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('repeat', 'repeat-x', 'repeat-y', 'no-repeat', 'paginate'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('repeat', 'repeat-x', 'repeat-y', 'no-repeat', 'paginate'))">
             <xsl:attribute name="location">
@@ -18393,7 +18236,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -18407,7 +18250,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18423,12 +18266,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:baseline-block-snap" priority="1044" mode="M9">
+<xsl:template match="fo:*/@axf:baseline-block-snap" priority="1044" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:baseline-block-snap"/>
 
 		    <!--ASSERT Warning-->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="exists(../@axf:baseline-grid) and normalize-space(../@axf:baseline-grid) = ('new', 'none')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18446,13 +18289,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-color" priority="1043" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:outline-color"/>
+<xsl:template match="fo:*/@axf:outline-color" priority="1043" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:outline-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18472,7 +18314,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18488,12 +18330,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:float" priority="1042" mode="M9">
+<xsl:template match="fo:*/@axf:float" priority="1042" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:float"/>
       <xsl:variable name="tokens" select="tokenize(normalize-space(.), '\s+')"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="every $token in $tokens satisfies matches($token, '^(after|alternate|auto|auto-move|auto-next|before|bottom|center|column|end|inside|keep|keep-float|left|multicol|next|none|normal|outside|page|right|skip|start|top|wrap)$')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18511,7 +18353,7 @@
       </xsl:choose>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="every $token in $tokens satisfies count($tokens[. eq $token]) = 1"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18530,13 +18372,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:outline-level" priority="1041" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:outline-level"/>
+<xsl:template match="fo:*/@axf:outline-level" priority="1041" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:outline-level"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Number', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18556,7 +18397,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18572,14 +18413,14 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-content-height | fo:*/@axf:background-content-width"
+<xsl:template match="fo:*/@axf:background-content-height | fo:*/@axf:background-content-width"
                  priority="1040"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-content-height | fo:*/@axf:background-content-width"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="true()">
+<xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -18596,13 +18437,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:background-scaling" priority="1039" mode="M9">
+<xsl:template match="fo:*/@axf:background-scaling" priority="1039" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:background-scaling"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18624,7 +18465,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('uniform', 'non-uniform', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('uniform', 'non-uniform', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('uniform', 'non-uniform', 'inherit'))">
             <xsl:attribute name="location">
@@ -18644,7 +18485,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -18658,7 +18499,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18674,13 +18515,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:break-distance" priority="1038" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:break-distance"/>
+<xsl:template match="fo:*/@axf:break-distance" priority="1038" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:break-distance"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Number', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18705,7 +18545,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('always', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('always', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('always', 'inherit'))">
             <xsl:attribute name="location">
@@ -18725,7 +18565,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -18742,7 +18582,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18760,13 +18600,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:column-rule-color" priority="1037" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:column-rule-color"/>
+<xsl:template match="fo:*/@axf:column-rule-color" priority="1037" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:column-rule-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18786,7 +18625,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18802,13 +18641,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:column-rule-length" priority="1036" mode="M9">
+<xsl:template match="fo:*/@axf:column-rule-length" priority="1036" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:column-rule-length"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18830,7 +18669,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -18844,7 +18683,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18860,7 +18699,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:field-button-icon |          fo:*/@axf:field-button-icon-down |          fo:*/@axf:field-button-icon-rollover"
+<xsl:template match="fo:*/@axf:field-button-icon |          fo:*/@axf:field-button-icon-down |          fo:*/@axf:field-button-icon-rollover"
                  priority="1035"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18868,7 +18707,7 @@
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('URI', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18890,7 +18729,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -18907,7 +18746,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -18925,13 +18764,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:field-font-size" priority="1034" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:field-font-size"/>
+<xsl:template match="fo:*/@axf:field-font-size" priority="1034" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:field-font-size"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -18953,7 +18791,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('font-size', 'auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('font-size', 'auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('font-size', 'auto'))">
             <xsl:attribute name="location">
@@ -18970,7 +18808,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -18984,7 +18822,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19000,13 +18838,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:hyphenation-zone" priority="1033" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:hyphenation-zone"/>
+<xsl:template match="fo:*/@axf:hyphenation-zone" priority="1033" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:hyphenation-zone"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19028,7 +18865,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">
             <xsl:attribute name="location">
@@ -19045,7 +18882,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19059,7 +18896,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19074,7 +18911,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'Length' and    (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or    $expression/@is-zero = 'yes')">
+<xsl:if test="local-name($expression) = 'Length' and    (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or    $expression/@is-zero = 'yes')">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'Length' and (exists($expression/@is-positive) and $expression/@is-positive eq 'no' or $expression/@is-zero = 'yes')">
             <xsl:attribute name="id">axf.hyphenation-zone</xsl:attribute>
@@ -19092,12 +18929,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:indent-here" priority="1032" mode="M9">
+<xsl:template match="fo:*/@axf:indent-here" priority="1032" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:indent-here"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19119,7 +18956,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none'))">
             <xsl:attribute name="location">
@@ -19136,7 +18973,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19150,7 +18987,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19166,12 +19003,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:image-orientation" priority="1031" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:image-orientation"/>
+<xsl:template match="fo:*/@axf:image-orientation" priority="1031" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:image-orientation"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="normalize-space(.) = ('from-image', 'none', '0', '0 flip', '90', '90 flip', '180', '180 flip', '270', '270 flip')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19190,14 +19026,14 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:initial-letters-color" priority="1030" mode="M9">
+<xsl:template match="fo:*/@axf:initial-letters-color" priority="1030" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:initial-letters-color"/>
       <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19222,7 +19058,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('inherit'))">
             <xsl:attribute name="location">
@@ -19242,7 +19078,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19259,7 +19095,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19277,15 +19113,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:keep-together-within-dimension"
-                 priority="1029"
-                 mode="M9">
+<xsl:template match="fo:*/@axf:keep-together-within-dimension" priority="1029" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:keep-together-within-dimension"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19307,7 +19141,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
             <xsl:attribute name="location">
@@ -19324,7 +19158,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19338,7 +19172,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19354,16 +19188,14 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-background-color"
-                 priority="1028"
-                 mode="M9">
+<xsl:template match="fo:*/@axf:line-number-background-color" priority="1028" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:line-number-background-color"/>
       <xsl:variable name="context" select="."/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19388,7 +19220,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('transparent', 'inherit'))">
             <xsl:attribute name="location">
@@ -19408,7 +19240,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19425,7 +19257,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19443,13 +19275,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-color" priority="1027" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:line-number-color"/>
+<xsl:template match="fo:*/@axf:line-number-color" priority="1027" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:line-number-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EMPTY', 'ERROR')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19474,7 +19305,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19491,7 +19322,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19509,13 +19340,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-font-size" priority="1026" mode="M9">
+<xsl:template match="fo:*/@axf:line-number-font-size" priority="1026" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:line-number-font-size"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'Percent', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19537,7 +19368,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', 'larger', 'smaller'))">
             <xsl:attribute name="location">
@@ -19554,7 +19385,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19568,7 +19399,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19584,13 +19415,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-initial" priority="1025" mode="M9">
+<xsl:template match="fo:*/@axf:line-number-initial" priority="1025" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:line-number-initial"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19615,7 +19446,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
             <xsl:attribute name="location">
@@ -19635,7 +19466,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19652,7 +19483,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19670,13 +19501,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-interval" priority="1024" mode="M9">
+<xsl:template match="fo:*/@axf:line-number-interval" priority="1024" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:line-number-interval"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19701,7 +19532,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
             <xsl:attribute name="location">
@@ -19721,7 +19552,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19738,7 +19569,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19756,13 +19587,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-offset" priority="1023" mode="M9">
+<xsl:template match="fo:*/@axf:line-number-offset" priority="1023" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:line-number-offset"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Length', 'EMPTY', 'ERROR') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19784,7 +19615,7 @@
       </xsl:choose>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19798,7 +19629,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19814,13 +19645,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-start" priority="1022" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:line-number-start"/>
+<xsl:template match="fo:*/@axf:line-number-start" priority="1022" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:line-number-start"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19845,7 +19675,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
             <xsl:attribute name="location">
@@ -19865,7 +19695,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19882,7 +19712,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19900,12 +19730,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@text-decoration" priority="1021" mode="M9">
+<xsl:template match="fo:*/@text-decoration" priority="1021" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@text-decoration"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -19927,7 +19757,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'underline', 'no-underline]', 'overline', 'no-overline', 'line-through', 'no-line-through', 'blink', 'no-blink', 'inherit'))">
             <xsl:attribute name="location">
@@ -19944,7 +19774,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -19958,7 +19788,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -19974,13 +19804,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:line-number-width" priority="1020" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:line-number-width"/>
+<xsl:template match="fo:*/@axf:line-number-width" priority="1020" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:line-number-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20005,7 +19834,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
             <xsl:attribute name="location">
@@ -20025,7 +19854,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -20042,7 +19871,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -20060,13 +19889,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:media-duration" priority="1019" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:media-duration"/>
+<xsl:template match="fo:*/@axf:media-duration" priority="1019" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:media-duration"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20091,7 +19919,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('intrinsic', 'infinity'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('intrinsic', 'infinity'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('intrinsic', 'infinity'))">
             <xsl:attribute name="location">
@@ -20111,7 +19939,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -20128,7 +19956,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -20145,7 +19973,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="../@axf:media-play-mode = 'once'">
+<xsl:if test="../@axf:media-play-mode = 'once'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="../@axf:media-play-mode = 'once'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -20163,13 +19991,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:media-play-mode" priority="1018" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:media-play-mode"/>
+<xsl:template match="fo:*/@axf:media-play-mode" priority="1018" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:media-play-mode"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Number', 'EMPTY', 'ERROR')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20194,7 +20021,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('once', 'continuously'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('once', 'continuously'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('once', 'continuously'))">
             <xsl:attribute name="location">
@@ -20214,7 +20041,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -20231,7 +20058,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -20249,13 +20076,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:media-skin-color" priority="1017" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:media-skin-color"/>
+<xsl:template match="fo:*/@axf:media-skin-color" priority="1017" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:media-skin-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20277,7 +20103,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
             <xsl:attribute name="location">
@@ -20297,7 +20123,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -20311,7 +20137,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -20327,13 +20153,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:media-volume" priority="1016" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:media-volume"/>
+<xsl:template match="fo:*/@axf:media-volume" priority="1016" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:media-volume"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Percent', 'Number', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20355,7 +20180,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
             <xsl:attribute name="location">
@@ -20372,7 +20197,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -20389,7 +20214,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -20405,7 +20230,7 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:media-window-height |          fo:*/@axf:media-window-width"
+<xsl:template match="fo:*/@axf:media-window-height |          fo:*/@axf:media-window-width"
                  priority="1015"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20413,7 +20238,7 @@
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20438,7 +20263,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
             <xsl:attribute name="location">
@@ -20458,7 +20283,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -20475,7 +20300,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -20493,12 +20318,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:page-number-prefix" priority="1014" mode="M9">
+<xsl:template match="fo:*/@axf:page-number-prefix" priority="1014" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:page-number-prefix"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="true()">
+<xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -20512,13 +20337,13 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:poster-content-type" priority="1013" mode="M9">
+<xsl:template match="fo:*/@axf:poster-content-type" priority="1013" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:poster-content-type"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Literal', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20540,7 +20365,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
             <xsl:attribute name="location">
@@ -20557,7 +20382,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -20571,7 +20396,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -20587,13 +20412,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:poster-image" priority="1012" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:poster-image"/>
+<xsl:template match="fo:*/@axf:poster-image" priority="1012" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:poster-image"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('URI', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20615,7 +20439,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'auto'))">
             <xsl:attribute name="location">
@@ -20632,7 +20456,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -20646,7 +20470,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -20662,12 +20486,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:revision-bar-color" priority="1011" mode="M9">
+<xsl:template match="fo:*/@axf:revision-bar-color" priority="1011" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:revision-bar-color"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="true()">
+<xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -20681,12 +20505,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:revision-bar-offset" priority="1010" mode="M9">
+<xsl:template match="fo:*/@axf:revision-bar-offset" priority="1010" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:revision-bar-offset"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="true()">
+<xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -20700,12 +20524,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:revision-bar-position" priority="1009" mode="M9">
+<xsl:template match="fo:*/@axf:revision-bar-position" priority="1009" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:revision-bar-position"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="true()">
+<xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -20719,12 +20543,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:revision-bar-style" priority="1008" mode="M9">
+<xsl:template match="fo:*/@axf:revision-bar-style" priority="1008" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:revision-bar-style"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="true()">
+<xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -20738,12 +20562,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:revision-bar-width" priority="1007" mode="M9">
+<xsl:template match="fo:*/@axf:revision-bar-width" priority="1007" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:revision-bar-width"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="true()">
+<xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -20757,14 +20581,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:suppress-duplicate-page-number"
-                 priority="1006"
-                 mode="M9">
+<xsl:template match="fo:*/@axf:suppress-duplicate-page-number" priority="1006" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="fo:*/@axf:suppress-duplicate-page-number"/>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="true()">
+<xsl:if test="true()">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="true()">
             <xsl:attribute name="role">Warning</xsl:attribute>
             <xsl:attribute name="location">
@@ -20778,13 +20600,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:text-justify" priority="1005" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:text-justify"/>
+<xsl:template match="fo:*/@axf:text-justify" priority="1005" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:text-justify"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20806,7 +20627,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inter-word', 'inter-character', 'distribute'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inter-word', 'inter-character', 'distribute'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'inter-word', 'inter-character', 'distribute'))">
             <xsl:attribute name="location">
@@ -20823,7 +20644,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -20837,7 +20658,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -20852,7 +20673,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EnumerationToken' and    $expression/@token = 'distribute'">
+<xsl:if test="local-name($expression) = 'EnumerationToken' and    $expression/@token = 'distribute'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EnumerationToken' and $expression/@token = 'distribute'">
             <xsl:attribute name="id">axf.text-justify</xsl:attribute>
@@ -20870,13 +20691,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:text-line-color" priority="1004" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:text-line-color"/>
+<xsl:template match="fo:*/@axf:text-line-color" priority="1004" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:text-line-color"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('Color', 'EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20898,7 +20718,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto'))">
             <xsl:attribute name="location">
@@ -20918,7 +20738,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -20932,7 +20752,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -20948,13 +20768,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:text-line-style" priority="1003" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:text-line-style"/>
+<xsl:template match="fo:*/@axf:text-line-style" priority="1003" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:text-line-style"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'EMPTY', 'ERROR', 'Object')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -20979,7 +20798,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'dot-dash', 'dot-dot-dash', 'wave', 'inherit'))">
             <xsl:attribute name="location">
@@ -20999,7 +20818,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -21016,7 +20835,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -21034,13 +20853,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@axf:text-line-width" priority="1002" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@axf:text-line-width"/>
+<xsl:template match="fo:*/@axf:text-line-width" priority="1002" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@axf:text-line-width"/>
       <xsl:variable name="expression" select="ahf:parser-runner(.)"/>
 
 		    <!--ASSERT -->
-      <xsl:choose>
+<xsl:choose>
          <xsl:when test="local-name($expression) = ('EnumerationToken', 'Length', 'EMPTY', 'ERROR', 'Object') or $expression/@value = '0'"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -21062,7 +20880,7 @@
       </xsl:choose>
 
 		    <!--REPORT -->
-      <xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'thin', 'medium', 'thick', 'inherit'))">
+<xsl:if test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'thin', 'medium', 'thick', 'inherit'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="$expression instance of element(EnumerationToken) and not($expression/@token = ('auto', 'thin', 'medium', 'thick', 'inherit'))">
             <xsl:attribute name="location">
@@ -21079,7 +20897,7 @@
       </xsl:if>
 
 		    <!--REPORT Warning-->
-      <xsl:if test="local-name($expression) = 'EMPTY'">
+<xsl:if test="local-name($expression) = 'EMPTY'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'EMPTY'">
             <xsl:attribute name="role">Warning</xsl:attribute>
@@ -21093,7 +20911,7 @@
       </xsl:if>
 
 		    <!--REPORT -->
-      <xsl:if test="local-name($expression) = 'ERROR'">
+<xsl:if test="local-name($expression) = 'ERROR'">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="local-name($expression) = 'ERROR'">
             <xsl:attribute name="location">
@@ -21109,13 +20927,12 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@color-profile-name" priority="1001" mode="M9">
-      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                       context="fo:*/@color-profile-name"/>
+<xsl:template match="fo:*/@color-profile-name" priority="1001" mode="M9">
+      <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@color-profile-name"/>
       <xsl:variable name="expression" select="normalize-space(.)"/>
 
 		    <!--REPORT -->
-      <xsl:if test="not($expression = ('#CMYK', '#Grayscale', '#RGB'))">
+<xsl:if test="not($expression = ('#CMYK', '#Grayscale', '#RGB'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test="not($expression = ('#CMYK', '#Grayscale', '#RGB'))">
             <xsl:attribute name="location">
@@ -21133,11 +20950,11 @@
    </xsl:template>
 
 	  <!--RULE -->
-   <xsl:template match="fo:*/@overflow" priority="1000" mode="M9">
+<xsl:template match="fo:*/@overflow" priority="1000" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="fo:*/@overflow"/>
 
 		    <!--REPORT -->
-      <xsl:if test=". = ('replace', 'condense') and not(local-name(..) = ('block-container', 'inline-container'))">
+<xsl:if test=". = ('replace', 'condense') and not(local-name(..) = ('block-container', 'inline-container'))">
          <svrl:successful-report xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                  test=". = ('replace', 'condense') and not(local-name(..) = ('block-container', 'inline-container'))">
             <xsl:attribute name="location">
