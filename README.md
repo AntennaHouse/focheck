@@ -125,7 +125,7 @@ Use the `build-focheck.xml` Ant build file and the `validate.single` target to v
 
 `focheck.el` associates the RELAX NG schema with `.fo` files. The `fo-format` command runs Antenna House Formatter (or any command-line formatter) on the current file.
 
-Add this to our `.emacs` file.
+Add this to your `.emacs` file.
 
 ```elisp
 (setq load-path
