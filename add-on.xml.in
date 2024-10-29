@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xt:extensions xmlns:xt="http://www.oxygenxml.com/ns/extension"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
+    <xt:extension id="focheck">
+        <xt:location href="https://github.com/AntennaHouse/focheck/releases/download/v7.4.4/focheck-framework-7.4.4.zip"/>
+        <xt:version>7.4.4</xt:version>
+        <xt:oxy_version>14.0+</xt:oxy_version>
+        <xt:type>framework</xt:type>
+        <xt:author>Antenna House, Inc.</xt:author>
+        <xt:name>focheck</xt:name>
+        <xt:description xmlns="http://www.w3.org/1999/xhtml"><h1>focheck</h1>
+<p>Validate XSL-FO and Antenna House extensions using Relax NG and Schematron.</p>
+
+<p>See <a href="https://github.com/AntennaHouse/focheck#en">https://github.com/AntennaHouse/focheck#en</a>.</p>
+
+	<pre><![CDATA[@@ChangeLog@@]]></pre></xt:description>
+        <xt:license><![CDATA[@@LICENSE@@]]></xt:license>
+    </xt:extension>
+</xt:extensions>
