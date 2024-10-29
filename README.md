@@ -80,10 +80,25 @@ If you don't have permission to modify the oXygen installation – for example, 
 
 When you open an XSL-FO document – where the document element is `root` in the XSL-FO namespace – oXygen will automatically validate the document against both the Relax NG schema and the Schematron grammar.
 
+#### 'Antenna House' external FO processor
+
+The transformation scenario expects Oxygen to have an 'Antenna House' FO processor configuration that runs the Antenna House command-line formatter.
+
+If your Oxygen is not already configured:
+
+1. Oxygen will overwrite every current FO processor configuration in the following steps, so if desired, backup your current Oxygen global options by exporting them to a file.
+1. Install Antenna House Formatter V7.4 (64-bit version) then restart Oxygen.
+1. Download https://github.com/AntennaHouse/focheck/raw/master/resources/formatter-options/formatter-options.xml
+1. In Oxygen, under the **Options** menu, select **Import Global Options...**.
+1. Select the `formatter-options.xml` file that you downloaded then click on **Open**.
+1. When the **Import Global Options** dialog box is displayed, click on **Open**.
+1. Oxygen will advise that a restart is required, but the FO processor configuration has been made already.
+
+If you are using a different Antenna House Formatter version (for example, if these instructions have not been updated to refer to the current version), you can follow these instructions to add the FO processor configurations then edit the processor entries in the 'XML / PDF Output / FO Processors' preferences.
+
 #### PDF/UA checks
 
 Enable the 'PDF/UA Accessibility' validation scenario to enable additional Schematron checks of some of the requirements of PDF/UA.
-
 
 !['PDF/UA Accessibility' enabled in 'Configure Validation Scenarios' dialog box](etc/validation-scenarios-en.png)
 
@@ -206,7 +221,7 @@ The MathML3 schema was downloaded from http://www.w3.org/Math/RelaxNG/
 #     application for describing mathematical notation and capturing
 #     both its structure and content.
 #
-#     Copyright 1998-2010 W3C (MIT, ERCIM, Keio)
+#     Copyright 1998 - 2010 W3C (MIT, ERCIM, Keio)
 # 
 #     Use and distribution of this code are permitted under the terms
 #     W3C Software Notice and License
@@ -400,7 +415,7 @@ The MathML3 schema was downloaded from http://www.w3.org/Math/RelaxNG/
 #     application for describing mathematical notation and capturing
 #     both its structure and content.
 #
-#     Copyright 1998-2010 W3C (MIT, ERCIM, Keio)
+#     Copyright 1998 - 2010 W3C (MIT, ERCIM, Keio)
 # 
 #     Use and distribution of this code are permitted under the terms
 #     W3C Software Notice and License
