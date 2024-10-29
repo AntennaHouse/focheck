@@ -157,7 +157,7 @@ non-xsl-element =
 # <axf:counter-style/>
 # https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.counter-style
 axf_counter-style =
-  ## Custom PDF property Effective with PDF 1.4 or later. Invalid with PDF/A
+  ## Custom counter style
   element axf:counter-style {
     ## Name of the counter style: <name>.
     attribute name { text },
