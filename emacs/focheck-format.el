@@ -54,11 +54,11 @@
   (list
    ;; Antenna House Formatter GUI on Windows (opens in already-running
    ;; AHFormatter)
-   "AHFormatter -s -d %f"
+   "AHFormatter -s -d \"%f\""
    ;; Antenna House Formatter on Windows
-   "AHFCmd -x 4 -d %f -o %o"
+   "AHFCmd -x 4 -d \"%f\" -o \"%o\""
    ;; Antenna House Formatter GUI on Windows
-   "run.sh -x 4 -d %f -o %o"
+   "run.sh -x 4 -d \"%f\" -o \"%o\""
    )
   "*The shell command to format an XSL document.
 
@@ -273,7 +273,7 @@ response to the \"Output file:\" prompt is opened in a buffer."
   ;; (compile-internal command "No more errors" "FO format"
   ;; 		    nil
   ;; 		    fo-format-error-regexps)
-  (compilation-start command 'fo-format-mode (lambda (mode-name) "FO format"))
+  (compilation-start command 'fo-format-mode (lambda (mode-name) "*FO format*"))
   (if fo-format-browse-output
       (browse-url fo-format-output-file))
   (if fo-format-find-output
