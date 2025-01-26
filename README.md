@@ -125,6 +125,8 @@ Use the `build-focheck.xml` Ant build file and the `validate.single` target to v
 
 `focheck.el` associates the RELAX NG schema with `.fo` files. The `fo-format` command runs Antenna House Formatter (or any command-line formatter) on the current file.
 
+If you have the [`lorem-ipsum`](https://github.com/jschaf/emacs-lorem-ipsum) package installed, you can generate Lorem Ipsum paragraphs and lists in FO markup (as well as sentences without markup).
+
 Add this to your `.emacs` file.
 
 ```elisp
@@ -142,6 +144,9 @@ Add this to your `.emacs` file.
        (list
 	'("\\.fo$" . fo-mode))
        auto-mode-alist))
+	   
+;; Uncomment if you have the `lorem-ipsum` package installed:
+;(add-hook 'fo-mode-hook #'lorem-ipsum-fo-mode-hook)
 ```
 
 ### Standalone
@@ -192,6 +197,24 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+## Emacs mode license
+
+Copyright (C) 2016-2025 Antenna House
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ### Additional components:
  
