@@ -97,6 +97,20 @@
 	     value)))
 
 
+
+(defun lorem-ipsum-fo-mode-hook ()
+  "Set some variables for lorem-ipsum in `fo-mode'."
+  (setq lorem-ipsum-paragraph-separator "</fo:block>\n<fo:block>"
+	lorem-ipsum-sentence-separator " "
+	lorem-ipsum-list-beginning "<fo:list-block>\n"
+	lorem-ipsum-list-bullet "<fo:list-item>\n<fo:list-item-label><fo:block>*</fo:block></fo:list-item-label>\n<fo:list-item-body><fo:block>"
+	lorem-ipsum-list-item-end "</fo:block></fo:list-item-body>\n</fo:list-item>\n"
+	lorem-ipsum-list-end "</fo:list-block>\n"))
+
+(add-hook 'fo-mode-hook #'lorem-ipsum-fo-mode-hook)
+
+
+
 (define-derived-mode fo-mode nxml-mode "focheck"
   "Major mode for editing XSL-FO."
   (setq rng-schema-locating-files
