@@ -142,7 +142,7 @@
     </define>
     <!--
       Antenna House Formatter allows axf:document-info with multi-volume
-      output.
+      output.  Also allows empty fo:page-sequence.
     -->
     <define name="fo_page-sequence.model">
       <optional>
@@ -160,9 +160,9 @@
       <zeroOrMore>
         <ref name="fo_static-content"/>
       </zeroOrMore>
-      <oneOrMore>
+      <zeroOrMore>
         <ref name="fo_flow"/>
-      </oneOrMore>
+      </zeroOrMore>
     </define>
     <!-- Antenna House Formatter allows empty fo:static-content. -->
     <define name="fo_static-content.model">
@@ -327,6 +327,13 @@
           <ref name="anything"/>
         </element>
       </zeroOrMore>
+    </define>
+    <define name="initial-page-number">
+      <optional>
+        <attribute name="initial-page-number">
+          <a:documentation>auto | auto-odd | auto-even | &lt;number&gt; | auto-odd-if-only | inherit</a:documentation>
+        </attribute>
+      </optional>
     </define>
     <!--
       

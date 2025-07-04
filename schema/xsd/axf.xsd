@@ -110,7 +110,7 @@
   </xs:complexType>
   <!--
     Antenna House Formatter allows axf:document-info with multi-volume
-    output.
+    output.  Also allows empty fo:page-sequence.
   -->
   <xs:complexType name="fo_page-sequence.model">
     <xs:sequence>
@@ -119,7 +119,7 @@
       <xs:element minOccurs="0" ref="fo:folio-prefix"/>
       <xs:element minOccurs="0" ref="fo:folio-suffix"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:static-content"/>
-      <xs:element maxOccurs="unbounded" ref="fo:flow"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="fo:flow"/>
     </xs:sequence>
   </xs:complexType>
   <!-- Antenna House Formatter allows empty fo:static-content. -->
@@ -222,6 +222,13 @@
       <xs:any minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
     </xs:sequence>
   </xs:group>
+  <xs:attributeGroup name="initial-page-number">
+    <xs:attribute name="initial-page-number">
+      <xs:annotation>
+        <xs:documentation>auto | auto-odd | auto-even | &lt;number&gt; | auto-odd-if-only | inherit</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
   <!--
     
     End of overrides to patterns in 'axf-inherited.rnc'.

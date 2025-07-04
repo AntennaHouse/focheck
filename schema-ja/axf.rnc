@@ -84,14 +84,14 @@ include "axf-inherited.rnc" inherit = axf {
      | axf_output-volume-info
      | non-xsl-element)*
   # Antenna House Formatter allows axf:document-info with multi-volume
-  # output.
+  # output.  Also allows empty fo:page-sequence.
   fo_page-sequence.model =
     axf_document-info?,
     fo_title?,
     fo_folio-prefix?,
     fo_folio-suffix?,
     fo_static-content*,
-    fo_flow+
+    fo_flow*
   # Antenna House Formatter allows empty fo:static-content.
   fo_static-content.model =
     (block.fo.list | neutral.fo.list)* & point.fo.list*
@@ -132,6 +132,10 @@ include "axf-inherited.rnc" inherit = axf {
       attribute * { text }*,
       anything
     }*
+  initial-page-number =
+    
+    ## auto | auto-odd | auto-even | <number> | auto-odd-if-only | inherit
+    attribute initial-page-number { text }?
   # 
   # End of overrides to patterns in 'axf-inherited.rnc'.
   #
