@@ -285,6 +285,9 @@
 #
 # These properties are defined in:
 #  - https://www.antenna.co.jp/AHF/help/en/ahf-ext.html
+#
+# With additional properties defined in:
+#  - https://www.antenna.co.jp/AHF/help/en/ahf-analyzer.html
 #  - https://www.antenna.co.jp/AHF/help/en/ahf-float.html
 #  - https://www.antenna.co.jp/AHF/help/en/ahf-ruby.html
 #  - https://www.antenna.co.jp/AHF/help/en/ahf-spread.html
