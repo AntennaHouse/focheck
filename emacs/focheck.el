@@ -1,5 +1,5 @@
 ;;;; focheck.el --- XSL-FO mode
-;; Copyright (C) 2016, 2017, 2018 Antenna House
+;; Copyright (C) 2016-2025 Antenna House
 
 ;; Author: Tony Graham, Antenna House <tgraham@antenna.co.jp>
 ;; Contributors: 
@@ -23,9 +23,8 @@
 ;; Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 
-(require 'cl)
 (require 'compile)
-(require 'flymake)
+(require 'flymake-proc)
 
 (require 'focheck-format "focheck-format")
 
@@ -45,7 +44,8 @@
   :group 'focheck
   :type '(file :must-match t))
 
-(defcustom focheck-template-file (locate-library "XSL-FO.fo" t)
+(defcustom focheck-template-file
+  (locate-library "../template/XSL-FO.fo" t)
   "*File containing initial FO stylesheet inserted into empty `focheck' buffers."
   :type '(choice (file :must-match t) (const :tag "No initial FO file" nil))
   :group 'xsl)
@@ -65,7 +65,7 @@
      	 (local-file (file-relative-name
 		      temp-file
 		      (file-name-directory buffer-file-name)))
-	 (build-file (concat focheck-home "build-focheck.xml")))
+	 (build-file (locate-library "../build-focheck.xml")))
 ;;;    (list "java" (list "-jar" focheck-saxon "-l:on" local-file (concat focheck-home "build/schematron.xsl")))))
     ;; cmd /c ant.bat -emacs -f C:/projects/oxygen/focheck/build-focheck.xml schematron.single -Dsingle=C:/projects/oxygen/focheck/test/samples/test.fo
     (list "cmd" (list "/c" "ant.bat" "-emacs" "-f" build-file "schematron.single" (concat "-Dsingle=" local-file) ))))

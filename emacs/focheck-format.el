@@ -32,6 +32,8 @@
 ;; psgml.el by Lennart Staflin.  Updated to use `compilation-start`
 ;; then made to work by copying bits from `grep-mode'.
 
+(require 'cl-lib)
+
 
 ;;;; Variables:
 
@@ -139,11 +141,11 @@ See `compilation-error-regexp-alist'."
   (cdr-safe (assq (downcase c) parts)))
 
 (defun fo-subst-expand (s parts)
-  (loop for i from 0 to (1- (length s))
+  (cl-loop for i from 0 to (1- (length s))
 	as c = (aref s i)
 	concat (if (eq c ?%)
-		   (or (fo-subst-expand-char (aref s (incf i)) parts)
-		       (return nil)) 
+		   (or (fo-subst-expand-char (aref s (cl-incf i)) parts)
+		       (cl-return nil)) 
 		 (char-to-string (aref s i)))))
 
 (defun fo-populate-format-command-history ()
@@ -163,7 +165,7 @@ See `compilation-error-regexp-alist'."
 		       (fo-subst-expand x format-subst))
 		     fo-format-command)
 	     fo-format-command-history))))
-;;      (loop for template in fo-format-command
+;;      (cl-loop for template in fo-format-command
 ;;	    append
 ;;	    (fo-subst-expand template format-subst)
 ;;	    into
