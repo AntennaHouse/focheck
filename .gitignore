@@ -3,5 +3,7 @@ out
 *local.properties
 *.zip
 *~
+.#*
 *_Conflict.*
 test/issues
+tmp
