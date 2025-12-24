@@ -15,7 +15,7 @@
 						<null/>
 					</field>
 					<field name="cmd">
-						<String>"${env(AHF74_64_HOME)}\AHFormatter.exe" -d ${fo} -s</String>
+						<String>"${env(AHF75_64_HOME)}\AHFormatter.exe" -d ${fo} -s</String>
 					</field>
 					<field name="description">
 						<String>AH Formatter GUI (Windows only)</String>
@@ -47,7 +47,7 @@
 						<null/>
 					</field>
 					<field name="cmd">
-						<String>"${env(AHF74_64_HOME)}\AHFCmd.exe" -d ${fo} -p ${ah_method} -o ${out} -extlevel 4</String>
+						<String>"${env(AHF75_64_HOME)}\AHFCmd.exe" -d ${fo} -p ${ah_method} -o ${out} -extlevel 4</String>
 					</field>
 					<field name="description">
 						<String>Antenna House FO Processor</String>
