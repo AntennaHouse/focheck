@@ -487,9 +487,9 @@ AFTER making a release on GitHub:
 <target name="add-on.xml.uptodate">
   <condition property="add-on.xml.uptodate">
     <and>
-      <uptodate targetfile="${basedir.converted}/add-on.xml">
+      <uptodate targetfile="${focheck.basedir.converted}/add-on.xml">
 	<srcfiles
-	    dir="${basedir.converted}"
+	    dir="${focheck.basedir.converted}"
 	    includes="build.properties, add-on.xml.in, ChangeLog.md" />
       </uptodate>
       <isfalse value="${force}" />
@@ -502,7 +502,8 @@ AFTER making a release on GitHub:
 	description="Update the version information in 'add-on.xml'.">
   <update-copyright file="${focheck.basedir.converted}/add-on.xml.in" />
   <update-copyright file="${focheck.basedir.converted}/LICENSE.md" />
-  <copy file="add-on.xml.in" tofile="add-on.xml" />
+  <delete file="add-on.xml" />
+  <copy file="add-on.xml.in" tofile="add-on.xml" force="true" />
   <replaceregexp file="${focheck.basedir.converted}/add-on.xml"
 		 encoding="UTF-8">
     <regexp pattern="&lt;xt:version>[^&lt;]+&lt;/xt:version>" />
