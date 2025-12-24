@@ -132,6 +132,7 @@
 <property name="axf:diagonal-border-width" model="text" description="Width of the diagonal border" />
 <property name="axf:display-alttext" model="'true' | 'false' | 'auto'" description="Whether to display the alternate text of a missing image: true | false | auto" /><!-- V7.0 -->
 <property name="axf:double-hyphen-translineation" model="'true' | 'false' | 'auto'" description="Whether to also place a hyphen at the start of the line when breaking lines at a hyphen: auto | true | false" /><!-- V7.4 -->
+<property name="axf:float-breaking-y" model="'true' | 'false' | 'auto'" description="Whether to break floats in the vertical direction: true | false | auto>" /><!-- V7.5 -->
 <property name="axf:flush-zone" model="text" description="Threshold for justifying last line: none | &lt;length> | &lt;percentage>" /><!-- V7.0 -->
 <property name="axf:font-feature-settings" model="text" description="OpenType font features: normal | &lt;feature-tag-value>#" /><!-- V6.5 -->
 <property name="axf:hanging-punctuation" model="text" description="Whether to hang punctuations at the start of the line or end of the line: none | [ start || first || [ force-end | allow-end ] || last ]" />
@@ -179,15 +180,8 @@
 <property name="axf:line-number-font-size" model="text" description="Font size of line numbers" />
 <property name="axf:line-number-font-style" model="'normal' | 'italic'" description="Whether to make the font style italic" />
 <property name="axf:line-number-font-weight" model="'normal' | 'bold' | 'bolder' | 'lighter' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900'" description="Font weight of line numbers" />
-<property name="axf:line-number-format" model="text" description="format of line numbers: &lt;string>" />
-<property name="axf:line-number-initial" model="text" description="Line number of the first line: auto | &lt;number>" />
-<property name="axf:line-number-interval" model="text" description="Interval of line numbers: &lt;snumber> | auto" />
 <property name="axf:line-number-offset" model="text" description="Offset of line numbers: &lt;length>" />
-<property name="axf:line-number-orientation" model="'0' | '90' | '180' | '270' | '-90' | '-180' | '-270'" description="Rotates line numbers: 0 | 90 | 180 | 270 | -90 | -180 | -270" />
 <property name="axf:line-number-position" model="'start' | 'end' | 'inside' | 'outside' | 'alternate'" description="Position of line numbers: start | end | inside | outside | alternate" />
-<property name="axf:line-number-prefix" model="text" description="Prefix of line number: &lt;string>" />
-<property name="axf:line-number-reset" model="'auto' | 'none' | 'page' | 'column' | 'force'" description="When to reset line numbers: auto | none | page | column | force" />
-<property name="axf:line-number-start" model="text" description="Starting line number: &lt;snumber> | auto" />
 <property name="axf:line-number-text-align" model="'auto' | 'start' | 'center' | 'end' | 'inside' | 'outside' | 'left' | 'right'" description="Alignment of line numbers in the line area: auto | start | center | end | inside | outside | left | right" />
 <property name="axf:line-number-text-decoration" model="text" description="Text decoration of line numbers" />
 <property name="axf:line-number-width" model="text" description="Width of line numbers: auto | &lt;length>" />
@@ -238,7 +232,7 @@
 <property name="axf:suppress-duplicate-page-number" model="'true' | 'false'" description="Whether to delete duplicated page numbers: true | false" />
 <property name="axf:tab-overlap-treatment" model="'auto' | 'ignore-tab' | 'next-tab'" description="Behavior when tab alignment makes letters overlap: auto | ignore-tab | next-tab" />
 <property name="axf:tab-stops" model="text" description="Tab stop positions" />
-<property name="axf:tab-treatment" model="text" description="Treatment for literal tab characters" />
+<property name="axf:tab-treatment" model="text" description="Treatment for literal tab characters: &lt;number> | preserve | normal" />
 <property name="axf:table-auto-layout-limit" model="text" description="Number of table-rows to read ahead: auto | &lt;number>" /><!-- V7.1 -->
 <property name="axf:table-row-orphans" model="text" description="Number of table-rows that must remain at the bottom of the page (column): &lt;integer>" /><!-- V7.0 -->
 <property name="axf:table-row-widows" model="text" description="Number of table-rows that must remain at the top of the page (column): &lt;integer>" /><!-- V7.0 -->
@@ -257,7 +251,7 @@
 <property name="axf:text-emphasis-position" model="'before' | 'after'" description="Which side of base characters emphasis marks are put" />
 <property name="axf:text-emphasis-skip" model="text" description="Characters to which emphasis marks are not applied: none | [ spaces || punctuation || symbols || narrow ]" />
 <property name="axf:text-emphasis-style" model="text" description="Style of emphasis marks: none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | &lt;string> " />
-<property name="axf:text-indent-if-first-on-page" model="text" description="text-indent of a block at the top of a page or column: &lt;length> | &lt;percentage> | auto" /><!-- V7.0 -->
+<property name="axf:text-indent-if-first-on-page" model="text" description="text-indent of a block at the top of a page or column: [[&lt;length&gt; | &lt;percentage&gt;] &amp;&amp; hanging? &amp;&amp; each-line?] | auto" /><!-- V7.0 -->
 <property name="axf:text-justify" model="'auto' | 'inter-word' | 'inter-character' | 'distribute'" description="How to justify text: auto | inter-word | inter-character" />
 <property name="axf:text-justify-trim" model="text" description="The way to trim spaces between characters in justified text" />
 <property name="axf:text-kashida-space" model="text" description="Percentage of Kashida in Arabic justification: &lt;percentage> | auto" />
