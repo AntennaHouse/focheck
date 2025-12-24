@@ -1,7 +1,7 @@
 # Schema for Antenna House extension elements and non-inherited
 # extension attributes.
 #
-# Copyright 2015-2021 Antenna House, Inc.
+# Copyright 2015-2025 Antenna House, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -602,23 +602,40 @@ fo_root.attlist &=
     axf_require,
     xml_id
 
-fo_page-sequence.attlist &=
-    axf_baseline-grid,
+fo_page-sequence-master.attlist &=
     axf_repeat-page-sequence-master
 
 fo_page-sequence.attlist &=
-    axf_background-clip,
+    axf_append-non-end-of-line-characters,
+    axf_append-non-starter-characters,
     axf_background-color,
+    axf_background-clip,
+    axf_background-content-height,
+    axf_background-content-type,
+    axf_background-content-width,
     axf_background-image,
+    axf_background-image-resolution,
     axf_background-origin,
     axf_background-position-horizontal,
     axf_background-position-vertical,
     axf_background-repeat,
+    axf_background-scaling,
     axf_background-size,
+    axf_baseline-grid,
+    axf_column-number-format,
+    axf_except-non-starter-characters,
+    axf_except-non-end-of-line-characters,
     axf_footnote-number-initial,
     axf_footnote-number-format,
     axf_footnote-number-reset,
+    axf_line-number-format,
+    axf_line-number-initial,
+    axf_line-number-interval,
+    axf_line-number-orientation,
+    axf_line-number-prefix,
+    axf_line-number-reset,
     axf_line-number-show,
+    axf_line-number-start,
     axf_output-volume-break,
     axf_output-volume-filename,
     axf_page-number-prefix,
@@ -896,7 +913,14 @@ fo_table-cell.attlist &=
 fo_table-column.attlist &=
     id,
     xml_id,
-    axf_line-number-show
+    axf_line-number-format,
+    axf_line-number-initial,
+    axf_line-number-interval,
+    axf_line-number-orientation,
+    axf_line-number-prefix,
+    axf_line-number-reset,
+    axf_line-number-show,
+    axf_line-number-start
 
 fo_table-body.attlist &=
     xml_id
@@ -921,7 +945,9 @@ fo_wrapper.attlist &=
 #
 
 common-accessibility-properties &=
-    axf_pdftag
+    axf_expansion-text,
+    axf_pdftag,
+    axf_pdftag-title
 
 common-border-padding-and-background-properties &=
     axf_background-clip,
@@ -1263,8 +1289,8 @@ axf_annotation-title =
 #
 # https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.annotation-type
 axf_annotation-type =
-   ## Type of the annotation: Empty string | Text | FreeText | Stamp | FileAttachment
-   attribute axf:annotation-type { ('Text' | 'FreeText' | 'Stamp' | 'FileAttachment')? }?
+   ## Type of the annotation: Empty string | Text | FreeText | Stamp | FileAttachment | Highlight | Underline | StrikeOut | Squiggly
+   attribute axf:annotation-type { ('Text' | 'FreeText' | 'Stamp' | 'FileAttachment' | 'Highlight' | 'Underline' | 'StrikeOut' | 'Squiggly')? }?
 
 # @axf:annotation-width
 #
@@ -1272,6 +1298,20 @@ axf_annotation-type =
 axf_annotation-width =
    ## Width of the annotation: <length>
    attribute axf:annotation-width { text }?
+
+# @axf:append-non-end-of-line-characters
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.append-non-end-of-line-characters
+axf_append-non-end-of-line-characters =
+   ## Width of the annotation: <string>
+   attribute axf:append-non-end-of-line-characters { text }?
+
+# @axf:append-non-starter-characters
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.append-non-starter-characters
+axf_append-non-starter-characters =
+   ## Width of the annotation: <string>
+   attribute axf:append-non-starter-characters { text }?
 
 # @axf:background-color
 # @axf:background-image
@@ -1347,7 +1387,7 @@ axf_background-size =
 #
 # https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.baseline-block-snap
 axf_baseline-block-snap =
-    ## How to align blocks on the baseline grid: none | [auto | before | after | center] || [border-box | margin-box]
+    ## How to align blocks on the baseline grid: none | [auto | before | after | center] || [border-box | margin-box | line]
     attribute axf:baseline-block-snap { text }?
 
 # @axf:baseline-grid
@@ -1537,6 +1577,27 @@ axf_destination-type =
 axf_diagonal-border-style =
     ## Style of the reverse diagonal border: <border-style>
     attribute axf:diagonal-border-style { text }?
+
+# @axf:except-non-end-of-line-characters
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.except-non-end-of-line-characters
+axf_except-non-end-of-line-characters =
+   ## Width of the annotation: <string>
+   attribute axf:except-non-end-of-line-characters { text }?
+
+# @axf:except-non-starter-characters
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.except-non-starter-characters
+axf_except-non-starter-characters =
+   ## Width of the annotation: <string>
+   attribute axf:except-non-starter-characters { text }?
+
+# @axf:expansion-text
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.expansion-text
+axf_expansion-text =
+    ## Expansion text for a tag in Tagged PDF
+    attribute axf:expansion-text { text }?
 
 # @axf:field-checked
 # @field-checked
@@ -2001,12 +2062,61 @@ axf_left-page-master-reference =
     ## Master name of the page master for the left page of a two-page spread
     attribute (axf:left-page-master-reference | left-page-master-reference) { xsd:NCName }
 
+# @axf:line-number-format
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-format
+axf_line-number-format =
+    ## Line numbers to always output: <string>
+    attribute axf:line-number-format { text }?
+
+# @axf:line-number-initial
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-initial
+axf_line-number-initial =
+    ## Line numbers to always output: <number> | auto
+    attribute axf:line-number-initial { text }?
+
+# @axf:line-number-interval
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-interval
+axf_line-number-interval =
+    ## Line numbers to always output: auto | <number> | #<id>
+    attribute axf:line-number-interval { text }?
+
+# @axf:line-number-orientation
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-orientation
+axf_line-number-orientation = 
+    ## Rotates line numbers: 0 | 90 | 180 | 270 | -90 | -180 | -270
+    attribute axf:line-number-orientation { '0' | '0deg' | '90' | '90deg' | '180' | '180deg' | '270' | '270deg' | '-90' | '-90deg' | '-180' | '-180deg' | '-270' | '-270deg' }?
+
+# @axf:line-number-prefix
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-prefix
+axf_line-number-prefix =
+    ## Line numbers to always output: <string>
+    attribute axf:line-number-prefix { text }?
+
+# @axf:line-number-reset
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-reset
+axf_line-number-reset =
+    ## Line numbers to always output: auto | none | page | column | force
+    attribute axf:line-number-reset { 'auto' | 'none' | 'page' | 'column' | 'force' }?
+
 # @axf:line-number-show
 #
 # https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-show
 axf_line-number-show =
     ## Line numbers to always output: <number*>
     attribute axf:line-number-show { text }?
+
+# @axf:line-number-start
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-start
+axf_line-number-start =
+    ## Starting line number: <number> | auto
+    attribute axf:line-number-start { text }?
 
 # @axf:media-activation
 #
@@ -2438,6 +2548,13 @@ axf_text-underline-position =
 axf_text-overflow =
     ## What to display when text overflows in the inline progression direction: clip | ellipsis | <string>
     attribute axf:text-overflow { text }?
+
+# @axf:pdftag-title
+#
+# https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.pdftag-title
+axf_pdftag-title =
+    ## 'Title' PDF property for a tag in Tagged PDF
+    attribute axf:pdftag-title { text }?
 
 # @axf:transform
 #
