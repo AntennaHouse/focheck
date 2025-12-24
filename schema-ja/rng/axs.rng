@@ -551,6 +551,16 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="embed-pdf-fatal-error">
+        <a:documentation>Error level for when PDF Embedding fails: 2 | 3 | 4</a:documentation>
+        <choice>
+          <value>2</value>
+          <value>3</value>
+          <value>4</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="error-if-overflow">
         <a:documentation>Whether to perform 'error-if-overflow' checks when 'overflow=&quot;auto&quot;'</a:documentation>
         <ref name="ah.boolean"/>
@@ -583,12 +593,24 @@
       </attribute>
     </optional>
     <optional>
+      <attribute name="fix-css-running-element">
+        <a:documentation>Apply previous, incorrect handling of CSS running elements: true | false</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
       <attribute name="fixed-width-space-treatment">
         <a:documentation>Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always</a:documentation>
         <choice>
           <ref name="ah.boolean"/>
           <value>always</value>
         </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="float-breaking-y">
+        <a:documentation>Value for when 'float-breaking-y' is 'auto': true | false</a:documentation>
+        <ref name="ah.boolean"/>
       </attribute>
     </optional>
     <optional>
@@ -671,6 +693,12 @@
       <attribute name="latin-ligature">
         <a:documentation>Whether to process ligatures in European languages</a:documentation>
         <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="memory-limit-size">
+        <a:documentation>Upper limit of memory usage in AHFCmd</a:documentation>
+        <data type="integer"/>
       </attribute>
     </optional>
     <optional>
@@ -1427,7 +1455,14 @@
     </optional>
     <optional>
       <attribute name="color-conversion-k100">
-        <a:documentation>Whether to always convert black to K100 when 'color-conversion=&quot;all-cmyk&quot;'</a:documentation>
+        <a:documentation>Whether to always convert black to K100 when 'color-conversion=&quot;all-cmyk&quot;'
+Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false</a:documentation>
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="color-conversion-separation">
+        <a:documentation>Whether to apply color conversion to separation colors: true | false</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>
@@ -2288,13 +2323,17 @@
         <data type="integer"/>
       </attribute>
     </optional>
+    <optional>
+      <!--
+        attribute  { xsd:NMTOKEN }?,
+        attribute  { xsd:decimal }?,
+        attribute scriptsizemultiplier { xsd:decimal }?,
+      -->
+      <attribute name="mathmlSettingsMode">
+        <data type="NMTOKEN"/>
+      </attribute>
+    </optional>
   </define>
-  <!--
-    ,
-    attribute  { xsd:NMTOKEN }?,
-    attribute  { xsd:decimal }?,
-    attribute scriptsizemultiplier { xsd:decimal }?
-  -->
   <define name="munderover">
     <element name="munderover">
       <ref name="munderover.attlist"/>
@@ -2353,6 +2392,12 @@
   <define name="svg-render-settings.attlist">
     <optional>
       <attribute name="current-color-eval-at-painting">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="ignore-rasterize-properties">
+        <a:documentation>Whether to ignore filter/mask properties that require rasterization</a:documentation>
         <ref name="ah.boolean"/>
       </attribute>
     </optional>

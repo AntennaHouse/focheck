@@ -300,6 +300,9 @@ formatter-settings.attlist =
   ## Comma-separated languages for which to also place a hyphen at the start of a line
   attribute double-hyphen-translineation { text }?,
   
+  ## Error level for when PDF Embedding fails: 2 | 3 | 4
+  attribute embed-pdf-fatal-error { "2" | "3" | "4" }?,
+  
   ## Whether to perform 'error-if-overflow' checks when 'overflow="auto"'
   attribute error-if-overflow { ah.boolean }?,
   attribute except-non-end-of-line-characters { text }?,
@@ -310,8 +313,14 @@ formatter-settings.attlist =
   attribute family-name-syntax { "auto" | "loose" | "strict" }?,
   attribute fix-css-img-percentage { ah.boolean }?,
   
+  ## Apply previous, incorrect handling of CSS running elements: true | false
+  attribute fix-css-running-element { ah.boolean }?,
+  
   ## Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always
   attribute fixed-width-space-treatment { ah.boolean | "always" }?,
+  
+  ## Value for when 'float-breaking-y' is 'auto': true | false
+  attribute float-breaking-y { ah.boolean }?,
   
   ## Width, in em, of HAIR SPACE (U+200A)
   attribute hair-space-width { text }?,
@@ -341,6 +350,9 @@ formatter-settings.attlist =
   
   ## Whether to process ligatures in European languages
   attribute latin-ligature { ah.boolean }?,
+  
+  ## Upper limit of memory usage in AHFCmd
+  attribute memory-limit-size { xsd:integer }?,
   
   ## Suppress specific error messages
   attribute no-disp-warnings {
@@ -674,7 +686,11 @@ pdf-settings.attlist =
   }?,
   
   ## Whether to always convert black to K100 when 'color-conversion="all-cmyk"'
+  ## Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false
   attribute color-conversion-k100 { ah.boolean }?,
+  
+  ## Whether to apply color conversion to separation colors: true | false
+  attribute color-conversion-separation { ah.boolean }?,
   attribute color-downsampling { downsampling.list }?,
   attribute color-downsampling-above-dpi { dpi.model }?,
   attribute color-downsampling-target-dpi { dpi.model }?,
@@ -940,11 +956,11 @@ mathml-settings.attlist =
   attribute opspace-multiplier { xsd:decimal }?,
   attribute sans-serif { xsd:NCName }?,
   attribute script { xsd:NCName }?,
-  attribute script-maxnest { xsd:integer }?
-# ,
-# attribute  { xsd:NMTOKEN }?,
-# attribute  { xsd:decimal }?,
-# attribute scriptsizemultiplier { xsd:decimal }?
+  attribute script-maxnest { xsd:integer }?,
+  # attribute  { xsd:NMTOKEN }?,
+  # attribute  { xsd:decimal }?,
+  # attribute scriptsizemultiplier { xsd:decimal }?,
+  attribute mathmlSettingsMode { xsd:NMTOKEN }?
 munderover = element munderover { munderover.attlist, munderover.model }
 munderover.model = empty
 munderover.attlist =
@@ -968,6 +984,9 @@ svg-render-settings =
   }
 svg-render-settings.attlist =
   attribute current-color-eval-at-painting { ah.boolean }?,
+  
+  ## Whether to ignore filter/mask properties that require rasterization
+  attribute ignore-rasterize-properties { ah.boolean }?,
   attribute image-element-eval-as-svg20 { ah.boolean }?,
   attribute inherit-svg-fill-color { ah.boolean }?,
   attribute outermost-svg-eval-as-isolate { ah.boolean }?,

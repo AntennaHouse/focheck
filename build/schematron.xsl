@@ -668,9 +668,10 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="string-length(.) = 1"/>
+         <xsl:when test="string-length(.) = 1 or matches(., '^''.''$') or matches(., '^&#34;.&#34;$')"/>
          <xsl:otherwise>
-            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl" test="string-length(.) = 1">
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="string-length(.) = 1 or matches(., '^''.''$') or matches(., '^&#34;.&#34;$')">
                <xsl:attribute name="id">character_grouping-separator</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>

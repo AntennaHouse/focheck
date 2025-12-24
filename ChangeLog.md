@@ -1,3 +1,26 @@
+# focheck 7.5.1
+
+- **focheck** version numbers correspond to the `version.xml` values of the Antenna House Formatter version current at the time of the release.
+- Updated for Antenna House Formatter V7.5R1.
+- `axs.rnc` updated to match ahfsettings 7.5.1.
+- Added `axf:float-breaking-y`. (V7.5)
+- `axf:baseline-block-snap` has `line` keyword. (V7.5)
+- `text-indent` and `axf:text-indent-if-first-on-page` can have `hanging` and `each-line` keywords. (V7.5)
+- Additional `axf:annotation-type` types. (V7.5)
+- Added `axf:append-non-end-of-line-characters`, `axf:append-non-starter-characters`, `axf:except-non-end-of-line-characters`, `axf:except-non-starter-characters`, and `axf:expansion-text`.
+- More properties for `fo:page-sequence`.
+- `axf:line-number-format`, `axf:line-number-initial`, `axf:line-number-interval`, `axf:line-number-orientation`, `axf:line-number-prefix`, `axf:line-number-reset`, and `axf:line-number-start` are not inherited.
+
+# focheck 7.4.11
+
+- Allow empty `fo:page-sequence`.
+-`initial-page-number` extension.
+- Emacs mode can generate 'Lorem Ipsum...' sentences, paragraphs, and lists
+- Added Emacs mode license to `README.md`
+- Ignore Emacs temporary files and 'tmp' directory.
+- Return of template FO file.
+- Handle spaces in file names.
+
 # focheck 7.4.6
 
 - `axs.rnc` updated to match ahfsettings 7.4.6.

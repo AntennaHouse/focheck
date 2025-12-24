@@ -2766,14 +2766,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>How to align blocks on the baseline grid: none | [auto | before | after | center] || [border-box | margin-box]</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T153358Z" creationid="mtan" creationdate="20171005T153358Z">
-        <seg>ブロックを行グリッドにどのように揃えるか： none | [auto | before | after | center] || [border-box | margin-box]</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>How to convert the RGB or CMYK color space to DeviceGray or DeviceCMYK: none | black | gray | all-gray | all-cmyk</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190523T150126Z" creationid="mtan" creationdate="20190523T150126Z">
@@ -2926,14 +2918,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Interval of line numbers: &lt;snumber&gt; | auto</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T121314Z" creationid="mtan" creationdate="20171005T120218Z">
-        <seg>出力する行番号の間隔: &lt;snumber&gt; | auto</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Invalid with PDF/A</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T115825Z" creationid="mtan" creationdate="20171117T132116Z">
@@ -3074,14 +3058,6 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20160120T125408Z" creationid="mtan" creationdate="20160120T125408Z">
         <seg>トンボの線の長さ： &lt;length&gt; | auto</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Line number of the first line: auto | &lt;number&gt;</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T120049Z" creationid="mtan" creationdate="20171005T120049Z">
-        <seg>最初の行の行番号: auto | &lt;number&gt;</seg>
       </tuv>
     </tu>
     <tu>
@@ -3512,14 +3488,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Prefix of line number: &lt;string&gt;</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T121456Z" creationid="mtan" creationdate="20171005T121456Z">
-        <seg>行番号の前置文字列: &lt;string&gt;</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Presentation MathML</seg>
       </tuv>
       <tuv lang="JA" changeid="tkg" changedate="20171120T164938Z" creationid="tkg" creationdate="20171120T164938Z">
@@ -3888,10 +3856,10 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Starting line number: &lt;snumber&gt; | auto</seg>
+        <seg>Starting line number: &lt;number&gt; | auto</seg>
       </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T121815Z" creationid="mtan" creationdate="20171005T121815Z">
-        <seg>出力を開始する行番号: &lt;snumber&gt; | auto</seg>
+      <tuv lang="JA" changeid="mtan" changedate="20160310T104712Z" creationid="mtan" creationdate="20160310T104712Z">
+        <seg>出力を開始する行番号: &lt;number&gt; | auto</seg>
       </tuv>
     </tu>
     <tu>
@@ -6680,22 +6648,6 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Treatment for literal tab characters</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20160309T145846Z" creationid="mtan" creationdate="20160309T130345Z">
-        <seg>リテラルタブ文字の扱い</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Type of the annotation: Empty string | Text | FreeText | Stamp | FileAttachment</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T153150Z" creationid="mtan" creationdate="20171005T153150Z">
-        <seg>注釈の種類： Empty string | Text | FreeText | Stamp | FileAttachment</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Typical conditions include, testing whether the page which is generated using the alternative is the first or last page in a page-sequence or is the page blank.</seg>
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171016T120313Z" creationid="mtan" creationdate="20160127T114434Z">
@@ -6852,14 +6804,6 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190522T145652Z" creationid="mtan" creationdate="20190522T145652Z">
         <seg>リッチメディアを有効無効にするタイミング： [ ExplicitlyActivated | PageOpen | PageVisible ]?</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>When to reset line numbers: auto | none | page | column | force</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T121709Z" creationid="mtan" creationdate="20171005T121709Z">
-        <seg>行番号のリセットする場合: auto | none | page | column | force</seg>
       </tuv>
     </tu>
     <tu>
@@ -9868,14 +9812,6 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20171012T115350Z" creationid="mtan" creationdate="20151102T152314Z">
         <seg>force-page-count="" は auto | even | odd | end-on-even | end-on-odd | no-force | inherit でなければなりません。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>format of line numbers: &lt;string&gt;</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20171005T120030Z" creationid="mtan" creationdate="20171005T120030Z">
-        <seg>行番号のための書式: &lt;string&gt;</seg>
       </tuv>
     </tu>
     <tu>
@@ -12996,14 +12932,6 @@
       </tuv>
       <tuv lang="JA" changeid="mtan" changedate="20190528T153223Z" creationid="mtan" creationdate="20190528T094638Z">
         <seg>text-depth="" です。</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>text-indent of a block at the top of a page or column: &lt;length&gt; | &lt;percentage&gt; | auto</seg>
-      </tuv>
-      <tuv lang="JA" changeid="mtan" changedate="20200521T130655Z" creationid="mtan" creationdate="20200521T130655Z">
-        <seg>ページ先頭または段先頭のブロックの text-indent: &lt;length&gt; | &lt;percentage&gt; | auto</seg>
       </tuv>
     </tu>
     <tu>

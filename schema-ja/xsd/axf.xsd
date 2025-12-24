@@ -3,7 +3,7 @@
   Schema for Antenna House extension elements and non-inherited
   extension attributes.
   
-  Copyright 2015-2021 Antenna House, Inc.
+  Copyright 2015-2025 Antenna House, Inc.
   
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -1534,7 +1534,7 @@
   <xs:attributeGroup name="axf_annotation-type">
     <xs:attribute name="annotation-type" form="qualified">
       <xs:annotation>
-        <xs:documentation>注釈の種類： Empty string | Text | FreeText | Stamp | FileAttachment</xs:documentation>
+        <xs:documentation>Type of the annotation: Empty string | Text | FreeText | Stamp | FileAttachment | Highlight | Underline | StrikeOut | Squiggly</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:union>
@@ -1544,6 +1544,10 @@
               <xs:enumeration value="FreeText"/>
               <xs:enumeration value="Stamp"/>
               <xs:enumeration value="FileAttachment"/>
+              <xs:enumeration value="Highlight"/>
+              <xs:enumeration value="Underline"/>
+              <xs:enumeration value="StrikeOut"/>
+              <xs:enumeration value="Squiggly"/>
             </xs:restriction>
           </xs:simpleType>
           <xs:simpleType>
@@ -1564,6 +1568,30 @@
     <xs:attribute name="annotation-width" form="qualified">
       <xs:annotation>
         <xs:documentation>注釈の幅： &lt;length&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:append-non-end-of-line-characters
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.append-non-end-of-line-characters
+  -->
+  <xs:attributeGroup name="axf_append-non-end-of-line-characters">
+    <xs:attribute name="append-non-end-of-line-characters" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Width of the annotation: &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:append-non-starter-characters
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.append-non-starter-characters
+  -->
+  <xs:attributeGroup name="axf_append-non-starter-characters">
+    <xs:attribute name="append-non-starter-characters" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Width of the annotation: &lt;string&gt;</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -1710,7 +1738,7 @@
   <xs:attributeGroup name="axf_baseline-block-snap">
     <xs:attribute name="baseline-block-snap" form="qualified">
       <xs:annotation>
-        <xs:documentation>ブロックを行グリッドにどのように揃えるか： none | [auto | before | after | center] || [border-box | margin-box]</xs:documentation>
+        <xs:documentation>How to align blocks on the baseline grid: none | [auto | before | after | center] || [border-box | margin-box | line]</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -2066,6 +2094,42 @@
     <xs:attribute name="diagonal-border-style" form="qualified">
       <xs:annotation>
         <xs:documentation>対角罫のスタイルを指定します: &lt;border-style&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:except-non-end-of-line-characters
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.except-non-end-of-line-characters
+  -->
+  <xs:attributeGroup name="axf_except-non-end-of-line-characters">
+    <xs:attribute name="except-non-end-of-line-characters" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Width of the annotation: &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:except-non-starter-characters
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.except-non-starter-characters
+  -->
+  <xs:attributeGroup name="axf_except-non-starter-characters">
+    <xs:attribute name="except-non-starter-characters" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Width of the annotation: &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:expansion-text
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.expansion-text
+  -->
+  <xs:attributeGroup name="axf_expansion-text">
+    <xs:attribute name="expansion-text" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Expansion text for a tag in Tagged PDF</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -3093,6 +3157,105 @@
     <xs:attribute name="left-page-master-reference" type="xs:NCName"/>
   </xs:attributeGroup>
   <!--
+    @axf:line-number-format
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.line-number-format
+  -->
+  <xs:attributeGroup name="axf_line-number-format">
+    <xs:attribute name="line-number-format" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Line numbers to always output: &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:line-number-initial
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.line-number-initial
+  -->
+  <xs:attributeGroup name="axf_line-number-initial">
+    <xs:attribute name="line-number-initial" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Line numbers to always output: &lt;number&gt; | auto</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:line-number-interval
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.line-number-interval
+  -->
+  <xs:attributeGroup name="axf_line-number-interval">
+    <xs:attribute name="line-number-interval" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Line numbers to always output: auto | &lt;number&gt; | #&lt;id&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:line-number-orientation
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.line-number-orientation
+  -->
+  <xs:attributeGroup name="axf_line-number-orientation">
+    <xs:attribute name="line-number-orientation" form="qualified">
+      <xs:annotation>
+        <xs:documentation>行番号を回転させます: 0 | 90 | 180 | 270 | -90 | -180 | -270</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="0"/>
+          <xs:enumeration value="0deg"/>
+          <xs:enumeration value="90"/>
+          <xs:enumeration value="90deg"/>
+          <xs:enumeration value="180"/>
+          <xs:enumeration value="180deg"/>
+          <xs:enumeration value="270"/>
+          <xs:enumeration value="270deg"/>
+          <xs:enumeration value="-90"/>
+          <xs:enumeration value="-90deg"/>
+          <xs:enumeration value="-180"/>
+          <xs:enumeration value="-180deg"/>
+          <xs:enumeration value="-270"/>
+          <xs:enumeration value="-270deg"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:line-number-prefix
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.line-number-prefix
+  -->
+  <xs:attributeGroup name="axf_line-number-prefix">
+    <xs:attribute name="line-number-prefix" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Line numbers to always output: &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:line-number-reset
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.line-number-reset
+  -->
+  <xs:attributeGroup name="axf_line-number-reset">
+    <xs:attribute name="line-number-reset" form="qualified">
+      <xs:annotation>
+        <xs:documentation>Line numbers to always output: auto | none | page | column | force</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="auto"/>
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="page"/>
+          <xs:enumeration value="column"/>
+          <xs:enumeration value="force"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
     @axf:line-number-show
     
     https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.line-number-show
@@ -3101,6 +3264,18 @@
     <xs:attribute name="line-number-show" form="qualified">
       <xs:annotation>
         <xs:documentation>Line numbers to always output: &lt;number*&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:line-number-start
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.line-number-start
+  -->
+  <xs:attributeGroup name="axf_line-number-start">
+    <xs:attribute name="line-number-start" form="qualified">
+      <xs:annotation>
+        <xs:documentation>出力を開始する行番号: &lt;number&gt; | auto</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -3970,6 +4145,18 @@
     <xs:attribute name="text-overflow" form="qualified">
       <xs:annotation>
         <xs:documentation>インライン方向にオーバーフローしたときの、内容末尾の表示方法： clip | ellipsis | &lt;string&gt;</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <!--
+    @axf:pdftag-title
+    
+    https://www.antenna.co.jp/AHF/help/ja/ahf-ext.html#axf.pdftag-title
+  -->
+  <xs:attributeGroup name="axf_pdftag-title">
+    <xs:attribute name="pdftag-title" form="qualified">
+      <xs:annotation>
+        <xs:documentation>'Title' PDF property for a tag in Tagged PDF</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>

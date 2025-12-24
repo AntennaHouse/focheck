@@ -467,6 +467,18 @@
         <xs:documentation>Comma-separated languages for which to also place a hyphen at the start of a line</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="embed-pdf-fatal-error">
+      <xs:annotation>
+        <xs:documentation>Error level for when PDF Embedding fails: 2 | 3 | 4</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="2"/>
+          <xs:enumeration value="3"/>
+          <xs:enumeration value="4"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="error-if-overflow" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether to perform 'error-if-overflow' checks when 'overflow="auto"'</xs:documentation>
@@ -488,6 +500,11 @@
       </xs:simpleType>
     </xs:attribute>
     <xs:attribute name="fix-css-img-percentage" type="axs:ah.boolean"/>
+    <xs:attribute name="fix-css-running-element" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Apply previous, incorrect handling of CSS running elements: true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="fixed-width-space-treatment">
       <xs:annotation>
         <xs:documentation>Whether to insert a substitute glyph when a font does not include a white-space glyph: false | true | always</xs:documentation>
@@ -501,6 +518,11 @@
           </xs:simpleType>
         </xs:union>
       </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="float-breaking-y" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Value for when 'float-breaking-y' is 'auto': true | false</xs:documentation>
+      </xs:annotation>
     </xs:attribute>
     <xs:attribute name="hair-space-width">
       <xs:annotation>
@@ -558,6 +580,11 @@
     <xs:attribute name="latin-ligature" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether to process ligatures in European languages</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="memory-limit-size" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>Upper limit of memory usage in AHFCmd</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="no-disp-warnings">
@@ -1157,7 +1184,13 @@
     </xs:attribute>
     <xs:attribute name="color-conversion-k100" type="axs:ah.boolean">
       <xs:annotation>
-        <xs:documentation>Whether to always convert black to K100 when 'color-conversion="all-cmyk"'</xs:documentation>
+        <xs:documentation>Whether to always convert black to K100 when 'color-conversion="all-cmyk"'
+Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="color-conversion-separation" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to apply color conversion to separation colors: true | false</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="color-downsampling" type="axs:downsampling.list"/>
@@ -1634,13 +1667,8 @@
     <xs:attribute name="sans-serif" type="xs:NCName"/>
     <xs:attribute name="script" type="xs:NCName"/>
     <xs:attribute name="script-maxnest" type="xs:integer"/>
+    <xs:attribute name="mathmlSettingsMode" type="xs:NMTOKEN"/>
   </xs:attributeGroup>
-  <!--
-    ,
-    attribute  { xsd:NMTOKEN }?,
-    attribute  { xsd:decimal }?,
-    attribute scriptsizemultiplier { xsd:decimal }?
-  -->
   <xs:element name="munderover">
     <xs:complexType>
       <xs:attributeGroup ref="axs:munderover.attlist"/>
@@ -1669,6 +1697,11 @@
   </xs:element>
   <xs:attributeGroup name="svg-render-settings.attlist">
     <xs:attribute name="current-color-eval-at-painting" type="axs:ah.boolean"/>
+    <xs:attribute name="ignore-rasterize-properties" type="axs:ah.boolean">
+      <xs:annotation>
+        <xs:documentation>Whether to ignore filter/mask properties that require rasterization</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="image-element-eval-as-svg20" type="axs:ah.boolean"/>
     <xs:attribute name="inherit-svg-fill-color" type="axs:ah.boolean"/>
     <xs:attribute name="outermost-svg-eval-as-isolate" type="axs:ah.boolean"/>

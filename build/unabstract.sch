@@ -188,7 +188,7 @@
   
 
   <rule context="fo:*/@character | fo:*/@grouping-separator">
-    <assert test="string-length(.) = 1" id="character_grouping-separator"><value-of select="name()"/>="<value-of select="."/>" should be a single character.</assert>
+    <assert test="string-length(.) = 1 or matches(., '^''.''$') or matches(., '^&#34;.&#34;$')" id="character_grouping-separator"><value-of select="name()"/>="<value-of select="."/>" should be a single character.</assert>
   </rule>
 
   <rule context="fo:*/@column-count | fo:*/@number-columns-spanned">

@@ -3,7 +3,7 @@
   Schema for Antenna House extension elements and non-inherited
   extension attributes.
   
-  Copyright 2015-2021 Antenna House, Inc.
+  Copyright 2015-2025 Antenna House, Inc.
   
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -1070,23 +1070,40 @@
     <ref name="axf_require"/>
     <ref name="xml_id"/>
   </define>
-  <define name="fo_page-sequence.attlist" combine="interleave">
-    <ref name="axf_baseline-grid"/>
+  <define name="fo_page-sequence-master.attlist" combine="interleave">
     <ref name="axf_repeat-page-sequence-master"/>
   </define>
   <define name="fo_page-sequence.attlist" combine="interleave">
-    <ref name="axf_background-clip"/>
+    <ref name="axf_append-non-end-of-line-characters"/>
+    <ref name="axf_append-non-starter-characters"/>
     <ref name="axf_background-color"/>
+    <ref name="axf_background-clip"/>
+    <ref name="axf_background-content-height"/>
+    <ref name="axf_background-content-type"/>
+    <ref name="axf_background-content-width"/>
     <ref name="axf_background-image"/>
+    <ref name="axf_background-image-resolution"/>
     <ref name="axf_background-origin"/>
     <ref name="axf_background-position-horizontal"/>
     <ref name="axf_background-position-vertical"/>
     <ref name="axf_background-repeat"/>
+    <ref name="axf_background-scaling"/>
     <ref name="axf_background-size"/>
+    <ref name="axf_baseline-grid"/>
+    <ref name="axf_column-number-format"/>
+    <ref name="axf_except-non-starter-characters"/>
+    <ref name="axf_except-non-end-of-line-characters"/>
     <ref name="axf_footnote-number-initial"/>
     <ref name="axf_footnote-number-format"/>
     <ref name="axf_footnote-number-reset"/>
+    <ref name="axf_line-number-format"/>
+    <ref name="axf_line-number-initial"/>
+    <ref name="axf_line-number-interval"/>
+    <ref name="axf_line-number-orientation"/>
+    <ref name="axf_line-number-prefix"/>
+    <ref name="axf_line-number-reset"/>
     <ref name="axf_line-number-show"/>
+    <ref name="axf_line-number-start"/>
     <ref name="axf_output-volume-break"/>
     <ref name="axf_output-volume-filename"/>
     <ref name="axf_page-number-prefix"/>
@@ -1363,7 +1380,14 @@
   <define name="fo_table-column.attlist" combine="interleave">
     <ref name="id"/>
     <ref name="xml_id"/>
+    <ref name="axf_line-number-format"/>
+    <ref name="axf_line-number-initial"/>
+    <ref name="axf_line-number-interval"/>
+    <ref name="axf_line-number-orientation"/>
+    <ref name="axf_line-number-prefix"/>
+    <ref name="axf_line-number-reset"/>
     <ref name="axf_line-number-show"/>
+    <ref name="axf_line-number-start"/>
   </define>
   <define name="fo_table-body.attlist" combine="interleave">
     <ref name="xml_id"/>
@@ -1389,7 +1413,9 @@
     
   -->
   <define name="common-accessibility-properties" combine="interleave">
+    <ref name="axf_expansion-text"/>
     <ref name="axf_pdftag"/>
+    <ref name="axf_pdftag-title"/>
   </define>
   <define name="common-border-padding-and-background-properties" combine="interleave">
     <ref name="axf_background-clip"/>
@@ -1954,13 +1980,17 @@
   <define name="axf_annotation-type">
     <optional>
       <attribute name="axf:annotation-type">
-        <a:documentation>Type of the annotation: Empty string | Text | FreeText | Stamp | FileAttachment</a:documentation>
+        <a:documentation>Type of the annotation: Empty string | Text | FreeText | Stamp | FileAttachment | Highlight | Underline | StrikeOut | Squiggly</a:documentation>
         <optional>
           <choice>
             <value>Text</value>
             <value>FreeText</value>
             <value>Stamp</value>
             <value>FileAttachment</value>
+            <value>Highlight</value>
+            <value>Underline</value>
+            <value>StrikeOut</value>
+            <value>Squiggly</value>
           </choice>
         </optional>
       </attribute>
@@ -1975,6 +2005,30 @@
     <optional>
       <attribute name="axf:annotation-width">
         <a:documentation>Width of the annotation: &lt;length&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:append-non-end-of-line-characters
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.append-non-end-of-line-characters
+  -->
+  <define name="axf_append-non-end-of-line-characters">
+    <optional>
+      <attribute name="axf:append-non-end-of-line-characters">
+        <a:documentation>Width of the annotation: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:append-non-starter-characters
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.append-non-starter-characters
+  -->
+  <define name="axf_append-non-starter-characters">
+    <optional>
+      <attribute name="axf:append-non-starter-characters">
+        <a:documentation>Width of the annotation: &lt;string&gt;</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2119,7 +2173,7 @@
   <define name="axf_baseline-block-snap">
     <optional>
       <attribute name="axf:baseline-block-snap">
-        <a:documentation>How to align blocks on the baseline grid: none | [auto | before | after | center] || [border-box | margin-box]</a:documentation>
+        <a:documentation>How to align blocks on the baseline grid: none | [auto | before | after | center] || [border-box | margin-box | line]</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -2500,6 +2554,42 @@
     <optional>
       <attribute name="axf:diagonal-border-style">
         <a:documentation>Style of the reverse diagonal border: &lt;border-style&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:except-non-end-of-line-characters
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.except-non-end-of-line-characters
+  -->
+  <define name="axf_except-non-end-of-line-characters">
+    <optional>
+      <attribute name="axf:except-non-end-of-line-characters">
+        <a:documentation>Width of the annotation: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:except-non-starter-characters
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.except-non-starter-characters
+  -->
+  <define name="axf_except-non-starter-characters">
+    <optional>
+      <attribute name="axf:except-non-starter-characters">
+        <a:documentation>Width of the annotation: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:expansion-text
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.expansion-text
+  -->
+  <define name="axf_expansion-text">
+    <optional>
+      <attribute name="axf:expansion-text">
+        <a:documentation>Expansion text for a tag in Tagged PDF</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -3551,6 +3641,101 @@
     </attribute>
   </define>
   <!--
+    @axf:line-number-format
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-format
+  -->
+  <define name="axf_line-number-format">
+    <optional>
+      <attribute name="axf:line-number-format">
+        <a:documentation>Line numbers to always output: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:line-number-initial
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-initial
+  -->
+  <define name="axf_line-number-initial">
+    <optional>
+      <attribute name="axf:line-number-initial">
+        <a:documentation>Line numbers to always output: &lt;number&gt; | auto</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:line-number-interval
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-interval
+  -->
+  <define name="axf_line-number-interval">
+    <optional>
+      <attribute name="axf:line-number-interval">
+        <a:documentation>Line numbers to always output: auto | &lt;number&gt; | #&lt;id&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:line-number-orientation
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-orientation
+  -->
+  <define name="axf_line-number-orientation">
+    <optional>
+      <attribute name="axf:line-number-orientation">
+        <a:documentation>Rotates line numbers: 0 | 90 | 180 | 270 | -90 | -180 | -270</a:documentation>
+        <choice>
+          <value>0</value>
+          <value>0deg</value>
+          <value>90</value>
+          <value>90deg</value>
+          <value>180</value>
+          <value>180deg</value>
+          <value>270</value>
+          <value>270deg</value>
+          <value>-90</value>
+          <value>-90deg</value>
+          <value>-180</value>
+          <value>-180deg</value>
+          <value>-270</value>
+          <value>-270deg</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:line-number-prefix
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-prefix
+  -->
+  <define name="axf_line-number-prefix">
+    <optional>
+      <attribute name="axf:line-number-prefix">
+        <a:documentation>Line numbers to always output: &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:line-number-reset
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-reset
+  -->
+  <define name="axf_line-number-reset">
+    <optional>
+      <attribute name="axf:line-number-reset">
+        <a:documentation>Line numbers to always output: auto | none | page | column | force</a:documentation>
+        <choice>
+          <value>auto</value>
+          <value>none</value>
+          <value>page</value>
+          <value>column</value>
+          <value>force</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--
     @axf:line-number-show
     
     https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-show
@@ -3559,6 +3744,18 @@
     <optional>
       <attribute name="axf:line-number-show">
         <a:documentation>Line numbers to always output: &lt;number*&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:line-number-start
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.line-number-start
+  -->
+  <define name="axf_line-number-start">
+    <optional>
+      <attribute name="axf:line-number-start">
+        <a:documentation>Starting line number: &lt;number&gt; | auto</a:documentation>
       </attribute>
     </optional>
   </define>
@@ -4413,6 +4610,18 @@
     <optional>
       <attribute name="axf:text-overflow">
         <a:documentation>What to display when text overflows in the inline progression direction: clip | ellipsis | &lt;string&gt;</a:documentation>
+      </attribute>
+    </optional>
+  </define>
+  <!--
+    @axf:pdftag-title
+    
+    https://www.antenna.co.jp/AHF/help/en/ahf-ext.html#axf.pdftag-title
+  -->
+  <define name="axf_pdftag-title">
+    <optional>
+      <attribute name="axf:pdftag-title">
+        <a:documentation>'Title' PDF property for a tag in Tagged PDF</a:documentation>
       </attribute>
     </optional>
   </define>
