@@ -1,0 +1,43 @@
+@namespace fo url("http://www.w3.org/1999/XSL/Format");
+@namespace axf url("http://www.antennahouse.com/names/XSL/Extensions");
+
+* {
+    font-size: attr(font-size);
+    margin-top: attr(margin-top);
+    margin-bottom: attr(margin-bottom);
+    margin-left: attr(margin-left);
+    margin-right: attr(margin-right);
+    padding-top: attr(padding-top);
+    padding-bottom: attr(padding-bottom);
+    padding-left: attr(padding-left);
+    padding-right: attr(padding-right);
+}
+fo|table {
+  display: table;
+  border: attr(border);
+}
+
+fo|block,
+fo|block-container {
+  display: block;
+}
+
+fo|inline {
+  display: inline;
+}
+    
+fo|table-header,
+fo|table-body,
+fo|table-footer {
+  display: table-row-group;
+  border: attr(border);
+}
+
+fo|table-row {
+  display: table-row;
+}
+
+fo|table-cell {
+  display: table-cell;
+  border: attr(border);
+}
