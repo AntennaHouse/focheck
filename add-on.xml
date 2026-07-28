@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
     <xt:extension id="focheck">
-        <xt:location href="https://github.com/AntennaHouse/focheck/releases/download/v7.5.1/focheck-framework-7.5.1.zip"/>
-        <xt:version>7.5.1</xt:version>
+        <xt:location href="https://github.com/AntennaHouse/focheck/releases/download/v7.5.5/focheck-framework-7.5.5.zip"/>
+        <xt:version>7.5.5</xt:version>
         <xt:oxy_version>14.0+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Antenna House, Inc.</xt:author>
@@ -14,7 +14,12 @@
 
 <p>See <a href="https://github.com/AntennaHouse/focheck#en">https://github.com/AntennaHouse/focheck#en</a>.</p>
 
-	<pre><![CDATA[# focheck 7.5.1
+	<pre><![CDATA[# focheck 7.5.5
+
+- First attempt at 'Author Mode' for XSL-FO.
+- Updated from ahfsettings 7.5.5.
+
+# focheck 7.5.1
 
 - **focheck** version numbers correspond to the `version.xml` values of the Antenna House Formatter version current at the time of the release.
 - Updated for Antenna House Formatter V7.5R1.

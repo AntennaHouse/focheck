@@ -184,7 +184,7 @@ Makes a Zip archive of just the oXygen framework.
 
 ## License
 
-Copyright 2015-2025 Antenna House, Inc.
+Copyright 2015-2026 Antenna House, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -396,7 +396,7 @@ oXygen フレームワークの Zip アーカイブを生成します。
 ## ライセンス
 
 
-Copyright 2015-2025 Antenna House, Inc.
+Copyright 2015-2026 Antenna House, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

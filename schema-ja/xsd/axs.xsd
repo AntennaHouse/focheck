@@ -246,11 +246,11 @@
       <xs:element minOccurs="0" ref="axs:font-settings"/>
       <xs:element minOccurs="0" ref="axs:pdf-settings"/>
       <xs:element minOccurs="0" ref="axs:ps-settings"/>
+      <xs:element minOccurs="0" ref="axs:mathml-settings"/>
       <xs:element minOccurs="0" ref="axs:svg-settings"/>
       <xs:element minOccurs="0" ref="axs:svg-render-settings"/>
-      <xs:element minOccurs="0" ref="axs:text-settings"/>
-      <xs:element minOccurs="0" ref="axs:mathml-settings"/>
       <xs:element minOccurs="0" ref="axs:cgm-settings"/>
+      <xs:element minOccurs="0" ref="axs:text-settings"/>
       <xs:element minOccurs="0" ref="axs:xslt-settings"/>
       <xs:element minOccurs="0" ref="axs:analyzer-settings"/>
     </xs:sequence>
@@ -456,7 +456,17 @@
     <xs:attribute name="default-page-margin-right"/>
     <xs:attribute name="default-page-margin-top"/>
     <xs:attribute name="default-page-width" type="xs:NMTOKEN"/>
-    <xs:attribute name="descendant-or-self-files" type="axs:ah.boolean"/>
+    <xs:attribute name="descendant-or-self-files">
+      <xs:simpleType>
+        <xs:union memberTypes="axs:ah.boolean">
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="disable-network"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="display-alttext" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether to display axf:alttext content when no image in &lt;fo:external-graphic&gt; or &lt;img&gt;</xs:documentation>
@@ -1148,6 +1158,11 @@
         <xs:documentation>Whether to set alt text in descendants of tags with alt text: true | false</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="alt-text-length-limit" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>Upper limit of alternative text in Tagged PDF: integer</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="check-tag-relationship" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether to check the parent-child relationship between tags: true | false</xs:documentation>
@@ -1409,7 +1424,7 @@ Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false<
     <xs:attribute name="pass-through-minimum" type="axs:pass-through.model"/>
     <xs:attribute name="pdf-version" type="axs:pdf-version.list"/>
     <xs:attribute name="printing-allowed" type="xs:NCName"/>
-    <xs:attribute name="rasterize-resolution" type="xs:integer"/>
+    <xs:attributeGroup ref="axs:rasterize-resolution"/>
     <xs:attribute name="real-value-limit">
       <xs:simpleType>
         <xs:restriction base="xs:token">
@@ -1426,6 +1441,7 @@ Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false<
     <xs:attribute name="signature" type="axs:ah.boolean"/>
     <xs:attribute name="signature-name" type="xs:NCName"/>
     <xs:attribute name="tagged-pdf" type="axs:ah.boolean"/>
+    <xs:attribute name="tagging-absolute-area-as-child-of-anchor" type="axs:ah.boolean"/>
     <xs:attribute name="text-and-lineart-compression" type="axs:ah.boolean"/>
     <xs:attribute name="text-and-lineart-compression-default" type="axs:ah.boolean"/>
     <xs:attribute name="text-and-lineart-compression-minimum" type="axs:ah.boolean"/>
@@ -1707,6 +1723,7 @@ Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false<
     <xs:attribute name="outermost-svg-eval-as-isolate" type="axs:ah.boolean"/>
     <xs:attribute name="radial-gradient-eval-as-svg20" type="axs:ah.boolean"/>
     <xs:attribute name="rasterize-dpi" type="xs:decimal"/>
+    <xs:attributeGroup ref="axs:rasterize-resolution"/>
     <xs:attribute name="rasterize-size-lower-limit" type="xs:decimal"/>
     <xs:attribute name="rasterize-size-upper-limit" type="xs:decimal"/>
     <xs:attribute name="responsive-svg-size">
@@ -1780,6 +1797,7 @@ Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false<
         <xs:documentation>Image quality for images that cannot be embedded directly in SVG</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attributeGroup ref="axs:rasterize-resolution"/>
     <xs:attribute name="rename-copy-image" type="axs:ah.boolean">
       <xs:annotation>
         <xs:documentation>Whether to add 'copy-image-prefix' prefix when copying files</xs:documentation>
@@ -1863,4 +1881,11 @@ Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false<
       <xs:attribute name="paragraph-widow-limit-percent"/>
     </xs:complexType>
   </xs:element>
+  <xs:attributeGroup name="rasterize-resolution">
+    <xs:attribute name="rasterize-resolution" type="xs:integer">
+      <xs:annotation>
+        <xs:documentation>DPI to use when rasterizing.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
 </xs:schema>

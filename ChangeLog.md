@@ -1,3 +1,8 @@
+# focheck 7.5.5
+
+- First attempt at 'Author Mode' for XSL-FO.
+- Updated from ahfsettings 7.5.5.
+
 # focheck 7.5.1
 
 - **focheck** version numbers correspond to the `version.xml` values of the Antenna House Formatter version current at the time of the release.

@@ -245,19 +245,19 @@
       <ref name="ps-settings"/>
     </optional>
     <optional>
+      <ref name="mathml-settings"/>
+    </optional>
+    <optional>
       <ref name="svg-settings"/>
     </optional>
     <optional>
       <ref name="svg-render-settings"/>
     </optional>
     <optional>
-      <ref name="text-settings"/>
-    </optional>
-    <optional>
-      <ref name="mathml-settings"/>
-    </optional>
-    <optional>
       <ref name="cgm-settings"/>
+    </optional>
+    <optional>
+      <ref name="text-settings"/>
     </optional>
     <optional>
       <ref name="xslt-settings"/>
@@ -536,7 +536,10 @@
     </optional>
     <optional>
       <attribute name="descendant-or-self-files">
-        <ref name="ah.boolean"/>
+        <choice>
+          <ref name="ah.boolean"/>
+          <value>disable-network</value>
+        </choice>
       </attribute>
     </optional>
     <optional>
@@ -1417,6 +1420,13 @@
       </attribute>
     </optional>
     <optional>
+      <!-- V7.4MR8 -->
+      <attribute name="alt-text-length-limit">
+        <a:documentation>Upper limit of alternative text in Tagged PDF: integer</a:documentation>
+        <data type="integer"/>
+      </attribute>
+    </optional>
+    <optional>
       <!-- attribute certificate-name { xsd:NCName }?, -->
       <attribute name="check-tag-relationship">
         <a:documentation>Whether to check the parent-child relationship between tags: true | false</a:documentation>
@@ -1942,11 +1952,7 @@ Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false<
         <data type="NCName"/>
       </attribute>
     </optional>
-    <optional>
-      <attribute name="rasterize-resolution">
-        <data type="integer"/>
-      </attribute>
-    </optional>
+    <ref name="rasterize-resolution"/>
     <optional>
       <attribute name="real-value-limit">
         <choice>
@@ -1988,6 +1994,13 @@ Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false<
       </attribute>
     </optional>
     <optional>
+      <!-- Whether an absolutely positioned area is tagged as a child of its anchor -->
+      <attribute name="tagging-absolute-area-as-child-of-anchor">
+        <ref name="ah.boolean"/>
+      </attribute>
+    </optional>
+    <optional>
+      <!-- Whether text and line art are compressed to reduce file size -->
       <attribute name="text-and-lineart-compression">
         <ref name="ah.boolean"/>
       </attribute>
@@ -2426,6 +2439,7 @@ Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false<
         <data type="decimal"/>
       </attribute>
     </optional>
+    <ref name="rasterize-resolution"/>
     <optional>
       <attribute name="rasterize-size-lower-limit">
         <data type="decimal"/>
@@ -2528,6 +2542,7 @@ Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false<
         <ref name="jpeg-quality.model"/>
       </attribute>
     </optional>
+    <ref name="rasterize-resolution"/>
     <optional>
       <attribute name="rename-copy-image">
         <a:documentation>Whether to add 'copy-image-prefix' prefix when copying files</a:documentation>
@@ -2548,7 +2563,6 @@ Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false<
     </optional>
     <optional>
       <!--
-        attribute rasterize-resolution { xsd:integer }?,
         attribute single-file-max-height { text }?,
         attribute single-file-max-pages { xsd:integer }?,
         attribute single-page-number { ah.boolean }?,
@@ -2656,5 +2670,13 @@ Whether to always convert rgb(0, 0, 0) to K100 (cmyk(0, 0, 0, 1)): true | false<
         <attribute name="paragraph-widow-limit-percent"/>
       </optional>
     </element>
+  </define>
+  <define name="rasterize-resolution">
+    <optional>
+      <attribute name="rasterize-resolution">
+        <a:documentation>DPI to use when rasterizing.</a:documentation>
+        <data type="integer"/>
+      </attribute>
+    </optional>
   </define>
 </grammar>
