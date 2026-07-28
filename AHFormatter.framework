@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="20.1" xml:space="preserve">
+<serialized xml:space="preserve">
 	<serializableOrderedMap>
 		<entry>
 			<String>document.types</String>
 			<documentTypeDescriptor-array>
 				<documentTypeDescriptor>
+					<field name="webResources">
+						<null/>
+					</field>
 					<field name="extensionPatch">
 						<null/>
 					</field>
@@ -30,7 +33,19 @@
 					<field name="authorExtensionDescriptor">
 						<authorExtension>
 							<field name="cssDescriptors">
-								<cssFile-array/>
+								<cssFile-array>
+									<cssFile>
+										<field name="href">
+											<String>${framework}/css/fo.css</String>
+										</field>
+										<field name="title">
+											<String>XSL-FO</String>
+										</field>
+										<field name="alternate">
+											<Boolean>false</Boolean>
+										</field>
+									</cssFile>
+								</cssFile-array>
 							</field>
 							<field name="mergeCSSsFromDocument">
 								<Boolean>false</Boolean>
@@ -228,9 +243,6 @@
 								<field name="openInBrowser">
 									<Boolean>true</Boolean>
 								</field>
-								<field name="outputFile">
-									<File>${cfd}/${cfn}.pdf</File>
-								</field>
 								<field name="outputResource">
 									<String>${cfd}/${cfn}.pdf</String>
 								</field>
@@ -313,9 +325,6 @@
 								</field>
 								<field name="openInBrowser">
 									<Boolean>false</Boolean>
-								</field>
-								<field name="outputFile">
-									<File>${cfd}/${cfn}.pdf</File>
 								</field>
 								<field name="outputResource">
 									<String>${cfd}/${cfn}.pdf</String>
@@ -407,6 +416,9 @@
 													</field>
 												</validationUnitSchema>
 											</field>
+											<field name="validationAdvancedSettings">
+												<null/>
+											</field>
 										</validationUnit>
 										<validationUnit>
 											<field name="validationType">
@@ -450,6 +462,9 @@
 														<String>${framework}/schematron/focheck.sch</String>
 													</field>
 												</validationUnitSchema>
+											</field>
+											<field name="validationAdvancedSettings">
+												<null/>
 											</field>
 										</validationUnit>
 									</list>
@@ -507,6 +522,9 @@
 													</field>
 												</validationUnitSchema>
 											</field>
+											<field name="validationAdvancedSettings">
+												<null/>
+											</field>
 										</validationUnit>
 									</list>
 								</field>
@@ -563,6 +581,9 @@
 													</field>
 												</validationUnitSchema>
 											</field>
+											<field name="validationAdvancedSettings">
+												<null/>
+											</field>
 										</validationUnit>
 										<validationUnit>
 											<field name="validationType">
@@ -606,6 +627,9 @@
 														<String>${framework}/schematron/focheck.sch</String>
 													</field>
 												</validationUnitSchema>
+											</field>
+											<field name="validationAdvancedSettings">
+												<null/>
 											</field>
 										</validationUnit>
 									</list>
