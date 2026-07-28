@@ -177,11 +177,11 @@ formatter-config.model =
     font-settings?,
     pdf-settings?,
     ps-settings?,
+    mathml-settings?,
     svg-settings?,
     svg-render-settings?,
-    text-settings?,
-    mathml-settings?,
     cgm-settings?,
+    text-settings?,
     xslt-settings?,
     analyzer-settings?)
 
@@ -272,7 +272,7 @@ formatter-settings.attlist =
    attribute default-page-margin-right { text }?,
    attribute default-page-margin-top { text }?,
    attribute default-page-width { xsd:NMTOKEN }?,
-   attribute descendant-or-self-files { ah.boolean }?,
+   attribute descendant-or-self-files { ah.boolean | 'disable-network' }?,
    ## Whether to display axf:alttext content when no image in <fo:external-graphic> or <img>
    attribute display-alttext { ah.boolean }?,
    ## Comma-separated languages for which to also place a hyphen at the start of a line
@@ -614,6 +614,9 @@ pdf-settings.attlist =
    attribute allow-javascript { ah.boolean }?,
    ## Whether to set alt text in descendants of tags with alt text: true | false
    attribute allow-nest-alt-text { ah.boolean }?,
+   # V7.4MR8
+   ## Upper limit of alternative text in Tagged PDF: integer
+   attribute alt-text-length-limit { xsd:integer }?,
    #attribute certificate-name { xsd:NCName }?,
    ## Whether to check the parent-child relationship between tags: true | false
    attribute check-tag-relationship { ah.boolean }?,
@@ -742,7 +745,7 @@ attribute import-annotation-types { text }?,
    attribute pass-through-minimum { pass-through.model }?,
    attribute pdf-version { pdf-version.list }?,
    attribute printing-allowed { xsd:NCName }?,
-   attribute rasterize-resolution { xsd:integer }?,
+   rasterize-resolution,
    attribute real-value-limit { '0' | '1' | '2' | '3' }?,
    attribute real-value-limit-modify { ah.boolean }?,
    attribute reverse-page { ah.boolean }?,
@@ -750,6 +753,9 @@ attribute import-annotation-types { text }?,
    attribute signature { ah.boolean }?,
    attribute signature-name { xsd:NCName }?,
    attribute tagged-pdf { ah.boolean }?,
+   # Whether an absolutely positioned area is tagged as a child of its anchor
+   attribute tagging-absolute-area-as-child-of-anchor { ah.boolean }?,
+   # Whether text and line art are compressed to reduce file size
    attribute text-and-lineart-compression { ah.boolean }?,
    attribute text-and-lineart-compression-default { ah.boolean }?,
    attribute text-and-lineart-compression-minimum { ah.boolean }?,
@@ -887,6 +893,7 @@ svg-render-settings.attlist =
    attribute outermost-svg-eval-as-isolate { ah.boolean }?,
    attribute radial-gradient-eval-as-svg20 { ah.boolean }?,
    attribute rasterize-dpi { xsd:decimal }?,
+   rasterize-resolution,
    attribute rasterize-size-lower-limit { xsd:decimal }?,
    attribute rasterize-size-upper-limit { xsd:decimal }?,
    ## Whether the size matches the viewBox setting when width/height of the root element are omitted: reference | viewBox
@@ -925,13 +932,13 @@ svg-settings.attlist =
    attribute image-processing { 'embed-all' | 'link' | 'copy-all' | 'copy' }?,
    ## Image quality for images that cannot be embedded directly in SVG
    attribute jpeg-quality { jpeg-quality.model }?,
+   rasterize-resolution,
    ## Whether to add 'copy-image-prefix' prefix when copying files
    attribute rename-copy-image { ah.boolean }?,
    ## Whether multi-page formatted result is output as a single SVG file
    attribute singlefile { ah.boolean }?,
    ## Whether to add a sequence number to a one-page formatted document when 'singlefile="false"'
    attribute singlefile-number { ah.boolean }?,
-   #attribute rasterize-resolution { xsd:integer }?,
    #attribute single-file-max-height { text }?,
    #attribute single-file-max-pages { xsd:integer }?,
    #attribute single-page-number { ah.boolean }?,
@@ -981,3 +988,7 @@ analyzer-settings =
        attribute paragraph-widow-limit-em { text }?,
        attribute paragraph-widow-limit-percent { text }?
      }
+
+rasterize-resolution =
+   ## DPI to use when rasterizing.
+   attribute rasterize-resolution { xsd:integer }?
