@@ -55,6 +55,12 @@
   :type '(integer)
   :group 'xsl)
 
+(defcustom focheck-declarations-file
+  (locate-library "../template/declarations.xml" t)
+  "*File containing <fo:declarations> to be inserted into a file."
+  :type '(choice (file :must-match t) (const :tag "No initial <fo:declarations> file" nil))
+  :group 'xsl)
+
 (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
     (setq flymake-check-was-interrupted t))
 (ad-activate 'flymake-post-syntax-check)
@@ -111,6 +117,18 @@
 
 
 
+(defun focheck-insert-declarations ()
+  "Insert template <fo:declarations>."
+  (interactive)
+  (if (file-readable-p focheck-declarations-file)
+      (progn
+	(goto-char (point-min))
+	(re-search-forward "</\\(fo:\\)?layout-master-set>")
+	(insert "\n")
+	(save-excursion
+	  (insert-file-contents focheck-declarations-file)))))
+
+
 (define-derived-mode fo-mode nxml-mode "focheck"
   "Major mode for editing XSL-FO."
   (setq rng-schema-locating-files
